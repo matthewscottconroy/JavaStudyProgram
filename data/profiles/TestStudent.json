@@ -1,0 +1,10 @@
+{
+  "id" : "86273464-f884-4518-8cfc-3bb5434cb887",
+  "name" : "TestStudent",
+  "createdAt" : "2026-05-03T17:18:51.177263851",
+  "lastStudied" : null,
+  "totalQuestionsAnswered" : 0,
+  "totalCorrect" : 0,
+  "selectedTopics" : [ ],
+  "performance" : { }
+}
