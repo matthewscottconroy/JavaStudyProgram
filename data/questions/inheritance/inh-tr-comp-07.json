@@ -1,0 +1,10 @@
+{
+  "id": "inh-tr-comp-07",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class AbstractDemo {\n    abstract static class Shape {\n        abstract double area();\n        void describe() { System.out.println(\"Area=\" + area()); }\n    }\n    static class Circle extends Shape {\n        double r;\n        Circle(double r) { this.r = r; }\n        @Override double area() { return Math.PI * r * r; }\n    }\n    static class Square extends Shape {\n        double side;\n        Square(double s) { side = s; }\n        @Override double area() { return side * side; }\n    }\n    public static void main(String[] args) {\n        Shape[] shapes = {new Circle(1), new Square(2)};\n        for (Shape s : shapes) s.describe();\n    }\n}",
+  "answer": "Area=3.141592653589793\nArea=4.0",
+  "explanation": "Circle(1).area() = Math.PI * 1 * 1 = Math.PI. Square(2).area() = 2*2 = 4.0. describe() in Shape calls the overridden area() via dynamic dispatch.",
+  "alternatives": ["Area=3.141592653589793\nArea=4.0\n"]
+}

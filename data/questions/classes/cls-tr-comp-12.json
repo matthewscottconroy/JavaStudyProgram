@@ -1,0 +1,10 @@
+{
+  "id": "cls-tr-comp-12",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Enum {\n    enum Day { MON, TUE, WED, THU, FRI, SAT, SUN }\n    public static void main(String[] args) {\n        Day d = Day.WED;\n        System.out.println(d.name());\n        System.out.println(d.ordinal());\n        System.out.println(Day.values().length);\n        System.out.println(d == Day.WED);\n    }\n}",
+  "answer": "WED\n2\n7\ntrue",
+  "explanation": "d=Day.WED. name()='WED'. ordinal()=2 (0-indexed: MON=0,TUE=1,WED=2). values().length=7. d==Day.WED is true (enums are singletons).",
+  "alternatives": ["WED\n2\n7\ntrue\n"]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "cls-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The Rectangle class always prints width=0, height=0 after construction. What is the bug?",
+  "code": "public class Rectangle {\n    private int width;\n    private int height;\n\n    public Rectangle(int width, int height) {\n        width = width;\n        height = height;\n    }\n\n    public String toString() {\n        return \"width=\" + width + \", height=\" + height;\n    }\n\n    public static void main(String[] args) {\n        Rectangle r = new Rectangle(10, 5);\n        System.out.println(r);\n    }\n}",
+  "choices": [
+    "The constructor parameters must be named w and h to avoid shadowing the fields",
+    "width = width assigns the parameter to itself; this.width = width is required to set the field",
+    "Private fields cannot be read inside toString() without getters",
+    "toString() must be annotated with @Override or it won't be called by println"
+  ],
+  "answer": "b",
+  "explanation": "Inside the constructor, 'width' refers to the parameter, not the field. 'width = width' re-assigns the parameter to itself and leaves the field at its default value of 0. Fix: use this.width = width; this.height = height; to disambiguate field from parameter."
+}

@@ -1,0 +1,15 @@
+{
+  "id": "ser-db-comp-11",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The serialized object graph shares an object but deserialization creates two copies. What is the bug?",
+  "code": "import java.io.*;\npublic class SharedRef {\n    public static void main(String[] args) throws Exception {\n        Object shared = new Object();\n        ByteArrayOutputStream baos1 = new ByteArrayOutputStream();\n        ByteArrayOutputStream baos2 = new ByteArrayOutputStream();\n        // bug: two separate streams lose the shared identity\n        new ObjectOutputStream(baos1).writeObject(shared);\n        new ObjectOutputStream(baos2).writeObject(shared);\n        // deserializing each gives independent objects\n    }\n}",
+  "choices": [
+    "Object does not implement Serializable and cannot be written to an ObjectOutputStream",
+    "Writing shared to two separate ObjectOutputStream instances loses the shared-object identity; each stream independently serializes the object, so deserialization produces two unrelated copies",
+    "ByteArrayOutputStream cannot hold two serialized objects simultaneously",
+    "Shared references are automatically maintained across separate ObjectOutputStream instances"
+  ],
+  "answer": "b",
+  "explanation": "ObjectOutputStream tracks shared references within a single stream using an internal handle table. Writing the same object to two separate streams loses that relationship. To preserve shared identity, write both references through the same ObjectOutputStream."
+}

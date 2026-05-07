@@ -1,0 +1,15 @@
+{
+  "id": "ser-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "Serializing a User object throws NotSerializableException. What is the bug?",
+  "code": "import java.io.*;\npublic class User implements Serializable {\n    String name;\n    Connection dbConn;   // database connection\n\n    User(String name, Connection dbConn) {\n        this.name   = name;\n        this.dbConn = dbConn;\n    }\n}",
+  "choices": [
+    "User must declare a serialVersionUID field to be serializable",
+    "The Connection field is not Serializable — all non-transient fields must be Serializable or the class cannot be serialized",
+    "String is not Serializable and must be replaced with char[]",
+    "Constructors cannot accept non-Serializable arguments"
+  ],
+  "answer": "b",
+  "explanation": "Java serialization requires every non-transient field to be Serializable. java.sql.Connection is a live network resource and is not Serializable. Fix: mark the field transient — transient Connection dbConn; — so the serialization engine skips it. After deserialization, the connection will be null and must be re-established."
+}

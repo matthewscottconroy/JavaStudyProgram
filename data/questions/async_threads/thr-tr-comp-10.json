@@ -1,0 +1,10 @@
+{
+  "id": "thr-tr-comp-10",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.util.concurrent.*;\npublic class CompletableFutureDemo {\n    public static void main(String[] args) throws Exception {\n        CompletableFuture<Integer> cf = CompletableFuture\n            .supplyAsync(() -> 10)\n            .thenApply(n -> n * 2)\n            .thenApply(n -> n + 5);\n        System.out.println(cf.get());\n    }\n}",
+  "answer": "25",
+  "explanation": "supplyAsync returns 10. thenApply(n->n*2): 10*2=20. thenApply(n->n+5): 20+5=25. get()=25.",
+  "alternatives": ["25\n"]
+}

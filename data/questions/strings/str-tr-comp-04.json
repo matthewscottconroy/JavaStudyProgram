@@ -1,0 +1,10 @@
+{
+  "id": "str-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "public class StrMethods {\n    public static void main(String[] args) {\n        String s = \"Hello, World!\";\n        System.out.println(s.length());\n        System.out.println(s.substring(7, 12));\n        System.out.println(s.toUpperCase().substring(0, 5));\n    }\n}",
+  "answer": "13\nWorld\nHELLO",
+  "explanation": "\"Hello, World!\" has 13 characters. substring(7,12) extracts indices 7-11 = \"World\". toUpperCase() makes \"HELLO, WORLD!\", substring(0,5) = \"HELLO\".",
+  "alternatives": ["13\nWorld\nHELLO\n"]
+}

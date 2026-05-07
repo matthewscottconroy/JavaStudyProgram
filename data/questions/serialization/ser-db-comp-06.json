@@ -1,0 +1,15 @@
+{
+  "id": "ser-db-comp-06",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The singleton invariant is broken by deserialization. What is the bug?",
+  "code": "import java.io.*;\npublic class SingletonSerial {\n    static class Registry implements Serializable {\n        private static final Registry INSTANCE = new Registry();\n        private Registry() {}\n        public static Registry getInstance() { return INSTANCE; }\n        // readResolve() not defined — bug!\n    }\n}",
+  "choices": [
+    "Singleton classes cannot implement Serializable",
+    "Deserialization creates a new Registry object bypassing the private constructor; readResolve() must return INSTANCE to preserve the singleton",
+    "INSTANCE must be transient to prevent serialization",
+    "The constructor must throw an exception to prevent second instantiation"
+  ],
+  "answer": "b",
+  "explanation": "Java deserialization bypasses the constructor and creates a new object, breaking the singleton pattern. Fix: add protected Object readResolve() { return INSTANCE; } — this method is called during deserialization and its return value replaces the newly created object, returning the existing singleton."
+}

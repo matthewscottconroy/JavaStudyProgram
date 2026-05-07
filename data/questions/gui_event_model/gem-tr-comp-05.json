@@ -1,0 +1,10 @@
+{
+  "id": "gem-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print when itemStateChanged is triggered?",
+  "code": "import javax.swing.*;\nimport java.awt.event.*;\npublic class CheckEvent {\n    public static void main(String[] args) {\n        JCheckBox cb = new JCheckBox(\"Enable\");\n        cb.addItemListener(e -> {\n            if (e.getStateChange() == ItemEvent.SELECTED) {\n                System.out.println(\"checked\");\n            } else {\n                System.out.println(\"unchecked\");\n            }\n        });\n        cb.setSelected(true);   // fires SELECTED\n        cb.setSelected(false);  // fires DESELECTED\n    }\n}",
+  "answer": "checked\nunchecked",
+  "explanation": "setSelected(true) fires ItemEvent.SELECTED → \"checked\". setSelected(false) fires ItemEvent.DESELECTED → \"unchecked\".",
+  "alternatives": ["checked\nunchecked\n"]
+}

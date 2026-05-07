@@ -1,0 +1,10 @@
+{
+  "id": "fi-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.function.*;\npublic class BiFunctionDemo {\n    public static void main(String[] args) {\n        BiFunction<String, Integer, String> repeat = (s, n) -> s.repeat(n);\n        System.out.println(repeat.apply(\"ab\", 3));\n        Function<Integer, String> star = repeat.apply(\"*\")::toString;\n        // partial application via andThen\n        Function<Integer, String> starN = n -> repeat.apply(\"*\", n);\n        System.out.println(starN.apply(4));\n    }\n}",
+  "answer": "ababab\n****",
+  "explanation": "repeat.apply(\"ab\",3) = \"ab\".repeat(3) = \"ababab\". starN.apply(4) = \"*\".repeat(4) = \"****\".",
+  "alternatives": ["ababab\n****\n"]
+}

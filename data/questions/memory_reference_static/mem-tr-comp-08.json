@@ -1,0 +1,10 @@
+{
+  "id": "mem-tr-comp-08",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Singleton {\n    private static Singleton instance = null;\n    private int value;\n    private Singleton() { value = 42; }\n    static Singleton getInstance() {\n        if (instance == null) instance = new Singleton();\n        return instance;\n    }\n    public static void main(String[] args) {\n        Singleton a = Singleton.getInstance();\n        Singleton b = Singleton.getInstance();\n        System.out.println(a == b);\n        a.value = 99;\n        System.out.println(b.value);\n    }\n}",
+  "answer": "true\n99",
+  "explanation": "getInstance() returns the same instance each time. a==b is true (same object). Setting a.value=99 also changes b.value since they reference the same object.",
+  "alternatives": ["true\n99\n"]
+}

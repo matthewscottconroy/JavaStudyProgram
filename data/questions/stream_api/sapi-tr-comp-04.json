@@ -1,0 +1,10 @@
+{
+  "id": "sapi-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\nimport java.util.stream.*;\npublic class StreamBasics {\n    public static void main(String[] args) {\n        List<Integer> nums = Arrays.asList(1,2,3,4,5,6,7,8,9,10);\n        int sum = nums.stream()\n            .filter(n -> n % 2 == 0)\n            .mapToInt(Integer::intValue)\n            .sum();\n        System.out.println(sum);\n        long count = nums.stream()\n            .filter(n -> n > 5)\n            .count();\n        System.out.println(count);\n    }\n}",
+  "answer": "30\n5",
+  "explanation": "Even numbers: 2,4,6,8,10 → sum=30. Numbers > 5: 6,7,8,9,10 → count=5.",
+  "alternatives": ["30\n5\n"]
+}

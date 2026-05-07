@@ -1,0 +1,15 @@
+{
+  "id": "inh-db-comp-06",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The subclass constructor does not compile. What is the bug?",
+  "code": "public class NoDefault {\n    static class Base {\n        Base(int n) { System.out.println(\"Base:\"+n); }\n    }\n    static class Sub extends Base {\n        Sub() {                    // compile error\n            System.out.println(\"Sub\");\n        }\n    }\n}",
+  "choices": [
+    "Sub must declare a matching constructor with the same parameter type",
+    "When Base defines only a parameterized constructor, Java does not generate a default no-arg constructor; Sub() must explicitly call super(n)",
+    "Subclass constructors are not allowed when the parent has a constructor",
+    "Sub must call this() before super()"
+  ],
+  "answer": "b",
+  "explanation": "Java generates a default no-arg constructor only if no constructor is defined. Base has Base(int n) so no default is generated. Sub() implicitly calls super() (no-arg), which does not exist — compile error. Fix: Sub() { super(0); ... } supplying a required argument."
+}

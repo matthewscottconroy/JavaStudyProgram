@@ -1,0 +1,10 @@
+{
+  "id": "arg-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "If run with: java Calc add 10 25 — what does this program print?",
+  "code": "public class Calc {\n    public static void main(String[] args) {\n        if (args.length < 3) {\n            System.out.println(\"usage: Calc <op> <a> <b>\");\n            return;\n        }\n        String op = args[0];\n        int a = Integer.parseInt(args[1]);\n        int b = Integer.parseInt(args[2]);\n        int result = switch (op) {\n            case \"add\" -> a + b;\n            case \"sub\" -> a - b;\n            case \"mul\" -> a * b;\n            default    -> throw new IllegalArgumentException(\"unknown op: \" + op);\n        };\n        System.out.println(op + \"(\" + a + \",\" + b + \") = \" + result);\n    }\n}",
+  "answer": "add(10,25) = 35",
+  "explanation": "args = [\"add\", \"10\", \"25\"]. length=3 passes the guard. a=10, b=25. switch matches \"add\" → 35. Output: 'add(10,25) = 35'.",
+  "alternatives": ["add(10,25) = 35\n"]
+}

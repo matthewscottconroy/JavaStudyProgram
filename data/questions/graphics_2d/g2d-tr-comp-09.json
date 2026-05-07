@@ -1,0 +1,10 @@
+{
+  "id": "g2d-tr-comp-09",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.awt.geom.*;\npublic class PathBounds {\n    public static void main(String[] args) {\n        Path2D path = new Path2D.Double();\n        path.moveTo(0, 0);\n        path.lineTo(100, 0);\n        path.lineTo(100, 50);\n        path.closePath();\n        java.awt.Rectangle bounds = path.getBounds();\n        System.out.println(bounds.width);\n        System.out.println(bounds.height);\n    }\n}",
+  "answer": "100\n50",
+  "explanation": "The path traces a right triangle with vertices (0,0), (100,0), (100,50). getBounds() returns the axis-aligned bounding box: width=100 (x spans 0–100), height=50 (y spans 0–50).",
+  "alternatives": ["100\n50\n"]
+}

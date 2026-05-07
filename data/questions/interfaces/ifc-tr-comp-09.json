@@ -1,0 +1,10 @@
+{
+  "id": "ifc-tr-comp-09",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class MultiInterface {\n    interface A { default String hello() { return \"A\"; } }\n    interface B extends A { default String hello() { return \"B\"; } }\n    static class C implements A, B {\n        // B.hello() overrides A.hello() — no conflict\n    }\n    static class D implements A, B {\n        public String hello() { return \"D\"; }  // explicit override\n    }\n    public static void main(String[] args) {\n        System.out.println(new C().hello());\n        System.out.println(new D().hello());\n        System.out.println(new C() instanceof A);\n        System.out.println(new C() instanceof B);\n    }\n}",
+  "answer": "B\nD\ntrue\ntrue",
+  "explanation": "C implements A and B; B extends A and overrides hello() — the more specific interface wins: C.hello()='B'. D explicitly overrides to 'D'. C is both instanceof A and B.",
+  "alternatives": ["B\nD\ntrue\ntrue\n"]
+}

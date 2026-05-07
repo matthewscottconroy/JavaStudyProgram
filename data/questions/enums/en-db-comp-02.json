@@ -1,0 +1,15 @@
+{
+  "id": "en-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The switch on enum does not compile. What is the bug?",
+  "code": "public class EnumSwitchBug {\n    enum Level { LOW, MEDIUM, HIGH }\n    static void check(Level l) {\n        switch (l) {\n            case Level.LOW:   System.out.println(\"low\"); break;  // bug\n            case Level.HIGH:  System.out.println(\"high\"); break;\n        }\n    }\n}",
+  "choices": [
+    "switch statements cannot be used with enum types",
+    "Enum case labels must not be qualified with the enum type name; write case LOW: not case Level.LOW:",
+    "break statements are not allowed inside a switch on an enum",
+    "The switch is missing a default case, which is required for enum switches"
+  ],
+  "answer": "b",
+  "explanation": "Inside a switch(enumVariable), case labels must use the unqualified constant name. Writing case Level.LOW: is a compile error. Fix: use case LOW: and case HIGH:. The compiler already knows the type from the switch expression."
+}

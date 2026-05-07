@@ -1,0 +1,15 @@
+{
+  "id": "col-db-comp-10",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The sorted list is in descending instead of ascending order. What is the bug?",
+  "code": "import java.util.*;\npublic class SortOrder {\n    public static void main(String[] args) {\n        List<Integer> nums = new ArrayList<>(Arrays.asList(3,1,4,1,5));\n        nums.sort((a, b) -> b - a);   // bug: should be a - b for ascending\n        System.out.println(nums);\n    }\n}",
+  "choices": [
+    "ArrayList.sort() does not accept a Comparator",
+    "The comparator (a,b)->b-a returns positive when b>a, placing larger values first — this is descending order, not ascending",
+    "Comparator subtraction is only valid for double values",
+    "nums.sort() should be Collections.sort(nums) for correct behavior"
+  ],
+  "answer": "b",
+  "explanation": "A comparator returning b-a produces descending order (larger element first). For ascending order use (a,b)->a-b, or Comparator.naturalOrder(). The output [5,4,3,1,1] confirms descending sort."
+}

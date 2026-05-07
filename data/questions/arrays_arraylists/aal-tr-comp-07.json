@@ -1,0 +1,10 @@
+{
+  "id": "aal-tr-comp-07",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class ListOps {\n    public static void main(String[] args) {\n        List<String> list = new ArrayList<>(Arrays.asList(\"c\",\"a\",\"b\"));\n        list.add(1, \"x\");\n        System.out.println(list);\n        list.remove(\"a\");\n        System.out.println(list);\n        System.out.println(list.indexOf(\"b\"));\n    }\n}",
+  "answer": "[c, x, a, b]\n[c, x, b]\n2",
+  "explanation": "add(1,\"x\"): inserts at index 1 → [c,x,a,b]. remove(\"a\"): removes first occurrence of \"a\" → [c,x,b]. indexOf(\"b\"): \"b\" is at index 2.",
+  "alternatives": ["[c, x, a, b]\n[c, x, b]\n2\n"]
+}

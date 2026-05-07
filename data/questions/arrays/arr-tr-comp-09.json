@@ -1,0 +1,10 @@
+{
+  "id": "arr-tr-comp-09",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Alias {\n    public static void main(String[] args) {\n        int[] a = {1, 2, 3};\n        int[] b = a;\n        b[1] = 99;\n        System.out.println(a[1]);\n        a = new int[]{10, 20, 30};\n        System.out.println(b[1]);\n    }\n}",
+  "answer": "99\n99",
+  "explanation": "b = a makes b an alias for the same array. b[1]=99 changes that shared array, so a[1] is 99. Then a is rebound to a new array, but b still points to the old array where b[1]=99.",
+  "alternatives": ["99\n99\n"]
+}

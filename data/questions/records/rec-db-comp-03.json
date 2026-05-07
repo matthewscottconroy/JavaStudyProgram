@@ -1,0 +1,15 @@
+{
+  "id": "rec-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The record does not validate its input correctly. What is the bug?",
+  "code": "public class RecordValidateBug {\n    record Percent(int value) {\n        Percent {\n            if (value < 0 || value > 100)\n                value = 0;  // bug: silently clamping instead of throwing\n        }\n    }\n    public static void main(String[] args) {\n        Percent p = new Percent(150);\n        System.out.println(p.value());  // caller expects 150 but gets 0\n    }\n}",
+  "choices": [
+    "Compact constructors cannot modify parameter values",
+    "Silently clamping invalid input to 0 hides the error; callers passing 150 receive a Percent(0) without any indication that their input was invalid; throw IllegalArgumentException instead to fail fast",
+    "The record will not compile because value is reassigned in the compact constructor",
+    "Records automatically clamp numeric fields to valid ranges"
+  ],
+  "answer": "b",
+  "explanation": "Silently replacing bad input with a default value hides bugs — the caller has no way to know their value was discarded. Records should enforce their invariants by throwing on invalid input. Fix: throw new IllegalArgumentException(\"value must be 0-100, got \" + value); so callers are alerted immediately."
+}

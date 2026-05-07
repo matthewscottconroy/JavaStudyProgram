@@ -1,0 +1,15 @@
+{
+  "id": "ref-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 5,
+  "prompt": "This code throws InvocationTargetException when invoking the method. What does that mean, and what is the actual underlying problem?",
+  "code": "import java.lang.reflect.*;\npublic class Invoker {\n    static int divide(int a, int b) { return a / b; }\n\n    public static void main(String[] args) throws Exception {\n        Method m = Invoker.class.getMethod(\"divide\", int.class, int.class);\n        Object result = m.invoke(null, 10, 0);  // throws InvocationTargetException\n        System.out.println(result);\n    }\n}",
+  "choices": [
+    "getMethod cannot locate static methods; use getDeclaredMethod instead",
+    "InvocationTargetException wraps the exception thrown by the method itself — here, divide(10,0) throws ArithmeticException (/ by zero)",
+    "null cannot be passed as the first argument to invoke()",
+    "int parameters must be boxed as Integer before being passed to invoke()"
+  ],
+  "answer": "b",
+  "explanation": "InvocationTargetException is a wrapper: it means the reflectively invoked method ran but threw an exception of its own. divide(10, 0) performs integer division by zero, throwing ArithmeticException. That gets wrapped in InvocationTargetException. To inspect the real cause: e.getCause(). Contrast with IllegalAccessException (no permission) and NoSuchMethodException (method not found). null as the first arg is correct for static methods."
+}

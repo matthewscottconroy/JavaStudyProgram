@@ -1,0 +1,15 @@
+{
+  "id": "aal-db-comp-10",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The ArrayList capacity is confused with its size. What is the bug?",
+  "code": "import java.util.*;\npublic class CapacityBug {\n    public static void main(String[] args) {\n        List<String> list = new ArrayList<>(10);  // initial capacity 10\n        System.out.println(list.size());           // bug: developer expects 10\n        list.get(0);                               // bug: IndexOutOfBoundsException\n    }\n}",
+  "choices": [
+    "new ArrayList<>(10) fills the list with 10 null elements",
+    "new ArrayList<>(10) sets the initial capacity (internal buffer size), not the size; size() returns 0 and get(0) throws IndexOutOfBoundsException",
+    "ArrayList(int) is deprecated and should not be used",
+    "size() returns the capacity, not the element count"
+  ],
+  "answer": "b",
+  "explanation": "The ArrayList(int) constructor sets the initial internal array capacity for performance (avoids resizing). It does NOT add any elements. size() returns 0. get(0) throws IndexOutOfBoundsException. To add n null elements, use Collections.nCopies() or a loop."
+}

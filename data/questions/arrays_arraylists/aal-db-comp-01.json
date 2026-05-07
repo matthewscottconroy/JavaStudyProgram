@@ -1,0 +1,15 @@
+{
+  "id": "aal-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "This method throws IndexOutOfBoundsException when called with an empty list. What is the bug?",
+  "code": "import java.util.*;\npublic class First {\n    public static String firstOrDefault(List<String> items, String def) {\n        return items.get(0);\n    }\n}",
+  "choices": [
+    "ArrayList.get() requires the index to be passed as a long, not int",
+    "The method never checks whether the list is empty before calling get(0)",
+    "The default parameter is unused — remove it to fix the signature",
+    "List.get() always throws IndexOutOfBoundsException for index 0"
+  ],
+  "answer": "b",
+  "explanation": "get(0) on an empty list throws IndexOutOfBoundsException because index 0 does not exist. Fix: return items.isEmpty() ? def : items.get(0); — check first, then access."
+}

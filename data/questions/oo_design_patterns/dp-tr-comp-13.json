@@ -1,0 +1,10 @@
+{
+  "id": "dp-tr-comp-13",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Template {\n    abstract static class Report {\n        final void generate() {\n            header();\n            body();\n            footer();\n        }\n        void header() { System.out.println(\"=== Report ===\"); }\n        abstract void body();\n        void footer() { System.out.println(\"--- End ---\"); }\n    }\n    static class SalesReport extends Report {\n        void body() { System.out.println(\"Sales: $1000\"); }\n    }\n    public static void main(String[] args) {\n        new SalesReport().generate();\n    }\n}",
+  "answer": "=== Report ===\nSales: $1000\n--- End ---",
+  "explanation": "Template Method pattern: generate() calls header() (default), body() (overridden in SalesReport), footer() (default). Output follows that order.",
+  "alternatives": ["=== Report ===\nSales: $1000\n--- End ---\n"]
+}

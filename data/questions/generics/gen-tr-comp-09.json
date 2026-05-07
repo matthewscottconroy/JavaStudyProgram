@@ -1,0 +1,10 @@
+{
+  "id": "gen-tr-comp-09",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class GenericPair {\n    static class Pair<A,B> {\n        A first; B second;\n        Pair(A a, B b) { first=a; second=b; }\n        Pair<B,A> swap() { return new Pair<>(second, first); }\n    }\n    public static void main(String[] args) {\n        Pair<String,Integer> p = new Pair<>(\"hello\", 42);\n        System.out.println(p.first + \" \" + p.second);\n        Pair<Integer,String> q = p.swap();\n        System.out.println(q.first + \" \" + q.second);\n    }\n}",
+  "answer": "hello 42\n42 hello",
+  "explanation": "p=(\"hello\",42). p.first='hello', p.second=42. swap() creates Pair<Integer,String>(42,'hello'): q.first=42, q.second='hello'.",
+  "alternatives": ["hello 42\n42 hello\n"]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "dp-tr-comp-16",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Command {\n    interface Cmd { void execute(); }\n    static int value = 0;\n    public static void main(String[] args) {\n        Cmd add5 = () -> value += 5;\n        Cmd mul2 = () -> value *= 2;\n        java.util.Deque<Cmd> queue = new java.util.ArrayDeque<>();\n        queue.add(add5);\n        queue.add(mul2);\n        queue.add(add5);\n        for (Cmd c : queue) c.execute();\n        System.out.println(value);\n    }\n}",
+  "answer": "15",
+  "explanation": "Commands execute in order: value=0 → add5 → 5 → mul2 → 10 → add5 → 15. Output: 15.",
+  "alternatives": ["15\n"]
+}

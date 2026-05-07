@@ -1,0 +1,15 @@
+{
+  "id": "arg-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The program crashes when the argument is not a number. What is the bug?",
+  "code": "public class ParseArg {\n    public static void main(String[] args) {\n        int n = Integer.parseInt(args[0]);  // throws if not a number\n        System.out.println(n * 2);\n    }\n}",
+  "choices": [
+    "Integer.parseInt() can only parse positive integers",
+    "If args[0] is not a valid integer (e.g., \"abc\"), parseInt throws NumberFormatException without any error message to the user",
+    "args[0] must be cast to int before parsing",
+    "parseInt requires the string to be surrounded by quotes"
+  ],
+  "answer": "b",
+  "explanation": "Integer.parseInt() throws NumberFormatException for non-numeric input. At boundaries like main(), input should be validated. Fix: wrap in try-catch to print a user-friendly error, or use a library like Apache Commons CLI that handles argument validation."
+}

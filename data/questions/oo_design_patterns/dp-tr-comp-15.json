@@ -1,0 +1,10 @@
+{
+  "id": "dp-tr-comp-15",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class Chain {\n    abstract static class Handler {\n        Handler next;\n        Handler setNext(Handler h) { next = h; return h; }\n        abstract void handle(int req);\n        void passOn(int req) { if (next != null) next.handle(req); }\n    }\n    static class SmallHandler extends Handler {\n        void handle(int req) { if (req < 10) System.out.println(\"Small:\" + req); else passOn(req); }\n    }\n    static class BigHandler extends Handler {\n        void handle(int req) { System.out.println(\"Big:\" + req); }\n    }\n    public static void main(String[] args) {\n        SmallHandler s = new SmallHandler();\n        s.setNext(new BigHandler());\n        s.handle(5);\n        s.handle(20);\n        s.handle(3);\n    }\n}",
+  "answer": "Small:5\nBig:20\nSmall:3",
+  "explanation": "Chain of Responsibility: SmallHandler handles req<10, else passes to BigHandler. 5<10→Small:5. 20≥10→passes→Big:20. 3<10→Small:3.",
+  "alternatives": ["Small:5\nBig:20\nSmall:3\n"]
+}

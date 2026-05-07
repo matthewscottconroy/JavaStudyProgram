@@ -1,0 +1,15 @@
+{
+  "id": "thr-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "This counter loses updates under concurrent access. What is the bug?",
+  "code": "public class RaceCondition {\n    static int counter = 0;\n    static void inc() { counter++; }  // not thread-safe\n    public static void main(String[] args) throws InterruptedException {\n        Thread t1 = new Thread(() -> { for(int i=0;i<1000;i++) inc(); });\n        Thread t2 = new Thread(() -> { for(int i=0;i<1000;i++) inc(); });\n        t1.start(); t2.start();\n        t1.join(); t2.join();\n        System.out.println(counter);  // may print less than 2000\n    }\n}",
+  "choices": [
+    "Two threads cannot share a static variable",
+    "counter++ is not atomic — it reads, increments, and writes in three separate steps; concurrent execution causes lost updates",
+    "for loops cannot run concurrently in Java",
+    "join() must be called before start() to ensure synchronization"
+  ],
+  "answer": "b",
+  "explanation": "counter++ expands to counter = counter + 1 — three operations. If both threads read 5 simultaneously, both increment to 6 and write 6, losing one update. Fix: use synchronized void inc(), AtomicInteger.incrementAndGet(), or a lock. This is the classic race condition."
+}

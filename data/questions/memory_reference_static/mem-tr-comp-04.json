@@ -1,0 +1,10 @@
+{
+  "id": "mem-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class StaticBlock {\n    static int a;\n    static int b;\n    static {\n        a = 10;\n        b = a * 2;\n        System.out.println(\"static block: \" + a + \" \" + b);\n    }\n    int c = a + b;\n    { System.out.println(\"instance block: \" + c); }\n    StaticBlock() { System.out.println(\"ctor\"); }\n    public static void main(String[] args) {\n        new StaticBlock();\n        new StaticBlock();\n    }\n}",
+  "answer": "static block: 10 20\ninstance block: 30\nctor\ninstance block: 30\nctor",
+  "explanation": "Static block runs once at class load: prints \"static block: 10 20\". For each new instance: instance initializer runs first (c=a+b=30, prints \"instance block: 30\"), then constructor prints \"ctor\".",
+  "alternatives": ["static block: 10 20\ninstance block: 30\nctor\ninstance block: 30\nctor\n"]
+}

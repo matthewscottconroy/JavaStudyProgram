@@ -1,0 +1,15 @@
+{
+  "id": "ut-db-comp-06",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The test incorrectly uses assertEquals for collections. What is the bug?",
+  "code": "import java.util.*;\nimport static org.junit.jupiter.api.Assertions.*;\npublic class ListTest {\n    @Test void testSort() {\n        List<Integer> actual = new ArrayList<>(Arrays.asList(3,1,2));\n        Collections.sort(actual);\n        List<Integer> expected = Arrays.asList(1, 2, 3);\n        assertSame(expected, actual);  // bug\n    }\n}",
+  "choices": [
+    "Collections.sort() does not work on ArrayList",
+    "assertSame checks reference equality — expected and actual are different List objects; use assertEquals which calls List.equals() to compare contents",
+    "Arrays.asList cannot be compared with ArrayList",
+    "assertEquals must be used with int[] not List<Integer>"
+  ],
+  "answer": "b",
+  "explanation": "assertSame(a,b) is equivalent to assertTrue(a==b) — it checks if they are the same object in memory. expected and actual are distinct objects → fails. Fix: assertEquals(expected, actual) which calls expected.equals(actual) comparing contents element-by-element."
+}

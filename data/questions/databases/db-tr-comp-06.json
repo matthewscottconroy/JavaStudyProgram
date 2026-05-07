@@ -1,0 +1,10 @@
+{
+  "id": "db-tr-comp-06",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.sql.*;\npublic class AutoCommitDefault {\n    public static void main(String[] args) throws Exception {\n        // Simulating connection behavior\n        // By JDBC spec, new connections have autoCommit=true by default\n        boolean autoCommit = true;  // default\n        System.out.println(autoCommit);\n        autoCommit = false;\n        System.out.println(autoCommit);\n        System.out.println(Connection.TRANSACTION_READ_COMMITTED);\n    }\n}",
+  "answer": "true\nfalse\n2",
+  "explanation": "By JDBC spec, Connection.getAutoCommit() returns true by default. After disabling it, the value is false. Connection.TRANSACTION_READ_COMMITTED is a constant with value 2.",
+  "alternatives": ["true\nfalse\n2\n"]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "opt-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "import java.util.Optional;\npublic class OrElseDemo {\n    public static void main(String[] args) {\n        Optional<String> a = Optional.of(\"found\");\n        Optional<String> b = Optional.empty();\n        System.out.println(a.orElse(\"default\"));\n        System.out.println(b.orElse(\"default\"));\n        System.out.println(b.orElseGet(() -> \"computed\"));\n    }\n}",
+  "answer": "found\ndefault\ncomputed",
+  "explanation": "orElse returns the value if present, or the argument. a has \"found\". b is empty so orElse returns \"default\". orElseGet calls the supplier when empty, returning \"computed\".",
+  "alternatives": ["found\ndefault\ncomputed\n"]
+}

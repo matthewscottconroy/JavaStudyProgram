@@ -1,0 +1,15 @@
+{
+  "id": "col-db-comp-06",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The code counts unique words incorrectly — duplicates are not filtered. What is the bug?",
+  "code": "import java.util.*;\npublic class UniqueCount {\n    public static void main(String[] args) {\n        List<String> words = Arrays.asList(\"hi\",\"hello\",\"hi\",\"bye\");\n        List<String> unique = new ArrayList<>();\n        for (String w : words) unique.add(w);  // bug: should filter\n        System.out.println(unique.size());\n    }\n}",
+  "choices": [
+    "ArrayList cannot hold String elements",
+    "All words are added including duplicates; to count unique words use a Set or check contains() before adding",
+    "The for-each loop should use an index-based loop",
+    "unique.size() returns the wrong value for String lists"
+  ],
+  "answer": "b",
+  "explanation": "Adding all words to a List keeps duplicates — unique has all 4 elements. Fix option 1: use Set<String> unique = new HashSet<>(words); — HashSet automatically deduplicates. Fix option 2: check if (!unique.contains(w)) unique.add(w); before adding."
+}

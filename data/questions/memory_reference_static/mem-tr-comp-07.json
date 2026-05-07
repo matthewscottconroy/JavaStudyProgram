@@ -1,0 +1,10 @@
+{
+  "id": "mem-tr-comp-07",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class SharedMutable {\n    static class Counter {\n        int count = 0;\n        void inc() { count++; }\n    }\n    public static void main(String[] args) {\n        Counter c1 = new Counter();\n        Counter c2 = c1;       // alias\n        c1.inc(); c1.inc();\n        c2.inc();\n        System.out.println(c1.count);\n        System.out.println(c2.count);\n        System.out.println(c1 == c2);\n    }\n}",
+  "answer": "3\n3\ntrue",
+  "explanation": "c2 = c1 makes both variables reference the same Counter object. All three inc() calls increment the same object's count. Both c1.count and c2.count show 3. c1==c2 is true (same object).",
+  "alternatives": ["3\n3\ntrue\n"]
+}

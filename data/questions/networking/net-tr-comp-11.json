@@ -1,0 +1,10 @@
+{
+  "id": "net-tr-comp-11",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.net.URL;\npublic class FileUrl {\n    public static void main(String[] args) throws Exception {\n        URL a = new URL(\"https://example.com/path\");\n        URL b = new URL(\"https://example.com/path\");\n        System.out.println(a == b);\n        System.out.println(a.equals(b));\n        System.out.println(a.sameFile(b));\n    }\n}",
+  "answer": "false\ntrue\ntrue",
+  "explanation": "a == b compares references — two different URL objects, so false. URL.equals() compares protocol, host, port, file, and reference; these match, so true. sameFile() is like equals() but ignores the fragment anchor — also true here.",
+  "alternatives": ["false\ntrue\ntrue\n"]
+}

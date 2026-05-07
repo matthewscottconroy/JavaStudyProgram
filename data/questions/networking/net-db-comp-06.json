@@ -1,0 +1,15 @@
+{
+  "id": "net-db-comp-06",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The server socket never accepts connections. What is the bug?",
+  "code": "import java.net.*;\npublic class ServerBug {\n    public static void main(String[] args) throws Exception {\n        ServerSocket ss = new ServerSocket(8080);\n        // bug: forgot to call ss.accept()\n        System.out.println(\"Server started\");\n        ss.close();\n    }\n}",
+  "choices": [
+    "ServerSocket requires a backlog parameter to accept connections",
+    "The server creates the socket and closes it immediately without calling accept() to block and wait for a client connection",
+    "ServerSocket must be wrapped in a Thread to accept connections",
+    "Port 8080 is reserved and cannot be used by user programs"
+  ],
+  "answer": "b",
+  "explanation": "ServerSocket.accept() is the blocking call that waits for an incoming connection and returns a Socket for communicating with the client. Without calling accept(), the server socket is opened and immediately closed, so no client can ever connect. Fix: add Socket client = ss.accept(); before ss.close()."
+}

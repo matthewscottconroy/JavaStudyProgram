@@ -1,0 +1,15 @@
+{
+  "id": "g2d-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The clipped region still shows drawing outside the clip. What is the bug?",
+  "code": "import java.awt.*;\nimport java.awt.image.BufferedImage;\npublic class ClipBug {\n    public static void main(String[] args) {\n        BufferedImage img = new BufferedImage(200, 200, BufferedImage.TYPE_INT_RGB);\n        Graphics2D g2 = img.createGraphics();\n        g2.fillRect(0, 0, 200, 200);  // fill with black\n        g2.setClip(50, 50, 100, 100);\n        g2.setColor(Color.RED);\n        g2.fillRect(0, 0, 200, 200);  // should only fill clip area\n        g2.setClip(null);  // bug: clearing clip before final draw\n        g2.setColor(Color.BLUE);\n        g2.fillRect(0, 0, 200, 200);  // blue covers everything because clip is null\n    }\n}",
+  "choices": [
+    "setClip(null) throws NullPointerException",
+    "setClip(null) removes the clip region entirely, so the subsequent blue fillRect covers the entire image including the area that was supposed to be clipped to red only",
+    "setClip must use a Shape parameter, not a rectangle",
+    "fillRect ignores the clip when Color.BLUE is set"
+  ],
+  "answer": "b",
+  "explanation": "setClip(null) clears the clipping region so all subsequent drawing covers the full image surface. The final blue fillRect overwrites everything. Fix: do not clear the clip until all clipped drawing is finished, or save/restore the Graphics state with g2.getClip()/setClip() to restore it only when needed."
+}

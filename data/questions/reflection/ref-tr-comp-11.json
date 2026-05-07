@@ -1,0 +1,10 @@
+{
+  "id": "ref-tr-comp-11",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.lang.reflect.*;\npublic class ConstructorReflect {\n    static class Greeter {\n        String prefix;\n        Greeter(String p) { prefix = p; }\n        String greet(String name) { return prefix + name; }\n    }\n    public static void main(String[] args) throws Exception {\n        Constructor<Greeter> ctor = Greeter.class.getDeclaredConstructor(String.class);\n        Greeter g = ctor.newInstance(\"Hello, \");\n        Method m = Greeter.class.getDeclaredMethod(\"greet\", String.class);\n        System.out.println(m.invoke(g, \"World\"));\n        System.out.println(ctor.getParameterTypes()[0].getSimpleName());\n    }\n}",
+  "answer": "Hello, World\nString",
+  "explanation": "ctor.newInstance('Hello, ') creates Greeter with prefix='Hello, '. m.invoke(g,'World') returns 'Hello, World'. getParameterTypes()[0]=String.class, getSimpleName()='String'.",
+  "alternatives": ["Hello, World\nString\n"]
+}

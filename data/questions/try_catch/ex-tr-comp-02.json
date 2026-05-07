@@ -1,0 +1,10 @@
+{
+  "id": "ex-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class Vault {\n    static int balance = 50;\n\n    static void withdraw(int amount) {\n        if (amount > balance)\n            throw new IllegalArgumentException(\"need \" + amount + \", have \" + balance);\n        balance -= amount;\n    }\n\n    public static void main(String[] args) {\n        try {\n            withdraw(30);\n            System.out.println(\"balance: \" + balance);\n            withdraw(40);\n            System.out.println(\"balance: \" + balance);\n        } catch (IllegalArgumentException e) {\n            System.out.println(\"error: \" + e.getMessage());\n        }\n        System.out.println(\"done\");\n    }\n}",
+  "answer": "balance: 20\nerror: need 40, have 20\ndone",
+  "explanation": "withdraw(30): 30 <= 50, balance = 20. Prints 'balance: 20'. withdraw(40): 40 > 20 → throws with message 'need 40, have 20'. Catch block prints the error message. 'done' always prints after the try/catch block.",
+  "alternatives": ["balance: 20\nerror: need 40, have 20\ndone\n"]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "inh-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "This code throws ClassCastException at runtime. What is the bug?",
+  "code": "public class BadCast {\n    static class Animal {}\n    static class Dog extends Animal {}\n    static class Cat extends Animal {}\n    public static void main(String[] args) {\n        Animal a = new Cat();\n        Dog d = (Dog) a;   // runtime exception\n        System.out.println(d);\n    }\n}",
+  "choices": [
+    "Animal must implement Serializable to be cast",
+    "a holds a Cat object; casting it to Dog fails at runtime because Cat is not a Dog",
+    "Downcasting from Animal to Dog requires a static method",
+    "The cast should be (Animal) a, not (Dog) a"
+  ],
+  "answer": "b",
+  "explanation": "a references a Cat object. Casting to Dog is a downcast. At runtime, Java checks the actual object type. Since Cat is not a subtype of Dog, ClassCastException is thrown. Fix: check with instanceof before casting: if (a instanceof Dog d) { ... }"
+}

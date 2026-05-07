@@ -1,0 +1,10 @@
+{
+  "id": "fn-tr-comp-21",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class StaticChain {\n    static int x = 5;\n    static void setX(int val) { x = val; }\n    static int getDouble() { return x * 2; }\n    public static void main(String[] args) {\n        System.out.println(getDouble());\n        setX(10);\n        System.out.println(getDouble());\n        setX(getDouble() - 3);\n        System.out.println(x);\n    }\n}",
+  "answer": "10\n20\n17",
+  "explanation": "Initially x=5, getDouble()=10. setX(10): x=10, getDouble()=20. setX(getDouble()-3)=setX(20-3)=setX(17): x=17.",
+  "alternatives": ["10\n20\n17\n"]
+}

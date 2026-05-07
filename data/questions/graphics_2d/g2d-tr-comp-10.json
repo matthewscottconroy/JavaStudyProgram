@@ -1,0 +1,10 @@
+{
+  "id": "g2d-tr-comp-10",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.awt.geom.*;\npublic class TransformScale {\n    public static void main(String[] args) {\n        AffineTransform at = AffineTransform.getScaleInstance(2, 3);\n        double[] src = {5, 4};\n        double[] dst = new double[2];\n        at.transform(src, 0, dst, 0, 1);\n        System.out.println(dst[0]);\n        System.out.println(dst[1]);\n    }\n}",
+  "answer": "10.0\n12.0",
+  "explanation": "A scale transform with sx=2, sy=3 multiplies x by 2 and y by 3. Point (5,4) becomes (10,12). dst[0]=10.0, dst[1]=12.0.",
+  "alternatives": ["10.0\n12.0\n"]
+}

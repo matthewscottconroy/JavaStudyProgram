@@ -1,0 +1,15 @@
+{
+  "id": "cc-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The TreeSet silently drops elements. What is the bug?",
+  "code": "import java.util.*;\npublic class TreeSetBug {\n    static class Point { int x, y; Point(int x, int y) { this.x=x; this.y=y; } }\n    public static void main(String[] args) {\n        TreeSet<Point> set = new TreeSet<>((a, b) -> Integer.compare(a.x, b.x));\n        set.add(new Point(1, 10));\n        set.add(new Point(1, 20));  // bug: same x, comparator returns 0\n        System.out.println(set.size());\n    }\n}",
+  "choices": [
+    "TreeSet does not accept custom Comparators",
+    "The Comparator compares only by x; Point(1,10) and Point(1,20) have the same x so the Comparator returns 0, meaning they are considered equal; TreeSet discards the duplicate — size is 1",
+    "TreeSet requires Comparable elements even when a Comparator is provided",
+    "Adding elements with equal keys throws IllegalArgumentException"
+  ],
+  "answer": "b",
+  "explanation": "TreeSet uses its Comparator (or natural ordering) to determine equality. If comparator.compare(a, b) == 0, the set treats the elements as equal and discards the second. Here x=1 for both, so (1,20) is silently dropped. Fix: compare by both fields: Comparator.comparingInt((Point p)->p.x).thenComparingInt(p->p.y)."
+}

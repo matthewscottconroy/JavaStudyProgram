@@ -1,0 +1,15 @@
+{
+  "id": "ic-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The switch is intended to print only the matching season, but it prints extra output. What is the bug?",
+  "code": "public class Season {\n    public static void main(String[] args) {\n        int month = 6;\n        switch (month) {\n            case 12: case 1: case 2:\n                System.out.println(\"Winter\");\n            case 3: case 4: case 5:\n                System.out.println(\"Spring\");\n            case 6: case 7: case 8:\n                System.out.println(\"Summer\");\n            case 9: case 10: case 11:\n                System.out.println(\"Fall\");\n        }\n    }\n}",
+  "choices": [
+    "switch cannot use multiple case labels on one line",
+    "Missing break after each season block causes fall-through — month=6 prints Summer and Fall",
+    "case 6 is invalid because 6 is not a compile-time constant",
+    "The default case is required for switch on int"
+  ],
+  "answer": "b",
+  "explanation": "Without break statements, execution falls through from the matching case to every subsequent case. month=6 matches case 6, prints \"Summer\", then falls through to case 9 and prints \"Fall\". Fix: add break; (or return;) at the end of each season block."
+}

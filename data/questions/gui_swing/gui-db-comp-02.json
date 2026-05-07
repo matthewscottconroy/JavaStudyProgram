@@ -1,0 +1,15 @@
+{
+  "id": "gui-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The JFrame appears but the button is not visible. What is the bug?",
+  "code": "import javax.swing.*;\npublic class Invisible {\n    public static void main(String[] args) {\n        JFrame frame = new JFrame(\"Test\");\n        frame.setSize(300, 200);\n        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);\n        frame.setVisible(true);          // shown before button is added\n        JButton btn = new JButton(\"Click me\");\n        frame.add(btn);                  // added after setVisible\n    }\n}",
+  "choices": [
+    "JButton cannot be added to a JFrame directly — use a JPanel",
+    "setVisible(true) is called before the button is added; the layout is not revalidated afterward, so the button is not rendered",
+    "setSize must be called after add() to include the button's dimensions",
+    "JButton requires an ActionListener before it can be displayed"
+  ],
+  "answer": "b",
+  "explanation": "setVisible(true) renders the frame with its current components. Adding components afterward does not automatically trigger a re-layout and repaint. Fix: add all components before calling setVisible(true), or call frame.revalidate(); frame.repaint(); after adding the button."
+}

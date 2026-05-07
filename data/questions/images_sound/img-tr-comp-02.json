@@ -1,0 +1,10 @@
+{
+  "id": "img-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print? (It converts a color image to grayscale by averaging channels.)",
+  "code": "import java.awt.image.*;\npublic class Grayscale {\n    public static int toGray(int rgb) {\n        int r = (rgb >> 16) & 0xFF;\n        int g = (rgb >>  8) & 0xFF;\n        int b =  rgb        & 0xFF;\n        int avg = (r + g + b) / 3;\n        return (avg << 16) | (avg << 8) | avg;\n    }\n\n    public static void main(String[] args) {\n        int pixel = 0x0060C0;  // r=0, g=96, b=192\n        int gray = toGray(pixel);\n        int channel = gray & 0xFF;  // all three channels equal\n        System.out.println(channel);\n    }\n}",
+  "answer": "96",
+  "explanation": "r=0, g=96, b=192. avg = (0+96+192)/3 = 288/3 = 96. The gray pixel packs 96 into all three channels. gray & 0xFF extracts the blue channel = 96.",
+  "alternatives": ["96\n"]
+}

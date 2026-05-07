@@ -1,0 +1,15 @@
+{
+  "id": "g2d-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The drawing does not reflect updates because repaint is called incorrectly. What is the bug?",
+  "code": "import javax.swing.*;\nimport java.awt.*;\npublic class RepaintBug extends JPanel {\n    int x = 0;\n    protected void paintComponent(Graphics g) {\n        super.paintComponent(g);\n        g.fillOval(x, 50, 20, 20);\n    }\n    void move() {\n        x += 5;\n        paintComponent(getGraphics());  // bug: direct call\n    }\n}",
+  "choices": [
+    "getGraphics() returns null and causes NullPointerException",
+    "Calling paintComponent directly bypasses Swing's rendering pipeline; use repaint() to schedule a proper repaint through the EDT",
+    "fillOval cannot be called with a variable x coordinate",
+    "move() must be declared static to be called from outside the class"
+  ],
+  "answer": "b",
+  "explanation": "Never call paintComponent() directly. The Graphics from getGraphics() is transient and may be null or wrong. Use repaint() which schedules a proper repaint through Swing's render pipeline on the EDT. Fix: call repaint() in move() and let the system invoke paintComponent at the right time."
+}

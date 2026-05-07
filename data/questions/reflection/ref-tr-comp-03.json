@@ -1,0 +1,10 @@
+{
+  "id": "ref-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.lang.reflect.*;\npublic class ReflectMethods {\n    static class Box {\n        private int value;\n        Box(int v) { value = v; }\n        public int getValue() { return value; }\n        private void secret() { System.out.println(\"secret:\" + value); }\n    }\n    public static void main(String[] args) throws Exception {\n        Box box = new Box(42);\n        Method m = Box.class.getDeclaredMethod(\"secret\");\n        m.setAccessible(true);\n        m.invoke(box);\n        System.out.println(box.getValue());\n    }\n}",
+  "answer": "secret:42\n42",
+  "explanation": "getDeclaredMethod finds the private secret() method. setAccessible(true) bypasses access control. invoke(box) calls it on box, printing \"secret:42\". getValue() returns 42.",
+  "alternatives": ["secret:42\n42\n"]
+}

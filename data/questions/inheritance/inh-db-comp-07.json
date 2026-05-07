@@ -1,0 +1,15 @@
+{
+  "id": "inh-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The abstract method can be called directly without a concrete class. What is the bug?",
+  "code": "public class AbstractBug {\n    abstract static class Processor {\n        abstract void process();\n        void run() {\n            System.out.println(\"starting\");\n            process();\n            System.out.println(\"done\");\n        }\n    }\n    public static void main(String[] args) {\n        Processor p = new Processor();  // compile error\n        p.run();\n    }\n}",
+  "choices": [
+    "Abstract classes cannot have both abstract and concrete methods",
+    "Abstract classes cannot be instantiated; new Processor() is a compile error",
+    "process() must be declared public to be called from run()",
+    "run() cannot call process() because process() is abstract"
+  ],
+  "answer": "b",
+  "explanation": "Abstract classes cannot be instantiated with new. You must create a concrete subclass that implements process(). Fix: create an anonymous class or a named subclass: Processor p = new Processor() { @Override void process() { System.out.println(\"processing\"); } };"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "ut-tr-comp-08",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class TestLifecycle {\n    static java.util.List<String> log = new java.util.ArrayList<>();\n    // Simulating @BeforeEach, @Test, @AfterEach lifecycle\n    static void beforeEach() { log.add(\"before\"); }\n    static void afterEach() { log.add(\"after\"); }\n    static void runTest(Runnable test) {\n        beforeEach();\n        try { test.run(); log.add(\"test ok\"); }\n        catch (Throwable t) { log.add(\"test fail\"); }\n        afterEach();\n    }\n    public static void main(String[] args) {\n        runTest(() -> { int x = 1 + 1; });\n        runTest(() -> { throw new RuntimeException(); });\n        System.out.println(log);\n    }\n}",
+  "answer": "[before, test ok, after, before, test fail, after]",
+  "explanation": "Each test run: before→test(ok or fail)→after. Two tests → 6 log entries.",
+  "alternatives": ["[before, test ok, after, before, test fail, after]\n"]
+}

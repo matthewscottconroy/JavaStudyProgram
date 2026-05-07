@@ -1,0 +1,10 @@
+{
+  "id": "gui-tr-comp-09",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import javax.swing.*;\npublic class TextFieldContent {\n    public static void main(String[] args) {\n        JTextField tf = new JTextField(\"initial\");\n        System.out.println(tf.getText());\n        tf.setText(\"\");\n        System.out.println(tf.getText().isEmpty());\n        tf.setText(\"updated\");\n        System.out.println(tf.getText().length());\n    }\n}",
+  "answer": "initial\ntrue\n7",
+  "explanation": "getText() returns the current content. After setText(\"\"), the field is empty. \"updated\" has length 7.",
+  "alternatives": ["initial\ntrue\n7\n"]
+}

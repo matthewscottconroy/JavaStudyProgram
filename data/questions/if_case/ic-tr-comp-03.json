@@ -1,0 +1,10 @@
+{
+  "id": "ic-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class Validator {\n    static int checks = 0;\n\n    static boolean check(String label, boolean result) {\n        checks++;\n        System.out.println(\"checking \" + label);\n        return result;\n    }\n\n    public static void main(String[] args) {\n        boolean valid = check(\"A\", true) && check(\"B\", false) && check(\"C\", true);\n        System.out.println(valid);\n        System.out.println(checks);\n    }\n}",
+  "answer": "checking A\nchecking B\nfalse\n2",
+  "explanation": "Short-circuit &&: check('A') returns true, so the second operand is evaluated. check('B') returns false; because false && anything is false, the entire expression is already determined — check('C') is never called. valid = false. checks was incremented exactly twice.",
+  "alternatives": ["checking A\nchecking B\nfalse\n2\n"]
+}

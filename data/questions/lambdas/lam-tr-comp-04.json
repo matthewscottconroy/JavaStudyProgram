@@ -1,0 +1,10 @@
+{
+  "id": "lam-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.function.*;\npublic class LambdaChain {\n    public static void main(String[] args) {\n        Function<Integer,Integer> times2 = x -> x * 2;\n        Function<Integer,Integer> plus10 = x -> x + 10;\n        Function<Integer,Integer> composed = times2.andThen(plus10);\n        Function<Integer,Integer> composed2 = times2.compose(plus10);\n        System.out.println(composed.apply(5));\n        System.out.println(composed2.apply(5));\n    }\n}",
+  "answer": "20\n30",
+  "explanation": "andThen: times2 then plus10 = (5*2)+10=20. compose: plus10 first then times2 = (5+10)*2=30.",
+  "alternatives": ["20\n30\n"]
+}

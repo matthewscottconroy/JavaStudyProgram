@@ -1,0 +1,10 @@
+{
+  "id": "sapi-tr-comp-10",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\nimport java.util.stream.*;\npublic class Reduce {\n    public static void main(String[] args) {\n        List<Integer> nums = List.of(1,2,3,4,5);\n        int product = nums.stream().reduce(1, (a,b) -> a * b);\n        System.out.println(product);\n        Optional<Integer> max = nums.stream().reduce(Integer::max);\n        System.out.println(max.get());\n        String joined = nums.stream().map(String::valueOf)\n            .reduce(\"\", (a,b) -> a + b);\n        System.out.println(joined);\n    }\n}",
+  "answer": "120\n5\n12345",
+  "explanation": "Product: 1*1*2*3*4*5=120. max: Integer::max of 1..5=5. joined: ''+1+2+3+4+5='12345'.",
+  "alternatives": ["120\n5\n12345\n"]
+}

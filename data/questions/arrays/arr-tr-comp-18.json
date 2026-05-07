@@ -1,0 +1,10 @@
+{
+  "id": "arr-tr-comp-18",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Dutch {\n    static void sort012(int[] arr) {\n        int lo = 0, mid = 0, hi = arr.length - 1;\n        while (mid <= hi) {\n            if (arr[mid] == 0) { int t = arr[lo]; arr[lo++] = arr[mid]; arr[mid++] = t; }\n            else if (arr[mid] == 1) mid++;\n            else { int t = arr[mid]; arr[mid] = arr[hi]; arr[hi--] = t; }\n        }\n    }\n    public static void main(String[] args) {\n        int[] a = {2, 0, 1, 2, 1, 0};\n        sort012(a);\n        for (int x : a) System.out.print(x + \" \");\n    }\n}",
+  "answer": "0 0 1 1 2 2 ",
+  "explanation": "Dutch National Flag algorithm partitions {2,0,1,2,1,0} into 0s, 1s, 2s: {0,0,1,1,2,2}.",
+  "alternatives": ["0 0 1 1 2 2"]
+}

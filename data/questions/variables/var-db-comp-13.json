@@ -1,0 +1,15 @@
+{
+  "id": "var-db-comp-13",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The long literal overflows. What is the bug?",
+  "code": "public class LongLiteral {\n    public static void main(String[] args) {\n        long big = 10_000_000_000;   // bug: missing L suffix\n        System.out.println(big);\n    }\n}",
+  "choices": [
+    "Underscores are not allowed in numeric literals",
+    "10_000_000_000 exceeds Integer.MAX_VALUE; without the L suffix it is treated as an int literal and causes a compile error",
+    "long variables cannot store values above 9,999,999,999",
+    "The variable must be declared as Long (boxed) to store large values"
+  ],
+  "answer": "b",
+  "explanation": "10_000_000_000 (10 billion) exceeds Integer.MAX_VALUE (2.1 billion). Without the L suffix, the compiler treats it as an int literal and reports 'integer number too large'. Fix: add the L suffix: 10_000_000_000L. Underscores in literals are valid Java 7+ syntax."
+}

@@ -1,0 +1,10 @@
+{
+  "id": "col-tr-comp-18",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class FreqCount {\n    public static void main(String[] args) {\n        int[] nums = {3,1,4,1,5,9,2,6,5,3};\n        Map<Integer,Integer> freq = new TreeMap<>();\n        for (int n : nums) freq.merge(n, 1, Integer::sum);\n        freq.forEach((k,v) -> System.out.println(k + \":\" + v));\n    }\n}",
+  "answer": "1:2\n2:1\n3:2\n4:1\n5:2\n6:1\n9:1",
+  "explanation": "merge(k,1,Integer::sum) increments count per key. TreeMap sorts by key. Frequencies: 1→2, 2→1, 3→2, 4→1, 5→2, 6→1, 9→1.",
+  "alternatives": ["1:2\n2:1\n3:2\n4:1\n5:2\n6:1\n9:1\n"]
+}

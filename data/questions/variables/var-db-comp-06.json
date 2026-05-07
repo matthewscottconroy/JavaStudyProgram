@@ -1,0 +1,15 @@
+{
+  "id": "var-db-comp-06",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The method is supposed to swap two variables, but after the call x and y are unchanged. What is the bug?",
+  "code": "public class SwapRef {\n    static void swap(int[] a, int[] b) {\n        int[] temp = a;\n        a = b;         // reassigns local parameter\n        b = temp;      // reassigns local parameter\n    }\n    public static void main(String[] args) {\n        int[] x = {1};\n        int[] y = {2};\n        swap(x, y);\n        System.out.println(x[0] + \" \" + y[0]);  // still 1 2\n    }\n}",
+  "choices": [
+    "int[] cannot be passed as a method parameter",
+    "swap reassigns the local reference parameters a and b, but that does not change x and y in main",
+    "temp must be declared as int, not int[]",
+    "Arrays passed to methods are always copied"
+  ],
+  "answer": "b",
+  "explanation": "Reassigning a parameter (a = b) only changes the local copy of the reference. x and y in main still point to their original arrays. To actually swap contents, swap a[0] and b[0] instead: int temp=a[0]; a[0]=b[0]; b[0]=temp;"
+}

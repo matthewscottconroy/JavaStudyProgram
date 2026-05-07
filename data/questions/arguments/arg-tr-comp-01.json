@@ -1,0 +1,10 @@
+{
+  "id": "arg-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "If this program is run with: java Greet Alice 3 — what does it print?",
+  "code": "public class Greet {\n    public static void main(String[] args) {\n        String name  = args[0];\n        int    times = Integer.parseInt(args[1]);\n        for (int i = 0; i < times; i++) {\n            System.out.println(\"Hello, \" + name + \"!\");\n        }\n    }\n}",
+  "answer": "Hello, Alice!\nHello, Alice!\nHello, Alice!",
+  "explanation": "args[0] = \"Alice\", args[1] = \"3\". Integer.parseInt(\"3\") = 3. The loop runs 3 times, printing 'Hello, Alice!' on each iteration.",
+  "alternatives": ["Hello, Alice!\nHello, Alice!\nHello, Alice!\n"]
+}

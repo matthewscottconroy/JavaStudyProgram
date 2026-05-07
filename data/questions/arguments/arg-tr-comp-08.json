@@ -1,0 +1,10 @@
+{
+  "id": "arg-tr-comp-08",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "public class PassByValue {\n    static void doubleIt(int x) { x = x * 2; }\n    static void appendIt(StringBuilder sb) { sb.append(\"!\"); }\n    public static void main(String[] args) {\n        int n = 5;\n        doubleIt(n);\n        System.out.println(n);\n        StringBuilder s = new StringBuilder(\"Hi\");\n        appendIt(s);\n        System.out.println(s);\n    }\n}",
+  "answer": "5\nHi!",
+  "explanation": "Java passes references by value. doubleIt receives a copy of n; the original is unchanged. appendIt receives a copy of the reference — it still points to the same StringBuilder, so sb.append mutates the object. n stays 5; s becomes \"Hi!\".",
+  "alternatives": ["5\nHi!\n"]
+}

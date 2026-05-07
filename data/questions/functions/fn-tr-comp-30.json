@@ -1,0 +1,10 @@
+{
+  "id": "fn-tr-comp-30",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class TailRec {\n    static long sumTail(int n, long acc) {\n        if (n == 0) return acc;\n        return sumTail(n - 1, acc + n);\n    }\n    public static void main(String[] args) {\n        System.out.println(sumTail(5, 0));\n        System.out.println(sumTail(0, 42));\n        System.out.println(sumTail(10, 100));\n    }\n}",
+  "answer": "15\n42\n155",
+  "explanation": "sumTail(5,0): accumulates 5+4+3+2+1+0=15. sumTail(0,42): base case immediately returns 42. sumTail(10,100): 10+9+...+1=55, plus acc=100 → 155.",
+  "alternatives": ["15\n42\n155\n"]
+}

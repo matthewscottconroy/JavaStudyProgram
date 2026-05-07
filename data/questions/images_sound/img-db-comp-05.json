@@ -1,0 +1,15 @@
+{
+  "id": "img-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "ImageIO.read returns null instead of the image. What is the bug?",
+  "code": "import javax.imageio.ImageIO;\nimport java.io.File;\nimport java.awt.image.BufferedImage;\npublic class LoadImageBug {\n    public static void main(String[] args) throws Exception {\n        BufferedImage img = ImageIO.read(new File(\"photo.bmp\"));\n        // bug: ImageIO may not support BMP on all platforms, returns null\n        System.out.println(img.getWidth());\n    }\n}",
+  "choices": [
+    "ImageIO.read throws FileNotFoundException instead of returning null for missing files",
+    "ImageIO.read returns null when it cannot decode the file (unsupported format or file not found); calling getWidth() on null throws NullPointerException — check for null before use",
+    "BufferedImage.getWidth() requires an ImageObserver argument",
+    "BMP files must be converted to PNG before ImageIO can read them"
+  ],
+  "answer": "b",
+  "explanation": "ImageIO.read() returns null when no registered reader can handle the file (or the file doesn't exist). Calling getWidth() on null causes NullPointerException. Fix: check if (img != null) before accessing the image, and verify the format is supported via ImageIO.getReaderFileSuffixes()."
+}

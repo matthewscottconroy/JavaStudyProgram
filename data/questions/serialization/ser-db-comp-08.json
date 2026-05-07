@@ -1,0 +1,15 @@
+{
+  "id": "ser-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The class fails to serialize because a field is not serializable. What is the bug?",
+  "code": "import java.io.*;\npublic class NonSerField {\n    static class Container implements Serializable {\n        Thread worker = new Thread();  // bug: Thread is not Serializable\n        int value = 42;\n    }\n}",
+  "choices": [
+    "int fields cannot be serialized alongside object fields",
+    "Thread does not implement Serializable; serializing Container throws NotSerializableException for the worker field",
+    "Container must extend Thread to serialize a Thread field",
+    "The serialVersionUID must be set before Thread fields can be serialized"
+  ],
+  "answer": "b",
+  "explanation": "All non-transient instance fields of a Serializable class must themselves be serializable. Thread is not Serializable. Serializing Container throws NotSerializableException: 'java.lang.Thread'. Fix: declare worker as transient so it is excluded from serialization."
+}

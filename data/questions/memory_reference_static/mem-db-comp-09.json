@@ -1,0 +1,15 @@
+{
+  "id": "mem-db-comp-09",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The static field is shared accidentally across test instances. What is the bug?",
+  "code": "public class SharedState {\n    static int requestCount = 0;  // bug: shared across all instances\n    void handleRequest() { requestCount++; }\n    int getCount() { return requestCount; }\n    public static void main(String[] args) {\n        SharedState s1 = new SharedState();\n        SharedState s2 = new SharedState();\n        s1.handleRequest();\n        s1.handleRequest();\n        s2.handleRequest();\n        System.out.println(s1.getCount());\n        System.out.println(s2.getCount());\n    }\n}",
+  "choices": [
+    "Static fields cannot be incremented from instance methods",
+    "requestCount is static so it is shared by all instances; s1 and s2 both see the same count (3) rather than independent counts of 2 and 1",
+    "getCount() must be static to access a static field",
+    "handleRequest() should use synchronized to protect the counter"
+  ],
+  "answer": "b",
+  "explanation": "static fields belong to the class, not to any instance. All instances share the same requestCount. After s1.handleRequest() x2 and s2.handleRequest() x1, requestCount=3 for all instances. Both s1.getCount() and s2.getCount() return 3. Fix: make requestCount an instance field (remove static)."
+}

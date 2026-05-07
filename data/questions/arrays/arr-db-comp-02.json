@@ -1,0 +1,15 @@
+{
+  "id": "arr-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The method is supposed to return a sorted copy without modifying the original, but the original array ends up sorted too. What is the bug?",
+  "code": "import java.util.Arrays;\npublic class Sorter {\n    public static int[] sortedCopy(int[] arr) {\n        int[] result = arr;          // line A\n        Arrays.sort(result);         // line B\n        return result;\n    }\n\n    public static void main(String[] args) {\n        int[] nums = {3, 1, 4};\n        int[] sorted = sortedCopy(nums);\n        System.out.println(nums[0]); // prints 1, expected 3\n    }\n}",
+  "choices": [
+    "Arrays.sort() cannot sort int arrays — use a Collections method",
+    "Line A copies the reference, not the data; line B then sorts the original array through the alias",
+    "The return type should be void since Arrays.sort sorts in place",
+    "nums[0] should be sorted[0] to read from the sorted copy"
+  ],
+  "answer": "b",
+  "explanation": "'int[] result = arr' copies the reference, so 'result' and 'arr' (and 'nums' in main) all point to the same array. Arrays.sort(result) sorts that single array in place. Fix line A: int[] result = Arrays.copyOf(arr, arr.length);"
+}

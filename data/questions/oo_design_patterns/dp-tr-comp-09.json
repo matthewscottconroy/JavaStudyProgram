@@ -1,0 +1,10 @@
+{
+  "id": "dp-tr-comp-09",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class ObserverPattern {\n    interface Observer { void update(String event); }\n    static class EventBus {\n        java.util.List<Observer> obs = new java.util.ArrayList<>();\n        void subscribe(Observer o) { obs.add(o); }\n        void publish(String event) { for (Observer o : obs) o.update(event); }\n    }\n    public static void main(String[] args) {\n        EventBus bus = new EventBus();\n        bus.subscribe(e -> System.out.println(\"A:\" + e));\n        bus.subscribe(e -> System.out.println(\"B:\" + e));\n        bus.publish(\"click\");\n        bus.publish(\"hover\");\n    }\n}",
+  "answer": "A:click\nB:click\nA:hover\nB:hover",
+  "explanation": "Two observers A and B. publish(\"click\"): A notified → \"A:click\", B notified → \"B:click\". publish(\"hover\"): same pattern.",
+  "alternatives": ["A:click\nB:click\nA:hover\nB:hover\n"]
+}

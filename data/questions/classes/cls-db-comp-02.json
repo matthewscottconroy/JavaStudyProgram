@@ -1,0 +1,15 @@
+{
+  "id": "cls-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "This class is supposed to enforce that Temperature values stay above absolute zero (-273.15), but the check never triggers. What is the bug?",
+  "code": "public class Temperature {\n    private double celsius;\n\n    public Temperature(double celsius) {\n        this.celsius = celsius;\n        validate();\n    }\n\n    private void validate() {\n        if (celsius < -273.15) {\n            celsius = -273.15;\n        }\n    }\n\n    public void set(double celsius) {\n        this.celsius = celsius;\n    }\n\n    public double get() { return celsius; }\n\n    public static void main(String[] args) {\n        Temperature t = new Temperature(20);\n        t.set(-500);\n        System.out.println(t.get());\n    }\n}",
+  "choices": [
+    "validate() is private and cannot be called from the constructor",
+    "The set() method bypasses validate(); it should call validate() after updating the field",
+    "celsius should be an int, not a double, for comparisons to work correctly",
+    "The constructor should call set() instead of assigning the field directly"
+  ],
+  "answer": "b",
+  "explanation": "validate() is called in the constructor, so initial values are clamped. But set() assigns celsius directly without calling validate(), so any call to set() can bypass the constraint. Fix: add validate(); at the end of the set() method."
+}

@@ -1,0 +1,10 @@
+{
+  "id": "img-tr-comp-06",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print about audio clip properties?",
+  "code": "import javax.sound.sampled.*;\npublic class AudioProps {\n    // Hypothetical audio format\n    public static void main(String[] args) {\n        AudioFormat format = new AudioFormat(44100f, 16, 2, true, false);\n        System.out.println(format.getSampleRate());\n        System.out.println(format.getSampleSizeInBits());\n        System.out.println(format.getChannels());\n        System.out.println(format.isBigEndian());\n    }\n}",
+  "answer": "44100.0\n16\n2\nfalse",
+  "explanation": "AudioFormat(sampleRate=44100, bits=16, channels=2, signed=true, bigEndian=false). getSampleRate()=44100.0 (float). getSampleSizeInBits()=16. getChannels()=2 (stereo). isBigEndian()=false.",
+  "alternatives": ["44100.0\n16\n2\nfalse\n"]
+}

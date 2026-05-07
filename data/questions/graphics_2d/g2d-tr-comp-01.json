@@ -1,0 +1,10 @@
+{
+  "id": "g2d-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What color is the pixel at (50, 50) after this paintComponent runs? (Describe the color.)",
+  "code": "import javax.swing.*;\nimport java.awt.*;\npublic class Canvas extends JPanel {\n    @Override\n    protected void paintComponent(Graphics g) {\n        super.paintComponent(g);\n        Graphics2D g2 = (Graphics2D) g;\n\n        g2.setColor(Color.RED);\n        g2.fillRect(0, 0, 100, 100);   // red square 0-99,0-99\n\n        g2.setColor(Color.BLUE);\n        g2.fillRect(50, 50, 100, 100); // blue square 50-149,50-149\n    }\n}",
+  "answer": "blue",
+  "explanation": "The red rectangle fills (0,0) to (99,99). The blue rectangle then fills (50,50) to (149,149), painting over the overlapping region. (50,50) is inside both rectangles but blue is drawn last, so it appears blue. Painting in Graphics2D is like painting on a canvas — later draws cover earlier ones.",
+  "alternatives": ["Blue", "BLUE"]
+}

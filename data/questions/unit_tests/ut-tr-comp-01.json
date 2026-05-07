@@ -1,0 +1,10 @@
+{
+  "id": "ut-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "How many individual test executions does JUnit 5 run for this class?",
+  "code": "import org.junit.jupiter.params.ParameterizedTest;\nimport org.junit.jupiter.params.provider.ValueSource;\nimport static org.junit.jupiter.api.Assertions.*;\n\nclass PalindromeTest {\n    static boolean isPalindrome(String s) {\n        String r = new StringBuilder(s).reverse().toString();\n        return s.equals(r);\n    }\n\n    @ParameterizedTest\n    @ValueSource(strings = {\"racecar\", \"level\", \"hello\", \"noon\"})\n    void testPalindromes(String word) {\n        // 'hello' is not a palindrome, so this will have 3 passes and 1 fail\n        assertTrue(isPalindrome(word));\n    }\n}",
+  "answer": "4",
+  "explanation": "@ParameterizedTest with @ValueSource(strings={...}) runs the test method once per value in the array. Four strings → four test executions. Three pass (racecar, level, noon are palindromes) and one fails (hello). JUnit reports each as a separate test result.",
+  "alternatives": ["4\n"]
+}

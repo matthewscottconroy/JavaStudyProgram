@@ -1,0 +1,15 @@
+{
+  "id": "cls-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The toString() method doesn't produce the expected output. What is the bug?",
+  "code": "public class ToStringBug {\n    int x, y;\n    ToStringBug(int x, int y) { this.x=x; this.y=y; }\n    public String toString() {\n        return \"(\" + x + \",\" + y + \")\";\n    }\n    public static void main(String[] args) {\n        ToStringBug p = new ToStringBug(3, 4);\n        System.out.println(p.toString());\n        System.out.println(\"Point: \" + p);\n        // No bug above — but see below:\n        ToStringBug q = null;\n        System.out.println(\"q=\" + q.toString());  // bug: NPE\n    }\n}",
+  "choices": [
+    "toString() cannot be called explicitly; it must only be invoked implicitly",
+    "Calling q.toString() on a null reference throws NullPointerException; string concatenation 'q=' + q would safely produce 'q=null' instead",
+    "The return statement in toString() should use StringBuilder",
+    "System.out.println() does not call toString() automatically"
+  ],
+  "answer": "b",
+  "explanation": "q is null. q.toString() dereferences the null reference → NullPointerException. String concatenation ('q=' + q) would work safely because Java checks for null before calling toString(). Fix: use 'q=' + q instead of q.toString()."
+}

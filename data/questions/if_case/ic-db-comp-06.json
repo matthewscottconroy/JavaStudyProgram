@@ -1,0 +1,15 @@
+{
+  "id": "ic-db-comp-06",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The condition is supposed to check if n is between 1 and 10 inclusive, but it is always false. What is the bug?",
+  "code": "public class Range {\n    public static void main(String[] args) {\n        int n = 5;\n        if (1 <= n <= 10) {    // does not compile in Java\n            System.out.println(\"in range\");\n        }\n    }\n}",
+  "choices": [
+    "The condition should use 1 < n < 10 without equals signs",
+    "Java does not support chained comparisons; use (n >= 1 && n <= 10) instead",
+    "int n must be cast to double before range comparisons",
+    "The condition order must be (n >= 1) with n on the left"
+  ],
+  "answer": "b",
+  "explanation": "Unlike Python, Java does not support chained comparisons like 1 <= n <= 10. This is a compile error. Fix: use compound boolean: if (n >= 1 && n <= 10). The && operator evaluates both sub-conditions."
+}

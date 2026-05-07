@@ -1,0 +1,15 @@
+{
+  "id": "ut-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The test passes even though the method is broken. What is the bug?",
+  "code": "public class FalsePass {\n    static int abs(int x) {\n        return x;   // bug: should be Math.abs(x)\n    }\n    // Test:\n    static void testAbs() {\n        if (abs(5) != 5) throw new AssertionError();\n        // bug: only tests positive input — misses negative case\n    }\n    public static void main(String[] args) {\n        try { testAbs(); System.out.println(\"PASS\"); }\n        catch (AssertionError e) { System.out.println(\"FAIL\"); }\n    }\n}",
+  "choices": [
+    "abs(5) should return 0 for the test to be meaningful",
+    "The test only checks abs(5)==5 which passes even for a broken implementation; it never tests abs(-5)==5, so the bug is undetected",
+    "AssertionError should be caught with catch(Exception) to detect all failures",
+    "The test method must be annotated with @Test to run properly"
+  ],
+  "answer": "b",
+  "explanation": "Incomplete tests provide false confidence. Testing only positive inputs misses the core functionality of abs() — handling negatives. A proper test would also assert abs(-5)==5 and abs(0)==0. Good tests cover positive cases, negative cases, zero, and boundary values."
+}

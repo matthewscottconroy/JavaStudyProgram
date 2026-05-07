@@ -1,0 +1,15 @@
+{
+  "id": "fn-db-comp-22",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The method should find the index of the minimum element but returns -1 for a single-element array. What is the bug?",
+  "code": "public class MinIndex {\n    static int minIndex(int[] arr) {\n        int minIdx = -1;\n        int minVal = Integer.MAX_VALUE;\n        for (int i = 1; i < arr.length; i++) {   // bug: starts at 1, skips arr[0]\n            if (arr[i] < minVal) { minVal = arr[i]; minIdx = i; }\n        }\n        return minIdx;\n    }\n}",
+  "choices": [
+    "Integer.MAX_VALUE is too large to compare with array values",
+    "The loop starts at i = 1, skipping arr[0]; for a single-element array the loop body never executes and minIdx stays -1",
+    "minIdx should be initialized to 0 instead of -1 to handle empty arrays",
+    "The method should use Arrays.sort() before scanning"
+  ],
+  "answer": "b",
+  "explanation": "Starting the loop at index 1 skips the first element. For a one-element array the loop never runs, so minIdx remains -1. Fix: start the loop at i = 0, or initialize minIdx = 0 and minVal = arr[0] before the loop."
+}

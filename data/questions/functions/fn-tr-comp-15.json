@@ -1,0 +1,10 @@
+{
+  "id": "fn-tr-comp-15",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Hanoi {\n    static int moves = 0;\n    static void hanoi(int n, char from, char to, char aux) {\n        if (n == 0) return;\n        hanoi(n - 1, from, aux, to);\n        moves++;\n        hanoi(n - 1, aux, to, from);\n    }\n    public static void main(String[] args) {\n        hanoi(3, 'A', 'C', 'B');\n        System.out.println(moves);\n        moves = 0;\n        hanoi(4, 'A', 'C', 'B');\n        System.out.println(moves);\n    }\n}",
+  "answer": "7\n15",
+  "explanation": "Tower of Hanoi: 3 discs = 2³-1=7 moves. 4 discs = 2⁴-1=15 moves.",
+  "alternatives": ["7\n15\n"]
+}

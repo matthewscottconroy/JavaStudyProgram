@@ -1,0 +1,15 @@
+{
+  "id": "db-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The connection leaks when an exception occurs. What is the bug?",
+  "code": "import java.sql.*;\npublic class ConnLeak {\n    static void query(String url) throws SQLException {\n        Connection conn = DriverManager.getConnection(url);\n        Statement st = conn.createStatement();\n        ResultSet rs = st.executeQuery(\"SELECT 1\");\n        rs.close(); st.close(); conn.close();\n        // if executeQuery throws, conn and st are never closed\n    }\n}",
+  "choices": [
+    "Connection objects close automatically when they go out of scope",
+    "If executeQuery() throws, rs.close()/st.close()/conn.close() are skipped and database connections leak",
+    "DriverManager.getConnection must be wrapped in synchronized",
+    "ResultSet must be closed before Statement"
+  ],
+  "answer": "b",
+  "explanation": "An exception from executeQuery jumps out of the method, bypassing all three close() calls. Each unclosed Connection consumes a database connection from the pool. Fix: use try-with-resources — Connection, Statement, and ResultSet all implement AutoCloseable. They close in reverse order automatically."
+}

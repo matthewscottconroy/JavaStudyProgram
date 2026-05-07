@@ -1,0 +1,15 @@
+{
+  "id": "inh-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The subclass constructor fails to compile. What is the bug?",
+  "code": "public class NoDefaultCtor {\n    static class Animal {\n        String name;\n        Animal(String name) { this.name = name; }  // no default constructor\n    }\n    static class Dog extends Animal {\n        Dog() {  // bug: implicit super() — but Animal has no no-arg constructor\n            System.out.println(\"Dog created\");\n        }\n    }\n}",
+  "choices": [
+    "Dog cannot have a no-arg constructor if Animal has a parameterized one",
+    "Dog() implicitly calls super() (no-arg), but Animal only defines Animal(String); the compiler error says 'no suitable constructor found'",
+    "Animal must declare its constructor protected for Dog to call it",
+    "Dog should not extend Animal if Animal has a parameterized constructor"
+  ],
+  "answer": "b",
+  "explanation": "When a class defines any constructor, the compiler no longer generates a default no-arg constructor. Dog() implicitly inserts super() before its body, but Animal(String) is the only constructor available — there is no Animal(). Fix: explicitly call super(\"some name\") as the first statement in Dog()."
+}

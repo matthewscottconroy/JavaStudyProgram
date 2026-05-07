@@ -1,0 +1,10 @@
+{
+  "id": "lp-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class VowelCount {\n    public static int countVowels(String s) {\n        int count = 0;\n        for (char c : s.toLowerCase().toCharArray()) {\n            if (\"aeiou\".indexOf(c) >= 0) count++;\n        }\n        return count;\n    }\n    public static void main(String[] args) {\n        System.out.println(countVowels(\"Hello World\"));\n        System.out.println(countVowels(\"rhythm\"));\n    }\n}",
+  "answer": "3\n0",
+  "explanation": "\"Hello World\" → lowercase → \"hello world\". Vowels: e, o, o → 3. \"rhythm\" → no vowels (y is not in \"aeiou\") → 0.",
+  "alternatives": ["3\n0\n"]
+}

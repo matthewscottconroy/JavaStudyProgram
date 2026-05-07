@@ -1,0 +1,10 @@
+{
+  "id": "str-tr-comp-15",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Immutability {\n    public static void main(String[] args) {\n        String s = \"hello\";\n        s.toUpperCase();\n        System.out.println(s);\n        s = s.toUpperCase();\n        System.out.println(s);\n        String t = s.replace('L','_');\n        System.out.println(s);\n        System.out.println(t);\n    }\n}",
+  "answer": "hello\nHELLO\nHELLO\nHE__O",
+  "explanation": "Strings are immutable. s.toUpperCase() returns a new String but s is unchanged → still 'hello'. Reassigning s: s='HELLO'. t=s.replace('L','_')='HE__O'; s is unchanged.",
+  "alternatives": ["hello\nHELLO\nHELLO\nHE__O\n"]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "arg-db-comp-09",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The overloaded method call is ambiguous and fails to compile. What is the bug?",
+  "code": "public class AmbigOverload {\n    static void process(long x, int y)  { System.out.println(\"A\"); }\n    static void process(int x, long y)  { System.out.println(\"B\"); }\n    public static void main(String[] args) {\n        process(1, 2);  // bug: ambiguous — both require one widening\n    }\n}",
+  "choices": [
+    "process must be called with explicit long arguments to resolve the ambiguity",
+    "Overloaded methods with the same number of parameters are not allowed in Java",
+    "The call process(1, 2) is ambiguous because both overloads require exactly one widening conversion (int→long) and neither is more specific; the compiler rejects it",
+    "int literals cannot be widened to long in overload resolution"
+  ],
+  "answer": "c",
+  "explanation": "Both overloads require widening one argument: (long,int) widens arg1, (int,long) widens arg2. Neither overload is more specific than the other, so the compiler cannot choose and reports an ambiguous method call. Fix: use explicit casts — process(1L, 2) for overload A or process(1, 2L) for overload B."
+}

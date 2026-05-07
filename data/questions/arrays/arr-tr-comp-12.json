@@ -1,0 +1,10 @@
+{
+  "id": "arr-tr-comp-12",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "import java.util.Arrays;\npublic class ArrayCopy {\n    public static void main(String[] args) {\n        int[] a = {1, 2, 3, 4, 5};\n        int[] b = Arrays.copyOfRange(a, 1, 4);\n        b[0] = 99;\n        System.out.println(Arrays.toString(b));\n        System.out.println(a[1]);\n    }\n}",
+  "answer": "[99, 3, 4]\n2",
+  "explanation": "copyOfRange(a, 1, 4) creates a new array containing a[1], a[2], a[3] = {2,3,4}. Setting b[0]=99 only changes b; a is unaffected. a[1] remains 2.",
+  "alternatives": ["[99, 3, 4]\n2\n"]
+}

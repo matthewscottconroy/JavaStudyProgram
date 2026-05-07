@@ -1,0 +1,10 @@
+{
+  "id": "ser-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.io.*;\npublic class SerDemo {\n    static class Point implements Serializable {\n        int x, y;\n        transient int cached;   // not serialized\n        Point(int x, int y) { this.x = x; this.y = y; this.cached = x + y; }\n    }\n\n    public static void main(String[] args) throws Exception {\n        Point p = new Point(3, 4);\n        System.out.println(p.cached);\n\n        // serialize\n        ByteArrayOutputStream bos = new ByteArrayOutputStream();\n        new ObjectOutputStream(bos).writeObject(p);\n\n        // deserialize\n        ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray()));\n        Point q = (Point) ois.readObject();\n        System.out.println(q.x + \",\" + q.y);\n        System.out.println(q.cached);\n    }\n}",
+  "answer": "7\n3,4\n0",
+  "explanation": "Before serialization, cached = 3+4 = 7. Serialization saves x and y but skips 'cached' (transient). Deserialization reconstructs the object: x=3, y=4, but cached is not restored — it gets its default value for int, which is 0.",
+  "alternatives": ["7\n3,4\n0\n"]
+}

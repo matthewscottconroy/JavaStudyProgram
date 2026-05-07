@@ -1,0 +1,15 @@
+{
+  "id": "opt-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The expensive fallback is always called even when the Optional has a value. What is the bug?",
+  "code": "import java.util.Optional;\npublic class OrElseBug {\n    static String expensive() {\n        System.out.println(\"computing\");\n        return \"fallback\";\n    }\n    public static void main(String[] args) {\n        Optional<String> opt = Optional.of(\"value\");\n        String result = opt.orElse(expensive());  // bug: eager argument\n        System.out.println(result);\n    }\n}",
+  "choices": [
+    "orElse only evaluates its argument when the Optional is empty",
+    "orElse(T other) evaluates the argument expression eagerly before calling orElse; expensive() is always called regardless of whether the Optional has a value; use orElseGet(() -> expensive()) to evaluate lazily",
+    "Optional.of(\"value\") is incorrect; use Optional.ofNullable to wrap non-null values",
+    "orElse must be replaced with or() to support supplier-style fallbacks"
+  ],
+  "answer": "b",
+  "explanation": "orElse(T other) receives an already-evaluated value — the argument is computed before orElse is even called, just like any method argument in Java. expensive() always runs. Fix: opt.orElseGet(() -> expensive()) wraps the call in a Supplier so it is only invoked when the Optional is empty."
+}

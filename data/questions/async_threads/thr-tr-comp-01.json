@@ -1,0 +1,10 @@
+{
+  "id": "thr-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What is guaranteed to be printed by this program? (Choose what is always true regardless of thread scheduling.)",
+  "code": "public class Threads {\n    public static void main(String[] args) throws InterruptedException {\n        Thread t = new Thread(() -> {\n            System.out.println(\"thread\");\n        });\n        t.start();\n        t.join();\n        System.out.println(\"main\");\n    }\n}",
+  "answer": "thread\nmain",
+  "explanation": "t.join() causes the main thread to wait until thread t completes. This establishes a happens-before relationship: 'thread' is always printed before 'main'. Without join(), the order would be non-deterministic, but with it the output is guaranteed to be 'thread' then 'main'.",
+  "alternatives": ["thread\nmain\n"]
+}

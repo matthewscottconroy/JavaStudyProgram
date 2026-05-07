@@ -1,0 +1,10 @@
+{
+  "id": "thr-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 5,
+  "prompt": "What does this program always print? (The synchronized block guarantees ordering.)",
+  "code": "public class SafeCounter {\n    static int count = 0;\n    static final Object LOCK = new Object();\n\n    static void increment(int times) {\n        for (int i = 0; i < times; i++) {\n            synchronized (LOCK) { count++; }\n        }\n    }\n\n    public static void main(String[] args) throws InterruptedException {\n        Thread a = new Thread(() -> increment(500));\n        Thread b = new Thread(() -> increment(500));\n        a.start(); b.start();\n        a.join();  b.join();\n        System.out.println(count);\n    }\n}",
+  "answer": "1000",
+  "explanation": "synchronized(LOCK) ensures only one thread executes count++ at a time, preventing lost updates. Each of the two threads increments 500 times, for a total of exactly 1000. join() ensures both complete before the println.",
+  "alternatives": ["1000\n"]
+}

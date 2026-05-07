@@ -1,0 +1,10 @@
+{
+  "id": "col-tr-comp-13",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class SetOps {\n    public static void main(String[] args) {\n        Set<Integer> a = new HashSet<>(Arrays.asList(1,2,3,4));\n        Set<Integer> b = new HashSet<>(Arrays.asList(3,4,5,6));\n        Set<Integer> intersection = new HashSet<>(a);\n        intersection.retainAll(b);\n        Set<Integer> union = new HashSet<>(a);\n        union.addAll(b);\n        List<Integer> il = new ArrayList<>(intersection);\n        Collections.sort(il);\n        System.out.println(il);\n        System.out.println(union.size());\n    }\n}",
+  "answer": "[3, 4]\n6",
+  "explanation": "Intersection of {1,2,3,4} and {3,4,5,6} is {3,4}. Sorted: [3,4]. Union has 6 elements: {1,2,3,4,5,6}.",
+  "alternatives": ["[3, 4]\n6\n"]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "cls-tr-comp-11",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class StaticInit {\n    static int a;\n    static int b;\n    static {\n        a = 5;\n        b = a * 2;\n        System.out.println(\"static block: a=\" + a + \" b=\" + b);\n    }\n    public static void main(String[] args) {\n        System.out.println(\"main: a=\" + a + \" b=\" + b);\n    }\n}",
+  "answer": "static block: a=5 b=10\nmain: a=5 b=10",
+  "explanation": "Static initializer runs once when the class is loaded, before main(). a=5, b=10. main() then prints the initialized values.",
+  "alternatives": ["static block: a=5 b=10\nmain: a=5 b=10\n"]
+}

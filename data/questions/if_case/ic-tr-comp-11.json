@@ -1,0 +1,10 @@
+{
+  "id": "ic-tr-comp-11",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class PatternMatch {\n    sealed interface Shape permits Circle, Rect {}\n    record Circle(double r) implements Shape {}\n    record Rect(double w, double h) implements Shape {}\n    static String describe(Shape s) {\n        return switch (s) {\n            case Circle c when c.r() > 5 -> \"big circle\";\n            case Circle c -> \"small circle\";\n            case Rect r -> \"rect\";\n        };\n    }\n    public static void main(String[] args) {\n        System.out.println(describe(new Circle(10)));\n        System.out.println(describe(new Circle(3)));\n        System.out.println(describe(new Rect(2,3)));\n    }\n}",
+  "answer": "big circle\nsmall circle\nrect",
+  "explanation": "Pattern matching switch: Circle with r=10>5 → 'big circle'. Circle r=3 not>5 → 'small circle'. Rect → 'rect'.",
+  "alternatives": ["big circle\nsmall circle\nrect\n"]
+}

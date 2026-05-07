@@ -1,0 +1,10 @@
+{
+  "id": "dp-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class BuilderPattern {\n    static class Pizza {\n        String size; boolean cheese, pepperoni;\n        private Pizza() {}\n        static class Builder {\n            Pizza p = new Pizza();\n            Builder size(String s) { p.size = s; return this; }\n            Builder cheese() { p.cheese = true; return this; }\n            Builder pepperoni() { p.pepperoni = true; return this; }\n            Pizza build() { return p; }\n        }\n        @Override public String toString() {\n            return size + \",ch=\" + cheese + \",pep=\" + pepperoni;\n        }\n    }\n    public static void main(String[] args) {\n        Pizza p = new Pizza.Builder().size(\"large\").cheese().build();\n        System.out.println(p);\n    }\n}",
+  "answer": "large,ch=true,pep=false",
+  "explanation": "Builder pattern: chained calls set size=\"large\" and cheese=true. pepperoni() not called so p.pepperoni=false. toString formats: \"large,ch=true,pep=false\".",
+  "alternatives": ["large,ch=true,pep=false\n"]
+}

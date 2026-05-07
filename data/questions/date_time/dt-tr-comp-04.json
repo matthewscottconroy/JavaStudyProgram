@@ -1,0 +1,10 @@
+{
+  "id": "dt-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.time.*;\nimport java.time.format.*;\npublic class FormatterDemo {\n    public static void main(String[] args) {\n        LocalDate d = LocalDate.of(2024, 6, 5);\n        DateTimeFormatter fmt = DateTimeFormatter.ofPattern(\"dd/MM/yyyy\");\n        System.out.println(d.format(fmt));\n        LocalDate parsed = LocalDate.parse(\"05/06/2024\", fmt);\n        System.out.println(parsed.getYear());\n    }\n}",
+  "answer": "05/06/2024\n2024",
+  "explanation": "The pattern dd/MM/yyyy formats day/month/year with zero-padding. June 5, 2024 → \"05/06/2024\". Parsing \"05/06/2024\" with the same pattern recovers year=2024.",
+  "alternatives": ["05/06/2024\n2024\n"]
+}

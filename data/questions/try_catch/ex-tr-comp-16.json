@@ -1,0 +1,10 @@
+{
+  "id": "ex-tr-comp-16",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Rethrow {\n    static void process(int n) {\n        try {\n            if (n < 0) throw new IllegalArgumentException(\"negative\");\n            System.out.println(\"processed: \" + n);\n        } catch (IllegalArgumentException e) {\n            System.out.println(\"caught: \" + e.getMessage());\n            throw e;  // rethrow\n        }\n    }\n    public static void main(String[] args) {\n        try {\n            process(5);\n            process(-1);\n        } catch (Exception e) {\n            System.out.println(\"outer: \" + e.getMessage());\n        }\n    }\n}",
+  "answer": "processed: 5\ncaught: negative\nouter: negative",
+  "explanation": "process(5): no exception → 'processed: 5'. process(-1): throws, inner catch prints 'caught: negative', rethrows. Outer catch prints 'outer: negative'.",
+  "alternatives": ["processed: 5\ncaught: negative\nouter: negative\n"]
+}

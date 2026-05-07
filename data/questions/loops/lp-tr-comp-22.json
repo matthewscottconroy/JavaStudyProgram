@@ -1,0 +1,10 @@
+{
+  "id": "lp-tr-comp-22",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class BreakMulti {\n    public static void main(String[] args) {\n        int result = -1;\n        search:\n        for (int i = 0; i < 4; i++) {\n            for (int j = 0; j < 4; j++) {\n                if (i * j > 5) {\n                    result = i * 10 + j;\n                    break search;\n                }\n            }\n        }\n        System.out.println(result);\n    }\n}",
+  "answer": "23",
+  "explanation": "Scanning i=0,1,2: 0*j never >5, 1*j never >5 for j<4. i=2: j=0(0),j=1(2),j=2(4),j=3(6>5) → break. result=2*10+3=23.",
+  "alternatives": ["23\n"]
+}

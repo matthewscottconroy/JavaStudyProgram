@@ -1,0 +1,10 @@
+{
+  "id": "lp-tr-comp-23",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class SelectionSort {\n    public static void main(String[] args) {\n        int[] a = {5, 2, 8, 1};\n        for (int i = 0; i < a.length - 1; i++) {\n            int minIdx = i;\n            for (int j = i + 1; j < a.length; j++) {\n                if (a[j] < a[minIdx]) minIdx = j;\n            }\n            int tmp = a[i]; a[i] = a[minIdx]; a[minIdx] = tmp;\n        }\n        for (int x : a) System.out.print(x + \" \");\n    }\n}",
+  "answer": "1 2 5 8 ",
+  "explanation": "Selection sort finds min of remaining unsorted portion and swaps. {5,2,8,1}: min=1(idx3)↔a[0]→{1,2,8,5}; min=2(idx1)↔a[1]→{1,2,8,5}; min=5(idx3)↔a[2]→{1,2,5,8}. Result: 1 2 5 8.",
+  "alternatives": ["1 2 5 8 \n", "1 2 5 8"]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "fn-tr-comp-27",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Compose {\n    interface IntFn { int apply(int x); }\n    static IntFn compose(IntFn f, IntFn g) {\n        return x -> f.apply(g.apply(x));\n    }\n    public static void main(String[] args) {\n        IntFn doubleIt = x -> x * 2;\n        IntFn addThree = x -> x + 3;\n        IntFn composed = compose(doubleIt, addThree);\n        System.out.println(composed.apply(5));\n        System.out.println(composed.apply(0));\n    }\n}",
+  "answer": "16\n6",
+  "explanation": "compose(f,g)(x) = f(g(x)). g=addThree, f=doubleIt. composed(5)=doubleIt(addThree(5))=doubleIt(8)=16. composed(0)=doubleIt(3)=6.",
+  "alternatives": ["16\n6\n"]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "fi-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The lambda does not compile. What is the bug?",
+  "code": "import java.util.function.*;\npublic class FuncTypeBug {\n    public static void main(String[] args) {\n        Function<String, String> fn = (String s, int n) -> s.repeat(n);  // bug: wrong signature\n        System.out.println(fn.apply(\"a\"));\n    }\n}",
+  "choices": [
+    "Function requires the return type to be declared in the lambda",
+    "Function<String, String> has a single String input and String output; the lambda takes two parameters (String and int) which does not match; use BiFunction<String, Integer, String> instead",
+    "Lambda parameters must not declare types when used with Function",
+    "repeat is not defined on String in this version of Java"
+  ],
+  "answer": "b",
+  "explanation": "Function<T, R> represents a function with one input (T) and one output (R). A lambda with two parameters (String, int) does not satisfy Function<String,String>'s single-argument apply method. Fix: BiFunction<String, Integer, String> fn = (s, n) -> s.repeat(n);"
+}

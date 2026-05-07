@@ -1,0 +1,10 @@
+{
+  "id": "g2d-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "In what order are these shapes drawn, and which appears on top?",
+  "code": "import javax.swing.*;\nimport java.awt.*;\npublic class Layers extends JPanel {\n    @Override\n    protected void paintComponent(Graphics g) {\n        super.paintComponent(g);\n        Graphics2D g2 = (Graphics2D) g;\n\n        g2.setColor(new Color(255, 0, 0, 128));   // semi-transparent red\n        g2.fillRect(20, 20, 100, 100);\n\n        g2.setColor(Color.BLUE);\n        g2.fillOval(60, 60, 80, 80);\n\n        g2.setColor(Color.BLACK);\n        g2.drawString(\"Hello\", 70, 110);\n    }\n}",
+  "answer": "red rectangle first, blue oval on top of it, then black text on top of both",
+  "explanation": "Graphics2D paints in call order — later calls draw over earlier ones. The semi-transparent red rectangle is first. The solid blue oval is drawn second, covering the center of the red rect. The black string 'Hello' is drawn last and appears on top of everything at that location.",
+  "alternatives": ["red rect, then blue oval, then black text"]
+}

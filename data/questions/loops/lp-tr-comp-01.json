@@ -1,0 +1,10 @@
+{
+  "id": "lp-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "public class SumUp {\n    public static int sumTo(int n) {\n        int total = 0;\n        for (int i = 1; i <= n; i++) {\n            total += i;\n        }\n        return total;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(sumTo(4));\n        System.out.println(sumTo(1));\n    }\n}",
+  "answer": "10\n1",
+  "explanation": "sumTo(4): total starts at 0, then adds 1, 2, 3, 4 → total = 10. sumTo(1): adds only 1 → total = 1. Each result is printed on its own line.",
+  "alternatives": ["10\n1\n"]
+}

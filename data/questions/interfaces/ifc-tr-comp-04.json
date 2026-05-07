@@ -1,0 +1,10 @@
+{
+  "id": "ifc-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class DefaultMethod {\n    interface Greeter {\n        String greet(String name);\n        default String greetLoud(String name) {\n            return greet(name).toUpperCase();\n        }\n    }\n    static class FormalGreeter implements Greeter {\n        public String greet(String name) { return \"Dear \" + name; }\n    }\n    static class CasualGreeter implements Greeter {\n        public String greet(String name) { return \"hey \" + name; }\n        @Override public String greetLoud(String name) { return greet(name) + \"!!!\"; }\n    }\n    public static void main(String[] args) {\n        Greeter f = new FormalGreeter();\n        Greeter c = new CasualGreeter();\n        System.out.println(f.greetLoud(\"Alice\"));\n        System.out.println(c.greetLoud(\"Bob\"));\n    }\n}",
+  "answer": "DEAR ALICE\nhey Bob!!!",
+  "explanation": "FormalGreeter uses default greetLoud: greet(\"Alice\")=\"Dear Alice\", toUpperCase()=\"DEAR ALICE\". CasualGreeter overrides greetLoud: returns \"hey Bob!!!\".",
+  "alternatives": ["DEAR ALICE\nhey Bob!!!\n"]
+}

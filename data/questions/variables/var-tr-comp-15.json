@@ -1,0 +1,10 @@
+{
+  "id": "var-tr-comp-15",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Promotion {\n    public static void main(String[] args) {\n        byte a = 10, b = 20;\n        // byte c = a + b;  // won't compile without cast\n        int c = a + b;     // int arithmetic\n        System.out.println(c);\n        System.out.println(Integer.toBinaryString(c));\n        char ch = 'A';\n        System.out.println(ch + 1);     // int arithmetic\n        System.out.println((char)(ch + 1));\n    }\n}",
+  "answer": "30\n11110\n66\nB",
+  "explanation": "byte+byte promotes to int=30. toBinaryString(30)='11110'. 'A'=65; 65+1=66 (int). (char)66='B'.",
+  "alternatives": ["30\n11110\n66\nB\n"]
+}

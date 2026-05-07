@@ -1,0 +1,15 @@
+{
+  "id": "rx-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "replaceAll corrupts backslash sequences in the replacement. What is the bug?",
+  "code": "public class ReplaceBug {\n    public static void main(String[] args) {\n        String path = \"C:/user/docs\";\n        // bug: replacement string interprets \\ and $\n        String result = path.replaceAll(\"/\", \"\\\\\\\\\");  // intended: replace / with \\\n        System.out.println(result);\n    }\n}",
+  "choices": [
+    "replaceAll cannot replace single characters like /",
+    "The replacement string in replaceAll is processed for regex special sequences: \\\\ means a literal backslash and $ starts a group reference; extra escaping is needed, or use Matcher.quoteReplacement() to treat the replacement as literal",
+    "replaceAll only replaces the first match; use replaceAll(Pattern.compile(\"/\"), ...) for all",
+    "Forward slash / is a regex metacharacter that must be escaped as \\/"
+  ],
+  "answer": "b",
+  "explanation": "In replaceAll's replacement string, '\\' and '$' are special: '\\' escapes the next char and '$' references a capture group. To replace with a literal backslash you need \"\\\\\\\\\" (4 backslashes in Java string = 2 in regex replacement = 1 literal). Use Matcher.quoteReplacement(\"\\\\\") to safely escape replacement strings."
+}

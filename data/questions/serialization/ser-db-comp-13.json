@@ -1,0 +1,15 @@
+{
+  "id": "ser-db-comp-13",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The stream is not closed after writing, causing incomplete data. What is the bug?",
+  "code": "import java.io.*;\npublic class NoFlush {\n    public static void main(String[] args) throws Exception {\n        FileOutputStream fos = new FileOutputStream(\"/tmp/data.ser\");\n        ObjectOutputStream oos = new ObjectOutputStream(fos);\n        oos.writeObject(\"hello\");\n        // bug: oos never closed or flushed\n        // data may remain in buffer and not be written to file\n    }\n}",
+  "choices": [
+    "ObjectOutputStream writes directly to disk without buffering",
+    "Without calling oos.close() or oos.flush(), buffered data may not be flushed to the file; the serialized object could be incomplete or missing",
+    "FileOutputStream automatically flushes when garbage collected",
+    "writeObject() flushes the stream automatically"
+  ],
+  "answer": "b",
+  "explanation": "ObjectOutputStream buffers data internally. Without close() (which calls flush()) or explicit flush(), some bytes may remain in the buffer and not reach the file. Fix: use try-with-resources: try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(...))) { oos.writeObject(...); }"
+}

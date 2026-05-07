@@ -1,0 +1,15 @@
+{
+  "id": "thr-db-comp-06",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The volatile variable does not prevent the race condition it seems to. What is the bug?",
+  "code": "public class VolatileBug {\n    static volatile int counter = 0;\n    static void inc() {\n        counter++;  // bug: read-modify-write is still not atomic\n    }\n    public static void main(String[] args) throws InterruptedException {\n        Thread t1 = new Thread(() -> { for(int i=0;i<1000;i++) inc(); });\n        Thread t2 = new Thread(() -> { for(int i=0;i<1000;i++) inc(); });\n        t1.start(); t2.start();\n        t1.join(); t2.join();\n        // may not be 2000\n    }\n}",
+  "choices": [
+    "volatile variables cannot be used in static methods",
+    "volatile ensures visibility but not atomicity; counter++ is three operations (read, increment, write) that can still interleave",
+    "volatile only works with boolean fields in Java",
+    "t1.join() and t2.join() must be called before start()"
+  ],
+  "answer": "b",
+  "explanation": "volatile guarantees that reads/writes of the variable are visible across threads immediately. However, counter++ is a compound operation — read counter, add 1, write back. Between read and write, another thread may read the old value. This is still a race condition. Fix: use AtomicInteger or synchronize inc()."
+}

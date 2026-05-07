@@ -1,0 +1,15 @@
+{
+  "id": "lam-db-comp-06",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The lambda does not match the functional interface signature. What is the bug?",
+  "code": "import java.util.function.*;\npublic class SignatureMismatch {\n    public static void main(String[] args) {\n        // Function<T,R> expects one argument\n        Function<Integer,Integer> f = (a, b) -> a + b;  // bug: two parameters\n        System.out.println(f.apply(5));\n    }\n}",
+  "choices": [
+    "Function cannot accept Integer type parameters",
+    "Function<Integer,Integer> expects a lambda with one parameter; (a,b)->a+b has two parameters and doesn't match the apply(T) signature",
+    "Lambda parameters must be declared with their types explicitly",
+    "Function should be BinaryOperator to support two-parameter lambdas"
+  ],
+  "answer": "b",
+  "explanation": "Function<T,R> represents T -> R (one input, one output). Its abstract method is R apply(T t). The lambda (a,b)->a+b has two parameters, which matches BiFunction<Integer,Integer,Integer>, not Function. Fix: use BiFunction<Integer,Integer,Integer> f = (a,b) -> a+b;"
+}

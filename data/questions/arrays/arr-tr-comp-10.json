@@ -1,0 +1,10 @@
+{
+  "id": "arr-tr-comp-10",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.Arrays;\npublic class ArrayCopy {\n    public static void main(String[] args) {\n        int[] src = {1, 2, 3, 4, 5};\n        int[] copy = Arrays.copyOfRange(src, 1, 4);\n        System.out.println(Arrays.toString(copy));\n        copy[0] = 99;\n        System.out.println(src[1]);  // unchanged\n        System.out.println(Arrays.copyOf(src, 3).length);\n    }\n}",
+  "answer": "[2, 3, 4]\n2\n3",
+  "explanation": "copyOfRange(src,1,4) copies indices 1,2,3 → [2,3,4]. copy[0]=99 changes the copy, not src. src[1]=2 (unchanged). copyOf(src,3) takes first 3 elements [1,2,3], length=3.",
+  "alternatives": ["[2, 3, 4]\n2\n3\n"]
+}

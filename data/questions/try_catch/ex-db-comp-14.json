@@ -1,0 +1,15 @@
+{
+  "id": "ex-db-comp-14",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The multi-catch block causes a compile error. What is the bug?",
+  "code": "public class MultiCatchBug {\n    static void go() throws Exception {\n        try {\n            throw new IllegalArgumentException();\n        } catch (IllegalArgumentException | RuntimeException e) {  // bug: redundant\n            System.out.println(\"caught\");\n        }\n    }\n}",
+  "choices": [
+    "Multi-catch requires exactly two exception types",
+    "IllegalArgumentException is a subclass of RuntimeException; multi-catch does not allow catching a type and its supertype together — the compiler rejects it as redundant",
+    "RuntimeException cannot be caught in a multi-catch block",
+    "The pipe | separator is not valid Java syntax for catch blocks"
+  ],
+  "answer": "b",
+  "explanation": "Multi-catch (catch(A | B e)) requires the listed types to be independent (no subtype relationship). IllegalArgumentException extends RuntimeException, so catching both is redundant. The compiler reports an error. Fix: catch(RuntimeException e) alone is sufficient to cover both."
+}

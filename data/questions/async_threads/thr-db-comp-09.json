@@ -1,0 +1,15 @@
+{
+  "id": "thr-db-comp-09",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The thread pool is never shut down, preventing JVM exit. What is the bug?",
+  "code": "import java.util.concurrent.*;\npublic class LeakyExecutor {\n    public static void main(String[] args) throws Exception {\n        ExecutorService exec = Executors.newFixedThreadPool(4);\n        for (int i = 0; i < 10; i++) exec.submit(() -> System.out.println(\"task\"));\n        // bug: exec.shutdown() not called\n    }\n}",
+  "choices": [
+    "ExecutorService automatically shuts down when all tasks complete",
+    "Without shutdown(), the thread pool's non-daemon threads keep the JVM alive indefinitely after all tasks finish",
+    "submit() blocks until all tasks complete, making shutdown() unnecessary",
+    "Executors.newFixedThreadPool() creates daemon threads that exit with main()"
+  ],
+  "answer": "b",
+  "explanation": "ExecutorService threads are non-daemon by default. Without shutdown(), they stay alive waiting for new tasks, preventing the JVM from exiting. Fix: call exec.shutdown() after submitting tasks, or use try-with-resources (Java 19+) or finally block to ensure shutdown."
+}

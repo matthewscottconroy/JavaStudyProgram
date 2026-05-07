@@ -1,0 +1,10 @@
+{
+  "id": "fi-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.function.*;\npublic class UnaryDemo {\n    public static void main(String[] args) {\n        UnaryOperator<String> trim   = String::trim;\n        UnaryOperator<String> upper  = String::toUpperCase;\n        UnaryOperator<String> both   = trim.andThen(upper);\n        System.out.println(both.apply(\"  hello  \"));\n        System.out.println(UnaryOperator.identity().apply(\"unchanged\"));\n    }\n}",
+  "answer": "HELLO\nunchanged",
+  "explanation": "trim.andThen(upper) first trims whitespace then uppercases: \"  hello  \" → \"hello\" → \"HELLO\". UnaryOperator.identity() returns its input unchanged.",
+  "alternatives": ["HELLO\nunchanged\n"]
+}

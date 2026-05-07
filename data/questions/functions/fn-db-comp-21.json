@@ -1,0 +1,15 @@
+{
+  "id": "fn-db-comp-21",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The method should compute n choose k but gives wrong results for large inputs. What is the bug?",
+  "code": "public class Choose {\n    static long nCk(int n, int k) {\n        if (k == 0 || k == n) return 1;\n        return nCk(n-1, k-1) + nCk(n-1, k);  // bug: exponential recomputation\n    }\n}",
+  "choices": [
+    "The base case k == n should be k >= n",
+    "The plain recursive approach has exponential time complexity due to overlapping subproblems; for large n it is extremely slow or overflows the call stack",
+    "nCk(n-1,k-1) should be nCk(n,k-1) per Pascal's triangle",
+    "The return type long cannot store combinatorial results"
+  ],
+  "answer": "b",
+  "explanation": "The naive recursive implementation recomputes the same nCk(i,j) values exponentially many times. For n=40, k=20 this is billions of calls. Fix: use dynamic programming (bottom-up table) or add memoization with a HashMap to cache previously computed values."
+}

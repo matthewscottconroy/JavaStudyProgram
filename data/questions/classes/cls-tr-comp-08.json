@@ -1,0 +1,10 @@
+{
+  "id": "cls-tr-comp-08",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class EqualsHash {\n    static class Box {\n        int val;\n        Box(int v) { val = v; }\n        @Override public boolean equals(Object o) {\n            if (!(o instanceof Box)) return false;\n            return val == ((Box)o).val;\n        }\n        @Override public int hashCode() { return val; }\n    }\n    public static void main(String[] args) {\n        Box a = new Box(5);\n        Box b = new Box(5);\n        Box c = a;\n        System.out.println(a.equals(b));\n        System.out.println(a == b);\n        System.out.println(a == c);\n        System.out.println(a.hashCode() == b.hashCode());\n    }\n}",
+  "answer": "true\nfalse\ntrue\ntrue",
+  "explanation": "a.equals(b): Box.equals compares val, 5==5 → true. a==b: different objects → false. a==c: c is same reference as a → true. hashCode: both return val=5, so equal.",
+  "alternatives": ["true\nfalse\ntrue\ntrue\n"]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gem-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "Clicking the button does nothing. What is the bug?",
+  "code": "import javax.swing.*;\npublic class NoAction {\n    public static void main(String[] args) {\n        JButton btn = new JButton(\"Save\");\n        // ActionListener is created but never registered\n        java.awt.event.ActionListener listener = e -> System.out.println(\"saved!\");\n\n        JFrame f = new JFrame();\n        f.add(btn);\n        f.pack();\n        f.setVisible(true);\n    }\n}",
+  "choices": [
+    "Lambda expressions cannot be used as ActionListeners",
+    "The ActionListener is created but never passed to btn.addActionListener() — clicking the button fires no registered listeners",
+    "ActionListener must be registered before the JFrame is created",
+    "System.out.println cannot be called from inside an ActionListener"
+  ],
+  "answer": "b",
+  "explanation": "Creating an ActionListener object (or lambda) does not automatically attach it to any component. The button has no knowledge that this listener exists. Fix: btn.addActionListener(listener); — or inline: btn.addActionListener(e -> System.out.println(\"saved!\"));"
+}

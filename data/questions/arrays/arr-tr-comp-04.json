@@ -1,0 +1,10 @@
+{
+  "id": "arr-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class Rotate {\n    public static void rotateLeft(int[] arr) {\n        int first = arr[0];\n        for (int i = 0; i < arr.length - 1; i++) {\n            arr[i] = arr[i + 1];\n        }\n        arr[arr.length - 1] = first;\n    }\n\n    public static void main(String[] args) {\n        int[] a = {10, 20, 30, 40};\n        rotateLeft(a);\n        for (int n : a) System.out.print(n + \" \");\n        System.out.println();\n        rotateLeft(a);\n        System.out.println(a[0]);\n    }\n}",
+  "answer": "20 30 40 10 \n30",
+  "explanation": "First rotateLeft: saves first=10, shifts each element left one position → {20,30,40,?}, puts 10 at end → {20,30,40,10}. Prints '20 30 40 10 ' with trailing space then newline. Second rotateLeft on {20,30,40,10}: saves first=20, shifts → {30,40,10,20}. a[0]=30.",
+  "alternatives": ["20 30 40 10 \n30\n"]
+}

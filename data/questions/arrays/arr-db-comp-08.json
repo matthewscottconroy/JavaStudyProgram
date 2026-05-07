@@ -1,0 +1,15 @@
+{
+  "id": "arr-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The two-dimensional array access is in the wrong order (row/column swapped). What is the bug?",
+  "code": "public class RowColBug {\n    public static void main(String[] args) {\n        // matrix[row][col]\n        int[][] matrix = {{1,2,3},{4,5,6},{7,8,9}};\n        // intended: sum of column 0 (1+4+7=12)\n        int sum = 0;\n        for (int i = 0; i < 3; i++) {\n            sum += matrix[0][i];  // bug: iterates row 0 instead of column 0\n        }\n        System.out.println(sum);\n    }\n}",
+  "choices": [
+    "2D arrays cannot be traversed with a single loop variable",
+    "matrix[0][i] sums row 0 (1,2,3=6), not column 0; to sum column 0 use matrix[i][0]",
+    "matrix[0][i] is out of bounds for a 3x3 matrix",
+    "sum should be declared outside the for loop"
+  ],
+  "answer": "b",
+  "explanation": "matrix[row][col]. To sum column 0, fix to matrix[i][0] (row varies, col=0 fixed). matrix[0][i] sums row 0: 1+2+3=6, not the column sum 1+4+7=12."
+}

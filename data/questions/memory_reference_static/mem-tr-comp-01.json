@@ -1,0 +1,10 @@
+{
+  "id": "mem-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Shared {\n    static int count = 0;\n\n    static void increment() { count++; }\n\n    public static void main(String[] args) {\n        increment();\n        increment();\n        System.out.println(count);\n\n        count = 0;\n        for (int i = 0; i < 5; i++) increment();\n        System.out.println(count);\n    }\n}",
+  "answer": "2\n5",
+  "explanation": "count is a static field — one copy shared by all code in the class. Two increment() calls make it 2. After resetting to 0, five more increments make it 5.",
+  "alternatives": ["2\n5\n"]
+}

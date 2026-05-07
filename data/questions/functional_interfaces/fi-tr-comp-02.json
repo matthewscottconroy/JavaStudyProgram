@@ -1,0 +1,10 @@
+{
+  "id": "fi-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "import java.util.function.*;\npublic class FunctionCompose {\n    public static void main(String[] args) {\n        Function<Integer, Integer> times2 = x -> x * 2;\n        Function<Integer, Integer> plus3  = x -> x + 3;\n        System.out.println(times2.andThen(plus3).apply(5));\n        System.out.println(times2.compose(plus3).apply(5));\n    }\n}",
+  "answer": "13\n16",
+  "explanation": "andThen: times2 then plus3 → (5*2)+3=13. compose: plus3 then times2 → (5+3)*2=16. andThen applies the argument after the receiver; compose applies it before.",
+  "alternatives": ["13\n16\n"]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "fio-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.nio.file.*;\npublic class PathNormalize {\n    public static void main(String[] args) {\n        Path p = Path.of(\"/a/b/../c/./d\");\n        System.out.println(p.normalize());\n        System.out.println(Path.of(\"x\").isAbsolute());\n        System.out.println(Path.of(\"/x\").isAbsolute());\n    }\n}",
+  "answer": "/a/c/d\nfalse\ntrue",
+  "explanation": "normalize() resolves .. and . components: /a/b/../c/./d → /a/c/d. \"x\" is relative (no leading /) so isAbsolute()=false. \"/x\" starts with / so isAbsolute()=true.",
+  "alternatives": ["/a/c/d\nfalse\ntrue\n"]
+}

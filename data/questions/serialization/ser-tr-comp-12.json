@@ -1,0 +1,10 @@
+{
+  "id": "ser-tr-comp-12",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.io.*;\npublic class CustomSerial {\n    static class Temp implements Serializable {\n        double celsius;\n        Temp(double c) { celsius = c; }\n        private void writeObject(ObjectOutputStream out) throws IOException {\n            out.writeDouble(celsius * 9.0/5.0 + 32);  // save as Fahrenheit\n        }\n        private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {\n            celsius = (in.readDouble() - 32) * 5.0/9.0;  // convert back\n        }\n    }\n    public static void main(String[] args) throws Exception {\n        Temp t = new Temp(100.0);\n        ByteArrayOutputStream baos = new ByteArrayOutputStream();\n        new ObjectOutputStream(baos).writeObject(t);\n        Temp t2 = (Temp) new ObjectInputStream(\n            new ByteArrayInputStream(baos.toByteArray())).readObject();\n        System.out.println((int)t2.celsius);\n    }\n}",
+  "answer": "100",
+  "explanation": "Custom writeObject saves 212°F. readObject converts 212°F back to 100°C. (int)100.0 = 100.",
+  "alternatives": ["100\n"]
+}

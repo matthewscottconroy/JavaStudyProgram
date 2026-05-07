@@ -1,0 +1,10 @@
+{
+  "id": "lam-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.function.*;\npublic class Predicates {\n    public static void main(String[] args) {\n        Predicate<Integer> isEven = n -> n % 2 == 0;\n        Predicate<Integer> isPos = n -> n > 0;\n        Predicate<Integer> both = isEven.and(isPos);\n        Predicate<Integer> either = isEven.or(isPos);\n        System.out.println(both.test(4));\n        System.out.println(both.test(-4));\n        System.out.println(either.test(-3));\n        System.out.println(isEven.negate().test(3));\n    }\n}",
+  "answer": "true\nfalse\nfalse\ntrue",
+  "explanation": "both.test(4): even and positive → true. both.test(-4): even but not positive → false. either.test(-3): odd and negative → false. isEven.negate().test(3): !isEven(3) = !false = true.",
+  "alternatives": ["true\nfalse\nfalse\ntrue\n"]
+}

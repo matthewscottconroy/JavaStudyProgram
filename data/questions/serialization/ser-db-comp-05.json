@@ -1,0 +1,15 @@
+{
+  "id": "ser-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "Serialization of this class creates a security vulnerability. What is the bug?",
+  "code": "import java.io.*;\npublic class SerSecurity {\n    static class Credentials implements Serializable {\n        String username;\n        String password;   // bug: passwords should not be serialized as plaintext\n        Credentials(String u, String p) { username=u; password=p; }\n    }\n}",
+  "choices": [
+    "Serializable classes cannot hold String fields",
+    "Storing password as a serialized field saves it in plaintext to disk or network; passwords should be transient or stored as a hash",
+    "The Credentials class should implement Externalizable instead",
+    "serialVersionUID is required for classes holding sensitive data"
+  ],
+  "answer": "b",
+  "explanation": "Serializing a password as a String writes it in plaintext to the byte stream (file, network, memory). This is a security risk — anyone who can read the serialized form gets the password. Fix: mark password as transient (it won't be serialized), or store a hashed value instead of the raw password."
+}

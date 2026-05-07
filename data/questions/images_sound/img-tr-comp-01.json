@@ -1,0 +1,10 @@
+{
+  "id": "img-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print for a 2×2 image where all pixels are red (RGB 255,0,0)?",
+  "code": "import java.awt.image.*;\npublic class PixelRead {\n    public static void main(String[] args) {\n        BufferedImage img = new BufferedImage(2, 2, BufferedImage.TYPE_INT_RGB);\n        // fill all pixels with red\n        for (int y = 0; y < 2; y++)\n            for (int x = 0; x < 2; x++)\n                img.setRGB(x, y, 0xFF0000);\n\n        int pixel = img.getRGB(1, 0);\n        int red   = (pixel >> 16) & 0xFF;\n        int green = (pixel >>  8) & 0xFF;\n        int blue  =  pixel        & 0xFF;\n        System.out.println(red + \",\" + green + \",\" + blue);\n        System.out.println(img.getWidth() + \"x\" + img.getHeight());\n    }\n}",
+  "answer": "255,0,0\n2x2",
+  "explanation": "setRGB packs color as 0xAARRGGBB. 0xFF0000 = red=255, green=0, blue=0. getRGB(1,0) reads pixel at x=1,y=0. Bit-shifting and masking extract each channel: red=(0xFF0000>>16)&0xFF=255, green=0, blue=0. The image is 2×2.",
+  "alternatives": ["255,0,0\n2x2\n"]
+}

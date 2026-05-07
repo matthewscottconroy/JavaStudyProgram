@@ -1,0 +1,15 @@
+{
+  "id": "thr-db-comp-12",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The ConcurrentHashMap is iterated unsafely. What is the bug?",
+  "code": "import java.util.concurrent.*;\npublic class ConcMapBug {\n    static ConcurrentHashMap<String,Integer> map = new ConcurrentHashMap<>();\n    public static void main(String[] args) {\n        map.put(\"a\", 1); map.put(\"b\", 2); map.put(\"c\", 3);\n        int sum = 0;\n        for (String key : map.keySet()) {\n            sum += map.get(key);\n            map.remove(key);  // bug: modifying during iteration\n        }\n        System.out.println(sum);\n    }\n}",
+  "choices": [
+    "ConcurrentHashMap does not support iteration",
+    "ConcurrentHashMap's iterator is weakly consistent and does not throw ConcurrentModificationException, but removing keys during iteration may cause some entries to be skipped or double-counted",
+    "map.get() throws NullPointerException during concurrent iteration",
+    "keySet() returns a copy, so modification during iteration is always safe"
+  ],
+  "answer": "b",
+  "explanation": "ConcurrentHashMap's iterators are weakly consistent — they tolerate concurrent modifications without throwing, but do not guarantee that modifications made during iteration will be reflected. Removing keys while iterating can cause entries to be skipped. Fix: use map.forEach() or collect keys first, then remove."
+}

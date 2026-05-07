@@ -1,0 +1,15 @@
+{
+  "id": "ifc-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The lambda does not compile. What is the bug?",
+  "code": "import java.util.function.Function;\npublic class LambdaBug {\n    public static void main(String[] args) {\n        Function<Integer, Integer> f = (int x) -> x * 2;  // compile error\n        System.out.println(f.apply(5));\n    }\n}",
+  "choices": [
+    "Function cannot use lambdas — use an anonymous class instead",
+    "Lambda parameters must use the boxed type (Integer) to match the generic, not the primitive type (int)",
+    "The arrow -> should be replaced with a colon :",
+    "f.apply() requires a primitive int, not Integer"
+  ],
+  "answer": "b",
+  "explanation": "Function<Integer,Integer> has generic type parameters. Lambda parameter types must match: use (Integer x) or just (x) (inferred). Using the primitive (int x) is a type mismatch with the boxed generic. Fix: Function<Integer,Integer> f = x -> x * 2; — type is inferred as Integer."
+}

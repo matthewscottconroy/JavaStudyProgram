@@ -1,0 +1,10 @@
+{
+  "id": "lam-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.util.function.*;\npublic class FuncCompose {\n    public static void main(String[] args) {\n        Function<Integer, Integer> doubleIt  = x -> x * 2;\n        Function<Integer, Integer> addThree  = x -> x + 3;\n\n        Function<Integer, Integer> doubleThenAdd = doubleIt.andThen(addThree);\n        Function<Integer, Integer> addThenDouble = doubleIt.compose(addThree);\n\n        System.out.println(doubleThenAdd.apply(5));\n        System.out.println(addThenDouble.apply(5));\n    }\n}",
+  "answer": "13\n16",
+  "explanation": "andThen applies doubleIt first, then addThree: 5*2=10, 10+3=13. compose applies the argument (addThree) first, then the receiver (doubleIt): 5+3=8, 8*2=16.",
+  "alternatives": ["13\n16\n"]
+}

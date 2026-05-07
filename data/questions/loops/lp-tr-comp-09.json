@@ -1,0 +1,10 @@
+{
+  "id": "lp-tr-comp-09",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class DoWhile {\n    public static void main(String[] args) {\n        int n = 1;\n        do {\n            System.out.print(n + \" \");\n            n *= 2;\n        } while (n <= 16);\n        System.out.println();\n\n        int x = 100;\n        do {\n            System.out.print(x + \" \");\n            x *= 2;\n        } while (x <= 16);\n        System.out.println();\n    }\n}",
+  "answer": "1 2 4 8 16 \n100 ",
+  "explanation": "First loop: n starts at 1, prints then doubles. Prints 1,2,4,8,16 — then n=32 which fails the condition. Second loop: x=100 which already exceeds 16, but do-while always executes the body at least once before checking, so 100 is printed, then the condition (200<=16) is false.",
+  "alternatives": ["1 2 4 8 16 \n100 \n"]
+}

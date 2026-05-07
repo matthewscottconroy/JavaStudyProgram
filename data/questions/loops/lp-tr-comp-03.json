@@ -1,0 +1,10 @@
+{
+  "id": "lp-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Repeat {\n    public static String join(String s, int times) {\n        StringBuilder sb = new StringBuilder();\n        for (int i = 0; i < times; i++) {\n            sb.append(s);\n            if (i < times - 1) sb.append(\"-\");\n        }\n        return sb.toString();\n    }\n\n    public static void main(String[] args) {\n        System.out.println(join(\"go\", 3));\n        System.out.println(join(\"hi\", 1));\n    }\n}",
+  "answer": "go-go-go\nhi",
+  "explanation": "join(\"go\", 3): i=0 appends 'go' then '-' (0 < 2). i=1 appends 'go' then '-' (1 < 2). i=2 appends 'go', no dash (2 < 2 is false). Result: 'go-go-go'. join(\"hi\", 1): i=0 appends 'hi', no dash (0 < 0 is false). Result: 'hi'.",
+  "alternatives": ["go-go-go\nhi\n"]
+}

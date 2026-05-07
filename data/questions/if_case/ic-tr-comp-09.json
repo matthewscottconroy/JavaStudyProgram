@@ -1,0 +1,10 @@
+{
+  "id": "ic-tr-comp-09",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class SwitchExpr {\n    public static void main(String[] args) {\n        for (int day = 1; day <= 4; day++) {\n            String name = switch (day) {\n                case 1 -> \"Mon\";\n                case 2 -> \"Tue\";\n                case 3 -> \"Wed\";\n                default -> \"Other\";\n            };\n            System.out.println(name);\n        }\n    }\n}",
+  "answer": "Mon\nTue\nWed\nOther",
+  "explanation": "Switch expression (arrow form) with day 1→'Mon', 2→'Tue', 3→'Wed', 4→default→'Other'.",
+  "alternatives": ["Mon\nTue\nWed\nOther\n"]
+}

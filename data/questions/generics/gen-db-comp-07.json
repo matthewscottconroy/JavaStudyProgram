@@ -1,0 +1,15 @@
+{
+  "id": "gen-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The wildcard makes the list read-only, preventing add(). What is the bug?",
+  "code": "import java.util.*;\npublic class WildcardAdd {\n    static void addItem(List<?> list, Object item) {\n        list.add(item);   // bug: cannot add to List<?>\n    }\n}",
+  "choices": [
+    "Object cannot be added to a generic list",
+    "List<?> (unbounded wildcard) is read-only for additions; the compiler does not know the actual element type, so it rejects add() to maintain type safety",
+    "list.add() requires the element to be cast to the wildcard type first",
+    "Wildcard lists must use addAll() instead of add()"
+  ],
+  "answer": "b",
+  "explanation": "List<?> means 'a list of some unknown type'. Since the type is unknown, the compiler cannot guarantee that adding an Object is safe — it might be List<String> and you're adding an Integer. Fix: use List<Object> if you want to add any object, or use a bounded wildcard with super: List<? super T>."
+}

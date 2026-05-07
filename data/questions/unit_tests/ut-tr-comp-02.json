@@ -1,0 +1,10 @@
+{
+  "id": "ut-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does JUnit report as the test result, and what is printed to the console?",
+  "code": "import org.junit.jupiter.api.*;\nimport static org.junit.jupiter.api.Assertions.*;\n\nclass LifecycleTest {\n    StringBuilder log = new StringBuilder();\n\n    @BeforeEach\n    void setup() { log.append(\"setup \"); }\n\n    @AfterEach\n    void teardown() { log.append(\"teardown\"); System.out.println(log); }\n\n    @Test\n    void testA() { log.append(\"A \"); assertTrue(true); }\n\n    @Test\n    void testB() { log.append(\"B \"); assertEquals(1, 1); }\n}",
+  "answer": "setup A teardown\nsetup B teardown",
+  "explanation": "JUnit creates a new instance of LifecycleTest for each @Test method. @BeforeEach runs before each test. @AfterEach runs after each and prints the log. testA produces 'setup A teardown'; testB produces 'setup B teardown'. Both tests pass. (Order of A vs B may vary, but each log is correct for its test.)",
+  "alternatives": ["setup B teardown\nsetup A teardown"]
+}

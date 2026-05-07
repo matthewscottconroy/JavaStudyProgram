@@ -1,0 +1,15 @@
+{
+  "id": "mem-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The code does not compile. What is the bug?",
+  "code": "public class StaticAccess {\n    int instanceField = 10;\n    static void staticMethod() {\n        System.out.println(instanceField);  // compile error\n    }\n}",
+  "choices": [
+    "System.out.println cannot print int values in static methods",
+    "Static methods cannot access instance fields because there is no implicit 'this' reference",
+    "instanceField must be declared public to be accessed from a static method",
+    "int fields are automatically static in Java"
+  ],
+  "answer": "b",
+  "explanation": "Static methods belong to the class, not any instance. There is no 'this' available, so instance fields cannot be accessed. Fix: either make instanceField static, or pass an instance as a parameter: static void staticMethod(StaticAccess obj) { ... obj.instanceField ... }"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "ref-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.lang.reflect.*;\npublic class Inspector {\n    public static void main(String[] args) throws Exception {\n        String s = \"hello\";\n        Class<?> cls = s.getClass();\n        System.out.println(cls.getSimpleName());\n\n        Method m = cls.getMethod(\"substring\", int.class, int.class);\n        Object result = m.invoke(s, 1, 4);\n        System.out.println(result);\n\n        System.out.println(cls.getMethods().length > 5);\n    }\n}",
+  "answer": "String\nell\ntrue",
+  "explanation": "s.getClass() returns the Class object for String. getSimpleName() = 'String'. getMethod('substring', int.class, int.class) finds String.substring(int,int). invoke(s, 1, 4) calls s.substring(1,4) = 'ell'. String has many public methods (inherited from Object too), so getMethods().length is well above 5.",
+  "alternatives": ["String\nell\ntrue\n"]
+}

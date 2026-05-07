@@ -1,0 +1,15 @@
+{
+  "id": "ser-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "Serialization throws NotSerializableException. What is the bug?",
+  "code": "import java.io.*;\npublic class NotSerialBug {\n    static class Engine {   // does not implement Serializable\n        int horsepower = 200;\n    }\n    static class Car implements Serializable {\n        String model = \"Sedan\";\n        Engine engine = new Engine();   // bug: non-serializable field\n    }\n}",
+  "choices": [
+    "Car cannot extend classes when it implements Serializable",
+    "Car holds a reference to Engine which is not Serializable; serializing Car throws NotSerializableException",
+    "static fields cannot be held by Serializable classes",
+    "Engine must be abstract to be excluded from serialization"
+  ],
+  "answer": "b",
+  "explanation": "All non-transient, non-static fields must be serializable. Engine doesn't implement Serializable, so serializing Car fails. Fix options: (1) make Engine implement Serializable, (2) mark engine as transient, (3) implement custom writeObject/readObject to handle it manually."
+}

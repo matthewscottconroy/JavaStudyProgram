@@ -1,0 +1,10 @@
+{
+  "id": "fn-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Classifier {\n    public static String classify(int n) {\n        if (n < 0)        return \"negative\";\n        if (n == 0)       return \"zero\";\n        if (n % 2 == 0)   return \"positive even\";\n        return \"positive odd\";\n    }\n\n    public static void main(String[] args) {\n        System.out.println(classify(-5));\n        System.out.println(classify(0));\n        System.out.println(classify(7));\n        System.out.println(classify(12));\n    }\n}",
+  "answer": "negative\nzero\npositive odd\npositive even",
+  "explanation": "-5 < 0 → 'negative'. 0 == 0 → 'zero'. 7 is positive and 7%2==1 (not 0), falls to last return → 'positive odd'. 12 is positive and 12%2==0 → 'positive even'.",
+  "alternatives": ["negative\nzero\npositive odd\npositive even\n"]
+}

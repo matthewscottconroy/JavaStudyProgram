@@ -1,0 +1,10 @@
+{
+  "id": "var-tr-comp-09",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "public class AutoBox {\n    public static void main(String[] args) {\n        Integer a = 127;\n        Integer b = 127;\n        Integer c = 128;\n        Integer d = 128;\n        System.out.println(a == b);\n        System.out.println(c == d);\n        System.out.println(c.equals(d));\n    }\n}",
+  "answer": "true\nfalse\ntrue",
+  "explanation": "Java caches Integer values -128 to 127. a and b both point to the cached Integer(127) → ==true. 128 is outside the cache range; c and d are distinct objects → ==false. equals() compares value → true.",
+  "alternatives": ["true\nfalse\ntrue\n"]
+}

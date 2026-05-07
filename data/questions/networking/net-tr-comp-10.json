@@ -1,0 +1,10 @@
+{
+  "id": "net-tr-comp-10",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.net.Socket;\npublic class SocketState {\n    public static void main(String[] args) throws Exception {\n        Socket s = new Socket();\n        System.out.println(s.isConnected());\n        System.out.println(s.isClosed());\n        s.close();\n        System.out.println(s.isClosed());\n    }\n}",
+  "answer": "false\nfalse\ntrue",
+  "explanation": "A newly created Socket() with no arguments is unconnected. isConnected() returns false. isClosed() returns false (open but not connected). After close(), isClosed() returns true.",
+  "alternatives": ["false\nfalse\ntrue\n"]
+}

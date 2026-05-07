@@ -1,0 +1,10 @@
+{
+  "id": "gui-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "import javax.swing.*;\npublic class LabelText {\n    public static void main(String[] args) {\n        JLabel label = new JLabel(\"Hello\");\n        System.out.println(label.getText());\n        label.setText(\"World\");\n        System.out.println(label.getText());\n    }\n}",
+  "answer": "Hello\nWorld",
+  "explanation": "JLabel is constructed with \"Hello\", so getText() returns \"Hello\". After setText(\"World\"), getText() returns \"World\".",
+  "alternatives": ["Hello\nWorld\n"]
+}

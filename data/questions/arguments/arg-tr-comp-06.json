@@ -1,0 +1,10 @@
+{
+  "id": "arg-tr-comp-06",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print when run with no arguments?",
+  "code": "public class NoArgs {\n    public static void main(String[] args) {\n        if (args.length == 0) {\n            System.out.println(\"No arguments\");\n            System.out.println(args.length);\n        } else {\n            System.out.println(args[0]);\n        }\n        System.out.println(args == null);\n    }\n}",
+  "answer": "No arguments\n0\nfalse",
+  "explanation": "With no args: args is an empty array (not null), args.length=0. \"No arguments\" and 0 print. args==null is false — Java always provides an (possibly empty) String array, never null.",
+  "alternatives": ["No arguments\n0\nfalse\n"]
+}

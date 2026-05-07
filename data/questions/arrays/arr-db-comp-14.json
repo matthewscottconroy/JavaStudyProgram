@@ -1,0 +1,15 @@
+{
+  "id": "arr-db-comp-14",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The method should count negative numbers but counts positives. What is the bug?",
+  "code": "public class CountNeg {\n    static int countNeg(int[] arr) {\n        int count = 0;\n        for (int x : arr) {\n            if (x > 0) count++;   // bug: should be x < 0\n        }\n        return count;\n    }\n}",
+  "choices": [
+    "The loop should use index-based access, not enhanced for-each",
+    "x > 0 counts positive numbers; the condition should be x < 0 to count negatives",
+    "count should be decremented, not incremented",
+    "The method should use Math.abs(x) to detect negatives"
+  ],
+  "answer": "b",
+  "explanation": "x > 0 is true for positive numbers, so countNeg incorrectly counts positives. Fix: change the condition to x < 0. If zeros should also be excluded (neither positive nor negative), x < 0 correctly excludes them."
+}

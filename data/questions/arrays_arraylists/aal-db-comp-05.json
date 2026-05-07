@@ -1,0 +1,15 @@
+{
+  "id": "aal-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The code throws NullPointerException when accessing list elements. What is the bug?",
+  "code": "import java.util.*;\npublic class NullList {\n    static List<String> getItems() {\n        return null;   // bug: should return empty list\n    }\n    public static void main(String[] args) {\n        List<String> items = getItems();\n        for (String s : items) {    // NPE here\n            System.out.println(s);\n        }\n    }\n}",
+  "choices": [
+    "for-each cannot iterate over List<String>",
+    "getItems() returns null; iterating a null reference throws NullPointerException",
+    "The for-each loop should use an index-based loop for null safety",
+    "items must be declared as ArrayList, not List"
+  ],
+  "answer": "b",
+  "explanation": "Returning null from a method that should return a collection is an antipattern. Callers must null-check before iterating, which is easy to forget. Fix: return Collections.emptyList() instead of null. Then the loop simply doesn't execute for an empty list."
+}

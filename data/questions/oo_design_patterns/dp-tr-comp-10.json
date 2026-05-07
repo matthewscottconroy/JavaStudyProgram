@@ -1,0 +1,10 @@
+{
+  "id": "dp-tr-comp-10",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class TemplateMethod {\n    static abstract class Report {\n        final void generate() {\n            header();\n            body();\n            footer();\n        }\n        void header() { System.out.println(\"=== Report ===\"); }\n        abstract void body();\n        void footer() { System.out.println(\"=== End ===\"); }\n    }\n    static class SalesReport extends Report {\n        @Override void body() { System.out.println(\"Sales: $1000\"); }\n        @Override void footer() { System.out.println(\"Total: $1000\"); }\n    }\n    public static void main(String[] args) {\n        new SalesReport().generate();\n    }\n}",
+  "answer": "=== Report ===\nSales: $1000\nTotal: $1000",
+  "explanation": "generate() calls header() (not overridden → \"=== Report ===\"), then body() (overridden → \"Sales: $1000\"), then footer() (overridden → \"Total: $1000\"). Template Method pattern: algorithm structure in base class, steps overridden by subclasses.",
+  "alternatives": ["=== Report ===\nSales: $1000\nTotal: $1000\n"]
+}

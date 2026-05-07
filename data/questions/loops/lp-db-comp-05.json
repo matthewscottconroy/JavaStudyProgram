@@ -1,0 +1,15 @@
+{
+  "id": "lp-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "This method is supposed to double every element in the array, but the array is unchanged after the call. What is the bug?",
+  "code": "public class Doubler {\n    public static void doubleAll(int[] arr) {\n        for (int n : arr) {\n            n *= 2;   // modifies local copy, not the array element\n        }\n    }\n    public static void main(String[] args) {\n        int[] a = {1, 2, 3};\n        doubleAll(a);\n        System.out.println(a[0]);  // prints 1, not 2\n    }\n}",
+  "choices": [
+    "for-each loops cannot be used with int arrays",
+    "The for-each loop variable 'n' is a copy of each element — assigning to it does not modify the array; use an indexed loop with arr[i] *= 2",
+    "int arrays are passed by value so no method can modify them",
+    "n *= 2 should be written as n = n * 2 for the assignment to take effect"
+  ],
+  "answer": "b",
+  "explanation": "In a for-each loop over a primitive array, the loop variable is a copy of the element. Modifying 'n' has no effect on the array. Fix: for (int i = 0; i < arr.length; i++) { arr[i] *= 2; }"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "dp-tr-comp-11",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class ProxyPattern {\n    interface Service { String fetch(String key); }\n    static class RealService implements Service {\n        public String fetch(String key) {\n            System.out.println(\"fetching:\" + key);\n            return \"value:\" + key;\n        }\n    }\n    static class CachedService implements Service {\n        Service real = new RealService();\n        java.util.Map<String,String> cache = new java.util.HashMap<>();\n        public String fetch(String key) {\n            return cache.computeIfAbsent(key, real::fetch);\n        }\n    }\n    public static void main(String[] args) {\n        Service s = new CachedService();\n        System.out.println(s.fetch(\"a\"));\n        System.out.println(s.fetch(\"a\"));\n        System.out.println(s.fetch(\"b\"));\n    }\n}",
+  "answer": "fetching:a\nvalue:a\nvalue:a\nfetching:b\nvalue:b",
+  "explanation": "First fetch(\"a\"): not in cache → real.fetch prints \"fetching:a\", returns \"value:a\", stored in cache. Second fetch(\"a\"): cache hit → returns \"value:a\" without calling real. fetch(\"b\"): cache miss → \"fetching:b\", \"value:b\".",
+  "alternatives": ["fetching:a\nvalue:a\nvalue:a\nfetching:b\nvalue:b\n"]
+}

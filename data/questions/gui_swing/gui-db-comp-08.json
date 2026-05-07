@@ -1,0 +1,15 @@
+{
+  "id": "gui-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "JOptionPane.showInputDialog always returns null. What is the bug?",
+  "code": "import javax.swing.*;\npublic class DialogBug {\n    public static void main(String[] args) {\n        // In headless test environment\n        System.setProperty(\"java.awt.headless\", \"true\");\n        String input = JOptionPane.showInputDialog(\"Enter name:\");\n        System.out.println(input.length());  // NullPointerException\n    }\n}",
+  "choices": [
+    "showInputDialog requires a parent component as the first argument",
+    "In headless mode there is no display; showInputDialog cannot show a dialog and returns null; calling .length() on null throws NullPointerException",
+    "JOptionPane.showInputDialog returns an empty string, not null, when cancelled",
+    "showInputDialog must be called on the EDT to return a non-null value"
+  ],
+  "answer": "b",
+  "explanation": "In a headless environment (java.awt.headless=true), there is no screen or input device. JOptionPane cannot display a dialog and returns null. Similarly, if a user cancels the dialog, null is returned. Calling .length() on null throws NullPointerException. Fix: always null-check the return value before using it."
+}

@@ -1,0 +1,10 @@
+{
+  "id": "lam-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\nimport java.util.function.*;\npublic class LambdaDemo {\n    public static void main(String[] args) {\n        List<String> words = new ArrayList<>(List.of(\"fig\", \"apple\", \"kiwi\", \"banana\"));\n\n        Comparator<String> byLength = (a, b) -> a.length() - b.length();\n        words.sort(byLength);\n        System.out.println(words);\n\n        Predicate<String> longWord = s -> s.length() > 4;\n        words.removeIf(longWord);\n        System.out.println(words);\n    }\n}",
+  "answer": "[fig, kiwi, apple, banana]\n[fig, kiwi]",
+  "explanation": "byLength sorts ascending by string length: fig(3), kiwi(4), apple(5), banana(6). After sort: [fig, kiwi, apple, banana]. removeIf removes words longer than 4 characters (apple and banana) → [fig, kiwi].",
+  "alternatives": ["[fig, kiwi, apple, banana]\n[fig, kiwi]\n"]
+}

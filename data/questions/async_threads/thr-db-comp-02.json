@@ -1,0 +1,15 @@
+{
+  "id": "thr-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 5,
+  "prompt": "This program sometimes hangs forever. What is the classic concurrency bug shown here?",
+  "code": "public class Deadlock {\n    static final Object lockA = new Object();\n    static final Object lockB = new Object();\n\n    public static void main(String[] args) {\n        Thread t1 = new Thread(() -> {\n            synchronized (lockA) {\n                synchronized (lockB) { System.out.println(\"T1 done\"); }\n            }\n        });\n        Thread t2 = new Thread(() -> {\n            synchronized (lockB) {\n                synchronized (lockA) { System.out.println(\"T2 done\"); }\n            }\n        });\n        t1.start();\n        t2.start();\n    }\n}",
+  "choices": [
+    "Two threads cannot print to System.out simultaneously",
+    "t1 acquires lockA and waits for lockB; t2 acquires lockB and waits for lockA — each holds what the other needs, causing deadlock",
+    "synchronized blocks cannot be nested in Java",
+    "lockA and lockB must be declared volatile to be shared across threads"
+  ],
+  "answer": "b",
+  "explanation": "Deadlock occurs when two threads each hold a lock the other needs: t1 holds lockA and waits for lockB; t2 holds lockB and waits for lockA. Neither can proceed. Fix: always acquire locks in the same order in all threads (e.g., always lockA then lockB), eliminating the circular wait."
+}

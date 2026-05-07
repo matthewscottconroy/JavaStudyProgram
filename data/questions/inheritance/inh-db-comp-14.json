@@ -1,0 +1,15 @@
+{
+  "id": "inh-db-comp-14",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "Calling an overridable method from a constructor produces unexpected output. What is the bug?",
+  "code": "public class CtorVirtual {\n    static class Base {\n        Base() { print(); }   // bug: calls overridable method\n        void print() { System.out.println(\"Base.print\"); }\n    }\n    static class Derived extends Base {\n        int value = 42;\n        void print() { System.out.println(\"Derived.print: \" + value); }\n    }\n    public static void main(String[] args) {\n        new Derived();\n    }\n}",
+  "choices": [
+    "Base() should call super.print() explicitly",
+    "Calling an overridable method from a constructor dispatches to the subclass's override before the subclass fields are initialized; value is 0 (default), not 42",
+    "Derived.print() cannot access value because it is not yet allocated at Base() time",
+    "The constructor chain Base()→Derived() always initializes fields before any code runs"
+  ],
+  "answer": "b",
+  "explanation": "When new Derived() runs, Base() is called first. It calls print() which dispatches to Derived.print() polymorphically. But Derived's field initializers (value=42) haven't run yet, so value is the default int value 0. Output: 'Derived.print: 0'. This is a well-known Java pitfall."
+}

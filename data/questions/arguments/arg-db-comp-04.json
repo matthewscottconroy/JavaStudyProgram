@@ -1,0 +1,15 @@
+{
+  "id": "arg-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The numeric argument comparison is always wrong. What is the bug?",
+  "code": "public class NumArg {\n    public static void main(String[] args) {\n        String val = args[0];\n        if (val == \"42\") {    // bug: string reference comparison\n            System.out.println(\"got 42\");\n        } else {\n            System.out.println(\"not 42\");\n        }\n    }\n}",
+  "choices": [
+    "Command-line arguments cannot represent numbers",
+    "val == \"42\" compares references; the argument string is a different object than the literal \"42\"; use val.equals(\"42\") or Integer.parseInt(val) == 42",
+    "args[0] returns int, not String",
+    "String comparisons must use compareTo() returning 0"
+  ],
+  "answer": "b",
+  "explanation": "args[0] is a new String object. val == \"42\" compares references — always false for command-line arguments. Fix: val.equals(\"42\") for string comparison, or Integer.parseInt(val) == 42 for numeric comparison."
+}

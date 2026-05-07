@@ -1,0 +1,10 @@
+{
+  "id": "lam-tr-comp-13",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\nimport java.util.function.*;\npublic class MemoizeLambda {\n    static <K,V> Function<K,V> memoize(Function<K,V> fn) {\n        Map<K,V> cache = new HashMap<>();\n        return k -> cache.computeIfAbsent(k, fn);\n    }\n    public static void main(String[] args) {\n        int[] callCount = {0};\n        Function<Integer,Integer> square = memoize(n -> { callCount[0]++; return n*n; });\n        System.out.println(square.apply(5));\n        System.out.println(square.apply(5));\n        System.out.println(square.apply(3));\n        System.out.println(callCount[0]);\n    }\n}",
+  "answer": "25\n25\n9\n2",
+  "explanation": "First square(5): cache miss → computes 25, callCount=1. Second square(5): cache hit → 25, no call. square(3): cache miss → 9, callCount=2. Total calls=2.",
+  "alternatives": ["25\n25\n9\n2\n"]
+}

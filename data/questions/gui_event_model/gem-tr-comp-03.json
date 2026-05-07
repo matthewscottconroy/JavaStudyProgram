@@ -1,0 +1,10 @@
+{
+  "id": "gem-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print when a JTextField fires an action (user presses Enter)?",
+  "code": "import javax.swing.*;\npublic class TextEvent {\n    public static void main(String[] args) {\n        JTextField tf = new JTextField(\"hello\");\n        tf.addActionListener(e -> {\n            String text = e.getActionCommand();\n            System.out.println(\"text:\" + text);\n            System.out.println(\"src:\" + e.getSource().getClass().getSimpleName());\n        });\n        tf.postActionEvent();  // simulate Enter key\n    }\n}",
+  "answer": "text:hello\nsrc:JTextField",
+  "explanation": "postActionEvent simulates pressing Enter. ActionEvent.getActionCommand() returns the text field's current text (\"hello\"). getSource() returns the JTextField.",
+  "alternatives": ["text:hello\nsrc:JTextField\n"]
+}

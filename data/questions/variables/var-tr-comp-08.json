@@ -1,0 +1,10 @@
+{
+  "id": "var-tr-comp-08",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "public class TypePromo {\n    public static void main(String[] args) {\n        int i = 1_000_000;\n        int j = 1_000_000;\n        long product = (long) i * j;\n        System.out.println(product);\n        System.out.println(i * j);   // overflow!\n        System.out.println('A' + 1);\n        System.out.println(\"\" + 'A' + 1);\n    }\n}",
+  "answer": "1000000000000\n-727379968\n66\nA1",
+  "explanation": "(long)i*j casts i to long first, then multiplies → 1_000_000_000_000. i*j as int overflows. 'A'+1: char promoted to int (65), +1=66. \"\"+\\'A\\'+1: left-to-right string concat, \"\"+'A'=\"A\", \"A\"+1=\"A1\".",
+  "alternatives": ["1000000000000\n-727379968\n66\nA1\n"]
+}

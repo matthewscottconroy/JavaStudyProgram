@@ -1,0 +1,15 @@
+{
+  "id": "sapi-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The stream is consumed twice and throws IllegalStateException. What is the bug?",
+  "code": "import java.util.stream.*;\npublic class DoubleConsume {\n    public static void main(String[] args) {\n        Stream<Integer> s = Stream.of(1,2,3);\n        long count = s.count();\n        System.out.println(count);\n        s.forEach(System.out::println);  // bug: stream already consumed\n    }\n}",
+  "choices": [
+    "Stream.of() does not support count() and forEach() together",
+    "Streams can only be consumed once; after s.count() the stream is closed, and calling s.forEach() throws IllegalStateException",
+    "forEach() must be called before count() to function correctly",
+    "Stream<Integer> should be declared as IntStream for primitive operations"
+  ],
+  "answer": "b",
+  "explanation": "A Stream is a one-time use pipeline. After any terminal operation (count(), forEach(), collect(), etc.) the stream is consumed and cannot be reused. Fix: either create two separate streams, or collect to a List first and iterate that."
+}

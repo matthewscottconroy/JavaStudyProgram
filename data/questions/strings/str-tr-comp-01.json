@@ -1,0 +1,10 @@
+{
+  "id": "str-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class WordCount {\n    public static int countWords(String sentence) {\n        String trimmed = sentence.trim();\n        if (trimmed.isEmpty()) return 0;\n        return trimmed.split(\"\\\\s+\").length;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(countWords(\"hello world\"));\n        System.out.println(countWords(\"  one  two  three  \"));\n        System.out.println(countWords(\"   \"));\n    }\n}",
+  "answer": "2\n3\n0",
+  "explanation": "\"hello world\".trim() = \"hello world\", split on whitespace → 2 tokens. \"  one  two  three  \".trim() = \"one  two  three\", split(\"\\\\s+\") → [\"one\",\"two\",\"three\"] → 3. \"   \".trim() = \"\", isEmpty() is true → returns 0.",
+  "alternatives": ["2\n3\n0\n"]
+}

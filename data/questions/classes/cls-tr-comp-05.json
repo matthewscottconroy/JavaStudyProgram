@@ -1,0 +1,10 @@
+{
+  "id": "cls-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Builder {\n    static class Point {\n        final int x, y;\n        Point(int x, int y) { this.x = x; this.y = y; }\n        Point translate(int dx, int dy) { return new Point(x+dx, y+dy); }\n        @Override public String toString() { return \"(\" + x + \",\" + y + \")\"; }\n    }\n    public static void main(String[] args) {\n        Point p = new Point(1, 2);\n        Point q = p.translate(3, 4);\n        System.out.println(p);\n        System.out.println(q);\n        System.out.println(p == q);\n    }\n}",
+  "answer": "(1,2)\n(4,6)\nfalse",
+  "explanation": "translate creates a new Point(1+3, 2+4) = (4,6). p is unchanged (1,2) because Point is immutable (final fields). p==q compares references — different objects, false.",
+  "alternatives": ["(1,2)\n(4,6)\nfalse\n"]
+}

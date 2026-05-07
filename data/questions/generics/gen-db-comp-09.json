@@ -1,0 +1,15 @@
+{
+  "id": "gen-db-comp-09",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The generic array creation causes a compile error. What is the bug?",
+  "code": "public class GenericArray {\n    static <T> T[] makeArray(int size) {\n        return new T[size];   // bug: cannot create generic arrays\n    }\n}",
+  "choices": [
+    "Arrays cannot be returned from generic methods",
+    "Java prohibits creating generic type arrays (new T[size]) because type parameters are erased at runtime; the JVM doesn't know what type to create",
+    "The size parameter must be declared as long for array creation",
+    "Generic arrays must be created with null elements first"
+  ],
+  "answer": "b",
+  "explanation": "Due to type erasure, T is not known at runtime, so new T[size] cannot be compiled. Fix options: (1) pass a Class<T> and use Array.newInstance(cls, size); (2) create Object[] and cast: return (T[]) new Object[size]; (with @SuppressWarnings). This is why ArrayList uses Object[] internally."
+}

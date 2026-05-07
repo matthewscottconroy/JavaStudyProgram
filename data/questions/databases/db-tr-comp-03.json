@@ -1,0 +1,10 @@
+{
+  "id": "db-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this code print (assuming the update succeeds and affects 1 row)?",
+  "code": "// Assume conn is a valid JDBC Connection\nimport java.sql.*;\npublic class UpdateTrace {\n    static void update(Connection conn) throws SQLException {\n        String sql = \"UPDATE users SET name=? WHERE id=?\";\n        PreparedStatement ps = conn.prepareStatement(sql);\n        ps.setString(1, \"Charlie\");\n        ps.setInt(2, 1);\n        int rows = ps.executeUpdate();\n        System.out.println(\"updated=\" + rows);\n        ps.setString(1, \"Dave\");\n        ps.setInt(2, 99);  // no matching row\n        rows = ps.executeUpdate();\n        System.out.println(\"updated=\" + rows);\n        ps.close();\n    }\n}",
+  "answer": "updated=1\nupdated=0",
+  "explanation": "First update sets name='Charlie' for id=1 — 1 row affected. Second update targets id=99 which doesn't exist — 0 rows affected. executeUpdate() returns the number of affected rows.",
+  "alternatives": ["updated=1\nupdated=0\n"]
+}

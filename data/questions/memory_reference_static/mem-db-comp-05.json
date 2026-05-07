@@ -1,0 +1,15 @@
+{
+  "id": "mem-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The code has a memory-reference confusion: modifying the copy should not affect the original, but it does. What is the bug?",
+  "code": "public class DeepCopy {\n    static class Config {\n        int[] values;\n        Config(int[] v) { values = v; }  // bug: stores reference\n    }\n    public static void main(String[] args) {\n        int[] data = {1, 2, 3};\n        Config cfg = new Config(data);\n        data[0] = 99;\n        System.out.println(cfg.values[0]);  // 99, not 1\n    }\n}",
+  "choices": [
+    "int[] fields must be declared final to prevent modification",
+    "Config stores a reference to the passed array; mutations to data are visible through cfg.values",
+    "data[0] = 99 creates a new array instead of modifying the original",
+    "int[] cannot be stored in a field — use ArrayList instead"
+  ],
+  "answer": "b",
+  "explanation": "Config stores the reference to the passed array, not a copy. Changes to data affect cfg.values and vice versa. Fix: store a defensive copy in the constructor: values = Arrays.copyOf(v, v.length); This pattern (accepting mutable parameters by copy) is called defensive copying."
+}

@@ -1,0 +1,10 @@
+{
+  "id": "sapi-tr-comp-13",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\nimport java.util.stream.*;\npublic class Collectors2 {\n    public static void main(String[] args) {\n        List<String> words = List.of(\"hello\",\"world\",\"java\",\"stream\");\n        String joined = words.stream()\n            .filter(w -> w.length() > 4)\n            .collect(Collectors.joining(\", \", \"[\", \"]\"));\n        System.out.println(joined);\n        IntSummaryStatistics stats = words.stream()\n            .mapToInt(String::length).summaryStatistics();\n        System.out.println(stats.getMin() + \"-\" + stats.getMax());\n    }\n}",
+  "answer": "[hello, world, stream]\n4-6",
+  "explanation": "Words length>4: hello(5),world(5),stream(6). joined with ', ' in brackets: '[hello, world, stream]'. Lengths: hello=5,world=5,java=4,stream=6. min=4, max=6.",
+  "alternatives": ["[hello, world, stream]\n4-6\n"]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "str-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class StrBuild {\n    public static void main(String[] args) {\n        StringBuilder sb = new StringBuilder(\"Java\");\n        sb.append(\" is\");\n        sb.insert(4, \",\");\n        sb.reverse();\n        System.out.println(sb.toString());\n        System.out.println(sb.length());\n    }\n}",
+  "answer": "si ,avaJ\n8",
+  "explanation": "Start: \"Java\". After append: \"Java is\". After insert(4, \",\"): \"Java, is\". After reverse: \"si ,avaJ\". Length is 8.",
+  "alternatives": ["si ,avaJ\n8\n"]
+}

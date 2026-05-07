@@ -1,0 +1,15 @@
+{
+  "id": "g2d-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The transform is applied in the wrong order, producing unexpected positioning. What is the bug?",
+  "code": "import java.awt.*;\nimport java.awt.geom.*;\npublic class TransformOrder {\n    static void draw(Graphics2D g) {\n        g.translate(100, 100);  // move to (100,100)\n        g.rotate(Math.PI / 4); // rotate 45 degrees\n        // bug: rotates around (0,0) first in local coords, then translates\n        // intended: rotate around (100,100)\n        g.fillRect(0, 0, 50, 10);\n    }\n}",
+  "choices": [
+    "Graphics2D does not support both translate and rotate",
+    "Transforms are applied in reverse order; translate then rotate means the rotation is around (0,0) before translating; to rotate around (100,100) rotate first then translate, or use rotate(angle, x, y)",
+    "fillRect cannot be used after a rotation transform",
+    "rotate() requires radians to be converted to degrees first"
+  ],
+  "answer": "b",
+  "explanation": "Graphics2D transforms accumulate in right-to-left order (last applied = first to affect points). translate then rotate means: draw → rotate around local (0,0) → then translate. To rotate around the target point use g.rotate(angle, 100, 100) which is equivalent to translate, rotate, translate-back."
+}

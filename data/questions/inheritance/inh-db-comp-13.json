@@ -1,0 +1,15 @@
+{
+  "id": "inh-db-comp-13",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The method is accidentally overloaded instead of overriding. What is the bug?",
+  "code": "public class AccidentalOverload {\n    static class Animal {\n        void speak(String sound) { System.out.println(sound); }\n    }\n    static class Dog extends Animal {\n        void speak(int sound) {   // bug: different parameter type — overload not override\n            System.out.println(\"Woof \" + sound);\n        }\n    }\n    public static void main(String[] args) {\n        Animal a = new Dog();\n        a.speak(\"Bark\");   // calls Animal.speak, not Dog.speak\n    }\n}",
+  "choices": [
+    "Dog.speak(int) correctly overrides Animal.speak(String) because it has the same name",
+    "Dog.speak(int) has a different parameter type than Animal.speak(String), so it is an overload not an override; a.speak('Bark') dispatches to Animal.speak(String) and prints 'Bark'",
+    "Overloading is not allowed in subclasses",
+    "The compiler should reject Dog.speak(int) as it conflicts with the parent method signature"
+  ],
+  "answer": "b",
+  "explanation": "Overriding requires the same method signature (name + parameter types). Dog.speak(int) is a new overload, not an override. Animal.speak(String) is inherited unchanged. a.speak('Bark') calls Animal.speak(String) → 'Bark'. The @Override annotation would catch this mistake at compile time."
+}

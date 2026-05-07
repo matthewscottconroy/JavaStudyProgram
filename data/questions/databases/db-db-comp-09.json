@@ -1,0 +1,15 @@
+{
+  "id": "db-db-comp-09",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "ResultSet.getString throws SQLException after the loop. What is the bug?",
+  "code": "import java.sql.*;\npublic class ResultSetBug {\n    static void print(ResultSet rs) throws Exception {\n        while (rs.next()) {\n            System.out.println(rs.getString(\"name\"));\n        }\n        System.out.println(rs.getString(\"name\"));  // bug: cursor past last row\n    }\n}",
+  "choices": [
+    "rs.getString must use a column index, not a column name",
+    "After rs.next() returns false, the cursor is positioned after the last row; calling getString at that position throws SQLException",
+    "ResultSet is automatically closed after the while loop exits",
+    "getString returns null when the cursor is past the last row, not an exception"
+  ],
+  "answer": "b",
+  "explanation": "When rs.next() returns false, the cursor moves past the last row to an invalid position. Any call to getString (or any column accessor) throws SQLException because there is no current row. Fix: only access column values inside the while loop while rs.next() returned true."
+}

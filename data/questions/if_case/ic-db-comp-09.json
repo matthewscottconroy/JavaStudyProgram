@@ -1,0 +1,15 @@
+{
+  "id": "ic-db-comp-09",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The dangling else attaches to the wrong if. What is the bug?",
+  "code": "public class DanglingElse {\n    public static void main(String[] args) {\n        int x = 5;\n        if (x > 0)\n            if (x > 10)\n                System.out.println(\"big\");\n        else\n            System.out.println(\"non-positive\");  // bug: attaches to inner if\n    }\n}",
+  "choices": [
+    "Nested if statements are not allowed without braces",
+    "The else attaches to the nearest if (x > 10), so it prints 'non-positive' when x <= 10 and x > 0, not when x <= 0 as the indentation implies",
+    "The compiler rejects dangling else statements",
+    "else without braces always attaches to the outermost if"
+  ],
+  "answer": "b",
+  "explanation": "Java's dangling-else rule: an else attaches to the nearest unmatched if. So the else belongs to 'if (x>10)', not 'if (x>0)'. For x=5: outer if passes, inner if fails → else runs → 'non-positive' prints, even though x is positive. Fix: add braces to explicitly control which if the else belongs to."
+}

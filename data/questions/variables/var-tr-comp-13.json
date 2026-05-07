@@ -1,0 +1,10 @@
+{
+  "id": "var-tr-comp-13",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class TernaryChain {\n    public static void main(String[] args) {\n        for (int i = 1; i <= 5; i++) {\n            String s = i % 3 == 0 ? \"Fizz\" : i % 5 == 0 ? \"Buzz\" : String.valueOf(i);\n            System.out.println(s);\n        }\n    }\n}",
+  "answer": "1\n2\nFizz\n4\nBuzz",
+  "explanation": "i=1→'1', i=2→'2', i=3→3%3==0→'Fizz', i=4→'4', i=5→5%5==0→'Buzz'.",
+  "alternatives": ["1\n2\nFizz\n4\nBuzz\n"]
+}

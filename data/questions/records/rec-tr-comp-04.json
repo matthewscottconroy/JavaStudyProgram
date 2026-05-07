@@ -1,0 +1,10 @@
+{
+  "id": "rec-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class RecordMethod {\n    record Vector(double x, double y) {\n        double magnitude() { return Math.sqrt(x * x + y * y); }\n        Vector scale(double factor) { return new Vector(x * factor, y * factor); }\n    }\n    public static void main(String[] args) {\n        Vector v = new Vector(3, 4);\n        System.out.println(v.magnitude());\n        Vector v2 = v.scale(2);\n        System.out.println(v2);\n    }\n}",
+  "answer": "5.0\nVector[x=6.0, y=8.0]",
+  "explanation": "magnitude = sqrt(9+16) = sqrt(25) = 5.0. scale(2) returns a new Vector with x=6.0, y=8.0. toString() uses the record format.",
+  "alternatives": ["5.0\nVector[x=6.0, y=8.0]\n"]
+}

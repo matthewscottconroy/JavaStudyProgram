@@ -1,0 +1,10 @@
+{
+  "id": "gem-tr-comp-10",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.beans.*;\npublic class PropertyChangeDemo {\n    public static void main(String[] args) {\n        PropertyChangeSupport pcs = new PropertyChangeSupport(new Object());\n        pcs.addPropertyChangeListener(\"name\", evt ->\n            System.out.println(evt.getOldValue() + \"->\" + evt.getNewValue())\n        );\n        pcs.firePropertyChange(\"name\", \"Alice\", \"Bob\");\n        pcs.firePropertyChange(\"age\", 10, 20);  // different property, not heard\n    }\n}",
+  "answer": "Alice->Bob",
+  "explanation": "The listener is registered for the \"name\" property only. firePropertyChange(\"name\",...) triggers it, printing \"Alice->Bob\". firePropertyChange(\"age\",...) fires but no listener handles \"age\", so nothing additional is printed.",
+  "alternatives": ["Alice->Bob\n"]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "lam-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The lambda captures a variable that is not effectively final. What is the bug?",
+  "code": "public class NotFinal {\n    public static void main(String[] args) {\n        int x = 10;\n        Runnable r = () -> System.out.println(x);\n        x = 20;   // bug: x is reassigned after capture\n        r.run();\n    }\n}",
+  "choices": [
+    "Lambda expressions cannot print int values",
+    "Lambdas can only capture effectively-final variables; reassigning x after the lambda declaration makes it non-final and causes a compile error",
+    "x must be declared as final to be captured",
+    "The lambda captures x by value so reassignment is allowed"
+  ],
+  "answer": "b",
+  "explanation": "Lambdas capture local variables, but Java requires those variables to be effectively final (never reassigned after capture). x = 20 after the lambda declaration violates this, causing compile error: 'variable x is used from a lambda expression and should be effectively final'. Fix: don't reassign x, or use an effectively-final copy."
+}

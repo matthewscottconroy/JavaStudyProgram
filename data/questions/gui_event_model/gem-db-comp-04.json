@@ -1,0 +1,15 @@
+{
+  "id": "gem-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The long-running task causes the UI to freeze. What is the bug?",
+  "code": "import javax.swing.*;\npublic class EDTBlock {\n    public static void main(String[] args) {\n        JButton btn = new JButton(\"Run\");\n        btn.addActionListener(e -> {\n            // heavy computation on EDT — blocks UI\n            for (int i = 0; i < 1_000_000; i++) Math.sqrt(i);\n            System.out.println(\"done\");\n        });\n    }\n}",
+  "choices": [
+    "Math.sqrt() is not thread-safe and must be synchronized",
+    "The heavy loop runs on the Event Dispatch Thread, blocking all UI updates and user input until it completes; use SwingWorker or a background Thread",
+    "ActionListener cannot run computations lasting more than 100ms",
+    "for loops cannot be used inside event handlers"
+  ],
+  "answer": "b",
+  "explanation": "The EDT handles all UI events and repaints. Blocking it with a long computation freezes the entire UI — no repaints, no button clicks, no keyboard input. Fix: use SwingWorker<Void,Void> to run the computation in the background and publish results to the EDT when done."
+}

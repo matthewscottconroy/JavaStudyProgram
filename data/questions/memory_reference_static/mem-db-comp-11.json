@@ -1,0 +1,15 @@
+{
+  "id": "mem-db-comp-11",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The intern() call wastes memory by interning generated strings. What is the bug?",
+  "code": "public class InternBug {\n    public static void main(String[] args) {\n        for (int i = 0; i < 100_000; i++) {\n            String s = (\"key\" + i).intern();  // bug: interns 100k unique strings\n        }\n        System.out.println(\"done\");\n    }\n}",
+  "choices": [
+    "intern() is not allowed inside loops",
+    "Interning 100,000 unique strings permanently adds them to the string pool, which is never garbage collected in older JVMs; this wastes permgen/metaspace memory",
+    "String concatenation inside loops always throws OutOfMemoryError",
+    "intern() only works for string literals, not computed strings"
+  ],
+  "answer": "b",
+  "explanation": "intern() adds strings to the JVM string pool. The pool is long-lived (tied to class loading). Interning large numbers of dynamically generated unique strings bloats the pool permanently. In older JVMs this caused PermGen OOM. Fix: only intern strings that will be reused many times, not unique generated keys."
+}

@@ -1,0 +1,15 @@
+{
+  "id": "aal-db-comp-06",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The method modifies the passed list but the caller's list is unchanged after return. What is the misunderstanding?",
+  "code": "import java.util.*;\npublic class ListParam {\n    static void addItem(List<String> list) {\n        list = new ArrayList<>();    // reassigns local parameter\n        list.add(\"new item\");\n    }\n    public static void main(String[] args) {\n        List<String> myList = new ArrayList<>();\n        myList.add(\"original\");\n        addItem(myList);\n        System.out.println(myList);   // [original]\n    }\n}",
+  "choices": [
+    "ArrayList cannot be passed to a method expecting List",
+    "list = new ArrayList<>() rebinds the local parameter to a new list; the caller's myList reference is unchanged",
+    "list.add() inside a method does not modify the list",
+    "The method must return the new list to affect the caller"
+  ],
+  "answer": "b",
+  "explanation": "Java passes references by value. Reassigning the parameter list only changes the local variable; it doesn't affect myList in main. To add to the caller's list, do list.add(\"new item\") without reassigning. If you need to replace the list, return the new list and assign in the caller."
+}

@@ -1,0 +1,10 @@
+{
+  "id": "img-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print about image scaling?",
+  "code": "import java.awt.image.*;\nimport java.awt.*;\npublic class ScaleImage {\n    public static void main(String[] args) {\n        BufferedImage original = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);\n        int newW = original.getWidth() / 2;\n        int newH = original.getHeight() / 2;\n        BufferedImage scaled = new BufferedImage(newW, newH, BufferedImage.TYPE_INT_RGB);\n        Graphics2D g = scaled.createGraphics();\n        g.drawImage(original, 0, 0, newW, newH, null);\n        g.dispose();\n        System.out.println(scaled.getWidth());\n        System.out.println(scaled.getHeight());\n        System.out.println(original.getWidth());\n    }\n}",
+  "answer": "50\n50\n100",
+  "explanation": "original is 100×100. newW=50, newH=50. scaled BufferedImage is created at 50×50. drawImage draws original into it at scaled size. scaled.getWidth()=50, scaled.getHeight()=50. original.getWidth()=100 (unchanged).",
+  "alternatives": ["50\n50\n100\n"]
+}

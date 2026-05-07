@@ -1,0 +1,10 @@
+{
+  "id": "arr-tr-comp-11",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class MultiDim {\n    public static void main(String[] args) {\n        int[][] grid = new int[3][4];\n        grid[0][0] = 1;\n        grid[2][3] = 9;\n        System.out.println(grid.length);\n        System.out.println(grid[0].length);\n        System.out.println(grid[0][0]);\n        System.out.println(grid[1][2]);\n        System.out.println(grid[2][3]);\n    }\n}",
+  "answer": "3\n4\n1\n0\n9",
+  "explanation": "grid is 3×4. grid.length=3 (rows). grid[0].length=4 (columns). grid[0][0]=1. grid[1][2] is unset → default 0. grid[2][3]=9.",
+  "alternatives": ["3\n4\n1\n0\n9\n"]
+}

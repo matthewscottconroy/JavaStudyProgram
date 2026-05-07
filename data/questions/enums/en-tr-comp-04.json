@@ -1,0 +1,10 @@
+{
+  "id": "en-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class EnumMethod {\n    enum Op {\n        PLUS { @Override public int apply(int a, int b) { return a + b; } },\n        TIMES { @Override public int apply(int a, int b) { return a * b; } };\n        public abstract int apply(int a, int b);\n    }\n    public static void main(String[] args) {\n        System.out.println(Op.PLUS.apply(3, 4));\n        System.out.println(Op.TIMES.apply(3, 4));\n    }\n}",
+  "answer": "7\n12",
+  "explanation": "Each enum constant provides its own implementation of the abstract apply method. PLUS.apply(3,4)=7, TIMES.apply(3,4)=12.",
+  "alternatives": ["7\n12\n"]
+}

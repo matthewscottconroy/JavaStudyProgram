@@ -1,0 +1,10 @@
+{
+  "id": "var-tr-comp-11",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Narrowing {\n    public static void main(String[] args) {\n        int i = 300;\n        byte b = (byte) i;    // narrowing\n        short s = (short) i;\n        System.out.println(b);\n        System.out.println(s);\n        double d = i;         // widening\n        System.out.println(d);\n    }\n}",
+  "answer": "44\n300\n300.0",
+  "explanation": "300 in binary: 0b100101100. byte takes lowest 8 bits: 0b00101100 = 44. short takes lowest 16 bits: 300 fits → 300. Widening int→double: 300.0.",
+  "alternatives": ["44\n300\n300.0\n"]
+}

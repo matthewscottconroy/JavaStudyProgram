@@ -1,0 +1,15 @@
+{
+  "id": "ifc-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The code does not compile. What is the bug?",
+  "code": "public class InterfaceField {\n    interface Config {\n        int MAX = 100;   // implicitly public static final\n    }\n    public static void main(String[] args) {\n        Config.MAX = 200;   // compile error\n    }\n}",
+  "choices": [
+    "Interfaces cannot have fields of type int",
+    "Interface fields are implicitly public static final; they cannot be reassigned",
+    "Config.MAX requires an instance of Config to access",
+    "The field must be declared with explicit public static final keywords to be used"
+  ],
+  "answer": "b",
+  "explanation": "Fields declared in interfaces are implicitly public static final (constants). Attempting to assign a new value is a compile error because they are final. Config.MAX is always 100 and cannot be changed."
+}

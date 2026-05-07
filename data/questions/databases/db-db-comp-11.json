@@ -1,0 +1,15 @@
+{
+  "id": "db-db-comp-11",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The code is vulnerable to SQL injection. What is the bug?",
+  "code": "import java.sql.*;\npublic class InjectionBug {\n    static void login(Connection conn, String user, String pass) throws Exception {\n        String sql = \"SELECT * FROM users WHERE name='\" + user + \"' AND pass='\" + pass + \"'\";\n        Statement st = conn.createStatement();\n        ResultSet rs = st.executeQuery(sql);  // bug: SQL injection via string concat\n    }\n}",
+  "choices": [
+    "executeQuery should not be used for authentication queries",
+    "The SQL is built by concatenating user-supplied strings, allowing an attacker to inject SQL (e.g. pass = \"' OR '1'='1\") to bypass authentication; use PreparedStatement with ? parameters instead",
+    "Statement cannot be reused; create a new Statement for each query",
+    "Single quotes in SQL must be escaped with a backslash"
+  ],
+  "answer": "b",
+  "explanation": "Concatenating user input directly into SQL enables injection attacks. An attacker can set pass to \"' OR '1'='1\" to make the WHERE clause always true. Fix: use PreparedStatement: \"SELECT * FROM users WHERE name=? AND pass=?\" with ps.setString(1, user) and ps.setString(2, pass)."
+}

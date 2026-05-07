@@ -1,0 +1,15 @@
+{
+  "id": "ut-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The test has a floating-point precision problem. What is the bug?",
+  "code": "import static org.junit.jupiter.api.Assertions.*;\npublic class FloatTest {\n    @Test void testSqrt() {\n        double result = Math.sqrt(2);\n        assertEquals(1.4142135623730951, result);  // may fail on some JVMs\n    }\n}",
+  "choices": [
+    "Math.sqrt() does not work with irrational numbers",
+    "Comparing doubles with exact equality is fragile; use assertEquals with a delta: assertEquals(1.414, result, 0.001)",
+    "assertEquals cannot compare double values",
+    "Math.sqrt(2) returns float, not double"
+  ],
+  "answer": "b",
+  "explanation": "Although this particular case may pass (Math.sqrt(2) is specified by IEEE 754), exact floating-point equality is generally fragile. The proper way is assertEquals(expected, actual, delta) with an acceptable epsilon: assertEquals(Math.sqrt(2), result, 1e-10). This is more robust and communicates intent."
+}

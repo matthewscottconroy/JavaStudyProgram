@@ -1,0 +1,15 @@
+{
+  "id": "ifc-db-comp-06",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The interface method is not public, causing a compile error when implemented. What is the bug?",
+  "code": "public class InterfaceAccess {\n    interface Printable {\n        void print();  // implicitly public\n    }\n    static class Doc implements Printable {\n        void print() {   // bug: reduced to package-private\n            System.out.println(\"doc\");\n        }\n    }\n}",
+  "choices": [
+    "Interface methods cannot be overridden in implementing classes",
+    "Interface methods are implicitly public; the implementing class must also declare print() as public — using package-private (no modifier) is a narrower access and causes a compile error",
+    "void return type must be changed to String in the implementing class",
+    "static classes cannot implement interfaces"
+  ],
+  "answer": "b",
+  "explanation": "Interface methods are implicitly public abstract. Overriding methods cannot have weaker access. Doc.print() with no modifier is package-private (weaker than public), causing compile error: 'attempting to assign weaker access privileges'. Fix: add public to Doc.print()."
+}

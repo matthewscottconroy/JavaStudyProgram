@@ -1,0 +1,10 @@
+{
+  "id": "aal-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class Sorter {\n    public static void main(String[] args) {\n        List<String> words = new ArrayList<>(List.of(\"banana\", \"apple\", \"cherry\"));\n        Collections.sort(words);\n        System.out.println(words.get(0));\n\n        List<Integer> nums = new ArrayList<>(List.of(3, 1, 4, 1, 5));\n        Collections.sort(nums, Comparator.reverseOrder());\n        System.out.println(nums);\n    }\n}",
+  "answer": "apple\n[5, 4, 3, 1, 1]",
+  "explanation": "Collections.sort(words) sorts alphabetically: [\"apple\",\"banana\",\"cherry\"]. get(0) = \"apple\". Collections.sort with Comparator.reverseOrder() sorts [3,1,4,1,5] in descending order → [5,4,3,1,1]. List.toString() formats with brackets and commas.",
+  "alternatives": ["apple\n[5, 4, 3, 1, 1]\n"]
+}

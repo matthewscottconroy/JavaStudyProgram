@@ -1,0 +1,10 @@
+{
+  "id": "fn-tr-comp-14",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class DefaultArgs {\n    static String greet(String name) {\n        return greet(name, \"Hello\");\n    }\n    static String greet(String name, String greeting) {\n        return greeting + \", \" + name + \"!\";\n    }\n    public static void main(String[] args) {\n        System.out.println(greet(\"Alice\"));\n        System.out.println(greet(\"Bob\", \"Hi\"));\n        System.out.println(greet(\"Charlie\", \"Hey\"));\n    }\n}",
+  "answer": "Hello, Alice!\nHi, Bob!\nHey, Charlie!",
+  "explanation": "greet(name) delegates to greet(name, \"Hello\"). The two-arg version formats the greeting. Java simulates default parameters via overloading.",
+  "alternatives": ["Hello, Alice!\nHi, Bob!\nHey, Charlie!\n"]
+}

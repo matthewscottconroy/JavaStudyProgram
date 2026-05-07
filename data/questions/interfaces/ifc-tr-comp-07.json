@@ -1,0 +1,10 @@
+{
+  "id": "ifc-tr-comp-07",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.Comparator;\npublic class ComparatorDemo {\n    public static void main(String[] args) {\n        Comparator<String> byLen = Comparator.comparingInt(String::length);\n        Comparator<String> byLenThenAlpha = byLen.thenComparing(Comparator.naturalOrder());\n        String[] words = {\"cat\", \"ant\", \"bee\", \"elk\"};\n        java.util.Arrays.sort(words, byLenThenAlpha);\n        for (String w : words) System.out.print(w + \" \");\n    }\n}",
+  "answer": "ant bee cat elk ",
+  "explanation": "All 4 words have length 3. byLen sees them as equal so thenComparing uses natural (alphabetical) order: ant, bee, cat, elk.",
+  "alternatives": ["ant bee cat elk "]
+}

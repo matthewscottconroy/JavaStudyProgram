@@ -1,0 +1,15 @@
+{
+  "id": "ifc-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "Two interfaces provide conflicting default methods and the class does not resolve the ambiguity. What is the bug?",
+  "code": "public class DiamondDefault {\n    interface Left  { default String tag() { return \"left\"; } }\n    interface Right { default String tag() { return \"right\"; } }\n    static class Both implements Left, Right {  // bug: must override tag()\n    }\n}",
+  "choices": [
+    "A class can only implement one interface at a time",
+    "Left and Right both provide a default tag() method; Both inherits two conflicting defaults and must override tag() to resolve the ambiguity — the compiler requires this",
+    "default methods are inherited from the leftmost interface in the implements list",
+    "The compiler automatically picks the alphabetically first interface's default"
+  ],
+  "answer": "b",
+  "explanation": "When two unrelated interfaces provide a default method with the same signature, the implementing class must override it to resolve the conflict. The compiler reports 'class Both inherits unrelated defaults for tag()'. Fix: add public String tag() { return Left.super.tag(); } or whatever resolution is desired."
+}

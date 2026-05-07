@@ -1,0 +1,10 @@
+{
+  "id": "thr-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print (assuming single-threaded execution)?",
+  "code": "public class RunnableDemo {\n    public static void main(String[] args) throws InterruptedException {\n        Runnable task = () -> {\n            for (int i = 0; i < 3; i++) {\n                System.out.println(Thread.currentThread().getName() + \":\" + i);\n            }\n        };\n        Thread t = new Thread(task, \"worker\");\n        t.start();\n        t.join();  // waits for thread to finish\n        System.out.println(\"main done\");\n    }\n}",
+  "answer": "worker:0\nworker:1\nworker:2\nmain done",
+  "explanation": "t.join() causes main to wait until the worker thread completes. So the worker's loop runs fully (printing worker:0, worker:1, worker:2) before main prints \"main done\".",
+  "alternatives": ["worker:0\nworker:1\nworker:2\nmain done\n"]
+}

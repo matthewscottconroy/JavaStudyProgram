@@ -1,0 +1,10 @@
+{
+  "id": "gen-tr-comp-12",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class GenericStack {\n    static class Stack<T> {\n        Deque<T> items = new ArrayDeque<>();\n        void push(T item) { items.push(item); }\n        T pop() { return items.pop(); }\n        boolean isEmpty() { return items.isEmpty(); }\n    }\n    public static void main(String[] args) {\n        Stack<String> s = new Stack<>();\n        s.push(\"a\"); s.push(\"b\"); s.push(\"c\");\n        while (!s.isEmpty()) System.out.print(s.pop() + \" \");\n    }\n}",
+  "answer": "c b a ",
+  "explanation": "push() inserts at front of deque. pop() removes from front (LIFO). Pushed a,b,c; popped c,b,a.",
+  "alternatives": ["c b a"]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "db-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this code print (assuming the query returns rows with id=1,name='Alice' and id=2,name='Bob')?",
+  "code": "// Assume conn is a valid JDBC Connection\nimport java.sql.*;\npublic class QueryTrace {\n    static void query(Connection conn) throws SQLException {\n        PreparedStatement ps = conn.prepareStatement(\n            \"SELECT id, name FROM users ORDER BY id\");\n        ResultSet rs = ps.executeQuery();\n        int count = 0;\n        while (rs.next()) {\n            count++;\n            System.out.println(rs.getInt(\"id\") + \":\" + rs.getString(\"name\"));\n        }\n        System.out.println(\"rows=\" + count);\n        rs.close(); ps.close();\n    }\n}",
+  "answer": "1:Alice\n2:Bob\nrows=2",
+  "explanation": "rs.next() advances the cursor. First iteration: id=1, name=Alice. Second: id=2, name=Bob. Loop exits when no more rows. count=2.",
+  "alternatives": ["1:Alice\n2:Bob\nrows=2\n"]
+}

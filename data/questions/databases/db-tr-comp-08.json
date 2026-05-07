@@ -1,0 +1,10 @@
+{
+  "id": "db-tr-comp-08",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.sql.*;\npublic class IsolationLevels {\n    public static void main(String[] args) {\n        System.out.println(Connection.TRANSACTION_NONE);\n        System.out.println(Connection.TRANSACTION_READ_UNCOMMITTED);\n        System.out.println(Connection.TRANSACTION_SERIALIZABLE);\n        System.out.println(Connection.TRANSACTION_READ_UNCOMMITTED <\n                           Connection.TRANSACTION_SERIALIZABLE);\n    }\n}",
+  "answer": "0\n1\n8\ntrue",
+  "explanation": "JDBC isolation level constants: NONE=0, READ_UNCOMMITTED=1, READ_COMMITTED=2, REPEATABLE_READ=4, SERIALIZABLE=8. 1 < 8 is true.",
+  "alternatives": ["0\n1\n8\ntrue\n"]
+}

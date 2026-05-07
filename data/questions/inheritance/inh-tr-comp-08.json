@@ -1,0 +1,10 @@
+{
+  "id": "inh-tr-comp-08",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class CastCheck {\n    static class Animal { String sound() { return \"...\"; } }\n    static class Dog extends Animal { @Override String sound() { return \"woof\"; } }\n    static class Cat extends Animal { @Override String sound() { return \"meow\"; } }\n    public static void main(String[] args) {\n        Animal[] pets = {new Dog(), new Cat(), new Dog()};\n        for (Animal a : pets) {\n            if (a instanceof Dog) System.out.println(\"Dog:\" + a.sound());\n            else System.out.println(\"Other:\" + a.sound());\n        }\n    }\n}",
+  "answer": "Dog:woof\nOther:meow\nDog:woof",
+  "explanation": "pets[0] is Dog → \"Dog:woof\". pets[1] is Cat, not instanceof Dog → \"Other:meow\". pets[2] is Dog → \"Dog:woof\".",
+  "alternatives": ["Dog:woof\nOther:meow\nDog:woof\n"]
+}

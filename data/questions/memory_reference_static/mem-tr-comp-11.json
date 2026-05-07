@@ -1,0 +1,10 @@
+{
+  "id": "mem-tr-comp-11",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class WeakRef {\n    public static void main(String[] args) throws InterruptedException {\n        java.lang.ref.WeakReference<String> wr =\n            new java.lang.ref.WeakReference<>(new String(\"volatile\"));\n        System.out.println(wr.get() != null);\n        System.gc();\n        Thread.sleep(100);\n        // WeakReference may be collected after GC\n        System.out.println(wr.get() == null);\n    }\n}",
+  "answer": "true\ntrue",
+  "explanation": "Immediately after creation, the string is reachable → wr.get()!=null is true. After System.gc() and sleep, a weak reference with no strong referent is typically collected → wr.get()==null is true. (GC behavior is not guaranteed but predictable in practice.)",
+  "alternatives": ["true\ntrue\n"]
+}

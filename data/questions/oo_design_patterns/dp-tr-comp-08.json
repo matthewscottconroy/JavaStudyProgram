@@ -1,0 +1,10 @@
+{
+  "id": "dp-tr-comp-08",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class CommandPattern {\n    interface Command { void execute(); void undo(); }\n    static class Light {\n        boolean on = false;\n        void turnOn()  { on = true;  System.out.println(\"on\"); }\n        void turnOff() { on = false; System.out.println(\"off\"); }\n    }\n    public static void main(String[] args) {\n        Light light = new Light();\n        Command cmd = new Command() {\n            public void execute() { light.turnOn(); }\n            public void undo()    { light.turnOff(); }\n        };\n        cmd.execute();\n        cmd.execute();\n        cmd.undo();\n        System.out.println(light.on);\n    }\n}",
+  "answer": "on\non\noff\nfalse",
+  "explanation": "execute() twice: \"on\" printed twice. undo(): \"off\" printed. light.on=false.",
+  "alternatives": ["on\non\noff\nfalse\n"]
+}

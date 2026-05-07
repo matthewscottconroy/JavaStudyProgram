@@ -1,0 +1,10 @@
+{
+  "id": "str-tr-comp-07",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class StrReplace {\n    public static void main(String[] args) {\n        String s = \"aabbccaa\";\n        System.out.println(s.replace(\"aa\", \"X\"));\n        System.out.println(s.replaceFirst(\"a\", \"Z\"));\n        System.out.println(s.indexOf(\"bb\"));\n        System.out.println(s.contains(\"dd\"));\n    }\n}",
+  "answer": "XbbccX\nZabbccaa\n2\nfalse",
+  "explanation": "replace replaces all occurrences of \"aa\": \"aabbccaa\" → \"XbbccX\". replaceFirst replaces only the first \"a\": \"Zabbccaa\". indexOf(\"bb\") finds \"bb\" starting at index 2. contains(\"dd\") is false.",
+  "alternatives": ["XbbccX\nZabbccaa\n2\nfalse\n"]
+}

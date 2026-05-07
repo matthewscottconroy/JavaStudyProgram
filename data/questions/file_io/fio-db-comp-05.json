@@ -1,0 +1,15 @@
+{
+  "id": "fio-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The stream from Files.lines is never closed. What is the bug?",
+  "code": "import java.nio.file.*;\npublic class StreamCloseBug {\n    public static void main(String[] args) throws Exception {\n        long count = Files.lines(Path.of(\"data.txt\")).count();  // bug: stream not closed\n        System.out.println(count);\n    }\n}",
+  "choices": [
+    "Files.lines closes the underlying file automatically after count() completes",
+    "Files.lines returns a Stream backed by an open file handle; not closing it leaks the file descriptor; wrap in try-with-resources since Stream implements AutoCloseable",
+    "count() is a terminal operation that implicitly closes the stream",
+    "Files.lines cannot be used with count(); use Files.readAllLines().size() instead"
+  ],
+  "answer": "b",
+  "explanation": "Files.lines() opens a file and returns a lazy Stream. The Stream implements AutoCloseable; if you don't close it, the file handle leaks. Fix: try (Stream<String> lines = Files.lines(Path.of(\"data.txt\"))) { long count = lines.count(); }."
+}

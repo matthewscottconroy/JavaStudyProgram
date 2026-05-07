@@ -1,0 +1,15 @@
+{
+  "id": "str-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "This method is supposed to return a string with all vowels removed, but it returns the original string unchanged. What is the bug?",
+  "code": "public class Strip {\n    public static String removeVowels(String s) {\n        for (char c : s.toCharArray()) {\n            if (\"aeiouAEIOU\".contains(String.valueOf(c))) {\n                s.replace(String.valueOf(c), \"\");\n            }\n        }\n        return s;\n    }\n}",
+  "choices": [
+    "String.valueOf(c) cannot be used inside contains()",
+    "Strings are immutable — s.replace() returns a new String but the result is never assigned back to s",
+    "The for-each loop cannot iterate over char arrays",
+    "contains() requires a Pattern, not a String literal"
+  ],
+  "answer": "b",
+  "explanation": "String.replace() does not modify the original String — it returns a new String with the replacements applied. Since the return value is discarded and s is never reassigned, s remains unchanged. Fix: s = s.replaceAll(\"[aeiouAEIOU]\", \"\"); before the loop, or reassign s inside the loop."
+}

@@ -1,0 +1,10 @@
+{
+  "id": "var-tr-comp-12",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class BitOps {\n    public static void main(String[] args) {\n        int a = 0b1010;  // 10\n        int b = 0b1100;  // 12\n        System.out.println(a & b);   // AND\n        System.out.println(a | b);   // OR\n        System.out.println(a ^ b);   // XOR\n        System.out.println(~a & 0xFF); // NOT (masked to 8 bits)\n        System.out.println(a << 1);  // left shift\n    }\n}",
+  "answer": "8\n14\n6\n245\n20",
+  "explanation": "a=1010, b=1100. AND=1000=8. OR=1110=14. XOR=0110=6. ~a=-11 in int; ~a&0xFF=245 (0b11110101). a<<1=10100=20.",
+  "alternatives": ["8\n14\n6\n245\n20\n"]
+}

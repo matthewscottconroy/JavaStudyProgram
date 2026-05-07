@@ -1,0 +1,10 @@
+{
+  "id": "var-tr-comp-07",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class PrePost {\n    public static void main(String[] args) {\n        int a = 5;\n        int b = a++;\n        System.out.println(a + \" \" + b);\n        int c = 5;\n        int d = ++c;\n        System.out.println(c + \" \" + d);\n        int x = 3;\n        System.out.println(x++ + \" \" + x);\n    }\n}",
+  "answer": "6 5\n6 6\n3 4",
+  "explanation": "a++ returns current value (5) to b, then increments a to 6. ++c increments c to 6 first, then assigns 6 to d. x++ + \" \" + x: x++ evaluates to 3 (post-increment), then x is now 4 before the second x is read.",
+  "alternatives": ["6 5\n6 6\n3 4\n"]
+}

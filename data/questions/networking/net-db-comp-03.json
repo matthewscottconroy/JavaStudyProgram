@@ -1,0 +1,15 @@
+{
+  "id": "net-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The socket connection hangs indefinitely. What is the bug?",
+  "code": "import java.net.*;\nimport java.io.*;\npublic class HangBug {\n    static void connect() throws Exception {\n        Socket s = new Socket(\"example.com\", 80);\n        InputStream in = s.getInputStream();\n        int b;\n        while ((b = in.read()) != -1) {  // hangs if server doesn't close\n            System.out.print((char)b);\n        }\n        s.close();\n    }\n}",
+  "choices": [
+    "Socket.getInputStream() does not work for HTTP connections",
+    "No timeout is set; if the server keeps the connection open (HTTP keep-alive), read() blocks forever waiting for more data",
+    "in.read() returns bytes, not characters, so char casting is incorrect",
+    "Socket must be closed before reading from it"
+  ],
+  "answer": "b",
+  "explanation": "Without a socket timeout, read() blocks indefinitely waiting for the server to close the connection or send more data. HTTP/1.1 servers often keep connections alive. Fix: s.setSoTimeout(5000) sets a 5-second read timeout, causing a SocketTimeoutException if no data arrives in time."
+}

@@ -1,0 +1,10 @@
+{
+  "id": "thr-tr-comp-09",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.util.concurrent.*;\npublic class CallableFuture {\n    public static void main(String[] args) throws Exception {\n        ExecutorService exec = Executors.newSingleThreadExecutor();\n        Future<Integer> future = exec.submit(() -> {\n            Thread.sleep(10);\n            return 42;\n        });\n        System.out.println(future.isDone());\n        int result = future.get();\n        System.out.println(future.isDone());\n        System.out.println(result);\n        exec.shutdown();\n    }\n}",
+  "answer": "false\ntrue\n42",
+  "explanation": "Immediately after submit(), the task is likely still running → isDone()=false. future.get() blocks until complete. After get() returns, isDone()=true. result=42.",
+  "alternatives": ["false\ntrue\n42\n"]
+}

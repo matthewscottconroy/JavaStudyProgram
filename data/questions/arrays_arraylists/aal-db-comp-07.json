@@ -1,0 +1,15 @@
+{
+  "id": "aal-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "Comparing arrays with == returns false even for equal contents. What is the bug?",
+  "code": "public class ArrayEquals {\n    public static void main(String[] args) {\n        int[] a = {1, 2, 3};\n        int[] b = {1, 2, 3};\n        System.out.println(a == b);              // false\n        System.out.println(a.equals(b));         // also false — same as ==\n    }\n}",
+  "choices": [
+    "int arrays cannot be compared for equality in Java",
+    "== compares array references, not contents; int[].equals() also uses reference equality; use Arrays.equals(a,b) to compare element-by-element",
+    "a.equals(b) compares arrays correctly for primitive types",
+    "The arrays must be sorted before comparison"
+  ],
+  "answer": "b",
+  "explanation": "Arrays are objects. == tests reference identity (are they the same object?). Array's equals() (inherited from Object) also tests identity. For content comparison, use Arrays.equals(a, b) for 1D, or Arrays.deepEquals() for multidimensional arrays."
+}

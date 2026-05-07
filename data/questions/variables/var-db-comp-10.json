@@ -1,0 +1,15 @@
+{
+  "id": "var-db-comp-10",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The floating-point comparison fails unexpectedly. What is the bug?",
+  "code": "public class FloatCompare {\n    public static void main(String[] args) {\n        double a = 0.1 + 0.2;\n        if (a == 0.3) {   // bug: exact FP comparison\n            System.out.println(\"equal\");\n        } else {\n            System.out.println(\"not equal: \" + a);\n        }\n    }\n}",
+  "choices": [
+    "double addition is not defined for 0.1 and 0.2",
+    "Floating-point arithmetic is imprecise; 0.1+0.2 is not exactly 0.3 in binary, so == comparison fails",
+    "a should be declared as float, not double",
+    "The if condition should use a.compareTo(0.3) == 0"
+  ],
+  "answer": "b",
+  "explanation": "0.1 and 0.2 have no exact binary representations. Their sum (≈0.30000000000000004) is not == 0.3. Fix: use an epsilon comparison: Math.abs(a - 0.3) < 1e-9, or use BigDecimal for exact arithmetic."
+}

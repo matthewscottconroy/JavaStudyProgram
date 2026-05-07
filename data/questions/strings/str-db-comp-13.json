@@ -1,0 +1,15 @@
+{
+  "id": "str-db-comp-13",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The null check is backwards and throws NullPointerException. What is the bug?",
+  "code": "public class NullEquals {\n    static boolean matches(String s) {\n        return s.equals(\"target\");  // bug: NPE if s is null\n    }\n    public static void main(String[] args) {\n        System.out.println(matches(null));\n    }\n}",
+  "choices": [
+    "equals() always returns false for null arguments",
+    "Calling null.equals('target') throws NullPointerException because s is null",
+    "The equals() method must be called on a String variable, not a literal",
+    "null == 'target' should be used instead of equals()"
+  ],
+  "answer": "b",
+  "explanation": "s.equals(...) dereferences s. When s is null, this throws NullPointerException. Fix: reverse the call — \"target\".equals(s) — because String.equals() handles a null argument by returning false without throwing."
+}

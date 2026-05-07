@@ -1,0 +1,15 @@
+{
+  "id": "aal-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The sort produces wrong order because the Comparator logic is inverted. What is the bug?",
+  "code": "import java.util.*;\npublic class SortBug {\n    public static void main(String[] args) {\n        int[] arr = {3, 1, 4, 1, 5};\n        // wants descending order\n        Integer[] boxed = {3,1,4,1,5};\n        Arrays.sort(boxed, (a, b) -> a - b);  // bug: sorts ascending\n        System.out.println(Arrays.toString(boxed));\n    }\n}",
+  "choices": [
+    "Arrays.sort cannot take a Comparator for Integer[]",
+    "Comparator (a,b)->a-b sorts ascending; for descending use (a,b)->b-a or Comparator.reverseOrder()",
+    "The subtraction a-b causes integer overflow for large values",
+    "Integer[] must be converted to int[] before sorting with a comparator"
+  ],
+  "answer": "b",
+  "explanation": "(a,b)->a-b returns negative when a<b, which means a comes first — ascending order. For descending, use (a,b)->b-a or Arrays.sort(boxed, Comparator.reverseOrder()). Note: subtraction-based comparators can overflow for large values; Integer.compare(a,b) is safer."
+}

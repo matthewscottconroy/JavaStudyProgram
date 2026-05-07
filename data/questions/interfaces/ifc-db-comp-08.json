@@ -1,0 +1,15 @@
+{
+  "id": "ifc-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The functional interface has too many abstract methods and cannot be used with a lambda. What is the bug?",
+  "code": "public class NotFunctional {\n    interface Converter {\n        int convert(String s);\n        int reverseConvert(int n);  // bug: second abstract method\n    }\n    public static void main(String[] args) {\n        Converter c = s -> Integer.parseInt(s);  // compile error\n    }\n}",
+  "choices": [
+    "Lambda expressions cannot be assigned to interface types",
+    "Converter has two abstract methods; a functional interface must have exactly one abstract method for lambda assignment — Converter is not a functional interface",
+    "int return types are not supported in functional interfaces",
+    "The @FunctionalInterface annotation must be present for lambda assignment"
+  ],
+  "answer": "b",
+  "explanation": "A functional interface must have exactly one abstract method (SAM — Single Abstract Method). Converter has two abstract methods (convert and reverseConvert), so it's not a functional interface and cannot be implemented with a lambda. Fix: remove reverseConvert or move it to a separate interface. Add @FunctionalInterface to catch this at compile time."
+}

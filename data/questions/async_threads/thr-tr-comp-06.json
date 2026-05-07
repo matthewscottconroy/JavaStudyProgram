@@ -1,0 +1,10 @@
+{
+  "id": "thr-tr-comp-06",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class SyncDemo {\n    static int count = 0;\n    static synchronized void inc() { count++; }\n    static synchronized int get() { return count; }\n    public static void main(String[] args) throws InterruptedException {\n        Thread[] threads = new Thread[5];\n        for (int i = 0; i < 5; i++) {\n            threads[i] = new Thread(() -> {\n                for (int j = 0; j < 100; j++) inc();\n            });\n            threads[i].start();\n        }\n        for (Thread t : threads) t.join();\n        System.out.println(get());\n    }\n}",
+  "answer": "500",
+  "explanation": "synchronized methods prevent concurrent access. 5 threads each call inc() 100 times = 500 total increments. Because inc() is synchronized, all increments are serialized and count reaches exactly 500.",
+  "alternatives": ["500\n"]
+}

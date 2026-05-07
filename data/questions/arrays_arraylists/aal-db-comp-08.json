@@ -1,0 +1,15 @@
+{
+  "id": "aal-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "list.remove(1) removes the wrong thing. What is the bug?",
+  "code": "import java.util.*;\npublic class RemoveAmbig {\n    public static void main(String[] args) {\n        List<Integer> list = new ArrayList<>(Arrays.asList(10, 20, 30));\n        list.remove(1);   // intended to remove value 1, but removes index 1\n        System.out.println(list);\n    }\n}",
+  "choices": [
+    "ArrayList.remove() always removes by value for Integer lists",
+    "list.remove(int) removes by index; list.remove(1) removes the element at index 1 (value 20), not the element with value 1",
+    "Integer.valueOf(1) and 1 are identical arguments for List.remove()",
+    "ArrayList does not support remove() on Integer lists"
+  ],
+  "answer": "b",
+  "explanation": "List<E>.remove(int index) and List<E>.remove(Object o) are two overloads. Passing the literal 1 selects remove(int), removing index 1 (value 20). To remove by value, use list.remove(Integer.valueOf(1)), which selects the Object overload."
+}

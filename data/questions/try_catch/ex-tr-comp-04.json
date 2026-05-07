@@ -1,0 +1,10 @@
+{
+  "id": "ex-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class TryFinally {\n    static int compute() {\n        try {\n            System.out.println(\"try\");\n            return 1;\n        } finally {\n            System.out.println(\"finally\");\n        }\n    }\n    public static void main(String[] args) {\n        int result = compute();\n        System.out.println(\"result=\" + result);\n    }\n}",
+  "answer": "try\nfinally\nresult=1",
+  "explanation": "The finally block always runs, even when returning. Execution: try body prints \"try\", return 1 is queued, finally runs printing \"finally\", then the method returns 1. main prints \"result=1\".",
+  "alternatives": ["try\nfinally\nresult=1\n"]
+}

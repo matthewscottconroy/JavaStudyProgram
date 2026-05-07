@@ -1,0 +1,10 @@
+{
+  "id": "cls-tr-comp-14",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Sealed {\n    sealed interface Shape permits Circle, Square {}\n    record Circle(double r) implements Shape {}\n    record Square(double side) implements Shape {}\n    static double area(Shape s) {\n        return switch (s) {\n            case Circle c -> Math.PI * c.r() * c.r();\n            case Square sq -> sq.side() * sq.side();\n        };\n    }\n    public static void main(String[] args) {\n        System.out.printf(\"%.2f%n\", area(new Square(3)));\n        System.out.printf(\"%.0f%n\", area(new Circle(0)));\n    }\n}",
+  "answer": "9.00\n0",
+  "explanation": "area(Square(3))=3*3=9.0 formatted as '9.00'. area(Circle(0))=PI*0*0=0.0 formatted as '0'.",
+  "alternatives": ["9.00\n0\n"]
+}

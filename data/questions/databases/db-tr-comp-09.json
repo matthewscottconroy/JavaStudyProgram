@@ -1,0 +1,10 @@
+{
+  "id": "db-tr-comp-09",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.sql.*;\npublic class StatementType {\n    public static void main(String[] args) {\n        String insert = \"INSERT INTO t VALUES (1)\";\n        String select = \"SELECT * FROM t\";\n        System.out.println(insert.trim().toUpperCase().startsWith(\"INSERT\"));\n        System.out.println(select.trim().toUpperCase().startsWith(\"SELECT\"));\n        System.out.println(insert.toUpperCase().startsWith(\"SELECT\"));\n    }\n}",
+  "answer": "true\ntrue\nfalse",
+  "explanation": "Trimming and uppercasing \"INSERT INTO t VALUES (1)\" gives \"INSERT...\", which starts with \"INSERT\" → true. Same logic for SELECT → true. The INSERT string does not start with \"SELECT\" → false.",
+  "alternatives": ["true\ntrue\nfalse\n"]
+}

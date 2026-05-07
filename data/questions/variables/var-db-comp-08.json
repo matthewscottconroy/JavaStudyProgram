@@ -1,0 +1,15 @@
+{
+  "id": "var-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The division always produces 0. What is the bug?",
+  "code": "public class IntDiv {\n    public static void main(String[] args) {\n        int total = 7;\n        int count = 2;\n        double avg = total / count;   // bug: int/int = int, then widened to double\n        System.out.println(avg);\n    }\n}",
+  "choices": [
+    "double avg cannot be initialized from an int expression",
+    "total / count performs integer division (result 3), which is then widened to 3.0; not 3.5",
+    "The variables must be declared as double before division",
+    "avg should use Math.round() to get the correct result"
+  ],
+  "answer": "b",
+  "explanation": "Both operands are int, so Java performs integer division: 7/2=3 (truncates). The result 3 is then widened to 3.0 when assigned to avg. Fix: cast at least one operand: (double)total / count or total / (double)count."
+}

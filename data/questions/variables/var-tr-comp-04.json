@@ -1,0 +1,10 @@
+{
+  "id": "var-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "public class CastDemo {\n    public static void main(String[] args) {\n        double d = 9.99;\n        int i = (int) d;\n        System.out.println(i);\n        int x = 5;\n        double result = x / 2;\n        System.out.println(result);\n        double result2 = (double) x / 2;\n        System.out.println(result2);\n    }\n}",
+  "answer": "9\n2.0\n2.5",
+  "explanation": "(int)9.99 truncates to 9. x/2 is integer division (5/2=2) then widened to double 2.0. (double)x/2 promotes x to 5.0 first, giving 5.0/2=2.5.",
+  "alternatives": ["9\n2.0\n2.5\n"]
+}

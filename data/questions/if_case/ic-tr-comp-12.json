@@ -1,0 +1,10 @@
+{
+  "id": "ic-tr-comp-12",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "public class ShortCircuit {\n    static boolean sideEffect(String label) {\n        System.out.println(label);\n        return true;\n    }\n    public static void main(String[] args) {\n        boolean a = false && sideEffect(\"A\");\n        boolean b = true || sideEffect(\"B\");\n        boolean c = true && sideEffect(\"C\");\n        System.out.println(a + \" \" + b + \" \" + c);\n    }\n}",
+  "answer": "C\nfalse true true",
+  "explanation": "false && ... short-circuits: sideEffect('A') never called. true || ... short-circuits: sideEffect('B') never called. true && sideEffect('C'): evaluates → prints 'C', returns true. Final line: 'false true true'.",
+  "alternatives": ["C\nfalse true true\n"]
+}

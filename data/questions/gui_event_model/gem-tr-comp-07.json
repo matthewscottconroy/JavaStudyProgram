@@ -1,0 +1,10 @@
+{
+  "id": "gem-tr-comp-07",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "import java.awt.event.*;\npublic class ActionDemo {\n    static int count = 0;\n    public static void main(String[] args) {\n        ActionListener listener = e -> count++;\n        ActionEvent ev = new ActionEvent(new Object(), ActionEvent.ACTION_PERFORMED, \"click\");\n        listener.actionPerformed(ev);\n        listener.actionPerformed(ev);\n        System.out.println(count);\n    }\n}",
+  "answer": "2",
+  "explanation": "The lambda increments count each time actionPerformed is called. It is called twice, so count becomes 2.",
+  "alternatives": ["2\n"]
+}

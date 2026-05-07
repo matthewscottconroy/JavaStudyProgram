@@ -1,0 +1,10 @@
+{
+  "id": "gui-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import javax.swing.*;\npublic class LayoutDemo {\n    public static void main(String[] args) {\n        JPanel p = new JPanel();\n        JButton b1 = new JButton(\"B1\");\n        JButton b2 = new JButton(\"B2\");\n        p.add(b1);\n        p.add(b2);\n        System.out.println(p.getComponentCount());\n        System.out.println(p.getComponent(0).getClass().getSimpleName());\n        p.remove(0);\n        System.out.println(p.getComponentCount());\n    }\n}",
+  "answer": "2\nJButton\n1",
+  "explanation": "Two buttons added → componentCount=2. getComponent(0) is b1 which is a JButton. remove(0) removes b1 → componentCount=1.",
+  "alternatives": ["2\nJButton\n1\n"]
+}

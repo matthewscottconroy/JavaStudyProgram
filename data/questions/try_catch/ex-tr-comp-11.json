@@ -1,0 +1,10 @@
+{
+  "id": "ex-tr-comp-11",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class ChainedEx {\n    static void a() throws Exception {\n        try { b(); }\n        catch (RuntimeException e) {\n            throw new Exception(\"wrapped\", e);\n        }\n    }\n    static void b() { throw new IllegalArgumentException(\"bad arg\"); }\n    public static void main(String[] args) {\n        try { a(); }\n        catch (Exception e) {\n            System.out.println(e.getMessage());\n            System.out.println(e.getCause().getMessage());\n        }\n    }\n}",
+  "answer": "wrapped\nbad arg",
+  "explanation": "b() throws IllegalArgumentException (RuntimeException). a() catches it and wraps in new Exception('wrapped', cause). main() catches Exception: getMessage()='wrapped', getCause().getMessage()='bad arg'.",
+  "alternatives": ["wrapped\nbad arg\n"]
+}

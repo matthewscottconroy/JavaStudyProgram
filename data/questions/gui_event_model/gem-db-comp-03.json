@@ -1,0 +1,15 @@
+{
+  "id": "gem-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "Removing the listener does not work. What is the bug?",
+  "code": "import javax.swing.*;\nimport java.awt.event.*;\npublic class RemoveListenerBug {\n    public static void main(String[] args) {\n        JButton btn = new JButton(\"Go\");\n        btn.addActionListener(e -> System.out.println(\"clicked\"));\n        btn.removeActionListener(e -> System.out.println(\"clicked\"));  // bug: different lambda\n        btn.doClick();  // still prints \"clicked\"\n    }\n}",
+  "choices": [
+    "ActionListeners cannot be removed once added",
+    "Each lambda expression is a distinct object; the lambda passed to removeActionListener is different from the one added, so nothing is removed",
+    "removeActionListener requires the same ActionEvent source",
+    "doClick() fires events regardless of registered listeners"
+  ],
+  "answer": "b",
+  "explanation": "Each lambda expression creates a new object. The lambda in removeActionListener is a different object than the one in addActionListener, so the remove fails silently. Fix: store the listener in a variable: ActionListener listener = e -> ...; then add and remove the same variable."
+}

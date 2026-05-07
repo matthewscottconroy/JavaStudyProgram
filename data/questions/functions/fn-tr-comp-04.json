@@ -1,0 +1,10 @@
+{
+  "id": "fn-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class Power {\n    public static int pow(int base, int exp) {\n        if (exp == 0) return 1;\n        if (exp % 2 == 0) {\n            int half = pow(base, exp / 2);\n            return half * half;\n        }\n        return base * pow(base, exp - 1);\n    }\n\n    public static void main(String[] args) {\n        System.out.println(pow(2, 4));\n        System.out.println(pow(3, 3));\n    }\n}",
+  "answer": "16\n27",
+  "explanation": "pow(2,4): exp=4 is even → half=pow(2,2). pow(2,2): even → half=pow(2,1). pow(2,1): odd → 2*pow(2,0)=2*1=2. So pow(2,2)=2*2=4, pow(2,4)=4*4=16. pow(3,3): odd → 3*pow(3,2). pow(3,2): even → half=pow(3,1)=3*pow(3,0)=3*1=3 → 3*3=9. So pow(3,3)=3*9=27.",
+  "alternatives": ["16\n27\n"]
+}

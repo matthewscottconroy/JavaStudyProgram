@@ -1,0 +1,15 @@
+{
+  "id": "ser-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 5,
+  "prompt": "Deserializing an old saved file throws InvalidClassException: local class incompatible. What is the bug?",
+  "code": "import java.io.*;\n// Version 1 — saved to disk:\npublic class Config implements Serializable {\n    String host;\n    int    port;\n}\n\n// Version 2 — class was changed, file loaded:\npublic class Config implements Serializable {\n    String host;\n    int    port;\n    int    timeout;   // new field added\n    // no serialVersionUID declared in either version\n}",
+  "choices": [
+    "Adding a field always causes a NullPointerException, not an InvalidClassException",
+    "Without a declared serialVersionUID, Java auto-generates one from the class structure — changing the class changes the UID, making old files incompatible",
+    "Serializable classes cannot add fields after the first serialization",
+    "The new timeout field must also be transient for deserialization to succeed"
+  ],
+  "answer": "b",
+  "explanation": "When serialVersionUID is not declared, Java computes it from the class structure (fields, methods, etc.). Adding a field changes the structure, which changes the computed UID. Old saved data has the old UID; the new class has a new UID — they don't match, so InvalidClassException is thrown. Fix: declare private static final long serialVersionUID = 1L; in both versions to maintain compatibility. New fields will be initialized to their default values when loading old data."
+}

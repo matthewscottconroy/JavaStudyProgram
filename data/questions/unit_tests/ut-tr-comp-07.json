@@ -1,0 +1,10 @@
+{
+  "id": "ut-tr-comp-07",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class ExceptionTest {\n    static int divide(int a, int b) {\n        if (b == 0) throw new ArithmeticException(\"div by zero\");\n        return a / b;\n    }\n    // Simulating assertThrows\n    static <T extends Throwable> T assertThrows(Class<T> clazz, Runnable r) {\n        try { r.run(); throw new AssertionError(\"Expected exception\"); }\n        catch (Throwable t) {\n            if (!clazz.isInstance(t)) throw new AssertionError(\"Wrong type\");\n            return clazz.cast(t);\n        }\n    }\n    public static void main(String[] args) {\n        ArithmeticException ex = assertThrows(ArithmeticException.class, () -> divide(5, 0));\n        System.out.println(ex.getMessage());\n        System.out.println(divide(10, 2));\n    }\n}",
+  "answer": "div by zero\n5",
+  "explanation": "assertThrows captures the ArithmeticException from divide(5,0); getMessage()='div by zero'. divide(10,2)=5.",
+  "alternatives": ["div by zero\n5\n"]
+}

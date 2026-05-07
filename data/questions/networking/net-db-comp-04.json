@@ -1,0 +1,15 @@
+{
+  "id": "net-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The server can only handle one client at a time. What is the bug?",
+  "code": "import java.net.*;\nimport java.io.*;\npublic class SingleClient {\n    public static void main(String[] args) throws Exception {\n        ServerSocket ss = new ServerSocket(8080);\n        while (true) {\n            Socket client = ss.accept();\n            // handle client in main thread — blocks next accept\n            BufferedReader in = new BufferedReader(\n                new InputStreamReader(client.getInputStream()));\n            String line = in.readLine();\n            System.out.println(line);\n            client.close();\n        }\n    }\n}",
+  "choices": [
+    "ServerSocket cannot be used in a while(true) loop",
+    "Client handling runs on the main thread, blocking accept() from accepting the next client until the current one is done",
+    "BufferedReader cannot be used with socket streams",
+    "client.close() should be called before reading"
+  ],
+  "answer": "b",
+  "explanation": "Handling each client in the main thread means only one client can be served at a time. While handling client A, client B's connection request waits. Fix: spawn a new Thread for each accepted socket: new Thread(() -> handle(client)).start(); or use an ExecutorService thread pool."
+}

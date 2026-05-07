@@ -1,0 +1,10 @@
+{
+  "id": "str-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Reverse {\n    public static String reverseWords(String s) {\n        String[] parts = s.split(\" \");\n        StringBuilder sb = new StringBuilder();\n        for (int i = parts.length - 1; i >= 0; i--) {\n            sb.append(parts[i]);\n            if (i > 0) sb.append(\" \");\n        }\n        return sb.toString();\n    }\n\n    public static void main(String[] args) {\n        System.out.println(reverseWords(\"cat sat mat\"));\n        System.out.println(reverseWords(\"one\"));\n    }\n}",
+  "answer": "mat sat cat\none",
+  "explanation": "\"cat sat mat\" splits into [\"cat\",\"sat\",\"mat\"]. Loop from index 2 down to 0: appends 'mat',' ','sat',' ','cat'. Space is added when i > 0. Result: 'mat sat cat'. \"one\" splits into [\"one\"]; loop runs once, appends 'one', no space. Result: 'one'.",
+  "alternatives": ["mat sat cat\none\n"]
+}

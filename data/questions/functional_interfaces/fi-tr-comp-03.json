@@ -1,0 +1,10 @@
+{
+  "id": "fi-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "import java.util.function.*;\npublic class SupplierConsumer {\n    public static void main(String[] args) {\n        Supplier<String> hello = () -> \"Hello\";\n        Consumer<String> shout = s -> System.out.println(s.toUpperCase());\n        shout.accept(hello.get());\n        Consumer<String> shoutThenLen = shout.andThen(s -> System.out.println(s.length()));\n        shoutThenLen.accept(\"hi\");\n    }\n}",
+  "answer": "HELLO\nHI\n2",
+  "explanation": "hello.get() returns \"Hello\"; shout.accept prints \"HELLO\". shoutThenLen.accept(\"hi\"): shout prints \"HI\", then the second consumer prints \"hi\".length()=2.",
+  "alternatives": ["HELLO\nHI\n2\n"]
+}

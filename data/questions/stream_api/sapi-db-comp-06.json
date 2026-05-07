@@ -1,0 +1,15 @@
+{
+  "id": "sapi-db-comp-06",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The stream operation modifies shared state, causing unpredictable results. What is the bug?",
+  "code": "import java.util.*;\nimport java.util.stream.*;\npublic class SideEffectStream {\n    public static void main(String[] args) {\n        List<Integer> results = new ArrayList<>();\n        List.of(1,2,3,4,5).stream()\n            .filter(n -> n % 2 == 0)\n            .forEach(results::add);  // side effect in stream\n        System.out.println(results);\n    }\n}",
+  "choices": [
+    "forEach() cannot accept method references",
+    "Using forEach() with side effects (mutating an external ArrayList) is discouraged in sequential streams and unsafe in parallel streams; use collect() instead",
+    "filter() removes elements from the original list",
+    "results::add causes a ConcurrentModificationException"
+  ],
+  "answer": "b",
+  "explanation": "For sequential streams, this works but is bad practice — streams are designed for functional pipelines, not external mutations. For parallel streams, mutating a non-thread-safe ArrayList from multiple threads causes data corruption. Fix: results = stream.filter(...).collect(Collectors.toList());"
+}

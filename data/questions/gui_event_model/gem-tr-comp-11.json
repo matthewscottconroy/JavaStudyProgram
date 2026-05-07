@@ -1,0 +1,10 @@
+{
+  "id": "gem-tr-comp-11",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.awt.event.*;\npublic class FocusDemo {\n    public static void main(String[] args) {\n        FocusListener fl = new FocusAdapter() {\n            @Override public void focusGained(FocusEvent e) { System.out.println(\"gained\"); }\n        };\n        System.out.println(fl instanceof FocusListener);\n        System.out.println(fl instanceof java.util.EventListener);\n    }\n}",
+  "answer": "true\ntrue",
+  "explanation": "FocusAdapter implements FocusListener, which extends java.util.EventListener. So the anonymous subclass satisfies both instanceof checks.",
+  "alternatives": ["true\ntrue\n"]
+}

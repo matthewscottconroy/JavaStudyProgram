@@ -1,0 +1,15 @@
+{
+  "id": "fn-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "This method fails to compile with 'missing return statement'. What is the bug?",
+  "code": "public class Sign {\n    public static String sign(int n) {\n        if (n > 0) {\n            return \"positive\";\n        } else if (n < 0) {\n            return \"negative\";\n        }\n        // n == 0 is not handled\n    }\n}",
+  "choices": [
+    "The method should be declared void since not all branches produce a value",
+    "The compiler cannot prove all paths return — add return \"zero\"; after the if/else-if block",
+    "else if should be changed to else to cover all remaining cases",
+    "Java requires a default return at the top of every non-void method"
+  ],
+  "answer": "b",
+  "explanation": "The compiler requires every path through a non-void method to end with a return. If n == 0, neither the if nor the else-if runs, leaving execution with no return value at the end of the method. Fix: add return \"zero\"; after the if/else-if, or use an else block instead."
+}

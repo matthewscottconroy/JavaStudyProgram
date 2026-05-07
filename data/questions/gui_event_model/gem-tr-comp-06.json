@@ -1,0 +1,10 @@
+{
+  "id": "gem-tr-comp-06",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "import java.awt.event.*;\npublic class AdapterDemo {\n    public static void main(String[] args) {\n        MouseAdapter adapter = new MouseAdapter() {\n            @Override\n            public void mouseClicked(MouseEvent e) {\n                System.out.println(\"clicked\");\n            }\n        };\n        System.out.println(adapter instanceof MouseListener);\n        System.out.println(adapter instanceof MouseMotionListener);\n    }\n}",
+  "answer": "true\ntrue",
+  "explanation": "MouseAdapter implements both MouseListener and MouseMotionListener (and MouseWheelListener). An anonymous subclass is still an instance of all interfaces implemented by its superclass.",
+  "alternatives": ["true\ntrue\n"]
+}

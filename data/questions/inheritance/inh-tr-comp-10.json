@@ -1,0 +1,10 @@
+{
+  "id": "inh-tr-comp-10",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class CovariantReturn {\n    static class Animal {\n        Animal create() { return new Animal(); }\n        String name() { return \"Animal\"; }\n    }\n    static class Dog extends Animal {\n        Dog create() { return new Dog(); }  // covariant return type\n        String name() { return \"Dog\"; }\n    }\n    public static void main(String[] args) {\n        Animal a = new Dog();\n        System.out.println(a.name());\n        System.out.println(a.create().name());\n    }\n}",
+  "answer": "Dog\nDog",
+  "explanation": "a is a Dog instance. a.name() dispatches to Dog.name() → 'Dog'. a.create() dispatches to Dog.create() which returns a Dog; .name() on that Dog → 'Dog'.",
+  "alternatives": ["Dog\nDog\n"]
+}

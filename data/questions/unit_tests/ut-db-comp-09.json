@@ -1,0 +1,15 @@
+{
+  "id": "ut-db-comp-09",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The test assertion compares floating-point values with == and fails intermittently. What is the bug?",
+  "code": "public class FloatAssert {\n    static double computeArea(double r) { return Math.PI * r * r; }\n    static void testArea() {\n        if (computeArea(1.0) == Math.PI) {  // bug: exact FP comparison\n            System.out.println(\"pass\");\n        } else {\n            System.out.println(\"fail\");\n        }\n    }\n    public static void main(String[] args) { testArea(); }\n}",
+  "choices": [
+    "Math.PI is not available in unit tests",
+    "Floating-point == comparison is exact; tiny precision differences cause the test to fail even for mathematically correct results; use an epsilon delta comparison",
+    "computeArea(1.0) should return an int, not a double",
+    "Math.PI * 1.0 * 1.0 always equals Math.PI exactly"
+  ],
+  "answer": "b",
+  "explanation": "Math.PI * 1.0 * 1.0 is mathematically equal to Math.PI, but floating-point arithmetic can introduce a tiny rounding error. Using == for exact comparison is fragile. In JUnit 5: assertEquals(Math.PI, computeArea(1.0), 1e-9) — the third argument is the allowed delta."
+}

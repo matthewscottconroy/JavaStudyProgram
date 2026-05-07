@@ -1,0 +1,10 @@
+{
+  "id": "var-tr-comp-16",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class FinalVar {\n    public static void main(String[] args) {\n        final int MAX = 100;\n        final String label;\n        boolean flag = true;\n        if (flag) label = \"yes\";\n        else label = \"no\";\n        System.out.println(MAX);\n        System.out.println(label);\n        // MAX = 200;  // compile error — final cannot be reassigned\n    }\n}",
+  "answer": "100\nyes",
+  "explanation": "MAX is final=100. label is a blank final: assigned exactly once in the if/else. flag=true → label='yes'. Both print correctly.",
+  "alternatives": ["100\nyes\n"]
+}

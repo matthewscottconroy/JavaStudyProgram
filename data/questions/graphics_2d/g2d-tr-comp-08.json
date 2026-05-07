@@ -1,0 +1,10 @@
+{
+  "id": "g2d-tr-comp-08",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.awt.geom.*;\npublic class PointContains {\n    public static void main(String[] args) {\n        Ellipse2D circle = new Ellipse2D.Double(0, 0, 10, 10);\n        System.out.println(circle.contains(5, 5));\n        System.out.println(circle.contains(10, 10));\n        System.out.println(circle.contains(0, 0));\n    }\n}",
+  "answer": "true\nfalse\nfalse",
+  "explanation": "Ellipse2D.Double(0,0,10,10) is a circle centered at (5,5) with radius 5. contains() checks if the point is strictly inside. (5,5) is the center → true. (10,10) is a corner of the bounding box, outside the ellipse → false. (0,0) is on the boundary — contains() is exclusive of the boundary → false.",
+  "alternatives": ["true\nfalse\nfalse\n"]
+}

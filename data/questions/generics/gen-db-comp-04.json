@@ -1,0 +1,15 @@
+{
+  "id": "gen-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The generic Stack does not compile. What is the bug?",
+  "code": "public class GenStack<T> {\n    private T[] items;\n    private int size = 0;\n    public GenStack(int capacity) {\n        items = new T[capacity];  // compile error\n    }\n    public void push(T item) { items[size++] = item; }\n}",
+  "choices": [
+    "Generic classes cannot contain arrays",
+    "Java cannot create arrays of generic type T due to type erasure; use (T[]) new Object[capacity] with @SuppressWarnings",
+    "T[] must be declared as final to be allocated",
+    "capacity must be a final parameter to be used in the constructor"
+  ],
+  "answer": "b",
+  "explanation": "Generic type parameters are erased at runtime. new T[n] is not allowed because the JVM doesn't know T's type at runtime. Fix: cast from Object: items = (T[]) new Object[capacity]; with @SuppressWarnings(\"unchecked\"). Alternatively, use an ArrayList<T> internally."
+}

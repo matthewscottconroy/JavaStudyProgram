@@ -1,0 +1,15 @@
+{
+  "id": "lp-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "This method is supposed to return the sum of all array elements, but it throws ArrayIndexOutOfBoundsException. What is the bug?",
+  "code": "public class Adder {\n    public static int sum(int[] nums) {\n        int total = 0;\n        for (int i = 0; i <= nums.length; i++) {\n            total += nums[i];\n        }\n        return total;\n    }\n}",
+  "choices": [
+    "The loop variable i should start at 1, not 0",
+    "The condition i <= nums.length should be i < nums.length",
+    "total should be initialized to nums[0] before the loop",
+    "The loop should use a while loop instead of for"
+  ],
+  "answer": "b",
+  "explanation": "Array indices run from 0 to nums.length-1. The condition i <= nums.length lets i reach nums.length on the final iteration, which is one past the last valid index and throws ArrayIndexOutOfBoundsException. Fix: change <= to <."
+}

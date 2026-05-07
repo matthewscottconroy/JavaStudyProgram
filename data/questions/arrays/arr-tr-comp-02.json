@@ -1,0 +1,10 @@
+{
+  "id": "arr-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.Arrays;\npublic class Reverser {\n    public static void reverse(int[] arr) {\n        int lo = 0, hi = arr.length - 1;\n        while (lo < hi) {\n            int tmp = arr[lo];\n            arr[lo] = arr[hi];\n            arr[hi] = tmp;\n            lo++;\n            hi--;\n        }\n    }\n\n    public static void main(String[] args) {\n        int[] a = {1, 2, 3, 4, 5};\n        reverse(a);\n        System.out.println(Arrays.toString(a));\n    }\n}",
+  "answer": "[5, 4, 3, 2, 1]",
+  "explanation": "Two-pointer swap: lo=0,hi=4 → swap 1↔5 → {5,2,3,4,1}. lo=1,hi=3 → swap 2↔4 → {5,4,3,2,1}. lo=2,hi=2: loop ends (lo < hi is false). Arrays.toString prints the result with brackets and commas.",
+  "alternatives": ["[5, 4, 3, 2, 1]\n"]
+}

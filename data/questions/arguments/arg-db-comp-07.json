@@ -1,0 +1,15 @@
+{
+  "id": "arg-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The vararg method call fails to compile. What is the bug?",
+  "code": "public class VarargOrder {\n    static void log(String prefix, int... nums) {\n        System.out.println(prefix + nums.length);\n    }\n    public static void main(String[] args) {\n        log(1, 2, 3, \"prefix\");  // bug: wrong argument order\n    }\n}",
+  "choices": [
+    "vararg parameters cannot follow non-vararg parameters",
+    "The call passes int arguments before the String, reversing the declared order; the first argument must be the String prefix",
+    "log requires exactly one int in the vararg; multiple ints are not allowed",
+    "int literals cannot be passed to a vararg int[] parameter"
+  ],
+  "answer": "b",
+  "explanation": "log(String prefix, int... nums) expects a String first, then zero-or-more ints. The call log(1, 2, 3, \"prefix\") passes ints first, which does not match — 1 cannot be widened to String. Fix: log(\"prefix\", 1, 2, 3)."
+}

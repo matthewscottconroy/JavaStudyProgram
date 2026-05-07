@@ -1,0 +1,15 @@
+{
+  "id": "mem-db-comp-10",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The null check occurs after the dereference. What is the bug?",
+  "code": "public class NullOrder {\n    static String getValue() { return null; }\n    public static void main(String[] args) {\n        String s = getValue();\n        int len = s.length();      // bug: NPE before null check\n        if (s != null) {\n            System.out.println(len);\n        }\n    }\n}",
+  "choices": [
+    "s.length() returns -1 when s is null",
+    "s.length() is called before the null check; if s is null, NullPointerException is thrown before reaching the if statement",
+    "if (s != null) automatically prevents the earlier NPE",
+    "int len must be declared as Integer to handle null lengths"
+  ],
+  "answer": "b",
+  "explanation": "Execution is sequential. s is null. s.length() throws NullPointerException immediately — the if(s != null) check on the next line is never reached. Fix: check before dereferencing: if (s != null) { int len = s.length(); System.out.println(len); }"
+}

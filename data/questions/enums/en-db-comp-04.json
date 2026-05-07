@@ -1,0 +1,15 @@
+{
+  "id": "en-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "Comparing enums with == gives unexpected results. What is the bug?",
+  "code": "public class EnumCompareBug {\n    enum Status { ACTIVE, INACTIVE }\n    public static void main(String[] args) {\n        Status a = Status.valueOf(\"ACTIVE\");\n        Status b = Status.ACTIVE;\n        System.out.println(a.equals(b));   // true\n        String s = \"ACTIVE\";\n        // bug: comparing enum to String with ==\n        System.out.println(a == s);  // compile error\n    }\n}",
+  "choices": [
+    "== works for all enum comparisons and equals() is redundant",
+    "Comparing an enum to a String with == is a compile error because the types are incompatible; use a.name().equals(s) to compare the enum's name to a String",
+    "valueOf always returns a new object so == between two Status values is always false",
+    "equals() must be overridden in enums to compare by value"
+  ],
+  "answer": "b",
+  "explanation": "Using == between an enum and a String is a compile-time type error — the compiler knows they can never be the same object. To compare an enum's name to a String, use a.name().equals(s). Note: == between two enum values of the same type is fine and idiomatic (enums are singletons)."
+}

@@ -1,0 +1,10 @@
+{
+  "id": "net-tr-comp-09",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.net.URL;\npublic class DefaultPort {\n    public static void main(String[] args) throws Exception {\n        URL url = new URL(\"https://example.com/page\");\n        System.out.println(url.getPort());\n        System.out.println(url.getDefaultPort());\n    }\n}",
+  "answer": "-1\n443",
+  "explanation": "getPort() returns -1 when no port is explicitly specified in the URL. getDefaultPort() returns the protocol's well-known port — 443 for HTTPS.",
+  "alternatives": ["-1\n443\n"]
+}

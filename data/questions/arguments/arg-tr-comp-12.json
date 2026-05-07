@@ -1,0 +1,10 @@
+{
+  "id": "arg-tr-comp-12",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class OverloadAmbig {\n    static void print(Object o)  { System.out.println(\"Object\"); }\n    static void print(String s)  { System.out.println(\"String\"); }\n    public static void main(String[] args) {\n        print(\"hello\");\n        print((Object) \"hello\");\n        Object o = \"hello\";\n        print(o);\n    }\n}",
+  "answer": "String\nObject\nObject",
+  "explanation": "Overload resolution happens at compile time based on the declared type. \"hello\" literal has compile-time type String → print(String). (Object)\"hello\" casts to Object → print(Object). Variable o is declared as Object → print(Object), even though the runtime value is a String.",
+  "alternatives": ["String\nObject\nObject\n"]
+}

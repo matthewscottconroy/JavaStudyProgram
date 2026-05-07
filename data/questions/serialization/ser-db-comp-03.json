@@ -1,0 +1,15 @@
+{
+  "id": "ser-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "Deserialization throws InvalidClassException. What is the bug?",
+  "code": "import java.io.*;\npublic class VersionMismatch {\n    // Version 1 serialized to disk\n    static class Config implements Serializable {\n        // serialVersionUID was not declared — JVM auto-generates it\n        int timeout = 30;\n    }\n    // Now we add a field and the auto-generated UID changes:\n    // int retries = 3; // adding this would change the auto-generated UID\n}",
+  "choices": [
+    "Config must implement Externalizable instead of Serializable",
+    "Without an explicit serialVersionUID, adding/changing fields causes the JVM to generate a different UID, making previously serialized data incompatible",
+    "Serializable classes cannot have int fields",
+    "The class must be public to be serialized"
+  ],
+  "answer": "b",
+  "explanation": "Java computes serialVersionUID automatically based on the class structure. When the class changes (add/remove fields, change types), the computed UID changes and existing serialized data becomes incompatible. Fix: always declare private static final long serialVersionUID = 1L; explicitly. You can then manage version compatibility yourself."
+}

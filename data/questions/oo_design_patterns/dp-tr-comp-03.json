@@ -1,0 +1,10 @@
+{
+  "id": "dp-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print? (Observer pattern)",
+  "code": "import java.util.*;\ninterface Observer { void update(String event); }\n\nclass EventBus {\n    private List<Observer> observers = new ArrayList<>();\n    void subscribe(Observer o)   { observers.add(o); }\n    void unsubscribe(Observer o) { observers.remove(o); }\n    void publish(String event)   { for (Observer o : observers) o.update(event); }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        EventBus bus = new EventBus();\n        Observer logger  = e -> System.out.println(\"LOG: \" + e);\n        Observer auditor = e -> System.out.println(\"AUDIT: \" + e);\n\n        bus.subscribe(logger);\n        bus.subscribe(auditor);\n        bus.publish(\"login\");\n        bus.unsubscribe(auditor);\n        bus.publish(\"logout\");\n    }\n}",
+  "answer": "LOG: login\nAUDIT: login\nLOG: logout",
+  "explanation": "Both logger and auditor receive 'login'. After unsubscribing auditor, only logger receives 'logout'. Observers are notified in subscription order.",
+  "alternatives": ["LOG: login\nAUDIT: login\nLOG: logout\n"]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gui-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "This program updates a JLabel from a background thread. It sometimes shows corrupted text or freezes. What is the bug?",
+  "code": "import javax.swing.*;\npublic class BadUpdate {\n    public static void main(String[] args) {\n        JLabel label = new JLabel(\"waiting...\");\n        JFrame frame = new JFrame();\n        frame.add(label);\n        frame.setSize(200, 100);\n        frame.setVisible(true);\n\n        new Thread(() -> {\n            for (int i = 1; i <= 5; i++) {\n                label.setText(\"count: \" + i);   // Swing is NOT thread-safe\n                Thread.sleep(500);\n            }\n        }).start();\n    }\n}",
+  "choices": [
+    "JLabel.setText() must receive a String, not a concatenation expression",
+    "Swing components are not thread-safe — UI updates must happen on the Event Dispatch Thread via SwingUtilities.invokeLater()",
+    "new Thread() cannot be used in a Swing application — use a SwingWorker instead",
+    "frame.setVisible(true) must be called after all components are added and all threads started"
+  ],
+  "answer": "b",
+  "explanation": "Swing is single-threaded: all reads and writes to Swing components must occur on the Event Dispatch Thread (EDT). Calling label.setText() from a background thread is a data race that can cause rendering corruption, hangs, or subtle bugs that only appear sometimes. Fix: wrap each update — SwingUtilities.invokeLater(() -> label.setText(\"count: \" + i));"
+}

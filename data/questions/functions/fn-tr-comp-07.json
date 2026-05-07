@@ -1,0 +1,10 @@
+{
+  "id": "fn-tr-comp-07",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class StringOps {\n    static int callCount = 0;\n\n    public static String process(String s) {\n        callCount++;\n        return s.trim().toLowerCase();\n    }\n\n    public static void main(String[] args) {\n        String a = process(\"  Hello  \");\n        String b = process(a);\n        System.out.println(a);\n        System.out.println(b);\n        System.out.println(a == b);       // same content, different object?\n        System.out.println(a.equals(b));\n        System.out.println(callCount);\n    }\n}",
+  "answer": "hello\nhello\nfalse\ntrue\n2",
+  "explanation": "process(\"  Hello  \"): trim+toLowerCase → 'hello'. process('hello'): already trimmed/lowercase → 'hello', but a NEW String object is returned. a == b is false (different objects). a.equals(b) is true (same content). callCount incremented twice.",
+  "alternatives": ["hello\nhello\nfalse\ntrue\n2\n"]
+}

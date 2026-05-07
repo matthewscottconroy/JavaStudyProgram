@@ -1,0 +1,10 @@
+{
+  "id": "ref-tr-comp-08",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.lang.reflect.*;\npublic class MethodReflect {\n    static class Calc {\n        int add(int a, int b) { return a + b; }\n        static int square(int x) { return x * x; }\n    }\n    public static void main(String[] args) throws Exception {\n        Calc c = new Calc();\n        Method add = Calc.class.getDeclaredMethod(\"add\", int.class, int.class);\n        System.out.println(add.invoke(c, 3, 4));\n        Method sq = Calc.class.getDeclaredMethod(\"square\", int.class);\n        System.out.println(sq.invoke(null, 5));\n        System.out.println(add.getParameterCount());\n    }\n}",
+  "answer": "7\n25\n2",
+  "explanation": "add.invoke(c,3,4)=3+4=7. square is static: invoke(null,5)=25. getParameterCount()=2 (a,b).",
+  "alternatives": ["7\n25\n2\n"]
+}

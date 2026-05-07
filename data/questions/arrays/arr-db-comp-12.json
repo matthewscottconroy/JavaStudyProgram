@@ -1,0 +1,15 @@
+{
+  "id": "arr-db-comp-12",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The method should check if array is sorted ascending but returns true for {3,1,2}. What is the bug?",
+  "code": "public class IsSorted {\n    static boolean isSorted(int[] arr) {\n        for (int i = 0; i < arr.length - 1; i++) {\n            if (arr[i] > arr[i + 1]) return false;\n        }\n        return true;   // bug: none above — but the loop stops early below:\n    }\n    static boolean isSortedBug(int[] arr) {\n        for (int i = 0; i < arr.length - 2; i++) {  // bug: should be length-1\n            if (arr[i] > arr[i + 1]) return false;\n        }\n        return true;\n    }\n}",
+  "choices": [
+    "The comparison arr[i] > arr[i+1] should be arr[i] >= arr[i+1] for strict sorting",
+    "i < arr.length - 2 stops one pair short; the last two elements are never compared, so {1,2,3,1} would return true",
+    "The loop should iterate backwards from arr.length - 1",
+    "isSorted should use Arrays.sort() and compare the result"
+  ],
+  "answer": "b",
+  "explanation": "The loop bound arr.length - 2 means the last index checked is arr.length - 3, comparing arr[length-3] with arr[length-2]. The pair (arr[length-2], arr[length-1]) is never examined. An array like {1,2,0} would incorrectly return true. Fix: i < arr.length - 1."
+}

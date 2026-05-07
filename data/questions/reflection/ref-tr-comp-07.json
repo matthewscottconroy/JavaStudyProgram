@@ -1,0 +1,10 @@
+{
+  "id": "ref-tr-comp-07",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.lang.reflect.*;\npublic class FieldReflect {\n    static class Point {\n        public int x;\n        private int y;\n        Point(int x, int y) { this.x=x; this.y=y; }\n    }\n    public static void main(String[] args) throws Exception {\n        Point p = new Point(3, 4);\n        Field fx = Point.class.getField(\"x\");\n        System.out.println(fx.get(p));\n        Field fy = Point.class.getDeclaredField(\"y\");\n        fy.setAccessible(true);\n        System.out.println(fy.get(p));\n        fy.set(p, 99);\n        System.out.println(fy.get(p));\n    }\n}",
+  "answer": "3\n4\n99",
+  "explanation": "getField('x') retrieves public x=3. getDeclaredField('y') with setAccessible gets private y=4. fy.set() changes y to 99.",
+  "alternatives": ["3\n4\n99\n"]
+}

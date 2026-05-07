@@ -1,0 +1,10 @@
+{
+  "id": "ifc-tr-comp-08",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class DefaultMethods {\n    interface Greeter {\n        String greet(String name);\n        default String greetLoud(String name) { return greet(name).toUpperCase(); }\n        static Greeter formal() { return name -> \"Dear \" + name; }\n    }\n    public static void main(String[] args) {\n        Greeter g = name -> \"Hi \" + name;\n        System.out.println(g.greet(\"Alice\"));\n        System.out.println(g.greetLoud(\"Bob\"));\n        System.out.println(Greeter.formal().greet(\"Carol\"));\n    }\n}",
+  "answer": "Hi Alice\nHI BOB\nDear Carol",
+  "explanation": "g.greet('Alice')='Hi Alice'. g.greetLoud('Bob')=g.greet('Bob').toUpperCase()='HI BOB'. Greeter.formal() returns lambda n->'Dear '+n; .greet('Carol')='Dear Carol'.",
+  "alternatives": ["Hi Alice\nHI BOB\nDear Carol\n"]
+}

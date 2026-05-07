@@ -1,0 +1,15 @@
+{
+  "id": "ic-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The if statement uses assignment instead of equality. What is the bug?",
+  "code": "public class AssignVsEqual {\n    public static void main(String[] args) {\n        int x = 5;\n        if (x = 10) {   // bug: = instead of ==, and int in boolean context\n            System.out.println(\"ten\");\n        }\n    }\n}",
+  "choices": [
+    "if conditions must use boolean literals only",
+    "x = 10 is an assignment (not a comparison); in Java this assigns 10 to x and would return int 10, which is not a boolean — the compiler rejects this",
+    "The assignment x = 10 works inside if() in Java like it does in C",
+    "The bug is that x should be compared to 10 using x.equals(10)"
+  ],
+  "answer": "b",
+  "explanation": "Unlike C, Java requires a boolean expression inside if(). x = 10 evaluates to int 10, which is not a boolean. The compiler reports 'incompatible types: int cannot be converted to boolean'. Fix: use x == 10."
+}

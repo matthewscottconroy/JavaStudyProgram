@@ -1,0 +1,10 @@
+{
+  "id": "fn-tr-comp-18",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class FluentBuilder {\n    static class Query {\n        String table = \"\";\n        String where = \"\";\n        int limit = -1;\n        Query from(String t) { table = t; return this; }\n        Query where(String w) { where = w; return this; }\n        Query limit(int n) { limit = n; return this; }\n        String build() {\n            String q = \"SELECT * FROM \" + table;\n            if (!where.isEmpty()) q += \" WHERE \" + where;\n            if (limit > 0) q += \" LIMIT \" + limit;\n            return q;\n        }\n    }\n    public static void main(String[] args) {\n        String q = new Query().from(\"users\").where(\"age>18\").limit(10).build();\n        System.out.println(q);\n    }\n}",
+  "answer": "SELECT * FROM users WHERE age>18 LIMIT 10",
+  "explanation": "Fluent builder chains: from → where → limit → build. Produces \"SELECT * FROM users WHERE age>18 LIMIT 10\".",
+  "alternatives": ["SELECT * FROM users WHERE age>18 LIMIT 10\n"]
+}

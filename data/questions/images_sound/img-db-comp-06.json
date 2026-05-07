@@ -1,0 +1,15 @@
+{
+  "id": "img-db-comp-06",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The image write silently fails to save. What is the bug?",
+  "code": "import javax.imageio.ImageIO;\nimport java.io.File;\nimport java.awt.image.BufferedImage;\npublic class SaveImageBug {\n    public static void main(String[] args) throws Exception {\n        BufferedImage img = new BufferedImage(100, 100, BufferedImage.TYPE_INT_RGB);\n        boolean ok = ImageIO.write(img, \"jpeg\", new File(\"/tmp/out.png\"));\n        // bug: format string is \"jpeg\" but file extension is .png\n        System.out.println(ok);\n    }\n}",
+  "choices": [
+    "ImageIO.write throws IOException when the format does not match the file extension",
+    "The format string \"jpeg\" causes the image to be encoded as JPEG data and written to the file regardless of extension; the file will contain JPEG data with a .png name — if any registered JPEG writer exists, ok will be true but the file is misnamed",
+    "ImageIO.write returns false when no writer is registered for the given format string; \"jpeg\" is not a valid format identifier — use \"jpg\" or \"png\"",
+    "BufferedImage.TYPE_INT_RGB cannot be saved as JPEG because JPEG requires TYPE_INT_BGR"
+  ],
+  "answer": "c",
+  "explanation": "ImageIO.write returns false when no ImageWriter is registered for the specified format string. The valid format name for JPEG is \"jpg\" (or \"JPEG\" depending on the JDK), not \"jpeg\". Fix: use \"jpg\" or \"png\" as the format string, and match the file extension accordingly."
+}

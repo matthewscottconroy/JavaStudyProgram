@@ -1,0 +1,15 @@
+{
+  "id": "gen-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "This code compiles but throws ClassCastException at runtime. What is the bug?",
+  "code": "import java.util.*;\npublic class Raw {\n    @SuppressWarnings(\"unchecked\")\n    public static void main(String[] args) {\n        List numbers = new ArrayList();   // raw type\n        numbers.add(42);\n        numbers.add(\"oops\");              // String slips in\n        List<Integer> ints = numbers;     // unchecked cast\n        int first = ints.get(0);          // fine\n        int second = ints.get(1);         // ClassCastException here\n    }\n}",
+  "choices": [
+    "ArrayList cannot hold both Integer and String values",
+    "Using a raw List removes compile-time type safety — a String was added to what should be a List<Integer>, causing a ClassCastException when unboxing",
+    "List<Integer> ints = numbers is an illegal assignment and should not compile",
+    "ints.get(1) must be cast to (int) explicitly to avoid the exception"
+  ],
+  "answer": "b",
+  "explanation": "Raw types bypass generic type checking. numbers accepts any Object, so adding a String compiles without error. Assigning to List<Integer> triggers only an unchecked warning, not an error. At runtime, ints.get(1) returns the String 'oops', and unboxing it to int throws ClassCastException. Fix: declare List<Integer> numbers = new ArrayList<>() from the start."
+}

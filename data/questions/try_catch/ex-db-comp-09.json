@@ -1,0 +1,15 @@
+{
+  "id": "ex-db-comp-09",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The checked exception handling causes a compile error. What is the bug?",
+  "code": "public class CheckedBug {\n    static void readFile() throws java.io.IOException {\n        throw new java.io.IOException(\"file error\");\n    }\n    public static void main(String[] args) {\n        readFile();   // bug: IOException not handled or declared\n    }\n}",
+  "choices": [
+    "IOException is an unchecked exception and does not need handling",
+    "readFile() declares throws IOException (a checked exception); the caller must either catch it or declare throws IOException itself",
+    "main() cannot declare throws IOException",
+    "Checked exceptions only apply to methods, not main()"
+  ],
+  "answer": "b",
+  "explanation": "IOException is a checked exception. Any method that calls readFile() must either (1) surround with try/catch(IOException) or (2) propagate it with throws IOException in its own signature. main() does neither, causing a compile error. Fix: add throws IOException to main, or wrap readFile() in try/catch."
+}

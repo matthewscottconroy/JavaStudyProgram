@@ -1,0 +1,15 @@
+{
+  "id": "ut-db-comp-11",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The test is not testing what the developer thinks it is. What is the bug?",
+  "code": "public class WrongAssert {\n    static java.util.List<String> getNames() {\n        return java.util.Arrays.asList(\"Alice\", \"Bob\");\n    }\n    static void testNames() {\n        java.util.List<String> names = getNames();\n        // bug: tests the reference, not the contents\n        if (names != null) System.out.println(\"pass\");\n        else System.out.println(\"fail\");\n    }\n    public static void main(String[] args) { testNames(); }\n}",
+  "choices": [
+    "getNames() should return an array, not a List",
+    "The test only checks that names is not null, not that it contains 'Alice' and 'Bob'; a method returning an empty list would also pass",
+    "names != null always evaluates to true for ArrayList",
+    "Arrays.asList() returns null for empty input"
+  ],
+  "answer": "b",
+  "explanation": "Testing only for non-null is a weak assertion. Any non-null list (empty or wrong contents) would pass. A thorough test should also assert: names.size()==2, names.contains('Alice'), names.contains('Bob'), and the correct order if relevant."
+}

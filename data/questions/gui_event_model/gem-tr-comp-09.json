@@ -1,0 +1,10 @@
+{
+  "id": "gem-tr-comp-09",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.awt.event.*;\npublic class KeyEventDemo {\n    public static void main(String[] args) {\n        System.out.println(KeyEvent.VK_A);\n        System.out.println(KeyEvent.VK_ENTER);\n        System.out.println(KeyEvent.VK_SPACE);\n    }\n}",
+  "answer": "65\n10\n32",
+  "explanation": "KeyEvent virtual key constants map to ASCII/Unicode values for printable keys: VK_A=65 ('A'), VK_ENTER=10 (newline), VK_SPACE=32 (space).",
+  "alternatives": ["65\n10\n32\n"]
+}

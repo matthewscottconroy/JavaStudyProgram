@@ -1,0 +1,15 @@
+{
+  "id": "inh-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The override does not work — the parent version always runs. What is the bug?",
+  "code": "public class OverrideBug {\n    static class Base {\n        void greet(String name) { System.out.println(\"Hello, \" + name); }\n    }\n    static class Sub extends Base {\n        void greet(String name, String title) {   // overload, not override\n            System.out.println(\"Hello, \" + title + \" \" + name);\n        }\n    }\n    public static void main(String[] args) {\n        Base b = new Sub();\n        b.greet(\"Alice\");   // calls Base.greet, not Sub.greet\n    }\n}",
+  "choices": [
+    "Sub must use the @Override annotation for methods to override parent methods",
+    "Sub.greet has a different signature (adds a second parameter) so it is an overload, not an override; Base.greet(String) is never replaced",
+    "static classes cannot override methods from their enclosing class",
+    "Polymorphism only applies to constructors, not regular methods"
+  ],
+  "answer": "b",
+  "explanation": "Override requires an identical signature. Sub.greet(String, String) is a new overload, not an override of Base.greet(String). b.greet(\"Alice\") matches Base.greet(String) and no override exists. Adding @Override to Sub's method would show the compile error. Fix: Sub.greet must take exactly (String name) to override."
+}

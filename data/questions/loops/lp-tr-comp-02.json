@@ -1,0 +1,10 @@
+{
+  "id": "lp-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print? Write each line of output on its own line.",
+  "code": "public class Triangle {\n    public static void main(String[] args) {\n        for (int row = 1; row <= 3; row++) {\n            for (int col = 1; col <= row; col++) {\n                System.out.print(\"*\");\n            }\n            System.out.println();\n        }\n    }\n}",
+  "answer": "*\n**\n***",
+  "explanation": "Row 1: inner loop runs once (col=1), prints one '*', then println adds a newline. Row 2: inner loop runs twice, prints '**'. Row 3: inner loop runs three times, prints '***'. Each row's stars are followed by a newline from println().",
+  "alternatives": ["*\n**\n***\n"]
+}

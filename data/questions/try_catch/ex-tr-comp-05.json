@@ -1,0 +1,10 @@
+{
+  "id": "ex-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class MultiCatch {\n    static void risky(int n) {\n        try {\n            if (n == 0) throw new ArithmeticException(\"zero\");\n            if (n < 0) throw new IllegalArgumentException(\"neg\");\n            System.out.println(\"ok:\" + n);\n        } catch (ArithmeticException e) {\n            System.out.println(\"arith:\" + e.getMessage());\n        } catch (RuntimeException e) {\n            System.out.println(\"runtime:\" + e.getMessage());\n        }\n    }\n    public static void main(String[] args) {\n        risky(5);\n        risky(0);\n        risky(-1);\n    }\n}",
+  "answer": "ok:5\narith:zero\nruntime:neg",
+  "explanation": "risky(5): no exception → \"ok:5\". risky(0): ArithmeticException caught by first catch → \"arith:zero\". risky(-1): IllegalArgumentException is a RuntimeException; first catch doesn't match, second does → \"runtime:neg\".",
+  "alternatives": ["ok:5\narith:zero\nruntime:neg\n"]
+}

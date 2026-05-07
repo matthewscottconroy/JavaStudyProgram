@@ -1,0 +1,10 @@
+{
+  "id": "ex-tr-comp-09",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class MultiCatch {\n    public static void main(String[] args) {\n        String[] arr = {\"42\", \"abc\", null};\n        for (String s : arr) {\n            try {\n                int v = Integer.parseInt(s);\n                System.out.println(\"ok:\" + v);\n            } catch (NumberFormatException e) {\n                System.out.println(\"nfe\");\n            } catch (NullPointerException e) {\n                System.out.println(\"npe\");\n            }\n        }\n    }\n}",
+  "answer": "ok:42\nnfe\nnpe",
+  "explanation": "'42' parses ok. 'abc' throws NumberFormatException → 'nfe'. null passed to parseInt throws NullPointerException → 'npe'.",
+  "alternatives": ["ok:42\nnfe\nnpe\n"]
+}

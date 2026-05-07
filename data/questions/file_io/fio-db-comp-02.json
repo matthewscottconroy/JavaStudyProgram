@@ -1,0 +1,15 @@
+{
+  "id": "fio-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "Files.readString throws NoSuchFileException. What is the bug?",
+  "code": "import java.nio.file.*;\npublic class ReadFileBug {\n    public static void main(String[] args) throws Exception {\n        Path p = Path.of(\"data.txt\");\n        String content = Files.readString(p);  // bug: file may not exist\n        System.out.println(content);\n    }\n}",
+  "choices": [
+    "Files.readString requires an absolute path",
+    "Files.readString(Path) throws NoSuchFileException when the file does not exist at the given path; there is no null-return fallback",
+    "Files.readString is only available in Java 11+; use Files.readAllBytes on older versions",
+    "Relative paths are resolved from the classpath root, not the working directory"
+  ],
+  "answer": "b",
+  "explanation": "Files.readString() throws NoSuchFileException (a subtype of IOException) if the file doesn't exist — it does not return null or an empty string. Fix: check Files.exists(p) before reading, or catch IOException and handle the missing-file case."
+}

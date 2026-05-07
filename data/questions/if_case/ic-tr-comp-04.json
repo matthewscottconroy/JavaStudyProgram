@@ -1,0 +1,10 @@
+{
+  "id": "ic-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "public class Switch1 {\n    public static void main(String[] args) {\n        int day = 3;\n        switch (day) {\n            case 1: System.out.println(\"Monday\"); break;\n            case 2: System.out.println(\"Tuesday\"); break;\n            case 3: System.out.println(\"Wednesday\");\n            case 4: System.out.println(\"Thursday\"); break;\n            case 5: System.out.println(\"Friday\"); break;\n            default: System.out.println(\"Weekend\");\n        }\n    }\n}",
+  "answer": "Wednesday\nThursday",
+  "explanation": "case 3 matches and prints \"Wednesday\", but there is no break, so execution falls through to case 4 and prints \"Thursday\". case 4 has a break, so it stops there.",
+  "alternatives": ["Wednesday\nThursday\n"]
+}

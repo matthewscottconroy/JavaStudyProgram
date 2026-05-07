@@ -1,0 +1,10 @@
+{
+  "id": "rx-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.regex.*;\npublic class FindAll {\n    public static void main(String[] args) {\n        Matcher m = Pattern.compile(\"\\\\d+\").matcher(\"a1b22c333\");\n        int count = 0;\n        while (m.find()) count++;\n        System.out.println(count);\n        m.reset();\n        m.find();\n        System.out.println(m.group());\n    }\n}",
+  "answer": "3\n1",
+  "explanation": "The pattern \\d+ finds contiguous digit runs: \"1\", \"22\", \"333\" — 3 matches. After reset(), find() advances to the first match again: \"1\".",
+  "alternatives": ["3\n1\n"]
+}

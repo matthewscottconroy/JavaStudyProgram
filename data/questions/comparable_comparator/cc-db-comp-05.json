@@ -1,0 +1,15 @@
+{
+  "id": "cc-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The null-safe sort throws NullPointerException. What is the bug?",
+  "code": "import java.util.*;\npublic class NullSortBug {\n    public static void main(String[] args) {\n        List<String> list = new ArrayList<>(Arrays.asList(\"b\", null, \"a\"));\n        list.sort(Comparator.naturalOrder());  // bug: null not handled\n        System.out.println(list);\n    }\n}",
+  "choices": [
+    "Comparator.naturalOrder() sorts in descending order by default",
+    "Comparator.naturalOrder() calls compareTo on each element; comparing null to a String throws NullPointerException; use Comparator.nullsFirst(Comparator.naturalOrder()) to handle nulls",
+    "Lists containing null cannot be sorted in Java",
+    "naturalOrder() requires all elements to implement Comparable explicitly"
+  ],
+  "answer": "b",
+  "explanation": "naturalOrder() delegates to element.compareTo(), which throws NullPointerException when called on or with null. Fix: Comparator.nullsFirst(Comparator.naturalOrder()) places nulls at the front, or Comparator.nullsLast(Comparator.naturalOrder()) places them at the back."
+}

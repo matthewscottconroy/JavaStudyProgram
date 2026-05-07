@@ -1,0 +1,15 @@
+{
+  "id": "sapi-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The Optional is unwrapped without checking, causing NoSuchElementException. What is the bug?",
+  "code": "import java.util.*;\nimport java.util.stream.*;\npublic class OptionalBug {\n    public static void main(String[] args) {\n        List<Integer> empty = List.of();\n        Optional<Integer> max = empty.stream().max(Integer::compareTo);\n        System.out.println(max.get());  // bug: get() on empty Optional\n    }\n}",
+  "choices": [
+    "max() returns null instead of Optional for empty streams",
+    "Calling Optional.get() on an empty Optional throws NoSuchElementException; always check isPresent() or use orElse() first",
+    "Integer::compareTo is not a valid Comparator for max()",
+    "Empty streams always throw an exception in terminal operations"
+  ],
+  "answer": "b",
+  "explanation": "stream().max() returns Optional.empty() when the stream has no elements. Calling get() on an empty Optional throws NoSuchElementException. Fix: max.orElse(-1) or max.ifPresent(System.out::println) or max.orElseThrow(NoSuchElementException::new)."
+}

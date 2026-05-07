@@ -1,0 +1,10 @@
+{
+  "id": "ref-tr-comp-10",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class ClassInfo {\n    interface Flyable {}\n    static abstract class Vehicle {}\n    static class Car extends Vehicle implements Flyable {}\n    public static void main(String[] args) {\n        Class<?> c = Car.class;\n        System.out.println(c.getSuperclass().getSimpleName());\n        System.out.println(c.getInterfaces().length);\n        System.out.println(c.getInterfaces()[0].getSimpleName());\n        System.out.println(c.isAbstract() + \" \" + Modifier.isAbstract(Vehicle.class.getModifiers()));\n    }\n}",
+  "answer": "Vehicle\n1\nFlyable\nfalse true",
+  "explanation": "Car.getSuperclass()=Vehicle. Car implements 1 interface: Flyable. c.isAbstract() doesn't exist — need Modifier check. Car is not abstract: false. Vehicle is abstract: true.",
+  "alternatives": ["Vehicle\n1\nFlyable\nfalse true\n"]
+}

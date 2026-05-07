@@ -1,0 +1,10 @@
+{
+  "id": "ref-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.lang.reflect.*;\npublic class ReflectFields {\n    static class Point { public int x = 10; private int y = 20; }\n    public static void main(String[] args) throws Exception {\n        Point p = new Point();\n        Field[] fields = Point.class.getDeclaredFields();\n        System.out.println(fields.length);\n        for (Field f : fields) {\n            f.setAccessible(true);\n            System.out.println(f.getName() + \"=\" + f.get(p));\n        }\n    }\n}",
+  "answer": "2\nx=10\ny=20",
+  "explanation": "getDeclaredFields() returns all fields including private ones. Length=2 (x and y). setAccessible(true) allows reading private y. Prints field names and values.",
+  "alternatives": ["2\nx=10\ny=20\n"]
+}

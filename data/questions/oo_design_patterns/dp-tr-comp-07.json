@@ -1,0 +1,10 @@
+{
+  "id": "dp-tr-comp-07",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class DecoratorPattern {\n    interface Coffee { int cost(); String desc(); }\n    static class Basic implements Coffee {\n        public int cost() { return 5; }\n        public String desc() { return \"basic\"; }\n    }\n    static class Milk implements Coffee {\n        Coffee c; Milk(Coffee c) { this.c = c; }\n        public int cost() { return c.cost() + 2; }\n        public String desc() { return c.desc() + \"+milk\"; }\n    }\n    static class Sugar implements Coffee {\n        Coffee c; Sugar(Coffee c) { this.c = c; }\n        public int cost() { return c.cost() + 1; }\n        public String desc() { return c.desc() + \"+sugar\"; }\n    }\n    public static void main(String[] args) {\n        Coffee c = new Sugar(new Milk(new Basic()));\n        System.out.println(c.cost());\n        System.out.println(c.desc());\n    }\n}",
+  "answer": "8\nbasic+milk+sugar",
+  "explanation": "Basic=5. Milk wraps it: 5+2=7, \"basic+milk\". Sugar wraps that: 7+1=8, \"basic+milk+sugar\".",
+  "alternatives": ["8\nbasic+milk+sugar\n"]
+}

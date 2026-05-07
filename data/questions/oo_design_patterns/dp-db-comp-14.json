@@ -1,0 +1,15 @@
+{
+  "id": "dp-db-comp-14",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The Null Object pattern still causes NullPointerException. What is the bug?",
+  "code": "public class NullObject {\n    interface Logger { void log(String msg); }\n    static class ConsoleLogger implements Logger {\n        public void log(String msg) { System.out.println(msg); }\n    }\n    static class NullLogger implements Logger {\n        public void log(String msg) { /* do nothing */ }\n    }\n    static Logger getLogger(boolean enabled) {\n        if (enabled) return new ConsoleLogger();\n        return null;   // bug: should return new NullLogger()\n    }\n    public static void main(String[] args) {\n        Logger log = getLogger(false);\n        log.log(\"hello\");  // NPE\n    }\n}",
+  "choices": [
+    "NullLogger must extend ConsoleLogger to be used as a Logger",
+    "getLogger(false) returns null instead of a NullLogger instance; calling log.log() on null throws NullPointerException",
+    "The Null Object pattern requires an abstract class, not an interface",
+    "log.log() must be wrapped in a null check at the call site"
+  ],
+  "answer": "b",
+  "explanation": "The whole purpose of the Null Object pattern is to avoid null returns and the null checks they require. getLogger(false) returns null, which defeats the pattern. Fix: return new NullLogger() instead of null. The caller can then call log.log() safely without a null check."
+}

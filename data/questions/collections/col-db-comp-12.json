@@ -1,0 +1,15 @@
+{
+  "id": "col-db-comp-12",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "Objects placed in the HashSet are not found by contains(). What is the bug?",
+  "code": "import java.util.*;\npublic class MutableKey {\n    static class Box {\n        int val;\n        Box(int v) { val = v; }\n        public int hashCode() { return val; }\n        public boolean equals(Object o) { return o instanceof Box && ((Box)o).val == val; }\n    }\n    public static void main(String[] args) {\n        Set<Box> set = new HashSet<>();\n        Box b = new Box(5);\n        set.add(b);\n        b.val = 10;   // bug: mutating the key after insertion\n        System.out.println(set.contains(b));\n    }\n}",
+  "choices": [
+    "HashSet cannot store custom objects",
+    "Mutating b.val changes b's hashCode; HashSet looks in the wrong bucket and cannot find the object, returning false",
+    "equals() should compare object identity (==) not field values",
+    "set.contains() always returns false for non-String objects"
+  ],
+  "answer": "b",
+  "explanation": "After insertion, b is stored in the bucket for hash=5. Changing b.val to 10 changes hashCode() to 10. set.contains(b) looks in bucket 10 and finds nothing, returning false. This is why mutable objects should not be used as HashSet/HashMap keys."
+}

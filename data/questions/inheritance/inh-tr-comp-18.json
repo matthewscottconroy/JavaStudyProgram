@@ -1,0 +1,10 @@
+{
+  "id": "inh-tr-comp-18",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class MultiLevel {\n    static class A { String f() { return \"A\"; } }\n    static class B extends A { String f() { return super.f() + \"B\"; } }\n    static class C extends B { String f() { return super.f() + \"C\"; } }\n    public static void main(String[] args) {\n        A obj = new C();\n        System.out.println(obj.f());\n        System.out.println(new B().f());\n    }\n}",
+  "answer": "ABC\nAB",
+  "explanation": "C.f() calls super.f() (B.f()) which calls super.f() (A.f()='A') → 'AB', then C appends 'C' → 'ABC'. new B().f() = A.f()+'B' = 'AB'.",
+  "alternatives": ["ABC\nAB\n"]
+}

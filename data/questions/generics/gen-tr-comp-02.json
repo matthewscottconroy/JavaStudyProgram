@@ -1,0 +1,10 @@
+{
+  "id": "gen-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class Stats {\n    public static <T extends Comparable<T>> T max(List<T> list) {\n        T result = list.get(0);\n        for (T item : list) {\n            if (item.compareTo(result) > 0) result = item;\n        }\n        return result;\n    }\n\n    public static void main(String[] args) {\n        System.out.println(max(List.of(3, 1, 4, 1, 5, 9, 2, 6)));\n        System.out.println(max(List.of(\"banana\", \"apple\", \"cherry\")));\n    }\n}",
+  "answer": "9\ncherry",
+  "explanation": "max() uses a bounded type parameter T extends Comparable<T>, so compareTo() is available. For integers it finds the largest: 9. For strings it uses lexicographic order: 'cherry' > 'banana' > 'apple' → 'cherry'.",
+  "alternatives": ["9\ncherry\n"]
+}

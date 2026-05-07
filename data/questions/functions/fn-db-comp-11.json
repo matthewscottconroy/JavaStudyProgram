@@ -1,0 +1,15 @@
+{
+  "id": "fn-db-comp-11",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The method should return the second largest element but returns the wrong value. What is the bug?",
+  "code": "public class SecondMax {\n    static int secondMax(int[] arr) {\n        int max = arr[0], second = arr[0];   // bug: second should start at min value\n        for (int x : arr) {\n            if (x > max) { second = max; max = x; }\n            else if (x > second) second = x;\n        }\n        return second;\n    }\n    public static void main(String[] args) {\n        System.out.println(secondMax(new int[]{3, 1, 4, 1, 5}));\n    }\n}",
+  "choices": [
+    "The enhanced for-loop cannot be used with int arrays",
+    "Initializing second = arr[0] causes second to equal max when arr[0] is the largest element; it should be Integer.MIN_VALUE",
+    "max must be initialized to Integer.MAX_VALUE",
+    "The condition x > second should be x >= second"
+  ],
+  "answer": "b",
+  "explanation": "When arr[0] is the maximum element (e.g., {5,3,1}), second is initialized to that same value and never correctly updated. Fix: initialize second = Integer.MIN_VALUE so the first smaller element can replace it properly."
+}

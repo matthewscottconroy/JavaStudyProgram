@@ -1,0 +1,10 @@
+{
+  "id": "fn-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Factorial {\n    public static int fact(int n) {\n        if (n <= 1) return 1;\n        return n * fact(n - 1);\n    }\n\n    public static void main(String[] args) {\n        System.out.println(fact(0));\n        System.out.println(fact(4));\n    }\n}",
+  "answer": "1\n24",
+  "explanation": "fact(0): 0 <= 1 → returns 1. fact(4): 4 * fact(3) → 4 * (3 * fact(2)) → 4 * (3 * (2 * fact(1))) → 4 * 3 * 2 * 1 = 24. Each base case returns 1, then the multiplication unwinds.",
+  "alternatives": ["1\n24\n"]
+}

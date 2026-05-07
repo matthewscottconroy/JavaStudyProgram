@@ -1,0 +1,15 @@
+{
+  "id": "ut-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The test is brittle because it depends on execution order. What is the bug?",
+  "code": "public class OrderDependentTest {\n    static int counter = 0;  // shared mutable state\n    static void testA() {\n        counter = 5;\n        if (counter != 5) throw new AssertionError();\n    }\n    static void testB() {\n        // bug: assumes counter is 5 from testA\n        if (counter != 5) throw new AssertionError();\n        counter++;\n    }\n}",
+  "choices": [
+    "Static fields cannot be modified inside test methods",
+    "testB relies on counter being set to 5 by testA; if testB runs first or testA is not run, testB fails due to shared mutable state between tests",
+    "counter should be declared as volatile for test safety",
+    "Each test should use a separate class to avoid state sharing"
+  ],
+  "answer": "b",
+  "explanation": "Tests should be independent and idempotent. testB reads counter assuming testA ran first — this is an order dependency. If test order changes or testA is skipped, testB fails for the wrong reason. Fix: each test should set up its own state (use @BeforeEach) and not rely on other tests' side effects."
+}

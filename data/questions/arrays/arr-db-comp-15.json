@@ -1,0 +1,15 @@
+{
+  "id": "arr-db-comp-15",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The method should insert an element at position k and shift right, but it corrupts the array. What is the bug?",
+  "code": "public class Insert {\n    static void insert(int[] arr, int k, int val, int size) {\n        for (int i = k; i < size; i++) {   // bug: should shift right-to-left\n            arr[i + 1] = arr[i];\n        }\n        arr[k] = val;\n    }\n}",
+  "choices": [
+    "arr[k] = val should be placed before the loop",
+    "Shifting left-to-right overwrites arr[k] before it can be copied to arr[k+1]; the loop must iterate from size down to k+1",
+    "size should be arr.length, not a separate parameter",
+    "The loop should start at k + 1, not k"
+  ],
+  "answer": "b",
+  "explanation": "Iterating left-to-right: arr[k+1]=arr[k], arr[k+2]=arr[k+1] (already overwritten by arr[k]), etc. Every element from k onward becomes arr[k]. Fix: iterate right-to-left: for (int i = size-1; i >= k; i--) arr[i+1] = arr[i];"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "sapi-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\nimport java.util.stream.*;\npublic class StreamBasics {\n    public static void main(String[] args) {\n        List<String> words = List.of(\"hello\", \"world\", \"hi\", \"java\", \"stream\");\n\n        long count = words.stream()\n            .filter(w -> w.length() > 3)\n            .count();\n        System.out.println(count);\n\n        String result = words.stream()\n            .filter(w -> w.startsWith(\"h\"))\n            .map(String::toUpperCase)\n            .collect(Collectors.joining(\", \"));\n        System.out.println(result);\n    }\n}",
+  "answer": "4\nHELLO, HI",
+  "explanation": "filter(w -> w.length() > 3) keeps 'hello'(5), 'world'(5), 'java'(4), 'stream'(6) → 4 elements. For the second pipeline: filter keeps 'hello' and 'hi' (start with 'h'), map uppercases them → 'HELLO', 'HI', joined with ', ' → 'HELLO, HI'.",
+  "alternatives": ["4\nHELLO, HI\n"]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "str-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "This authentication method always returns false even when the correct password is entered. What is the bug?",
+  "code": "public class Auth {\n    private String stored = \"secret\";\n\n    public boolean check(String input) {\n        return stored == input;\n    }\n\n    public static void main(String[] args) {\n        Auth a = new Auth();\n        System.out.println(a.check(\"secret\"));  // prints false!\n    }\n}",
+  "choices": [
+    "The field 'stored' must be declared static to be compared with a parameter",
+    "== compares object references, not content; use stored.equals(input) instead",
+    "String parameters cannot be compared — use char arrays instead",
+    "The method should return Boolean (wrapper) instead of boolean (primitive)"
+  ],
+  "answer": "b",
+  "explanation": "== on String objects checks whether both variables point to the exact same object in memory. The literal 'secret' in the field and the String passed as a parameter are usually different objects even if they contain the same characters. Fix: stored.equals(input), or Objects.equals(stored, input) for null safety."
+}

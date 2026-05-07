@@ -1,0 +1,10 @@
+{
+  "id": "img-tr-comp-07",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "import java.awt.image.BufferedImage;\npublic class ImageSize {\n    public static void main(String[] args) {\n        BufferedImage img = new BufferedImage(320, 240, BufferedImage.TYPE_INT_RGB);\n        System.out.println(img.getWidth());\n        System.out.println(img.getHeight());\n        System.out.println(img.getType() == BufferedImage.TYPE_INT_RGB);\n    }\n}",
+  "answer": "320\n240\ntrue",
+  "explanation": "BufferedImage(320, 240, TYPE_INT_RGB) creates a 320-wide, 240-tall image. getWidth()=320, getHeight()=240. getType() returns the constant used at construction, which equals TYPE_INT_RGB.",
+  "alternatives": ["320\n240\ntrue\n"]
+}

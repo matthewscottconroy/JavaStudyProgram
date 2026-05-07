@@ -1,0 +1,15 @@
+{
+  "id": "arg-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The swap method does not swap the caller's variables. What is the bug?",
+  "code": "public class SwapBug {\n    static void swap(int a, int b) {\n        int tmp = a;\n        a = b;\n        b = tmp;\n    }\n    public static void main(String[] args) {\n        int x = 1, y = 2;\n        swap(x, y);\n        System.out.println(x + \" \" + y);  // prints 1 2, not 2 1\n    }\n}",
+  "choices": [
+    "swap needs to return both values as an array to work",
+    "Java passes primitives by value; swap receives copies of x and y, so swapping a and b inside the method does not affect x and y in main",
+    "The swap logic is wrong; a and b need to be swapped using XOR",
+    "int variables must be declared as Integer to be swappable"
+  ],
+  "answer": "b",
+  "explanation": "Java always passes arguments by value. swap receives copies of x and y. Swapping the local copies a and b leaves the originals x=1 and y=2 unchanged. To swap, either return an array/record with the swapped values, use an int[] parameter, or swap directly in the caller."
+}

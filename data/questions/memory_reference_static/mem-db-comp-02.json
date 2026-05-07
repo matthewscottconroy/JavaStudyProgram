@@ -1,0 +1,15 @@
+{
+  "id": "mem-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The equals() call always returns false even when comparing two Point objects with identical coordinates. What is the bug?",
+  "code": "public class Point {\n    int x, y;\n    Point(int x, int y) { this.x = x; this.y = y; }\n\n    public static void main(String[] args) {\n        Point p1 = new Point(3, 4);\n        Point p2 = new Point(3, 4);\n        System.out.println(p1.equals(p2));\n    }\n}",
+  "choices": [
+    "p1 and p2 must be the same variable for equals() to return true",
+    "Point does not override equals() — it inherits Object.equals() which compares references, not field values",
+    "int fields cannot be compared with equals(); use == directly on x and y",
+    "equals() always returns false for objects created with new"
+  ],
+  "answer": "b",
+  "explanation": "Object.equals() compares references by default: p1.equals(p2) is equivalent to p1 == p2, which is false because p1 and p2 are distinct objects. To compare by content, Point must override equals(): @Override public boolean equals(Object o) { if (!(o instanceof Point p)) return false; return x == p.x && y == p.y; } It's also good practice to override hashCode() consistently."
+}

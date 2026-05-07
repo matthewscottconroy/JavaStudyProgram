@@ -1,0 +1,15 @@
+{
+  "id": "arg-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "Running 'java Greet' with no arguments throws ArrayIndexOutOfBoundsException. What is the bug?",
+  "code": "public class Greet {\n    public static void main(String[] args) {\n        String name = args[0];   // throws if no args provided\n        System.out.println(\"Hello, \" + name + \"!\");\n    }\n}",
+  "choices": [
+    "args is null when no arguments are passed",
+    "args[0] is accessed without checking args.length — if no arguments are given the array is empty and index 0 is out of bounds",
+    "String[] args must be initialized before use in main()",
+    "Command-line arguments must be integers; Strings require explicit parsing"
+  ],
+  "answer": "b",
+  "explanation": "When no arguments are passed, args is a non-null but empty array (length 0). Accessing args[0] on an empty array throws ArrayIndexOutOfBoundsException. Fix: check args.length before accessing — if (args.length < 1) { System.out.println(\"usage: Greet <name>\"); return; }"
+}

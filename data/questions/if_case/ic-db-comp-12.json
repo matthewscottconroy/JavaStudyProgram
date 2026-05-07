@@ -1,0 +1,15 @@
+{
+  "id": "ic-db-comp-12",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The switch falls through unintentionally. What is the bug?",
+  "code": "public class MissingBreak {\n    static String classify(int n) {\n        String s = \"\";\n        switch (n) {\n            case 1: s = \"one\";   // bug: missing break\n            case 2: s = \"two\";   // bug: missing break\n            case 3: s = \"three\"; break;\n            default: s = \"other\";\n        }\n        return s;\n    }\n    public static void main(String[] args) {\n        System.out.println(classify(1));\n        System.out.println(classify(3));\n    }\n}",
+  "choices": [
+    "switch does not allow string assignments inside case blocks",
+    "case 1 and case 2 lack break statements; classify(1) falls through cases 1→2→3 and returns 'three' instead of 'one'",
+    "The default case should appear first in a switch block",
+    "switch statements require all cases to have break statements to compile"
+  ],
+  "answer": "b",
+  "explanation": "Without break, execution falls through to the next case. classify(1): sets s='one' (case 1), falls to s='two' (case 2), falls to s='three'+break → returns 'three'. Fix: add break after each case, or use the arrow-form switch expression which doesn't fall through."
+}

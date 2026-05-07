@@ -1,0 +1,10 @@
+{
+  "id": "ex-tr-comp-14",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class SuppressedEx {\n    static class Res implements AutoCloseable {\n        public void close() throws Exception {\n            throw new Exception(\"close failed\");\n        }\n    }\n    public static void main(String[] args) {\n        try (Res r = new Res()) {\n            throw new Exception(\"body failed\");\n        } catch (Exception e) {\n            System.out.println(e.getMessage());\n            System.out.println(e.getSuppressed().length);\n            System.out.println(e.getSuppressed()[0].getMessage());\n        }\n    }\n}",
+  "answer": "body failed\n1\nclose failed",
+  "explanation": "Body throws 'body failed'. close() also throws 'close failed'. Try-with-resources adds the close exception as a suppressed exception on the primary. e.getMessage()='body failed', getSuppressed().length=1, getSuppressed()[0].getMessage()='close failed'.",
+  "alternatives": ["body failed\n1\nclose failed\n"]
+}

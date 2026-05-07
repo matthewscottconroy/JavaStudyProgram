@@ -1,0 +1,15 @@
+{
+  "id": "var-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The floating-point comparison never passes. What is the bug?",
+  "code": "public class FloatEq {\n    public static void main(String[] args) {\n        double a = 0.1 + 0.2;\n        if (a == 0.3) {        // bug\n            System.out.println(\"equal\");\n        } else {\n            System.out.println(\"not equal\");\n        }\n        System.out.println(a);\n    }\n}",
+  "choices": [
+    "double cannot represent 0.3 at all; use float instead",
+    "0.1 + 0.2 produces 0.30000000000000004 due to floating-point representation errors; never compare doubles with ==",
+    "The + operator on double returns a String",
+    "0.3 is implicitly cast to int (0) before comparison"
+  ],
+  "answer": "b",
+  "explanation": "Floating-point arithmetic is not exact. 0.1 + 0.2 = 0.30000000000000004 in IEEE 754 double precision. Fix: use Math.abs(a - 0.3) < 1e-9 for epsilon comparison, or use BigDecimal for exact decimal arithmetic."
+}

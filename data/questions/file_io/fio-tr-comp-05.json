@@ -1,0 +1,10 @@
+{
+  "id": "fio-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.io.*;\npublic class BufferedLines {\n    public static void main(String[] args) throws Exception {\n        String data = \"line1\\nline2\\nline3\";\n        BufferedReader br = new BufferedReader(new StringReader(data));\n        String line;\n        int count = 0;\n        while ((line = br.readLine()) != null) count++;\n        System.out.println(count);\n        br.close();\n    }\n}",
+  "answer": "3",
+  "explanation": "readLine() reads until '\\n' or EOF, returning null at end. The string has 3 newline-separated segments (no trailing newline), so the loop iterates 3 times.",
+  "alternatives": ["3\n"]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "ic-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The dangling-else problem: which if does the else bind to, and what does this print for x=1?",
+  "code": "public class DanglingElse {\n    public static void main(String[] args) {\n        int x = 1;\n        if (x > 0)\n            if (x > 5)\n                System.out.println(\"big\");\n        else\n            System.out.println(\"non-positive\");  // misleading indent\n    }\n}",
+  "choices": [
+    "The else binds to the outer if (x>0) and prints \"non-positive\" for x=1",
+    "The else binds to the nearest if (x>5); for x=1, x>5 is false so \"non-positive\" prints",
+    "The else binds to the nearest if (x>5); for x=1, neither branch prints anything",
+    "The code does not compile because else must follow a block"
+  ],
+  "answer": "b",
+  "explanation": "In Java, an else binds to the nearest preceding if. So the else belongs to if(x>5). For x=1: outer if(x>0) is true, inner if(x>5) is false → else runs → prints \"non-positive\". Fix: use braces to make structure explicit."
+}

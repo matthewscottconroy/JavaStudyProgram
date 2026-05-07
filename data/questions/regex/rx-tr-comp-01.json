@@ -1,0 +1,10 @@
+{
+  "id": "rx-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "public class MatchesDemo {\n    public static void main(String[] args) {\n        System.out.println(\"hello123\".matches(\"[a-z]+\\\\d+\"));\n        System.out.println(\"hello\".matches(\"[a-z]+\\\\d+\"));\n        System.out.println(\"123hello\".matches(\"[a-z]+\\\\d+\"));\n    }\n}",
+  "answer": "true\nfalse\nfalse",
+  "explanation": "matches() checks if the entire string matches the pattern. [a-z]+\\d+ means one+ lowercase letters then one+ digits. \"hello123\" matches fully. \"hello\" has no digits. \"123hello\" starts with digits, not letters.",
+  "alternatives": ["true\nfalse\nfalse\n"]
+}

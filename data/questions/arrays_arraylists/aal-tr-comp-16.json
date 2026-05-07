@@ -1,0 +1,10 @@
+{
+  "id": "aal-tr-comp-16",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class ListOf {\n    public static void main(String[] args) {\n        List<Integer> immutable = List.of(1, 2, 3);\n        System.out.println(immutable.size());\n        System.out.println(immutable.contains(2));\n        try {\n            immutable.add(4);\n        } catch (UnsupportedOperationException e) {\n            System.out.println(\"immutable\");\n        }\n    }\n}",
+  "answer": "3\ntrue\nimmutable",
+  "explanation": "List.of() creates an immutable list. size()=3. contains(2)=true. add() throws UnsupportedOperationException → 'immutable'.",
+  "alternatives": ["3\ntrue\nimmutable\n"]
+}

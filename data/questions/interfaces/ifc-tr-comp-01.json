@@ -1,0 +1,10 @@
+{
+  "id": "ifc-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "interface Greeter {\n    String greet(String name);\n    default String greetLoud(String name) {\n        return greet(name).toUpperCase();\n    }\n}\n\nclass FormalGreeter implements Greeter {\n    public String greet(String name) {\n        return \"Good day, \" + name;\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Greeter g = new FormalGreeter();\n        System.out.println(g.greet(\"Alice\"));\n        System.out.println(g.greetLoud(\"Bob\"));\n    }\n}",
+  "answer": "Good day, Alice\nGOOD DAY, BOB",
+  "explanation": "g.greet(\"Alice\") calls FormalGreeter.greet() → 'Good day, Alice'. g.greetLoud(\"Bob\") uses the default method from the interface, which calls greet(\"Bob\") — dispatched dynamically to FormalGreeter.greet() — producing 'Good day, Bob', then toUpperCase() → 'GOOD DAY, BOB'.",
+  "alternatives": ["Good day, Alice\nGOOD DAY, BOB\n"]
+}

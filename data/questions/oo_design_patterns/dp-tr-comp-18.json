@@ -1,0 +1,10 @@
+{
+  "id": "dp-tr-comp-18",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Adapter {\n    interface Fahrenheit { double getF(); }\n    static class CelsiusSensor { double getC() { return 100.0; } }\n    static class TempAdapter implements Fahrenheit {\n        private final CelsiusSensor s;\n        TempAdapter(CelsiusSensor s) { this.s = s; }\n        public double getF() { return s.getC() * 9.0 / 5.0 + 32; }\n    }\n    public static void main(String[] args) {\n        Fahrenheit f = new TempAdapter(new CelsiusSensor());\n        System.out.println(f.getF());\n    }\n}",
+  "answer": "212.0",
+  "explanation": "Adapter converts Celsius to Fahrenheit. CelsiusSensor returns 100.0°C. Conversion: 100*9/5+32=180+32=212.0°F.",
+  "alternatives": ["212.0\n"]
+}

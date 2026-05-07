@@ -1,0 +1,10 @@
+{
+  "id": "ser-tr-comp-09",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.io.*;\npublic class SerialSingleton {\n    static class Config implements Serializable {\n        static final Config INSTANCE = new Config();\n        private int setting = 42;\n        private Config() {}\n        Object readResolve() { return INSTANCE; }\n    }\n    public static void main(String[] args) throws Exception {\n        Config c = Config.INSTANCE;\n        ByteArrayOutputStream baos = new ByteArrayOutputStream();\n        new ObjectOutputStream(baos).writeObject(c);\n        Config c2 = (Config) new ObjectInputStream(\n            new ByteArrayInputStream(baos.toByteArray())).readObject();\n        System.out.println(c == c2);\n        System.out.println(c2.setting);\n    }\n}",
+  "answer": "true\n42",
+  "explanation": "readResolve() returns the singleton INSTANCE, so c2 == c is true. c2.setting=42 (same object).",
+  "alternatives": ["true\n42\n"]
+}

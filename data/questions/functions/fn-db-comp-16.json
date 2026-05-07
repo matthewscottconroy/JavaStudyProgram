@@ -1,0 +1,15 @@
+{
+  "id": "fn-db-comp-16",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The method should return the maximum of three integers but sometimes returns the wrong value. What is the bug?",
+  "code": "public class MaxThree {\n    static int max3(int a, int b, int c) {\n        if (a > b && a > c) return a;\n        if (b > c) return b;\n        return c;   // bug: works but misses a==b==c case — actually the real bug below\n    }\n    // Real version with bug:\n    static int max3Bug(int a, int b, int c) {\n        if (a > b & a > c) return a;   // bug: & instead of && (no short-circuit)\n        if (b > c) return b;\n        return c;\n    }\n}",
+  "choices": [
+    "The method should use Math.max instead of comparison operators",
+    "Using & instead of && prevents short-circuit evaluation; both sides are always evaluated which can cause issues with side effects, though the logic result is the same",
+    "The return c statement is never reached when a equals b",
+    "int parameters should be Integer to handle null comparisons"
+  ],
+  "answer": "b",
+  "explanation": "The bitwise & operator evaluates both operands unconditionally, unlike the logical && which short-circuits. While the result is the same for boolean expressions with no side effects, using & is a common bug source when the right-hand side has side effects or can throw. The idiomatic fix is &&."
+}

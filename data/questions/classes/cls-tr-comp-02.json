@@ -1,0 +1,10 @@
+{
+  "id": "cls-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Counter {\n    private static int total = 0;\n    private int count = 0;\n\n    public Counter() {\n        total++;\n    }\n\n    public void increment() { count++; }\n\n    public static void main(String[] args) {\n        Counter a = new Counter();\n        Counter b = new Counter();\n        a.increment();\n        a.increment();\n        b.increment();\n        System.out.println(a.count);\n        System.out.println(b.count);\n        System.out.println(Counter.total);\n    }\n}",
+  "answer": "2\n1\n2",
+  "explanation": "Each call to new Counter() increments the static field total (shared across all instances). a.count is incremented twice → 2. b.count is incremented once → 1. Counter.total counts the number of instances created: 2.",
+  "alternatives": ["2\n1\n2\n"]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "str-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The trim should remove leading/trailing spaces, but the original variable is unchanged. What is the bug?",
+  "code": "public class TrimBug {\n    public static void main(String[] args) {\n        String s = \"  hello  \";\n        s.trim();                    // bug: return value discarded\n        System.out.println(\"|\" + s + \"|\");\n    }\n}",
+  "choices": [
+    "trim() only removes newline characters, not spaces",
+    "Strings are immutable; s.trim() returns a new trimmed String but the result is not assigned back to s",
+    "trim() requires the string to be at least 3 characters long",
+    "The concatenation with | changes the string before printing"
+  ],
+  "answer": "b",
+  "explanation": "String methods like trim(), toLowerCase(), replace() etc. return new String objects — they do not modify the original. The return value must be used: s = s.trim(); Then s becomes \"hello\" and the output is \"|hello|\"."
+}

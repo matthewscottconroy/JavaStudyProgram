@@ -1,0 +1,15 @@
+{
+  "id": "cls-db-comp-14",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The method reference does not match the functional interface. What is the bug?",
+  "code": "import java.util.function.*;\npublic class MethodRef {\n    static int doubleIt(int x) { return x * 2; }\n    public static void main(String[] args) {\n        Function<String, Integer> fn = MethodRef::doubleIt;  // bug: doubleIt takes int, not String\n        System.out.println(fn.apply(\"5\"));\n    }\n}",
+  "choices": [
+    "Static method references require the :: operator to be replaced with .class",
+    "doubleIt(int) takes an int parameter but Function<String,Integer> passes a String; the types are incompatible and the code won't compile",
+    "Function<String,Integer> should be Function<Integer,Integer> for int inputs",
+    "Method references cannot be assigned to Function variables"
+  ],
+  "answer": "b",
+  "explanation": "Function<String,Integer> expects a function from String to Integer. MethodRef::doubleIt takes an int (unboxable from Integer, not from String). The compiler rejects the assignment. Fix: use Function<Integer,Integer> fn = MethodRef::doubleIt; or change doubleIt to accept a String and parse it."
+}

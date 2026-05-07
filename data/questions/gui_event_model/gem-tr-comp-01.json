@@ -1,0 +1,10 @@
+{
+  "id": "gem-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "A user clicks the button twice. What is printed to the console?",
+  "code": "import javax.swing.*;\nimport java.awt.event.*;\npublic class ClickCounter {\n    static int count = 0;\n\n    public static void main(String[] args) {\n        JButton btn = new JButton(\"Click\");\n        btn.addActionListener(e -> {\n            count++;\n            System.out.println(\"clicked: \" + count);\n        });\n        JFrame f = new JFrame();\n        f.add(btn);\n        f.pack();\n        f.setVisible(true);\n    }\n}",
+  "answer": "clicked: 1\nclicked: 2",
+  "explanation": "Each button click fires one ActionEvent to the registered ActionListener. The lambda increments count and prints it. Two clicks → two ActionEvents → 'clicked: 1' then 'clicked: 2'.",
+  "alternatives": ["clicked: 1\nclicked: 2\n"]
+}

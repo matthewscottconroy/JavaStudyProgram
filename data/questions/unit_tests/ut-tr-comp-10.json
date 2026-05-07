@@ -1,0 +1,10 @@
+{
+  "id": "ut-tr-comp-10",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class ParameterizedTest {\n    static boolean isPrime(int n) {\n        if (n < 2) return false;\n        for (int i = 2; i * i <= n; i++) if (n % i == 0) return false;\n        return true;\n    }\n    public static void main(String[] args) {\n        int[][] cases = {{2,1},{3,1},{4,0},{1,0},{17,1},{15,0}};\n        int pass = 0, fail = 0;\n        for (int[] c : cases) {\n            boolean expected = c[1] == 1;\n            if (isPrime(c[0]) == expected) pass++; else fail++;\n        }\n        System.out.println(\"pass:\" + pass + \" fail:\" + fail);\n    }\n}",
+  "answer": "pass:6 fail:0",
+  "explanation": "isPrime: 2→true, 3→true, 4→false, 1→false, 17→true, 15→false. All 6 match expected values → pass:6 fail:0.",
+  "alternatives": ["pass:6 fail:0\n"]
+}

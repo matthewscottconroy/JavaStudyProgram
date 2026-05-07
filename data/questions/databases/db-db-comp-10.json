@@ -1,0 +1,15 @@
+{
+  "id": "db-db-comp-10",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The transaction is never committed, and changes are lost. What is the bug?",
+  "code": "import java.sql.*;\npublic class CommitBug {\n    static void insertRow(Connection conn) throws Exception {\n        conn.setAutoCommit(false);\n        Statement st = conn.createStatement();\n        st.execute(\"INSERT INTO t VALUES (1)\");\n        // bug: forgot conn.commit()\n        conn.close();\n    }\n}",
+  "choices": [
+    "setAutoCommit(false) is not needed because JDBC commits after every statement by default",
+    "conn.close() automatically commits any open transaction",
+    "When autoCommit is disabled, conn.close() without a prior conn.commit() rolls back the open transaction, discarding the insert",
+    "Statement.execute returns false for INSERT statements, indicating the insert failed"
+  ],
+  "answer": "c",
+  "explanation": "With autoCommit=false, changes are only persisted when conn.commit() is called. Closing the connection without committing causes the driver to roll back any uncommitted transaction, discarding the INSERT. Fix: add conn.commit(); before conn.close(); or in a finally block."
+}

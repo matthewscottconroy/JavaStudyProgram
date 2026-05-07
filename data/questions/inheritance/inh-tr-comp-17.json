@@ -1,0 +1,10 @@
+{
+  "id": "inh-tr-comp-17",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class FinalMethod {\n    static class Base {\n        final String tag() { return \"Base\"; }\n        String describe() { return \"I am \" + tag(); }\n    }\n    static class Sub extends Base {\n        // cannot override tag() — it's final\n        String describe() { return \"Sub says: \" + tag(); }\n    }\n    public static void main(String[] args) {\n        Base b = new Sub();\n        System.out.println(b.describe());\n        System.out.println(b.tag());\n    }\n}",
+  "answer": "Sub says: Base\nBase",
+  "explanation": "describe() is overridden in Sub → 'Sub says: Base' (tag() is final, always returns 'Base'). tag() is final → always dispatches to Base.tag() regardless of runtime type.",
+  "alternatives": ["Sub says: Base\nBase\n"]
+}

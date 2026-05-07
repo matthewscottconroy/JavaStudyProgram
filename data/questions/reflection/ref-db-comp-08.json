@@ -1,0 +1,15 @@
+{
+  "id": "ref-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "getMethod throws NoSuchMethodException. What is the bug?",
+  "code": "public class MethodLookupBug {\n    private void secret() { System.out.println(\"secret\"); }\n    public static void main(String[] args) throws Exception {\n        MethodLookupBug obj = new MethodLookupBug();\n        java.lang.reflect.Method m = obj.getClass().getMethod(\"secret\");  // bug: getMethod only finds public\n        m.invoke(obj);\n    }\n}",
+  "choices": [
+    "getMethod requires the method to be static",
+    "getMethod only finds public methods; secret() is private, so it throws NoSuchMethodException; use getDeclaredMethod instead, then setAccessible(true)",
+    "getMethod requires parameter types even for no-arg methods; pass an empty Class[] instead",
+    "instance methods cannot be found via getClass().getMethod()"
+  ],
+  "answer": "b",
+  "explanation": "Class.getMethod() searches public methods in the class and its superclasses. secret() is declared private, so it is invisible to getMethod(). Fix: use getDeclaredMethod(\"secret\") to find it regardless of access level, then call m.setAccessible(true) before invoking."
+}

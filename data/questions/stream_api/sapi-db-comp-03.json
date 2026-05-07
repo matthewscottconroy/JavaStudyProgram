@@ -1,0 +1,15 @@
+{
+  "id": "sapi-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The stream filter is applied in the wrong order, causing a NullPointerException. What is the bug?",
+  "code": "import java.util.*;\nimport java.util.stream.*;\npublic class NullStream {\n    public static void main(String[] args) {\n        List<String> items = Arrays.asList(\"a\", null, \"b\", null, \"c\");\n        long count = items.stream()\n            .filter(s -> s.length() > 0)   // NPE on null elements\n            .filter(Objects::nonNull)\n            .count();\n        System.out.println(count);\n    }\n}",
+  "choices": [
+    "Stream.filter() does not accept method references",
+    "s.length() is called before the null check; null elements cause NullPointerException. Move Objects::nonNull before the length check",
+    "items.stream() returns a null stream for lists containing null",
+    "count() is not a valid terminal operation for filtered streams"
+  ],
+  "answer": "b",
+  "explanation": "Filters are applied in declaration order. The first filter calls s.length() on every element including nulls — NullPointerException. Fix: put .filter(Objects::nonNull) first, then .filter(s -> s.length() > 0). Order of filter predicates matters for null safety."
+}

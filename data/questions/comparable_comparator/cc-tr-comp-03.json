@@ -1,0 +1,10 @@
+{
+  "id": "cc-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class ChainedComparator {\n    record Person(String name, int age) {}\n    public static void main(String[] args) {\n        List<Person> people = new ArrayList<>(List.of(\n            new Person(\"Bob\", 30),\n            new Person(\"Alice\", 25),\n            new Person(\"Bob\", 25)\n        ));\n        people.sort(Comparator.comparing(Person::name).thenComparingInt(Person::age));\n        people.forEach(p -> System.out.println(p.name() + \" \" + p.age()));\n    }\n}",
+  "answer": "Alice 25\nBob 25\nBob 30",
+  "explanation": "Primary sort by name (Alice < Bob). Among Bobs, secondary sort by age: 25 < 30.",
+  "alternatives": ["Alice 25\nBob 25\nBob 30\n"]
+}

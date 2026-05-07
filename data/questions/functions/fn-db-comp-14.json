@@ -1,0 +1,15 @@
+{
+  "id": "fn-db-comp-14",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The method should count occurrences of a character but always returns 0. What is the bug?",
+  "code": "public class CharCount {\n    static int count(String s, char target) {\n        int c = 0;\n        for (int i = 0; i <= s.length(); i++) {   // bug: <= causes exception; also misses chars\n            if (s.charAt(i) == target) c++;\n        }\n        return c;\n    }\n    public static void main(String[] args) {\n        System.out.println(count(\"banana\", 'a'));\n    }\n}",
+  "choices": [
+    "char cannot be compared with == inside a String loop",
+    "i <= s.length() causes StringIndexOutOfBoundsException at i == s.length(); the bound should be i < s.length()",
+    "The counter c must be static to accumulate across calls",
+    "charAt returns an int, not a char, so the comparison always fails"
+  ],
+  "answer": "b",
+  "explanation": "Valid indices for a String of length n are 0 through n-1. Using i <= s.length() attempts charAt(n) which throws StringIndexOutOfBoundsException. Fix: change the loop condition to i < s.length()."
+}

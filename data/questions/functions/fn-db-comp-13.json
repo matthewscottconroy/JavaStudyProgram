@@ -1,0 +1,15 @@
+{
+  "id": "fn-db-comp-13",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The factorial method returns a negative number for factorial(20). What is the bug?",
+  "code": "public class Factorial {\n    static int factorial(int n) {   // bug: should be long\n        if (n <= 1) return 1;\n        return n * factorial(n - 1);\n    }\n    public static void main(String[] args) {\n        System.out.println(factorial(20));\n    }\n}",
+  "choices": [
+    "The base case should be n == 0, not n <= 1",
+    "int overflows for factorial(20); the return type and parameter should be long",
+    "Recursive factorial must use a stack data structure explicitly",
+    "n * factorial(n-1) should be factorial(n-1) * n to avoid overflow"
+  ],
+  "answer": "b",
+  "explanation": "factorial(20) = 2,432,902,008,176,640,000 which far exceeds Integer.MAX_VALUE (2,147,483,647). The int computation overflows and produces a negative result. Fix: change the return type and parameter to long."
+}

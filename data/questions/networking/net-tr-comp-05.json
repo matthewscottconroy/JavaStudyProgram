@@ -1,0 +1,10 @@
+{
+  "id": "net-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "In a TCP client-server setup, what is the correct order of operations for the server?",
+  "code": "// This is a conceptual ordering question\n// Given these server operations:\n// A: serverSocket.accept()\n// B: new ServerSocket(port)\n// C: clientSocket.close()\n// D: read from input stream\n// E: write to output stream\n// F: serverSocket.close()\n// What is the correct order?\nSystem.out.println(\"B → A → D → E → C → F\");",
+  "answer": "B → A → D → E → C → F",
+  "explanation": "B: Create ServerSocket (bind to port). A: accept() blocks until client connects. D: Read request from client's input stream. E: Write response to output stream. C: Close the client socket. F: Close the server socket. This is the classic single-client TCP server lifecycle.",
+  "alternatives": ["B → A → D → E → C → F\n"]
+}

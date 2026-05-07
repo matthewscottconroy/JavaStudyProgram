@@ -1,0 +1,15 @@
+{
+  "id": "ref-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The reflection call throws NoSuchMethodException. What is the bug?",
+  "code": "import java.lang.reflect.*;\npublic class ReflectBug {\n    static class Calc {\n        int add(int a, int b) { return a + b; }\n    }\n    public static void main(String[] args) throws Exception {\n        Calc c = new Calc();\n        Method m = Calc.class.getMethod(\"add\", int.class, int.class);  // bug\n        System.out.println(m.invoke(c, 3, 4));\n    }\n}",
+  "choices": [
+    "getMethod() cannot find int parameters — use getDeclaredMethod() with Integer.class",
+    "getMethod() only finds public methods; add() is package-private, so getDeclaredMethod() must be used",
+    "Method.invoke() cannot accept int literals — use Integer objects",
+    "int.class is not a valid class literal for method lookup"
+  ],
+  "answer": "b",
+  "explanation": "getMethod() finds only public methods inherited or declared. add() has package-private access (no modifier), so getMethod() throws NoSuchMethodException. Fix: use getDeclaredMethod(\"add\", int.class, int.class) which finds all declared methods regardless of access. int.class is the correct class literal for primitive int."
+}

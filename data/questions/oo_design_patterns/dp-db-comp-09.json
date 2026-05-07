@@ -1,0 +1,15 @@
+{
+  "id": "dp-db-comp-09",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The Observer pattern causes a ConcurrentModificationException. What is the bug?",
+  "code": "import java.util.*;\npublic class ObserverBug {\n    List<Runnable> listeners = new ArrayList<>();\n    void subscribe(Runnable r) { listeners.add(r); }\n    void notify_all() {\n        for (Runnable r : listeners) {   // iterating\n            r.run();                      // run() calls subscribe(), modifying list\n        }\n    }\n}",
+  "choices": [
+    "Runnable cannot be stored in an ArrayList",
+    "notify_all() iterates listeners while a listener's run() can call subscribe(), modifying the list mid-iteration and causing ConcurrentModificationException",
+    "The method name notify_all conflicts with Object.notify()",
+    "listeners must be declared volatile to be visible to all observers"
+  ],
+  "answer": "b",
+  "explanation": "ArrayList's iterator uses a modCount check; adding to the list during iteration triggers ConcurrentModificationException. Fix: iterate over a snapshot copy: for (Runnable r : new ArrayList<>(listeners)) r.run(); or use CopyOnWriteArrayList."
+}

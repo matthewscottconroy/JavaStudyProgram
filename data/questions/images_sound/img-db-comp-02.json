@@ -1,0 +1,15 @@
+{
+  "id": "img-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The image appears stretched instead of scaled proportionally. What is the bug?",
+  "code": "import java.awt.image.*;\nimport java.awt.*;\npublic class StretchBug {\n    static BufferedImage scaleFixed(BufferedImage src) {\n        // desired: maintain aspect ratio to fit in 200x200\n        BufferedImage out = new BufferedImage(200, 200, src.getType());\n        Graphics2D g = out.createGraphics();\n        g.drawImage(src, 0, 0, 200, 200, null);  // bug: ignores aspect ratio\n        g.dispose();\n        return out;\n    }\n}",
+  "choices": [
+    "drawImage cannot scale images in Java",
+    "Drawing to a fixed 200x200 target distorts the image if the source is not square; calculate width and height preserving aspect ratio",
+    "Graphics2D must use RenderingHints.ANTIALIAS to scale correctly",
+    "BufferedImage cannot hold more than 200 pixels in any dimension"
+  ],
+  "answer": "b",
+  "explanation": "Scaling a non-square image to a square target stretches it. Fix: calculate target dimensions maintaining aspect ratio — e.g., if src is wider, set targetW=200 and targetH=(int)(200.0*src.getHeight()/src.getWidth()). Center the result in the 200x200 canvas."
+}

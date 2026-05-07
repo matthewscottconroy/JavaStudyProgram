@@ -1,0 +1,15 @@
+{
+  "id": "fn-db-comp-09",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The method always returns 0. What is the bug?",
+  "code": "public class SumArray {\n    static int sum(int[] arr) {\n        int total = 0;\n        for (int i = 0; i < arr.length; i++) {\n            total = arr[i];   // bug: should be +=\n        }\n        return total;\n    }\n    public static void main(String[] args) {\n        System.out.println(sum(new int[]{1, 2, 3, 4}));\n    }\n}",
+  "choices": [
+    "The loop should use arr.length - 1 as the bound",
+    "total = arr[i] assigns rather than accumulates; it should be total += arr[i]",
+    "The array must be sorted before summing",
+    "int total must be declared outside the class to persist across calls"
+  ],
+  "answer": "b",
+  "explanation": "total = arr[i] overwrites total on each iteration. After the loop, total holds only the last element (4). Fix: total += arr[i] to accumulate the running sum."
+}

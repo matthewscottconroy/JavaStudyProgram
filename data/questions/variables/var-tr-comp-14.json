@@ -1,0 +1,10 @@
+{
+  "id": "var-tr-comp-14",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "public class Scope {\n    static int x = 1;\n    public static void main(String[] args) {\n        int x = 2;      // shadows static x\n        {\n            int y = 3;\n            System.out.println(x + y);       // local x=2, y=3\n        }\n        System.out.println(x);              // local x=2\n        System.out.println(Scope.x);        // static x=1\n    }\n}",
+  "answer": "5\n2\n1",
+  "explanation": "Inside the block: x=2 (local), y=3, sum=5. After block: y is gone, local x=2. Scope.x accesses static field=1.",
+  "alternatives": ["5\n2\n1\n"]
+}

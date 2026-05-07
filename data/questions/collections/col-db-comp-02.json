@@ -1,0 +1,15 @@
+{
+  "id": "col-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "This method is supposed to return the most frequent word, but always returns the first word. What is the bug?",
+  "code": "import java.util.*;\npublic class MostFrequent {\n    public static String topWord(String[] words) {\n        Map<String, Integer> freq = new HashMap<>();\n        for (String w : words) freq.put(w, freq.getOrDefault(w, 0) + 1);\n\n        String best = words[0];\n        for (String w : freq.keySet()) {\n            if (freq.get(w) > freq.get(w)) {   // bug here\n                best = w;\n            }\n        }\n        return best;\n    }\n}",
+  "choices": [
+    "freq.get(w) should use getOrDefault to avoid NullPointerException",
+    "The condition compares freq.get(w) with itself — it should compare freq.get(w) with freq.get(best)",
+    "HashMap.keySet() does not return words in frequency order",
+    "The loop variable w shadows the outer w from the first loop"
+  ],
+  "answer": "b",
+  "explanation": "freq.get(w) > freq.get(w) is always false because a value is never greater than itself. The condition should be freq.get(w) > freq.get(best) to compare the current word's count against the running best. Because the condition is always false, 'best' is never updated and the method returns the first word unchanged."
+}

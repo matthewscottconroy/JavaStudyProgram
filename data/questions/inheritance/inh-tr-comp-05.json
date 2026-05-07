@@ -1,0 +1,10 @@
+{
+  "id": "inh-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class SuperCall {\n    static class Vehicle {\n        int speed;\n        Vehicle(int s) { speed = s; System.out.println(\"Vehicle:\"+s); }\n        String describe() { return \"Vehicle@\"+speed; }\n    }\n    static class Car extends Vehicle {\n        int doors;\n        Car(int s, int d) { super(s); doors = d; System.out.println(\"Car:\"+d); }\n        @Override String describe() { return super.describe()+\"/Car\"; }\n    }\n    public static void main(String[] args) {\n        Car c = new Car(100, 4);\n        System.out.println(c.describe());\n    }\n}",
+  "answer": "Vehicle:100\nCar:4\nVehicle@100/Car",
+  "explanation": "new Car(100,4) calls super(100) first: Vehicle constructor prints \"Vehicle:100\", sets speed=100. Then Car constructor prints \"Car:4\", sets doors=4. c.describe() calls Car.describe() which prepends super.describe() = \"Vehicle@100\", then appends \"/Car\".",
+  "alternatives": ["Vehicle:100\nCar:4\nVehicle@100/Car\n"]
+}

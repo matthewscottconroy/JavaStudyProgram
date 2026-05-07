@@ -1,0 +1,15 @@
+{
+  "id": "inh-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "This subclass constructor causes a compile error: 'constructor Employee() is undefined'. What is the bug?",
+  "code": "class Person {\n    String name;\n    Person(String name) {\n        this.name = name;\n    }\n}\n\nclass Employee extends Person {\n    int id;\n    Employee(int id) {\n        this.id = id;\n    }\n}",
+  "choices": [
+    "Employee must declare Person as an interface, not extend it",
+    "Employee's constructor does not call super(...) — the compiler inserts super() by default, but Person has no no-arg constructor",
+    "Employee cannot have fields if Person already has fields",
+    "The name field in Person must be private before Employee can extend it"
+  ],
+  "answer": "b",
+  "explanation": "When a constructor does not explicitly call super(...) or this(...), the compiler inserts an implicit super() (the no-arg constructor of the parent). Person only defines Person(String name), so there is no no-arg constructor for the implicit super() to call. Fix: add super(\"Unknown\"); (or an appropriate name) as the first statement in Employee's constructor, or add a no-arg constructor to Person."
+}

@@ -1,0 +1,10 @@
+{
+  "id": "lam-tr-comp-10",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.function.*;\npublic class Closures {\n    public static void main(String[] args) {\n        int base = 100;  // effectively final\n        IntUnaryOperator addBase = x -> x + base;\n        IntUnaryOperator mulBase = x -> x * base;\n        System.out.println(addBase.applyAsInt(5));\n        System.out.println(mulBase.applyAsInt(3));\n        // base = 200;  // would be compile error — base is captured\n        java.util.function.Supplier<IntUnaryOperator> maker = () -> x -> x + base;\n        System.out.println(maker.get().applyAsInt(7));\n    }\n}",
+  "answer": "105\n300\n107",
+  "explanation": "base=100. addBase(5)=5+100=105. mulBase(3)=3*100=300. maker creates lambda that also adds base: 7+100=107.",
+  "alternatives": ["105\n300\n107\n"]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "col-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class MapOps {\n    public static void main(String[] args) {\n        Map<String,Integer> freq = new HashMap<>();\n        String[] words = {\"a\",\"b\",\"a\",\"c\",\"a\",\"b\"};\n        for (String w : words) {\n            freq.merge(w, 1, Integer::sum);\n        }\n        System.out.println(freq.get(\"a\"));\n        System.out.println(freq.get(\"b\"));\n        System.out.println(freq.getOrDefault(\"z\", 0));\n    }\n}",
+  "answer": "3\n2\n0",
+  "explanation": "merge(key, 1, Integer::sum): if key absent, puts 1; if present, adds 1 to existing. 'a' appears 3x, 'b' appears 2x. getOrDefault(\"z\",0) returns 0 since \"z\" is not in the map.",
+  "alternatives": ["3\n2\n0\n"]
+}

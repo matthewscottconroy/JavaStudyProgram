@@ -1,0 +1,10 @@
+{
+  "id": "fn-tr-comp-09",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class GCD {\n    public static int gcd(int a, int b) {\n        while (b != 0) {\n            int temp = b;\n            b = a % b;\n            a = temp;\n        }\n        return a;\n    }\n    public static void main(String[] args) {\n        System.out.println(gcd(48, 18));\n        System.out.println(gcd(100, 75));\n        System.out.println(gcd(7, 5));\n    }\n}",
+  "answer": "6\n25\n1",
+  "explanation": "Euclidean algorithm. gcd(48,18): 48%18=12 → gcd(18,12): 18%12=6 → gcd(12,6): 12%6=0 → return 12? No: b=6, a%b=0, a=6 → 6. gcd(100,75): 100%75=25 → 75%25=0 → 25. gcd(7,5): 7%5=2 → 5%2=1 → 2%1=0 → 1.",
+  "alternatives": ["6\n25\n1\n"]
+}

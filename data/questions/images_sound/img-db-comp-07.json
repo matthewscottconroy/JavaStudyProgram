@@ -1,0 +1,15 @@
+{
+  "id": "img-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The pixel coordinates throw ArrayIndexOutOfBoundsException. What is the bug?",
+  "code": "import java.awt.image.BufferedImage;\npublic class PixelBug {\n    public static void main(String[] args) {\n        BufferedImage img = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB);\n        img.setRGB(10, 5, 0xFF0000);  // bug: x=10 is out of bounds for width 10\n    }\n}",
+  "choices": [
+    "setRGB requires ARGB packed values; 0xFF0000 is not a valid color",
+    "BufferedImage pixel coordinates use 1-based indexing starting at (1,1)",
+    "x=10 is out of bounds for an image of width 10; valid x-coordinates are 0 through 9 (inclusive)",
+    "setRGB cannot be called on TYPE_INT_RGB images; use TYPE_INT_ARGB"
+  ],
+  "answer": "c",
+  "explanation": "BufferedImage uses 0-based pixel coordinates. For width=10, valid x values are 0–9. Passing x=10 is out of bounds and throws ArrayIndexOutOfBoundsException. Fix: use img.setRGB(9, 5, 0xFF0000) or validate x < img.getWidth() before calling setRGB."
+}

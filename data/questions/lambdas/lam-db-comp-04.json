@@ -1,0 +1,15 @@
+{
+  "id": "lam-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The lambda is assigned to the wrong functional interface type. What is the bug?",
+  "code": "import java.util.function.*;\npublic class TypeMismatch {\n    public static void main(String[] args) {\n        Consumer<String> printer = s -> s.toUpperCase();  // bug: should use return value\n        printer.accept(\"hello\");\n    }\n}",
+  "choices": [
+    "Consumer cannot be used with String",
+    "Consumer<T> expects a void-result lambda; s.toUpperCase() returns a value that is silently discarded; use Function<String,String> to capture the result",
+    "accept() must be called with a StringBuilder",
+    "The lambda body must have explicit return void; statement"
+  ],
+  "answer": "b",
+  "explanation": "Consumer<T>'s accept method returns void. The lambda s -> s.toUpperCase() compiles as a Consumer (the return value is discarded), but likely the developer intended Function<String,String> to use the result. The code compiles and runs but does nothing useful with the transformation."
+}

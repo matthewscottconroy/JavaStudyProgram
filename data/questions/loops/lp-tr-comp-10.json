@@ -1,0 +1,10 @@
+{
+  "id": "lp-tr-comp-10",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class RunLength {\n    public static String encode(String s) {\n        StringBuilder sb = new StringBuilder();\n        int i = 0;\n        while (i < s.length()) {\n            char c = s.charAt(i);\n            int count = 0;\n            while (i < s.length() && s.charAt(i) == c) {\n                count++; i++;\n            }\n            sb.append(count).append(c);\n        }\n        return sb.toString();\n    }\n    public static void main(String[] args) {\n        System.out.println(encode(\"aaabbc\"));\n        System.out.println(encode(\"abc\"));\n    }\n}",
+  "answer": "3a2b1c\n1a1b1c",
+  "explanation": "Run-length encoding groups consecutive identical characters. \"aaabbc\": 3 a's, 2 b's, 1 c → \"3a2b1c\". \"abc\": each char appears once → \"1a1b1c\".",
+  "alternatives": ["3a2b1c\n1a1b1c\n"]
+}

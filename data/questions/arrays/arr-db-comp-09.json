@@ -1,0 +1,15 @@
+{
+  "id": "arr-db-comp-09",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The method should remove duplicates but returns the original array unchanged. What is the bug?",
+  "code": "import java.util.*;\npublic class RemoveDups {\n    static int[] removeDups(int[] arr) {\n        Set<Integer> seen = new LinkedHashSet<>();\n        for (int x : arr) seen.add(x);\n        return arr;   // bug: returns original instead of converting set\n    }\n}",
+  "choices": [
+    "LinkedHashSet cannot store int values",
+    "The method builds the set correctly but returns the original arr instead of converting the set back to an array",
+    "The for-each loop duplicates elements instead of removing them",
+    "Set does not preserve insertion order so duplicates remain"
+  ],
+  "answer": "b",
+  "explanation": "The set correctly collects unique elements in insertion order, but the method discards it by returning the original arr. Fix: convert the set to an array, e.g., return seen.stream().mapToInt(Integer::intValue).toArray();"
+}

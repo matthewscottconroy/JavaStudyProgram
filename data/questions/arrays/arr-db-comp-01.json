@@ -1,0 +1,15 @@
+{
+  "id": "arr-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "This program is supposed to double all values in a copy of the array and leave the original unchanged, but original[0] also changes. What is the bug?",
+  "code": "import java.util.Arrays;\npublic class DoubleUp {\n    public static void main(String[] args) {\n        int[] original = {1, 2, 3};\n        int[] copy = original;\n        for (int i = 0; i < copy.length; i++) {\n            copy[i] *= 2;\n        }\n        System.out.println(original[0]);  // prints 2, expected 1\n    }\n}",
+  "choices": [
+    "copy.length should be original.length to iterate over the correct array",
+    "int[] copy = original copies the reference, not the array contents — both names point to the same array",
+    "The *= operator does not work correctly on array elements",
+    "original must be declared final to prevent modification through aliases"
+  ],
+  "answer": "b",
+  "explanation": "Arrays are objects. 'int[] copy = original' copies the reference (the memory address), not the array's contents. Both 'copy' and 'original' name the same underlying array, so modifying copy[i] also changes original[i]. Fix: int[] copy = Arrays.copyOf(original, original.length);"
+}

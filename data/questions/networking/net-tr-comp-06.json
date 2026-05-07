@@ -1,0 +1,10 @@
+{
+  "id": "net-tr-comp-06",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "import java.net.URL;\npublic class UrlParts {\n    public static void main(String[] args) throws Exception {\n        URL url = new URL(\"https://example.com:8080/path?q=1\");\n        System.out.println(url.getProtocol());\n        System.out.println(url.getPort());\n        System.out.println(url.getPath());\n    }\n}",
+  "answer": "https\n8080\n/path",
+  "explanation": "URL.getProtocol() returns the scheme \"https\". getPort() returns the explicit port 8080. getPath() returns the path component \"/path\" (the query string is excluded).",
+  "alternatives": ["https\n8080\n/path\n"]
+}

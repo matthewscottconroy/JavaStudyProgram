@@ -1,0 +1,15 @@
+{
+  "id": "img-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The image file is not found when the application is packaged as a JAR. What is the bug?",
+  "code": "import java.io.*;\nimport javax.imageio.*;\nimport java.awt.image.*;\npublic class ImageLoadBug {\n    static BufferedImage loadImage() throws IOException {\n        return ImageIO.read(new File(\"resources/logo.png\"));  // bug\n    }\n}",
+  "choices": [
+    "ImageIO.read() cannot load PNG files",
+    "new File(path) uses the filesystem; inside a JAR, resources are not files — use getClass().getResourceAsStream() instead",
+    "File paths must be absolute when loading images",
+    "BufferedImage cannot be returned from a method"
+  ],
+  "answer": "b",
+  "explanation": "When packaged into a JAR, files inside the JAR are not accessible as File objects. File paths work during development but fail when deployed. Fix: use getClass().getResourceAsStream(\"/resources/logo.png\") and pass the stream to ImageIO.read(stream). Resources are then loaded from the classpath regardless of packaging."
+}

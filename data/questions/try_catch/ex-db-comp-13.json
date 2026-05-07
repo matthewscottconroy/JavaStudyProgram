@@ -1,0 +1,15 @@
+{
+  "id": "ex-db-comp-13",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The finally block loses the original exception. What is the bug?",
+  "code": "public class FinallyLoss {\n    static void risky() throws Exception {\n        try {\n            throw new Exception(\"original\");\n        } finally {\n            throw new Exception(\"finally\");  // bug: masks original\n        }\n    }\n    public static void main(String[] args) {\n        try { risky(); }\n        catch (Exception e) { System.out.println(e.getMessage()); }\n    }\n}",
+  "choices": [
+    "finally blocks cannot throw exceptions",
+    "When finally throws its own exception, it replaces the original exception; the caller sees 'finally' and the 'original' exception is lost",
+    "Both exceptions are wrapped into a multi-catch",
+    "The original exception is suppressed and accessible via getSuppressed()"
+  ],
+  "answer": "b",
+  "explanation": "If a finally block throws an exception, it replaces the exception propagating from the try block. The original exception ('original') is completely discarded — not suppressed, just lost. Output: 'finally'. This is a common pitfall. Fix: avoid throwing from finally, or explicitly add exceptions as suppressed: original.addSuppressed(finallyEx)."
+}

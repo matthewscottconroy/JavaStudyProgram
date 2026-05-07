@@ -1,0 +1,10 @@
+{
+  "id": "img-tr-comp-11",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.awt.*;\npublic class ColorEquality {\n    public static void main(String[] args) {\n        Color a = Color.RED;\n        Color b = new Color(255, 0, 0);\n        System.out.println(a == b);\n        System.out.println(a.equals(b));\n        System.out.println(a.getRGB() == b.getRGB());\n    }\n}",
+  "answer": "false\ntrue\ntrue",
+  "explanation": "Color.RED is a pre-defined constant; new Color(255,0,0) is a distinct object, so == is false. Color.equals() compares ARGB int values — both are 0xFFFF0000, so true. getRGB() returns the same packed int for both.",
+  "alternatives": ["false\ntrue\ntrue\n"]
+}

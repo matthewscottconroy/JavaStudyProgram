@@ -1,0 +1,10 @@
+{
+  "id": "str-tr-comp-14",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class TextBlock {\n    public static void main(String[] args) {\n        String json = \"\"\"\n                {\"key\": \"value\"}\n                \"\"\";\n        System.out.println(json.strip());\n        System.out.println(json.contains(\"key\"));\n        System.out.println(json.lines().count());\n    }\n}",
+  "answer": "{\"key\": \"value\"}\ntrue\n2",
+  "explanation": "Text block with content '{\"key\": \"value\"}\\n' (trailing newline). strip() removes leading/trailing whitespace → '{\"key\": \"value\"}'. contains('key')=true. lines() splits by newlines; the trailing newline creates 2 lines.",
+  "alternatives": ["{\"key\": \"value\"}\ntrue\n2\n"]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "ser-db-comp-10",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The Externalizable class reads fields in the wrong order. What is the bug?",
+  "code": "import java.io.*;\npublic class OrderBug implements Externalizable {\n    int a, b;\n    public OrderBug() {}\n    public void writeExternal(ObjectOutput out) throws IOException {\n        out.writeInt(a);\n        out.writeInt(b);\n    }\n    public void readExternal(ObjectInput in) throws IOException {\n        b = in.readInt();   // bug: reads b first, but a was written first\n        a = in.readInt();\n    }\n}",
+  "choices": [
+    "Externalizable always reads fields in alphabetical order",
+    "readExternal must read fields in the same order they were written in writeExternal; reading b first when a was written first swaps the values",
+    "writeExternal and readExternal must write/read all fields using writeObject/readObject",
+    "int fields must be written as bytes in Externalizable"
+  ],
+  "answer": "b",
+  "explanation": "Externalizable streams are positional — data must be read in exactly the same order it was written. writeExternal writes a then b; readExternal reads into b first (getting a's value) then a (getting b's value). Fix: read in the same order: a = in.readInt(); b = in.readInt();"
+}

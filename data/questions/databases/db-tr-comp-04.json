@@ -1,0 +1,10 @@
+{
+  "id": "db-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "import java.sql.*;\npublic class DriverCheck {\n    public static void main(String[] args) {\n        // JDBC URL scheme for H2 in-memory database\n        String url = \"jdbc:h2:mem:test\";\n        System.out.println(url.startsWith(\"jdbc:\"));\n        System.out.println(url.split(\":\")[1]);\n    }\n}",
+  "answer": "true\nh2",
+  "explanation": "The URL starts with \"jdbc:\", so startsWith returns true. Splitting on \":\" gives [\"jdbc\", \"h2\", \"mem\", \"test\"]; index [1] is \"h2\".",
+  "alternatives": ["true\nh2\n"]
+}

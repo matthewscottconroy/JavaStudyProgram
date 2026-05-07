@@ -1,0 +1,15 @@
+{
+  "id": "str-db-comp-10",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The substring index throws StringIndexOutOfBoundsException. What is the bug?",
+  "code": "public class SubstringBug {\n    public static void main(String[] args) {\n        String s = \"Hello\";\n        System.out.println(s.substring(1, 10));  // bug: endIndex > length\n    }\n}",
+  "choices": [
+    "substring(int, int) requires both indices to be positive",
+    "endIndex 10 exceeds the string length 5; substring throws StringIndexOutOfBoundsException",
+    "substring() returns null when endIndex is out of range",
+    "substring should be called on a char array, not a String"
+  ],
+  "answer": "b",
+  "explanation": "substring(beginIndex, endIndex) requires 0 <= beginIndex <= endIndex <= length(). 'Hello'.length()=5; passing endIndex=10 exceeds the string and throws StringIndexOutOfBoundsException. Fix: s.substring(1, s.length()) or s.substring(1, Math.min(10, s.length()))."
+}

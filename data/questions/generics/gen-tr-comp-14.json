@@ -1,0 +1,10 @@
+{
+  "id": "gen-tr-comp-14",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class SuperWild {\n    static void addNumbers(List<? super Integer> list) {\n        list.add(1); list.add(2); list.add(3);\n    }\n    public static void main(String[] args) {\n        List<Number> numList = new ArrayList<>();\n        addNumbers(numList);\n        System.out.println(numList);\n        System.out.println(numList.size());\n        System.out.println(numList.get(0).getClass().getSimpleName());\n    }\n}",
+  "answer": "[1, 2, 3]\n3\nInteger",
+  "explanation": "List<? super Integer> accepts List<Integer>, List<Number>, List<Object>. numList is List<Number>; addNumbers adds Integer 1,2,3. getClass() of element 1 is Integer.",
+  "alternatives": ["[1, 2, 3]\n3\nInteger\n"]
+}

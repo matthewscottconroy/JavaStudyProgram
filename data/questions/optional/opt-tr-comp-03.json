@@ -1,0 +1,10 @@
+{
+  "id": "opt-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "import java.util.Optional;\npublic class MapDemo {\n    public static void main(String[] args) {\n        Optional<String> opt = Optional.of(\"hello\");\n        Optional<Integer> len = opt.map(String::length);\n        System.out.println(len.get());\n        Optional<Integer> empty = Optional.<String>empty().map(String::length);\n        System.out.println(empty.isPresent());\n    }\n}",
+  "answer": "5\nfalse",
+  "explanation": "map applies the function to the contained value if present. \"hello\".length()=5. Mapping an empty Optional returns another empty Optional; isPresent()=false.",
+  "alternatives": ["5\nfalse\n"]
+}

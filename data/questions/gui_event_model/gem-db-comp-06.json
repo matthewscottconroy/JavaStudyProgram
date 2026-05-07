@@ -1,0 +1,15 @@
+{
+  "id": "gem-db-comp-06",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The button listener is never called. What is the bug?",
+  "code": "import javax.swing.*;\npublic class ListenerBug {\n    public static void main(String[] args) {\n        JButton btn = new JButton(\"Click\");\n        ActionListener listener = e -> System.out.println(\"clicked\");\n        // bug: listener created but never added to the button\n        JFrame frame = new JFrame();\n        frame.add(btn);\n        frame.setSize(200, 100);\n        frame.setVisible(true);\n    }\n}",
+  "choices": [
+    "ActionListener must be set with btn.setActionListener, not addActionListener",
+    "The listener lambda is created but never registered; btn.addActionListener(listener) was never called, so clicking the button does nothing",
+    "JButton event listeners must be added before the JFrame is created",
+    "Lambda expressions cannot be used as ActionListeners; an anonymous class is required"
+  ],
+  "answer": "b",
+  "explanation": "Creating an ActionListener object does not register it anywhere. You must call btn.addActionListener(listener) to attach it to the button. Without this call, no listener is notified when the button is clicked. Fix: add btn.addActionListener(listener); before or after adding the button to the frame."
+}

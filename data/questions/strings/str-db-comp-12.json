@@ -1,0 +1,15 @@
+{
+  "id": "str-db-comp-12",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The startsWith check is case-sensitive but should be case-insensitive. What is the bug?",
+  "code": "public class StartsWithBug {\n    static boolean hasPrefix(String s, String prefix) {\n        return s.startsWith(prefix);  // bug: case-sensitive\n    }\n    public static void main(String[] args) {\n        System.out.println(hasPrefix(\"Hello\", \"hello\"));  // false\n    }\n}",
+  "choices": [
+    "startsWith() is deprecated and should not be used",
+    "startsWith() is case-sensitive; 'Hello' does not start with 'hello' because H != h",
+    "The method should use indexOf(prefix) == 0 instead",
+    "prefix must be converted to a char[] before comparison"
+  ],
+  "answer": "b",
+  "explanation": "String.startsWith() compares characters exactly, including case. 'H' != 'h', so hasPrefix('Hello','hello') returns false. Fix for case-insensitive check: s.toLowerCase().startsWith(prefix.toLowerCase()) or s.regionMatches(true, 0, prefix, 0, prefix.length())."
+}

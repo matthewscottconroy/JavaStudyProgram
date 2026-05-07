@@ -1,0 +1,15 @@
+{
+  "id": "arr-db-comp-10",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The transpose method produces the wrong result for non-square matrices. What is the bug?",
+  "code": "public class Transpose {\n    static int[][] transpose(int[][] m) {\n        int[][] t = new int[m.length][m.length];   // bug: should be [m[0].length][m.length]\n        for (int i = 0; i < m.length; i++)\n            for (int j = 0; j < m[0].length; j++)\n                t[j][i] = m[i][j];\n        return t;\n    }\n}",
+  "choices": [
+    "The loop bounds i and j are swapped",
+    "new int[m.length][m.length] allocates a square matrix; for an r×c input the transposed result should be c×r, i.e., new int[m[0].length][m.length]",
+    "t[j][i] should be t[i][j] to correctly transpose",
+    "2D array transposition requires in-place swapping only"
+  ],
+  "answer": "b",
+  "explanation": "Transposing an r×c matrix produces a c×r matrix. Allocating new int[m.length][m.length] (r×r) is only correct when r==c. For non-square matrices it either wastes space or causes ArrayIndexOutOfBoundsException. Fix: new int[m[0].length][m.length]."
+}

@@ -1,0 +1,10 @@
+{
+  "id": "col-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class WordFreq {\n    public static void main(String[] args) {\n        String[] words = {\"apple\", \"banana\", \"apple\", \"cherry\", \"banana\", \"apple\"};\n        Map<String, Integer> freq = new HashMap<>();\n        for (String w : words) {\n            freq.put(w, freq.getOrDefault(w, 0) + 1);\n        }\n        System.out.println(freq.get(\"apple\"));\n        System.out.println(freq.get(\"banana\"));\n        System.out.println(freq.get(\"grape\"));\n    }\n}",
+  "answer": "3\n2\nnull",
+  "explanation": "getOrDefault(w, 0) returns 0 when the key is absent, so the first occurrence adds 0+1=1. 'apple' appears 3 times, 'banana' 2 times, 'cherry' 1 time. freq.get('grape') returns null because 'grape' was never added to the map.",
+  "alternatives": ["3\n2\nnull\n"]
+}

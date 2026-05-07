@@ -1,0 +1,15 @@
+{
+  "id": "net-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The URL connection always reads an empty response. What is the bug?",
+  "code": "import java.net.*;\nimport java.io.*;\npublic class ConnBug {\n    public static void main(String[] args) throws Exception {\n        URL url = new URL(\"https://example.com\");\n        URLConnection conn = url.openConnection();\n        // bug: reading before connect\n        InputStream in = conn.getInputStream();\n        in.close();\n    }\n}",
+  "choices": [
+    "URLConnection must be cast to HttpURLConnection before reading",
+    "getInputStream() implicitly connects, but the response body of example.com may be empty; the real bug is not calling conn.connect() explicitly when setting request properties before reading",
+    "URLConnection.getInputStream() throws if connect() was not called first",
+    "InputStream must be wrapped in BufferedReader to read text responses"
+  ],
+  "answer": "b",
+  "explanation": "getInputStream() does implicitly call connect() if not already connected, so the connection itself works. However, if you need to set request headers or properties (e.g. setRequestProperty), those must be set before the implicit connect. The common bug is adding properties after getInputStream() has already triggered the connection. Fix: set all properties before calling getInputStream()."
+}

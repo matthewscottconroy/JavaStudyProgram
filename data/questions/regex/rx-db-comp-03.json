@@ -1,0 +1,15 @@
+{
+  "id": "rx-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "Matcher.group throws IllegalStateException. What is the bug?",
+  "code": "import java.util.regex.*;\npublic class GroupStateBug {\n    public static void main(String[] args) {\n        Matcher m = Pattern.compile(\"\\\\d+\").matcher(\"abc\");\n        System.out.println(m.group());  // bug: find/matches not called first\n    }\n}",
+  "choices": [
+    "group() requires the pattern to match the full string; use matches() instead of find()",
+    "group() throws IllegalStateException when called before a successful find() or matches(); a match attempt must succeed before group data is available",
+    "Matcher.group() returns null when there is no match in the string",
+    "Pattern.compile must specify flags to enable group capture"
+  ],
+  "answer": "b",
+  "explanation": "Matcher.group() accesses the result of the most recent match attempt. Calling it before find() or matches() (or when the last attempt failed) throws IllegalStateException. Fix: call m.find() first and check the return value: if (m.find()) System.out.println(m.group());"
+}

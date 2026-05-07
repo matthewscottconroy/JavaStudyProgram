@@ -1,0 +1,10 @@
+{
+  "id": "arr-tr-comp-06",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.Arrays;\npublic class ArrOps {\n    public static void main(String[] args) {\n        int[] a = {5, 3, 8, 1, 4};\n        Arrays.sort(a);\n        System.out.println(Arrays.toString(a));\n        int idx = Arrays.binarySearch(a, 4);\n        System.out.println(idx);\n    }\n}",
+  "answer": "[1, 3, 4, 5, 8]\n2",
+  "explanation": "After sorting: [1, 3, 4, 5, 8]. binarySearch finds 4 at index 2.",
+  "alternatives": ["[1, 3, 4, 5, 8]\n2\n"]
+}

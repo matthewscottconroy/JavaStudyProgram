@@ -1,0 +1,10 @@
+{
+  "id": "aal-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class ListVsArray {\n    public static void main(String[] args) {\n        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(5,3,1,4,2));\n        Collections.sort(list);\n        System.out.println(list.get(0) + \" \" + list.get(4));\n        Collections.reverse(list);\n        System.out.println(list);\n        System.out.println(Collections.binarySearch(list, 3));\n    }\n}",
+  "answer": "1 5\n[5, 4, 3, 2, 1]\n-4",
+  "explanation": "After sort: [1,2,3,4,5]. get(0)=1, get(4)=5. After reverse: [5,4,3,2,1]. binarySearch requires sorted ascending; [5,4,3,2,1] is descending so the result is undefined/negative. With standard descending order, it searches incorrectly and may return -4 (insertion point 3, negated minus 1 = -(3+1)=-4).",
+  "alternatives": ["1 5\n[5, 4, 3, 2, 1]\n-4\n"]
+}

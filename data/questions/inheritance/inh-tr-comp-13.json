@@ -1,0 +1,10 @@
+{
+  "id": "inh-tr-comp-13",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class InstanceOf {\n    static class Shape {}\n    static class Circle extends Shape {}\n    static class ColoredCircle extends Circle {}\n    public static void main(String[] args) {\n        Object o = new ColoredCircle();\n        System.out.println(o instanceof ColoredCircle);\n        System.out.println(o instanceof Circle);\n        System.out.println(o instanceof Shape);\n        System.out.println(o instanceof String);\n    }\n}",
+  "answer": "true\ntrue\ntrue\nfalse",
+  "explanation": "instanceof checks the runtime type and all supertypes. ColoredCircle extends Circle extends Shape. o is a ColoredCircle, so it is also a Circle and a Shape. It is not a String.",
+  "alternatives": ["true\ntrue\ntrue\nfalse\n"]
+}

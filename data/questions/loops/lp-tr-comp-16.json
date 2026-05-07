@@ -1,0 +1,10 @@
+{
+  "id": "lp-tr-comp-16",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Pyramid {\n    public static void main(String[] args) {\n        for (int row = 1; row <= 4; row++) {\n            for (int col = 1; col <= row; col++) {\n                System.out.print(\"*\");\n            }\n            System.out.println();\n        }\n    }\n}",
+  "answer": "*\n**\n***\n****",
+  "explanation": "Row 1: 1 star. Row 2: 2 stars. Row 3: 3 stars. Row 4: 4 stars. Each row ends with println().",
+  "alternatives": ["*\n**\n***\n****\n"]
+}

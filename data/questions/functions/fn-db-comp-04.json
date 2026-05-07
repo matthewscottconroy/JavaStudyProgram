@@ -1,0 +1,15 @@
+{
+  "id": "fn-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The method always prints 0 instead of the expected sum. What is the bug?",
+  "code": "public class Summer {\n    static int total = 0;\n\n    public static int addUp(int[] nums) {\n        int total = 0;          // shadows the static field\n        for (int n : nums) total += n;\n        return total;\n    }\n\n    public static void main(String[] args) {\n        addUp(new int[]{1, 2, 3});\n        System.out.println(total);   // prints static field, which is still 0\n    }\n}",
+  "choices": [
+    "static fields cannot be accessed from static methods",
+    "The local variable 'total' inside addUp shadows the static field — the method adds to the local copy, the static field stays 0",
+    "addUp must be called with System.out.println(addUp(...)) to print its return value",
+    "for-each loops cannot modify local variables inside a method"
+  ],
+  "answer": "b",
+  "explanation": "Declaring 'int total = 0' inside addUp creates a new local variable that shadows the static field with the same name. All additions go to the local variable; the static field is never touched. Fix: either use the return value (System.out.println(addUp(nums))), or remove the local declaration and use the static field directly (neither is great design — returning a value is cleaner)."
+}

@@ -1,0 +1,15 @@
+{
+  "id": "ex-db-comp-11",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The more specific catch block is unreachable. What is the bug?",
+  "code": "public class CatchOrder {\n    public static void main(String[] args) {\n        try {\n            throw new IllegalArgumentException(\"bad\");\n        } catch (RuntimeException e) {   // catches first\n            System.out.println(\"runtime\");\n        } catch (IllegalArgumentException e) {  // bug: unreachable\n            System.out.println(\"illegal\");\n        }\n    }\n}",
+  "choices": [
+    "IllegalArgumentException must be caught before RuntimeException because it is more specific",
+    "catch(RuntimeException) appears before catch(IllegalArgumentException); since IllegalArgumentException IS-A RuntimeException, the first catch always handles it — the second is unreachable and causes a compile error",
+    "RuntimeException and IllegalArgumentException are in the same catch hierarchy and cannot both appear",
+    "The order of catch blocks does not matter in Java"
+  ],
+  "answer": "b",
+  "explanation": "Java requires catch blocks to be ordered from most specific to most general. IllegalArgumentException extends RuntimeException, so catching RuntimeException first shadows it. The compiler detects that the second catch is unreachable and reports a compile error. Fix: swap the order — catch IllegalArgumentException first."
+}

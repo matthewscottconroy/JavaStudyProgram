@@ -1,0 +1,10 @@
+{
+  "id": "arr-tr-comp-19",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "import java.util.Arrays;\npublic class SortSearch {\n    public static void main(String[] args) {\n        int[] arr = {5, 3, 8, 1, 9, 2};\n        Arrays.sort(arr);\n        System.out.println(Arrays.toString(arr));\n        System.out.println(Arrays.binarySearch(arr, 8));\n        System.out.println(Arrays.binarySearch(arr, 7));\n    }\n}",
+  "answer": "[1, 2, 3, 5, 8, 9]\n4\n-5",
+  "explanation": "After sort: [1,2,3,5,8,9]. binarySearch(8) returns index 4. binarySearch(7): not found; 7 would be at index 4, so returns -(4+1)=-5.",
+  "alternatives": ["[1, 2, 3, 5, 8, 9]\n4\n-5\n"]
+}

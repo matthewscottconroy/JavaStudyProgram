@@ -1,0 +1,15 @@
+{
+  "id": "mem-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The method leaks memory by accumulating objects in a static list. What is the bug?",
+  "code": "import java.util.*;\npublic class MemoryLeak {\n    static List<byte[]> cache = new ArrayList<>();\n    static void process() {\n        cache.add(new byte[1024 * 1024]);  // bug: static list grows unbounded\n    }\n    public static void main(String[] args) {\n        for (int i = 0; i < 1000; i++) process();\n        System.out.println(cache.size());\n    }\n}",
+  "choices": [
+    "byte[] arrays cannot be stored in ArrayList",
+    "The static cache list holds strong references to all byte arrays and is never cleared; calling process() 1000 times allocates ~1 GB that cannot be garbage collected",
+    "Static lists are garbage collected when the method exits",
+    "ArrayList automatically removes old entries when it grows too large"
+  ],
+  "answer": "b",
+  "explanation": "A static field lives for the lifetime of the class (typically the JVM). cache holds strong references to every byte array ever added. None can be collected. After 1000 calls: 1000 MB allocated and retained. Fix: use a bounded cache (e.g., LinkedHashMap with max size), WeakReferences, or clear the list when appropriate."
+}

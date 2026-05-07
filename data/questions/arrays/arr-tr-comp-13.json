@@ -1,0 +1,10 @@
+{
+  "id": "arr-tr-comp-13",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Rotate {\n    static void rotateLeft(int[] arr, int k) {\n        k = k % arr.length;\n        reverse(arr, 0, k - 1);\n        reverse(arr, k, arr.length - 1);\n        reverse(arr, 0, arr.length - 1);\n    }\n    static void reverse(int[] arr, int lo, int hi) {\n        while (lo < hi) { int t = arr[lo]; arr[lo++] = arr[hi]; arr[hi--] = t; }\n    }\n    public static void main(String[] args) {\n        int[] a = {1, 2, 3, 4, 5};\n        rotateLeft(a, 2);\n        for (int x : a) System.out.print(x + \" \");\n    }\n}",
+  "answer": "3 4 5 1 2 ",
+  "explanation": "rotateLeft by 2: reverse [0..1]→{2,1,3,4,5}, reverse [2..4]→{2,1,5,4,3}, reverse all→{3,4,5,1,2}.",
+  "alternatives": ["3 4 5 1 2"]
+}

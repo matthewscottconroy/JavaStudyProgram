@@ -1,0 +1,10 @@
+{
+  "id": "ic-tr-comp-14",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class SwitchString {\n    static String grade(String level) {\n        return switch (level.toUpperCase()) {\n            case \"A\" -> \"Excellent\";\n            case \"B\" -> \"Good\";\n            case \"C\" -> \"Pass\";\n            default -> \"Unknown\";\n        };\n    }\n    public static void main(String[] args) {\n        System.out.println(grade(\"b\"));\n        System.out.println(grade(\"A\"));\n        System.out.println(grade(\"f\"));\n    }\n}",
+  "answer": "Good\nExcellent\nUnknown",
+  "explanation": "grade('b'): toUpperCase→'B'→'Good'. grade('A')→'Excellent'. grade('f')→'F'→default→'Unknown'.",
+  "alternatives": ["Good\nExcellent\nUnknown\n"]
+}

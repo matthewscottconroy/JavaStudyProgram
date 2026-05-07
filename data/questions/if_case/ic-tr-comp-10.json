@@ -1,0 +1,10 @@
+{
+  "id": "ic-tr-comp-10",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Fallthrough {\n    public static void main(String[] args) {\n        int x = 2;\n        switch (x) {\n            case 1:\n            case 2:\n                System.out.println(\"one or two\");\n            case 3:\n                System.out.println(\"three\");\n                break;\n            case 4:\n                System.out.println(\"four\");\n        }\n    }\n}",
+  "answer": "one or two\nthree",
+  "explanation": "x=2 matches case 2. No break, so falls through to case 3 which prints 'three'. break stops execution before case 4.",
+  "alternatives": ["one or two\nthree\n"]
+}

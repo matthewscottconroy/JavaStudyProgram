@@ -1,0 +1,10 @@
+{
+  "id": "aal-tr-comp-12",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class StreamToList {\n    public static void main(String[] args) {\n        int[] arr = {5, 3, 8, 1, 9, 2, 7};\n        List<Integer> top3 = Arrays.stream(arr)\n            .boxed()\n            .sorted(Comparator.reverseOrder())\n            .limit(3)\n            .toList();\n        System.out.println(top3);\n        System.out.println(top3.get(0));\n    }\n}",
+  "answer": "[9, 8, 7]\n9",
+  "explanation": "Stream sorts descending and takes top 3: 9,8,7. toList() → [9,8,7]. get(0)=9.",
+  "alternatives": ["[9, 8, 7]\n9\n"]
+}

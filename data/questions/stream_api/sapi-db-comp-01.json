@@ -1,0 +1,15 @@
+{
+  "id": "sapi-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "This code throws IllegalStateException: stream has already been operated upon or closed. What is the bug?",
+  "code": "import java.util.*;\nimport java.util.stream.*;\npublic class ReusedStream {\n    public static void main(String[] args) {\n        List<Integer> nums = List.of(1, 2, 3, 4, 5);\n        Stream<Integer> s = nums.stream();\n\n        long count = s.filter(n -> n > 2).count();\n        System.out.println(count);\n\n        long sum = s.mapToLong(Integer::longValue).sum();  // reuses s\n        System.out.println(sum);\n    }\n}",
+  "choices": [
+    "filter() and count() cannot be chained on the same stream",
+    "A stream can only be consumed once — once a terminal operation (count) runs, the stream is closed and cannot be reused",
+    "mapToLong requires an IntStream, not a Stream<Integer>",
+    "nums.stream() must be reassigned after each terminal operation"
+  ],
+  "answer": "b",
+  "explanation": "Streams are single-use pipelines. Once a terminal operation (count(), collect(), sum(), etc.) is called, the stream is consumed and closed. Any further operation on the same stream reference throws IllegalStateException. Fix: call nums.stream() again for the second pipeline — Stream<Integer> s2 = nums.stream();"
+}

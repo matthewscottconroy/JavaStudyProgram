@@ -1,0 +1,15 @@
+{
+  "id": "col-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The loop throws ConcurrentModificationException. What is the bug?",
+  "code": "import java.util.*;\npublic class RemoveBug {\n    public static void main(String[] args) {\n        List<Integer> list = new ArrayList<>(Arrays.asList(1,2,3,4,5));\n        for (int x : list) {\n            if (x % 2 == 0) list.remove(Integer.valueOf(x));  // bug\n        }\n    }\n}",
+  "choices": [
+    "Integer.valueOf() cannot be used as an argument to List.remove()",
+    "Modifying a List while iterating it with for-each throws ConcurrentModificationException",
+    "ArrayList does not support removing elements",
+    "The condition x % 2 == 0 should use x % 2 != 0"
+  ],
+  "answer": "b",
+  "explanation": "The for-each loop uses an Iterator internally. Modifying the collection (remove) during iteration invalidates the iterator, causing ConcurrentModificationException. Fix: use Iterator.remove() explicitly, or collect elements to remove and remove after the loop, or use list.removeIf(x -> x % 2 == 0)."
+}

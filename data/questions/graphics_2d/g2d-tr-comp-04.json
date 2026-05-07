@@ -1,0 +1,10 @@
+{
+  "id": "g2d-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print about shapes?",
+  "code": "import java.awt.geom.*;\npublic class ShapeProps {\n    public static void main(String[] args) {\n        Rectangle2D rect = new Rectangle2D.Double(10, 20, 100, 50);\n        System.out.println(rect.getX());\n        System.out.println(rect.getWidth());\n        System.out.println(rect.contains(60, 45));\n        System.out.println(rect.contains(200, 200));\n        Ellipse2D ellipse = new Ellipse2D.Double(0, 0, 50, 50);\n        System.out.println(ellipse.contains(25, 25));\n    }\n}",
+  "answer": "10.0\n100.0\ntrue\nfalse\ntrue",
+  "explanation": "rect at (10,20), size (100,50). getX()=10.0, getWidth()=100.0. Point (60,45): x 10≤60≤110, y 20≤45≤70 → inside (true). (200,200): outside (false). Ellipse at (0,0) size (50,50). Center (25,25), radius=25. contains(25,25): center is inside → true.",
+  "alternatives": ["10.0\n100.0\ntrue\nfalse\ntrue\n"]
+}

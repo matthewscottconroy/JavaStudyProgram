@@ -1,0 +1,10 @@
+{
+  "id": "rec-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 1,
+  "prompt": "What does this program print?",
+  "code": "public class RecordBasic {\n    record Point(int x, int y) {}\n    public static void main(String[] args) {\n        Point p = new Point(3, 4);\n        System.out.println(p.x());\n        System.out.println(p.y());\n        System.out.println(p);\n    }\n}",
+  "answer": "3\n4\nPoint[x=3, y=4]",
+  "explanation": "Records auto-generate accessor methods with the same name as the component (no 'get' prefix). toString() produces ClassName[field=value, ...] format.",
+  "alternatives": ["3\n4\nPoint[x=3, y=4]\n"]
+}

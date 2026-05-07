@@ -1,0 +1,10 @@
+{
+  "id": "str-tr-comp-12",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class CharOps {\n    public static void main(String[] args) {\n        String s = \"Hello World\";\n        long upperCount = s.chars()\n            .filter(Character::isUpperCase)\n            .count();\n        System.out.println(upperCount);\n        System.out.println(s.chars().filter(c -> c == ' ').count());\n        System.out.println(s.toLowerCase().replace(\" \", \"_\"));\n    }\n}",
+  "answer": "2\n1\nhello_world",
+  "explanation": "Uppercase chars in 'Hello World': H, W → count 2. Space count: 1. toLowerCase then replace ' ' with '_' → 'hello_world'.",
+  "alternatives": ["2\n1\nhello_world\n"]
+}

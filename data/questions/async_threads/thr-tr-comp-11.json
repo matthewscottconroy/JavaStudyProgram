@@ -1,0 +1,10 @@
+{
+  "id": "thr-tr-comp-11",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.concurrent.*;\npublic class SemaphoreDemo {\n    static Semaphore sem = new Semaphore(2);\n    static java.util.concurrent.atomic.AtomicInteger active = \n        new java.util.concurrent.atomic.AtomicInteger(0);\n    public static void main(String[] args) throws Exception {\n        Runnable task = () -> {\n            try {\n                sem.acquire();\n                active.incrementAndGet();\n                Thread.sleep(50);\n                active.decrementAndGet();\n                sem.release();\n            } catch (InterruptedException e) {}\n        };\n        Thread[] ts = {new Thread(task), new Thread(task), new Thread(task)};\n        for (Thread t : ts) t.start();\n        Thread.sleep(10);\n        System.out.println(active.get() <= 2);\n        for (Thread t : ts) t.join();\n        System.out.println(active.get());\n    }\n}",
+  "answer": "true\n0",
+  "explanation": "Semaphore permits=2: at most 2 threads active at once. After 10ms, at most 2 threads are in the critical section → active<=2 is true. After all threads finish, active=0.",
+  "alternatives": ["true\n0\n"]
+}

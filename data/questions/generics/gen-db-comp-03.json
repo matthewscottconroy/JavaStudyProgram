@@ -1,0 +1,15 @@
+{
+  "id": "gen-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The code compiles with an unchecked cast warning and fails at runtime. What is the bug?",
+  "code": "import java.util.*;\npublic class HeapPollution {\n    @SuppressWarnings(\"unchecked\")\n    public static void main(String[] args) {\n        List raw = new ArrayList();\n        raw.add(\"hello\");\n        raw.add(42);\n        List<String> strings = raw;  // unsafe assignment\n        String s = strings.get(1);   // ClassCastException at runtime\n    }\n}",
+  "choices": [
+    "ArrayList cannot hold both String and int values",
+    "Assigning a raw type to a parameterized type bypasses generics; strings.get(1) retrieves an Integer and the implicit cast to String fails",
+    "raw.add(42) should use Integer.valueOf(42) to store integers",
+    "List<String> requires all elements to be converted to String at insertion time"
+  ],
+  "answer": "b",
+  "explanation": "Using raw types (List without type parameter) bypasses compile-time generics checks. The raw list holds both String and Integer. Assigning to List<String> is allowed with a warning (heap pollution). strings.get(1) inserts an implicit cast to String, which fails for the Integer value 42 at runtime. Always use parameterized types."
+}

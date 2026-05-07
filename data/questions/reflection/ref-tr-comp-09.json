@@ -1,0 +1,10 @@
+{
+  "id": "ref-tr-comp-09",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.lang.annotation.*;\nimport java.lang.reflect.*;\npublic class AnnotationReflect {\n    @Retention(RetentionPolicy.RUNTIME)\n    @interface Tag { String value(); }\n    @Tag(\"important\")\n    static class Marked {}\n    public static void main(String[] args) {\n        Class<?> cls = Marked.class;\n        System.out.println(cls.isAnnotationPresent(Tag.class));\n        Tag tag = cls.getAnnotation(Tag.class);\n        System.out.println(tag.value());\n        System.out.println(cls.getAnnotations().length);\n    }\n}",
+  "answer": "true\nimportant\n1",
+  "explanation": "Marked is annotated @Tag with RUNTIME retention. isAnnotationPresent(Tag.class)=true. tag.value()='important'. getAnnotations().length=1.",
+  "alternatives": ["true\nimportant\n1\n"]
+}

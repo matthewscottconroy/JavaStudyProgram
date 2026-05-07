@@ -1,0 +1,10 @@
+{
+  "id": "cc-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class ComparatorDemo {\n    public static void main(String[] args) {\n        List<String> words = new ArrayList<>(Arrays.asList(\"banana\", \"apple\", \"cherry\"));\n        words.sort(Comparator.comparingInt(String::length));\n        System.out.println(words);\n    }\n}",
+  "answer": "[apple, banana, cherry]",
+  "explanation": "Sorted by length: apple(5), banana(6), cherry(6). banana and cherry have equal length so their relative order is stable (banana was before cherry in the original list).",
+  "alternatives": ["[apple, banana, cherry]\n"]
+}

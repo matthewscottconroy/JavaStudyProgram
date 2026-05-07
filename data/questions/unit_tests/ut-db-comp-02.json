@@ -1,0 +1,15 @@
+{
+  "id": "ut-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "This test fails with 'expected: <4> but was: <5>'. The programmer expects add(2,3)=5 to pass. What is the bug?",
+  "code": "import org.junit.jupiter.api.*;\nimport static org.junit.jupiter.api.Assertions.*;\nclass AddTest {\n    static int add(int a, int b) { return a + b; }\n\n    @Test\n    void testAdd() {\n        assertEquals(4, add(2, 3));  // args swapped\n    }\n}",
+  "choices": [
+    "assertEquals does not support int arguments — use assertTrue instead",
+    "The arguments to assertEquals are swapped — the first argument is the expected value; 4 is expected but add(2,3)=5 is the actual result",
+    "add(2,3) returns the wrong value and the method itself has a bug",
+    "The test class must extend TestCase to use assertEquals"
+  ],
+  "answer": "b",
+  "explanation": "assertEquals(expected, actual): the first argument is what you expect the answer to be, the second is what the code actually computed. Here expected=4 and actual=add(2,3)=5, so the test fails with 'expected: <4> but was: <5>'. The method is correct; the test has the expected value wrong. Fix: assertEquals(5, add(2, 3));"
+}

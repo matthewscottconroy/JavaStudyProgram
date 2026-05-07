@@ -1,0 +1,15 @@
+{
+  "id": "fn-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The programmer expects this to print 10 but it prints 5. What is the bug?",
+  "code": "public class Doubler {\n    public static void doubleIt(int x) {\n        x = x * 2;\n    }\n\n    public static void main(String[] args) {\n        int value = 5;\n        doubleIt(value);\n        System.out.println(value);\n    }\n}",
+  "choices": [
+    "x * 2 should be written as 2 * x for left-to-right evaluation",
+    "Java passes primitives by value — doubleIt receives a copy; modifying x does not change value in main",
+    "The method must be declared static to access variables in main",
+    "value must be declared as Integer (wrapper type) for a method to modify it"
+  ],
+  "answer": "b",
+  "explanation": "Java always passes primitives by value. doubleIt(value) copies 5 into the parameter x. x = x * 2 sets the local copy to 10, but the original 'value' in main is a separate variable and remains 5. Fix: return the doubled value and assign it — value = doubleIt(value) — and change the return type to int."
+}

@@ -1,0 +1,10 @@
+{
+  "id": "dt-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.time.*;\npublic class ImmutableDate {\n    public static void main(String[] args) {\n        LocalDate d = LocalDate.of(2024, 1, 1);\n        d.plusDays(10);  // result discarded\n        System.out.println(d);\n        LocalDate d2 = d.plusDays(10);\n        System.out.println(d2);\n    }\n}",
+  "answer": "2024-01-01\n2024-01-11",
+  "explanation": "java.time objects are immutable. plusDays() returns a new object; it does not mutate d. The first println shows d unchanged. d2 captures the new value: Jan 1 + 10 days = Jan 11.",
+  "alternatives": ["2024-01-01\n2024-01-11\n"]
+}

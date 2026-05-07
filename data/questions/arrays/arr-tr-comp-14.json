@@ -1,0 +1,10 @@
+{
+  "id": "arr-tr-comp-14",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class TwoSum {\n    static int[] twoSum(int[] nums, int target) {\n        java.util.Map<Integer,Integer> map = new java.util.HashMap<>();\n        for (int i = 0; i < nums.length; i++) {\n            int complement = target - nums[i];\n            if (map.containsKey(complement)) return new int[]{map.get(complement), i};\n            map.put(nums[i], i);\n        }\n        return new int[]{-1, -1};\n    }\n    public static void main(String[] args) {\n        int[] r = twoSum(new int[]{2, 7, 11, 15}, 9);\n        System.out.println(r[0] + \" \" + r[1]);\n    }\n}",
+  "answer": "0 1",
+  "explanation": "i=0: complement=7, not in map, put 2→0. i=1: complement=2, found at index 0 → return {0,1}. Output: 0 1.",
+  "alternatives": ["0 1\n"]
+}

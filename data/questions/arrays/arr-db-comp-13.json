@@ -1,0 +1,15 @@
+{
+  "id": "arr-db-comp-13",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The merge sort implementation produces unsorted output. What is the bug?",
+  "code": "public class MergeSort {\n    static void mergeSort(int[] arr, int l, int r) {\n        if (l >= r) return;\n        int mid = (l + r) / 2;\n        mergeSort(arr, l, mid);\n        mergeSort(arr, mid, r);   // bug: should be mid+1, r\n        merge(arr, l, mid, r);\n    }\n    static void merge(int[] arr, int l, int mid, int r) { /* correct */ }\n}",
+  "choices": [
+    "The base case l >= r should be l > r",
+    "mergeSort(arr, mid, r) includes mid in the right half; it should be mergeSort(arr, mid+1, r) to avoid processing the midpoint twice",
+    "merge() should be called before the recursive calls",
+    "mid should be computed as (l + r + 1) / 2 to handle odd-length arrays"
+  ],
+  "answer": "b",
+  "explanation": "When the right recursive call is mergeSort(arr, mid, r), the element at index mid is included in both the left sort [l..mid] and the right sort [mid..r]. This causes incorrect partitioning. Fix: mergeSort(arr, mid+1, r) so the right sub-array starts at mid+1."
+}

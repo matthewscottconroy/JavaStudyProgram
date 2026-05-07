@@ -1,0 +1,15 @@
+{
+  "id": "dp-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The Singleton is not actually a singleton — multiple instances can be created. What is the bug?",
+  "code": "public class BrokenSingleton {\n    private static BrokenSingleton instance;\n    public BrokenSingleton() {}  // bug: public constructor\n    public static BrokenSingleton getInstance() {\n        if (instance == null) instance = new BrokenSingleton();\n        return instance;\n    }\n}",
+  "choices": [
+    "getInstance() must be declared final",
+    "The constructor is public, allowing callers to create instances directly with new BrokenSingleton(), bypassing getInstance()",
+    "static fields cannot be used to store singleton instances",
+    "getInstance() must be synchronized to be a singleton"
+  ],
+  "answer": "b",
+  "explanation": "The constructor must be private to prevent direct instantiation. With a public constructor, any code can do new BrokenSingleton() and get a second (third, etc.) instance. Fix: private BrokenSingleton() {}. Optionally also make it thread-safe with synchronized or using the initialization-on-demand holder pattern."
+}

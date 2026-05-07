@@ -1,0 +1,15 @@
+{
+  "id": "arg-db-comp-06",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The program throws ArrayIndexOutOfBoundsException when no arguments are provided. What is the bug?",
+  "code": "public class ArgPrint {\n    public static void main(String[] args) {\n        System.out.println(args[0]);  // bug: no guard for empty args\n    }\n}",
+  "choices": [
+    "args is null when no arguments are provided",
+    "args[0] throws ArrayIndexOutOfBoundsException when args is empty; the code does not check args.length before accessing the first element",
+    "main must declare throws ArrayIndexOutOfBoundsException to handle this case",
+    "args.length returns -1 when no arguments are passed"
+  ],
+  "answer": "b",
+  "explanation": "When no command-line arguments are passed, args is an empty array (length 0), not null. Accessing args[0] on an empty array throws ArrayIndexOutOfBoundsException. Fix: check if (args.length > 0) before accessing args[0]."
+}

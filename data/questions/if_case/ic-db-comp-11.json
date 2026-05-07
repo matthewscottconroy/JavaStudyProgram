@@ -1,0 +1,15 @@
+{
+  "id": "ic-db-comp-11",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The condition checks the wrong range. What is the bug?",
+  "code": "public class RangeCheck {\n    static boolean inRange(int x, int lo, int hi) {\n        return lo < x < hi;   // bug: not valid Java\n    }\n}",
+  "choices": [
+    "Chained comparisons like lo < x < hi work in Java as in Python",
+    "Java does not support chained comparisons; lo < x < hi would need to be written as x > lo && x < hi",
+    "The return type should be int, not boolean",
+    "lo and hi must be final to be used in a comparison"
+  ],
+  "answer": "b",
+  "explanation": "Java does not support Python-style chained comparisons. lo < x evaluates to a boolean; then boolean < hi is a type error. Fix: return x > lo && x < hi; (or x >= lo && x <= hi for inclusive bounds)."
+}

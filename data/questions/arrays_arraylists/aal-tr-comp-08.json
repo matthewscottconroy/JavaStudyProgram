@@ -1,0 +1,10 @@
+{
+  "id": "aal-tr-comp-08",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class CustomSort {\n    public static void main(String[] args) {\n        List<String> words = new ArrayList<>(Arrays.asList(\"banana\",\"fig\",\"apple\",\"kiwi\"));\n        words.sort(Comparator.comparingInt(String::length));\n        System.out.println(words.get(0));\n        words.sort(Comparator.comparingInt(String::length).reversed());\n        System.out.println(words.get(0));\n        System.out.println(words.size());\n    }\n}",
+  "answer": "fig\nbanana\n4",
+  "explanation": "Sorted by length ascending: fig(3), kiwi(4), apple(5), banana(6) → get(0)=\"fig\". Sorted by length descending: banana(6), apple(5), kiwi(4), fig(3) → get(0)=\"banana\". size()=4.",
+  "alternatives": ["fig\nbanana\n4\n"]
+}

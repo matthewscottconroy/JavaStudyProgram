@@ -1,0 +1,10 @@
+{
+  "id": "str-tr-comp-10",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class StringBuilder {\n    public static void main(String[] args) {\n        java.lang.StringBuilder sb = new java.lang.StringBuilder(\"hello\");\n        sb.reverse();\n        sb.insert(0, \"--\");\n        sb.append('!');\n        System.out.println(sb);\n        System.out.println(sb.length());\n    }\n}",
+  "answer": "--olleh!\n8",
+  "explanation": "reverse: 'olleh'. insert(0,'--'): '--olleh'. append('!'): '--olleh!'. Length=8.",
+  "alternatives": ["--olleh!\n8\n"]
+}

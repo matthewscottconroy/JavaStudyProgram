@@ -1,0 +1,15 @@
+{
+  "id": "rec-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The record field mutation fails to compile. What is the bug?",
+  "code": "public class RecordMutBug {\n    record Point(int x, int y) {}\n    public static void main(String[] args) {\n        Point p = new Point(1, 2);\n        p.x = 10;  // bug: record fields are final\n        System.out.println(p);\n    }\n}",
+  "choices": [
+    "Record accessor methods are called with parentheses: p.x() not p.x",
+    "Record components are implicitly final; you cannot assign to p.x; create a new record instance instead: p = new Point(10, p.y())",
+    "Records must implement Cloneable to allow field modification",
+    "final fields can be modified with reflection using setAccessible(true)"
+  ],
+  "answer": "b",
+  "explanation": "Record components are final — they are set in the constructor and never changed. p.x = 10 is a compile error. Records are inherently immutable data carriers. Fix: create a new instance: Point updated = new Point(10, p.y())."
+}

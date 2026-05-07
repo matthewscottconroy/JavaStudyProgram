@@ -1,0 +1,16 @@
+{
+  "id": "ex-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The code does not compile. What is the bug?",
+  "code": "public class UnreachableCatch {\n    static void method() {\n        try {\n            System.out.println(\"hello\");\n        } catch (IOException e) {   // compile error\n            e.printStackTrace();\n        }\n    }\n}",
+  "choices": [
+    "IOException must be imported from java.io",
+    "The try block does not throw IOException (or any checked exception); catching a checked exception that cannot be thrown is a compile error",
+    "catch blocks cannot call printStackTrace()",
+    "try blocks must contain at least one statement that can throw"
+  ],
+  "answer": "b",
+  "explanation": "Java detects unreachable catch clauses. Since the try block never throws IOException (a checked exception), catching it is a compile error. Fix: either add a throws IOException declaration and code that can throw it, or remove the catch. Note: catching RuntimeException or Exception is always allowed.",
+  "alternatives": []
+}

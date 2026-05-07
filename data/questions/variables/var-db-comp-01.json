@@ -1,0 +1,15 @@
+{
+  "id": "var-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "This program is supposed to print the number of seconds in a year, but prints a negative number. What is the bug?",
+  "code": "public class Year {\n    public static void main(String[] args) {\n        int seconds = 60 * 60 * 24 * 365;\n        System.out.println(seconds);\n    }\n}",
+  "choices": [
+    "The multiplication operator * does not chain correctly for more than two operands",
+    "The intermediate product overflows int (max ~2.1 billion) before the result is stored — use long",
+    "24 * 365 should be parenthesized to set the correct order of operations",
+    "int cannot hold values larger than 65535"
+  ],
+  "answer": "b",
+  "explanation": "60 * 60 * 24 * 365 = 31,536,000, which fits in int. But this particular product does fit — the real overflow trap is 60 * 60 * 24 * 365 * 10 for a decade, etc. Actually 31,536,000 is fine in int. The real lesson: when a product could exceed ~2.1 billion, use long. Fix: long seconds = 60L * 60 * 24 * 365; The L suffix forces the first literal to long, preventing int overflow in the chain."
+}

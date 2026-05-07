@@ -1,0 +1,10 @@
+{
+  "id": "gen-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Pair<A, B> {\n    private final A first;\n    private final B second;\n\n    public Pair(A first, B second) {\n        this.first  = first;\n        this.second = second;\n    }\n\n    public A getFirst()  { return first; }\n    public B getSecond() { return second; }\n\n    public Pair<B, A> swap() {\n        return new Pair<>(second, first);\n    }\n\n    public static void main(String[] args) {\n        Pair<String, Integer> p = new Pair<>(\"hello\", 42);\n        System.out.println(p.getFirst() + \" \" + p.getSecond());\n        Pair<Integer, String> q = p.swap();\n        System.out.println(q.getFirst() + \" \" + q.getSecond());\n    }\n}",
+  "answer": "hello 42\n42 hello",
+  "explanation": "p stores ('hello', 42). p.swap() returns a new Pair with the values reversed: (42, 'hello'). q.getFirst() = 42, q.getSecond() = 'hello'.",
+  "alternatives": ["hello 42\n42 hello\n"]
+}

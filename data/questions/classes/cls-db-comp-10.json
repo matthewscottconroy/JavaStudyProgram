@@ -1,0 +1,15 @@
+{
+  "id": "cls-db-comp-10",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The enum switch statement throws an exception for a valid value. What is the bug?",
+  "code": "public class EnumSwitch {\n    enum Color { RED, GREEN, BLUE }\n    static String describe(Color c) {\n        switch (c) {\n            case RED: return \"red\";\n            case GREEN: return \"green\";\n            // missing BLUE case — bug\n        }\n        return null;  // returns null for BLUE\n    }\n    public static void main(String[] args) {\n        System.out.println(describe(Color.BLUE).toUpperCase());  // NPE\n    }\n}",
+  "choices": [
+    "Enum switch statements require a default case to compile",
+    "BLUE has no case in the switch; describe() returns null, and calling toUpperCase() on null throws NullPointerException",
+    "switch on enum requires explicit ordinal() comparisons",
+    "Color.BLUE is not a valid enum constant and will throw IllegalArgumentException"
+  ],
+  "answer": "b",
+  "explanation": "BLUE is not handled in the switch, so describe() falls through to return null. Calling null.toUpperCase() throws NullPointerException. Fix: add a case BLUE: return \"blue\"; or a default case. With exhaustive switch expressions (Java 14+), the compiler would flag the missing case."
+}

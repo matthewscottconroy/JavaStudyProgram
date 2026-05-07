@@ -1,0 +1,10 @@
+{
+  "id": "ifc-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Functional {\n    @FunctionalInterface\n    interface Transformer {\n        int transform(int x);\n    }\n    static int apply(int n, Transformer t) { return t.transform(n); }\n    public static void main(String[] args) {\n        Transformer doubler = x -> x * 2;\n        Transformer square = x -> x * x;\n        System.out.println(apply(5, doubler));\n        System.out.println(apply(4, square));\n        System.out.println(apply(3, x -> x + 10));\n    }\n}",
+  "answer": "10\n16\n13",
+  "explanation": "apply(5, doubler): 5*2=10. apply(4, square): 4*4=16. apply(3, x->x+10): 3+10=13.",
+  "alternatives": ["10\n16\n13\n"]
+}

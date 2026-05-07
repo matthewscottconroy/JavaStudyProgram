@@ -1,0 +1,15 @@
+{
+  "id": "fn-db-comp-12",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The swap method does not actually swap the values. What is the bug?",
+  "code": "public class Swap {\n    static void swap(int a, int b) {\n        int temp = a;\n        a = b;\n        b = temp;\n        System.out.println(a + \" \" + b);\n    }\n    public static void main(String[] args) {\n        int x = 1, y = 2;\n        swap(x, y);\n        System.out.println(x + \" \" + y);  // still 1 2\n    }\n}",
+  "choices": [
+    "temp should be declared as a field, not a local variable",
+    "Java passes primitives by value; swapping parameters inside the method does not affect the caller's variables",
+    "The method should return both values as an array",
+    "int a and int b must be declared volatile to enable cross-method mutation"
+  ],
+  "answer": "b",
+  "explanation": "Java is pass-by-value for primitives. swap() receives copies of x and y; changes to a and b are local to the method. The caller's x and y remain 1 and 2. Fix: pass an array or use a wrapper, or return the swapped values."
+}

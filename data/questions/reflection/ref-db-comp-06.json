@@ -1,0 +1,15 @@
+{
+  "id": "ref-db-comp-06",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The reflection call throws IllegalAccessException. What is the bug?",
+  "code": "public class AccessBug {\n    public static void main(String[] args) throws Exception {\n        java.lang.reflect.Field f = String.class.getDeclaredField(\"value\");\n        f.get(\"hello\");  // bug: field is private, not accessible\n    }\n}",
+  "choices": [
+    "getDeclaredField returns null for private fields and get() throws NPE",
+    "Accessing a private field via reflection requires calling f.setAccessible(true) before f.get(); without it, IllegalAccessException is thrown",
+    "getDeclaredField only works on public fields; use getField instead",
+    "String.value is a char[] and cannot be retrieved via Field.get()"
+  ],
+  "answer": "b",
+  "explanation": "getDeclaredField finds private fields, but the JVM still enforces access control when you call get(). You must call f.setAccessible(true) before accessing the field value. Without it, reflection throws IllegalAccessException. Fix: add f.setAccessible(true); before f.get(\"hello\")."
+}

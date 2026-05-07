@@ -1,0 +1,15 @@
+{
+  "id": "dt-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The LocalDateTime comparison gives the wrong result. What is the bug?",
+  "code": "import java.time.*;\npublic class DateCompareBug {\n    public static void main(String[] args) {\n        LocalDateTime a = LocalDateTime.of(2024, 3, 1, 10, 0);\n        LocalDateTime b = LocalDateTime.of(2024, 3, 1, 9, 0);\n        // bug: using == instead of isBefore/isAfter\n        System.out.println(a == b);  // always false, wrong intent\n        System.out.println(a.isAfter(b));\n    }\n}",
+  "choices": [
+    "LocalDateTime does not implement Comparable",
+    "== compares object references, not date-time values; two distinct LocalDateTime objects representing the same moment are never == even if equal; use isAfter(), isBefore(), or equals() for value comparison",
+    "a.isAfter(b) throws UnsupportedTemporalTypeException for LocalDateTime",
+    "LocalDateTime.of requires a ZoneId parameter to compare correctly"
+  ],
+  "answer": "b",
+  "explanation": "== on objects checks reference identity. Two separate LocalDateTime objects with the same or different values are always different references, so == is always false and useless for date comparison. Fix: use a.isAfter(b) (true here — 10:00 > 9:00), a.isBefore(b), or a.equals(b)."
+}

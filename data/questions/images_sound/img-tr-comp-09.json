@@ -1,0 +1,10 @@
+{
+  "id": "img-tr-comp-09",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "import java.awt.*;\npublic class ColorComponents {\n    public static void main(String[] args) {\n        Color c = new Color(100, 150, 200);\n        System.out.println(c.getRed());\n        System.out.println(c.getGreen());\n        System.out.println(c.getBlue());\n    }\n}",
+  "answer": "100\n150\n200",
+  "explanation": "Color(int r, int g, int b) stores each component (0–255). getRed()=100, getGreen()=150, getBlue()=200.",
+  "alternatives": ["100\n150\n200\n"]
+}

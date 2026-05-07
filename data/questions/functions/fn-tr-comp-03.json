@@ -1,0 +1,10 @@
+{
+  "id": "fn-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Greeter {\n    public static String greet(String name) {\n        return \"Hello, \" + name + \"!\";\n    }\n\n    public static String greet(String name, int times) {\n        StringBuilder sb = new StringBuilder();\n        for (int i = 0; i < times; i++) {\n            if (i > 0) sb.append(\" \");\n            sb.append(greet(name));\n        }\n        return sb.toString();\n    }\n\n    public static void main(String[] args) {\n        System.out.println(greet(\"World\"));\n        System.out.println(greet(\"Java\", 2));\n    }\n}",
+  "answer": "Hello, World!\nHello, Java! Hello, Java!",
+  "explanation": "greet(\"World\") calls the single-arg overload → 'Hello, World!'. greet(\"Java\", 2): i=0 no leading space, appends 'Hello, Java!'; i=1 appends ' ' then 'Hello, Java!'. Result: 'Hello, Java! Hello, Java!'.",
+  "alternatives": ["Hello, World!\nHello, Java! Hello, Java!\n"]
+}

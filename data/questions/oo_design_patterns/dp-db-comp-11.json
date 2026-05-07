@@ -1,0 +1,15 @@
+{
+  "id": "dp-db-comp-11",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The Decorator accumulates state incorrectly. What is the bug?",
+  "code": "public class Decorator {\n    interface TextTransform { String transform(String s); }\n    static class Upper implements TextTransform {\n        public String transform(String s) { return s.toUpperCase(); }\n    }\n    static class Exclaim implements TextTransform {\n        TextTransform inner;\n        String suffix = \"!\";\n        Exclaim(TextTransform t) { inner = t; }\n        public String transform(String s) {\n            suffix += \"!\";   // bug: suffix grows each call\n            return inner.transform(s) + suffix;\n        }\n    }\n    public static void main(String[] args) {\n        TextTransform t = new Exclaim(new Upper());\n        System.out.println(t.transform(\"hi\"));\n        System.out.println(t.transform(\"bye\"));\n    }\n}",
+  "choices": [
+    "Upper.transform() should delegate to an inner transform",
+    "suffix += \"!\" mutates the suffix field on every call; the first call appends one !, the second appends another, producing '!!' on the second call",
+    "Decorator requires an abstract base class, not an interface",
+    "inner.transform(s) should be called after appending the suffix"
+  ],
+  "answer": "b",
+  "explanation": "suffix starts as '!'. First call: suffix becomes '!!' → result 'HI!!'. Second call: suffix becomes '!!!' → result 'BYE!!!'. The field mutates instead of using a constant. Fix: remove suffix += \"!\"; and use a literal: return inner.transform(s) + \"!\";"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "ser-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.io.*;\npublic class CustomSerial {\n    static class Safe implements Serializable {\n        private static final long serialVersionUID = 1L;\n        int value;\n        Safe(int v) { value = v; }\n        private void writeObject(ObjectOutputStream out) throws IOException {\n            out.defaultWriteObject();\n            out.writeInt(value * 2);\n        }\n        private void readObject(ObjectInputStream in) throws Exception {\n            in.defaultReadObject();\n            int extra = in.readInt();\n            System.out.println(\"extra=\" + extra);\n        }\n    }\n    public static void main(String[] args) throws Exception {\n        Safe s = new Safe(5);\n        ByteArrayOutputStream bos = new ByteArrayOutputStream();\n        new ObjectOutputStream(bos).writeObject(s);\n        Safe s2 = (Safe) new ObjectInputStream(\n            new ByteArrayInputStream(bos.toByteArray())).readObject();\n        System.out.println(s2.value);\n    }\n}",
+  "answer": "extra=10\n5",
+  "explanation": "writeObject writes the object normally (value=5) then writes value*2=10 as extra data. readObject reads normally (value=5 restored) then reads extra=10 and prints it. s2.value=5.",
+  "alternatives": ["extra=10\n5\n"]
+}

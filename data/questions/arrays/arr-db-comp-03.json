@@ -1,0 +1,15 @@
+{
+  "id": "arr-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "This code throws ArrayIndexOutOfBoundsException. What is the bug?",
+  "code": "public class LastElement {\n    public static void main(String[] args) {\n        int[] data = {10, 20, 30};\n        System.out.println(data[data.length]);  // bug\n    }\n}",
+  "choices": [
+    "int[] cannot be indexed with a variable expression",
+    "Array indices go from 0 to length-1; data[data.length] is data[3] which is out of bounds",
+    "data.length returns the wrong value for arrays declared with initializers",
+    "System.out.println cannot print int values directly"
+  ],
+  "answer": "b",
+  "explanation": "For an array of length 3, valid indices are 0, 1, 2. data[data.length] = data[3] is one past the last element, throwing ArrayIndexOutOfBoundsException. Fix: data[data.length - 1]."
+}

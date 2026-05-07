@@ -1,0 +1,10 @@
+{
+  "id": "fn-tr-comp-16",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class StringUtils {\n    static String padLeft(String s, int width, char c) {\n        StringBuilder sb = new StringBuilder();\n        for (int i = s.length(); i < width; i++) sb.append(c);\n        sb.append(s);\n        return sb.toString();\n    }\n    public static void main(String[] args) {\n        System.out.println(padLeft(\"hi\", 5, '-'));\n        System.out.println(padLeft(\"hello\", 3, '*'));\n        System.out.println(padLeft(\"\", 3, 'X'));\n    }\n}",
+  "answer": "---hi\nhello\nXXX",
+  "explanation": "padLeft(\"hi\",5,'-'): length=2, need 3 padding → \"---hi\". padLeft(\"hello\",3,'*'): length=5>=3, no padding → \"hello\". padLeft(\"\",3,'X'): 3 X's → \"XXX\".",
+  "alternatives": ["---hi\nhello\nXXX\n"]
+}

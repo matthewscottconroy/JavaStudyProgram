@@ -1,0 +1,10 @@
+{
+  "id": "inh-tr-comp-14",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class AbstractSealed {\n    abstract static class Vehicle {\n        abstract int speed();\n        String describe() { return getClass().getSimpleName() + \"@\" + speed(); }\n    }\n    static class Car extends Vehicle { int speed() { return 120; } }\n    static class Bike extends Vehicle { int speed() { return 30; } }\n    public static void main(String[] args) {\n        Vehicle[] v = {new Car(), new Bike()};\n        for (Vehicle x : v) System.out.println(x.describe());\n    }\n}",
+  "answer": "Car@120\nBike@30",
+  "explanation": "describe() uses getClass().getSimpleName() (runtime class name) and calls the overridden speed(). Car.speed()=120, Bike.speed()=30.",
+  "alternatives": ["Car@120\nBike@30\n"]
+}

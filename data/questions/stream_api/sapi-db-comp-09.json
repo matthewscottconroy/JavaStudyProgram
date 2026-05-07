@@ -1,0 +1,15 @@
+{
+  "id": "sapi-db-comp-09",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The parallel stream produces inconsistent results due to non-thread-safe collection. What is the bug?",
+  "code": "import java.util.*;\nimport java.util.stream.*;\npublic class ParallelBug {\n    public static void main(String[] args) {\n        List<Integer> result = new ArrayList<>();\n        IntStream.range(0, 1000).parallel()\n            .forEach(i -> result.add(i));  // bug: ArrayList not thread-safe\n        System.out.println(result.size());\n    }\n}",
+  "choices": [
+    "IntStream.range() cannot be made parallel",
+    "ArrayList is not thread-safe; parallel forEach() writing to it from multiple threads causes data corruption, so result.size() may be less than 1000 or throw an exception",
+    "forEach() in parallel streams always produces results in order",
+    "Parallel streams require the collection to implement Serializable"
+  ],
+  "answer": "b",
+  "explanation": "ArrayList.add() is not thread-safe. Concurrent writes from multiple threads cause race conditions: lost updates, wrong size, or ArrayIndexOutOfBoundsException internally. Fix: use Collectors.toList() which handles thread safety: result = IntStream.range(0,1000).parallel().boxed().collect(Collectors.toList());"
+}

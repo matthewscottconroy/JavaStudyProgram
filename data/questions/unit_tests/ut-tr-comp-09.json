@@ -1,0 +1,10 @@
+{
+  "id": "ut-tr-comp-09",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class MockDemo {\n    interface EmailService { boolean send(String to, String msg); }\n    static class UserService {\n        EmailService emailService;\n        UserService(EmailService e) { emailService = e; }\n        boolean register(String email) {\n            if (email == null) return false;\n            return emailService.send(email, \"Welcome!\");\n        }\n    }\n    public static void main(String[] args) {\n        // manual mock\n        EmailService mock = (to, msg) -> { System.out.println(\"sent to: \" + to); return true; };\n        UserService svc = new UserService(mock);\n        System.out.println(svc.register(\"alice@example.com\"));\n        System.out.println(svc.register(null));\n    }\n}",
+  "answer": "sent to: alice@example.com\ntrue\nfalse",
+  "explanation": "register('alice@...'): email not null, calls mock.send() which prints and returns true. register(null): returns false without calling send.",
+  "alternatives": ["sent to: alice@example.com\ntrue\nfalse\n"]
+}

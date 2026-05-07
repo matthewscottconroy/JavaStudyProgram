@@ -1,0 +1,10 @@
+{
+  "id": "aal-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class ListOps {\n    public static void main(String[] args) {\n        List<String> names = new ArrayList<>(List.of(\"Alice\", \"Bob\", \"Carol\"));\n        names.add(\"Dave\");\n        names.remove(\"Bob\");\n        System.out.println(names.size());\n        System.out.println(names.get(1));\n    }\n}",
+  "answer": "3\nCarol",
+  "explanation": "Start: [\"Alice\",\"Bob\",\"Carol\"]. add(\"Dave\") → [\"Alice\",\"Bob\",\"Carol\",\"Dave\"] (size 4). remove(\"Bob\") removes by value → [\"Alice\",\"Carol\",\"Dave\"] (size 3). get(1) is index 1 → \"Carol\".",
+  "alternatives": ["3\nCarol\n"]
+}

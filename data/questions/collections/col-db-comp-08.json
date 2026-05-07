@@ -1,0 +1,15 @@
+{
+  "id": "col-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The ConcurrentModificationException is thrown when removing during iteration. What is the bug?",
+  "code": "import java.util.*;\npublic class RemoveDuring {\n    public static void main(String[] args) {\n        List<Integer> list = new ArrayList<>(Arrays.asList(1,2,3,4,5));\n        for (Integer n : list) {\n            if (n % 2 == 0) list.remove(n);  // bug: structural modification during iteration\n        }\n    }\n}",
+  "choices": [
+    "ArrayList.remove() does not accept Integer arguments",
+    "Calling list.remove() inside a for-each loop modifies the list's structure during iteration, causing ConcurrentModificationException",
+    "The condition n % 2 == 0 should be n % 2 != 0",
+    "For-each loops cannot be used with ArrayList"
+  ],
+  "answer": "b",
+  "explanation": "For-each uses an Iterator internally. Modifying the list (via list.remove()) outside the iterator invalidates the iterator's modCount check, throwing ConcurrentModificationException. Fix: use Iterator explicitly and call it.remove(), or use list.removeIf(n -> n % 2 == 0)."
+}

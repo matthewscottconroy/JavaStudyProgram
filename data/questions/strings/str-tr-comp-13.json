@@ -1,0 +1,10 @@
+{
+  "id": "str-tr-comp-13",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Join {\n    public static void main(String[] args) {\n        String joined = String.join(\", \", \"apple\", \"banana\", \"cherry\");\n        System.out.println(joined);\n        String[] arr = {\"a\", \"b\", \"c\"};\n        System.out.println(String.join(\"-\", arr));\n        System.out.println(joined.contains(\"banana\"));\n        System.out.println(joined.indexOf(\"cherry\"));\n    }\n}",
+  "answer": "apple, banana, cherry\na-b-c\ntrue\n15",
+  "explanation": "join with ', ': 'apple, banana, cherry'. join '-' with array: 'a-b-c'. contains('banana')=true. indexOf('cherry')=15 (apple=0-4, ,=5, space=6, banana=7-12, ,=13, space=14, cherry starts at 15).",
+  "alternatives": ["apple, banana, cherry\na-b-c\ntrue\n15\n"]
+}

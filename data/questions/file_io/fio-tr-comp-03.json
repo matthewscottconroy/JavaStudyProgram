@@ -1,0 +1,10 @@
+{
+  "id": "fio-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.io.*;\npublic class TryResources {\n    static class MyResource implements AutoCloseable {\n        String name;\n        MyResource(String name) { this.name = name; System.out.println(\"open \" + name); }\n        public void close() { System.out.println(\"close \" + name); }\n    }\n    public static void main(String[] args) throws Exception {\n        try (MyResource a = new MyResource(\"A\");\n             MyResource b = new MyResource(\"B\")) {\n            System.out.println(\"body\");\n        }\n    }\n}",
+  "answer": "open A\nopen B\nbody\nclose B\nclose A",
+  "explanation": "Resources are opened in declaration order (A then B). The body runs. On exit, resources are closed in reverse order (B then A) — last-opened, first-closed.",
+  "alternatives": ["open A\nopen B\nbody\nclose B\nclose A\n"]
+}

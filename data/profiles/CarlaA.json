@@ -1,0 +1,103 @@
+{
+  "id" : "c3d4e5f6-a7b8-9012-cdef-123456789012",
+  "name" : "CarlaA",
+  "createdAt" : "2026-02-01T08:00:00",
+  "lastStudied" : "2026-05-04T08:00:00",
+  "totalQuestionsAnswered" : 680,
+  "totalCorrect" : 592,
+  "selectedTopics" : [
+    "VARIABLES", "PRINTING", "ARGUMENTS", "HEX_BINARY_ENCODING", "COMPILING_RUNNING",
+    "IF_CASE", "LOOPS", "FUNCTIONS", "STRINGS", "ARRAYS", "ARRAYS_ARRAYLISTS",
+    "COLLECTIONS", "CLASSES", "PUBLIC_PRIVATE_PROTECTED", "MEMORY_REFERENCE_STATIC",
+    "INTERFACES", "INHERITANCE", "COMPOSITION", "CLASS_HIERARCHY",
+    "INHERITANCE_POLYMORPHISM_ENCAPSULATION", "TRY_CATCH", "FILE_PROCESSING",
+    "GENERICS", "LAMBDAS", "STREAM_API", "UNIT_TESTS", "MAVEN"
+  ],
+  "performance" : {
+    "VARIABLES" : {
+      "topic" : "VARIABLES", "attempts" : 20, "correct" : 20, "masteryScore" : 1.0,
+      "lastAttempted" : "2026-03-01T10:00:00", "lastCorrect" : "2026-03-01T10:00:00",
+      "recentlyAnswered" : []
+    },
+    "PRINTING" : {
+      "topic" : "PRINTING", "attempts" : 18, "correct" : 18, "masteryScore" : 1.0,
+      "lastAttempted" : "2026-03-01T10:00:00", "lastCorrect" : "2026-03-01T10:00:00",
+      "recentlyAnswered" : []
+    },
+    "IF_CASE" : {
+      "topic" : "IF_CASE", "attempts" : 22, "correct" : 21, "masteryScore" : 0.95,
+      "lastAttempted" : "2026-03-15T11:00:00", "lastCorrect" : "2026-03-15T11:00:00",
+      "recentlyAnswered" : []
+    },
+    "LOOPS" : {
+      "topic" : "LOOPS", "attempts" : 25, "correct" : 23, "masteryScore" : 0.90,
+      "lastAttempted" : "2026-03-20T14:00:00", "lastCorrect" : "2026-03-20T14:00:00",
+      "recentlyAnswered" : []
+    },
+    "FUNCTIONS" : {
+      "topic" : "FUNCTIONS", "attempts" : 24, "correct" : 22, "masteryScore" : 0.90,
+      "lastAttempted" : "2026-03-22T10:00:00", "lastCorrect" : "2026-03-22T10:00:00",
+      "recentlyAnswered" : []
+    },
+    "STRINGS" : {
+      "topic" : "STRINGS", "attempts" : 22, "correct" : 20, "masteryScore" : 0.85,
+      "lastAttempted" : "2026-03-25T09:00:00", "lastCorrect" : "2026-03-25T09:00:00",
+      "recentlyAnswered" : []
+    },
+    "ARRAYS" : {
+      "topic" : "ARRAYS", "attempts" : 22, "correct" : 19, "masteryScore" : 0.80,
+      "lastAttempted" : "2026-04-01T10:00:00", "lastCorrect" : "2026-04-01T10:00:00",
+      "recentlyAnswered" : []
+    },
+    "ARRAYS_ARRAYLISTS" : {
+      "topic" : "ARRAYS_ARRAYLISTS", "attempts" : 20, "correct" : 17, "masteryScore" : 0.75,
+      "lastAttempted" : "2026-04-05T11:00:00", "lastCorrect" : "2026-04-05T11:00:00",
+      "recentlyAnswered" : []
+    },
+    "COLLECTIONS" : {
+      "topic" : "COLLECTIONS", "attempts" : 20, "correct" : 17, "masteryScore" : 0.75,
+      "lastAttempted" : "2026-04-10T13:00:00", "lastCorrect" : "2026-04-10T13:00:00",
+      "recentlyAnswered" : [ "col-tr-comp-01", "col-db-comp-01" ]
+    },
+    "CLASSES" : {
+      "topic" : "CLASSES", "attempts" : 22, "correct" : 19, "masteryScore" : 0.80,
+      "lastAttempted" : "2026-04-08T10:00:00", "lastCorrect" : "2026-04-08T10:00:00",
+      "recentlyAnswered" : []
+    },
+    "INTERFACES" : {
+      "topic" : "INTERFACES", "attempts" : 20, "correct" : 16, "masteryScore" : 0.70,
+      "lastAttempted" : "2026-04-15T14:00:00", "lastCorrect" : "2026-04-15T14:00:00",
+      "recentlyAnswered" : []
+    },
+    "INHERITANCE" : {
+      "topic" : "INHERITANCE", "attempts" : 22, "correct" : 18, "masteryScore" : 0.75,
+      "lastAttempted" : "2026-04-18T11:00:00", "lastCorrect" : "2026-04-18T11:00:00",
+      "recentlyAnswered" : [ "inh-tr-comp-02", "inh-db-comp-01" ]
+    },
+    "TRY_CATCH" : {
+      "topic" : "TRY_CATCH", "attempts" : 20, "correct" : 16, "masteryScore" : 0.70,
+      "lastAttempted" : "2026-04-22T13:00:00", "lastCorrect" : "2026-04-22T13:00:00",
+      "recentlyAnswered" : [ "ex-tr-comp-01", "ex-tr-comp-02" ]
+    },
+    "GENERICS" : {
+      "topic" : "GENERICS", "attempts" : 18, "correct" : 13, "masteryScore" : 0.55,
+      "lastAttempted" : "2026-04-28T15:00:00", "lastCorrect" : "2026-04-28T15:00:00",
+      "recentlyAnswered" : []
+    },
+    "LAMBDAS" : {
+      "topic" : "LAMBDAS", "attempts" : 16, "correct" : 11, "masteryScore" : 0.50,
+      "lastAttempted" : "2026-05-01T10:00:00", "lastCorrect" : "2026-05-01T10:00:00",
+      "recentlyAnswered" : []
+    },
+    "STREAM_API" : {
+      "topic" : "STREAM_API", "attempts" : 14, "correct" : 9, "masteryScore" : 0.40,
+      "lastAttempted" : "2026-05-03T14:00:00", "lastCorrect" : "2026-05-03T14:00:00",
+      "recentlyAnswered" : []
+    },
+    "UNIT_TESTS" : {
+      "topic" : "UNIT_TESTS", "attempts" : 16, "correct" : 12, "masteryScore" : 0.55,
+      "lastAttempted" : "2026-05-04T08:00:00", "lastCorrect" : "2026-05-04T08:00:00",
+      "recentlyAnswered" : []
+    }
+  }
+}

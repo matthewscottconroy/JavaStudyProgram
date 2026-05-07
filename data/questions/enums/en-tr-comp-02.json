@@ -1,0 +1,10 @@
+{
+  "id": "en-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "public class EnumField {\n    enum Planet {\n        MERCURY(3.303e+23, 2.4397e6),\n        EARTH(5.976e+24, 6.37814e6);\n        final double mass, radius;\n        Planet(double mass, double radius) { this.mass = mass; this.radius = radius; }\n    }\n    public static void main(String[] args) {\n        System.out.println(Planet.EARTH.name());\n        System.out.println(Planet.MERCURY.ordinal());\n        System.out.println(Planet.values().length);\n    }\n}",
+  "answer": "EARTH\n0\n2",
+  "explanation": "EARTH.name() is \"EARTH\". MERCURY is declared first so its ordinal is 0. values() returns all constants; there are 2 (MERCURY and EARTH).",
+  "alternatives": ["EARTH\n0\n2\n"]
+}

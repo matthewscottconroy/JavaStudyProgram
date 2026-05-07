@@ -1,0 +1,10 @@
+{
+  "id": "fn-tr-comp-28",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class SideEffect {\n    static int x = 0;\n    static int inc() { return ++x; }\n    static int add(int a, int b) { return a + b; }\n    public static void main(String[] args) {\n        int result = add(inc(), inc());\n        System.out.println(result);\n        System.out.println(x);\n    }\n}",
+  "answer": "3\n2",
+  "explanation": "inc() is called twice; Java evaluates arguments left-to-right. First inc() returns 1 (x becomes 1), second inc() returns 2 (x becomes 2). add(1,2)=3. x is 2 after both calls.",
+  "alternatives": ["3\n2\n"]
+}

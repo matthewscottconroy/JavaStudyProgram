@@ -1,0 +1,10 @@
+{
+  "id": "lp-tr-comp-25",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class MaxSubarray {\n    public static void main(String[] args) {\n        int[] nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4};\n        int maxSum = nums[0], cur = nums[0];\n        for (int i = 1; i < nums.length; i++) {\n            cur = Math.max(nums[i], cur + nums[i]);\n            maxSum = Math.max(maxSum, cur);\n        }\n        System.out.println(maxSum);\n    }\n}",
+  "answer": "6",
+  "explanation": "Kadane's algorithm. Best subarray is [4,-1,2,1]=6. The algorithm tracks current max ending here and global max.",
+  "alternatives": ["6\n"]
+}

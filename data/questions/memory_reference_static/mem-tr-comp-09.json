@@ -1,0 +1,10 @@
+{
+  "id": "mem-tr-comp-09",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Stack {\n    static int[] data = new int[10];\n    static int top = -1;\n    static void push(int v) { data[++top] = v; }\n    static int pop() { return data[top--]; }\n    static int peek() { return data[top]; }\n    public static void main(String[] args) {\n        push(10); push(20); push(30);\n        System.out.println(peek());\n        System.out.println(pop());\n        System.out.println(peek());\n        System.out.println(top);\n    }\n}",
+  "answer": "30\n30\n20\n1",
+  "explanation": "After pushing 10,20,30: top=2. peek()=data[2]=30. pop() returns data[2]=30, top becomes 1. peek()=data[1]=20. top=1.",
+  "alternatives": ["30\n30\n20\n1\n"]
+}

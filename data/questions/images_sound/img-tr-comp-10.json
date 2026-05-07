@@ -1,0 +1,10 @@
+{
+  "id": "img-tr-comp-10",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.awt.image.BufferedImage;\npublic class RasterSize {\n    public static void main(String[] args) {\n        BufferedImage img = new BufferedImage(5, 3, BufferedImage.TYPE_INT_ARGB);\n        System.out.println(img.getRaster().getWidth());\n        System.out.println(img.getRaster().getHeight());\n        System.out.println(img.getColorModel().hasAlpha());\n    }\n}",
+  "answer": "5\n3\ntrue",
+  "explanation": "The WritableRaster has the same dimensions as the image: width=5, height=3. TYPE_INT_ARGB includes an alpha channel, so ColorModel.hasAlpha() returns true.",
+  "alternatives": ["5\n3\ntrue\n"]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "ut-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "Which assertions pass and which fail for this code?",
+  "code": "// JUnit 5\nimport org.junit.jupiter.api.*;\nimport static org.junit.jupiter.api.Assertions.*;\npublic class CalcTest {\n    @Test void testDivide() {\n        assertEquals(2, 10 / 5);          // A\n        assertEquals(2.5, 10.0 / 4.0);    // B\n        assertEquals(2, 7 / 3);           // C: 7/3=2 (int division)\n        assertThrows(ArithmeticException.class,\n            () -> { int x = 5 / 0; });    // D\n    }\n}",
+  "answer": "A:pass B:pass C:pass D:pass",
+  "explanation": "A: 10/5=2 == 2 → pass. B: 10.0/4.0=2.5 == 2.5 → pass. C: 7/3=2 (integer division truncates) == 2 → pass. D: 5/0 throws ArithmeticException → assertThrows passes.",
+  "alternatives": ["A:pass B:pass C:pass D:pass\n"]
+}

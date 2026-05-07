@@ -1,0 +1,10 @@
+{
+  "id": "ser-tr-comp-10",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.io.*;\npublic class JsonLike {\n    public static void main(String[] args) throws Exception {\n        // Simulating record serialization with toString\n        record Point(int x, int y) implements Serializable {}\n        Point p = new Point(3, 4);\n        ByteArrayOutputStream baos = new ByteArrayOutputStream();\n        new ObjectOutputStream(baos).writeObject(p);\n        Point p2 = (Point) new ObjectInputStream(\n            new ByteArrayInputStream(baos.toByteArray())).readObject();\n        System.out.println(p2.x());\n        System.out.println(p2.y());\n        System.out.println(p.equals(p2));\n    }\n}",
+  "answer": "3\n4\ntrue",
+  "explanation": "Records implement Serializable. p2 is a deserialized copy with x=3, y=4. Records use value-based equals: p.equals(p2)=true.",
+  "alternatives": ["3\n4\ntrue\n"]
+}

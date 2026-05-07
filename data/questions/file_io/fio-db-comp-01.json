@@ -1,0 +1,15 @@
+{
+  "id": "fio-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The file is written but always empty. What is the bug?",
+  "code": "import java.io.*;\npublic class WriterBug {\n    public static void main(String[] args) throws Exception {\n        FileWriter fw = new FileWriter(\"out.txt\");\n        fw.write(\"hello world\");\n        // bug: forgot to flush/close\n    }\n}",
+  "choices": [
+    "FileWriter.write requires a char array, not a String",
+    "The written data sits in an internal buffer; without calling fw.flush() or fw.close() the buffer is never flushed to disk, leaving the file empty",
+    "FileWriter must be wrapped in BufferedWriter before writing",
+    "FileWriter overwrites existing files only when opened with append=true"
+  ],
+  "answer": "b",
+  "explanation": "FileWriter buffers output internally. Without calling fw.flush() or fw.close(), the buffered data is never written to the file. Fix: call fw.close() (which flushes first) in a finally block, or use try-with-resources: try (FileWriter fw = new FileWriter(\"out.txt\")) { fw.write(\"hello world\"); }."
+}

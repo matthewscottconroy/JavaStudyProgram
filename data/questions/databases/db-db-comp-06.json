@@ -1,0 +1,15 @@
+{
+  "id": "db-db-comp-06",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The transaction does not roll back on error. What is the bug?",
+  "code": "import java.sql.*;\npublic class TxBug {\n    static void transfer(Connection conn, int from, int to, int amount) throws SQLException {\n        conn.setAutoCommit(false);\n        Statement st = conn.createStatement();\n        st.executeUpdate(\"UPDATE accounts SET bal=bal-\" + amount + \" WHERE id=\" + from);\n        st.executeUpdate(\"UPDATE accounts SET bal=bal+\" + amount + \" WHERE id=\" + to);\n        conn.commit();\n        // if second update throws, first update is not rolled back\n    }\n}",
+  "choices": [
+    "Two UPDATE statements cannot run in the same transaction",
+    "If the second update throws, commit() is never reached but the first update is in an uncommitted transaction that is not rolled back",
+    "setAutoCommit(false) prevents all updates from executing",
+    "amount must be cast to String before interpolation"
+  ],
+  "answer": "b",
+  "explanation": "If the second UPDATE throws, the exception propagates out of the method with the transaction still open (uncommitted/not rolled back). The database may eventually auto-rollback but this is not guaranteed. Fix: add try-catch with conn.rollback() in the catch block, and always use try-with-resources."
+}

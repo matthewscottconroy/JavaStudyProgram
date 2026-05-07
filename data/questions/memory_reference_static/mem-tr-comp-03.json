@@ -1,0 +1,10 @@
+{
+  "id": "mem-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class Box {\n    int value;\n    Box(int v) { this.value = v; }\n\n    static void addFive(Box b) {\n        b.value += 5;\n    }\n\n    static void addTen(int x) {\n        x += 10;\n    }\n\n    public static void main(String[] args) {\n        Box box = new Box(1);\n        addFive(box);\n        System.out.println(box.value);\n\n        int n = 1;\n        addTen(n);\n        System.out.println(n);\n    }\n}",
+  "answer": "6\n1",
+  "explanation": "addFive(box): passes the reference. Inside the method, b.value += 5 mutates the object's field through the reference → box.value = 6. addTen(n): passes the int value 1 by copy. x += 10 modifies only the local copy; n in main stays 1.",
+  "alternatives": ["6\n1\n"]
+}

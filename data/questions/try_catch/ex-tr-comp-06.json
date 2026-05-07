@@ -1,0 +1,10 @@
+{
+  "id": "ex-tr-comp-06",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class Rethrow {\n    static void inner() throws Exception {\n        try {\n            throw new Exception(\"original\");\n        } catch (Exception e) {\n            System.out.println(\"inner caught: \" + e.getMessage());\n            throw new RuntimeException(\"wrapped\", e);\n        }\n    }\n    public static void main(String[] args) {\n        try {\n            inner();\n        } catch (Exception e) {\n            System.out.println(\"outer caught: \" + e.getMessage());\n            System.out.println(\"cause: \" + e.getCause().getMessage());\n        }\n    }\n}",
+  "answer": "inner caught: original\nouter caught: wrapped\ncause: original",
+  "explanation": "inner() throws Exception(\"original\"), catches it, prints \"inner caught: original\", then wraps it in RuntimeException(\"wrapped\", e) and rethrows. main catches that, prints \"outer caught: wrapped\" and \"cause: original\" via getCause().",
+  "alternatives": ["inner caught: original\nouter caught: wrapped\ncause: original\n"]
+}

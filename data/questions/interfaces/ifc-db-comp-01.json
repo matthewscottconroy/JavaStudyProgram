@@ -1,0 +1,15 @@
+{
+  "id": "ifc-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "This class fails to compile. What is the bug?",
+  "code": "interface Drawable {\n    void draw();\n    void resize(double factor);\n}\n\nclass Square implements Drawable {\n    double side;\n    Square(double side) { this.side = side; }\n\n    @Override\n    public void draw() {\n        System.out.println(\"Square with side \" + side);\n    }\n    // resize() is not implemented\n}",
+  "choices": [
+    "Interfaces cannot have more than one abstract method",
+    "Square does not implement resize() — a class must implement every abstract method in the interface or be declared abstract itself",
+    "draw() must be declared as public abstract in the interface to be implementable",
+    "Square must call super.draw() inside its draw() implementation"
+  ],
+  "answer": "b",
+  "explanation": "A concrete class that implements an interface must provide an implementation for every abstract method. Square implements draw() but not resize(), so the compiler reports 'Square is not abstract and does not override abstract method resize(double) in Drawable'. Fix: implement resize(double factor) { this.side *= factor; }, or declare Square as abstract."
+}

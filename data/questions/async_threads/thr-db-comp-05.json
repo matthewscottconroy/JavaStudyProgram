@@ -1,0 +1,15 @@
+{
+  "id": "thr-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The daemon thread prevents the JVM from exiting. What is the bug?",
+  "code": "public class DaemonBug {\n    public static void main(String[] args) throws InterruptedException {\n        Thread worker = new Thread(() -> {\n            while (true) {\n                try { Thread.sleep(100); } catch (InterruptedException e) { break; }\n                System.out.println(\"working\");\n            }\n        });\n        // worker.setDaemon(true);  // this line is missing\n        worker.start();\n        Thread.sleep(300);\n        System.out.println(\"main done\");\n        // JVM does not exit because worker is a non-daemon thread\n    }\n}",
+  "choices": [
+    "Thread.sleep() cannot be called from main",
+    "Worker is a non-daemon thread; the JVM waits for all non-daemon threads to finish, so it runs forever",
+    "The while(true) loop must have a condition to exit",
+    "InterruptedException must be rethrown, not caught"
+  ],
+  "answer": "b",
+  "explanation": "The JVM exits when all non-daemon threads complete. Worker has an infinite loop and is non-daemon, so the JVM never exits even after main() returns. Fix: call worker.setDaemon(true) before worker.start(). Daemon threads are killed automatically when no non-daemon threads remain."
+}

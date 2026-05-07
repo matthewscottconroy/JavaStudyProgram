@@ -1,0 +1,15 @@
+{
+  "id": "ifc-db-comp-09",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The class tries to instantiate an interface directly. What is the bug?",
+  "code": "public class InstInterface {\n    interface Shape { double area(); }\n    public static void main(String[] args) {\n        Shape s = new Shape();  // bug: cannot instantiate interface\n        System.out.println(s.area());\n    }\n}",
+  "choices": [
+    "Shape must have a default area() method to be instantiated",
+    "Interfaces cannot be instantiated directly; you must either implement the interface in a class, use an anonymous class, or provide a lambda",
+    "new Shape() creates an instance with area() returning 0.0",
+    "Interface instantiation requires the @Instantiable annotation"
+  ],
+  "answer": "b",
+  "explanation": "Interfaces are abstract by nature and cannot be instantiated with new Shape(). The compiler rejects this. Fix options: (1) anonymous class: new Shape() { public double area() { return 0; } }; (2) implement in a class; (3) if Shape is a SAM, use a lambda: Shape s = () -> 0.0;"
+}

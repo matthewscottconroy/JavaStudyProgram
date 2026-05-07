@@ -1,0 +1,15 @@
+{
+  "id": "aal-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The code does not compile. What is the bug?",
+  "code": "import java.util.*;\npublic class GenericArray {\n    public static void main(String[] args) {\n        ArrayList<Integer>[] arr = new ArrayList<Integer>[10];  // compile error\n    }\n}",
+  "choices": [
+    "ArrayList cannot hold Integer — use int[]",
+    "Java does not allow creating arrays of generic types due to type erasure; use ArrayList<ArrayList<Integer>> or an unchecked cast",
+    "The size 10 is too large for an ArrayList array",
+    "new ArrayList<Integer>() should be used without the [10]"
+  ],
+  "answer": "b",
+  "explanation": "Java prohibits creating arrays of parameterized generic types (e.g., new ArrayList<Integer>[10]) because generics are erased at runtime and the array would be unable to enforce type safety. Fix: use a list of lists: List<List<Integer>> = new ArrayList<>(); or use an unchecked cast with @SuppressWarnings."
+}

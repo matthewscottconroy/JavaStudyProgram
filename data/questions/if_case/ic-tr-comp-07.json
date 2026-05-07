@@ -1,0 +1,10 @@
+{
+  "id": "ic-tr-comp-07",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Nested {\n    public static void main(String[] args) {\n        int x = 5, y = 10;\n        if (x > 3) {\n            if (y > 8) {\n                System.out.println(\"A\");\n            } else {\n                System.out.println(\"B\");\n            }\n        } else {\n            System.out.println(\"C\");\n        }\n        boolean flag = (x < y) && (y < 20) || (x == 10);\n        System.out.println(flag);\n    }\n}",
+  "answer": "A\ntrue",
+  "explanation": "x=5>3 true, y=10>8 true → prints \"A\". flag: (5<10)=true AND (10<20)=true → true; true || false → true.",
+  "alternatives": ["A\ntrue\n"]
+}

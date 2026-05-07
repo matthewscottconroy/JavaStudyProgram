@@ -1,0 +1,10 @@
+{
+  "id": "ref-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class ClassInfo {\n    interface Runnable {}\n    static class Task implements Runnable {\n        void run() {}\n    }\n    public static void main(String[] args) {\n        Task t = new Task();\n        System.out.println(t.getClass().getSimpleName());\n        System.out.println(t.getClass().getSuperclass().getSimpleName());\n        System.out.println(t instanceof Runnable);\n        System.out.println(t.getClass().getInterfaces().length);\n    }\n}",
+  "answer": "Task\nObject\ntrue\n1",
+  "explanation": "getSimpleName() = \"Task\". getSuperclass() is Object (default superclass). Task implements Runnable → instanceof is true. getInterfaces() returns [Runnable], length=1.",
+  "alternatives": ["Task\nObject\ntrue\n1\n"]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "cls-tr-comp-17",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class InstanceInit {\n    int x;\n    {\n        x = 5;\n        System.out.println(\"instance init: x=\" + x);\n    }\n    InstanceInit() {\n        System.out.println(\"constructor: x=\" + x);\n    }\n    InstanceInit(int v) {\n        x = v;\n        System.out.println(\"constructor(int): x=\" + x);\n    }\n    public static void main(String[] args) {\n        new InstanceInit();\n        new InstanceInit(99);\n    }\n}",
+  "answer": "instance init: x=5\nconstructor: x=5\ninstance init: x=5\nconstructor(int): x=99",
+  "explanation": "Instance initializer runs before every constructor. For new InstanceInit(): init sets x=5, constructor prints x=5. For new InstanceInit(99): init sets x=5, then constructor(int) sets x=99 and prints it.",
+  "alternatives": ["instance init: x=5\nconstructor: x=5\ninstance init: x=5\nconstructor(int): x=99\n"]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "net-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "This server handles one client and then stops accepting new connections. What is the bug?",
+  "code": "import java.net.*;\nimport java.io.*;\npublic class OneShot {\n    public static void main(String[] args) throws Exception {\n        ServerSocket server = new ServerSocket(9000);\n        Socket client = server.accept();\n        BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));\n        PrintWriter   out = new PrintWriter(client.getOutputStream(), true);\n        out.println(\"ECHO: \" + in.readLine());\n        client.close();\n        server.close();   // server stops listening\n    }\n}",
+  "choices": [
+    "ServerSocket should use port 80 for clients to connect",
+    "The server closes after one client — wrap the accept/handle logic in a while(true) loop to keep serving",
+    "client.close() automatically closes the ServerSocket",
+    "ServerSocket cannot be reused after accept() returns"
+  ],
+  "answer": "b",
+  "explanation": "The server handles exactly one connection and exits. To serve multiple clients sequentially, wrap the accept-and-handle block in a loop: while (true) { Socket client = server.accept(); /* handle */ client.close(); }. For concurrent clients, pass each socket to a new Thread or ExecutorService."
+}

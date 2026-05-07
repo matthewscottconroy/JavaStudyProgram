@@ -1,0 +1,10 @@
+{
+  "id": "dt-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "import java.time.*;\npublic class DurationDemo {\n    public static void main(String[] args) {\n        Duration d = Duration.ofHours(2).plusMinutes(30);\n        System.out.println(d.toHours());\n        System.out.println(d.toMinutes());\n        System.out.println(d.toMinutesPart());\n    }\n}",
+  "answer": "2\n150\n30",
+  "explanation": "2 hours 30 minutes = 150 minutes total. toHours()=2. toMinutes() returns total minutes=150. toMinutesPart() returns only the minutes component after extracting hours=30.",
+  "alternatives": ["2\n150\n30\n"]
+}

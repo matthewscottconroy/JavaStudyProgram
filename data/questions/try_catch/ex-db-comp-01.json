@@ -1,0 +1,15 @@
+{
+  "id": "ex-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "This method silently returns null when the file is missing instead of reporting the error. What is the bug?",
+  "code": "import java.io.*;\npublic class SafeReader {\n    public static String readFirst(String path) {\n        try {\n            BufferedReader br = new BufferedReader(new FileReader(path));\n            return br.readLine();\n        } catch (Exception e) {\n            // silent\n        }\n        return null;\n    }\n}",
+  "choices": [
+    "BufferedReader should be replaced with Scanner for file reading",
+    "The empty catch block swallows the exception; errors are silently discarded, making failures invisible to callers",
+    "return null is illegal; the method must throw when the file is missing",
+    "FileReader must be inside a try-with-resources block or the code won't compile"
+  ],
+  "answer": "b",
+  "explanation": "An empty catch block discards the exception entirely. When the file is missing, the method returns null with no indication of failure, so callers cannot distinguish 'file was empty' from 'file did not exist'. Fix: at minimum log the error (e.printStackTrace()), or rethrow as a RuntimeException, or propagate the checked IOException by removing the try/catch and adding 'throws IOException' to the method signature."
+}

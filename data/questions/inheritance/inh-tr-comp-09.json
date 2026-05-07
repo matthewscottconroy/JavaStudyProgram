@@ -1,0 +1,10 @@
+{
+  "id": "inh-tr-comp-09",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class SealedDemo {\n    sealed interface Shape permits Circle, Rectangle {}\n    record Circle(double r) implements Shape {\n        double area() { return Math.PI * r * r; }\n    }\n    record Rectangle(double w, double h) implements Shape {\n        double area() { return w * h; }\n    }\n    static String describe(Shape s) {\n        return switch (s) {\n            case Circle c    -> String.format(\"circle r=%.0f\", c.r());\n            case Rectangle r -> String.format(\"rect %sx%s\", (int)r.w(), (int)r.h());\n        };\n    }\n    public static void main(String[] args) {\n        System.out.println(describe(new Circle(5)));\n        System.out.println(describe(new Rectangle(3, 4)));\n    }\n}",
+  "answer": "circle r=5\nrect 3x4",
+  "explanation": "Sealed interface with pattern matching switch (Java 21). Circle(5): format r=5. Rectangle(3,4): format 3x4.",
+  "alternatives": ["circle r=5\nrect 3x4\n"]
+}

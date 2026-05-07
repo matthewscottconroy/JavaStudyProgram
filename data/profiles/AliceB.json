@@ -1,0 +1,47 @@
+{
+  "id" : "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+  "name" : "AliceB",
+  "createdAt" : "2026-04-21T10:00:00",
+  "lastStudied" : "2026-05-03T15:45:00",
+  "totalQuestionsAnswered" : 52,
+  "totalCorrect" : 38,
+  "selectedTopics" : [ "VARIABLES", "PRINTING", "IF_CASE", "LOOPS", "FUNCTIONS" ],
+  "performance" : {
+    "VARIABLES" : {
+      "topic" : "VARIABLES",
+      "attempts" : 18,
+      "correct" : 16,
+      "masteryScore" : 0.75,
+      "lastAttempted" : "2026-05-03T15:45:00",
+      "lastCorrect" : "2026-05-03T15:45:00",
+      "recentlyAnswered" : [ "var-mc-01", "var-mc-03", "var-tr-01", "var-mc-05" ]
+    },
+    "PRINTING" : {
+      "topic" : "PRINTING",
+      "attempts" : 14,
+      "correct" : 11,
+      "masteryScore" : 0.60,
+      "lastAttempted" : "2026-05-02T11:20:00",
+      "lastCorrect" : "2026-05-02T11:20:00",
+      "recentlyAnswered" : [ "pr-mc-01", "pr-tr-01", "pr-mc-02" ]
+    },
+    "IF_CASE" : {
+      "topic" : "IF_CASE",
+      "attempts" : 12,
+      "correct" : 7,
+      "masteryScore" : 0.30,
+      "lastAttempted" : "2026-05-03T15:45:00",
+      "lastCorrect" : "2026-05-03T14:10:00",
+      "recentlyAnswered" : [ "ic-mc-01", "ic-tr-comp-01", "ic-db-comp-02" ]
+    },
+    "LOOPS" : {
+      "topic" : "LOOPS",
+      "attempts" : 8,
+      "correct" : 4,
+      "masteryScore" : 0.20,
+      "lastAttempted" : "2026-05-03T15:45:00",
+      "lastCorrect" : "2026-05-03T15:30:00",
+      "recentlyAnswered" : [ "lp-mc-01", "lp-tr-comp-01" ]
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "col-tr-comp-11",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class PriorityQueueDemo {\n    public static void main(String[] args) {\n        PriorityQueue<Integer> pq = new PriorityQueue<>();\n        pq.offer(5);\n        pq.offer(1);\n        pq.offer(3);\n        System.out.println(pq.peek());\n        System.out.println(pq.poll());\n        System.out.println(pq.poll());\n    }\n}",
+  "answer": "1\n1\n3",
+  "explanation": "PriorityQueue is a min-heap by default. peek() returns the smallest element (1) without removing. poll() removes and returns 1, then the next smallest is 3.",
+  "alternatives": ["1\n1\n3\n"]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "sapi-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\nimport java.util.stream.*;\npublic class GroupDemo {\n    public static void main(String[] args) {\n        List<String> words = List.of(\"cat\", \"car\", \"bat\", \"bar\", \"cap\");\n\n        Map<Character, List<String>> byFirst = words.stream()\n            .collect(Collectors.groupingBy(w -> w.charAt(0)));\n\n        List<String> cWords = new ArrayList<>(byFirst.get('c'));\n        Collections.sort(cWords);\n        System.out.println(cWords);\n        System.out.println(byFirst.get('b').size());\n    }\n}",
+  "answer": "[cap, car, cat]\n2",
+  "explanation": "groupingBy(w -> w.charAt(0)) partitions words by first letter. 'c' group: [\"cat\",\"car\",\"cap\"]; sorted alphabetically → [\"cap\",\"car\",\"cat\"]. 'b' group: [\"bat\",\"bar\"] → size 2.",
+  "alternatives": ["[cap, car, cat]\n2\n"]
+}

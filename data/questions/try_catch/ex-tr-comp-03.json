@@ -1,0 +1,10 @@
+{
+  "id": "ex-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class Rethrower {\n    static void parse(String s) {\n        try {\n            int n = Integer.parseInt(s);\n            System.out.println(\"parsed: \" + n);\n        } catch (NumberFormatException e) {\n            System.out.println(\"bad input: \" + s);\n            throw new RuntimeException(\"invalid\", e);\n        }\n    }\n\n    public static void main(String[] args) {\n        try {\n            parse(\"42\");\n            parse(\"abc\");\n            parse(\"7\");\n        } catch (RuntimeException e) {\n            System.out.println(\"caught: \" + e.getMessage());\n        }\n        System.out.println(\"end\");\n    }\n}",
+  "answer": "parsed: 42\nbad input: abc\ncaught: invalid\nend",
+  "explanation": "parse(\"42\"): parseInt succeeds → 'parsed: 42'. parse(\"abc\"): parseInt throws NumberFormatException → 'bad input: abc', then rethrows as RuntimeException('invalid'). The outer catch in main catches it → 'caught: invalid'. parse(\"7\") is never reached. 'end' always prints after the try/catch.",
+  "alternatives": ["parsed: 42\nbad input: abc\ncaught: invalid\nend\n"]
+}

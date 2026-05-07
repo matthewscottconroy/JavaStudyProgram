@@ -1,0 +1,15 @@
+{
+  "id": "dp-db-comp-06",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The composite pattern traversal is incorrect. What is the bug?",
+  "code": "public class CompositeBug {\n    interface Component { int value(); }\n    static class Leaf implements Component { int v; Leaf(int v) { this.v=v; } public int value() { return v; } }\n    static class Composite implements Component {\n        java.util.List<Component> children = new java.util.ArrayList<>();\n        void add(Component c) { children.add(c); }\n        public int value() {\n            int sum = 0;\n            for (Component c : children) sum += v;  // bug: should be c.value()\n            return sum;\n        }\n    }\n}",
+  "choices": [
+    "ArrayList cannot store Component interfaces",
+    "The composite sums v (undefined field) instead of c.value(); the result would be a compile error",
+    "children.add() requires a Leaf, not a Component",
+    "int value() must be declared in the Composite directly, not via interface"
+  ],
+  "answer": "b",
+  "explanation": "sum += v references a field v that does not exist in Composite — this is a compile error. The correct expression is sum += c.value() to recursively call value() on each child. This is the core of the Composite pattern: uniform treatment of leaves and composites."
+}

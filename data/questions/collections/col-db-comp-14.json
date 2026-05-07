@@ -1,0 +1,15 @@
+{
+  "id": "col-db-comp-14",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The queue is used as a stack (LIFO) but processes elements FIFO. What is the bug?",
+  "code": "import java.util.*;\npublic class QueueAsStack {\n    public static void main(String[] args) {\n        Queue<Integer> q = new LinkedList<>();\n        q.offer(1);\n        q.offer(2);\n        q.offer(3);\n        while (!q.isEmpty()) {\n            System.out.print(q.poll() + \" \");  // bug: FIFO, not LIFO\n        }\n    }\n}",
+  "choices": [
+    "LinkedList.offer() inserts at the wrong end",
+    "Queue.poll() removes from the head (FIFO: 1,2,3); for LIFO (stack) behavior use a Deque with push()/pop()",
+    "Queue cannot be parameterized with Integer",
+    "The while loop should use q.peek() instead of q.poll()"
+  ],
+  "answer": "b",
+  "explanation": "Queue processes elements in FIFO order (first in, first out), so poll() returns 1, 2, 3. For LIFO (stack) behavior, use Deque<Integer> stack = new ArrayDeque<>() and push()/pop() which operate on the front."
+}

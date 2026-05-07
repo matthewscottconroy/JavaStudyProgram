@@ -1,0 +1,10 @@
+{
+  "id": "thr-tr-comp-12",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.concurrent.*;\npublic class BlockingQueue {\n    public static void main(String[] args) throws Exception {\n        ArrayBlockingQueue<Integer> q = new ArrayBlockingQueue<>(3);\n        q.put(1); q.put(2); q.put(3);\n        System.out.println(q.size());\n        System.out.println(q.remainingCapacity());\n        System.out.println(q.take());\n        System.out.println(q.size());\n    }\n}",
+  "answer": "3\n0\n1\n2",
+  "explanation": "Queue capacity=3, filled with 1,2,3: size=3, remaining=0. take() removes and returns head (FIFO)=1. size is now 2.",
+  "alternatives": ["3\n0\n1\n2\n"]
+}

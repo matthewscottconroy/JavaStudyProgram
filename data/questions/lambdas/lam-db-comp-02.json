@@ -1,0 +1,15 @@
+{
+  "id": "lam-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The lambda does not compile. What is the bug?",
+  "code": "import java.util.function.*;\npublic class LamCapture {\n    public static void main(String[] args) {\n        int counter = 0;\n        Runnable r = () -> {\n            counter++;   // compile error\n            System.out.println(counter);\n        };\n        r.run();\n    }\n}",
+  "choices": [
+    "Runnable lambdas cannot contain multiple statements",
+    "Lambdas can only capture effectively final variables; counter++ modifies counter, so it is not effectively final",
+    "counter must be declared static to be captured in a lambda",
+    "Runnable.run() cannot be called inside main"
+  ],
+  "answer": "b",
+  "explanation": "Lambdas can only capture local variables that are effectively final (never reassigned after initialization). counter++ modifies counter, making it not effectively final — compile error. Fix: use an AtomicInteger or an int[] of size 1 as a workaround, or rethink the design."
+}

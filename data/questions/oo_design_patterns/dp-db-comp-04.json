@@ -1,0 +1,15 @@
+{
+  "id": "dp-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The factory method defeats the purpose of the pattern. What is the bug?",
+  "code": "public class FactoryBug {\n    interface Animal { String sound(); }\n    static class Dog implements Animal { public String sound() { return \"woof\"; } }\n    static class Cat implements Animal { public String sound() { return \"meow\"; } }\n    static Animal create(String type) {\n        if (type.equals(\"dog\")) return new Dog();\n        if (type.equals(\"cat\")) return new Cat();\n        return new Dog();   // bug: should throw for unknown type\n    }\n    public static void main(String[] args) {\n        System.out.println(create(\"fish\").sound());  // silently returns Dog!\n    }\n}",
+  "choices": [
+    "The factory method must return Object instead of Animal",
+    "Unknown types silently default to Dog instead of throwing an exception; callers cannot detect invalid input",
+    "static methods cannot implement factory patterns",
+    "The type parameter must be an enum, not a String"
+  ],
+  "answer": "b",
+  "explanation": "Returning a default for unknown input hides bugs. create(\"fish\") silently returns a Dog, which is incorrect and hard to debug. Fix: throw new IllegalArgumentException(\"Unknown type: \" + type) for unrecognized inputs, or return Optional<Animal>. Fail fast with clear error messages."
+}

@@ -1,0 +1,10 @@
+{
+  "id": "gem-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print when two listeners are added to the same button?",
+  "code": "import javax.swing.*;\npublic class MultiListener {\n    public static void main(String[] args) {\n        JButton btn = new JButton(\"Go\");\n        btn.addActionListener(e -> System.out.println(\"listener A\"));\n        btn.addActionListener(e -> System.out.println(\"listener B\"));\n        btn.doClick();\n        System.out.println(\"listeners: \" + btn.getActionListeners().length);\n    }\n}",
+  "answer": "listener A\nlistener B\nlisteners: 2",
+  "explanation": "Multiple listeners can be added to a component. All are notified in registration order. Two clicks trigger both A and B. getActionListeners() returns all registered listeners.",
+  "alternatives": ["listener A\nlistener B\nlisteners: 2\n"]
+}

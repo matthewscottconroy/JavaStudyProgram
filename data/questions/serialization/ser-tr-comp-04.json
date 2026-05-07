@@ -1,0 +1,10 @@
+{
+  "id": "ser-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.io.*;\npublic class JsonStyle {\n    static class Person {\n        String name; int age;\n        Person(String n, int a) { name=n; age=a; }\n    }\n    static String toJson(Person p) {\n        return \"{\\\"name\\\":\\\"\" + p.name + \"\\\",\\\"age\\\":\" + p.age + \"}\";\n    }\n    public static void main(String[] args) {\n        Person p = new Person(\"Alice\", 30);\n        System.out.println(toJson(p));\n        System.out.println(toJson(p).length());\n    }\n}",
+  "answer": "{\"name\":\"Alice\",\"age\":30}\n24",
+  "explanation": "toJson produces {\"name\":\"Alice\",\"age\":30} (escaped quotes in source become literal quotes). Length: {\"name\":\"Alice\",\"age\":30} = 24 characters.",
+  "alternatives": ["{\"name\":\"Alice\",\"age\":30}\n24\n"]
+}

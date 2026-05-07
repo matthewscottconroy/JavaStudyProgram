@@ -1,0 +1,10 @@
+{
+  "id": "img-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print about pixel manipulation?",
+  "code": "import java.awt.image.BufferedImage;\npublic class PixelOps {\n    public static void main(String[] args) {\n        BufferedImage img = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB);\n        int rgba = (255 << 24) | (100 << 16) | (150 << 8) | 200;\n        img.setRGB(5, 5, rgba);\n        int px = img.getRGB(5, 5);\n        int alpha = (px >> 24) & 0xFF;\n        int red   = (px >> 16) & 0xFF;\n        System.out.println(alpha);\n        System.out.println(red);\n    }\n}",
+  "answer": "255\n100",
+  "explanation": "rgba packs ARGB: alpha=255, red=100, green=150, blue=200. After setRGB/getRGB, bit-shift and mask extracts: alpha = (px>>24)&0xFF = 255, red = (px>>16)&0xFF = 100.",
+  "alternatives": ["255\n100\n"]
+}

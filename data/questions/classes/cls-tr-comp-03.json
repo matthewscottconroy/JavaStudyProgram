@@ -1,0 +1,10 @@
+{
+  "id": "cls-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class Stack {\n    private int[] data = new int[10];\n    private int top = 0;\n\n    public void push(int val) {\n        data[top++] = val;\n    }\n\n    public int pop() {\n        return data[--top];\n    }\n\n    public int peek() {\n        return data[top - 1];\n    }\n\n    public static void main(String[] args) {\n        Stack s = new Stack();\n        s.push(10);\n        s.push(20);\n        s.push(30);\n        System.out.println(s.pop());\n        System.out.println(s.peek());\n        System.out.println(s.pop());\n    }\n}",
+  "answer": "30\n20\n20",
+  "explanation": "push(10): data[0]=10, top=1. push(20): data[1]=20, top=2. push(30): data[2]=30, top=3. pop(): --top makes top=2, returns data[2]=30. peek(): top-1=1, returns data[1]=20. pop(): --top makes top=1, returns data[1]=20.",
+  "alternatives": ["30\n20\n20\n"]
+}

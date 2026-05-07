@@ -1,0 +1,10 @@
+{
+  "id": "dp-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Config {\n    private static Config instance;\n    private String env;\n\n    private Config() { this.env = \"production\"; }\n\n    public static Config getInstance() {\n        if (instance == null) instance = new Config();\n        return instance;\n    }\n\n    public String getEnv()        { return env; }\n    public void   setEnv(String e){ this.env = e; }\n\n    public static void main(String[] args) {\n        Config a = Config.getInstance();\n        Config b = Config.getInstance();\n        a.setEnv(\"testing\");\n        System.out.println(b.getEnv());\n        System.out.println(a == b);\n    }\n}",
+  "answer": "testing\ntrue",
+  "explanation": "getInstance() creates the Config object once and returns the same instance on every call. a and b both point to that single object, so a == b is true. Calling a.setEnv('testing') modifies the shared object, which b.getEnv() then reads.",
+  "alternatives": ["testing\ntrue\n"]
+}

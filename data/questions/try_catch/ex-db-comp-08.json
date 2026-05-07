@@ -1,0 +1,15 @@
+{
+  "id": "ex-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The catch block catches the wrong exception type. What is the bug?",
+  "code": "public class WrongCatch {\n    public static void main(String[] args) {\n        try {\n            int[] arr = new int[5];\n            arr[10] = 1;   // ArrayIndexOutOfBoundsException\n        } catch (NullPointerException e) {   // bug: wrong exception type\n            System.out.println(\"caught: \" + e.getMessage());\n        }\n    }\n}",
+  "choices": [
+    "ArrayIndexOutOfBoundsException and NullPointerException are the same class",
+    "The catch block only catches NullPointerException; ArrayIndexOutOfBoundsException is not caught and propagates up, terminating the program",
+    "catch(NullPointerException) also catches all subclasses of RuntimeException",
+    "arr[10] never throws because Java auto-resizes arrays"
+  ],
+  "answer": "b",
+  "explanation": "arr[10] throws ArrayIndexOutOfBoundsException, which is not a NullPointerException. The catch block does not match, so the exception propagates uncaught. Fix: catch(ArrayIndexOutOfBoundsException e) or catch(RuntimeException e) to catch both."
+}

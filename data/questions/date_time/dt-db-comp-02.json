@@ -1,0 +1,15 @@
+{
+  "id": "dt-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "DateTimeParseException is thrown when parsing the date. What is the bug?",
+  "code": "import java.time.*;\npublic class ParseBug {\n    public static void main(String[] args) {\n        LocalDate d = LocalDate.parse(\"15-03-2024\");  // bug: wrong format\n        System.out.println(d);\n    }\n}",
+  "choices": [
+    "LocalDate.parse cannot handle dates with a year later than 2023",
+    "LocalDate.parse(String) expects ISO-8601 format yyyy-MM-dd; \"15-03-2024\" is dd-MM-yyyy which does not match, causing DateTimeParseException",
+    "LocalDate.parse requires the month as a name, not a number",
+    "parse must be called on a DateTimeFormatter, not LocalDate"
+  ],
+  "answer": "b",
+  "explanation": "The single-argument LocalDate.parse() expects ISO-8601 format: yyyy-MM-dd (e.g. \"2024-03-15\"). The string \"15-03-2024\" has day and year swapped. Fix: LocalDate.parse(\"2024-03-15\") or LocalDate.parse(\"15-03-2024\", DateTimeFormatter.ofPattern(\"dd-MM-yyyy\"))."
+}

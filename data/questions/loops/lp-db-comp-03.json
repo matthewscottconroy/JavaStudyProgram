@@ -1,0 +1,15 @@
+{
+  "id": "lp-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "This method should print all elements except the last, but it skips the first one instead. What is the bug?",
+  "code": "public class Trim {\n    public static void printAllButLast(int[] arr) {\n        for (int i = 1; i < arr.length; i++) {  // starts at 1\n            System.out.println(arr[i]);\n        }\n    }\n    public static void main(String[] args) {\n        printAllButLast(new int[]{10, 20, 30, 40});\n    }\n}",
+  "choices": [
+    "i < arr.length should be i <= arr.length",
+    "The loop starts at i=1 instead of i=0, skipping the first element; to exclude the last, start at 0 and use i < arr.length - 1",
+    "printAllButLast should use a while loop instead of for",
+    "arr[i] should be arr[i-1] to offset the index"
+  ],
+  "answer": "b",
+  "explanation": "Starting at i=1 skips arr[0]. To print all but the last, the loop should start at 0 and stop before the last element: for (int i = 0; i < arr.length - 1; i++)."
+}

@@ -1,0 +1,15 @@
+{
+  "id": "lam-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "This code fails to compile with 'local variables referenced from a lambda must be final or effectively final'. What is the bug?",
+  "code": "import java.util.*;\nimport java.util.function.*;\npublic class Capture {\n    public static void main(String[] args) {\n        int threshold = 5;\n        List<Integer> nums = List.of(1, 3, 7, 2, 9, 4);\n        threshold = 10;                           // reassignment\n        Predicate<Integer> above = n -> n > threshold;\n        nums.stream().filter(above).forEach(System.out::println);\n    }\n}",
+  "choices": [
+    "Predicate<Integer> cannot be used with stream().filter()",
+    "Lambdas can only capture static fields, not local variables",
+    "threshold is reassigned after declaration, so it is not effectively final and cannot be captured by the lambda",
+    "System.out::println is not a valid method reference for forEach"
+  ],
+  "answer": "c",
+  "explanation": "A lambda can capture a local variable only if it is final or effectively final (never reassigned). 'threshold = 10' on the third line makes threshold mutable, breaking effective finality. Fix: either remove the reassignment (keep threshold=5) or use a separate effectively-final variable: int limit = 10; Predicate<Integer> above = n -> n > limit;"
+}

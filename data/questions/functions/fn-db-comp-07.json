@@ -1,0 +1,15 @@
+{
+  "id": "fn-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The recursive method causes StackOverflowError for negative inputs. What is the bug?",
+  "code": "public class SafePow {\n    static long pow(long base, int exp) {\n        if (exp == 0) return 1;\n        return base * pow(base, exp - 1);\n    }\n    public static void main(String[] args) {\n        System.out.println(pow(2, 10));\n        System.out.println(pow(2, -1));  // StackOverflow!\n    }\n}",
+  "choices": [
+    "long cannot be used as the type for base",
+    "The base case only checks exp==0; negative exp decrements forever without reaching 0, causing infinite recursion",
+    "The multiplication base * pow(...) should use Math.pow()",
+    "Recursive methods cannot accept negative parameters"
+  ],
+  "answer": "b",
+  "explanation": "exp==-1: exp-1=-2, then -3, etc. The condition exp==0 is never true for negative inputs. Fix: add a guard at the top: if (exp < 0) throw new IllegalArgumentException(\"Negative exponent\"); or handle it by returning 1.0/pow(base,-exp) if using double."
+}

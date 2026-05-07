@@ -1,0 +1,15 @@
+{
+  "id": "var-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "This code does not compile. What is the bug?",
+  "code": "public class Uninit {\n    public static void main(String[] args) {\n        int x;\n        if (true) {\n            x = 5;\n        }\n        System.out.println(x);  // compile error\n    }\n}",
+  "choices": [
+    "if(true) is not allowed by the Java compiler",
+    "Local variable x may not have been initialized; the compiler cannot prove x is always assigned before use",
+    "int variables must be declared with an initializer on the same line",
+    "System.out.println requires a String, not an int"
+  ],
+  "answer": "b",
+  "explanation": "The Java compiler performs definite-assignment analysis. Even though if(true) always executes, the compiler treats the branch as conditional. It cannot guarantee x is assigned, so it rejects the code. Fix: initialize x at declaration: int x = 0; or add an else branch."
+}

@@ -1,0 +1,10 @@
+{
+  "id": "dp-tr-comp-21",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class Mediator {\n    static class EventBus {\n        java.util.Map<String, java.util.List<Runnable>> listeners = new java.util.HashMap<>();\n        void on(String event, Runnable handler) {\n            listeners.computeIfAbsent(event, k -> new java.util.ArrayList<>()).add(handler);\n        }\n        void emit(String event) {\n            listeners.getOrDefault(event, java.util.Collections.emptyList()).forEach(Runnable::run);\n        }\n    }\n    public static void main(String[] args) {\n        EventBus bus = new EventBus();\n        bus.on(\"click\", () -> System.out.println(\"A\"));\n        bus.on(\"click\", () -> System.out.println(\"B\"));\n        bus.on(\"hover\", () -> System.out.println(\"C\"));\n        bus.emit(\"click\");\n        bus.emit(\"hover\");\n        bus.emit(\"focus\");\n    }\n}",
+  "answer": "A\nB\nC",
+  "explanation": "emit('click') fires handlers A then B in registration order. emit('hover') fires C. emit('focus') has no listeners, nothing printed.",
+  "alternatives": ["A\nB\nC\n"]
+}

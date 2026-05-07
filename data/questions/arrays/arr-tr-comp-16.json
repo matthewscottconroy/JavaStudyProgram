@@ -1,0 +1,10 @@
+{
+  "id": "arr-tr-comp-16",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class PrefixSum {\n    public static void main(String[] args) {\n        int[] a = {3, 1, 4, 1, 5};\n        int[] prefix = new int[a.length + 1];\n        for (int i = 0; i < a.length; i++)\n            prefix[i+1] = prefix[i] + a[i];\n        // range sum [1..3] inclusive (0-indexed)\n        System.out.println(prefix[4] - prefix[1]);\n        System.out.println(prefix[a.length]);\n    }\n}",
+  "answer": "6\n14",
+  "explanation": "prefix={0,3,4,8,9,14}. Range sum [1..3]: prefix[4]-prefix[1]=9-3=6. Total sum: prefix[5]=14.",
+  "alternatives": ["6\n14\n"]
+}

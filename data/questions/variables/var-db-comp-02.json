@@ -1,0 +1,15 @@
+{
+  "id": "var-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The programmer expects average to be 2.5 but it prints 2.0. What is the bug?",
+  "code": "public class Avg {\n    public static void main(String[] args) {\n        int total = 5;\n        int count = 2;\n        double average = total / count;\n        System.out.println(average);\n    }\n}",
+  "choices": [
+    "double cannot hold the result of an int division",
+    "total / count performs integer division (dropping the remainder) before converting to double — cast one operand first",
+    "The variable should be named 'avg' for the compiler to infer floating-point division",
+    "total and count must be declared as double for the division to work"
+  ],
+  "answer": "b",
+  "explanation": "total / count is evaluated first using integer division: 5 / 2 = 2. The integer result 2 is then widened to double 2.0 and stored. Fix: cast one operand before dividing — double average = (double) total / count; — which gives 5.0 / 2 = 2.5."
+}

@@ -1,0 +1,10 @@
+{
+  "id": "net-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.net.*;\npublic class InetDemo {\n    public static void main(String[] args) throws Exception {\n        InetAddress local = InetAddress.getLocalHost();\n        InetAddress loop = InetAddress.getByName(\"127.0.0.1\");\n        System.out.println(loop.getHostAddress());\n        System.out.println(loop.isLoopbackAddress());\n        System.out.println(local == loop);\n    }\n}",
+  "answer": "127.0.0.1\ntrue\nfalse",
+  "explanation": "getHostAddress() returns the dotted IP. isLoopbackAddress() is true for 127.0.0.1. local and loop are different objects (even if on same machine) → false.",
+  "alternatives": ["127.0.0.1\ntrue\nfalse\n"]
+}

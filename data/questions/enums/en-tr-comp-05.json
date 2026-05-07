@@ -1,0 +1,10 @@
+{
+  "id": "en-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class EnumSet {\n    enum Suit { CLUBS, DIAMONDS, HEARTS, SPADES }\n    public static void main(String[] args) {\n        java.util.EnumSet<Suit> red = java.util.EnumSet.of(Suit.DIAMONDS, Suit.HEARTS);\n        System.out.println(red.size());\n        System.out.println(red.contains(Suit.HEARTS));\n        System.out.println(red.contains(Suit.CLUBS));\n    }\n}",
+  "answer": "2\ntrue\nfalse",
+  "explanation": "EnumSet.of(DIAMONDS, HEARTS) creates a set with 2 elements. HEARTS is in the set; CLUBS is not.",
+  "alternatives": ["2\ntrue\nfalse\n"]
+}

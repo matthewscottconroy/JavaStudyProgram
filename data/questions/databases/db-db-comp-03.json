@@ -1,0 +1,15 @@
+{
+  "id": "db-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "This method leaks database connections and will eventually exhaust the connection pool. What is the bug?",
+  "code": "import java.sql.*;\npublic class Leaky {\n    public static int countUsers(Connection conn) throws Exception {\n        PreparedStatement ps = conn.prepareStatement(\"SELECT COUNT(*) FROM users\");\n        ResultSet rs = ps.executeQuery();\n        rs.next();\n        int count = rs.getInt(1);\n        return count;\n        // ps and rs are never closed\n    }\n}",
+  "choices": [
+    "rs.getInt(1) should be rs.getInt(\"COUNT(*)\") to read by column name",
+    "PreparedStatement and ResultSet are never closed — wrap them in try-with-resources to guarantee cleanup",
+    "The Connection parameter should be created inside the method, not passed in",
+    "return must come after rs.close() or the ResultSet cannot be garbage collected"
+  ],
+  "answer": "b",
+  "explanation": "PreparedStatement and ResultSet hold database cursors and memory. If an exception is thrown, or even in normal flow here, they are never closed — leaking resources that accumulate until the connection pool is exhausted. Fix: try (PreparedStatement ps = conn.prepareStatement(...); ResultSet rs = ps.executeQuery()) { rs.next(); return rs.getInt(1); }"
+}

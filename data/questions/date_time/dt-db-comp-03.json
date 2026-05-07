@@ -1,0 +1,15 @@
+{
+  "id": "dt-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The between() result is negative when it should be positive. What is the bug?",
+  "code": "import java.time.*;\npublic class BetweenBug {\n    public static void main(String[] args) {\n        LocalDate start = LocalDate.of(2024, 6, 1);\n        LocalDate end   = LocalDate.of(2024, 1, 1);\n        long days = ChronoUnit.DAYS.between(start, end);  // bug: arguments reversed\n        System.out.println(days);\n    }\n}",
+  "choices": [
+    "ChronoUnit.DAYS.between always returns a positive value",
+    "between(startInclusive, endExclusive) computes end - start; with start=June and end=January the result is negative (-152); swap the arguments to get the positive duration",
+    "LocalDate subtraction is not defined for dates in the same year",
+    "ChronoUnit.DAYS cannot be used with LocalDate; use Period.between instead"
+  ],
+  "answer": "b",
+  "explanation": "ChronoUnit.DAYS.between(a, b) returns b - a in days. With a=June 1 and b=January 1, b < a so the result is negative (-152 in a non-leap year). Fix: swap the arguments: ChronoUnit.DAYS.between(end, start) or Math.abs(...)."
+}

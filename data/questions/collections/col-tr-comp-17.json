@@ -1,0 +1,10 @@
+{
+  "id": "col-tr-comp-17",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class IteratorRemove {\n    public static void main(String[] args) {\n        List<Integer> list = new ArrayList<>(Arrays.asList(1,2,3,4,5));\n        Iterator<Integer> it = list.iterator();\n        while (it.hasNext()) {\n            int val = it.next();\n            if (val % 2 == 0) it.remove();\n        }\n        System.out.println(list);\n    }\n}",
+  "answer": "[1, 3, 5]",
+  "explanation": "Iterator.remove() safely removes elements during iteration without ConcurrentModificationException. Even elements 2 and 4 are removed, leaving [1,3,5].",
+  "alternatives": ["[1, 3, 5]\n"]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "mem-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Swap {\n    static int[] arr = {10, 20, 30};\n\n    static void doubleFirst(int[] a) {\n        a[0] = a[0] * 2;\n    }\n\n    static void replaceRef(int[] a) {\n        a = new int[]{99, 99, 99};  // reassigns local parameter only\n    }\n\n    public static void main(String[] args) {\n        doubleFirst(arr);\n        System.out.println(arr[0]);\n        replaceRef(arr);\n        System.out.println(arr[0]);\n    }\n}",
+  "answer": "20\n20",
+  "explanation": "doubleFirst(arr): parameter 'a' refers to the same array as 'arr'; a[0] = a[0] * 2 modifies the shared array → arr[0] = 20. replaceRef(arr): 'a = new int[]{99,99,99}' reassigns the local parameter to a new array object, but 'arr' in main still points to the original array — arr[0] remains 20.",
+  "alternatives": ["20\n20\n"]
+}

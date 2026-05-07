@@ -1,0 +1,15 @@
+{
+  "id": "dp-db-comp-10",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The Builder does not validate required fields before building. What is the bug?",
+  "code": "public class PersonBuilder {\n    String name;  // required\n    int age;\n    PersonBuilder setAge(int a) { age = a; return this; }\n    Object build() {\n        return name + \", age \" + age;   // bug: name may be null\n    }\n    public static void main(String[] args) {\n        System.out.println(new PersonBuilder().setAge(30).build());\n    }\n}",
+  "choices": [
+    "setAge should return void, not PersonBuilder",
+    "build() does not check that required field name is set; it silently produces 'null, age 30'",
+    "name must be declared static to be accessible in build()",
+    "The Builder pattern requires a separate Director class"
+  ],
+  "answer": "b",
+  "explanation": "name is never set, so it remains null. String concatenation with null produces the string 'null', yielding 'null, age 30' — silently wrong. Fix: add a null check in build(): if (name == null) throw new IllegalStateException(\"name is required\");"
+}

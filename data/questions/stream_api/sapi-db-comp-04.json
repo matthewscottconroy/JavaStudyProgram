@@ -1,0 +1,15 @@
+{
+  "id": "sapi-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The stream pipeline does not print anything. What is the bug?",
+  "code": "import java.util.stream.*;\npublic class LazyStream {\n    public static void main(String[] args) {\n        Stream<Integer> s = Stream.of(1, 2, 3)\n            .filter(n -> { System.out.println(\"filter:\"+n); return n > 1; })\n            .map(n -> n * 10);  // no terminal operation!\n        System.out.println(\"done\");\n    }\n}",
+  "choices": [
+    "Stream.filter() must be called after Stream.map()",
+    "Streams are lazy — intermediate operations (filter, map) are not executed until a terminal operation (forEach, collect, count) is called",
+    "The lambda inside filter cannot print to stdout",
+    "Stream.of() must be called with at least 4 elements"
+  ],
+  "answer": "b",
+  "explanation": "Streams are lazy. filter() and map() are intermediate operations — they build a pipeline but do not execute. Without a terminal operation, nothing runs. The output is just \"done\". Fix: add .forEach(System.out::println) or .collect(Collectors.toList()) to trigger execution."
+}

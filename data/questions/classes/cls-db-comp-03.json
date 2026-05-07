@@ -1,0 +1,15 @@
+{
+  "id": "cls-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The class does not compile. What is the bug?",
+  "code": "public class Access {\n    private int secret = 42;\n\n    static void reveal(Access obj) {\n        System.out.println(obj.secret);   // access private field from static method\n    }\n}",
+  "choices": [
+    "static methods cannot access instance fields even of the same class",
+    "This compiles correctly — private members are accessible anywhere within the same class, including static methods",
+    "obj.secret requires a cast to int before printing",
+    "Access.secret must be static to be accessed from a static method"
+  ],
+  "answer": "b",
+  "explanation": "Private access in Java is class-level, not instance-level. A static method in the same class can access private fields of any instance of that class. This code compiles and prints 42. Access control is checked by the compiler based on the class boundary, not whether the method is static."
+}

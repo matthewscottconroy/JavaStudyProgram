@@ -1,0 +1,15 @@
+{
+  "id": "lp-db-comp-14",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The enhanced for loop does not print what the student expects. What is the bug?",
+  "code": "public class EnhancedFor {\n    public static void main(String[] args) {\n        String[] words = {\"cat\", \"dog\", \"bird\"};\n        for (String s : words) {\n            s = s.toUpperCase();  // bug: reassigns local copy\n        }\n        for (String w : words) System.out.print(w + \" \");\n    }\n}",
+  "choices": [
+    "String.toUpperCase() is not available in for-each loops",
+    "s = s.toUpperCase() reassigns the local loop variable; the original array elements are unchanged — Strings are immutable and s is a local reference",
+    "for-each loops cannot modify String arrays",
+    "words.length must be checked before the for-each loop"
+  ],
+  "answer": "b",
+  "explanation": "In the for-each loop, s is a local variable that holds a copy of the reference. Reassigning s points it to a new uppercase String, but the array still holds the original lowercase strings. For mutation, use an index loop: for(int i=0;i<words.length;i++) words[i]=words[i].toUpperCase();"
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gui-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "Only one button is visible in the JFrame. What is the bug?",
+  "code": "import javax.swing.*;\npublic class LayoutBug {\n    public static void main(String[] args) {\n        JFrame f = new JFrame();\n        f.add(new JButton(\"A\"));\n        f.add(new JButton(\"B\"));  // replaces A in BorderLayout CENTER\n        f.setSize(300, 200);\n        f.setVisible(true);\n    }\n}",
+  "choices": [
+    "JFrame can only hold one component",
+    "JFrame uses BorderLayout by default; adding without constraints puts both in CENTER, with B replacing A",
+    "JButton cannot be added directly to JFrame",
+    "setSize must be called before adding components"
+  ],
+  "answer": "b",
+  "explanation": "JFrame's default layout is BorderLayout. When you add() without a constraint, the component goes to BorderLayout.CENTER. Only one component fits in each region — B replaces A. Fix: use f.setLayout(new FlowLayout()) or specify constraints like f.add(btnA, BorderLayout.NORTH)."
+}

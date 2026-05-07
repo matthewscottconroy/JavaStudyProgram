@@ -1,0 +1,15 @@
+{
+  "id": "opt-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "Optional.get throws NoSuchElementException. What is the bug?",
+  "code": "import java.util.Optional;\npublic class GetBug {\n    public static void main(String[] args) {\n        Optional<String> opt = Optional.empty();\n        System.out.println(opt.get());  // bug: get on empty\n    }\n}",
+  "choices": [
+    "get() returns null for an empty Optional",
+    "Calling get() on an empty Optional throws NoSuchElementException; always check isPresent() first, or use orElse/orElseGet/orElseThrow instead",
+    "Optional.empty() must be initialized with a type: Optional.<String>empty()",
+    "get() is deprecated; use value() instead"
+  ],
+  "answer": "b",
+  "explanation": "get() on an empty Optional throws NoSuchElementException. The safe alternatives are: opt.orElse(\"default\"), opt.orElseGet(supplier), opt.orElseThrow(), or guarding with opt.isPresent() before calling get()."
+}

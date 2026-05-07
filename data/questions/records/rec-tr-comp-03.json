@@ -1,0 +1,10 @@
+{
+  "id": "rec-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "public class RecordCompact {\n    record Range(int min, int max) {\n        Range {  // compact constructor\n            if (min > max) throw new IllegalArgumentException(\"min > max\");\n        }\n    }\n    public static void main(String[] args) {\n        Range r = new Range(1, 10);\n        System.out.println(r.min());\n        System.out.println(r.max());\n        try { new Range(10, 1); } catch (IllegalArgumentException e) {\n            System.out.println(\"invalid\");\n        }\n    }\n}",
+  "answer": "1\n10\ninvalid",
+  "explanation": "The compact constructor validates without re-assigning fields (the record runtime does that). new Range(1,10) is valid. new Range(10,1) fails the check and throws IllegalArgumentException, caught to print \"invalid\".",
+  "alternatives": ["1\n10\ninvalid\n"]
+}

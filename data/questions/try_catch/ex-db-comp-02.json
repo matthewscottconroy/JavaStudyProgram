@@ -1,0 +1,15 @@
+{
+  "id": "ex-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "This method reads a file but leaks the file handle if readLine() throws. What is the best fix?",
+  "code": "import java.io.*;\npublic class Leaky {\n    public static String read(String path) throws IOException {\n        BufferedReader br = new BufferedReader(new FileReader(path));\n        String line = br.readLine();\n        br.close();\n        return line;\n    }\n}",
+  "choices": [
+    "Call br.flush() before br.close() to ensure all data is written",
+    "Wrap the reader in try-with-resources so it closes automatically even if readLine() throws",
+    "Declare the method to catch IOException internally instead of declaring throws",
+    "Use FileReader directly instead of wrapping it in BufferedReader"
+  ],
+  "answer": "b",
+  "explanation": "If readLine() throws, execution jumps past br.close() and the file handle is never released — a resource leak that can cause 'too many open files' errors. try-with-resources guarantees close() is called whether the block completes normally or via exception. Fix: try (BufferedReader br = new BufferedReader(new FileReader(path))) { return br.readLine(); }"
+}

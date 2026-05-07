@@ -1,0 +1,10 @@
+{
+  "id": "fio-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "import java.nio.file.*;\npublic class PathDemo {\n    public static void main(String[] args) {\n        Path p = Path.of(\"/home/user/docs/file.txt\");\n        System.out.println(p.getFileName());\n        System.out.println(p.getParent());\n        System.out.println(p.getNameCount());\n    }\n}",
+  "answer": "file.txt\n/home/user/docs\n4",
+  "explanation": "getFileName() returns the last element \"file.txt\". getParent() returns the path without the last element. getNameCount() counts path elements: home, user, docs, file.txt = 4 (the root / is not counted).",
+  "alternatives": ["file.txt\n/home/user/docs\n4\n"]
+}

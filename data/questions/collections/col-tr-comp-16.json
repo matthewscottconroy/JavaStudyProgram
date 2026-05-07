@@ -1,0 +1,10 @@
+{
+  "id": "col-tr-comp-16",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class UnmodMap {\n    public static void main(String[] args) {\n        Map<String,Integer> m = new HashMap<>();\n        m.put(\"x\", 1);\n        Map<String,Integer> unmod = Collections.unmodifiableMap(m);\n        m.put(\"y\", 2);   // modifying the backing map\n        System.out.println(unmod.size());\n        System.out.println(unmod.get(\"y\"));\n    }\n}",
+  "answer": "2\n2",
+  "explanation": "Collections.unmodifiableMap() returns a view — it reflects changes to the underlying map. Adding 'y' to m is visible through unmod: size=2, get('y')=2.",
+  "alternatives": ["2\n2\n"]
+}

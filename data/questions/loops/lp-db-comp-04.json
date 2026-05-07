@@ -1,0 +1,15 @@
+{
+  "id": "lp-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "This loop is supposed to sum the digits of a number but always returns 0. What is the bug?",
+  "code": "public class Digits {\n    public static int digitSum(int n) {\n        int sum = 0;\n        while (n > 0) {\n            sum = n % 10;   // bug: should be +=\n            n /= 10;\n        }\n        return sum;\n    }\n}",
+  "choices": [
+    "n % 10 does not extract the last digit correctly",
+    "sum = n % 10 replaces sum each iteration instead of accumulating; it should be sum += n % 10",
+    "n /= 10 should be n %= 10 to strip the digit",
+    "The while condition should be n >= 0 to include zero"
+  ],
+  "answer": "b",
+  "explanation": "sum = n % 10 overwrites sum with the current digit rather than adding to it. After the loop, sum holds only the last digit processed (the leading digit). Fix: sum += n % 10;"
+}

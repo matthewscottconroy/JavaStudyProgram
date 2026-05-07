@@ -1,0 +1,15 @@
+{
+  "id": "lp-db-comp-09",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The loop counts one too many iterations. What is the bug?",
+  "code": "public class CountBug {\n    static int countPositive(int[] arr) {\n        int count = 0;\n        for (int i = 0; i <= arr.length; i++) {  // bug: <= instead of <\n            if (arr[i] > 0) count++;\n        }\n        return count;\n    }\n    public static void main(String[] args) {\n        System.out.println(countPositive(new int[]{1, -2, 3}));\n    }\n}",
+  "choices": [
+    "count must be initialized to -1 instead of 0",
+    "The loop condition i <= arr.length includes arr[arr.length] which is out of bounds, throwing ArrayIndexOutOfBoundsException",
+    "for-each should be used instead of index-based iteration",
+    "arr[i] > 0 should be arr[i] >= 0 to count non-negative values"
+  ],
+  "answer": "b",
+  "explanation": "Valid indices are 0 to arr.length-1. i <= arr.length allows i = arr.length (e.g., i=3 for length 3), causing ArrayIndexOutOfBoundsException. Fix: i < arr.length."
+}

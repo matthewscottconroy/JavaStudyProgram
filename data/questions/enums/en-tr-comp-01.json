@@ -1,0 +1,10 @@
+{
+  "id": "en-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 1,
+  "prompt": "What does this program print?",
+  "code": "public class EnumBasic {\n    enum Day { MON, TUE, WED, THU, FRI, SAT, SUN }\n    public static void main(String[] args) {\n        Day d = Day.WED;\n        System.out.println(d);\n        System.out.println(d.name());\n        System.out.println(d.ordinal());\n    }\n}",
+  "answer": "WED\nWED\n2",
+  "explanation": "toString() and name() both return the declared name \"WED\". ordinal() returns the 0-based position in the declaration order: MON=0, TUE=1, WED=2.",
+  "alternatives": ["WED\nWED\n2\n"]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "col-db-comp-11",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The Stack.peek() call throws EmptyStackException even though elements were pushed. What is the bug?",
+  "code": "import java.util.*;\npublic class StackBug {\n    public static void main(String[] args) {\n        Stack<Integer> stack = new Stack<>();\n        for (int i = 1; i <= 5; i++) stack.push(i);\n        while (!stack.isEmpty()) {\n            stack.pop();\n        }\n        System.out.println(stack.peek());  // bug: stack is empty here\n    }\n}",
+  "choices": [
+    "Stack.push() does not add elements correctly in a loop",
+    "The while loop pops all elements before peek() is called; the stack is empty when peek() executes",
+    "Stack.peek() requires the stack to have more than one element",
+    "peek() and pop() cannot be used on the same Stack instance"
+  ],
+  "answer": "b",
+  "explanation": "The while loop removes all 5 elements with pop(). When peek() is called afterward the stack is empty, so EmptyStackException is thrown. Fix: either call peek() inside the loop before popping, or call peek() before the loop."
+}

@@ -1,0 +1,10 @@
+{
+  "id": "ifc-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\ninterface Scorer {\n    int score(String s);\n}\n\npublic class Main {\n    public static List<String> top(List<String> words, Scorer scorer, int limit) {\n        List<String> copy = new ArrayList<>(words);\n        copy.sort((a, b) -> scorer.score(b) - scorer.score(a));\n        return copy.subList(0, Math.min(limit, copy.size()));\n    }\n\n    public static void main(String[] args) {\n        List<String> words = List.of(\"hi\", \"hello\", \"hey\");\n        Scorer byLength = s -> s.length();\n        System.out.println(top(words, byLength, 2));\n    }\n}",
+  "answer": "[hello, hey]",
+  "explanation": "byLength scores each string by its length: 'hi'=2, 'hello'=5, 'hey'=3. The comparator sorts descending (b-a). Sorted order: [\"hello\"(5), \"hey\"(3), \"hi\"(2)]. subList(0, 2) takes the first two → [\"hello\", \"hey\"].",
+  "alternatives": ["[hello, hey]\n"]
+}

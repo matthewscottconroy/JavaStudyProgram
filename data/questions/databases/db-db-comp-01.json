@@ -1,0 +1,15 @@
+{
+  "id": "db-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "This login method is vulnerable to SQL injection. A user who enters username: ' OR '1'='1 can log in without a password. What is the bug?",
+  "code": "import java.sql.*;\npublic class Auth {\n    public static boolean login(Connection conn, String user, String pass) throws Exception {\n        String sql = \"SELECT * FROM users WHERE username='\" + user + \"' AND password='\" + pass + \"'\";\n        ResultSet rs = conn.createStatement().executeQuery(sql);\n        return rs.next();\n    }\n}",
+  "choices": [
+    "createStatement() should be replaced with prepareStatement() for all queries",
+    "String concatenation builds the SQL directly from user input — an attacker can inject SQL syntax to bypass authentication; use PreparedStatement with ? placeholders",
+    "The method should use rs.getBoolean() instead of rs.next()",
+    "Connection must be closed inside the method to prevent resource leaks"
+  ],
+  "answer": "b",
+  "explanation": "Concatenating user input into SQL lets attackers inject SQL syntax. The input ' OR '1'='1 makes the WHERE clause always true, returning all rows. Fix: PreparedStatement ps = conn.prepareStatement(\"SELECT * FROM users WHERE username=? AND password=?\"); ps.setString(1, user); ps.setString(2, pass); — the driver escapes the parameters, preventing injection."
+}

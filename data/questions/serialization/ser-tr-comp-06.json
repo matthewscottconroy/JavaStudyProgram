@@ -1,0 +1,10 @@
+{
+  "id": "ser-tr-comp-06",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.io.*;\npublic class ExternDemo {\n    static class Config implements Externalizable {\n        int timeout; String host;\n        public Config() {}  // required for Externalizable\n        Config(int t, String h) { timeout=t; host=h; }\n        public void writeExternal(ObjectOutput out) throws IOException {\n            out.writeInt(timeout);\n            out.writeUTF(host);\n        }\n        public void readExternal(ObjectInput in) throws Exception {\n            timeout = in.readInt();\n            host = in.readUTF();\n        }\n    }\n    public static void main(String[] args) throws Exception {\n        Config c = new Config(30, \"localhost\");\n        ByteArrayOutputStream bos = new ByteArrayOutputStream();\n        new ObjectOutputStream(bos).writeObject(c);\n        Config c2 = (Config) new ObjectInputStream(\n            new ByteArrayInputStream(bos.toByteArray())).readObject();\n        System.out.println(c2.timeout);\n        System.out.println(c2.host);\n    }\n}",
+  "answer": "30\nlocalhost",
+  "explanation": "Externalizable gives full control over serialization. writeExternal writes timeout then host. readExternal reads in the same order. c2 correctly gets timeout=30 and host=\"localhost\".",
+  "alternatives": ["30\nlocalhost\n"]
+}

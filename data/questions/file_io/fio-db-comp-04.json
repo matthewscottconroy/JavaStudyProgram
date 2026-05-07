@@ -1,0 +1,15 @@
+{
+  "id": "fio-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "Reading a binary file as text corrupts the data. What is the bug?",
+  "code": "import java.io.*;\npublic class BinaryReadBug {\n    public static void main(String[] args) throws Exception {\n        // Reading a PNG file\n        FileReader fr = new FileReader(\"image.png\");  // bug: text reader for binary\n        int b;\n        while ((b = fr.read()) != -1) { /* process */ }\n        fr.close();\n    }\n}",
+  "choices": [
+    "FileReader cannot open files with a .png extension",
+    "FileReader decodes bytes as characters using the platform default charset, corrupting binary data that contains byte sequences not valid in that encoding; use FileInputStream for binary files",
+    "FileReader.read() returns char values, not bytes, which is correct for binary processing",
+    "Binary files must be opened with RandomAccessFile, not FileReader"
+  ],
+  "answer": "b",
+  "explanation": "FileReader is a character-oriented reader that decodes bytes using a charset (default platform encoding). Binary files like PNG contain arbitrary byte sequences that do not form valid text, so charset decoding corrupts the data. Fix: use FileInputStream or Files.readAllBytes() to read raw bytes."
+}

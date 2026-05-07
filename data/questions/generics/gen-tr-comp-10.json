@@ -1,0 +1,10 @@
+{
+  "id": "gen-tr-comp-10",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class BoundedWild {\n    static double sumList(List<? extends Number> list) {\n        double total = 0;\n        for (Number n : list) total += n.doubleValue();\n        return total;\n    }\n    public static void main(String[] args) {\n        System.out.println(sumList(List.of(1, 2, 3)));\n        System.out.println(sumList(List.of(1.5, 2.5)));\n    }\n}",
+  "answer": "6.0\n4.0",
+  "explanation": "List<? extends Number> accepts any List whose element type is a subtype of Number. sumList([1,2,3])=6.0. sumList([1.5,2.5])=4.0.",
+  "alternatives": ["6.0\n4.0\n"]
+}

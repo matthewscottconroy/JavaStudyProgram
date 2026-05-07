@@ -1,0 +1,15 @@
+{
+  "id": "arg-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The program crashes when run with no arguments. What is the bug?",
+  "code": "public class ArgsBug {\n    public static void main(String[] args) {\n        String first = args[0];   // bug: no length check\n        System.out.println(\"First arg: \" + first);\n    }\n}",
+  "choices": [
+    "args is always null when no arguments are provided",
+    "args[0] throws ArrayIndexOutOfBoundsException when no arguments are provided",
+    "String cannot be assigned from an array element",
+    "main() requires at least one argument to run"
+  ],
+  "answer": "b",
+  "explanation": "When no arguments are provided, args is an empty array. args[0] throws ArrayIndexOutOfBoundsException. Fix: check if (args.length > 0) first, or use a try-catch, or provide a usage message."
+}

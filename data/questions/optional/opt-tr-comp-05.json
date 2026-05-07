@@ -1,0 +1,10 @@
+{
+  "id": "opt-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.Optional;\npublic class FilterDemo {\n    public static void main(String[] args) {\n        Optional<Integer> opt = Optional.of(42);\n        System.out.println(opt.filter(n -> n > 10).isPresent());\n        System.out.println(opt.filter(n -> n > 100).isPresent());\n        Optional.of(\"hi\").ifPresent(s -> System.out.println(s.toUpperCase()));\n    }\n}",
+  "answer": "true\nfalse\nHI",
+  "explanation": "filter(predicate) returns the Optional unchanged if the predicate holds, else empty. 42>10 → still present (true). 42>100 fails → empty (false). ifPresent runs the consumer only when a value is present, printing \"HI\".",
+  "alternatives": ["true\nfalse\nHI\n"]
+}

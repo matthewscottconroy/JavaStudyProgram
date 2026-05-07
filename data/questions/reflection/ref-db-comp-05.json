@@ -1,0 +1,15 @@
+{
+  "id": "ref-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The dynamically created object has wrong type. What is the bug?",
+  "code": "public class NewInstanceBug {\n    static class Foo { int x = 10; }\n    public static void main(String[] args) throws Exception {\n        Object obj = Foo.class.newInstance();  // deprecated\n        // newInstance() ignores constructors with parameters\n        // and suppresses checked exceptions\n        System.out.println(((Foo)obj).x);\n    }\n}",
+  "choices": [
+    "newInstance() cannot create objects from inner classes",
+    "Class.newInstance() is deprecated because it propagates checked exceptions as unchecked and doesn't work with non-default constructors; use getDeclaredConstructor().newInstance() instead",
+    "Foo must implement Serializable to be created via reflection",
+    "Object must be cast to Foo before newInstance() is called"
+  ],
+  "answer": "b",
+  "explanation": "Class.newInstance() is deprecated in Java 9+ for two reasons: it only works with no-arg constructors, and it wraps checked exceptions from the constructor in undeclared exceptions. The modern replacement is getDeclaredConstructor().newInstance() which explicitly handles constructors and exceptions."
+}

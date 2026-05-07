@@ -1,0 +1,10 @@
+{
+  "id": "g2d-tr-comp-06",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "import java.awt.*;\npublic class StrokeInfo {\n    public static void main(String[] args) {\n        BasicStroke stroke = new BasicStroke(3.0f);\n        System.out.println(stroke.getLineWidth());\n        System.out.println(stroke.getEndCap());\n        System.out.println(stroke.getLineJoin());\n    }\n}",
+  "answer": "3.0\n0\n0",
+  "explanation": "BasicStroke(3.0f) sets line width to 3.0. Default end cap is CAP_BUTT=0. Default line join is JOIN_MITER=0.",
+  "alternatives": ["3.0\n0\n0\n"]
+}

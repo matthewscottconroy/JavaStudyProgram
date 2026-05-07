@@ -1,0 +1,15 @@
+{
+  "id": "inh-db-comp-10",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The cast throws ClassCastException at runtime. What is the bug?",
+  "code": "public class BadCast {\n    static class Animal {}\n    static class Dog extends Animal {}\n    static class Cat extends Animal {}\n    public static void main(String[] args) {\n        Animal a = new Dog();\n        Cat c = (Cat) a;   // bug: a is a Dog, not a Cat\n        System.out.println(c);\n    }\n}",
+  "choices": [
+    "Animal cannot be cast to Cat because Animal does not extend Cat",
+    "The runtime type of a is Dog; casting to Cat is invalid because Dog is not a Cat, causing ClassCastException",
+    "The cast syntax (Cat) a is illegal when a is declared as Animal",
+    "ClassCastException only occurs when casting to a primitive type"
+  ],
+  "answer": "b",
+  "explanation": "The compiler allows the cast because Cat and Dog are both Animals — it cannot prove it will fail at compile time. At runtime, the JVM checks whether the actual object (a Dog) is a Cat. It isn't, so ClassCastException is thrown. Fix: use instanceof before casting."
+}

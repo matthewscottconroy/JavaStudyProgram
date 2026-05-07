@@ -1,0 +1,10 @@
+{
+  "id": "lam-tr-comp-08",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.function.*;\npublic class FunctionChain {\n    public static void main(String[] args) {\n        Function<Integer,Integer> times3 = x -> x * 3;\n        Function<Integer,Integer> plus10 = x -> x + 10;\n        Function<Integer,Integer> composed = times3.andThen(plus10);\n        Function<Integer,Integer> composed2 = times3.compose(plus10);\n        System.out.println(composed.apply(5));\n        System.out.println(composed2.apply(5));\n    }\n}",
+  "answer": "25\n45",
+  "explanation": "andThen: times3 then plus10: 5*3=15, 15+10=25. compose: plus10 then times3: 5+10=15, 15*3=45.",
+  "alternatives": ["25\n45\n"]
+}

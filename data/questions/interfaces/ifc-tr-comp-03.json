@@ -1,0 +1,10 @@
+{
+  "id": "ifc-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class SortDemo {\n    record Person(String name, int age) implements Comparable<Person> {\n        @Override\n        public int compareTo(Person other) {\n            return Integer.compare(this.age, other.age);\n        }\n    }\n\n    public static void main(String[] args) {\n        List<Person> people = new ArrayList<>(List.of(\n            new Person(\"Zara\", 30),\n            new Person(\"Alice\", 25),\n            new Person(\"Bob\", 28)\n        ));\n        Collections.sort(people);\n        for (Person p : people) System.out.println(p.name());\n    }\n}",
+  "answer": "Alice\nBob\nZara",
+  "explanation": "Person implements Comparable<Person> using age. Collections.sort() calls compareTo() to order by age ascending: Alice(25), Bob(28), Zara(30). The loop prints each person's name in that order.",
+  "alternatives": ["Alice\nBob\nZara\n"]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "lam-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class MethodRef {\n    static int square(int n) { return n * n; }\n\n    public static void main(String[] args) {\n        List<Integer> nums = List.of(1, 2, 3, 4);\n\n        // method reference instead of n -> square(n)\n        nums.stream()\n            .map(MethodRef::square)\n            .forEach(System.out::println);\n    }\n}",
+  "answer": "1\n4\n9\n16",
+  "explanation": "MethodRef::square is a method reference equivalent to n -> MethodRef.square(n). map applies it to each element: 1→1, 2→4, 3→9, 4→16. forEach with System.out::println prints each result on its own line.",
+  "alternatives": ["1\n4\n9\n16\n"]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "inh-db-comp-12",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The abstract class instantiation fails to compile. What is the bug?",
+  "code": "public class AbstractInst {\n    abstract static class Shape {\n        abstract double area();\n    }\n    public static void main(String[] args) {\n        Shape s = new Shape();   // bug: cannot instantiate abstract class\n        System.out.println(s.area());\n    }\n}",
+  "choices": [
+    "area() must have a default implementation for Shape to be instantiated",
+    "Abstract classes cannot be instantiated directly; you must create a concrete subclass that implements area()",
+    "new Shape() works if area() is declared abstract with a body",
+    "Shape must implement Serializable to be created with new"
+  ],
+  "answer": "b",
+  "explanation": "Abstract classes exist to be subclassed; they cannot be instantiated with new. The compiler rejects 'new Shape()' with 'Shape is abstract; cannot be instantiated'. Fix: create a concrete subclass like class Circle extends Shape { double area() { return Math.PI * r * r; } } and instantiate that."
+}

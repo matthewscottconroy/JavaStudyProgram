@@ -1,0 +1,10 @@
+{
+  "id": "cls-tr-comp-18",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Encapsulation {\n    static class BankAccount {\n        private double balance;\n        BankAccount(double initial) { balance = initial; }\n        boolean deposit(double amt) {\n            if (amt <= 0) return false;\n            balance += amt;\n            return true;\n        }\n        double getBalance() { return balance; }\n    }\n    public static void main(String[] args) {\n        BankAccount acc = new BankAccount(100);\n        System.out.println(acc.deposit(50));\n        System.out.println(acc.deposit(-10));\n        System.out.println(acc.getBalance());\n    }\n}",
+  "answer": "true\nfalse\n150.0",
+  "explanation": "deposit(50): valid, balance becomes 150, returns true. deposit(-10): invalid (<=0), balance unchanged, returns false. getBalance()=150.0.",
+  "alternatives": ["true\nfalse\n150.0\n"]
+}

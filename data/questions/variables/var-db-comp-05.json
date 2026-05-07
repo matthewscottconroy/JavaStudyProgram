@@ -1,0 +1,15 @@
+{
+  "id": "var-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The calculation produces a wrong answer. What is the bug?",
+  "code": "public class ModBug {\n    public static void main(String[] args) {\n        // intended: is 15 divisible by 4?\n        int n = 15;\n        if (n % 4 = 0) {       // bug: = instead of ==\n            System.out.println(\"divisible\");\n        }\n    }\n}",
+  "choices": [
+    "The modulus operator % is not valid for int types",
+    "= is assignment, not comparison; the condition should use == to test equality",
+    "15 % 4 overflows an int",
+    "if statements cannot contain arithmetic expressions"
+  ],
+  "answer": "b",
+  "explanation": "n % 4 = 0 attempts to assign 0 to the expression n%4, which is not an assignable location. This is a compile error. Fix: n % 4 == 0. This is one of the most common typos in Java/C-family languages."
+}

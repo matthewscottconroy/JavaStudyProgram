@@ -1,0 +1,10 @@
+{
+  "id": "opt-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 1,
+  "prompt": "What does this program print?",
+  "code": "import java.util.Optional;\npublic class OptBasic {\n    public static void main(String[] args) {\n        Optional<String> present = Optional.of(\"hello\");\n        Optional<String> empty   = Optional.empty();\n        System.out.println(present.isPresent());\n        System.out.println(empty.isPresent());\n        System.out.println(present.get());\n    }\n}",
+  "answer": "true\nfalse\nhello",
+  "explanation": "Optional.of(\"hello\") wraps a non-null value; isPresent()=true. Optional.empty() contains no value; isPresent()=false. get() returns the wrapped value \"hello\".",
+  "alternatives": ["true\nfalse\nhello\n"]
+}

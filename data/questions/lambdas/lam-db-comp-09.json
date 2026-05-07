@@ -1,0 +1,15 @@
+{
+  "id": "lam-db-comp-09",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The method reference resolves to the wrong overload. What is the bug?",
+  "code": "import java.util.function.*;\npublic class AmbiguousRef {\n    static void print(String s) { System.out.println(\"String: \" + s); }\n    static void print(Object o) { System.out.println(\"Object: \" + o); }\n    public static void main(String[] args) {\n        Consumer<String> c = AmbiguousRef::print;  // ambiguous — which print?\n        c.accept(\"hello\");\n    }\n}",
+  "choices": [
+    "Method references cannot reference overloaded methods",
+    "Consumer<String> expects a method taking String; both print(String) and print(Object) match; the compiler selects the most specific (print(String)) — this is actually unambiguous",
+    "The Consumer must be typed as Consumer<Object> to use print(Object)",
+    "AmbiguousRef::print is always ambiguous and causes a compile error"
+  ],
+  "answer": "b",
+  "explanation": "Java overload resolution picks the most specific applicable method. Consumer<String> needs a method accepting String; print(String) is more specific than print(Object), so print(String) is selected. This compiles and prints 'String: hello'. The code is actually correct — the 'bug' is the misconception that it's ambiguous."
+}

@@ -1,0 +1,10 @@
+{
+  "id": "db-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "Assume the query returns two rows: (1, 'Alice') and (2, 'Bob'). What does this code print?",
+  "code": "import java.sql.*;\npublic class Query {\n    public static void main(String[] args) throws Exception {\n        Connection conn = DriverManager.getConnection(\"jdbc:h2:mem:\");\n        PreparedStatement ps = conn.prepareStatement(\n            \"SELECT id, name FROM users ORDER BY id\");\n        ResultSet rs = ps.executeQuery();\n        int count = 0;\n        while (rs.next()) {\n            count++;\n            System.out.println(rs.getInt(\"id\") + \": \" + rs.getString(\"name\"));\n        }\n        System.out.println(\"total: \" + count);\n        rs.close(); ps.close(); conn.close();\n    }\n}",
+  "answer": "1: Alice\n2: Bob\ntotal: 2",
+  "explanation": "rs.next() advances the cursor and returns true while rows remain. First iteration: id=1, name='Alice'. Second iteration: id=2, name='Bob'. Third call returns false, loop ends. count=2.",
+  "alternatives": ["1: Alice\n2: Bob\ntotal: 2\n"]
+}

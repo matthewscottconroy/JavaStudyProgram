@@ -1,0 +1,10 @@
+{
+  "id": "sapi-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\nimport java.util.stream.*;\npublic class Reduce {\n    public static void main(String[] args) {\n        List<Integer> nums = List.of(1, 2, 3, 4, 5);\n\n        int sum = nums.stream().reduce(0, Integer::sum);\n        System.out.println(sum);\n\n        Optional<Integer> product = nums.stream().reduce((a, b) -> a * b);\n        System.out.println(product.get());\n\n        int sumOfSquares = nums.stream()\n            .mapToInt(n -> n * n)\n            .sum();\n        System.out.println(sumOfSquares);\n    }\n}",
+  "answer": "15\n120\n55",
+  "explanation": "reduce(0, Integer::sum) starts with identity 0 and adds all elements: 0+1+2+3+4+5=15. reduce((a,b)->a*b) multiplies all: 1*2*3*4*5=120. mapToInt(n->n*n) creates an IntStream of squares [1,4,9,16,25], .sum()=55.",
+  "alternatives": ["15\n120\n55\n"]
+}

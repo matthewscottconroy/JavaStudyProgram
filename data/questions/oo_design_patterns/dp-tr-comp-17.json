@@ -1,0 +1,10 @@
+{
+  "id": "dp-tr-comp-17",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Flyweight {\n    static java.util.Map<String,String> pool = new java.util.HashMap<>();\n    static String get(String key) {\n        pool.putIfAbsent(key, \"[\" + key + \"]\");\n        return pool.get(key);\n    }\n    public static void main(String[] args) {\n        String a = get(\"x\");\n        String b = get(\"x\");\n        String c = get(\"y\");\n        System.out.println(a == b);\n        System.out.println(a == c);\n        System.out.println(pool.size());\n    }\n}",
+  "answer": "true\nfalse\n2",
+  "explanation": "Flyweight pattern: get('x') creates '[x]' and caches it; second get('x') returns the same object. a==b is true (same String instance). c='[y]' is different. Pool has 2 keys.",
+  "alternatives": ["true\nfalse\n2\n"]
+}

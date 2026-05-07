@@ -1,0 +1,10 @@
+{
+  "id": "fn-tr-comp-13",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class TailRec {\n    static int factorial(int n, int acc) {\n        if (n <= 0) return acc;\n        return factorial(n - 1, n * acc);\n    }\n    public static void main(String[] args) {\n        System.out.println(factorial(5, 1));\n        System.out.println(factorial(0, 1));\n        System.out.println(factorial(3, 2));  // starts with accumulator 2\n    }\n}",
+  "answer": "120\n1\n12",
+  "explanation": "factorial(5,1): 5*4*3*2*1*1=120. factorial(0,1): n<=0 returns acc=1. factorial(3,2): 3*2*1*2=12. The accumulator carries partial results.",
+  "alternatives": ["120\n1\n12\n"]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "inh-tr-comp-11",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class HidingVsOverride {\n    static class Parent {\n        static String staticMethod() { return \"Parent.static\"; }\n        String instanceMethod() { return \"Parent.instance\"; }\n    }\n    static class Child extends Parent {\n        static String staticMethod() { return \"Child.static\"; }\n        String instanceMethod() { return \"Child.instance\"; }\n    }\n    public static void main(String[] args) {\n        Parent p = new Child();\n        System.out.println(p.staticMethod());\n        System.out.println(p.instanceMethod());\n    }\n}",
+  "answer": "Parent.static\nChild.instance",
+  "explanation": "Static methods are resolved by the declared type (hiding, not overriding). p is declared as Parent so p.staticMethod() calls Parent.staticMethod(). Instance methods are polymorphic; p's runtime type is Child so p.instanceMethod() calls Child.instanceMethod().",
+  "alternatives": ["Parent.static\nChild.instance\n"]
+}

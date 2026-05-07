@@ -1,0 +1,15 @@
+{
+  "id": "str-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The string comparison returns false unexpectedly. What is the bug?",
+  "code": "public class EqualsBug {\n    public static void main(String[] args) {\n        String input = \"Hello\";\n        if (input == \"Hello\") {   // bug: should use equals()\n            System.out.println(\"match\");\n        } else {\n            System.out.println(\"no match\");\n        }\n    }\n}",
+  "choices": [
+    "String literals cannot be compared in if conditions",
+    "== compares object references, not content; if input came from user input or new String(), it would not be the same object as the literal 'Hello'",
+    "String.equals() is slower than == so == should always be used",
+    "The condition should use input.compareTo(\"Hello\") == 0"
+  ],
+  "answer": "b",
+  "explanation": "== tests reference identity. For string literals in the same class, it may work due to interning, but for Strings from input, files, or new String(), the references differ. The safe way is always input.equals(\"Hello\") or \"Hello\".equals(input) (null-safe)."
+}

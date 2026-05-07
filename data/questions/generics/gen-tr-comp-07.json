@@ -1,0 +1,10 @@
+{
+  "id": "gen-tr-comp-07",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class TypeErasure {\n    static <T> List<T> repeat(T item, int times) {\n        List<T> result = new ArrayList<>();\n        for (int i = 0; i < times; i++) result.add(item);\n        return result;\n    }\n    public static void main(String[] args) {\n        List<String> words = repeat(\"hi\", 3);\n        List<Integer> nums = repeat(42, 2);\n        System.out.println(words);\n        System.out.println(nums);\n        System.out.println(words.getClass() == nums.getClass());\n    }\n}",
+  "answer": "[hi, hi, hi]\n[42, 42]\ntrue",
+  "explanation": "repeat(\"hi\",3) produces [\"hi\",\"hi\",\"hi\"]. repeat(42,2) produces [42,42]. Due to type erasure, List<String> and List<Integer> are both ArrayList at runtime — same class object.",
+  "alternatives": ["[hi, hi, hi]\n[42, 42]\ntrue\n"]
+}

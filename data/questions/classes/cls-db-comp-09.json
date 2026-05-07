@@ -1,0 +1,15 @@
+{
+  "id": "cls-db-comp-09",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The static method accesses an instance field, causing a compile error. What is the bug?",
+  "code": "public class StaticAccess {\n    int count = 0;\n    static void reset() {\n        count = 0;   // bug: non-static field in static context\n    }\n}",
+  "choices": [
+    "count should be declared final to be accessible from reset()",
+    "static methods cannot reference instance fields because there is no implicit 'this'; count must be static or reset() must be an instance method",
+    "The method name reset is a reserved keyword in Java",
+    "Instance fields cannot be initialized to 0 in Java"
+  ],
+  "answer": "b",
+  "explanation": "Static methods belong to the class, not to an instance. There is no 'this' inside static context. Accessing an instance field count requires an object reference. Fix: either declare count as static, or make reset() an instance method."
+}

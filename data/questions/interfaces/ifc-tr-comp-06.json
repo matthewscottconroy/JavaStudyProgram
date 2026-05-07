@@ -1,0 +1,10 @@
+{
+  "id": "ifc-tr-comp-06",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class MultiInterface {\n    interface A { default String tag() { return \"A\"; } }\n    interface B { default String tag() { return \"B\"; } }\n    static class C implements A, B {\n        @Override public String tag() { return A.super.tag() + B.super.tag(); }\n    }\n    public static void main(String[] args) {\n        C c = new C();\n        System.out.println(c.tag());\n        A a = c;\n        System.out.println(a.tag());\n    }\n}",
+  "answer": "AB\nAB",
+  "explanation": "C implements both A and B which have conflicting default tag(). C must override and resolves using A.super.tag()+B.super.tag()=\"AB\". a.tag() uses dynamic dispatch — actual type is C → still calls C.tag() → \"AB\".",
+  "alternatives": ["AB\nAB\n"]
+}

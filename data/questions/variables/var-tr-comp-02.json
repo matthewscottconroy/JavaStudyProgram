@@ -1,0 +1,10 @@
+{
+  "id": "var-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class CharMath {\n    public static void main(String[] args) {\n        char c = 'A';\n        System.out.println(c);\n        System.out.println(c + 1);\n        System.out.println((char)(c + 1));\n        System.out.println('Z' - 'A');\n    }\n}",
+  "answer": "A\n66\nB\n25",
+  "explanation": "'A' has the ASCII/Unicode value 65. Printing c (char) prints the character: 'A'. c + 1 promotes char to int: 65 + 1 = 66 (printed as int). (char)(c + 1) converts 66 back to char: 'B'. 'Z' - 'A' = 90 - 65 = 25 (int arithmetic).",
+  "alternatives": ["A\n66\nB\n25\n"]
+}

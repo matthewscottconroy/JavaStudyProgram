@@ -1,0 +1,15 @@
+{
+  "id": "thr-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 5,
+  "prompt": "This counter should reach 10000 after all threads finish, but it consistently prints a smaller number. What is the bug?",
+  "code": "public class UnsafeCounter {\n    static int count = 0;\n\n    public static void main(String[] args) throws InterruptedException {\n        Thread[] threads = new Thread[100];\n        for (int i = 0; i < 100; i++) {\n            threads[i] = new Thread(() -> {\n                for (int j = 0; j < 100; j++) {\n                    count++;          // not atomic\n                }\n            });\n            threads[i].start();\n        }\n        for (Thread t : threads) t.join();\n        System.out.println(count);\n    }\n}",
+  "choices": [
+    "Thread arrays cannot store lambda-based threads",
+    "count++ is not atomic — read-modify-write can interleave across threads, causing lost updates (a race condition)",
+    "join() must be called inside the first for loop, not a separate one",
+    "Static fields cannot be safely shared across threads in Java"
+  ],
+  "answer": "b",
+  "explanation": "count++ compiles to three steps: read count, add 1, write count. When two threads execute these steps simultaneously, one thread's write can overwrite the other's, losing an increment. Fix: use AtomicInteger (count.incrementAndGet()) or synchronize the increment block. Static fields can be shared safely when proper synchronization is used."
+}

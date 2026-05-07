@@ -1,0 +1,15 @@
+{
+  "id": "fio-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "Each run overwrites the previous file content. What is the bug?",
+  "code": "import java.io.*;\npublic class AppendBug {\n    public static void main(String[] args) throws Exception {\n        try (FileWriter fw = new FileWriter(\"log.txt\")) {  // bug: append=false\n            fw.write(\"entry\\n\");\n        }\n    }\n}",
+  "choices": [
+    "FileWriter cannot write newline characters on Windows",
+    "FileWriter(String) opens the file in overwrite mode by default; each run truncates the file; use FileWriter(\"log.txt\", true) to append",
+    "try-with-resources closes the file before writing completes",
+    "write(String) must be replaced with write(char[]) to avoid truncation"
+  ],
+  "answer": "b",
+  "explanation": "FileWriter(path) truncates the file on open. To append without overwriting, use FileWriter(\"log.txt\", true) — the second boolean argument enables append mode."
+}

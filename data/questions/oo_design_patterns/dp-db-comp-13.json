@@ -1,0 +1,15 @@
+{
+  "id": "dp-db-comp-13",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The Prototype clone shares mutable state with the original. What is the bug?",
+  "code": "public class Prototype implements Cloneable {\n    int[] data;\n    Prototype(int[] d) { data = d; }\n    public Prototype clone() throws CloneNotSupportedException {\n        return (Prototype) super.clone();   // bug: shallow copy\n    }\n    public static void main(String[] args) throws Exception {\n        Prototype p1 = new Prototype(new int[]{1,2,3});\n        Prototype p2 = p1.clone();\n        p2.data[0] = 99;\n        System.out.println(p1.data[0]);\n    }\n}",
+  "choices": [
+    "Cloneable requires a copy constructor, not an override of clone()",
+    "super.clone() performs a shallow copy; both p1.data and p2.data reference the same array, so mutating p2.data[0] also changes p1.data[0]",
+    "clone() must be declared static to create a new instance",
+    "int arrays cannot be cloned in Java"
+  ],
+  "answer": "b",
+  "explanation": "Object.clone() does a shallow copy — it copies the data reference, not the array itself. Both prototypes share the same int[]. Mutating p2.data[0] changes p1.data[0] to 99. Fix: in clone(), perform a deep copy: Prototype copy = (Prototype) super.clone(); copy.data = data.clone(); return copy;"
+}

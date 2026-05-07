@@ -1,0 +1,10 @@
+{
+  "id": "ic-tr-comp-06",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class SwitchExpr {\n    public static void main(String[] args) {\n        for (int i = 1; i <= 4; i++) {\n            String result = switch (i) {\n                case 1, 2 -> \"low\";\n                case 3    -> \"mid\";\n                default   -> \"high\";\n            };\n            System.out.println(i + \":\" + result);\n        }\n    }\n}",
+  "answer": "1:low\n2:low\n3:mid\n4:high",
+  "explanation": "Switch expression (Java 14+) with arrow syntax. i=1 → \"low\", i=2 → \"low\", i=3 → \"mid\", i=4 → default → \"high\". No fall-through with arrow syntax.",
+  "alternatives": ["1:low\n2:low\n3:mid\n4:high\n"]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "lp-db-comp-12",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The loop accumulates the wrong product. What is the bug?",
+  "code": "public class ProductBug {\n    static int product(int[] arr) {\n        int result = 0;   // bug: should be 1\n        for (int n : arr) result *= n;\n        return result;\n    }\n    public static void main(String[] args) {\n        System.out.println(product(new int[]{2, 3, 4}));\n    }\n}",
+  "choices": [
+    "for-each loops cannot be used with multiplication",
+    "result is initialized to 0; multiplying anything by 0 stays 0; the identity for multiplication is 1",
+    "int result should be declared long to hold large products",
+    "result *= n should be result = result * n written explicitly"
+  ],
+  "answer": "b",
+  "explanation": "The multiplicative identity is 1 (any number times 1 is unchanged). Starting at 0 means 0*2=0, 0*3=0, etc. — always returns 0. Fix: int result = 1; (compare with sum where the identity is 0)."
+}

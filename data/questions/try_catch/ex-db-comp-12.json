@@ -1,0 +1,15 @@
+{
+  "id": "ex-db-comp-12",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The resource is not closed if an exception occurs. What is the bug?",
+  "code": "public class ResourceLeak {\n    static void process() throws Exception {\n        java.io.InputStream in = new java.io.FileInputStream(\"/tmp/f\");\n        // bug: no try-with-resources or finally\n        doWork(in);\n        in.close();\n    }\n    static void doWork(java.io.InputStream in) throws Exception {}\n}",
+  "choices": [
+    "FileInputStream cannot be used without a try block",
+    "If doWork() throws an exception, in.close() is never reached, leaking the file handle",
+    "InputStream must be declared final to be used safely",
+    "close() should be called before doWork() to prevent leaks"
+  ],
+  "answer": "b",
+  "explanation": "If doWork() throws, the method exits immediately without calling in.close(), leaking the file descriptor. Fix: use try-with-resources: try (InputStream in = new FileInputStream('/tmp/f')) { doWork(in); } — this guarantees close() is called even if an exception occurs."
+}

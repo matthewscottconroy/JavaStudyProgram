@@ -1,0 +1,10 @@
+{
+  "id": "rx-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "public class ReplaceDemo {\n    public static void main(String[] args) {\n        String s = \"foo bar foo baz\";\n        System.out.println(s.replaceAll(\"foo\", \"qux\"));\n        System.out.println(s.replaceFirst(\"foo\", \"qux\"));\n    }\n}",
+  "answer": "qux bar qux baz\nqux bar foo baz",
+  "explanation": "replaceAll replaces every occurrence of the pattern. replaceFirst replaces only the first occurrence.",
+  "alternatives": ["qux bar qux baz\nqux bar foo baz\n"]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "ic-db-comp-13",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The boolean expression is always true. What is the bug?",
+  "code": "public class AlwaysTrue {\n    static boolean isValid(int x) {\n        return x < 0 || x >= 0;   // bug: covers entire range\n    }\n}",
+  "choices": [
+    "|| should be && for a valid range check",
+    "x < 0 and x >= 0 together cover every possible integer; the expression is a tautology and always returns true",
+    "The method should use Math.abs(x) to check validity",
+    "int cannot be compared to 0 using < and >= simultaneously"
+  ],
+  "answer": "b",
+  "explanation": "Every integer is either negative (x < 0) or non-negative (x >= 0). The disjunction is always true — no integer can satisfy neither condition. This is a logic bug where the developer likely intended different bounds, e.g., x >= 0 && x <= 100."
+}

@@ -1,0 +1,10 @@
+{
+  "id": "lp-tr-comp-08",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class BinarySearch {\n    public static int search(int[] arr, int target) {\n        int lo = 0, hi = arr.length - 1;\n        while (lo <= hi) {\n            int mid = (lo + hi) / 2;\n            if      (arr[mid] == target) return mid;\n            else if (arr[mid] <  target) lo = mid + 1;\n            else                         hi = mid - 1;\n        }\n        return -1;\n    }\n    public static void main(String[] args) {\n        int[] a = {2, 5, 8, 12, 16, 23, 38};\n        System.out.println(search(a, 23));\n        System.out.println(search(a, 10));\n    }\n}",
+  "answer": "5\n-1",
+  "explanation": "search(a, 23): lo=0,hi=6. mid=3 → 12<23, lo=4. mid=5 → 23==23, return 5. search(a, 10): eliminated until lo>hi, return -1.",
+  "alternatives": ["5\n-1\n"]
+}

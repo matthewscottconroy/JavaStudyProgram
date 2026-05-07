@@ -1,0 +1,10 @@
+{
+  "id": "lp-tr-comp-21",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class GcdLcm {\n    static int gcd(int a, int b) {\n        while (b != 0) { int t = b; b = a % b; a = t; }\n        return a;\n    }\n    public static void main(String[] args) {\n        int a = 12, b = 18;\n        int g = gcd(a, b);\n        int lcm = a / g * b;\n        System.out.println(g);\n        System.out.println(lcm);\n    }\n}",
+  "answer": "6\n36",
+  "explanation": "gcd(12,18): 18%12=6→gcd(12,6): 12%6=0→return 6. lcm=12/6*18=2*18=36.",
+  "alternatives": ["6\n36\n"]
+}

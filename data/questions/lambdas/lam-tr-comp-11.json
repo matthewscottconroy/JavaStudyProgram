@@ -1,0 +1,10 @@
+{
+  "id": "lam-tr-comp-11",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.function.*;\npublic class MethodRefs {\n    static int triple(int x) { return x * 3; }\n    public static void main(String[] args) {\n        IntUnaryOperator op1 = MethodRefs::triple;   // static ref\n        IntUnaryOperator op2 = Math::abs;            // static ref\n        IntUnaryOperator op3 = Integer::bitCount;    // static ref to Integer\n        System.out.println(op1.applyAsInt(4));\n        System.out.println(op2.applyAsInt(-7));\n        System.out.println(op3.applyAsInt(0b1010));\n    }\n}",
+  "answer": "12\n7\n2",
+  "explanation": "triple(4)=12. Math.abs(-7)=7. Integer.bitCount(0b1010)=bitCount(10)=2 (binary 1010 has two 1s).",
+  "alternatives": ["12\n7\n2\n"]
+}

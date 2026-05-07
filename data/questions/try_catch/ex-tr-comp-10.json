@@ -1,0 +1,10 @@
+{
+  "id": "ex-tr-comp-10",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class TryReturn {\n    static int compute() {\n        try {\n            return 1;\n        } finally {\n            return 2;  // finally overrides try's return\n        }\n    }\n    public static void main(String[] args) {\n        System.out.println(compute());\n    }\n}",
+  "answer": "2",
+  "explanation": "finally always runs, even after a return in try. When finally contains its own return statement, it overrides the try's return value. compute() returns 2.",
+  "alternatives": ["2\n"]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "mem-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class RefSemantics {\n    static class Node {\n        int val;\n        Node(int v) { val = v; }\n    }\n    static void doubleIt(Node n) {\n        n.val *= 2;    // mutates the object\n    }\n    static void replace(Node n) {\n        n = new Node(999);  // rebinds local only\n    }\n    public static void main(String[] args) {\n        Node x = new Node(5);\n        doubleIt(x);\n        System.out.println(x.val);\n        replace(x);\n        System.out.println(x.val);\n    }\n}",
+  "answer": "10\n10",
+  "explanation": "doubleIt(x): n and x point to the same Node; n.val*=2 mutates the object → x.val=10. replace(x): n = new Node(999) rebinds the local parameter n to a new object, does not affect x. x.val remains 10.",
+  "alternatives": ["10\n10\n"]
+}

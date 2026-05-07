@@ -1,0 +1,15 @@
+{
+  "id": "mem-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "This program throws NullPointerException on the println line. What is the bug?",
+  "code": "public class Node {\n    String value;\n    Node next;\n\n    public static void main(String[] args) {\n        Node a = new Node();\n        a.value = \"hello\";\n        Node b;\n        System.out.println(b.value);\n    }\n}",
+  "choices": [
+    "Node fields must be initialized in a constructor before use",
+    "b is declared but never assigned — it is uninitialized, and accessing b.value is a compile error (local variable b may not have been initialized)",
+    "String fields default to null and cannot be used in println",
+    "a.value should be used instead of b.value"
+  ],
+  "answer": "b",
+  "explanation": "Local variables in Java are not given default values — they must be initialized before use. The compiler catches this as 'variable b might not have been initialized' and refuses to compile. Fix: Node b = new Node(); or Node b = null; (though then b.value would still throw NullPointerException at runtime)."
+}

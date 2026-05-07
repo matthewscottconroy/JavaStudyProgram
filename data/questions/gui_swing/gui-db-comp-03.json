@@ -1,0 +1,15 @@
+{
+  "id": "gui-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The button click handler does not update the UI correctly. What is the bug?",
+  "code": "import javax.swing.*;\npublic class ThreadBug {\n    static int count = 0;\n    static JLabel label = new JLabel(\"0\");\n    public static void main(String[] args) {\n        JFrame f = new JFrame();\n        JButton btn = new JButton(\"Click\");\n        btn.addActionListener(e -> {\n            count++;\n            label.setText(String.valueOf(count));  // correct: on EDT\n        });\n        // Bug: updating UI from non-EDT thread:\n        new Thread(() -> label.setText(\"background\")).start();  // unsafe\n        f.add(btn); f.add(label);\n    }\n}",
+  "choices": [
+    "JLabel cannot display integer values",
+    "Swing components must only be accessed on the Event Dispatch Thread; calling label.setText() from a background thread causes race conditions and visual corruption",
+    "addActionListener must be called after setVisible(true)",
+    "JButton and JLabel cannot both be added to the same JFrame"
+  ],
+  "answer": "b",
+  "explanation": "Swing is single-threaded — all UI updates must happen on the Event Dispatch Thread (EDT). Calling label.setText() from a background Thread causes undefined behavior, visual glitches, or exceptions. Fix: wrap the update in SwingUtilities.invokeLater(() -> label.setText(\"background\"));"
+}

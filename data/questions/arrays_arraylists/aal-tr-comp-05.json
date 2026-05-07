@@ -1,0 +1,10 @@
+{
+  "id": "aal-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class SubList {\n    public static void main(String[] args) {\n        List<Integer> src = new ArrayList<>(Arrays.asList(0,1,2,3,4,5));\n        List<Integer> sub = src.subList(1, 4);\n        System.out.println(sub);\n        sub.set(0, 99);\n        System.out.println(src.get(1));\n        System.out.println(sub.size());\n    }\n}",
+  "answer": "[1, 2, 3]\n99\n3",
+  "explanation": "subList(1,4) returns a view of indices 1-3: [1,2,3]. sub.set(0,99) changes the view's index 0, which is src's index 1. So src.get(1)=99. sub.size()=3.",
+  "alternatives": ["[1, 2, 3]\n99\n3\n"]
+}

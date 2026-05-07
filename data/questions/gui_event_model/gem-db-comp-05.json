@@ -1,0 +1,15 @@
+{
+  "id": "gem-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The GUI is not created on the Event Dispatch Thread. What is the bug?",
+  "code": "import javax.swing.*;\npublic class EDTCreation {\n    public static void main(String[] args) {\n        JFrame f = new JFrame();  // bug: main thread is not EDT\n        f.setSize(300, 200);\n        f.setVisible(true);\n    }\n}",
+  "choices": [
+    "JFrame must be created inside a try-with-resources block",
+    "Swing components must be created and modified on the EDT; creating them on the main thread violates the single-thread rule",
+    "setVisible() can only be called from a static context",
+    "JFrame requires SwingManager.install() to be called first"
+  ],
+  "answer": "b",
+  "explanation": "Swing requires all component creation and modification to happen on the EDT. Creating a JFrame on the main thread (before the EDT is set up) is technically unsafe. Fix: wrap in SwingUtilities.invokeLater(() -> { JFrame f = new JFrame(); ... f.setVisible(true); });"
+}

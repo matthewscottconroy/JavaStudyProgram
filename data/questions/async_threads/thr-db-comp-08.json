@@ -1,0 +1,15 @@
+{
+  "id": "thr-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The deadlock occurs because of lock ordering. What is the bug?",
+  "code": "public class Deadlock {\n    static final Object A = new Object();\n    static final Object B = new Object();\n    static void thread1() throws InterruptedException {\n        synchronized(A) { Thread.sleep(50); synchronized(B) {} }\n    }\n    static void thread2() throws InterruptedException {\n        synchronized(B) { Thread.sleep(50); synchronized(A) {} }  // bug: reversed order\n    }\n}",
+  "choices": [
+    "synchronized blocks cannot be nested",
+    "Thread 1 locks A then tries to lock B; Thread 2 locks B then tries to lock A; each waits for the other's lock, causing deadlock",
+    "Thread.sleep() inside synchronized releases the lock, preventing deadlock",
+    "Static lock objects A and B cannot be used across different methods"
+  ],
+  "answer": "b",
+  "explanation": "Classic deadlock: Thread1 holds A, waits for B. Thread2 holds B, waits for A. Neither can proceed. Fix: enforce consistent lock ordering — both threads acquire locks in the same order (always A before B, or always B before A)."
+}

@@ -1,0 +1,10 @@
+{
+  "id": "g2d-tr-comp-07",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "import java.awt.geom.*;\npublic class RectBounds {\n    public static void main(String[] args) {\n        Rectangle2D rect = new Rectangle2D.Double(10, 20, 100, 50);\n        System.out.println(rect.getX());\n        System.out.println(rect.getY());\n        System.out.println(rect.getWidth());\n        System.out.println(rect.getHeight());\n    }\n}",
+  "answer": "10.0\n20.0\n100.0\n50.0",
+  "explanation": "Rectangle2D.Double(x, y, width, height) stores x=10, y=20, width=100, height=50. All getters return double values.",
+  "alternatives": ["10.0\n20.0\n100.0\n50.0\n"]
+}

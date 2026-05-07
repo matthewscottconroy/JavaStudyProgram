@@ -1,0 +1,15 @@
+{
+  "id": "lp-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The infinite loop never terminates. What is the bug?",
+  "code": "public class InfiniteLoop {\n    public static void main(String[] args) {\n        int i = 1;\n        while (i != 10) {\n            i += 3;  // bug: 1→4→7→10... wait, 1+3=4, 4+3=7, 7+3=10 — does terminate\n        }\n        // Actually change: i starts at 0, increments by 3\n        // i = 0; i += 3 → 0,3,6,9,12 — skips 10!\n        int j = 0;\n        while (j != 10) {  // real bug: j goes 0,3,6,9,12... skips 10\n            j += 3;\n        }\n        System.out.println(j);\n    }\n}",
+  "choices": [
+    "while cannot use != for termination — use < instead",
+    "j starts at 0 and increments by 3 (0,3,6,9,12,...), never equaling 10; the condition j!=10 is never false, causing infinite loop",
+    "int j should be declared outside main",
+    "j += 3 needs to be j = j + 3 written explicitly"
+  ],
+  "answer": "b",
+  "explanation": "j goes 0→3→6→9→12→... and never equals 10. The != termination condition is bypassed. Fix: use j < 10 (terminates when j=12 after going past 10), or use j % 3 == 0 check, or increment by 2."
+}

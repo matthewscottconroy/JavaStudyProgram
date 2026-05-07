@@ -1,0 +1,15 @@
+{
+  "id": "fi-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The custom functional interface does not compile. What is the bug?",
+  "code": "@FunctionalInterface\ninterface Transformer {\n    String transform(String input);\n    String reverse(String input);  // bug: two abstract methods\n}",
+  "choices": [
+    "@FunctionalInterface interfaces cannot have any methods",
+    "A functional interface must have exactly one abstract method; Transformer declares two abstract methods (transform and reverse), violating the @FunctionalInterface contract — the compiler rejects it",
+    "Interfaces cannot declare methods that return String",
+    "reverse is a reserved method name in Java interfaces"
+  ],
+  "answer": "b",
+  "explanation": "@FunctionalInterface requires exactly one abstract method so it can be implemented by a lambda or method reference. Transformer has two abstract methods (transform and reverse), so the annotation causes a compile error. Fix: remove reverse, or make it a default method with a body."
+}

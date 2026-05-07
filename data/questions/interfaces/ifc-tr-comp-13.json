@@ -1,0 +1,10 @@
+{
+  "id": "ifc-tr-comp-13",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Iterable2 {\n    static class CountDown implements Iterable<Integer> {\n        final int start;\n        CountDown(int start) { this.start = start; }\n        public java.util.Iterator<Integer> iterator() {\n            return new java.util.Iterator<>() {\n                int cur = start;\n                public boolean hasNext() { return cur > 0; }\n                public Integer next() { return cur--; }\n            };\n        }\n    }\n    public static void main(String[] args) {\n        for (int n : new CountDown(4)) System.out.print(n + \" \");\n    }\n}",
+  "answer": "4 3 2 1 ",
+  "explanation": "CountDown iterates from start down to 1. cur=4: hasNext true, next returns 4 (cur becomes 3). Continues: 3,2,1. At 0, hasNext=false.",
+  "alternatives": ["4 3 2 1"]
+}

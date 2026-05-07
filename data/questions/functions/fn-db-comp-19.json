@@ -1,0 +1,15 @@
+{
+  "id": "fn-db-comp-19",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The overloaded method resolves to the wrong version. What is the bug?",
+  "code": "public class Overload {\n    static void print(Object o) { System.out.println(\"Object\"); }\n    static void print(String s) { System.out.println(\"String\"); }\n    public static void main(String[] args) {\n        Object o = \"hello\";   // runtime type is String\n        print(o);             // prints Object, not String\n    }\n}",
+  "choices": [
+    "Java resolves overloaded methods at runtime based on the actual object type",
+    "Java resolves overloaded methods at compile time based on the declared (static) type; o is declared as Object so print(Object) is called",
+    "The print(String) method shadows print(Object) and should always be preferred",
+    "Passing a String to an Object parameter causes implicit boxing"
+  ],
+  "answer": "b",
+  "explanation": "Overload resolution in Java is a compile-time decision based on the static type of the argument. Since o is declared as Object, the compiler selects print(Object). At runtime the actual type is String, but overloads (unlike overrides) are not polymorphic. Fix: cast to String or use instanceof before calling."
+}

@@ -1,0 +1,10 @@
+{
+  "id": "cc-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class ComparableSelf {\n    static class Box implements Comparable<Box> {\n        int size;\n        Box(int size) { this.size = size; }\n        public int compareTo(Box other) { return Integer.compare(this.size, other.size); }\n    }\n    public static void main(String[] args) {\n        Box a = new Box(3), b = new Box(5), c = new Box(3);\n        System.out.println(a.compareTo(b));\n        System.out.println(b.compareTo(a));\n        System.out.println(a.compareTo(c));\n    }\n}",
+  "answer": "-1\n1\n0",
+  "explanation": "Integer.compare(3,5)=-1 (a<b). Integer.compare(5,3)=1 (b>a). Integer.compare(3,3)=0 (equal).",
+  "alternatives": ["-1\n1\n0\n"]
+}

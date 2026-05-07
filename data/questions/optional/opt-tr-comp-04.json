@@ -1,0 +1,10 @@
+{
+  "id": "opt-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.Optional;\npublic class FlatMapDemo {\n    static Optional<String> findUser(int id) {\n        return id > 0 ? Optional.of(\"User\" + id) : Optional.empty();\n    }\n    static Optional<String> findEmail(String name) {\n        return name.startsWith(\"User\") ? Optional.of(name + \"@example.com\") : Optional.empty();\n    }\n    public static void main(String[] args) {\n        Optional<String> email = Optional.of(1)\n            .flatMap(id -> findUser(id))\n            .flatMap(name -> findEmail(name));\n        System.out.println(email.orElse(\"none\"));\n        Optional<String> missing = Optional.of(-1)\n            .flatMap(id -> findUser(id))\n            .flatMap(name -> findEmail(name));\n        System.out.println(missing.orElse(\"none\"));\n    }\n}",
+  "answer": "User1@example.com\nnone",
+  "explanation": "flatMap chains Optional-returning functions without nesting. id=1 → findUser(1)=\"User1\" → findEmail(\"User1\")=\"User1@example.com\". id=-1 → findUser(-1)=empty → flatMap short-circuits → empty → orElse returns \"none\".",
+  "alternatives": ["User1@example.com\nnone\n"]
+}

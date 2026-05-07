@@ -1,0 +1,15 @@
+{
+  "id": "gen-db-comp-06",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The generic class cannot be instantiated with primitives. What is the bug?",
+  "code": "public class PrimitiveGeneric {\n    static class Box<T> { T value; Box(T v){value=v;} }\n    public static void main(String[] args) {\n        Box<int> b = new Box<>(5);  // bug: primitives cannot be type arguments\n        System.out.println(b.value);\n    }\n}",
+  "choices": [
+    "Box cannot hold numeric types",
+    "Java generics only work with reference types; int is a primitive and cannot be used as a type argument; use Box<Integer> instead",
+    "The constructor Box(T v) must explicitly cast v to int",
+    "Generic classes must extend Number to hold numeric values"
+  ],
+  "answer": "b",
+  "explanation": "Java generics use type erasure and compile to Object internally, so type arguments must be reference types. int is a primitive and is not allowed as a type argument — Box<int> is a compile error. Fix: use Box<Integer>. Autoboxing handles the conversion automatically: new Box<>(5) works with Box<Integer>."
+}

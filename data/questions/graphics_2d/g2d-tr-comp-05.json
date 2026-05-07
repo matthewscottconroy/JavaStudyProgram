@@ -1,0 +1,10 @@
+{
+  "id": "g2d-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print about color components?",
+  "code": "import java.awt.*;\npublic class ColorTrace {\n    public static void main(String[] args) {\n        Color c = new Color(255, 128, 0);\n        System.out.println(c.getRed());\n        System.out.println(c.getGreen());\n        System.out.println(c.getBlue());\n        Color brighter = c.brighter();\n        System.out.println(brighter.getRed() > c.getRed() || brighter.getRed() == 255);\n    }\n}",
+  "answer": "255\n128\n0\ntrue",
+  "explanation": "Color(255,128,0) is orange. getRed()=255, getGreen()=128, getBlue()=0. brighter() increases component values (caps at 255). Red is already 255, so brighter returns 255==255, or other components increase → the condition is true.",
+  "alternatives": ["255\n128\n0\ntrue\n"]
+}

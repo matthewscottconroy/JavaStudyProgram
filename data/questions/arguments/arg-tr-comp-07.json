@@ -1,0 +1,10 @@
+{
+  "id": "arg-tr-comp-07",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "public class VarargSum {\n    static int sum(int... nums) {\n        int total = 0;\n        for (int n : nums) total += n;\n        return total;\n    }\n    public static void main(String[] args) {\n        System.out.println(sum(1, 2, 3));\n        System.out.println(sum());\n    }\n}",
+  "answer": "6\n0",
+  "explanation": "sum(1,2,3) iterates over [1,2,3] totalling 6. sum() receives an empty array, so the loop body never executes and total stays 0.",
+  "alternatives": ["6\n0\n"]
+}

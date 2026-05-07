@@ -1,0 +1,15 @@
+{
+  "id": "rx-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "Pattern.compile throws PatternSyntaxException. What is the bug?",
+  "code": "import java.util.regex.*;\npublic class PatternBug {\n    public static void main(String[] args) {\n        Pattern p = Pattern.compile(\"\\\\d+(\");  // bug: unclosed group\n        Matcher m = p.matcher(\"123\");\n        System.out.println(m.matches());\n    }\n}",
+  "choices": [
+    "Pattern.compile cannot be called with escaped sequences like \\\\d",
+    "The regex \"\\\\d+(\" has an unclosed capture group '('; every '(' must have a matching ')', causing PatternSyntaxException at compile time",
+    "Pattern.compile must be used with Matcher.find(), not Matcher.matches()",
+    "The + quantifier requires a preceding character class in the pattern"
+  ],
+  "answer": "b",
+  "explanation": "An opening '(' in a regex must be matched by a closing ')'. \"\\d+(\" has an unclosed group, which is a syntax error. Pattern.compile throws PatternSyntaxException. Fix: Pattern.compile(\"\\\\d+\") or Pattern.compile(\"(\\\\d+)\") with the closing parenthesis."
+}

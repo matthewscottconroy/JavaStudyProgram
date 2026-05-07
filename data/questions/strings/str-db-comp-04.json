@@ -1,0 +1,15 @@
+{
+  "id": "str-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "This code throws NullPointerException. What is the bug?",
+  "code": "public class NullStr {\n    public static void main(String[] args) {\n        String s = null;\n        if (s.equals(\"test\")) {    // bug\n            System.out.println(\"match\");\n        }\n    }\n}",
+  "choices": [
+    "null strings must be converted with String.valueOf() before comparison",
+    "Calling .equals() on a null reference throws NullPointerException; compare as \"test\".equals(s) instead",
+    "== must be used when one operand may be null",
+    "String.equals() is not available for null arguments"
+  ],
+  "answer": "b",
+  "explanation": "s is null, so s.equals(...) dereferences a null pointer and throws NullPointerException. The fix is to flip the comparison: \"test\".equals(s). A string literal can never be null, so calling equals on it is safe. Alternatively, use Objects.equals(s, \"test\")."
+}

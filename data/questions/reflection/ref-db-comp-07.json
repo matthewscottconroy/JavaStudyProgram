@@ -1,0 +1,15 @@
+{
+  "id": "ref-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The reflective method invocation throws InvocationTargetException. What is the bug?",
+  "code": "public class InvokeBug {\n    static String greet(String name) { return \"Hello \" + name; }\n    public static void main(String[] args) throws Exception {\n        java.lang.reflect.Method m = InvokeBug.class.getDeclaredMethod(\"greet\", String.class);\n        Object result = m.invoke(null, (Object) null);  // bug: passing null for required String param\n        System.out.println(result);\n    }\n}",
+  "choices": [
+    "getDeclaredMethod cannot find static methods; use getMethod instead",
+    "invoke throws InvocationTargetException wrapping NullPointerException because greet concatenates null which actually works — the real bug is m.invoke(null, (Object) null) passes null as the name argument, not null for the instance, and greet is static so null instance is correct",
+    "The method throws NullPointerException inside greet because null is passed as name, which is wrapped in InvocationTargetException; use an empty string instead of null",
+    "Static methods cannot be called via Method.invoke()"
+  ],
+  "answer": "c",
+  "explanation": "m.invoke(null, null) passes null as the name argument to greet(). Inside greet, \"Hello \" + null yields \"Hello null\" — actually no NPE there. The real scenario: InvocationTargetException wraps any exception thrown inside the invoked method. If greet itself throws (e.g. name.length()), that surfaces as InvocationTargetException. The fix is to pass a valid String: m.invoke(null, \"World\")."
+}

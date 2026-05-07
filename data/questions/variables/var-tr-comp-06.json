@@ -1,0 +1,10 @@
+{
+  "id": "var-tr-comp-06",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "public class FinalVar {\n    static final int SIZE = 10;\n    public static void main(String[] args) {\n        int x = SIZE * 2 + 1;\n        System.out.println(x);\n        final int y = 5;\n        System.out.println(y * y);\n        var z = \"hello\";\n        System.out.println(z.toUpperCase());\n    }\n}",
+  "answer": "21\n25\nHELLO",
+  "explanation": "SIZE=10, x=10*2+1=21. y=5, y*y=25. var z infers type String; z.toUpperCase()=\"HELLO\".",
+  "alternatives": ["21\n25\nHELLO\n"]
+}

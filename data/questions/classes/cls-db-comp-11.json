@@ -1,0 +1,15 @@
+{
+  "id": "cls-db-comp-11",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The inner class cannot access the enclosing instance's method. What is the bug?",
+  "code": "public class StaticNested {\n    private String message = \"hello\";\n    static class Printer {\n        void print() {\n            System.out.println(message);  // bug: static nested class has no enclosing instance\n        }\n    }\n}",
+  "choices": [
+    "Nested classes cannot access private members of the enclosing class",
+    "A static nested class has no implicit reference to the enclosing instance; it cannot access instance members like message directly",
+    "message must be declared public for the nested class to access it",
+    "Static nested classes cannot define instance methods"
+  ],
+  "answer": "b",
+  "explanation": "Static nested classes are like top-level classes that happen to be nested — they have no implicit 'this' reference to the outer class. Accessing the instance field message requires an explicit enclosing instance. Fix: either remove static from the nested class (making it an inner class), or pass the message as a constructor parameter."
+}

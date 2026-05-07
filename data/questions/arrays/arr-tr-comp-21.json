@@ -1,0 +1,10 @@
+{
+  "id": "arr-tr-comp-21",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class LongestInc {\n    static int lis(int[] arr) {\n        int[] dp = new int[arr.length];\n        java.util.Arrays.fill(dp, 1);\n        int max = 1;\n        for (int i = 1; i < arr.length; i++) {\n            for (int j = 0; j < i; j++) {\n                if (arr[j] < arr[i]) dp[i] = Math.max(dp[i], dp[j] + 1);\n            }\n            max = Math.max(max, dp[i]);\n        }\n        return max;\n    }\n    public static void main(String[] args) {\n        System.out.println(lis(new int[]{3, 1, 4, 1, 5, 9, 2, 6}));\n    }\n}",
+  "answer": "4",
+  "explanation": "LIS of {3,1,4,1,5,9,2,6}: one longest increasing subsequence is {1,4,5,9} or {1,4,5,6}, length 4.",
+  "alternatives": ["4\n"]
+}

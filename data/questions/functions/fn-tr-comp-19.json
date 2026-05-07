@@ -1,0 +1,10 @@
+{
+  "id": "fn-tr-comp-19",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class ChainedCalls {\n    static int add(int a, int b) { return a + b; }\n    static int mul(int a, int b) { return a * b; }\n    static int square(int n) { return mul(n, n); }\n    public static void main(String[] args) {\n        System.out.println(add(square(3), square(4)));\n        System.out.println(mul(add(1, 2), add(3, 4)));\n        System.out.println(square(add(2, 3)));\n    }\n}",
+  "answer": "25\n21\n25",
+  "explanation": "add(square(3),square(4))=add(9,16)=25. mul(add(1,2),add(3,4))=mul(3,7)=21. square(add(2,3))=square(5)=25.",
+  "alternatives": ["25\n21\n25\n"]
+}

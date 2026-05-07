@@ -1,0 +1,15 @@
+{
+  "id": "str-db-comp-11",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The split() produces unexpected empty strings. What is the bug?",
+  "code": "public class SplitBug {\n    public static void main(String[] args) {\n        String csv = \",a,,b,\";\n        String[] parts = csv.split(\",\");\n        System.out.println(parts.length);\n        for (String p : parts) System.out.println('[' + p + ']');\n    }\n}",
+  "choices": [
+    "split() cannot accept a single character delimiter",
+    "split(',') removes trailing empty strings by default; leading and middle empty strings are kept, so the length is 4 not 5",
+    "split() should use split(',', -1) to keep all empty strings including trailing ones",
+    "The loop should check for null before printing each part"
+  ],
+  "answer": "b",
+  "explanation": "split(regex) with no limit drops trailing empty strings. ',a,,b,' splits to ['','a','','b'] (trailing empty string removed). Length=4. Use split(',', -1) to retain trailing empty strings and get length=5."
+}

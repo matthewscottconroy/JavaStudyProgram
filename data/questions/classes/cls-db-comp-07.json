@@ -1,0 +1,15 @@
+{
+  "id": "cls-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The record accessor returns unexpected results. What is the bug?",
+  "code": "public class RecordBug {\n    record Point(int x, int y) {\n        // custom accessor that modifies returned value — bug\n        public int x() { return x + 1; }  // wrong: should return x\n    }\n    public static void main(String[] args) {\n        Point p = new Point(5, 10);\n        System.out.println(p.x());\n        System.out.println(p.y());\n    }\n}",
+  "choices": [
+    "Records cannot define custom accessor methods",
+    "The custom x() returns x+1 instead of x, breaking the record's contract that accessors return the stored component value",
+    "int x is not a valid type for a record component",
+    "p.x() and p.y() cannot both be called on the same record instance"
+  ],
+  "answer": "b",
+  "explanation": "Records auto-generate accessor methods that return the component as-is. Overriding x() to return x+1 violates the record's contract and surprises callers. Output: x()=5+1=6, y()=10. Fix: don't override x() if you just want the stored value, or override it with return x; only."
+}

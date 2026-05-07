@@ -1,0 +1,10 @@
+{
+  "id": "var-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "public class Overflow {\n    public static void main(String[] args) {\n        int max = Integer.MAX_VALUE;\n        System.out.println(max);\n        System.out.println(max + 1);\n        byte b = 127;\n        b++;\n        System.out.println(b);\n    }\n}",
+  "answer": "2147483647\n-2147483648\n-128",
+  "explanation": "Integer.MAX_VALUE is 2147483647. Adding 1 overflows to Integer.MIN_VALUE = -2147483648 (integers wrap in two's complement). byte 127 + 1 wraps to -128 (byte range is -128 to 127).",
+  "alternatives": ["2147483647\n-2147483648\n-128\n"]
+}

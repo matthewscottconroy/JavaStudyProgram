@@ -1,0 +1,15 @@
+{
+  "id": "str-db-comp-09",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The string concatenation inside a loop is slow. What is the fix?",
+  "code": "public class SlowConcat {\n    static String build(int n) {\n        String result = \"\";\n        for (int i = 0; i < n; i++) {\n            result += i + \",\";  // bug: O(n^2) string creation\n        }\n        return result;\n    }\n}",
+  "choices": [
+    "String concatenation is not allowed inside for loops",
+    "Each result += creates a new String object; for large n this is O(n^2). Use StringBuilder.append() instead for O(n) performance",
+    "The method should return char[] instead of String",
+    "String.format() should be used instead of concatenation"
+  ],
+  "answer": "b",
+  "explanation": "Strings are immutable; += inside a loop creates a new String each iteration, copying all previous content. For n iterations this is O(n^2) work. Fix: StringBuilder sb = new StringBuilder(); for (...) sb.append(i).append(','); return sb.toString();"
+}

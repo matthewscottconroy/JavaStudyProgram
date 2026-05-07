@@ -1,0 +1,10 @@
+{
+  "id": "gen-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class WildCard {\n    static double sum(List<? extends Number> list) {\n        double total = 0;\n        for (Number n : list) total += n.doubleValue();\n        return total;\n    }\n    public static void main(String[] args) {\n        System.out.println(sum(Arrays.asList(1, 2, 3)));\n        System.out.println(sum(Arrays.asList(1.5, 2.5)));\n        List<Integer> ints = Arrays.asList(10, 20);\n        System.out.println(sum(ints));\n    }\n}",
+  "answer": "6.0\n4.0\n30.0",
+  "explanation": "sum accepts any List<? extends Number>. 1+2+3=6.0. 1.5+2.5=4.0. 10+20=30.0. All return double.",
+  "alternatives": ["6.0\n4.0\n30.0\n"]
+}

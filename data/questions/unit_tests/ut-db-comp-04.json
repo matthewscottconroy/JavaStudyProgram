@@ -1,0 +1,15 @@
+{
+  "id": "ut-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The test is fragile — it fails when run in a different environment. What is the bug?",
+  "code": "import org.junit.jupiter.api.*;\nimport static org.junit.jupiter.api.Assertions.*;\nimport java.time.*;\npublic class TimeTest {\n    @Test void testToday() {\n        String today = LocalDate.now().toString();  // depends on current date\n        assertEquals(\"2026-05-04\", today);  // hardcoded date!\n    }\n}",
+  "choices": [
+    "LocalDate.now() is not deterministic so should never be tested",
+    "The test asserts a hardcoded date that only passes on one specific day; inject a Clock to make the date controllable in tests",
+    "toString() is not a reliable method for LocalDate comparison",
+    "assertEquals must use DateTimeFormatter for date comparisons"
+  ],
+  "answer": "b",
+  "explanation": "Hardcoding dates (or times, random values, network calls) makes tests fragile — they only pass under specific conditions. Fix: inject a Clock dependency into the class under test and pass a fixed clock in tests: LocalDate.now(fixedClock). This is clock injection, a form of dependency injection."
+}

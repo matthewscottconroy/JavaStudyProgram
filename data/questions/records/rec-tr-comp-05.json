@@ -1,0 +1,10 @@
+{
+  "id": "rec-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class RecordInMap {\n    record Key(String name, int version) {}\n    public static void main(String[] args) {\n        Map<Key, String> map = new HashMap<>();\n        map.put(new Key(\"api\", 1), \"v1\");\n        map.put(new Key(\"api\", 2), \"v2\");\n        System.out.println(map.get(new Key(\"api\", 1)));\n        System.out.println(map.size());\n    }\n}",
+  "answer": "v1\n2",
+  "explanation": "Records auto-generate hashCode() and equals() based on all components. new Key(\"api\",1) in get() produces the same hash and equals the key used in put(), so the lookup succeeds. The two keys have different versions so there are 2 entries.",
+  "alternatives": ["v1\n2\n"]
+}

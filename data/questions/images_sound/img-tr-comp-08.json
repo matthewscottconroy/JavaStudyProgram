@@ -1,0 +1,10 @@
+{
+  "id": "img-tr-comp-08",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.awt.image.BufferedImage;\npublic class PixelColor {\n    public static void main(String[] args) {\n        BufferedImage img = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB);\n        img.setRGB(0, 0, 0xFF0000);  // red\n        int rgb = img.getRGB(0, 0);\n        System.out.println(Integer.toHexString(rgb).toUpperCase());\n    }\n}",
+  "answer": "FFFF0000",
+  "explanation": "setRGB stores the color as a packed ARGB int. For TYPE_INT_RGB, the alpha is fully opaque (0xFF). 0xFF0000 (red) stored with alpha 0xFF becomes 0xFFFF0000. Integer.toHexString produces \"ffff0000\" and toUpperCase yields \"FFFF0000\".",
+  "alternatives": ["FFFF0000\n"]
+}

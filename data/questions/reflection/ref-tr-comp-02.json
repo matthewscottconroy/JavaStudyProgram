@@ -1,0 +1,10 @@
+{
+  "id": "ref-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.lang.reflect.*;\npublic class FieldAccess {\n    static class Person {\n        private String name = \"Alice\";\n        private int    age  = 30;\n    }\n\n    public static void main(String[] args) throws Exception {\n        Person p = new Person();\n        Field nameField = Person.class.getDeclaredField(\"name\");\n        nameField.setAccessible(true);\n        System.out.println(nameField.get(p));\n\n        nameField.set(p, \"Bob\");\n        System.out.println(nameField.get(p));\n\n        Field[] fields = Person.class.getDeclaredFields();\n        System.out.println(fields.length);\n    }\n}",
+  "answer": "Alice\nBob\n2",
+  "explanation": "getDeclaredField('name') finds the private field. setAccessible(true) bypasses the access check. get(p) reads 'Alice'. set(p, 'Bob') writes through the field reference, changing p.name. getDeclaredFields() returns both declared fields (name and age) → length 2.",
+  "alternatives": ["Alice\nBob\n2\n"]
+}

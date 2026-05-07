@@ -1,0 +1,15 @@
+{
+  "id": "net-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The URL parsing throws MalformedURLException. What is the bug?",
+  "code": "import java.net.*;\npublic class URLBug {\n    public static void main(String[] args) throws Exception {\n        URL url = new URL(\"example.com/path\");  // bug: no protocol\n        System.out.println(url.getHost());\n    }\n}",
+  "choices": [
+    "URL cannot hold paths with slashes",
+    "URL requires a protocol scheme (e.g., https://); without it, the constructor throws MalformedURLException",
+    "getHost() must be called after openConnection()",
+    "URL cannot be used for HTTPS — use HttpsURLConnection directly"
+  ],
+  "answer": "b",
+  "explanation": "A URL must include the protocol. \"example.com/path\" has no protocol scheme, causing MalformedURLException. Fix: new URL(\"https://example.com/path\"). Valid schemes include http, https, ftp, file, etc."
+}

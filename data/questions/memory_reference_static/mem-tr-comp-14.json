@@ -1,0 +1,10 @@
+{
+  "id": "mem-tr-comp-14",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class NullHandling {\n    static String name = null;\n    public static void main(String[] args) {\n        System.out.println(name == null);\n        System.out.println(\"hello\" + name);\n        System.out.println(String.valueOf(name));\n        try {\n            System.out.println(name.length());\n        } catch (NullPointerException e) {\n            System.out.println(\"NPE\");\n        }\n    }\n}",
+  "answer": "true\nhellonull\nnull\nNPE",
+  "explanation": "name==null→true. String concat with null: 'hello'+'null'='hellonull'. String.valueOf(null)='null'. name.length() throws NPE.",
+  "alternatives": ["true\nhellonull\nnull\nNPE\n"]
+}

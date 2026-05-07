@@ -1,0 +1,10 @@
+{
+  "id": "ser-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.io.*;\npublic class SerDeser {\n    static class Data implements Serializable {\n        int x; transient int y;\n        Data(int x, int y) { this.x = x; this.y = y; }\n        @Override public String toString() { return \"x=\" + x + \",y=\" + y; }\n    }\n    public static void main(String[] args) throws Exception {\n        Data d = new Data(10, 20);\n        ByteArrayOutputStream bos = new ByteArrayOutputStream();\n        new ObjectOutputStream(bos).writeObject(d);\n        Data d2 = (Data) new ObjectInputStream(\n            new ByteArrayInputStream(bos.toByteArray())).readObject();\n        System.out.println(d);\n        System.out.println(d2);\n    }\n}",
+  "answer": "x=10,y=20\nx=10,y=0",
+  "explanation": "d has x=10, y=20. After serialization/deserialization, x=10 is preserved but y is marked transient so it's not serialized — deserialized as default (0). d prints x=10,y=20; d2 prints x=10,y=0.",
+  "alternatives": ["x=10,y=20\nx=10,y=0\n"]
+}

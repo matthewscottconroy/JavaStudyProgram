@@ -1,0 +1,15 @@
+{
+  "id": "g2d-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The custom painting does not appear. What is the bug?",
+  "code": "import javax.swing.*;\nimport java.awt.*;\npublic class PaintBug extends JPanel {\n    public void paint(Graphics g) {   // bug: should override paintComponent\n        g.setColor(Color.BLUE);\n        g.fillRect(10, 10, 100, 50);\n    }\n}",
+  "choices": [
+    "fillRect coordinates must be specified as double, not int",
+    "Overriding paint() instead of paintComponent() skips Swing's double-buffering and UI optimizations; also, super.paintComponent(g) must be called to clear the background",
+    "Graphics must be cast to Graphics2D before calling fillRect",
+    "Color.BLUE is not a valid constant in Java"
+  ],
+  "answer": "b",
+  "explanation": "In Swing, override paintComponent(Graphics g) not paint(). Also call super.paintComponent(g) first to clear the background. paint() handles the full rendering pipeline (including border and children). Overriding it wrong disrupts Swing's rendering order and eliminates double-buffering."
+}

@@ -1,0 +1,15 @@
+{
+  "id": "gui-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The JFrame window does not appear. What is the bug?",
+  "code": "import javax.swing.*;\npublic class InvisibleFrame {\n    public static void main(String[] args) {\n        JFrame f = new JFrame(\"Hello\");\n        f.setSize(400, 300);\n        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);\n        // Missing: f.setVisible(true);\n        System.out.println(\"created\");\n    }\n}",
+  "choices": [
+    "JFrame requires a JPanel to be visible",
+    "setVisible(true) is never called; frames are invisible by default",
+    "setSize must be called after setVisible for the frame to appear",
+    "EXIT_ON_CLOSE prevents the frame from being shown"
+  ],
+  "answer": "b",
+  "explanation": "JFrames are invisible by default. setVisible(true) must be called to make the window appear on screen. This is one of the most common beginners' mistakes with Swing. The program completes without error because creating an invisible JFrame is perfectly valid."
+}

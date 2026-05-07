@@ -1,0 +1,15 @@
+{
+  "id": "arg-db-comp-10",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The vararg method has a compile error. What is the bug?",
+  "code": "public class TwoVarargs {\n    static void bad(int... a, String... b) {  // bug: two vararg params\n        System.out.println(a.length + b.length);\n    }\n}",
+  "choices": [
+    "vararg parameters cannot be combined with other types in the same method",
+    "Java allows at most one vararg parameter and it must be last; having two vararg parameters is a compile error",
+    "String... is not a valid vararg type; only primitive arrays can use ...",
+    "The method must be static to use vararg parameters"
+  ],
+  "answer": "b",
+  "explanation": "Java requires that a method have at most one vararg (variable-arity) parameter, and it must be the last parameter in the list. Declaring two vararg parameters (int... a, String... b) is a compile-time error. Fix: choose one vararg, or accept a String[] as an explicit array parameter."
+}

@@ -1,0 +1,15 @@
+{
+  "id": "rx-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "String.split produces unexpected results. What is the bug?",
+  "code": "public class SplitDotBug {\n    public static void main(String[] args) {\n        String s = \"a.b.c\";\n        String[] parts = s.split(\".\");  // bug: . is regex wildcard\n        System.out.println(parts.length);\n    }\n}",
+  "choices": [
+    "split only works with single-character delimiters",
+    "In regex, '.' matches any character; split(\".\") splits on every character, producing an empty array; to split on a literal dot use split(\"\\\\.\") or split(Pattern.quote(\".\"))",
+    "split returns null when the pattern matches the entire string",
+    "split(\".\" ) splits on whitespace by default"
+  ],
+  "answer": "b",
+  "explanation": "split takes a regex. '.' is a regex metacharacter matching any character. split(\".\") on \"a.b.c\" matches every position, and Java's split discards trailing empty strings, yielding an empty array (length 0). Fix: split(\"\\\\.\") to match a literal dot."
+}

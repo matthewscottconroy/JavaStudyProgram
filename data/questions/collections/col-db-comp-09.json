@@ -1,0 +1,15 @@
+{
+  "id": "col-db-comp-09",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The map lookup always returns null. What is the bug?",
+  "code": "import java.util.*;\npublic class MapLookup {\n    public static void main(String[] args) {\n        Map<String,Integer> map = new HashMap<>();\n        map.put(\"Hello\", 1);\n        String key = \"hello\";  // bug: lowercase\n        System.out.println(map.get(key));\n    }\n}",
+  "choices": [
+    "HashMap cannot store String keys",
+    "HashMap.get() is case-sensitive; 'hello' and 'Hello' are different keys, so get('hello') returns null",
+    "map.put() must use the same variable as map.get()",
+    "HashMap requires keys to be interned strings"
+  ],
+  "answer": "b",
+  "explanation": "HashMap uses equals() for key comparison, which is case-sensitive for Strings. 'Hello' and 'hello' are different strings with different hash codes. get('hello') finds no matching key and returns null. Fix: normalize the key with toLowerCase() consistently on both put and get."
+}

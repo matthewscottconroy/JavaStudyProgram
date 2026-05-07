@@ -1,0 +1,15 @@
+{
+  "id": "ifc-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The class does not compile. What is the bug?",
+  "code": "public class NotImpl {\n    interface Printable {\n        void print();\n        void save();\n    }\n    static class Doc implements Printable {\n        @Override public void print() { System.out.println(\"printing\"); }\n        // save() not implemented\n    }\n}",
+  "choices": [
+    "A class can only implement one interface method at a time",
+    "Doc implements Printable but does not override save(); a concrete class must implement all abstract interface methods",
+    "interface methods must be public and Doc's print() is missing a modifier",
+    "Printable must be declared abstract to allow partial implementation"
+  ],
+  "answer": "b",
+  "explanation": "A concrete (non-abstract) class that implements an interface must provide implementations for all abstract methods. Doc only implements print(), leaving save() unimplemented. Fix: either implement save() in Doc, or declare Doc abstract."
+}

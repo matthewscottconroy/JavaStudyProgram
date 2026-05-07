@@ -1,0 +1,15 @@
+{
+  "id": "lp-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "This method is supposed to count down from n to 1 and return the number of steps, but it loops forever. What is the bug?",
+  "code": "public class Countdown {\n    public static int countDown(int n) {\n        int steps = 0;\n        while (n > 0) {\n            steps++;\n            n++;\n        }\n        return steps;\n    }\n}",
+  "choices": [
+    "steps should start at 1 instead of 0",
+    "The while condition should be n >= 0 to include zero",
+    "n++ should be n-- so n actually moves toward 0",
+    "The return statement should be inside the while loop"
+  ],
+  "answer": "c",
+  "explanation": "n++ increments n, so if n starts positive it grows without bound and n > 0 is always true — infinite loop. The intent is to decrement toward 0 on each step. Fix: change n++ to n--."
+}

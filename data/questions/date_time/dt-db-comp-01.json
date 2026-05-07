@@ -1,0 +1,15 @@
+{
+  "id": "dt-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The date arithmetic result is wrong. What is the bug?",
+  "code": "import java.time.*;\npublic class DateMutBug {\n    public static void main(String[] args) {\n        LocalDate deadline = LocalDate.of(2024, 12, 1);\n        deadline.minusDays(7);  // bug: result not captured\n        System.out.println(deadline);\n    }\n}",
+  "choices": [
+    "minusDays modifies the date in place; the variable must be declared var",
+    "LocalDate is immutable; minusDays() returns a new LocalDate and does not modify deadline; the result must be assigned: deadline = deadline.minusDays(7)",
+    "minusDays accepts only positive values; use plusDays(-7) instead",
+    "LocalDate.of must be called each time a new date is needed"
+  ],
+  "answer": "b",
+  "explanation": "All java.time types are immutable. Calling minusDays(7) returns a new LocalDate representing 7 days earlier but leaves deadline unchanged. Fix: deadline = deadline.minusDays(7); or LocalDate earlier = deadline.minusDays(7);"
+}

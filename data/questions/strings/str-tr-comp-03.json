@@ -1,0 +1,10 @@
+{
+  "id": "str-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Initials {\n    public static String initials(String fullName) {\n        String[] parts = fullName.trim().split(\"\\\\s+\");\n        StringBuilder sb = new StringBuilder();\n        for (String part : parts) {\n            sb.append(Character.toUpperCase(part.charAt(0)));\n            sb.append('.');\n        }\n        return sb.toString();\n    }\n\n    public static void main(String[] args) {\n        System.out.println(initials(\"alan turing\"));\n        System.out.println(initials(\"Grace  Hopper\"));\n    }\n}",
+  "answer": "A.T.\nG.H.",
+  "explanation": "\"alan turing\" splits into [\"alan\",\"turing\"]. Each word: take first char, uppercase it, append '.'. Result: 'A.T.'. \"Grace  Hopper\" split(\"\\\\s+\") splits on one-or-more spaces → [\"Grace\",\"Hopper\"] → 'G.H.'.",
+  "alternatives": ["A.T.\nG.H.\n"]
+}

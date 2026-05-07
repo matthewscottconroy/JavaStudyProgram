@@ -1,0 +1,15 @@
+{
+  "id": "gen-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The generic type bound is too restrictive. What is the bug?",
+  "code": "public class TooRestrictive {\n    static <T extends Integer> T doubleIt(T n) {  // bug: Integer is final\n        return (T)(Integer)(n.intValue() * 2);\n    }\n    public static void main(String[] args) {\n        System.out.println(doubleIt(5));\n    }\n}",
+  "choices": [
+    "Integer cannot be used as an upper bound for type parameters",
+    "Integer is a final class, so no subclasses exist; the bound <T extends Integer> is equivalent to just Integer, making the generic parameter pointless",
+    "The cast (T)(Integer)(...) always throws ClassCastException",
+    "Multiplying n.intValue() by 2 causes integer overflow"
+  ],
+  "answer": "b",
+  "explanation": "Integer is declared final, meaning no class can extend it. The bound <T extends Integer> therefore only ever allows T=Integer. The generic is pointless — the method could just be declared as Integer doubleIt(Integer n). The code compiles and works but uses an antipattern."
+}

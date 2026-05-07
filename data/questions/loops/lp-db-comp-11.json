@@ -1,0 +1,15 @@
+{
+  "id": "lp-db-comp-11",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The do-while loop body never executes the intended number of times. What is the bug?",
+  "code": "public class DoWhileBug {\n    public static void main(String[] args) {\n        int n = 5;\n        int count = 0;\n        do {\n            count++;\n        } while (count < n && count != 3);  // bug: exits at count==3\n        System.out.println(count);\n    }\n}",
+  "choices": [
+    "do-while cannot use multiple conditions with &&",
+    "The && condition exits when count==3, printing 3 instead of 5; to loop until count==5 use while(count < n)",
+    "count should be initialized to 1, not 0",
+    "The loop body must contain more than one statement"
+  ],
+  "answer": "b",
+  "explanation": "The loop increments count then checks: count<5 AND count!=3. When count reaches 3, count!=3 is false → loop exits. prints 3. To loop to 5, remove the count!=3 condition or change the logic."
+}

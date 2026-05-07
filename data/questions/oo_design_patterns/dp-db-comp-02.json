@@ -1,0 +1,15 @@
+{
+  "id": "dp-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "This Factory method always creates a Circle even when 'square' is requested. What is the bug?",
+  "code": "interface Shape { String name(); }\nclass Circle implements Shape { public String name() { return \"circle\"; } }\nclass Square implements Shape { public String name() { return \"square\"; } }\n\nclass ShapeFactory {\n    public static Shape create(String type) {\n        if (type == \"circle\") return new Circle();\n        if (type == \"square\") return new Square();\n        throw new IllegalArgumentException(\"unknown: \" + type);\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        System.out.println(ShapeFactory.create(\"square\").name());\n    }\n}",
+  "choices": [
+    "Circle and Square must be declared as enums for a Factory to work",
+    "String comparison with == checks reference identity, not content — use type.equals(\"circle\") and type.equals(\"square\")",
+    "The factory method must be an instance method, not static",
+    "ShapeFactory must implement an interface to qualify as a Factory pattern"
+  ],
+  "answer": "b",
+  "explanation": "type == \"circle\" compares references. String literals may or may not be the same reference depending on how the String was created, so this comparison is unreliable. In this case 'square' doesn't match either == check, and the method throws IllegalArgumentException rather than returning a Square. Fix: use type.equals(\"circle\") and type.equals(\"square\")."
+}

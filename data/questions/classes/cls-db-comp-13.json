@@ -1,0 +1,15 @@
+{
+  "id": "cls-db-comp-13",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The compareTo() implementation is inconsistent with equals(). What is the bug?",
+  "code": "public class BadComparable implements Comparable<BadComparable> {\n    int val;\n    BadComparable(int v) { val = v; }\n    public int compareTo(BadComparable other) {\n        return Integer.compare(val, other.val);\n    }\n    // equals() not overridden — bug\n}",
+  "choices": [
+    "compareTo() should return a boolean, not an int",
+    "compareTo() is implemented but equals() uses identity (==); a.equals(b) can return false even when a.compareTo(b)==0, violating the recommended contract",
+    "Comparable<BadComparable> should be Comparable<Object>",
+    "Integer.compare() is not suitable for Comparable implementations"
+  ],
+  "answer": "b",
+  "explanation": "The Comparable contract strongly recommends that (a.compareTo(b)==0) == a.equals(b). Without overriding equals(), two BadComparable objects with the same val compare as 0 but are not equals(). This causes inconsistency with sorted collections (TreeSet, TreeMap) which use compareTo() for equality but Collections.contains() uses equals()."
+}

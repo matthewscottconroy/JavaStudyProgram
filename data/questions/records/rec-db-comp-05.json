@@ -1,0 +1,15 @@
+{
+  "id": "rec-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The mutable component breaks the record's value semantics. What is the bug?",
+  "code": "import java.util.*;\npublic class RecordMutableBug {\n    record Tag(String name, List<String> values) {}\n    public static void main(String[] args) {\n        List<String> vals = new ArrayList<>(List.of(\"a\", \"b\"));\n        Tag t = new Tag(\"x\", vals);\n        vals.add(\"c\");  // bug: mutates the record's internal list\n        System.out.println(t.values().size());\n    }\n}",
+  "choices": [
+    "Record components cannot hold List types",
+    "The List reference is shared; mutating vals after construction also mutates t.values(), breaking immutability; the compact constructor should make a defensive copy: values = List.copyOf(values)",
+    "Records auto-copy mutable components in the generated constructor",
+    "vals.add(\"c\") throws UnsupportedOperationException because record fields are final"
+  ],
+  "answer": "b",
+  "explanation": "Records store the reference, not a copy. The caller retains a reference to the same List, so vals.add(\"c\") mutates the data inside the record — t.values().size() becomes 3. Fix: defensive copy in the compact constructor: values = List.copyOf(values); to make the record truly immutable."
+}

@@ -1,0 +1,10 @@
+{
+  "id": "img-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print about a BufferedImage?",
+  "code": "import java.awt.image.BufferedImage;\nimport java.awt.Color;\npublic class ImageTrace {\n    public static void main(String[] args) {\n        BufferedImage img = new BufferedImage(100, 200, BufferedImage.TYPE_INT_RGB);\n        System.out.println(img.getWidth());\n        System.out.println(img.getHeight());\n        img.setRGB(0, 0, Color.RED.getRGB());\n        int pixel = img.getRGB(0, 0);\n        System.out.println(pixel == Color.RED.getRGB());\n        System.out.println(img.getType() == BufferedImage.TYPE_INT_RGB);\n    }\n}",
+  "answer": "100\n200\ntrue\ntrue",
+  "explanation": "BufferedImage(100,200,...) creates 100×200 image. getWidth()=100, getHeight()=200. setRGB at (0,0) to RED, getRGB at (0,0) equals Color.RED.getRGB() → true. getType() == TYPE_INT_RGB → true.",
+  "alternatives": ["100\n200\ntrue\ntrue\n"]
+}

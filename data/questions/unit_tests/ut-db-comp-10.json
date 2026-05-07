@@ -1,0 +1,15 @@
+{
+  "id": "ut-db-comp-10",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The test catches exceptions too broadly, masking real failures. What is the bug?",
+  "code": "public class BroadCatch {\n    static int parse(String s) { return Integer.parseInt(s); }\n    static void testParse() {\n        try {\n            int result = parse(\"42x\");  // should throw\n            System.out.println(\"pass\");  // bug: reached unexpectedly\n        } catch (Exception e) {\n            System.out.println(\"pass\");  // bug: passes even on unexpected exceptions\n        }\n    }\n    public static void main(String[] args) { testParse(); }\n}",
+  "choices": [
+    "Integer.parseInt() does not throw exceptions",
+    "The test prints 'pass' in both the try body and the catch; it always passes regardless of whether the correct exception is thrown or some other failure occurs",
+    "catch(Exception) should be catch(NumberFormatException) only",
+    "The test should not catch any exceptions"
+  ],
+  "answer": "b",
+  "explanation": "The test prints 'pass' in both branches — it can never fail. A proper test for expected exceptions should: assert the exception is thrown (use assertThrows), verify it's the correct type (NumberFormatException), and possibly check the message. A broad catch hides bugs where wrong exceptions are thrown."
+}

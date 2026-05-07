@@ -1,0 +1,10 @@
+{
+  "id": "net-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "Assume the URL responds with the body 'pong'. What does this program print?",
+  "code": "import java.net.*;\nimport java.io.*;\npublic class HttpGet {\n    public static void main(String[] args) throws Exception {\n        URL url = new URL(\"http://example.com/ping\");\n        HttpURLConnection conn = (HttpURLConnection) url.openConnection();\n        conn.setRequestMethod(\"GET\");\n        int code = conn.getResponseCode();\n        System.out.println(\"status: \" + code);\n        try (BufferedReader reader = new BufferedReader(\n                new InputStreamReader(conn.getInputStream()))) {\n            String line;\n            while ((line = reader.readLine()) != null) {\n                System.out.println(line);\n            }\n        }\n    }\n}",
+  "answer": "status: 200\npong",
+  "explanation": "getResponseCode() reads the HTTP status line; a successful response is 200. getInputStream() provides the response body. readLine() reads 'pong' (the only line), then returns null on the next call (end of stream), ending the loop.",
+  "alternatives": ["status: 200\npong\n"]
+}

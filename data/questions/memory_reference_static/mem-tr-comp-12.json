@@ -1,0 +1,10 @@
+{
+  "id": "mem-tr-comp-12",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class StaticCounter {\n    static int total = 0;\n    int id;\n    StaticCounter() { id = ++total; }\n    static int getTotal() { return total; }\n    public static void main(String[] args) {\n        StaticCounter a = new StaticCounter();\n        StaticCounter b = new StaticCounter();\n        StaticCounter c = new StaticCounter();\n        System.out.println(a.id + \" \" + b.id + \" \" + c.id);\n        System.out.println(StaticCounter.getTotal());\n        System.out.println(a.getTotal() == c.getTotal());\n    }\n}",
+  "answer": "1 2 3\n3\ntrue",
+  "explanation": "Each constructor increments shared static total. a.id=1, b.id=2, c.id=3. getTotal()=3. a.getTotal() and c.getTotal() both return the same static field → true.",
+  "alternatives": ["1 2 3\n3\ntrue\n"]
+}

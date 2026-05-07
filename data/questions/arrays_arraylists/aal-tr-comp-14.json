@@ -1,0 +1,10 @@
+{
+  "id": "aal-tr-comp-14",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class BinaryVsList {\n    public static void main(String[] args) {\n        List<Integer> sorted = new ArrayList<>(Arrays.asList(2,5,7,10,14,20));\n        System.out.println(Collections.binarySearch(sorted, 7));\n        System.out.println(Collections.binarySearch(sorted, 6));\n        sorted.add(3, 8);\n        System.out.println(sorted.get(3));\n        System.out.println(sorted.size());\n    }\n}",
+  "answer": "2\n-3\n8\n7",
+  "explanation": "binarySearch(7): found at index 2. binarySearch(6): not found; insertion point is 2 (before 7), so returns -(2+1)=-3. add(3,8) inserts 8 at index 3: [2,5,7,8,10,14,20]. get(3)=8. size=7.",
+  "alternatives": ["2\n-3\n8\n7\n"]
+}

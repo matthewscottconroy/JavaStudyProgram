@@ -1,0 +1,10 @@
+{
+  "id": "dt-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "import java.time.*;\npublic class DateArithmetic {\n    public static void main(String[] args) {\n        LocalDate d = LocalDate.of(2024, 1, 31);\n        LocalDate next = d.plusMonths(1);\n        System.out.println(next);\n        LocalDate week = d.plusWeeks(1);\n        System.out.println(week);\n    }\n}",
+  "answer": "2024-02-29\n2024-02-07",
+  "explanation": "2024 is a leap year. Jan 31 + 1 month = Feb 31, which doesn't exist; java.time clamps to the last valid day of February: Feb 29. Jan 31 + 7 days = Feb 7.",
+  "alternatives": ["2024-02-29\n2024-02-07\n"]
+}

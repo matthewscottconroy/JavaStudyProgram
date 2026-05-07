@@ -1,0 +1,15 @@
+{
+  "id": "gem-db-comp-09",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The Timer fires only once instead of repeatedly. What is the bug?",
+  "code": "import javax.swing.*;\npublic class TimerBug {\n    public static void main(String[] args) {\n        Timer timer = new Timer(1000, e -> System.out.println(\"tick\"));\n        timer.setRepeats(false);  // bug: disables repeating\n        timer.start();\n    }\n}",
+  "choices": [
+    "javax.swing.Timer fires on the main thread, not the EDT",
+    "setRepeats(false) makes the Timer a one-shot timer; it fires once after the delay and stops; to repeat, remove the call or use setRepeats(true)",
+    "Timer requires a JFrame to be visible before it will fire",
+    "The Timer delay of 1000ms is too long; use 100ms for reliable repeating"
+  ],
+  "answer": "b",
+  "explanation": "By default, javax.swing.Timer repeats. Calling setRepeats(false) overrides this to make it fire exactly once. Fix: remove setRepeats(false) or change it to setRepeats(true) to restore continuous firing every 1000ms on the EDT."
+}

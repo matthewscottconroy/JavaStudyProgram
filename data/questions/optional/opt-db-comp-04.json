@@ -1,0 +1,15 @@
+{
+  "id": "opt-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The nested Optional is awkward to unwrap. What is the bug?",
+  "code": "import java.util.Optional;\npublic class NestedOptBug {\n    static Optional<String> findName(int id) {\n        return id > 0 ? Optional.of(\"Alice\") : Optional.empty();\n    }\n    public static void main(String[] args) {\n        Optional<Optional<String>> nested = Optional.of(1).map(id -> findName(id));  // bug\n        System.out.println(nested.get().get());\n    }\n}",
+  "choices": [
+    "Optional.map requires a Function that returns a non-Optional value",
+    "Using map with a function that returns Optional<T> produces Optional<Optional<T>>; use flatMap instead to collapse the nesting into Optional<T>",
+    "Optional.of(1) is invalid; Optional only wraps reference types, not int",
+    "nested.get().get() is the correct way to unwrap a doubly-nested Optional"
+  ],
+  "answer": "b",
+  "explanation": "map(f) wraps f's return value in another Optional, so returning Optional<String> from map yields Optional<Optional<String>>. flatMap(f) expects f to return Optional<T> and flattens the result. Fix: Optional<String> result = Optional.of(1).flatMap(id -> findName(id)); then result.orElse(\"none\")."
+}

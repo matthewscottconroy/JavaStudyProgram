@@ -1,0 +1,15 @@
+{
+  "id": "net-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The server never receives the message — the client blocks on readLine() indefinitely. What is the bug?",
+  "code": "import java.net.*;\nimport java.io.*;\npublic class BrokenClient {\n    public static void main(String[] args) throws Exception {\n        Socket sock = new Socket(\"localhost\", 9000);\n        PrintWriter out = new PrintWriter(sock.getOutputStream()); // no autoFlush\n        BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));\n        out.println(\"ping\");         // written to buffer, NOT sent\n        System.out.println(in.readLine());  // blocks forever\n        sock.close();\n    }\n}",
+  "choices": [
+    "Socket must use UDP, not TCP, for text messages to be sent immediately",
+    "PrintWriter buffers output and does not flush automatically — the 'ping' line sits in the buffer and is never sent to the server",
+    "BufferedReader.readLine() requires the server to close its connection before returning",
+    "out.println() must be replaced with out.write() for network communication"
+  ],
+  "answer": "b",
+  "explanation": "PrintWriter buffers writes for efficiency. Without autoFlush or an explicit out.flush(), the 'ping' line remains in the local buffer and is never transmitted. The server never receives input, so it never sends a response, so readLine() blocks forever. Fix: new PrintWriter(sock.getOutputStream(), true) to enable autoFlush, or call out.flush() explicitly after println."
+}

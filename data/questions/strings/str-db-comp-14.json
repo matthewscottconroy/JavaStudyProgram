@@ -1,0 +1,15 @@
+{
+  "id": "str-db-comp-14",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The replace() call does not remove all dots. What is the bug?",
+  "code": "public class ReplaceBug {\n    public static void main(String[] args) {\n        String s = \"a.b.c\";\n        System.out.println(s.replaceAll(\".\", \"-\"));\n    }\n}",
+  "choices": [
+    "replaceAll() is not available on String",
+    "In a regex, '.' matches any character, not just a literal dot; every character is replaced with '-'",
+    "replace() should be used instead of replaceAll() for single characters",
+    "The replacement string '-' must be escaped as '\\\\-'"
+  ],
+  "answer": "b",
+  "explanation": "replaceAll() interprets the first argument as a regex. In regex, '.' is a wildcard matching any character, so every character gets replaced with '-' → '-----'. Fix: escape the dot: replaceAll(\"\\\\.\", \"-\") or use replace(\".\", \"-\") which takes a literal string."
+}

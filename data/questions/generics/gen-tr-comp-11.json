@@ -1,0 +1,10 @@
+{
+  "id": "gen-tr-comp-11",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class TypeErasure {\n    static <T> T identity(T x) { return x; }\n    public static void main(String[] args) {\n        String s = identity(\"hello\");\n        Integer i = identity(42);\n        System.out.println(s.getClass().getSimpleName());\n        System.out.println(i.getClass().getSimpleName());\n        // type parameter T is erased at runtime\n        Object o = identity(\"test\");\n        System.out.println(o instanceof String);\n    }\n}",
+  "answer": "String\nInteger\ntrue",
+  "explanation": "identity() returns its argument. The actual runtime type is preserved even though T is erased. s.getClass()=String, i.getClass()=Integer. The object is still a String at runtime → instanceof true.",
+  "alternatives": ["String\nInteger\ntrue\n"]
+}

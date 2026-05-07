@@ -1,0 +1,10 @@
+{
+  "id": "arg-tr-comp-11",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class VarargVsArray {\n    static void show(String... items) {\n        System.out.println(items.length + \" \" + items[0]);\n    }\n    public static void main(String[] args) {\n        String[] arr = {\"a\", \"b\", \"c\"};\n        show(arr);\n        show(\"x\", \"y\");\n    }\n}",
+  "answer": "3 a\n2 x",
+  "explanation": "Passing an existing array to a vararg parameter uses that array directly (no wrapping). show(arr) sees length=3, items[0]=\"a\". show(\"x\",\"y\") creates a new 2-element array; items[0]=\"x\".",
+  "alternatives": ["3 a\n2 x\n"]
+}

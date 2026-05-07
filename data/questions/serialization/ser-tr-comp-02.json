@@ -1,0 +1,10 @@
+{
+  "id": "ser-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.io.*;\npublic class Cloning {\n    static class Box implements Serializable {\n        int value;\n        Box(int v) { this.value = v; }\n    }\n\n    // Deep copy via serialization\n    @SuppressWarnings(\"unchecked\")\n    static <T extends Serializable> T deepCopy(T obj) throws Exception {\n        ByteArrayOutputStream bos = new ByteArrayOutputStream();\n        new ObjectOutputStream(bos).writeObject(obj);\n        return (T) new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray())).readObject();\n    }\n\n    public static void main(String[] args) throws Exception {\n        Box original = new Box(42);\n        Box copy = deepCopy(original);\n        copy.value = 99;\n        System.out.println(original.value);\n        System.out.println(copy.value);\n        System.out.println(original == copy);\n    }\n}",
+  "answer": "42\n99\nfalse",
+  "explanation": "deepCopy serializes and deserializes the object, producing a completely independent copy. Modifying copy.value to 99 does not affect original.value (still 42). The two variables reference different objects, so == is false.",
+  "alternatives": ["42\n99\nfalse\n"]
+}

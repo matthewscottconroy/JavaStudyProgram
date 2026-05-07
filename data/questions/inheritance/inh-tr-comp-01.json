@@ -1,0 +1,10 @@
+{
+  "id": "inh-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "class Animal {\n    String name;\n    Animal(String name) {\n        this.name = name;\n        System.out.println(\"Animal: \" + name);\n    }\n}\n\nclass Dog extends Animal {\n    String breed;\n    Dog(String name, String breed) {\n        super(name);\n        this.breed = breed;\n        System.out.println(\"Dog: \" + breed);\n    }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Dog d = new Dog(\"Rex\", \"Lab\");\n    }\n}",
+  "answer": "Animal: Rex\nDog: Lab",
+  "explanation": "new Dog('Rex','Lab') runs Dog's constructor. The first statement, super(name), calls Animal('Rex') which prints 'Animal: Rex'. Control returns to Dog's constructor, which then prints 'Dog: Lab'. The parent constructor always completes before the child's body continues.",
+  "alternatives": ["Animal: Rex\nDog: Lab\n"]
+}

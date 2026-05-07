@@ -1,0 +1,15 @@
+{
+  "id": "arg-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "Running 'java App 3.5' throws NumberFormatException. What is the bug?",
+  "code": "public class App {\n    public static void main(String[] args) {\n        int value = Integer.parseInt(args[0]);  // args[0] = \"3.5\"\n        System.out.println(value * 2);\n    }\n}",
+  "choices": [
+    "parseInt cannot accept a String that contains digits",
+    "Integer.parseInt cannot parse decimal numbers like \"3.5\" — use Double.parseDouble or Float.parseFloat instead",
+    "args[0] must be cast to int before parsing",
+    "parseInt requires the radix as a second argument"
+  ],
+  "answer": "b",
+  "explanation": "Integer.parseInt only accepts strings that represent whole integers (e.g., \"3\", \"-42\"). \"3.5\" contains a decimal point, causing NumberFormatException. Fix: use Double.parseDouble(args[0]) to get a double, or document that the argument must be an integer and validate input."
+}

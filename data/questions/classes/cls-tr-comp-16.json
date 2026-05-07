@@ -1,0 +1,10 @@
+{
+  "id": "cls-tr-comp-16",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class AnonymousClass {\n    interface Greeter { String greet(String name); }\n    public static void main(String[] args) {\n        int prefix = 7;  // effectively final\n        Greeter g = new Greeter() {\n            public String greet(String name) {\n                return \"Hi #\" + prefix + \" \" + name;\n            }\n        };\n        System.out.println(g.greet(\"Alice\"));\n        System.out.println(g.getClass().isAnonymousClass());\n    }\n}",
+  "answer": "Hi #7 Alice\ntrue",
+  "explanation": "Anonymous class captures effectively-final prefix=7. greet('Alice') returns 'Hi #7 Alice'. getClass().isAnonymousClass() returns true for anonymous classes.",
+  "alternatives": ["Hi #7 Alice\ntrue\n"]
+}

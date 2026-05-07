@@ -1,0 +1,15 @@
+{
+  "id": "inh-db-comp-11",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The equals() override is inconsistent with hashCode(). What is the bug?",
+  "code": "public class EqHash {\n    static class Point {\n        int x, y;\n        Point(int x, int y) { this.x=x; this.y=y; }\n        public boolean equals(Object o) {\n            if (!(o instanceof Point)) return false;\n            Point p = (Point)o;\n            return x==p.x && y==p.y;\n        }\n        // hashCode not overridden — bug\n    }\n    public static void main(String[] args) {\n        java.util.Set<Point> set = new java.util.HashSet<>();\n        set.add(new Point(1,2));\n        System.out.println(set.contains(new Point(1,2)));\n    }\n}",
+  "choices": [
+    "HashSet cannot store objects without a default constructor",
+    "equals() is overridden but hashCode() is not; equal Points hash to different buckets, so HashSet.contains() returns false even for logically equal objects",
+    "The instanceof check should use Point.class.isInstance(o) instead",
+    "set.contains() requires the Point to be the exact same object reference"
+  ],
+  "answer": "b",
+  "explanation": "The equals/hashCode contract requires equal objects to have the same hash code. Without overriding hashCode(), two equal Points (same x,y) produce different hash codes (default identity hash), so they land in different buckets. HashSet.contains() finds false. Fix: override hashCode(): return Objects.hash(x, y);"
+}

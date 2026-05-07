@@ -1,0 +1,15 @@
+{
+  "id": "ref-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "This reflective field access throws IllegalAccessException. What is the bug?",
+  "code": "import java.lang.reflect.*;\npublic class Probe {\n    static class Secret { private int pin = 1234; }\n\n    public static void main(String[] args) throws Exception {\n        Secret s = new Secret();\n        Field f = Secret.class.getDeclaredField(\"pin\");\n        System.out.println(f.get(s));   // throws IllegalAccessException\n    }\n}",
+  "choices": [
+    "getDeclaredField only works on public fields",
+    "f.setAccessible(true) must be called before accessing a private field reflectively",
+    "int fields cannot be retrieved with f.get() — use f.getInt() instead",
+    "The Secret class must be public for its fields to be accessible via reflection"
+  ],
+  "answer": "b",
+  "explanation": "getDeclaredField finds the private field successfully, but the JVM still enforces the access modifier when get() is called. f.setAccessible(true) suppresses that check for this Field object. Add it between getDeclaredField and get(): f.setAccessible(true); System.out.println(f.get(s));"
+}

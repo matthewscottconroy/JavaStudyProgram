@@ -1,0 +1,15 @@
+{
+  "id": "lp-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The loop variable is modified inside the loop, causing unexpected behavior. What is the bug?",
+  "code": "public class LoopVarMod {\n    public static void main(String[] args) {\n        for (int i = 0; i < 10; i++) {\n            System.out.println(i);\n            if (i == 3) i = 7;  // bug: modifying loop variable\n        }\n    }\n}",
+  "choices": [
+    "The if statement cannot appear inside a for loop",
+    "Modifying the loop variable i inside the body jumps from 3 directly to 7 (then 8 via i++), skipping 4,5,6 and making the loop hard to reason about",
+    "i = 7 causes an infinite loop because i never reaches 10",
+    "The condition i < 10 should be rewritten after the i = 7 assignment"
+  ],
+  "answer": "b",
+  "explanation": "Output is: 0,1,2,3,8,9 (i=3 sets i=7, then i++ makes i=8 before the condition check, so 4,5,6,7 are skipped). Modifying a loop counter inside the loop is a code smell — use break/continue or restructure the loop to avoid confusing control flow."
+}

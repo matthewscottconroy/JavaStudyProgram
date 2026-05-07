@@ -1,0 +1,10 @@
+{
+  "id": "lam-tr-comp-06",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.function.*;\npublic class MethodRef {\n    static int doubleIt(int n) { return n * 2; }\n    public static void main(String[] args) {\n        IntUnaryOperator f = MethodRef::doubleIt;\n        IntBinaryOperator add = Integer::sum;\n        Supplier<String> hello = \"hello\"::toUpperCase;\n        System.out.println(f.applyAsInt(7));\n        System.out.println(add.applyAsInt(3, 4));\n        System.out.println(hello.get());\n    }\n}",
+  "answer": "14\n7\nHELLO",
+  "explanation": "MethodRef::doubleIt is a static method reference. 7*2=14. Integer::sum references a static method, 3+4=7. \"hello\"::toUpperCase is an instance method reference on a particular instance → \"HELLO\".",
+  "alternatives": ["14\n7\nHELLO\n"]
+}

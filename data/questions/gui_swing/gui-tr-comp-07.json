@@ -1,0 +1,10 @@
+{
+  "id": "gui-tr-comp-07",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import javax.swing.*;\npublic class ComboModel {\n    public static void main(String[] args) {\n        JComboBox<String> box = new JComboBox<>(new String[]{\"A\", \"B\", \"C\"});\n        System.out.println(box.getItemCount());\n        System.out.println(box.getSelectedIndex());\n        box.setSelectedIndex(2);\n        System.out.println(box.getSelectedItem());\n    }\n}",
+  "answer": "3\n0\nC",
+  "explanation": "The combo box has 3 items. By default the first item (index 0) is selected. After setSelectedIndex(2), getSelectedItem() returns \"C\" (the item at index 2).",
+  "alternatives": ["3\n0\nC\n"]
+}

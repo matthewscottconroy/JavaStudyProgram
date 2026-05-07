@@ -1,0 +1,10 @@
+{
+  "id": "fn-tr-comp-20",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class BinaryConvert {\n    static String toBinary(int n) {\n        if (n == 0) return \"0\";\n        StringBuilder sb = new StringBuilder();\n        while (n > 0) {\n            sb.insert(0, n % 2);\n            n /= 2;\n        }\n        return sb.toString();\n    }\n    public static void main(String[] args) {\n        System.out.println(toBinary(0));\n        System.out.println(toBinary(10));\n        System.out.println(toBinary(255));\n    }\n}",
+  "answer": "0\n1010\n11111111",
+  "explanation": "0→\"0\". 10 in binary: 10÷2=5r0, 5÷2=2r1, 2÷2=1r0, 1÷2=0r1 → \"1010\". 255=2⁸-1 → 8 ones → \"11111111\".",
+  "alternatives": ["0\n1010\n11111111\n"]
+}

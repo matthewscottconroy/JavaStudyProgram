@@ -1,0 +1,15 @@
+{
+  "id": "fn-db-comp-18",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The varargs method prints wrong results when called with an array. What is the bug?",
+  "code": "public class Varargs {\n    static int sum(int... nums) {\n        int total = 0;\n        for (int n : nums) total += n;\n        return total;\n    }\n    public static void main(String[] args) {\n        int[] data = {1, 2, 3};\n        System.out.println(sum(data));   // bug: passes int[] not int...\n    }\n}",
+  "choices": [
+    "Varargs methods cannot accept int primitives; use Integer instead",
+    "Passing an int[] directly to a varargs int... parameter works correctly because Java auto-expands it",
+    "The for-each loop cannot iterate over a varargs parameter",
+    "sum(data) compiles and runs correctly; int[] is directly compatible with int... and the values are summed"
+  ],
+  "answer": "d",
+  "explanation": "In Java, an int[] passed to an int... varargs parameter is treated as the underlying array directly — the compiler does not wrap it in another array. So sum(data) works correctly and returns 6. This is a common misconception; the code is actually correct."
+}

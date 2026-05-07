@@ -1,0 +1,10 @@
+{
+  "id": "mem-tr-comp-06",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class StringPool {\n    public static void main(String[] args) {\n        String a = \"hello\";\n        String b = \"hello\";\n        String c = new String(\"hello\");\n        System.out.println(a == b);\n        System.out.println(a == c);\n        System.out.println(a.equals(c));\n        String d = c.intern();\n        System.out.println(a == d);\n    }\n}",
+  "answer": "true\nfalse\ntrue\ntrue",
+  "explanation": "a and b both reference the same interned string literal \"hello\" → a==b is true. c = new String(...) creates a new heap object → a==c is false. a.equals(c) compares content → true. c.intern() returns the pooled reference → a==d is true.",
+  "alternatives": ["true\nfalse\ntrue\ntrue\n"]
+}

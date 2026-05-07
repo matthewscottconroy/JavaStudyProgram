@@ -1,0 +1,15 @@
+{
+  "id": "gen-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The generic method causes an unchecked cast warning that leads to ClassCastException. What is the bug?",
+  "code": "public class UncheckedCast {\n    @SuppressWarnings(\"unchecked\")\n    static <T> T firstElement(Object[] arr) {\n        return (T) arr[0];   // unchecked cast\n    }\n    public static void main(String[] args) {\n        Object[] arr = {\"hello\", 42};\n        Integer n = firstElement(arr);  // ClassCastException at runtime\n        System.out.println(n);\n    }\n}",
+  "choices": [
+    "Object[] cannot hold String and Integer simultaneously",
+    "The unchecked cast (T) arr[0] always returns the object as-is at runtime due to type erasure; the ClassCastException occurs when assigning to Integer n because arr[0] is a String",
+    "firstElement() must declare the array parameter as T[]",
+    "Generic return types always cause ClassCastException"
+  ],
+  "answer": "b",
+  "explanation": "Due to type erasure, (T) arr[0] is a no-op at runtime — T is erased to Object. The actual cast happens at the call site when assigning to Integer n. arr[0] is a String, so ClassCastException is thrown. Fix: pass the expected class and cast explicitly: Class<T> clazz, then clazz.cast(arr[0])."
+}

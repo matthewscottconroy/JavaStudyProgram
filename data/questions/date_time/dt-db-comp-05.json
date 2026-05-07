@@ -1,0 +1,15 @@
+{
+  "id": "dt-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The formatter produces a wrong output string. What is the bug?",
+  "code": "import java.time.*;\nimport java.time.format.*;\npublic class FormatBug {\n    public static void main(String[] args) {\n        LocalDate d = LocalDate.of(2024, 6, 5);\n        // bug: MM is month, mm is minutes — wrong case\n        DateTimeFormatter fmt = DateTimeFormatter.ofPattern(\"dd/mm/yyyy\");\n        System.out.println(d.format(fmt));\n    }\n}",
+  "choices": [
+    "ofPattern is case-insensitive for date fields",
+    "The pattern \"mm\" means minutes (0–59), not months; LocalDate has no minute field so the formatter substitutes 0, printing 05/00/2024 instead of 05/06/2024",
+    "LocalDate.format throws UnsupportedTemporalTypeException when the pattern includes time fields like mm",
+    "yyyy must be uppercase YYYY for modern Java formatters"
+  ],
+  "answer": "c",
+  "explanation": "In DateTimeFormatter patterns, MM = month, mm = minutes. LocalDate has no minute component. Formatting a LocalDate with a pattern containing \"mm\" throws UnsupportedTemporalTypeException because the temporal type doesn't support MINUTE_OF_HOUR. Fix: use \"dd/MM/yyyy\" (capital MM for month)."
+}

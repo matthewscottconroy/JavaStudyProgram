@@ -1,0 +1,10 @@
+{
+  "id": "str-tr-comp-09",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Regex {\n    public static void main(String[] args) {\n        String s = \"abc123def456\";\n        String[] parts = s.split(\"[0-9]+\");\n        System.out.println(parts.length);\n        System.out.println(parts[0]);\n        System.out.println(parts[1]);\n        System.out.println(s.replaceAll(\"[a-z]+\", \"X\"));\n    }\n}",
+  "answer": "2\nabc\ndef\nX123X456",
+  "explanation": "split on digits: ['abc','def'] → length 2. parts[0]='abc', parts[1]='def'. replaceAll replaces each run of lowercase letters with 'X': 'X123X456'.",
+  "alternatives": ["2\nabc\ndef\nX123X456\n"]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "ut-tr-comp-06",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "// JUnit 5 test class behavior simulation\npublic class AssertDemo {\n    static void assertEquals(Object expected, Object actual) {\n        if (!expected.equals(actual))\n            throw new AssertionError(\"Expected \" + expected + \" but was \" + actual);\n    }\n    static void assertTrue(boolean cond) {\n        if (!cond) throw new AssertionError(\"Expected true\");\n    }\n    public static void main(String[] args) {\n        try { assertEquals(\"hello\", \"hello\"); System.out.println(\"pass\"); } catch(AssertionError e) { System.out.println(\"fail\"); }\n        try { assertEquals(1, 2); System.out.println(\"pass\"); } catch(AssertionError e) { System.out.println(\"fail\"); }\n        try { assertTrue(5 > 3); System.out.println(\"pass\"); } catch(AssertionError e) { System.out.println(\"fail\"); }\n    }\n}",
+  "answer": "pass\nfail\npass",
+  "explanation": "assertEquals('hello','hello'): equal → pass. assertEquals(1,2): 1!=2 → AssertionError → fail. assertTrue(5>3): true → pass.",
+  "alternatives": ["pass\nfail\npass\n"]
+}

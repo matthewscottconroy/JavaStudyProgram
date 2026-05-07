@@ -1,0 +1,15 @@
+{
+  "id": "arr-db-comp-06",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The equality check prints false even though both arrays contain the same values. What is the bug?",
+  "code": "import java.util.Arrays;\npublic class EqualArrays {\n    public static void main(String[] args) {\n        int[] a = {1, 2, 3};\n        int[] b = {1, 2, 3};\n        System.out.println(a == b);              // false\n        System.out.println(a.equals(b));         // also false!\n    }\n}",
+  "choices": [
+    "int[] does not support equals() — use double[] instead",
+    "== and .equals() on arrays compare object references, not contents; use Arrays.equals(a, b)",
+    "Both arrays must be sorted before comparison",
+    "equals() requires that both arrays have the same variable name"
+  ],
+  "answer": "b",
+  "explanation": "For arrays, == compares references (are they the same object?), and .equals() is inherited from Object and also compares references. To compare contents use Arrays.equals(a, b), which returns true for {1,2,3} vs {1,2,3}."
+}

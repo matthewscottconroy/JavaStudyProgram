@@ -1,0 +1,10 @@
+{
+  "id": "lp-tr-comp-11",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class Primes {\n    public static boolean isPrime(int n) {\n        if (n < 2) return false;\n        for (int i = 2; i * i <= n; i++) {\n            if (n % i == 0) return false;\n        }\n        return true;\n    }\n    public static void main(String[] args) {\n        int count = 0;\n        for (int n = 1; n <= 20; n++) {\n            if (isPrime(n)) count++;\n        }\n        System.out.println(count);\n        System.out.println(isPrime(17));\n    }\n}",
+  "answer": "8\ntrue",
+  "explanation": "Primes up to 20: 2,3,5,7,11,13,17,19 → 8 primes. isPrime(17): checks 2,3,4 (4*4=16≤17). 17%2≠0, 17%3≠0, 17%4≠0, loop ends → true.",
+  "alternatives": ["8\ntrue\n"]
+}

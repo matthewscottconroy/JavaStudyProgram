@@ -1,0 +1,15 @@
+{
+  "id": "g2d-db-comp-06",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The AffineTransform rotates around the origin instead of the shape center. What is the bug?",
+  "code": "import java.awt.geom.*;\npublic class RotateBug {\n    public static void main(String[] args) {\n        AffineTransform at = new AffineTransform();\n        at.rotate(Math.PI / 4);  // bug: rotates around (0,0), not shape center\n        // shape at (100,100) orbits the origin instead of spinning in place\n    }\n}",
+  "choices": [
+    "AffineTransform.rotate takes degrees, not radians",
+    "rotate(theta) rotates around the coordinate origin (0,0); to rotate around a specific point use rotate(theta, anchorX, anchorY) with the shape's center coordinates",
+    "AffineTransform must be applied to a Graphics2D before rotation takes effect",
+    "Math.PI / 4 exceeds the maximum rotation angle of 1.0 radians"
+  ],
+  "answer": "b",
+  "explanation": "rotate(theta) applies rotation around (0,0). A shape centered at (100,100) will orbit the origin instead of spinning around its own center. Fix: use rotate(Math.PI / 4, 100, 100) to rotate about the anchor point (100,100), or translate to origin, rotate, then translate back."
+}

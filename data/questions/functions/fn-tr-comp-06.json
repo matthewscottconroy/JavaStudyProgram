@@ -1,0 +1,10 @@
+{
+  "id": "fn-tr-comp-06",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Validator {\n    public static String validate(int score) {\n        if (score < 0)   return \"invalid\";\n        if (score < 60)  return \"F\";\n        if (score < 70)  return \"D\";\n        if (score < 80)  return \"C\";\n        if (score < 90)  return \"B\";\n        return \"A\";\n    }\n    public static void main(String[] args) {\n        System.out.println(validate(-1));\n        System.out.println(validate(65));\n        System.out.println(validate(100));\n    }\n}",
+  "answer": "invalid\nD\nA",
+  "explanation": "-1 < 0 → 'invalid'. 65: not <0, not <60, but 65<70 → 'D'. 100: passes all thresholds, hits final return → 'A'.",
+  "alternatives": ["invalid\nD\nA\n"]
+}

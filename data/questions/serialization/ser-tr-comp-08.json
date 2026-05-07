@@ -1,0 +1,10 @@
+{
+  "id": "ser-tr-comp-08",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.io.*;\npublic class TransientField {\n    static class Secret implements Serializable {\n        String name;\n        transient String password;\n        Secret(String n, String p) { name=n; password=p; }\n    }\n    public static void main(String[] args) throws Exception {\n        Secret s = new Secret(\"alice\", \"s3cr3t\");\n        ByteArrayOutputStream baos = new ByteArrayOutputStream();\n        new ObjectOutputStream(baos).writeObject(s);\n        Secret s2 = (Secret) new ObjectInputStream(\n            new ByteArrayInputStream(baos.toByteArray())).readObject();\n        System.out.println(s2.name);\n        System.out.println(s2.password);\n    }\n}",
+  "answer": "alice\nnull",
+  "explanation": "transient fields are excluded from serialization. name is serialized → 'alice'. password is transient → not saved → restored as null.",
+  "alternatives": ["alice\nnull\n"]
+}

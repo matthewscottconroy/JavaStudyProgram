@@ -1,0 +1,15 @@
+{
+  "id": "gem-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "Updating a Swing component from a background thread causes intermittent display bugs. What is the bug?",
+  "code": "import javax.swing.*;\npublic class ThreadBug {\n    static JLabel label = new JLabel(\"waiting\");\n    public static void main(String[] args) throws Exception {\n        JFrame f = new JFrame(); f.add(label); f.setSize(200,100); f.setVisible(true);\n        new Thread(() -> {\n            label.setText(\"done\");  // bug: Swing mutation off EDT\n        }).start();\n    }\n}",
+  "choices": [
+    "JLabel.setText is synchronized and thread-safe for any thread",
+    "Swing components are not thread-safe; mutating label.setText from a non-EDT thread violates the single-thread rule and can cause rendering corruption or missed updates",
+    "new Thread() must call Thread.sleep(100) before updating Swing to ensure the EDT is ready",
+    "setVisible(true) must be called on the EDT for this to matter"
+  ],
+  "answer": "b",
+  "explanation": "Swing is single-threaded. All reads and writes to Swing components must happen on the Event Dispatch Thread. Calling label.setText() from a plain new Thread() violates this and can cause inconsistent rendering, missed repaints, or exceptions. Fix: wrap the update in SwingUtilities.invokeLater(() -> label.setText(\"done\"));"
+}

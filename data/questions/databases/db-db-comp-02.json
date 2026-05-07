@@ -1,0 +1,15 @@
+{
+  "id": "db-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "This code throws SQLException: ResultSet not positioned on a row. What is the bug?",
+  "code": "import java.sql.*;\npublic class Fetch {\n    public static void main(String[] args) throws Exception {\n        Connection conn = DriverManager.getConnection(\"jdbc:h2:mem:\");\n        PreparedStatement ps = conn.prepareStatement(\"SELECT name FROM users WHERE id=1\");\n        ResultSet rs = ps.executeQuery();\n        System.out.println(rs.getString(\"name\"));   // exception here\n    }\n}",
+  "choices": [
+    "getString must be called with a column index (1), not a column name",
+    "rs.next() must be called to advance the cursor to the first row before reading any column values",
+    "executeQuery returns null when the row exists",
+    "PreparedStatement must use setInt to bind the id before executing"
+  ],
+  "answer": "b",
+  "explanation": "A freshly executed ResultSet cursor is positioned before the first row — no row is current. Calling getString() before rs.next() throws an exception. Fix: if (rs.next()) { System.out.println(rs.getString(\"name\")); } — rs.next() advances the cursor and returns true if a row exists."
+}

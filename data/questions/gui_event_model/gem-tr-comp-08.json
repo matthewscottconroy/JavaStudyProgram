@@ -1,0 +1,10 @@
+{
+  "id": "gem-tr-comp-08",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import javax.swing.*;\npublic class SwingUtilDemo {\n    public static void main(String[] args) throws Exception {\n        System.out.println(SwingUtilities.isEventDispatchThread());\n        SwingUtilities.invokeAndWait(() ->\n            System.out.println(SwingUtilities.isEventDispatchThread())\n        );\n        System.out.println(SwingUtilities.isEventDispatchThread());\n    }\n}",
+  "answer": "false\ntrue\nfalse",
+  "explanation": "main runs on the main thread, not the EDT, so isEventDispatchThread() is false. invokeAndWait posts the runnable to the EDT and blocks until it finishes; inside the lambda the EDT is current so it returns true. After invokeAndWait returns, we're back on the main thread — false again.",
+  "alternatives": ["false\ntrue\nfalse\n"]
+}

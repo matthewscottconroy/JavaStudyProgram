@@ -1,0 +1,15 @@
+{
+  "id": "col-db-comp-13",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "Arrays.asList() returns a fixed-size list that throws on add(). What is the bug?",
+  "code": "import java.util.*;\npublic class AsListBug {\n    public static void main(String[] args) {\n        List<String> list = Arrays.asList(\"a\", \"b\", \"c\");\n        list.add(\"d\");   // bug: UnsupportedOperationException\n        System.out.println(list);\n    }\n}",
+  "choices": [
+    "Arrays.asList() returns null for String arguments",
+    "Arrays.asList() returns a fixed-size List backed by the array; add() throws UnsupportedOperationException because the size cannot change",
+    "String arrays must be converted with String[] before passing to asList()",
+    "list.add() requires an index argument for List returned by Arrays.asList()"
+  ],
+  "answer": "b",
+  "explanation": "Arrays.asList() returns a fixed-size view of the underlying array. set() works, but add() and remove() throw UnsupportedOperationException. Fix: wrap it: new ArrayList<>(Arrays.asList(\"a\",\"b\",\"c\")) to get a fully mutable list."
+}

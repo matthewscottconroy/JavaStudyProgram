@@ -1,0 +1,10 @@
+{
+  "id": "ut-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "Which assertion fails?",
+  "code": "import static org.junit.jupiter.api.Assertions.*;\npublic class StringTest {\n    void testStrings() {\n        String a = \"hello\";\n        String b = new String(\"hello\");\n        assertTrue(a.equals(b));      // A\n        assertSame(a, b);             // B\n        assertNotNull(a);             // C\n        assertEquals(5, a.length());  // D\n    }\n}",
+  "answer": "B fails",
+  "explanation": "A: a.equals(b) is true (same content) → passes. B: assertSame checks reference equality (==). a and b are different objects (b = new String) → assertSame FAILS. C: a is not null → passes. D: \"hello\".length()=5 → passes.",
+  "alternatives": ["B fails\n"]
+}

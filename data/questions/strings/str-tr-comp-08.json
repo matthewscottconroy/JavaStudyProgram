@@ -1,0 +1,10 @@
+{
+  "id": "str-tr-comp-08",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class StrConcat {\n    public static void main(String[] args) {\n        String a = \"abc\";\n        String b = a;\n        a = a + \"def\";\n        System.out.println(a);\n        System.out.println(b);\n        System.out.println(a == b);\n    }\n}",
+  "answer": "abcdef\nabc\nfalse",
+  "explanation": "Strings are immutable. a + \"def\" creates a new String object \"abcdef\" and assigns it to a. b still refers to the original \"abc\" object. a == b compares references: different objects, so false.",
+  "alternatives": ["abcdef\nabc\nfalse\n"]
+}

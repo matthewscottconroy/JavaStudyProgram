@@ -1,0 +1,10 @@
+{
+  "id": "ic-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Ternary {\n    static String classify(int n) {\n        return n < 0 ? \"negative\" : n == 0 ? \"zero\" : \"positive\";\n    }\n    public static void main(String[] args) {\n        System.out.println(classify(-5));\n        System.out.println(classify(0));\n        System.out.println(classify(7));\n        int x = 10;\n        System.out.println(x > 5 ? x * 2 : x / 2);\n    }\n}",
+  "answer": "negative\nzero\npositive\n20",
+  "explanation": "classify(-5): -5<0 → \"negative\". classify(0): not <0, 0==0 → \"zero\". classify(7): not <0, not ==0 → \"positive\". x=10>5 is true → x*2=20.",
+  "alternatives": ["negative\nzero\npositive\n20\n"]
+}

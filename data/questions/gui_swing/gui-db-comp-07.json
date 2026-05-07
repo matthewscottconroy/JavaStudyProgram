@@ -1,0 +1,15 @@
+{
+  "id": "gui-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "Only the last added button is visible. What is the bug?",
+  "code": "import javax.swing.*;\npublic class LayoutBug {\n    public static void main(String[] args) {\n        JFrame frame = new JFrame();\n        frame.add(new JButton(\"One\"));\n        frame.add(new JButton(\"Two\"));\n        frame.add(new JButton(\"Three\"));  // only this one shows\n        frame.setSize(300, 200);\n        frame.setVisible(true);\n    }\n}",
+  "choices": [
+    "JFrame cannot hold more than one component at a time",
+    "JFrame's default BorderLayout places all components added without a constraint in the CENTER position; each new component replaces the previous one",
+    "JButton components must be wrapped in a JPanel to display side by side",
+    "setSize must be called before adding components"
+  ],
+  "answer": "b",
+  "explanation": "JFrame uses BorderLayout by default. Calling add(component) without a position constraint places the component in BorderLayout.CENTER. Only one component can occupy CENTER, so each addition replaces the last, and only \"Three\" appears. Fix: use a JPanel with FlowLayout or specify constraints like frame.add(btn, BorderLayout.NORTH)."
+}

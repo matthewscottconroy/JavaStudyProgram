@@ -1,0 +1,15 @@
+{
+  "id": "rec-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The record does not compile. What is the bug?",
+  "code": "public class RecordExtendBug {\n    static class Base { int id; }\n    record Item(String name) extends Base {}  // bug: records cannot extend classes\n}",
+  "choices": [
+    "Records can extend any non-final class",
+    "Records implicitly extend java.lang.Record and cannot extend any other class; extending Base is a compile error",
+    "Records can only extend abstract classes",
+    "extends is replaced by implements for records"
+  ],
+  "answer": "b",
+  "explanation": "All records implicitly extend java.lang.Record (similar to how enums extend java.lang.Enum). Because Java has single inheritance, a record cannot additionally extend any other class. Records can implement interfaces. Fix: remove extends Base, and use an interface if shared behaviour is needed."
+}

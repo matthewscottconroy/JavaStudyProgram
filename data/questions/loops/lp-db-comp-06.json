@@ -1,0 +1,15 @@
+{
+  "id": "lp-db-comp-06",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The loop prints one extra line. What is the bug?",
+  "code": "public class FencePost {\n    public static void main(String[] args) {\n        for (int i = 1; i <= 5; i++) {\n            System.out.println(\"Line \" + i);\n            if (i < 5) System.out.println(\"---\");\n        }\n        System.out.println(\"--- (extra)\");  // should not be here\n    }\n}",
+  "choices": [
+    "The for loop condition should use < 5 instead of <= 5",
+    "The separator println at the end is outside the loop and always executes, adding one extra separator after the last line",
+    "if (i < 5) should be if (i <= 5) to print all separators",
+    "System.out.println cannot be called after a for loop"
+  ],
+  "answer": "b",
+  "explanation": "The extra System.out.println(\"--- (extra)\") after the loop runs unconditionally, printing one more separator. The fence-post pattern (N items, N-1 separators) was correctly implemented inside the loop. The extra line after the loop is the bug — remove it."
+}

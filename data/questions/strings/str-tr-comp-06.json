@@ -1,0 +1,10 @@
+{
+  "id": "str-tr-comp-06",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class StrSplit {\n    public static void main(String[] args) {\n        String csv = \"apple,banana,cherry\";\n        String[] parts = csv.split(\",\");\n        System.out.println(parts.length);\n        System.out.println(parts[1].charAt(0));\n        String joined = String.join(\" | \", parts);\n        System.out.println(joined);\n    }\n}",
+  "answer": "3\nb\napple | banana | cherry",
+  "explanation": "split(\",\") produces [\"apple\",\"banana\",\"cherry\"], length 3. parts[1]=\"banana\", charAt(0)='b'. String.join(\" | \", ...) produces \"apple | banana | cherry\".",
+  "alternatives": ["3\nb\napple | banana | cherry\n"]
+}

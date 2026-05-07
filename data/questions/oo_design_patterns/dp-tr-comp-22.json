@@ -1,0 +1,10 @@
+{
+  "id": "dp-tr-comp-22",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class FactoryMethod {\n    abstract static class Button { abstract void render(); }\n    static class WinButton extends Button { void render() { System.out.println(\"Windows button\"); } }\n    static class MacButton extends Button { void render() { System.out.println(\"Mac button\"); } }\n    abstract static class Dialog { abstract Button createButton(); void show() { createButton().render(); } }\n    static class WinDialog extends Dialog { Button createButton() { return new WinButton(); } }\n    static class MacDialog extends Dialog { Button createButton() { return new MacButton(); } }\n    public static void main(String[] args) {\n        Dialog d1 = new WinDialog();\n        Dialog d2 = new MacDialog();\n        d1.show();\n        d2.show();\n    }\n}",
+  "answer": "Windows button\nMac button",
+  "explanation": "Factory Method pattern: WinDialog.createButton() returns WinButton; MacDialog.createButton() returns MacButton. show() calls render() on the created button.",
+  "alternatives": ["Windows button\nMac button\n"]
+}

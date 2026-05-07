@@ -1,0 +1,10 @@
+{
+  "id": "lam-tr-comp-12",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.function.*;\npublic class ConsumerChain {\n    public static void main(String[] args) {\n        Consumer<String> print = System.out::println;\n        Consumer<String> upper = s -> System.out.println(s.toUpperCase());\n        Consumer<String> both = print.andThen(upper);\n        both.accept(\"hello\");\n        System.out.println(\"---\");\n        both.accept(\"world\");\n    }\n}",
+  "answer": "hello\nHELLO\n---\nworld\nWORLD",
+  "explanation": "andThen chains consumers: first print (lowercase), then upper (uppercase). 'hello': hello, HELLO. separator. 'world': world, WORLD.",
+  "alternatives": ["hello\nHELLO\n---\nworld\nWORLD\n"]
+}

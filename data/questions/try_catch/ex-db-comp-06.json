@@ -1,0 +1,15 @@
+{
+  "id": "ex-db-comp-06",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The code does not compile. What is the bug?",
+  "code": "public class CatchOrder {\n    public static void main(String[] args) {\n        try {\n            throw new IllegalArgumentException(\"bad\");\n        } catch (RuntimeException e) {\n            System.out.println(\"runtime\");\n        } catch (IllegalArgumentException e) {  // compile error\n            System.out.println(\"illegal\");\n        }\n    }\n}",
+  "choices": [
+    "You cannot catch the same exception twice",
+    "IllegalArgumentException is a RuntimeException; its catch is unreachable because RuntimeException catches it first",
+    "catch blocks must be ordered alphabetically",
+    "throw requires a checked exception"
+  ],
+  "answer": "b",
+  "explanation": "IllegalArgumentException is a subclass of RuntimeException. The catch(RuntimeException) block catches it before catch(IllegalArgumentException) can. Java detects this unreachable catch and reports a compile error. Fix: put the more specific catch first: catch(IllegalArgumentException) before catch(RuntimeException)."
+}

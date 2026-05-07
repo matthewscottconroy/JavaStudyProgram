@@ -1,0 +1,10 @@
+{
+  "id": "rx-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.regex.*;\npublic class GroupDemo {\n    public static void main(String[] args) {\n        Pattern p = Pattern.compile(\"(\\\\d{4})-(\\\\d{2})-(\\\\d{2})\");\n        Matcher m = p.matcher(\"Date: 2024-06-15 today\");\n        if (m.find()) {\n            System.out.println(m.group(0));\n            System.out.println(m.group(1));\n            System.out.println(m.group(3));\n        }\n    }\n}",
+  "answer": "2024-06-15\n2024\n15",
+  "explanation": "group(0) is the entire match \"2024-06-15\". group(1) is the first capture group (year) \"2024\". group(3) is the third capture group (day) \"15\".",
+  "alternatives": ["2024-06-15\n2024\n15\n"]
+}

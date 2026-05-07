@@ -1,0 +1,10 @@
+{
+  "id": "thr-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.concurrent.atomic.*;\npublic class AtomicDemo {\n    static AtomicInteger counter = new AtomicInteger(0);\n    public static void main(String[] args) throws InterruptedException {\n        Thread t1 = new Thread(() -> { for(int i=0;i<1000;i++) counter.incrementAndGet(); });\n        Thread t2 = new Thread(() -> { for(int i=0;i<1000;i++) counter.incrementAndGet(); });\n        t1.start(); t2.start();\n        t1.join(); t2.join();\n        System.out.println(counter.get());\n    }\n}",
+  "answer": "2000",
+  "explanation": "AtomicInteger.incrementAndGet() is thread-safe; each call atomically reads, increments, and writes. Two threads each calling it 1000 times gives exactly 2000. If plain int++ were used, the result would be non-deterministic (race condition).",
+  "alternatives": ["2000\n"]
+}

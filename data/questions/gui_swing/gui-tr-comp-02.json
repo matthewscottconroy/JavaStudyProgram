@@ -1,0 +1,10 @@
+{
+  "id": "gui-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print (note: does not actually display a GUI)?",
+  "code": "import javax.swing.*;\npublic class SwingTrace {\n    public static void main(String[] args) {\n        JFrame frame = new JFrame(\"Test\");\n        JButton btn = new JButton(\"Click\");\n        JLabel label = new JLabel(\"Hello\");\n        frame.add(btn);\n        frame.add(label);\n        System.out.println(frame.getTitle());\n        System.out.println(btn.getText());\n        System.out.println(label.getText());\n        System.out.println(frame.isVisible());\n    }\n}",
+  "answer": "Test\nClick\nHello\nfalse",
+  "explanation": "getTitle() returns the frame title set in constructor. getText() returns button and label text. isVisible() is false by default until setVisible(true) is called.",
+  "alternatives": ["Test\nClick\nHello\nfalse\n"]
+}

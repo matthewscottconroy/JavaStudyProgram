@@ -1,0 +1,10 @@
+{
+  "id": "var-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "public class Types {\n    public static void main(String[] args) {\n        int a = 7;\n        int b = 2;\n        double result = a / b;\n        System.out.println(result);\n        double result2 = (double) a / b;\n        System.out.println(result2);\n    }\n}",
+  "answer": "3.0\n3.5",
+  "explanation": "a / b is integer division (both operands are int): 7 / 2 = 3. Assigning 3 to a double gives 3.0. In (double) a / b, a is cast to double first, making it 7.0 / 2, which uses floating-point division → 3.5.",
+  "alternatives": ["3.0\n3.5\n"]
+}

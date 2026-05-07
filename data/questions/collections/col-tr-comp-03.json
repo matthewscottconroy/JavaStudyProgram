@@ -1,0 +1,10 @@
+{
+  "id": "col-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class BalanceCheck {\n    public static boolean isBalanced(String s) {\n        Deque<Character> stack = new ArrayDeque<>();\n        for (char c : s.toCharArray()) {\n            if      (c == '(') stack.push(c);\n            else if (c == ')') {\n                if (stack.isEmpty()) return false;\n                stack.pop();\n            }\n        }\n        return stack.isEmpty();\n    }\n\n    public static void main(String[] args) {\n        System.out.println(isBalanced(\"(a + (b * c))\"));\n        System.out.println(isBalanced(\"(()\"));\n        System.out.println(isBalanced(\"\"));\n    }\n}",
+  "answer": "true\nfalse\ntrue",
+  "explanation": "\"(a + (b * c))\": 2 '(' pushed, 2 ')' pop both. Stack empty → true. \"(()\": 2 '(' pushed, 1 ')' pops one. Stack has one '(' left → not empty → false. \"\": no characters processed, stack stays empty → true.",
+  "alternatives": ["true\nfalse\ntrue\n"]
+}

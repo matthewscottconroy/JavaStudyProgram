@@ -1,0 +1,15 @@
+{
+  "id": "ut-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The test always passes even when the method has a bug. What is wrong?",
+  "code": "import org.junit.jupiter.api.*;\nimport static org.junit.jupiter.api.Assertions.*;\npublic class BadTest {\n    static int add(int a, int b) { return a - b; }  // intentional bug\n\n    @Test void testAdd() {\n        int result = add(5, 3);\n        // no assertion — test always passes!\n        System.out.println(result);\n    }\n}",
+  "choices": [
+    "JUnit automatically validates method return values",
+    "The test has no assertion; it prints the result but never verifies it, so it always passes regardless of what add() returns",
+    "System.out.println() counts as an assertion in JUnit 5",
+    "The test must call add() with at least three arguments"
+  ],
+  "answer": "b",
+  "explanation": "A test without assertions is a \"passing test that tests nothing.\" It will pass whether add() returns 8, 2, or throws an exception (in some cases). Fix: add assertEquals(8, add(5, 3)); to verify the actual result against the expected value."
+}

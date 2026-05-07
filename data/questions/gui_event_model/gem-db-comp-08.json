@@ -1,0 +1,15 @@
+{
+  "id": "gem-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The window does not close when the X button is clicked. What is the bug?",
+  "code": "import javax.swing.*;\npublic class CloseBug {\n    public static void main(String[] args) {\n        JFrame frame = new JFrame(\"App\");\n        // bug: default close operation is HIDE_ON_CLOSE, not EXIT_ON_CLOSE\n        frame.setSize(300, 200);\n        frame.setVisible(true);\n    }\n}",
+  "choices": [
+    "JFrame.setVisible(true) must be called on the EDT",
+    "The default close operation is DO_NOTHING_ON_CLOSE; clicking X does nothing at all",
+    "The default close operation for JFrame is HIDE_ON_CLOSE; the window is hidden but the JVM keeps running; to terminate the application call frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE)",
+    "JFrame requires a WindowListener to handle close events"
+  ],
+  "answer": "c",
+  "explanation": "JFrame's default close operation is HIDE_ON_CLOSE. Clicking X hides the window but does not exit the JVM — the application keeps running invisibly. Fix: call frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) to terminate the JVM when the window is closed."
+}

@@ -1,0 +1,15 @@
+{
+  "id": "mem-db-comp-06",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The static initializer causes a circular dependency. What is the bug?",
+  "code": "public class CircularInit {\n    static class A {\n        static int val = B.val + 1;   // bug: depends on B which depends on A\n    }\n    static class B {\n        static int val = A.val + 1;\n    }\n    public static void main(String[] args) {\n        System.out.println(A.val + \" \" + B.val);\n    }\n}",
+  "choices": [
+    "Static fields cannot reference fields from other classes",
+    "A.val depends on B.val and B.val depends on A.val; during class initialization A.val is read while B is initializing, getting the default 0 and producing unexpected values",
+    "The JVM detects circular dependencies and throws CircularInitializationError",
+    "B.val must be initialized before A.val in this configuration"
+  ],
+  "answer": "b",
+  "explanation": "When A loads, it triggers B's initialization to read B.val. B's initializer reads A.val, but A is still being initialized — its default value 0 is used. B.val = 0+1 = 1. Then A.val = 1+1 = 2. Output: '2 1'. The circular dependency produces subtly wrong values without any error."
+}

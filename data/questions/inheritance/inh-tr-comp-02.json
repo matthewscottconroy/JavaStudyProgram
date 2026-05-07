@@ -1,0 +1,10 @@
+{
+  "id": "inh-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "class Shape {\n    public String describe() { return \"shape\"; }\n    public String label()    { return \"[\" + describe() + \"]\"; }\n}\n\nclass Circle extends Shape {\n    @Override\n    public String describe() { return \"circle\"; }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Shape s = new Circle();\n        System.out.println(s.describe());\n        System.out.println(s.label());\n    }\n}",
+  "answer": "circle\n[circle]",
+  "explanation": "s is declared as Shape but refers to a Circle object. s.describe() dispatches to Circle.describe() → 'circle'. s.label() is inherited from Shape; inside it, describe() is called on 'this' (still a Circle), so dynamic dispatch again calls Circle.describe() → '[circle]'. The runtime type, not the declared type, controls which method runs.",
+  "alternatives": ["circle\n[circle]\n"]
+}

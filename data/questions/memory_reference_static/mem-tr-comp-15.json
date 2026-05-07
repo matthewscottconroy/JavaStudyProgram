@@ -1,0 +1,10 @@
+{
+  "id": "mem-tr-comp-15",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class DefaultValues {\n    static byte b;\n    static short s;\n    static int i;\n    static long l;\n    static float f;\n    static double d;\n    static boolean flag;\n    static char c;\n    static Object o;\n    public static void main(String[] args) {\n        System.out.println(b + \",\" + s + \",\" + i + \",\" + l);\n        System.out.println(f + \",\" + d);\n        System.out.println(flag);\n        System.out.println((int)c);\n        System.out.println(o);\n    }\n}",
+  "answer": "0,0,0,0\n0.0,0.0\nfalse\n0\nnull",
+  "explanation": "Static fields default: byte/short/int/long→0, float/double→0.0, boolean→false, char→'\\u0000' (int value 0), Object→null.",
+  "alternatives": ["0,0,0,0\n0.0,0.0\nfalse\n0\nnull\n"]
+}

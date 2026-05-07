@@ -1,0 +1,15 @@
+{
+  "id": "dp-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "This Singleton implementation prints [1] first and [1] second — the logCount never increments past 1. What is the bug?",
+  "code": "public class Logger {\n    private static Logger instance;\n    private int logCount = 0;\n\n    public static Logger getInstance() {\n        instance = new Logger();   // creates new instance every call\n        return instance;\n    }\n\n    public void log(String msg) {\n        logCount++;\n        System.out.println(\"[\" + logCount + \"] \" + msg);\n    }\n\n    public static void main(String[] args) {\n        Logger.getInstance().log(\"first\");\n        Logger.getInstance().log(\"second\");\n    }\n}",
+  "choices": [
+    "logCount must be declared static to persist across method calls",
+    "getInstance() unconditionally creates a new Logger on every call — the null-check guard is missing",
+    "The method should be synchronized to be thread-safe",
+    "private constructors cannot be called from static methods"
+  ],
+  "answer": "b",
+  "explanation": "A correct Singleton only creates the instance when it is null: if (instance == null) instance = new Logger(); Without the guard, every call to getInstance() creates a fresh Logger with logCount=0. Fix: add the null check so the instance is created exactly once."
+}

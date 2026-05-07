@@ -1,0 +1,15 @@
+{
+  "id": "fn-db-comp-20",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The method should reverse a string recursively but throws StackOverflowError. What is the bug?",
+  "code": "public class ReverseRec {\n    static String reverse(String s) {\n        if (s.length() == 0) return s;\n        return reverse(s.substring(1)) + s.charAt(0);\n    }\n    public static void main(String[] args) {\n        System.out.println(reverse(null));  // bug: null passed\n    }\n}",
+  "choices": [
+    "String.substring() is not allowed in recursive methods",
+    "Passing null to reverse() causes NullPointerException at s.length(), not StackOverflowError",
+    "The base case should check s.length() == 1 instead of 0",
+    "s.charAt(0) should be s.charAt(s.length()-1) to reverse correctly"
+  ],
+  "answer": "b",
+  "explanation": "Calling reverse(null) causes a NullPointerException at s.length() because null has no methods. The actual exception is NPE, not StackOverflowError. The recursive logic itself is correct for non-null strings. Fix: add a null check at the start: if (s == null) return null;"
+}

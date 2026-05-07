@@ -1,0 +1,15 @@
+{
+  "id": "ref-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The annotation is not visible at runtime. What is the bug?",
+  "code": "import java.lang.annotation.*;\n@interface MyAnnot { String value(); }  // missing @Retention\npublic class AnnotBug {\n    @MyAnnot(\"test\")\n    void method() {}\n    public static void main(String[] args) throws Exception {\n        var m = AnnotBug.class.getDeclaredMethod(\"method\");\n        MyAnnot a = m.getAnnotation(MyAnnot.class);\n        System.out.println(a);   // prints null!\n    }\n}",
+  "choices": [
+    "getAnnotation must be called on the class, not the method",
+    "Without @Retention(RetentionPolicy.RUNTIME), annotations are discarded by the compiler and unavailable at runtime",
+    "MyAnnot must be declared public to be accessible via reflection",
+    "String parameters in annotations are not preserved at runtime"
+  ],
+  "answer": "b",
+  "explanation": "The default retention policy is CLASS (kept in .class file but not loaded by JVM). For runtime reflection, the annotation must declare @Retention(RetentionPolicy.RUNTIME). Without it, getAnnotation() returns null. Fix: add @Retention(RetentionPolicy.RUNTIME) to MyAnnot's declaration."
+}

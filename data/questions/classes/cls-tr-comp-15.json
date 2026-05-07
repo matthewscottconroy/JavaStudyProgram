@@ -1,0 +1,10 @@
+{
+  "id": "cls-tr-comp-15",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Lazy {\n    private static class Holder {\n        static final String VALUE;\n        static {\n            System.out.println(\"initializing\");\n            VALUE = \"hello\";\n        }\n    }\n    static String get() { return Holder.VALUE; }\n    public static void main(String[] args) {\n        System.out.println(\"before\");\n        System.out.println(get());\n        System.out.println(get());\n    }\n}",
+  "answer": "before\ninitializing\nhello\nhello",
+  "explanation": "Holder class is not initialized until first use. 'before' prints first. Calling get() triggers Holder's static init → 'initializing', VALUE='hello'. Second get() reuses already-initialized Holder: just 'hello'.",
+  "alternatives": ["before\ninitializing\nhello\nhello\n"]
+}

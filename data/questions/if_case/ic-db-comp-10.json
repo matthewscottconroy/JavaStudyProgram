@@ -1,0 +1,15 @@
+{
+  "id": "ic-db-comp-10",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The switch statement on a String crashes with NullPointerException. What is the bug?",
+  "code": "public class NullSwitch {\n    static void check(String s) {\n        switch (s) {   // bug: s may be null\n            case \"yes\" -> System.out.println(\"yes\");\n            default -> System.out.println(\"other\");\n        }\n    }\n    public static void main(String[] args) {\n        check(null);\n    }\n}",
+  "choices": [
+    "switch cannot use String values as cases",
+    "Passing null to switch(String) throws NullPointerException because switch dereferences the expression to compute its hash",
+    "The default case should be removed to allow null to pass through",
+    "null matches the default case in a switch statement"
+  ],
+  "answer": "b",
+  "explanation": "switch on a String calls hashCode() internally to find the matching case. Dereferencing null throws NullPointerException. Fix: null-check before the switch: if (s == null) return; or Java 21+ pattern matching handles null with 'case null ->'."
+}

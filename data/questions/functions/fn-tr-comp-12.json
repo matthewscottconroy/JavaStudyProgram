@@ -1,0 +1,10 @@
+{
+  "id": "fn-tr-comp-12",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Scope {\n    static int x = 10;\n\n    static int compute(int x) {\n        return x * 2 + Scope.x;\n    }\n\n    static void show(int val) {\n        int x = 99;\n        System.out.println(val + x);\n    }\n\n    public static void main(String[] args) {\n        System.out.println(compute(5));\n        show(compute(3));\n    }\n}",
+  "answer": "20\n115",
+  "explanation": "compute(5): parameter x=5, Scope.x=10 → 5*2+10=20. compute(3): 3*2+10=16. show(16): local x=99, prints 16+99=115. The local variable x inside show shadows the static field.",
+  "alternatives": ["20\n115\n"]
+}

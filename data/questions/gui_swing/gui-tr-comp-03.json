@@ -1,0 +1,10 @@
+{
+  "id": "gui-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import javax.swing.*;\npublic class SwingComponents {\n    public static void main(String[] args) {\n        JCheckBox cb = new JCheckBox(\"Accept\", true);\n        JRadioButton rb = new JRadioButton(\"Option A\");\n        JTextField tf = new JTextField(\"initial text\");\n        System.out.println(cb.isSelected());\n        System.out.println(rb.isSelected());\n        System.out.println(tf.getText());\n        tf.setText(\"changed\");\n        System.out.println(tf.getText());\n    }\n}",
+  "answer": "true\nfalse\ninitial text\nchanged",
+  "explanation": "JCheckBox constructed with selected=true. JRadioButton default is not selected. JTextField getText() returns its content. setText() replaces it.",
+  "alternatives": ["true\nfalse\ninitial text\nchanged\n"]
+}

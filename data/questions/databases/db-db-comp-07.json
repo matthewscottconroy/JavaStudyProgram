@@ -1,0 +1,15 @@
+{
+  "id": "db-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "ResultSet access fails with a confusing error. What is the bug?",
+  "code": "import java.sql.*;\npublic class RSBug {\n    static void show(Connection conn) throws SQLException {\n        ResultSet rs = conn.createStatement().executeQuery(\"SELECT name FROM users\");\n        System.out.println(rs.getString(\"name\"));  // bug: before calling next()\n        rs.close();\n    }\n}",
+  "choices": [
+    "ResultSet.getString requires a column index, not a name",
+    "ResultSet cursor starts before the first row; getString before calling next() throws SQLException",
+    "executeQuery must be called before creating a Statement",
+    "name must be the first column in the SELECT to use getString"
+  ],
+  "answer": "b",
+  "explanation": "A fresh ResultSet's cursor is positioned before the first row. Calling getString() without first calling next() throws SQLException (or returns undefined behavior). Fix: always call rs.next() first and check its return value: if (rs.next()) { ... rs.getString(\"name\") ... }"
+}

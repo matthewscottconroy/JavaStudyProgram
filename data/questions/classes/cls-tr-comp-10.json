@@ -1,0 +1,10 @@
+{
+  "id": "cls-tr-comp-10",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class InnerClass {\n    private int x = 10;\n    class Inner {\n        private int x = 20;\n        void show() {\n            int x = 30;\n            System.out.println(x);\n            System.out.println(this.x);\n            System.out.println(InnerClass.this.x);\n        }\n    }\n    public static void main(String[] args) {\n        new InnerClass().new Inner().show();\n    }\n}",
+  "answer": "30\n20\n10",
+  "explanation": "Three levels of x: local x=30, Inner.this.x=20, InnerClass.this.x=10. Unqualified x refers to the local variable.",
+  "alternatives": ["30\n20\n10\n"]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "fn-tr-comp-17",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class Memoize {\n    static java.util.Map<Integer,Long> memo = new java.util.HashMap<>();\n    static long fib(int n) {\n        if (n <= 1) return n;\n        if (memo.containsKey(n)) return memo.get(n);\n        long result = fib(n - 1) + fib(n - 2);\n        memo.put(n, result);\n        return result;\n    }\n    public static void main(String[] args) {\n        System.out.println(fib(10));\n        System.out.println(fib(0));\n        System.out.println(fib(1));\n    }\n}",
+  "answer": "55\n0\n1",
+  "explanation": "Memoized Fibonacci. fib(10)=55. fib(0)=0. fib(1)=1.",
+  "alternatives": ["55\n0\n1\n"]
+}

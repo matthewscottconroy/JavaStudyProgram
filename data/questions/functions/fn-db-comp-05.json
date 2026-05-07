@@ -1,0 +1,15 @@
+{
+  "id": "fn-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "This method should return the largest number in the array, but returns Integer.MIN_VALUE for an empty array instead of throwing. Is that a bug? What is the more important issue?",
+  "code": "public class MaxFinder {\n    public static int max(int[] nums) {\n        int result = Integer.MIN_VALUE;\n        for (int n : nums) {\n            if (n > result) result = n;\n        }\n        return result;\n    }\n    public static void main(String[] args) {\n        System.out.println(max(new int[]{3, 1, 4}));\n        System.out.println(max(new int[]{}));  // empty array\n    }\n}",
+  "choices": [
+    "Integer.MIN_VALUE is not a valid int value and causes an overflow",
+    "Returning Integer.MIN_VALUE for an empty array is a silent sentinel — callers cannot distinguish 'array was empty' from 'array contained MIN_VALUE'; throw IllegalArgumentException instead",
+    "The for-each loop does not work on empty arrays",
+    "result must be initialized to 0, not Integer.MIN_VALUE"
+  ],
+  "answer": "b",
+  "explanation": "Returning Integer.MIN_VALUE is a silent sentinel value — callers receive a plausible-looking number with no way to know the input was empty. If an array legitimately contains Integer.MIN_VALUE as its only element, the result is indistinguishable from the empty-array case. Fix: check if (nums.length == 0) throw new IllegalArgumentException(\"empty array\"); before the loop."
+}

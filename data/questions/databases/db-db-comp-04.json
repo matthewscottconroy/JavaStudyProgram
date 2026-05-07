@@ -1,0 +1,15 @@
+{
+  "id": "db-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The query is vulnerable to SQL injection. What is the bug?",
+  "code": "import java.sql.*;\npublic class SqlInjection {\n    static ResultSet find(Connection conn, String name) throws SQLException {\n        String sql = \"SELECT * FROM users WHERE name = '\" + name + \"'\";  // bug\n        return conn.createStatement().executeQuery(sql);\n    }\n}",
+  "choices": [
+    "createStatement() cannot execute SELECT queries",
+    "String concatenation into SQL allows injection — a value like \"' OR '1'='1\" bypasses the WHERE clause; use PreparedStatement",
+    "ResultSet cannot be returned from a method",
+    "Single quotes around name must be replaced with double quotes"
+  ],
+  "answer": "b",
+  "explanation": "If name = \"' OR '1'='1\", the SQL becomes SELECT * FROM users WHERE name='' OR '1'='1' — returning all rows. Malicious input can also drop tables ('; DROP TABLE users;--). Fix: always use PreparedStatement with ? placeholders and setString() to parameterize user input."
+}

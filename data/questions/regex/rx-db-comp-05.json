@@ -1,0 +1,15 @@
+{
+  "id": "rx-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The email validation regex accepts invalid addresses. What is the bug?",
+  "code": "public class EmailRegexBug {\n    static boolean isValidEmail(String email) {\n        return email.matches(\".+@.+\");  // bug: too permissive\n    }\n    public static void main(String[] args) {\n        System.out.println(isValidEmail(\"bad@\"));\n        System.out.println(isValidEmail(\"@bad\"));\n    }\n}",
+  "choices": [
+    "matches() requires anchors ^ and $ to validate the full string",
+    "The pattern \".+@.+\" requires at least one character before and after @, so \"bad@\" would return false and \"@bad\" would also return false",
+    "The pattern .+@.+ is too permissive: any characters match '.', so addresses like \"a@b\" with no TLD or domain are accepted; a stricter pattern is needed for real validation",
+    "String.matches cannot be used for email validation; use javax.mail.internet.InternetAddress"
+  ],
+  "answer": "b",
+  "explanation": "matches() anchors to the full string. \".+@.+\" requires 1+ chars, @, then 1+ chars. \"bad@\" has nothing after @, so .+ fails → returns false. \"@bad\" has nothing before @, so the first .+ fails → returns false. The pattern is still too permissive for real emails but correctly rejects these two cases. Option b correctly describes what happens."
+}

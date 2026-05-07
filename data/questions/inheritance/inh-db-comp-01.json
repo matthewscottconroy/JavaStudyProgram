@@ -1,0 +1,15 @@
+{
+  "id": "inh-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The programmer expects this to print 'Animal speaks Dog barks' but it prints 'Dog barks Dog barks'. What is the bug?",
+  "code": "class Animal {\n    public String speak() { return \"Animal speaks\"; }\n}\n\nclass Dog extends Animal {\n    @Override\n    public String speak() { return \"Dog barks\"; }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Animal a = new Dog();\n        System.out.println(a.speak() + \" \" + a.speak());\n    }\n}",
+  "choices": [
+    "Cast a to Animal before the first call: ((Animal) a).speak()",
+    "Dynamic dispatch always uses the runtime type — a refers to a Dog, so both calls invoke Dog.speak()",
+    "Remove @Override so the compiler treats Dog.speak() as a separate method",
+    "The Animal and Dog classes must be in separate files for the cast to take effect"
+  ],
+  "answer": "b",
+  "explanation": "In Java, overridden method calls are resolved at runtime using the actual object's type, not the declared variable type. 'a' refers to a Dog instance, so a.speak() always calls Dog.speak() — the declared type Animal has no effect at runtime. To call Animal.speak() from outside, you need an actual Animal instance. From inside Dog, you can call super.speak()."
+}

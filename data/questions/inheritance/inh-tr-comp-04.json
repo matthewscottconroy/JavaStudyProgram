@@ -1,0 +1,10 @@
+{
+  "id": "inh-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Chain {\n    static class A {\n        String name() { return \"A\"; }\n        void print() { System.out.println(name()); }\n    }\n    static class B extends A {\n        @Override String name() { return \"B\"; }\n    }\n    static class C extends B {\n        @Override String name() { return \"C\"; }\n        @Override void print() { System.out.println(\"C-print:\"+name()); }\n    }\n    public static void main(String[] args) {\n        A a = new B();\n        a.print();\n        A b = new C();\n        b.print();\n    }\n}",
+  "answer": "B\nC-print:C",
+  "explanation": "a is A reference but B object. a.print() calls A.print() (not overridden in B), which calls name(). Dynamic dispatch: the actual type is B, so name() returns \"B\". b is A reference but C object. C overrides print(), so C.print() runs: prints \"C-print:C\".",
+  "alternatives": ["B\nC-print:C\n"]
+}

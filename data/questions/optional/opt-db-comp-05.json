@@ -1,0 +1,15 @@
+{
+  "id": "opt-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "Optional is used as a field, causing serialization issues. What is the bug?",
+  "code": "import java.util.Optional;\nimport java.io.Serializable;\npublic class OptFieldBug implements Serializable {\n    private Optional<String> name;  // bug: Optional is not Serializable\n    public OptFieldBug(String name) {\n        this.name = Optional.ofNullable(name);\n    }\n}",
+  "choices": [
+    "Optional cannot hold String values in a Serializable class",
+    "Optional is not Serializable; using it as a field in a Serializable class causes NotSerializableException at runtime; store the raw value (String name) and expose Optional via a getter instead",
+    "Serializable classes must override readObject/writeObject when using Optional fields",
+    "Optional fields must be declared transient to avoid serialization errors"
+  ],
+  "answer": "b",
+  "explanation": "Optional does not implement Serializable (by design — it is meant for return types, not persistent storage). Using it as a field in a Serializable class causes NotSerializableException. Fix: store String name (nullable), and expose Optional<String> getName() { return Optional.ofNullable(name); } as a method."
+}

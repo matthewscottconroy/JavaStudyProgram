@@ -1,0 +1,15 @@
+{
+  "id": "thr-db-comp-11",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The wait() call is not inside a while loop. What is the bug?",
+  "code": "public class SpuriousWakeup {\n    synchronized void consume(java.util.Queue<Integer> q) throws InterruptedException {\n        if (q.isEmpty()) wait();   // bug: should be while, not if\n        int val = q.poll();\n        System.out.println(val);\n    }\n}",
+  "choices": [
+    "wait() must be called outside a synchronized block",
+    "Using if instead of while for the wait condition allows spurious wakeups to proceed even if the queue is still empty, causing NPE from q.poll() returning null",
+    "wait() returns when any thread calls notify, so if is always sufficient",
+    "q.isEmpty() should be replaced with q.size() == 0 for correctness"
+  ],
+  "answer": "b",
+  "explanation": "Java allows spurious wakeups — threads can wake from wait() without being notified. With if, a spurious wakeup proceeds to q.poll() even if the queue is empty, returning null and causing NPE. Fix: use while(q.isEmpty()) wait(); so the condition is re-checked on every wakeup."
+}

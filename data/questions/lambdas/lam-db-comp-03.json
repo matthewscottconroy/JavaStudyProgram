@@ -1,0 +1,15 @@
+{
+  "id": "lam-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The lambda expression does not match the functional interface. What is the bug?",
+  "code": "import java.util.function.*;\npublic class WrongFI {\n    public static void main(String[] args) {\n        BiFunction<Integer,Integer,Integer> f = x -> x * 2;  // compile error\n        System.out.println(f.apply(3, 4));\n    }\n}",
+  "choices": [
+    "BiFunction cannot use lambda expressions",
+    "BiFunction takes two input parameters but the lambda only declares one; use x -> x * 2 as Function<Integer,Integer> instead",
+    "The lambda body must be a block statement for BiFunction",
+    "BiFunction.apply() requires three arguments"
+  ],
+  "answer": "b",
+  "explanation": "BiFunction<A,B,R> represents a function of two arguments. Its apply(A,B) method needs two parameters, but x -> x * 2 only declares one. Fix: change to (x, y) -> x * 2, or use Function<Integer,Integer> f = x -> x * 2 if only one input is needed."
+}

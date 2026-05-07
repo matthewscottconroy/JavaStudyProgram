@@ -1,0 +1,10 @@
+{
+  "id": "cc-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class ReverseOrder {\n    public static void main(String[] args) {\n        List<Integer> nums = new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5));\n        nums.sort(Comparator.reverseOrder());\n        System.out.println(nums.get(0));\n        System.out.println(nums.get(4));\n        System.out.println(Collections.min(nums));\n    }\n}",
+  "answer": "5\n1\n1",
+  "explanation": "reverseOrder() sorts descending: [5,4,3,2,1]. get(0)=5, get(4)=1. Collections.min still returns the mathematical minimum regardless of sort order: 1.",
+  "alternatives": ["5\n1\n1\n"]
+}

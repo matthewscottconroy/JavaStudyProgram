@@ -1,0 +1,10 @@
+{
+  "id": "gem-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print when a button is clicked?",
+  "code": "import javax.swing.*;\nimport java.awt.event.*;\npublic class EventTrace {\n    static int clicks = 0;\n    public static void main(String[] args) {\n        JButton btn = new JButton(\"Click\");\n        btn.addActionListener(new ActionListener() {\n            @Override\n            public void actionPerformed(ActionEvent e) {\n                clicks++;\n                System.out.println(\"click:\" + clicks);\n            }\n        });\n        // Simulate three clicks:\n        btn.doClick(); btn.doClick(); btn.doClick();\n    }\n}",
+  "answer": "click:1\nclick:2\nclick:3",
+  "explanation": "doClick() fires the ActionEvent as if the user clicked. The listener increments clicks and prints each time. Three clicks produce click:1, click:2, click:3.",
+  "alternatives": ["click:1\nclick:2\nclick:3\n"]
+}

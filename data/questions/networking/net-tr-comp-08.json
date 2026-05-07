@@ -1,0 +1,10 @@
+{
+  "id": "net-tr-comp-08",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.net.URI;\npublic class UriQuery {\n    public static void main(String[] args) throws Exception {\n        URI uri = new URI(\"http://host/search?term=java&page=2\");\n        System.out.println(uri.getScheme());\n        System.out.println(uri.getQuery());\n        System.out.println(uri.getHost());\n    }\n}",
+  "answer": "http\nterm=java&page=2\nhost",
+  "explanation": "URI.getScheme() returns \"http\". getQuery() returns the raw query string \"term=java&page=2\" (without the leading ?). getHost() returns \"host\".",
+  "alternatives": ["http\nterm=java&page=2\nhost\n"]
+}

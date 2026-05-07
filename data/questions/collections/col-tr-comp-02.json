@@ -1,0 +1,10 @@
+{
+  "id": "col-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class Sorted {\n    public static void main(String[] args) {\n        Map<String, Integer> scores = new TreeMap<>();\n        scores.put(\"Charlie\", 85);\n        scores.put(\"Alice\",   92);\n        scores.put(\"Bob\",     78);\n        for (Map.Entry<String, Integer> e : scores.entrySet()) {\n            System.out.println(e.getKey() + \"=\" + e.getValue());\n        }\n    }\n}",
+  "answer": "Alice=92\nBob=78\nCharlie=85",
+  "explanation": "TreeMap maintains keys in natural (alphabetical) order regardless of insertion order. Iterating entrySet() yields entries in key order: Alice, Bob, Charlie.",
+  "alternatives": ["Alice=92\nBob=78\nCharlie=85\n"]
+}

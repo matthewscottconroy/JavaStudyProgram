@@ -1,0 +1,10 @@
+{
+  "id": "inh-tr-comp-12",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class ConstructorChain {\n    static class A {\n        A() { System.out.println(\"A\"); }\n        A(int x) { this(); System.out.println(\"A(\" + x + \")\"); }\n    }\n    static class B extends A {\n        B() { super(5); System.out.println(\"B\"); }\n    }\n    public static void main(String[] args) {\n        new B();\n    }\n}",
+  "answer": "A\nA(5)\nB",
+  "explanation": "new B() calls B() which calls super(5) → A(5) which calls this() → A() prints 'A', returns; A(5) prints 'A(5)', returns; B() prints 'B'.",
+  "alternatives": ["A\nA(5)\nB\n"]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "cls-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The getter always returns 0 regardless of what was passed to the constructor. What is the bug?",
+  "code": "public class ShadowBug {\n    int value;\n    ShadowBug(int value) {\n        value = value;   // bug: assigns parameter to itself\n    }\n    int getValue() { return value; }\n    public static void main(String[] args) {\n        ShadowBug s = new ShadowBug(99);\n        System.out.println(s.getValue());\n    }\n}",
+  "choices": [
+    "Constructors cannot have parameters with the same name as fields",
+    "value = value assigns the parameter to itself; the field is never set. Fix: this.value = value",
+    "The field must be initialized with int value = 0 at declaration",
+    "getValue() returns a copy of value so changes are not visible"
+  ],
+  "answer": "b",
+  "explanation": "When a parameter name shadows a field, the bare name refers to the parameter. value = value is self-assignment of the parameter — the field stays at its default (0). Fix: use this.value = value; to explicitly reference the instance field."
+}

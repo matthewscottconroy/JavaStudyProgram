@@ -1,0 +1,10 @@
+{
+  "id": "gen-tr-comp-13",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class GenericMath {\n    static <T extends Comparable<T>> T max(T a, T b) {\n        return a.compareTo(b) >= 0 ? a : b;\n    }\n    public static void main(String[] args) {\n        System.out.println(max(3, 7));\n        System.out.println(max(\"apple\", \"banana\"));\n        System.out.println(max(3.14, 2.72));\n    }\n}",
+  "answer": "7\nbanana\n3.14",
+  "explanation": "max(3,7)=7. max('apple','banana'): 'apple'.compareTo('banana')<0 → 'banana'. max(3.14,2.72)=3.14.",
+  "alternatives": ["7\nbanana\n3.14\n"]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "ifc-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The interface is used as a marker but also adds unintended methods. What is the bug?",
+  "code": "public class MarkerBug {\n    interface Saveable {\n        void save();    // bug: marker interfaces should have no methods\n    }\n    static class Config implements Saveable {\n        public void save() { System.out.println(\"saving\"); }\n    }\n    static void backup(Object o) {\n        if (o instanceof Saveable) System.out.println(\"backing up\");\n        // cannot call save() without casting\n    }\n}",
+  "choices": [
+    "Marker interfaces must extend Serializable",
+    "A true marker interface has no methods; adding save() makes it a functional interface instead of a pure marker, requiring all implementors to provide save() even if they don't need it",
+    "backup() should cast o to Saveable before checking instanceof",
+    "Interface methods are optional for implementors in Java 9+"
+  ],
+  "answer": "b",
+  "explanation": "A marker interface (like Serializable, Cloneable) has no methods — it only marks a type for special treatment. Adding save() forces every implementing class to provide it, conflating two concerns. Fix: keep the marker interface empty; define a separate Persistable interface with save() for classes that need it."
+}

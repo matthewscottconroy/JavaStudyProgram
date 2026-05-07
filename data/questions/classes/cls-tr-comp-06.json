@@ -1,0 +1,10 @@
+{
+  "id": "cls-tr-comp-06",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Init {\n    static int x = initX();\n    int y = x + 1;\n\n    static int initX() {\n        System.out.println(\"initX\");\n        return 10;\n    }\n\n    Init() { System.out.println(\"ctor y=\" + y); }\n\n    public static void main(String[] args) {\n        System.out.println(\"main x=\" + x);\n        Init a = new Init();\n        Init b = new Init();\n    }\n}",
+  "answer": "initX\nmain x=10\nctor y=11\nctor y=11",
+  "explanation": "Static initializer runs once when class is loaded: prints \"initX\", sets x=10. main() prints \"main x=10\". Each new Init() sets instance y=x+1=11 then constructor prints \"ctor y=11\".",
+  "alternatives": ["initX\nmain x=10\nctor y=11\nctor y=11\n"]
+}

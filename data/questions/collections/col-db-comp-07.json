@@ -1,0 +1,15 @@
+{
+  "id": "col-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The sorted set does not sort correctly. What is the bug?",
+  "code": "import java.util.*;\npublic class SortedSetBug {\n    static class Item {\n        int value;\n        Item(int v) { value = v; }\n    }\n    public static void main(String[] args) {\n        TreeSet<Item> set = new TreeSet<>();  // bug: Item not Comparable\n        set.add(new Item(3));\n        set.add(new Item(1));\n    }\n}",
+  "choices": [
+    "TreeSet cannot hold custom objects",
+    "Item does not implement Comparable<Item>; TreeSet requires elements to be Comparable or a Comparator must be provided at construction",
+    "TreeSet cannot have more than one element",
+    "int fields are not sortable in a TreeSet"
+  ],
+  "answer": "b",
+  "explanation": "TreeSet keeps elements sorted. To sort, it must compare them. Item implements no Comparable interface. Calling add() throws ClassCastException at runtime. Fix: implement Comparable<Item> in Item (return Integer.compare(this.value, other.value)), or provide a Comparator: new TreeSet<>(Comparator.comparingInt(i -> i.value))."
+}

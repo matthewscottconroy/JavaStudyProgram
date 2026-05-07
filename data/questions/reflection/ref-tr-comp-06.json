@@ -1,0 +1,10 @@
+{
+  "id": "ref-tr-comp-06",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.lang.annotation.*;\nimport java.lang.reflect.*;\n@Retention(RetentionPolicy.RUNTIME)\n@interface Tag { String value(); }\n@Tag(\"hello\")\npublic class AnnotDemo {\n    @Tag(\"world\")\n    void method() {}\n    public static void main(String[] args) throws Exception {\n        Tag classTag = AnnotDemo.class.getAnnotation(Tag.class);\n        System.out.println(classTag.value());\n        Tag methodTag = AnnotDemo.class.getDeclaredMethod(\"method\").getAnnotation(Tag.class);\n        System.out.println(methodTag.value());\n    }\n}",
+  "answer": "hello\nworld",
+  "explanation": "The @Tag annotation is retained at runtime. Class-level annotation value is \"hello\". Method-level annotation value is \"world\".",
+  "alternatives": ["hello\nworld\n"]
+}

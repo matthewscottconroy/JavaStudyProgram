@@ -1,0 +1,15 @@
+{
+  "id": "ser-db-comp-12",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The parent class fields are not restored after deserialization. What is the bug?",
+  "code": "import java.io.*;\npublic class NonSerParent {\n    static class Base {           // not Serializable\n        int baseVal = 10;\n    }\n    static class Child extends Base implements Serializable {\n        int childVal;\n        Child(int cv) { childVal = cv; }\n    }\n}",
+  "choices": [
+    "Child cannot implement Serializable if Base does not",
+    "When a Serializable subclass extends a non-Serializable parent, the parent's fields are not saved; on deserialization the parent's no-arg constructor is called, resetting those fields to defaults",
+    "int fields in non-Serializable parents are always serialized as 0",
+    "Serializable must be implemented by all classes in the hierarchy"
+  ],
+  "answer": "b",
+  "explanation": "A Serializable class can extend a non-Serializable class, but the parent's state is not saved. On deserialization, Java calls the first non-Serializable ancestor's no-arg constructor. Base's no-arg constructor resets baseVal to 10 (default), but any mutations are lost. If Base has no no-arg constructor, deserialization throws InvalidClassException."
+}

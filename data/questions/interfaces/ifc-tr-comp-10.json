@@ -1,0 +1,10 @@
+{
+  "id": "ifc-tr-comp-10",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class InterfaceConstants {\n    interface Config {\n        int MAX = 100;       // implicitly public static final\n        String VERSION = \"1.0\";\n    }\n    static class App implements Config {\n        void show() { System.out.println(MAX + \" \" + VERSION); }\n    }\n    public static void main(String[] args) {\n        App app = new App();\n        app.show();\n        System.out.println(Config.MAX);\n        System.out.println(app.MAX);\n    }\n}",
+  "answer": "100 1.0\n100\n100",
+  "explanation": "Interface fields are implicitly public static final. App inherits them. show() prints '100 1.0'. Config.MAX=100. app.MAX=100 (accessing static field via instance — works but discouraged).",
+  "alternatives": ["100 1.0\n100\n100\n"]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "mem-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The static counter counts across all instances but gives wrong values. What is the bug?",
+  "code": "public class BadCounter {\n    static int count = 0;\n    BadCounter() { count = 1; }   // bug: should be ++\n    static int getCount() { return count; }\n    public static void main(String[] args) {\n        new BadCounter();\n        new BadCounter();\n        new BadCounter();\n        System.out.println(BadCounter.getCount());\n    }\n}",
+  "choices": [
+    "Static fields cannot be modified inside constructors",
+    "count = 1 resets the static counter to 1 on every instantiation instead of incrementing it",
+    "The count field should be declared as int, not static int",
+    "getCount() must be an instance method to return the correct value"
+  ],
+  "answer": "b",
+  "explanation": "count = 1 assigns the constant 1 each time a new instance is created. After 3 instances, count is still 1. Fix: count++ or ++count in the constructor to increment the shared static counter."
+}

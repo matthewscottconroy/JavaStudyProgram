@@ -1,0 +1,15 @@
+{
+  "id": "arr-db-comp-16",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The method should print all permutations but prints duplicates. What is the bug?",
+  "code": "public class Perms {\n    static void permute(int[] arr, int start) {\n        if (start == arr.length) {\n            System.out.println(java.util.Arrays.toString(arr));\n            return;\n        }\n        for (int i = start; i < arr.length; i++) {\n            swap(arr, start, i);\n            permute(arr, start + 1);\n            // bug: missing swap back (backtrack)\n        }\n    }\n    static void swap(int[] a, int i, int j) { int t=a[i]; a[i]=a[j]; a[j]=t; }\n}",
+  "choices": [
+    "The base case should check start == arr.length - 1",
+    "The missing backtracking swap after the recursive call leaves the array in a modified state, causing subsequent iterations to generate permutations from wrong prefixes",
+    "swap(arr, start, i) should be swap(arr, i, start) with reversed arguments",
+    "Permutations require a separate visited boolean array"
+  ],
+  "answer": "b",
+  "explanation": "After permute(arr, start+1) returns, the array has been modified by the swap. Without swapping back (swap(arr, start, i) again), subsequent iterations of the loop use the corrupted array state, producing wrong permutations. Fix: add swap(arr, start, i); after the recursive call."
+}

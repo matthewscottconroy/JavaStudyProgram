@@ -1,0 +1,10 @@
+{
+  "id": "mem-tr-comp-10",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class RefTypes {\n    static void increment(int[] arr) { arr[0]++; }\n    static void replace(int[] arr) { arr = new int[]{99}; }  // rebinds local\n    public static void main(String[] args) {\n        int[] a = {1, 2, 3};\n        increment(a);\n        System.out.println(a[0]);\n        replace(a);\n        System.out.println(a[0]);\n    }\n}",
+  "answer": "2\n2",
+  "explanation": "increment(a): arr[0]++ modifies the shared array → a[0]=2. replace(a): arr = new int[]{99} only rebinds the local parameter; the caller's a still points to the original array → a[0] remains 2.",
+  "alternatives": ["2\n2\n"]
+}

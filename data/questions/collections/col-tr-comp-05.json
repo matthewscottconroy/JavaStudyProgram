@@ -1,0 +1,10 @@
+{
+  "id": "col-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class SetOps {\n    public static void main(String[] args) {\n        Set<Integer> a = new HashSet<>(Arrays.asList(1,2,3,4));\n        Set<Integer> b = new HashSet<>(Arrays.asList(3,4,5,6));\n        Set<Integer> inter = new HashSet<>(a);\n        inter.retainAll(b);\n        System.out.println(inter.size());\n        Set<Integer> union = new HashSet<>(a);\n        union.addAll(b);\n        System.out.println(union.size());\n    }\n}",
+  "answer": "2\n6",
+  "explanation": "inter=retainAll(b): keeps only elements in both → {3,4}, size=2. union=addAll(b): {1,2,3,4,5,6}, size=6.",
+  "alternatives": ["2\n6\n"]
+}

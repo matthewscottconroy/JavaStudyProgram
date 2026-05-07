@@ -1,0 +1,10 @@
+{
+  "id": "net-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print (assuming the URL returns the text \"Hello, World!\")?",
+  "code": "import java.net.*;\nimport java.io.*;\npublic class HttpTrace {\n    // Assume URL http://example.com/hello returns exactly: Hello, World!\n    static String fetch(String urlStr) throws Exception {\n        URL url = new URL(urlStr);\n        BufferedReader br = new BufferedReader(\n            new InputStreamReader(url.openStream()));\n        StringBuilder sb = new StringBuilder();\n        String line;\n        while ((line = br.readLine()) != null) sb.append(line);\n        br.close();\n        return sb.toString();\n    }\n    public static void main(String[] args) throws Exception {\n        String result = fetch(\"http://example.com/hello\");\n        System.out.println(result);\n        System.out.println(result.length());\n    }\n}",
+  "answer": "Hello, World!\n13",
+  "explanation": "fetch reads lines from the URL and concatenates. \"Hello, World!\" is one line. Length of \"Hello, World!\" = 13.",
+  "alternatives": ["Hello, World!\n13\n"]
+}

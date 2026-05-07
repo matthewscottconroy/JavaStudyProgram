@@ -1,0 +1,10 @@
+{
+  "id": "col-tr-comp-07",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class SortedCols {\n    public static void main(String[] args) {\n        TreeMap<String,Integer> tm = new TreeMap<>();\n        tm.put(\"banana\", 2);\n        tm.put(\"apple\", 1);\n        tm.put(\"cherry\", 3);\n        for (Map.Entry<String,Integer> e : tm.entrySet()) {\n            System.out.println(e.getKey() + \"=\" + e.getValue());\n        }\n        System.out.println(tm.firstKey());\n    }\n}",
+  "answer": "apple=1\nbanana=2\ncherry=3\napple",
+  "explanation": "TreeMap maintains keys in natural sorted order. Iteration produces alphabetical order: apple, banana, cherry. firstKey() is \"apple\".",
+  "alternatives": ["apple=1\nbanana=2\ncherry=3\napple\n"]
+}

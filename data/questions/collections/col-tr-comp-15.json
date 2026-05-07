@@ -1,0 +1,10 @@
+{
+  "id": "col-tr-comp-15",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class ComputeMap {\n    public static void main(String[] args) {\n        Map<String,List<Integer>> map = new HashMap<>();\n        String[] words = {\"a\", \"b\", \"a\", \"c\", \"b\", \"a\"};\n        for (String w : words) {\n            map.computeIfAbsent(w, k -> new ArrayList<>()).add(map.size());\n        }\n        List<Integer> aList = new ArrayList<>(map.get(\"a\"));\n        Collections.sort(aList);\n        System.out.println(aList.size());\n        System.out.println(map.size());\n    }\n}",
+  "answer": "3\n3",
+  "explanation": "'a' appears 3 times so its list has 3 elements. map has 3 distinct keys (a, b, c).",
+  "alternatives": ["3\n3\n"]
+}

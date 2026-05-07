@@ -1,0 +1,15 @@
+{
+  "id": "lam-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The Comparator sorts in wrong order because Integer subtraction can overflow. What is the bug?",
+  "code": "import java.util.*;\npublic class ComparatorOverflow {\n    public static void main(String[] args) {\n        List<Integer> list = Arrays.asList(Integer.MIN_VALUE, 1, Integer.MAX_VALUE);\n        list.sort((a, b) -> a - b);   // bug: can overflow\n        System.out.println(list);\n    }\n}",
+  "choices": [
+    "List.sort() cannot accept a lambda comparator",
+    "Integer subtraction (a-b) overflows for large values: MAX_VALUE - MIN_VALUE wraps to negative, producing wrong comparator results",
+    "Comparator lambdas require explicit int casts for Integer parameters",
+    "MIN_VALUE and MAX_VALUE cannot be stored in a List<Integer>"
+  ],
+  "answer": "b",
+  "explanation": "Integer.MAX_VALUE - Integer.MIN_VALUE overflows int, producing a negative result and incorrect ordering. Fix: use Integer.compare(a, b) which handles all cases correctly, or Comparator.naturalOrder()."
+}

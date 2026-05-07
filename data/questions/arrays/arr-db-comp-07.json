@@ -1,0 +1,15 @@
+{
+  "id": "arr-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The array fill loop does not initialize all elements. What is the bug?",
+  "code": "public class FillBug {\n    public static void main(String[] args) {\n        int[] arr = new int[5];\n        for (int i = 1; i < arr.length; i++) {  // bug: starts at 1\n            arr[i] = i * 10;\n        }\n        System.out.println(arr[0]);  // still 0\n        System.out.println(arr[4]);\n    }\n}",
+  "choices": [
+    "new int[5] does not allocate memory for all 5 elements",
+    "The loop starts at i=1 skipping arr[0]; arr[0] remains the default value of 0",
+    "i * 10 causes integer overflow for large arrays",
+    "arr.length should be arr.length - 1 in the condition"
+  ],
+  "answer": "b",
+  "explanation": "The loop initializes arr[1] through arr[4] but skips arr[0]. arr[0] remains 0 (the default for int arrays). Fix: start at i=0: for (int i = 0; i < arr.length; i++)."
+}

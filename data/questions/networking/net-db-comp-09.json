@@ -1,0 +1,15 @@
+{
+  "id": "net-db-comp-09",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The HTTP response code check is always wrong. What is the bug?",
+  "code": "import java.net.*;\npublic class ResponseCodeBug {\n    public static void main(String[] args) throws Exception {\n        URL url = new URL(\"https://example.com\");\n        URLConnection conn = url.openConnection();\n        // bug: URLConnection doesn't expose getResponseCode()\n        int code = conn.getContentLength();  // using wrong method\n        System.out.println(code == 200);\n    }\n}",
+  "choices": [
+    "URLConnection must be connected before checking any response properties",
+    "getContentLength() returns the Content-Length header value, not the HTTP status code; to get the response code, cast to HttpURLConnection and call getResponseCode()",
+    "getResponseCode() is called on the InputStream, not the connection object",
+    "HTTP response codes are only available after reading the entire response body"
+  ],
+  "answer": "b",
+  "explanation": "URLConnection does not expose getResponseCode(); that method is on HttpURLConnection. getContentLength() returns the Content-Length header (or -1 if unknown), not the HTTP status code. Fix: cast to HttpURLConnection hc = (HttpURLConnection) url.openConnection(); then call hc.getResponseCode()."
+}

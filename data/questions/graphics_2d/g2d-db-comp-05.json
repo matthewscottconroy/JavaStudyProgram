@@ -1,0 +1,15 @@
+{
+  "id": "g2d-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The drawn rectangle is invisible against the white background. What is the bug?",
+  "code": "import java.awt.*;\nimport java.awt.image.BufferedImage;\npublic class DrawBug {\n    public static void main(String[] args) {\n        BufferedImage img = new BufferedImage(200, 200, BufferedImage.TYPE_INT_RGB);\n        Graphics2D g2 = img.createGraphics();\n        // fill background white\n        g2.setColor(Color.WHITE);\n        g2.fillRect(0, 0, 200, 200);\n        // bug: forgot to change color before drawing rectangle\n        g2.fillRect(50, 50, 100, 100);  // still white — invisible\n        g2.dispose();\n    }\n}",
+  "choices": [
+    "fillRect cannot be called twice on the same Graphics2D object",
+    "The second fillRect is drawn in the current color which is still WHITE after the background fill; no color change means the rectangle is invisible against the white background",
+    "Graphics2D.setColor must be called after each fillRect to reset the color",
+    "BufferedImage.TYPE_INT_RGB does not support the Color.WHITE constant"
+  ],
+  "answer": "b",
+  "explanation": "After filling the background with WHITE, the current Graphics2D color remains WHITE. The second fillRect(50,50,100,100) draws a white rectangle on a white background — completely invisible. Fix: call g2.setColor(Color.RED) (or any non-white color) before the second fillRect."
+}

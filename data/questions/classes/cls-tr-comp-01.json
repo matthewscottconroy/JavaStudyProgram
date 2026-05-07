@@ -1,0 +1,10 @@
+{
+  "id": "cls-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class BankAccount {\n    private double balance;\n    private String owner;\n\n    public BankAccount(String owner, double initial) {\n        this.owner = owner;\n        this.balance = initial;\n    }\n\n    public void deposit(double amount) {\n        balance += amount;\n    }\n\n    public boolean withdraw(double amount) {\n        if (amount > balance) return false;\n        balance -= amount;\n        return true;\n    }\n\n    public String status() {\n        return owner + \": $\" + balance;\n    }\n\n    public static void main(String[] args) {\n        BankAccount a = new BankAccount(\"Alice\", 100.0);\n        a.deposit(50.0);\n        boolean ok = a.withdraw(200.0);\n        System.out.println(ok);\n        System.out.println(a.status());\n    }\n}",
+  "answer": "false\nAlice: $150.0",
+  "explanation": "After deposit(50.0), balance = 150.0. withdraw(200.0): 200.0 > 150.0 is true, so returns false without changing balance. status() concatenates 'Alice: $' with 150.0 → 'Alice: $150.0'.",
+  "alternatives": ["false\nAlice: $150.0\n"]
+}

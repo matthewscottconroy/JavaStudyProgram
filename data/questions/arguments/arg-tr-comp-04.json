@@ -1,0 +1,10 @@
+{
+  "id": "arg-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print when run with: java Flags --verbose --count=5",
+  "code": "public class Flags {\n    public static void main(String[] args) {\n        boolean verbose = false;\n        int count = 1;\n        for (String arg : args) {\n            if (arg.equals(\"--verbose\")) verbose = true;\n            else if (arg.startsWith(\"--count=\")) {\n                count = Integer.parseInt(arg.substring(8));\n            }\n        }\n        System.out.println(verbose);\n        System.out.println(count);\n        for (int i = 0; i < count && verbose; i++) {\n            System.out.println(\"item \" + i);\n        }\n    }\n}",
+  "answer": "true\n5\nitem 0\nitem 1\nitem 2\nitem 3\nitem 4",
+  "explanation": "\"--verbose\" sets verbose=true. \"--count=5\": substring(8)=\"5\", parseInt=5. Prints verbose=true, count=5. Loop runs 5 times (both conditions true): item 0 through item 4.",
+  "alternatives": ["true\n5\nitem 0\nitem 1\nitem 2\nitem 3\nitem 4\n"]
+}

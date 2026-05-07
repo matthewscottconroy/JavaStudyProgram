@@ -1,0 +1,10 @@
+{
+  "id": "dp-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print? (Strategy pattern)",
+  "code": "interface Discount {\n    double apply(double price);\n}\n\nclass NoDiscount  implements Discount { public double apply(double p) { return p; } }\nclass TenPercent  implements Discount { public double apply(double p) { return p * 0.9; } }\nclass HalfPrice   implements Discount { public double apply(double p) { return p * 0.5; } }\n\nclass Cart {\n    private Discount discount = new NoDiscount();\n    void setDiscount(Discount d) { this.discount = d; }\n    double total(double price)   { return discount.apply(price); }\n}\n\npublic class Main {\n    public static void main(String[] args) {\n        Cart cart = new Cart();\n        System.out.println(cart.total(100.0));\n        cart.setDiscount(new TenPercent());\n        System.out.println(cart.total(100.0));\n        cart.setDiscount(new HalfPrice());\n        System.out.println(cart.total(80.0));\n    }\n}",
+  "answer": "100.0\n90.0\n40.0",
+  "explanation": "Strategy pattern: Cart delegates the discount calculation to whichever Discount object is currently set. NoDiscount returns the price unchanged (100.0). TenPercent returns 90% (90.0). HalfPrice returns 50% of 80.0 = 40.0.",
+  "alternatives": ["100.0\n90.0\n40.0\n"]
+}

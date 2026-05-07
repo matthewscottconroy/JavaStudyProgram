@@ -1,0 +1,15 @@
+{
+  "id": "ref-db-comp-10",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "Class.forName throws ClassNotFoundException at runtime. What is the bug?",
+  "code": "public class ForNameBug {\n    public static void main(String[] args) throws Exception {\n        Class<?> c = Class.forName(\"ArrayList\");  // bug: simple name instead of fully-qualified\n        System.out.println(c.getName());\n    }\n}",
+  "choices": [
+    "Class.forName requires the class to be imported before it can be found",
+    "Class.forName requires the fully-qualified class name; \"ArrayList\" should be \"java.util.ArrayList\"",
+    "Class.forName cannot load standard library classes, only user-defined ones",
+    "Class.forName returns null when the class is not found rather than throwing"
+  ],
+  "answer": "b",
+  "explanation": "Class.forName() looks up a class by its binary name, which must be fully qualified (e.g., \"java.util.ArrayList\"). Simple names like \"ArrayList\" are resolved only by the compiler via import statements; reflection has no import context. Fix: Class.forName(\"java.util.ArrayList\")."
+}

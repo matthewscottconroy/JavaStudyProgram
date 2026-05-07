@@ -1,0 +1,10 @@
+{
+  "id": "dp-tr-comp-12",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Proxy {\n    interface Service { String fetch(); }\n    static class RealService implements Service {\n        public String fetch() { return \"data\"; }\n    }\n    static class LoggingProxy implements Service {\n        private final Service target;\n        LoggingProxy(Service s) { target = s; }\n        public String fetch() {\n            System.out.println(\"before\");\n            String r = target.fetch();\n            System.out.println(\"after\");\n            return r;\n        }\n    }\n    public static void main(String[] args) {\n        Service s = new LoggingProxy(new RealService());\n        System.out.println(s.fetch());\n    }\n}",
+  "answer": "before\nafter\ndata",
+  "explanation": "LoggingProxy wraps RealService. fetch() prints 'before', delegates to RealService.fetch() returning 'data', prints 'after', then main prints the returned value 'data'.",
+  "alternatives": ["before\nafter\ndata\n"]
+}

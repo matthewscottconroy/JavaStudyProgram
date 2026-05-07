@@ -1,0 +1,15 @@
+{
+  "id": "fi-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The Consumer modifies a local variable but the caller sees no change. What is the bug?",
+  "code": "import java.util.function.*;\npublic class ConsumerCaptureBug {\n    public static void main(String[] args) {\n        int count = 0;\n        Consumer<String> counter = s -> count++;  // bug: can't mutate captured local\n        counter.accept(\"a\");\n        System.out.println(count);\n    }\n}",
+  "choices": [
+    "Consumer.accept is non-blocking and runs asynchronously",
+    "Lambda expressions can only capture effectively final local variables; count++ modifies count, making it not effectively final — the code does not compile",
+    "Consumer.accept returns void so the count change is discarded",
+    "int variables cannot be captured by lambdas; use Integer instead"
+  ],
+  "answer": "b",
+  "explanation": "Lambdas can only capture local variables that are effectively final (never reassigned). count++ modifies count, so it is not effectively final — the compiler rejects the lambda. Fix: use an int[] counter = {0}; so you mutate counter[0] (the array reference is final) or use AtomicInteger."
+}

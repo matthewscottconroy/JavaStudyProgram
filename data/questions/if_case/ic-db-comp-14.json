@@ -1,0 +1,15 @@
+{
+  "id": "ic-db-comp-14",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The switch expression is missing a yield statement. What is the bug?",
+  "code": "public class SwitchYield {\n    static int compute(int x) {\n        return switch (x) {\n            case 1 -> 10;\n            case 2 -> 20;\n            default -> {\n                int result = x * x;\n                result;   // bug: missing yield\n            }\n        };\n    }\n}",
+  "choices": [
+    "switch expressions cannot contain blocks in the default case",
+    "A block in a switch expression arm must use yield to produce the value; bare expression result; is not a statement",
+    "result must be declared final to be used in a switch expression",
+    "default in a switch expression must use the -> arrow form only"
+  ],
+  "answer": "b",
+  "explanation": "When a switch expression arm uses a block ({}), it must use yield to produce the result value: yield result;. A bare expression statement result; computes and discards the value, producing a compile error ('not a statement'). Fix: change to yield result;"
+}

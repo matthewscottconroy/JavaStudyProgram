@@ -1,0 +1,10 @@
+{
+  "id": "db-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.sql.*;\npublic class SqlTypes {\n    public static void main(String[] args) {\n        System.out.println(Types.INTEGER);\n        System.out.println(Types.VARCHAR);\n        System.out.println(Types.BOOLEAN);\n    }\n}",
+  "answer": "4\n12\n16",
+  "explanation": "java.sql.Types defines SQL type constants as ints: INTEGER=4, VARCHAR=12, BOOLEAN=16. These are standardized JDBC type identifiers.",
+  "alternatives": ["4\n12\n16\n"]
+}

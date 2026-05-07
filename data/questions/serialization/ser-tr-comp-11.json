@@ -1,0 +1,10 @@
+{
+  "id": "ser-tr-comp-11",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.io.*;\npublic class StaticNotSaved {\n    static class Counter implements Serializable {\n        static int count = 0;  // static — not serialized\n        int id;\n        Counter() { id = ++count; }\n    }\n    public static void main(String[] args) throws Exception {\n        Counter.count = 0;\n        Counter c = new Counter();  // id=1, count=1\n        ByteArrayOutputStream baos = new ByteArrayOutputStream();\n        new ObjectOutputStream(baos).writeObject(c);\n        Counter.count = 99;  // simulate changed state\n        Counter c2 = (Counter) new ObjectInputStream(\n            new ByteArrayInputStream(baos.toByteArray())).readObject();\n        System.out.println(c2.id);\n        System.out.println(Counter.count);\n    }\n}",
+  "answer": "1\n99",
+  "explanation": "Static fields are not serialized. c2.id=1 (the instance field was saved). Counter.count was set to 99 and remains 99 after deserialization (static field not touched).",
+  "alternatives": ["1\n99\n"]
+}

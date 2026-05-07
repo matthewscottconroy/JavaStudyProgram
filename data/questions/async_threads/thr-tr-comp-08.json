@@ -1,0 +1,10 @@
+{
+  "id": "thr-tr-comp-08",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.concurrent.atomic.*;\npublic class AtomicDemo {\n    public static void main(String[] args) throws InterruptedException {\n        AtomicInteger count = new AtomicInteger(0);\n        Thread[] threads = new Thread[5];\n        for (int i = 0; i < 5; i++) {\n            threads[i] = new Thread(() -> count.incrementAndGet());\n            threads[i].start();\n        }\n        for (Thread t : threads) t.join();\n        System.out.println(count.get());\n    }\n}",
+  "answer": "5",
+  "explanation": "AtomicInteger.incrementAndGet() is thread-safe. 5 threads each increment once with no race conditions. Final value is exactly 5.",
+  "alternatives": ["5\n"]
+}

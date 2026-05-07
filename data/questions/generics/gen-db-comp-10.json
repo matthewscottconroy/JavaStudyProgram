@@ -1,0 +1,15 @@
+{
+  "id": "gen-db-comp-10",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The raw type usage causes an unchecked warning and potential ClassCastException. What is the bug?",
+  "code": "import java.util.*;\npublic class RawType {\n    public static void main(String[] args) {\n        List list = new ArrayList();   // bug: raw type\n        list.add(\"hello\");\n        list.add(42);\n        String s = (String) list.get(1);  // ClassCastException\n        System.out.println(s);\n    }\n}",
+  "choices": [
+    "ArrayList cannot mix String and int values",
+    "Using a raw List bypasses compile-time type checking; list.add(42) adds an Integer, and casting it to String at runtime throws ClassCastException",
+    "list.get() always returns Object and cannot be cast",
+    "Raw types are forbidden in Java 17 and cause compile errors"
+  ],
+  "answer": "b",
+  "explanation": "Raw types (List without type parameter) disable generics compile-time checking — you can add any object. list.get(1) returns the Integer 42. Casting Integer to String throws ClassCastException. Fix: use List<String> list = new ArrayList<>() so the compiler rejects list.add(42)."
+}

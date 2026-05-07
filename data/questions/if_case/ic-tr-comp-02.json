@@ -1,0 +1,10 @@
+{
+  "id": "ic-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class DayType {\n    public static String classify(String day) {\n        return switch (day.toLowerCase()) {\n            case \"saturday\", \"sunday\" -> \"weekend\";\n            case \"monday\", \"friday\"   -> \"boundary\";\n            default                   -> \"midweek\";\n        };\n    }\n\n    public static void main(String[] args) {\n        System.out.println(classify(\"Saturday\"));\n        System.out.println(classify(\"wednesday\"));\n        System.out.println(classify(\"Monday\"));\n    }\n}",
+  "answer": "weekend\nmidweek\nboundary",
+  "explanation": "\"Saturday\".toLowerCase() = \"saturday\" → matches first case → 'weekend'. \"wednesday\" matches none of the named cases → default → 'midweek'. \"Monday\".toLowerCase() = \"monday\" → matches second case → 'boundary'. Arrow-syntax switch expressions do not fall through.",
+  "alternatives": ["weekend\nmidweek\nboundary\n"]
+}

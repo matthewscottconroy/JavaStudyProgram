@@ -1,0 +1,15 @@
+{
+  "id": "ex-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The finally block return overrides the try return. What is the bug?",
+  "code": "public class FinallyReturn {\n    static int compute() {\n        try {\n            return 1;\n        } finally {\n            return 2;   // always wins\n        }\n    }\n    public static void main(String[] args) {\n        System.out.println(compute());\n    }\n}",
+  "choices": [
+    "Finally blocks cannot contain return statements — compile error",
+    "return in finally overrides the try return; compute() always returns 2, swallowing the try's return value",
+    "try return sets the result but finally return is ignored",
+    "The output is 1 because try executes first"
+  ],
+  "answer": "b",
+  "explanation": "A return in finally overrides any return or thrown exception from try or catch. compute() prints 2, not 1. This is considered a bug pattern — finally should clean up, not change the return value. Java allows it but compilers often warn."
+}

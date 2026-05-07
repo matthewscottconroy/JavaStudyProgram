@@ -1,0 +1,15 @@
+{
+  "id": "ref-db-comp-09",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The annotation is not visible at runtime via reflection. What is the bug?",
+  "code": "import java.lang.annotation.*;\n@interface Tag { String value(); }  // bug: missing @Retention(RUNTIME)\npublic class AnnoReflectBug {\n    @Tag(\"hello\")\n    public void annotated() {}\n    public static void main(String[] args) throws Exception {\n        java.lang.reflect.Method m = AnnoReflectBug.class.getMethod(\"annotated\");\n        System.out.println(m.isAnnotationPresent(Tag.class));  // prints false\n    }\n}",
+  "choices": [
+    "isAnnotationPresent requires getDeclaredMethod, not getMethod",
+    "Custom annotations are ignored by the JVM unless the interface is public",
+    "Without @Retention(RetentionPolicy.RUNTIME) the annotation is discarded by the compiler and is not available via reflection at runtime",
+    "Annotation values must be accessed via getAnnotation(), not isAnnotationPresent()"
+  ],
+  "answer": "c",
+  "explanation": "The default retention policy is RetentionPolicy.CLASS, which writes the annotation to the .class file but does not preserve it at runtime. Reflection APIs read runtime metadata, so they cannot see CLASS-retained annotations. Fix: add @Retention(RetentionPolicy.RUNTIME) above @interface Tag."
+}

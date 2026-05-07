@@ -1,0 +1,10 @@
+{
+  "id": "inh-tr-comp-06",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class FieldHiding {\n    static class Parent {\n        int x = 10;\n        void show() { System.out.println(x); }\n    }\n    static class Child extends Parent {\n        int x = 20;   // hides parent field\n        @Override void show() { System.out.println(x); }\n    }\n    public static void main(String[] args) {\n        Parent p = new Child();\n        p.show();\n        System.out.println(p.x);\n    }\n}",
+  "answer": "20\n10",
+  "explanation": "p.show() uses dynamic dispatch — Child.show() runs, printing Child's x=20. p.x uses the declared (static) type of p which is Parent, so it accesses Parent.x=10. Fields are not polymorphic; methods are.",
+  "alternatives": ["20\n10\n"]
+}

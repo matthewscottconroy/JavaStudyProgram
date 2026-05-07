@@ -1,0 +1,15 @@
+{
+  "id": "var-db-comp-14",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The volatile variable still has a race condition. What is the bug?",
+  "code": "public class VolatileBug {\n    volatile int count = 0;\n    void increment() {\n        count++;   // bug: not atomic despite volatile\n    }\n}",
+  "choices": [
+    "volatile fields cannot be incremented with ++",
+    "volatile ensures visibility but not atomicity; count++ is read-modify-write and is not atomic, so two threads can both read the same value and both write the incremented value, losing an update",
+    "volatile variables must be declared static",
+    "count++ is thread-safe for volatile int fields"
+  ],
+  "answer": "b",
+  "explanation": "volatile guarantees that reads/writes are visible to all threads (no caching), but does not make compound operations atomic. count++ = read count + increment + write count (three operations). Two threads can interleave: both read 5, both write 6, losing one increment. Fix: use AtomicInteger.incrementAndGet() or synchronized."
+}

@@ -1,0 +1,15 @@
+{
+  "id": "ic-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The code always prints \"pass\" regardless of the score. What is the bug?",
+  "code": "public class Grade {\n    public static void main(String[] args) {\n        int score = 45;\n        if (score > 60);\n            System.out.println(\"pass\");\n    }\n}",
+  "choices": [
+    "score > 60 should be score >= 60",
+    "There is a semicolon after if (score > 60) making the if-body an empty statement; println always executes",
+    "System.out.println must be inside curly braces to be part of an if",
+    "int score should be declared as final to be used in a condition"
+  ],
+  "answer": "b",
+  "explanation": "The semicolon after if (score > 60); creates an empty if-body. The println that follows is not part of the if — it always runs. Fix: remove the semicolon, or use braces: if (score > 60) { System.out.println(\"pass\"); }"
+}

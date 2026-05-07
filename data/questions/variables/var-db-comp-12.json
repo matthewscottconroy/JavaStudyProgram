@@ -1,0 +1,15 @@
+{
+  "id": "var-db-comp-12",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The compound assignment changes the type unexpectedly. What is the bug?",
+  "code": "public class CompoundAssign {\n    public static void main(String[] args) {\n        byte b = 10;\n        b = b + 1;   // bug: compile error — int result assigned to byte\n        System.out.println(b);\n    }\n}",
+  "choices": [
+    "byte variables cannot be incremented",
+    "b + 1 promotes b to int; assigning an int back to byte requires an explicit cast; b = b + 1 is a compile error",
+    "b += 1 and b = b + 1 are equivalent and both cause the same error",
+    "byte addition overflows at 11 and wraps to a negative value"
+  ],
+  "answer": "b",
+  "explanation": "b + 1 promotes b to int (numeric promotion). Assigning an int to a byte without a cast is a compile error. Fix: use b += 1 (compound assignment includes an implicit cast) or b = (byte)(b + 1). Note that b += 1 compiles fine but b = b + 1 does not."
+}

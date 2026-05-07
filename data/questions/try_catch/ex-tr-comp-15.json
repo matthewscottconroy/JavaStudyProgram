@@ -1,0 +1,10 @@
+{
+  "id": "ex-tr-comp-15",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class ExInheritance {\n    static class Base extends Exception { Base(String m){super(m);} }\n    static class Child extends Base { Child(String m){super(m);} }\n    public static void main(String[] args) {\n        try {\n            throw new Child(\"child ex\");\n        } catch (Base e) {\n            System.out.println(\"Base caught: \" + e.getMessage());\n        } catch (Exception e) {\n            System.out.println(\"Exception caught\");\n        }\n    }\n}",
+  "answer": "Base caught: child ex",
+  "explanation": "Child extends Base. The catch(Base e) clause matches Child (since Child IS-A Base), so it catches the exception first. The Exception clause is never reached.",
+  "alternatives": ["Base caught: child ex\n"]
+}

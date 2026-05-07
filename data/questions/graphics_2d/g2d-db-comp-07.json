@@ -1,0 +1,15 @@
+{
+  "id": "g2d-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "Text rendering is jagged and aliased. What is the bug?",
+  "code": "import java.awt.*;\nimport java.awt.image.BufferedImage;\npublic class TextAliasBug {\n    public static void main(String[] args) {\n        BufferedImage img = new BufferedImage(200, 50, BufferedImage.TYPE_INT_RGB);\n        Graphics2D g2 = img.createGraphics();\n        // bug: no rendering hints set — antialiasing is off by default\n        g2.drawString(\"Hello\", 10, 30);\n        g2.dispose();\n    }\n}",
+  "choices": [
+    "drawString requires a Font to be set before rendering",
+    "Graphics2D antialiasing is disabled by default; text appears aliased/jagged; enable it with g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON)",
+    "BufferedImage.TYPE_INT_RGB does not support text rendering",
+    "drawString must be called on the EDT for antialiasing to work"
+  ],
+  "answer": "b",
+  "explanation": "By default, Graphics2D does not apply antialiasing, resulting in jagged text edges. Fix: call g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON) before drawString to enable smooth text rendering."
+}

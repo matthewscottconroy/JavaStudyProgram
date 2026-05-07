@@ -1,0 +1,10 @@
+{
+  "id": "arg-tr-comp-09",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Overload {\n    static String which(int x)    { return \"int\"; }\n    static String which(double x) { return \"double\"; }\n    static String which(long x)   { return \"long\"; }\n    public static void main(String[] args) {\n        System.out.println(which(5));\n        System.out.println(which(5L));\n        System.out.println(which(5.0));\n    }\n}",
+  "answer": "int\nlong\ndouble",
+  "explanation": "The compiler selects the most specific overload. 5 is an int literal → which(int). 5L is a long literal → which(long). 5.0 is a double literal → which(double).",
+  "alternatives": ["int\nlong\ndouble\n"]
+}

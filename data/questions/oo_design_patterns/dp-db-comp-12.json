@@ -1,0 +1,15 @@
+{
+  "id": "dp-db-comp-12",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The Strategy pattern ignores the injected strategy. What is the bug?",
+  "code": "public class Strategy {\n    interface SortStrategy { void sort(int[] arr); }\n    static class Sorter {\n        SortStrategy strategy;\n        Sorter(SortStrategy s) { /* forgot to assign */ }\n        void sort(int[] arr) { strategy.sort(arr); }   // NPE\n    }\n}",
+  "choices": [
+    "SortStrategy cannot be an interface in a Strategy pattern",
+    "The constructor receives the strategy but never assigns it: this.strategy = s; is missing, so strategy remains null",
+    "sort() should call Arrays.sort() instead of delegating to the strategy",
+    "strategy must be declared static to be accessible in sort()"
+  ],
+  "answer": "b",
+  "explanation": "The constructor body is empty — the parameter s is never assigned to the field. strategy remains null. Calling strategy.sort(arr) throws NullPointerException. Fix: add this.strategy = s; inside the constructor body."
+}

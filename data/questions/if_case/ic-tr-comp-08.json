@@ -1,0 +1,10 @@
+{
+  "id": "ic-tr-comp-08",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class ShortCircuit {\n    static int count = 0;\n    static boolean check(boolean val) {\n        count++;\n        return val;\n    }\n    public static void main(String[] args) {\n        boolean r1 = check(false) && check(true);\n        System.out.println(r1 + \" \" + count);\n        boolean r2 = check(true) || check(false);\n        System.out.println(r2 + \" \" + count);\n    }\n}",
+  "answer": "false 1\ntrue 2",
+  "explanation": "check(false)&&check(true): first check returns false, && short-circuits — second check never called. count=1, r1=false. check(true)||check(false): first check returns true, || short-circuits. count=2, r2=true.",
+  "alternatives": ["false 1\ntrue 2\n"]
+}

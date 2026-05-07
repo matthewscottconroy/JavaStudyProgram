@@ -1,0 +1,10 @@
+{
+  "id": "str-tr-comp-16",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Comparison {\n    public static void main(String[] args) {\n        String a = new String(\"test\");\n        String b = new String(\"test\");\n        String c = \"test\";\n        String d = \"test\";\n        System.out.println(a == b);\n        System.out.println(a.equals(b));\n        System.out.println(c == d);\n        System.out.println(a == c);\n    }\n}",
+  "answer": "false\ntrue\ntrue\nfalse",
+  "explanation": "new String() always creates a new heap object: a!=b. equals() compares content: true. c and d are string literals referencing the same pooled object: c==d is true. a is a heap object, c is a pool object: a!=c.",
+  "alternatives": ["false\ntrue\ntrue\nfalse\n"]
+}

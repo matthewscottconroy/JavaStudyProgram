@@ -1,0 +1,15 @@
+{
+  "id": "fn-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The overloaded method is called ambiguously and does not compile. What is the bug?",
+  "code": "public class AmbigOverload {\n    static void show(int n, double d) { System.out.println(\"int,double\"); }\n    static void show(double d, int n) { System.out.println(\"double,int\"); }\n    public static void main(String[] args) {\n        show(1, 2);   // compile error: ambiguous\n    }\n}",
+  "choices": [
+    "Overloaded methods with more than one parameter are not allowed",
+    "show(1,2): both 1 and 2 can be promoted to double; both overloads match (int→int,double→double or int→double,int→int), creating ambiguity",
+    "int literals must be explicitly cast before overloaded method calls",
+    "show must be declared with a return type to be unambiguous"
+  ],
+  "answer": "b",
+  "explanation": "show(1,2): both args are int. Matching show(int,double) requires widening 2 to double. Matching show(double,int) requires widening 1 to double. Both are equally specific — the compiler cannot choose. Fix: add explicit casts: show(1, 2.0) or show(1.0, 2) to disambiguate."
+}

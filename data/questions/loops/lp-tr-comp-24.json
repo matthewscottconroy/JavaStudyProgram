@@ -1,0 +1,10 @@
+{
+  "id": "lp-tr-comp-24",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class HammingWeight {\n    static int bits(int n) {\n        int count = 0;\n        while (n != 0) {\n            count += n & 1;\n            n >>>= 1;\n        }\n        return count;\n    }\n    public static void main(String[] args) {\n        System.out.println(bits(0));\n        System.out.println(bits(7));\n        System.out.println(bits(8));\n        System.out.println(bits(255));\n    }\n}",
+  "answer": "0\n3\n1\n8",
+  "explanation": "bits(0)=0. 7=0b111 has 3 ones. 8=0b1000 has 1 one. 255=0b11111111 has 8 ones.",
+  "alternatives": ["0\n3\n1\n8\n"]
+}

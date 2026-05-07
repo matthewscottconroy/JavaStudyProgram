@@ -1,0 +1,10 @@
+{
+  "id": "var-tr-comp-10",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class VarKeyword {\n    public static void main(String[] args) {\n        var x = 42;\n        var s = \"hello\";\n        var list = new java.util.ArrayList<String>();\n        list.add(\"world\");\n        System.out.println(x + 1);\n        System.out.println(s.toUpperCase());\n        System.out.println(list.get(0));\n    }\n}",
+  "answer": "43\nHELLO\nworld",
+  "explanation": "var infers types: x is int, s is String, list is ArrayList<String>. x+1=43, s.toUpperCase()='HELLO', list.get(0)='world'.",
+  "alternatives": ["43\nHELLO\nworld\n"]
+}

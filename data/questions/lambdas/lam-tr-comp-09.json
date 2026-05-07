@@ -1,0 +1,10 @@
+{
+  "id": "lam-tr-comp-09",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.function.*;\npublic class PredicateOps {\n    public static void main(String[] args) {\n        Predicate<Integer> isEven = n -> n % 2 == 0;\n        Predicate<Integer> isPos = n -> n > 0;\n        Predicate<Integer> both = isEven.and(isPos);\n        Predicate<Integer> either = isEven.or(isPos);\n        System.out.println(both.test(4));\n        System.out.println(both.test(-4));\n        System.out.println(either.test(-3));\n        System.out.println(isEven.negate().test(3));\n    }\n}",
+  "answer": "true\nfalse\nfalse\ntrue",
+  "explanation": "both(4): even(T)&&pos(T)=true. both(-4): even(T)&&pos(F)=false. either(-3): even(F)||pos(F)=false. negate(isEven)(3): !even(F)=true.",
+  "alternatives": ["true\nfalse\nfalse\ntrue\n"]
+}

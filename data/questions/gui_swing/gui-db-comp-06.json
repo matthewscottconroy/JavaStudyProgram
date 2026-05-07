@@ -1,0 +1,15 @@
+{
+  "id": "gui-db-comp-06",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The JFrame is blank — no button appears. What is the bug?",
+  "code": "import javax.swing.*;\npublic class BlankFrameBug {\n    public static void main(String[] args) {\n        JFrame frame = new JFrame();\n        JButton btn = new JButton(\"OK\");\n        frame.setSize(300, 200);\n        frame.setVisible(true);\n        frame.add(btn);  // bug: add after setVisible\n    }\n}",
+  "choices": [
+    "JButton must be added to a JPanel before being added to a JFrame",
+    "Components added to a visible frame are not automatically repainted; add the component before setVisible(true), or call frame.revalidate() and frame.repaint() after adding",
+    "setSize must be called after add() for the layout to calculate correctly",
+    "JFrame uses BorderLayout by default and cannot contain a JButton directly"
+  ],
+  "answer": "b",
+  "explanation": "Adding a component after setVisible(true) requires a revalidate/repaint cycle to update the display. The button is added but the frame doesn't know it needs to redraw. Fix: either add the button before setVisible(true), or call frame.revalidate(); frame.repaint(); after adding."
+}

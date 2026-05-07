@@ -1,0 +1,10 @@
+{
+  "id": "col-tr-comp-12",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class DequeStack {\n    public static void main(String[] args) {\n        Deque<String> stack = new ArrayDeque<>();\n        stack.push(\"a\");\n        stack.push(\"b\");\n        stack.push(\"c\");\n        System.out.println(stack.peek());\n        System.out.println(stack.pop());\n        System.out.println(stack.size());\n    }\n}",
+  "answer": "c\nc\n2",
+  "explanation": "Deque used as a stack: push() inserts at the front (LIFO). After pushing a,b,c: front is c. peek()=c (no removal). pop()=c (removes). Remaining: b,a → size=2.",
+  "alternatives": ["c\nc\n2\n"]
+}

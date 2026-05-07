@@ -1,0 +1,10 @@
+{
+  "id": "inh-tr-comp-16",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class FieldHiding {\n    static class Parent {\n        int x = 10;\n        int getX() { return x; }\n    }\n    static class Child extends Parent {\n        int x = 20;  // hides Parent.x\n        int getX() { return x; }  // overrides\n    }\n    public static void main(String[] args) {\n        Parent p = new Child();\n        System.out.println(p.x);       // field access: compile-time type\n        System.out.println(p.getX()); // method call: runtime type\n    }\n}",
+  "answer": "10\n20",
+  "explanation": "Field access (p.x) uses the declared type Parent, so x=10. Method call (p.getX()) dispatches to Child.getX() at runtime, which returns Child's x=20.",
+  "alternatives": ["10\n20\n"]
+}

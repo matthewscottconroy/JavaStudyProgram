@@ -1,0 +1,15 @@
+{
+  "id": "cls-db-comp-12",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The immutable class is not truly immutable. What is the bug?",
+  "code": "public final class ImmutableBug {\n    private final int[] data;\n    ImmutableBug(int[] d) {\n        data = d;   // bug: should be d.clone()\n    }\n    int[] getData() {\n        return data;  // bug: should return data.clone()\n    }\n}",
+  "choices": [
+    "final classes cannot store arrays",
+    "The constructor stores a reference to the passed array (not a copy), and getData() returns the internal array reference; callers can mutate the array externally",
+    "int[] fields must be declared transient in immutable classes",
+    "The class should implement Cloneable to be truly immutable"
+  ],
+  "answer": "b",
+  "explanation": "Two leaks break immutability: (1) the constructor stores the caller's array reference — the caller can mutate it afterward; (2) getData() returns the internal reference — the caller receives direct access. Fix: defensive copy in constructor: this.data = d.clone(); and in accessor: return data.clone();"
+}

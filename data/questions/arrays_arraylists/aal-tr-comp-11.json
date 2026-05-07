@@ -1,0 +1,10 @@
+{
+  "id": "aal-tr-comp-11",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class ArrayDeepCopy {\n    public static void main(String[] args) {\n        int[][] a = {{1,2},{3,4}};\n        int[][] b = Arrays.copyOf(a, a.length);  // shallow!\n        b[0][0] = 99;\n        System.out.println(a[0][0]);\n        System.out.println(b[0][0]);\n        b[0] = new int[]{10,20};  // reassigning row\n        System.out.println(a[0][0]);\n        System.out.println(b[0][0]);\n    }\n}",
+  "answer": "99\n99\n99\n10",
+  "explanation": "Arrays.copyOf for 2D makes a shallow copy: a and b share the same row arrays. b[0][0]=99 changes shared row → a[0][0]=99. Reassigning b[0]=new int[]{10,20} breaks the sharing only for b: a[0][0] still 99, b[0][0]=10.",
+  "alternatives": ["99\n99\n99\n10\n"]
+}

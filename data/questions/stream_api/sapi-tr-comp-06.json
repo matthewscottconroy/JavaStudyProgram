@@ -1,0 +1,10 @@
+{
+  "id": "sapi-tr-comp-06",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\nimport java.util.stream.*;\npublic class FlatMap {\n    public static void main(String[] args) {\n        List<List<Integer>> nested = Arrays.asList(\n            Arrays.asList(1, 2, 3),\n            Arrays.asList(4, 5),\n            Arrays.asList(6)\n        );\n        List<Integer> flat = nested.stream()\n            .flatMap(Collection::stream)\n            .collect(Collectors.toList());\n        System.out.println(flat);\n        System.out.println(flat.stream().reduce(0, Integer::sum));\n    }\n}",
+  "answer": "[1, 2, 3, 4, 5, 6]\n21",
+  "explanation": "flatMap flattens [[1,2,3],[4,5],[6]] to [1,2,3,4,5,6]. reduce with sum: 1+2+3+4+5+6=21.",
+  "alternatives": ["[1, 2, 3, 4, 5, 6]\n21\n"]
+}

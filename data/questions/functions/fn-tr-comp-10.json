@@ -1,0 +1,10 @@
+{
+  "id": "fn-tr-comp-10",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Overload {\n    static String describe(int n)    { return \"int:\" + n; }\n    static String describe(double n) { return \"double:\" + n; }\n    static String describe(String s) { return \"string:\" + s; }\n\n    public static void main(String[] args) {\n        System.out.println(describe(42));\n        System.out.println(describe(3.14));\n        System.out.println(describe(\"hi\"));\n        System.out.println(describe('A'));\n    }\n}",
+  "answer": "int:42\ndouble:3.14\nstring:hi\nint:65",
+  "explanation": "42 → int overload. 3.14 → double overload. \"hi\" → String overload. 'A' is a char; Java promotes char to int (ASCII 65) to match the int overload, since there is no char overload.",
+  "alternatives": ["int:42\ndouble:3.14\nstring:hi\nint:65\n"]
+}

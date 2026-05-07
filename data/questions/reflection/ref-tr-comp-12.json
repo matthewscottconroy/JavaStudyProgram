@@ -1,0 +1,10 @@
+{
+  "id": "ref-tr-comp-12",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class ModifierCheck {\n    import java.lang.reflect.*;\n}// Note: using inline for brevity\npublic class ModifierCheck2 {\n    public static final int VALUE = 42;\n    private volatile int counter = 0;\n    public static void main(String[] args) throws Exception {\n        java.lang.reflect.Field f1 = ModifierCheck2.class.getField(\"VALUE\");\n        int m1 = f1.getModifiers();\n        System.out.println(java.lang.reflect.Modifier.isPublic(m1));\n        System.out.println(java.lang.reflect.Modifier.isStatic(m1));\n        System.out.println(java.lang.reflect.Modifier.isFinal(m1));\n    }\n}",
+  "answer": "true\ntrue\ntrue",
+  "explanation": "VALUE is declared public static final. getModifiers() reflects these: isPublic=true, isStatic=true, isFinal=true.",
+  "alternatives": ["true\ntrue\ntrue\n"]
+}

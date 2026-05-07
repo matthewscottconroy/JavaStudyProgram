@@ -1,0 +1,15 @@
+{
+  "id": "cls-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "Two instances that should be equal are treated as different by a HashMap. What is the bug?",
+  "code": "import java.util.*;\npublic class MapBug {\n    static class Key {\n        int id;\n        Key(int id) { this.id = id; }\n        @Override public boolean equals(Object o) {\n            return o instanceof Key && ((Key)o).id == this.id;\n        }\n        // hashCode not overridden!\n    }\n    public static void main(String[] args) {\n        Map<Key, String> map = new HashMap<>();\n        map.put(new Key(1), \"one\");\n        System.out.println(map.get(new Key(1)));  // prints null!\n    }\n}",
+  "choices": [
+    "HashMap requires keys to implement Comparable",
+    "equals is overridden but hashCode is not; two equal Keys have different hash codes so HashMap puts them in different buckets",
+    "new Key(1) creates a new object which cannot be found in the map",
+    "HashMap.get uses == instead of equals to find keys"
+  ],
+  "answer": "b",
+  "explanation": "The contract: if a.equals(b) then a.hashCode() == b.hashCode(). Key overrides equals but inherits Object.hashCode() which uses object identity. Two separate new Key(1) objects have different hashCodes, so HashMap never finds the entry. Fix: @Override public int hashCode() { return id; }"
+}

@@ -1,0 +1,15 @@
+{
+  "id": "en-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The enum constructor does not compile. What is the bug?",
+  "code": "public class EnumConstructorBug {\n    enum Coin {\n        PENNY, NICKEL, DIME;\n        public Coin(int value) {  // bug: enum constructors must be private\n            this.value = value;\n        }\n        int value;\n    }\n}",
+  "choices": [
+    "Enum constructors cannot have parameters",
+    "Enum constructors must be private (or package-private); declaring them public is a compile error because enum constants are instantiated only by the enum class itself",
+    "Enum fields must be declared before the constructor",
+    "Enum constants must pass constructor arguments: PENNY(1), NICKEL(5), DIME(10)"
+  ],
+  "answer": "b",
+  "explanation": "Enum constructors are implicitly private and cannot be declared public or protected — the compiler rejects it. Additionally, the constants PENNY, NICKEL, DIME don't pass arguments to the constructor. Fix: make the constructor private (or drop the modifier), declare the field before the constants, and add values: PENNY(1), NICKEL(5), DIME(10)."
+}

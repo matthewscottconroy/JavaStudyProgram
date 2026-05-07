@@ -1,0 +1,15 @@
+{
+  "id": "thr-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The synchronized block uses the wrong lock, allowing concurrent access. What is the bug?",
+  "code": "public class WrongLock {\n    private final Object lockA = new Object();\n    private final Object lockB = new Object();\n    private int counter = 0;\n    void increment() {\n        synchronized (lockA) { counter++; }  // thread 1 uses lockA\n    }\n    void decrement() {\n        synchronized (lockB) { counter--; }  // bug: thread 2 uses lockB\n    }\n}",
+  "choices": [
+    "synchronized blocks must use 'this' as the lock object",
+    "increment() and decrement() use different lock objects; they can execute concurrently, causing a data race on counter",
+    "lockA and lockB must be declared static for synchronization to work",
+    "counter must be volatile when used with synchronized"
+  ],
+  "answer": "b",
+  "explanation": "Mutual exclusion only works when competing threads use the same lock. lockA and lockB are independent locks, so increment() and decrement() can run simultaneously, causing a data race on counter. Fix: use the same lock for both methods — either 'this' or a shared lock object."
+}

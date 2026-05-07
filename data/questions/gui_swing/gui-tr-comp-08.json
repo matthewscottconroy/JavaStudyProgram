@@ -1,0 +1,10 @@
+{
+  "id": "gui-tr-comp-08",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import javax.swing.*;\npublic class SliderRange {\n    public static void main(String[] args) {\n        JSlider slider = new JSlider(0, 100, 50);\n        System.out.println(slider.getMinimum());\n        System.out.println(slider.getMaximum());\n        System.out.println(slider.getValue());\n        slider.setValue(75);\n        System.out.println(slider.getValue());\n    }\n}",
+  "answer": "0\n100\n50\n75",
+  "explanation": "JSlider(min, max, value) initializes with min=0, max=100, value=50. After setValue(75), getValue() returns 75.",
+  "alternatives": ["0\n100\n50\n75\n"]
+}

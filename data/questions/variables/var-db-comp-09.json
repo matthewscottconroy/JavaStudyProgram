@@ -1,0 +1,15 @@
+{
+  "id": "var-db-comp-09",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The unboxing throws NullPointerException. What is the bug?",
+  "code": "import java.util.*;\npublic class UnboxNull {\n    public static void main(String[] args) {\n        Map<String,Integer> map = new HashMap<>();\n        int value = map.get(\"key\");  // bug: NPE on unboxing null\n        System.out.println(value);\n    }\n}",
+  "choices": [
+    "HashMap cannot store Integer values",
+    "map.get('key') returns null (key not present); unboxing null to int throws NullPointerException",
+    "The variable value must be declared as Integer, not int",
+    "map.get() throws NoSuchElementException when the key is not found"
+  ],
+  "answer": "b",
+  "explanation": "map.get('key') returns null because 'key' was never put in the map. Assigning null to int triggers auto-unboxing (null.intValue()), which throws NullPointerException. Fix: use map.getOrDefault('key', 0) or check for null before unboxing."
+}

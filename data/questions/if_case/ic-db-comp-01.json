@@ -1,0 +1,15 @@
+{
+  "id": "ic-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "For score=2, this method prints 'silver', 'bronze', and 'none' instead of just 'silver'. What is the bug?",
+  "code": "public class Tier {\n    public static void printTier(int score) {\n        switch (score) {\n            case 3: System.out.println(\"gold\");\n            case 2: System.out.println(\"silver\");\n            case 1: System.out.println(\"bronze\");\n            default: System.out.println(\"none\");\n        }\n    }\n}",
+  "choices": [
+    "switch on int is not supported in Java — use if/else instead",
+    "Each case is missing a break; statement, so execution falls through into every subsequent case",
+    "default must appear before case 1 in a traditional switch",
+    "System.out.println cannot be called inside a switch statement"
+  ],
+  "answer": "b",
+  "explanation": "In a traditional switch, after a matching case executes, control continues into the next case unless there is an explicit break (or return). score=2 matches case 2, prints 'silver', then falls through to case 1 ('bronze'), then default ('none'). Fix: add break; at the end of each case, or rewrite using arrow-syntax switch expressions (case X -> ...) which never fall through."
+}

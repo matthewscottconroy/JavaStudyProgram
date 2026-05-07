@@ -1,0 +1,15 @@
+{
+  "id": "rec-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The record accessor name conflicts with a custom method. What is the bug?",
+  "code": "public class RecordMethodConflict {\n    record Circle(double radius) {\n        double radius() { return radius * 2; }  // bug: overrides the auto-generated accessor\n    }\n    public static void main(String[] args) {\n        Circle c = new Circle(5.0);\n        System.out.println(c.radius());  // surprising: returns 10.0, not 5.0\n    }\n}",
+  "choices": [
+    "Records do not auto-generate accessor methods when a manual method is present",
+    "Defining a method with the same signature as an auto-generated record accessor overrides it; c.radius() returns 10.0 instead of the stored 5.0, silently breaking the accessor contract",
+    "The code does not compile because record accessors cannot be overridden",
+    "radius() inside the method refers to the parameter, not the field"
+  ],
+  "answer": "b",
+  "explanation": "Java allows overriding the auto-generated accessor with a custom implementation. The custom radius() returns radius * 2 = 10.0 instead of the stored 5.0, silently violating the expectation that the accessor returns the component value. Fix: rename the custom method (e.g., diameter()) or remove it; if overriding the accessor is intentional, document it clearly."
+}

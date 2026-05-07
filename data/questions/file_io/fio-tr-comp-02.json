@@ -1,0 +1,10 @@
+{
+  "id": "fio-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "import java.nio.file.*;\npublic class PathResolve {\n    public static void main(String[] args) {\n        Path base = Path.of(\"/home/user\");\n        Path child = base.resolve(\"docs/notes.txt\");\n        System.out.println(child);\n        Path rel = Path.of(\"a/b\").relativize(Path.of(\"a/b/c/d\"));\n        System.out.println(rel);\n    }\n}",
+  "answer": "/home/user/docs/notes.txt\nc/d",
+  "explanation": "resolve() appends the argument to the base path. relativize(other) returns the relative path from the receiver to other: from a/b to a/b/c/d is c/d.",
+  "alternatives": ["/home/user/docs/notes.txt\nc/d\n"]
+}

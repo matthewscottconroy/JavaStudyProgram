@@ -1,0 +1,15 @@
+{
+  "id": "fn-db-comp-10",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The recursive power method throws StackOverflowError for power(2, 0). What is the bug?",
+  "code": "public class Power {\n    static long power(long base, int exp) {\n        if (exp == 1) return base;   // bug: base case misses exp==0\n        return base * power(base, exp - 1);\n    }\n    public static void main(String[] args) {\n        System.out.println(power(2, 0));\n    }\n}",
+  "choices": [
+    "long cannot represent powers of 2",
+    "The base case exp == 1 misses exp == 0; power(2,0) recurses forever",
+    "exp - 1 should be exp / 2 for efficiency",
+    "base * power(...) causes integer overflow before the base case"
+  ],
+  "answer": "b",
+  "explanation": "The base case only handles exp == 1. When called with exp == 0, the method recurses indefinitely (0 → -1 → -2 ...). Fix: change the base case to exp == 0 and return 1, which is mathematically correct (anything^0 = 1)."
+}

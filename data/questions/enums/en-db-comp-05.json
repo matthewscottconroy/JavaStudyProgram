@@ -1,0 +1,15 @@
+{
+  "id": "en-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "EnumMap lookup always returns null. What is the bug?",
+  "code": "import java.util.*;\npublic class EnumMapBug {\n    enum Dir { NORTH, SOUTH, EAST, WEST }\n    public static void main(String[] args) {\n        EnumMap<Dir, String> map = new EnumMap<>(Dir.class);\n        map.put(Dir.NORTH, \"up\");\n        // bug: looking up a String key instead of an enum constant\n        System.out.println(map.get(\"NORTH\"));\n    }\n}",
+  "choices": [
+    "EnumMap.get() requires an int ordinal, not an enum constant",
+    "EnumMap<Dir, String> is keyed by Dir enum constants; passing the String \"NORTH\" to get() does not match any key and returns null",
+    "EnumMap does not support null values and throws NullPointerException",
+    "map.put must use the ordinal as the key: map.put(0, \"up\")"
+  ],
+  "answer": "b",
+  "explanation": "EnumMap<Dir, String> uses Dir constants as keys. Passing the String \"NORTH\" to get() does not match the Dir.NORTH key (different types), so it returns null. Fix: map.get(Dir.NORTH)."
+}

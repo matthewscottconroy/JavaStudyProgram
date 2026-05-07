@@ -1,0 +1,15 @@
+{
+  "id": "str-db-comp-06",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "This loop builds a large string very slowly due to a performance problem. What is the issue?",
+  "code": "public class SlowConcat {\n    public static String repeat(String word, int n) {\n        String result = \"\";\n        for (int i = 0; i < n; i++) {\n            result = result + word;   // creates new String each iteration\n        }\n        return result;\n    }\n}",
+  "choices": [
+    "String concatenation with + is not allowed inside loops",
+    "Strings are immutable, so result + word creates a new object every iteration, causing O(n²) memory allocations",
+    "The loop variable i should start at 1 to avoid an empty first concatenation",
+    "result must be initialized to word, not empty string"
+  ],
+  "answer": "b",
+  "explanation": "Each += on String creates a new String object (Strings are immutable). For n iterations, this allocates n objects and copies O(1+2+...+n)=O(n²) characters total. Fix: use StringBuilder sb = new StringBuilder(); sb.append(word) in the loop; return sb.toString()."
+}

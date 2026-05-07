@@ -1,0 +1,15 @@
+{
+  "id": "cc-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The compareTo implementation violates the contract. What is the bug?",
+  "code": "public class BrokenComparable {\n    static class Score implements Comparable<Score> {\n        int value;\n        Score(int value) { this.value = value; }\n        public int compareTo(Score other) {\n            if (this.value > other.value) return 1;\n            return -1;  // bug: returns -1 even when equal\n        }\n    }\n    public static void main(String[] args) {\n        Score a = new Score(5), b = new Score(5);\n        System.out.println(a.compareTo(b));\n        System.out.println(b.compareTo(a));\n    }\n}",
+  "choices": [
+    "compareTo must return exactly -1, 0, or 1",
+    "The implementation never returns 0 for equal values; compareTo(equal) returns -1 and the reverse also returns -1, violating the antisymmetry contract (sgn(x.compareTo(y)) == -sgn(y.compareTo(x)))",
+    "Comparable requires overriding equals() to match compareTo()",
+    "int fields must be compared with == before using > in compareTo"
+  ],
+  "answer": "b",
+  "explanation": "The Comparable contract requires that if x.compareTo(y) < 0 then y.compareTo(x) > 0. Equal values must return 0. Here both a.compareTo(b) and b.compareTo(a) return -1, violating the contract. This causes incorrect sorting and broken TreeSet/TreeMap behavior. Fix: add else if (this.value == other.value) return 0; or simply return Integer.compare(this.value, other.value);"
+}

@@ -1,0 +1,10 @@
+{
+  "id": "net-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "A server is running that echoes back any line it receives prefixed with 'ECHO: '. What does this client print?",
+  "code": "import java.net.*;\nimport java.io.*;\npublic class EchoClient {\n    public static void main(String[] args) throws Exception {\n        try (Socket sock = new Socket(\"localhost\", 9000);\n             PrintWriter  out = new PrintWriter(sock.getOutputStream(), true);\n             BufferedReader in  = new BufferedReader(\n                     new InputStreamReader(sock.getInputStream()))) {\n            out.println(\"hello\");\n            System.out.println(in.readLine());\n            out.println(\"world\");\n            System.out.println(in.readLine());\n        }\n    }\n}",
+  "answer": "ECHO: hello\nECHO: world",
+  "explanation": "The client sends 'hello', the server echoes 'ECHO: hello', which readLine() reads and println prints. Then it sends 'world', receives and prints 'ECHO: world'. PrintWriter with autoFlush=true (second constructor arg) ensures each println() is sent immediately.",
+  "alternatives": ["ECHO: hello\nECHO: world\n"]
+}

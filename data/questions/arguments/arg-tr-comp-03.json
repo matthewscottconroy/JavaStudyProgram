@@ -1,0 +1,10 @@
+{
+  "id": "arg-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print when run with: java Main hello world 42",
+  "code": "public class Main {\n    public static void main(String[] args) {\n        System.out.println(args.length);\n        System.out.println(args[0]);\n        System.out.println(args[args.length - 1]);\n        int num = Integer.parseInt(args[2]);\n        System.out.println(num * 2);\n    }\n}",
+  "answer": "3\nhello\n42\n84",
+  "explanation": "args=[\"hello\",\"world\",\"42\"]. args.length=3. args[0]=\"hello\". args[2]=\"42\"=last. Integer.parseInt(\"42\")*2=84.",
+  "alternatives": ["3\nhello\n42\n84\n"]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "ic-tr-comp-15",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class ConditionalAssign {\n    public static void main(String[] args) {\n        int x = 10;\n        int result = (x > 5) ? (x > 8 ? 100 : 50) : 0;\n        System.out.println(result);\n        String s = null;\n        String safe = (s != null) ? s : \"default\";\n        System.out.println(safe);\n    }\n}",
+  "answer": "100\ndefault",
+  "explanation": "x=10>5 so outer ternary: inner 10>8→true→100. safe: s==null so else branch→'default'.",
+  "alternatives": ["100\ndefault\n"]
+}

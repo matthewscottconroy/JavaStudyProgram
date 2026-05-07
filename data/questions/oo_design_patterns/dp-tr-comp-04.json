@@ -1,0 +1,10 @@
+{
+  "id": "dp-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print? (Builder pattern)",
+  "code": "public class Pizza {\n    private final String size, crust;\n    private final boolean cheese, pepperoni;\n\n    private Pizza(Builder b) {\n        size = b.size; crust = b.crust;\n        cheese = b.cheese; pepperoni = b.pepperoni;\n    }\n\n    public String toString() {\n        return size + \"/\" + crust + \" cheese=\" + cheese + \" pep=\" + pepperoni;\n    }\n\n    static class Builder {\n        String size, crust = \"thin\";\n        boolean cheese, pepperoni;\n        Builder(String size) { this.size = size; }\n        Builder crust(String c)  { crust = c;        return this; }\n        Builder cheese()         { cheese = true;     return this; }\n        Builder pepperoni()      { pepperoni = true;  return this; }\n        Pizza build()            { return new Pizza(this); }\n    }\n\n    public static void main(String[] args) {\n        Pizza p1 = new Pizza.Builder(\"large\").crust(\"thick\").cheese().pepperoni().build();\n        Pizza p2 = new Pizza.Builder(\"small\").build();\n        System.out.println(p1);\n        System.out.println(p2);\n    }\n}",
+  "answer": "large/thick cheese=true pep=true\nsmall/thin cheese=false pep=false",
+  "explanation": "Builder pattern collects optional configuration through chained calls. p1 sets all options. p2 uses all defaults (crust='thin', cheese=false, pepperoni=false). Each build() call creates an independent immutable Pizza.",
+  "alternatives": ["large/thick cheese=true pep=true\nsmall/thin cheese=false pep=false\n"]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "ic-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The assignment inside the condition compiles and runs, but produces wrong logic. What is the bug?",
+  "code": "public class AssignCond {\n    public static void main(String[] args) {\n        int x = 0;\n        if (x = 5) {     // compile error in Java\n            System.out.println(\"five\");\n        }\n    }\n}",
+  "choices": [
+    "= in a condition is legal in Java if the result is boolean",
+    "x = 5 assigns 5 to x; in Java this is a compile error in an if-condition because int is not boolean",
+    "if requires a final variable as its condition",
+    "x must be declared outside main to be used in a condition"
+  ],
+  "answer": "b",
+  "explanation": "In Java (unlike C), the if-condition must be boolean. x = 5 is an int expression, not boolean, so this is a compile error. In C, non-zero is truthy, making this a classic bug. Java's stricter type system catches it at compile time. Fix: if (x == 5)."
+}

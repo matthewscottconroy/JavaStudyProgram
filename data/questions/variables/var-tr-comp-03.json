@@ -1,0 +1,10 @@
+{
+  "id": "var-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Widening {\n    public static void main(String[] args) {\n        byte  b = 100;\n        short s = b;\n        int   i = s;\n        long  l = i;\n        System.out.println(b + \" \" + s + \" \" + i + \" \" + l);\n\n        double d = 1.9;\n        int truncated = (int) d;\n        System.out.println(truncated);\n    }\n}",
+  "answer": "100 100 100 100\n1",
+  "explanation": "byte→short→int→long is implicit widening: the value 100 is preserved through each promotion. When casting double to int, the fractional part is truncated (not rounded): (int)1.9 = 1.",
+  "alternatives": ["100 100 100 100\n1\n"]
+}

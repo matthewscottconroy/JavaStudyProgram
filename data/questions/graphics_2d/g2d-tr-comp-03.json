@@ -1,0 +1,10 @@
+{
+  "id": "g2d-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print about the Graphics2D state?",
+  "code": "import java.awt.*;\nimport java.awt.geom.*;\npublic class G2DState {\n    // Graphics2D is obtained from a component's paintComponent or BufferedImage\n    static void inspect(Graphics2D g2) {\n        g2.setColor(Color.RED);\n        g2.setStroke(new BasicStroke(3.0f));\n        Color c = g2.getColor();\n        System.out.println(c.equals(Color.RED));\n        Stroke s = g2.getStroke();\n        System.out.println(s instanceof BasicStroke);\n        System.out.println(((BasicStroke)s).getLineWidth());\n    }\n}",
+  "answer": "true\ntrue\n3.0",
+  "explanation": "setColor(Color.RED) sets the color. getColor() returns it, equals(Color.RED) is true. setStroke(new BasicStroke(3f)) sets stroke. getStroke() returns it, it is a BasicStroke, lineWidth=3.0.",
+  "alternatives": ["true\ntrue\n3.0\n"]
+}

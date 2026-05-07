@@ -1,0 +1,15 @@
+{
+  "id": "img-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The audio clip does not play. What is the bug?",
+  "code": "import javax.sound.sampled.*;\npublic class AudioBug {\n    static void play(String path) throws Exception {\n        Clip clip = AudioSystem.getClip();\n        AudioInputStream ais = AudioSystem.getAudioInputStream(\n            new java.io.File(path));\n        clip.open(ais);\n        clip.start();\n        // program exits immediately, clip never finishes\n    }\n}",
+  "choices": [
+    "Clip.start() is synchronous and blocks until audio completes",
+    "clip.start() returns immediately; if the main thread exits, the audio is cut off — wait with Thread.sleep or a CountDownLatch",
+    "AudioSystem.getClip() requires a specific audio driver",
+    "Clip cannot play .wav files"
+  ],
+  "answer": "b",
+  "explanation": "Clip.start() is non-blocking — it starts audio on a daemon thread and returns immediately. If the main thread exits, the JVM shuts down and cuts off the audio. Fix: add Thread.sleep(clip.getMicrosecondLength()/1000) to wait, or use a CountDownLatch in a LineListener triggered by LineEvent.Type.STOP."
+}

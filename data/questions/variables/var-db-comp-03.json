@@ -1,0 +1,15 @@
+{
+  "id": "var-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The division result is always 0 for inputs less than 10. What is the bug?",
+  "code": "public class DivBug {\n    public static void main(String[] args) {\n        int numerator = 7;\n        int denominator = 10;\n        double result = numerator / denominator;  // bug\n        System.out.println(result);\n    }\n}",
+  "choices": [
+    "double cannot hold values between 0 and 1",
+    "numerator / denominator performs integer division (7/10=0) before assigning to double, giving 0.0",
+    "The variable names numerator and denominator are reserved in Java",
+    "int values must be explicitly initialized before division"
+  ],
+  "answer": "b",
+  "explanation": "The division is performed as integer division first (7/10=0) and then the result 0 is widened to 0.0 before assignment. Fix: cast either operand: (double)numerator / denominator, or use double literals: 7.0 / 10."
+}

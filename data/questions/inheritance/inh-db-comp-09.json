@@ -1,0 +1,15 @@
+{
+  "id": "inh-db-comp-09",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The overriding method fails to compile. What is the bug?",
+  "code": "public class NarrowerAccess {\n    static class Parent {\n        public void show() { System.out.println(\"Parent\"); }\n    }\n    static class Child extends Parent {\n        protected void show() {   // bug: narrower access modifier\n            System.out.println(\"Child\");\n        }\n    }\n}",
+  "choices": [
+    "show() must be declared static to be overridden",
+    "An overriding method cannot have a more restrictive access modifier than the method it overrides; protected is less accessible than public",
+    "Child must call super.show() before its own logic",
+    "void return type is incompatible with the parent's show() signature"
+  ],
+  "answer": "b",
+  "explanation": "Java requires that overriding methods have the same or broader access as the overridden method. Parent.show() is public; Child.show() is protected (narrower). This causes a compile error: 'attempting to assign weaker access privileges'. Fix: declare Child.show() as public."
+}

@@ -1,0 +1,10 @@
+{
+  "id": "col-tr-comp-06",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class DequeDemo {\n    public static void main(String[] args) {\n        Deque<Integer> dq = new ArrayDeque<>();\n        dq.push(1); dq.push(2); dq.push(3);\n        System.out.println(dq.peek());\n        System.out.println(dq.pop());\n        dq.addLast(99);\n        System.out.println(dq.size());\n        System.out.println(dq.peekLast());\n    }\n}",
+  "answer": "3\n3\n3\n99",
+  "explanation": "push adds to front (stack semantics). After push(1),push(2),push(3): deque is [3,2,1]. peek()=3 (front). pop()=3, deque=[2,1]. addLast(99): deque=[2,1,99]. size()=3. peekLast()=99.",
+  "alternatives": ["3\n3\n3\n99\n"]
+}

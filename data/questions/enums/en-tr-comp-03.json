@@ -1,0 +1,10 @@
+{
+  "id": "en-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "public class EnumSwitch {\n    enum Color { RED, GREEN, BLUE }\n    static String label(Color c) {\n        return switch (c) {\n            case RED   -> \"stop\";\n            case GREEN -> \"go\";\n            case BLUE  -> \"sky\";\n        };\n    }\n    public static void main(String[] args) {\n        for (Color c : Color.values())\n            System.out.println(label(c));\n    }\n}",
+  "answer": "stop\ngo\nsky",
+  "explanation": "values() iterates RED, GREEN, BLUE in declaration order. The switch expression maps each to its label string.",
+  "alternatives": ["stop\ngo\nsky\n"]
+}

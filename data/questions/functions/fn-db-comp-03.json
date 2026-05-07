@@ -1,0 +1,15 @@
+{
+  "id": "fn-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "This recursive method throws StackOverflowError. What is the bug?",
+  "code": "public class Power {\n    public static int pow(int base, int exp) {\n        if (exp == 0) return 1;\n        return base * pow(base, exp);   // bug: exp not decremented\n    }\n}",
+  "choices": [
+    "The base case should check exp < 0 instead of exp == 0",
+    "pow() calls itself with the same exp value — it never decreases toward the base case, causing infinite recursion",
+    "int cannot hold large enough values for exponentiation",
+    "Recursive methods must declare 'throws RecursionException'"
+  ],
+  "answer": "b",
+  "explanation": "The recursive call passes the same exp unchanged: pow(base, exp) instead of pow(base, exp - 1). Since exp never reaches 0, the base case is never hit and the call stack grows until StackOverflowError. Fix: return base * pow(base, exp - 1);"
+}

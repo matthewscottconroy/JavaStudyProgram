@@ -1,0 +1,15 @@
+{
+  "id": "aal-db-comp-11",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "Sorting a String array numerically produces wrong order. What is the bug?",
+  "code": "import java.util.*;\npublic class NumericSort {\n    public static void main(String[] args) {\n        String[] nums = {\"10\", \"9\", \"100\", \"2\"};\n        Arrays.sort(nums);   // bug: lexicographic, not numeric\n        System.out.println(Arrays.toString(nums));\n    }\n}",
+  "choices": [
+    "Arrays.sort() cannot sort String arrays",
+    "Arrays.sort() uses lexicographic (dictionary) order for Strings; '10' < '2' because '1' < '2', giving wrong numeric order",
+    "The array must be converted to int[] before sorting numerically",
+    "Lexicographic and numeric sort produce the same result for digit strings"
+  ],
+  "answer": "b",
+  "explanation": "String natural order is lexicographic: '10' < '100' < '2' < '9'. Fix: Arrays.sort(nums, Comparator.comparingInt(Integer::parseInt)) to sort by numeric value, or parse to int[] first."
+}

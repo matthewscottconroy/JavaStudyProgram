@@ -1,0 +1,15 @@
+{
+  "id": "img-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The Clip audio does not play. What is the bug?",
+  "code": "import javax.sound.sampled.*;\nimport java.io.File;\npublic class AudioBug {\n    public static void main(String[] args) throws Exception {\n        AudioInputStream ais = AudioSystem.getAudioInputStream(new File(\"sound.wav\"));\n        Clip clip = AudioSystem.getClip();\n        clip.open(ais);\n        clip.start();\n        // bug: main exits before clip finishes playing\n    }\n}",
+  "choices": [
+    "clip.start() must be called twice to initiate playback",
+    "Clip.open() requires the audio format to be PCM_SIGNED",
+    "The main thread exits immediately after clip.start(), which is non-blocking; the JVM shuts down before the audio finishes playing",
+    "AudioSystem.getClip() returns null when no audio device is present"
+  ],
+  "answer": "c",
+  "explanation": "clip.start() is non-blocking — it starts playback on a daemon thread and returns immediately. The main thread then exits, causing the JVM to shut down and cutting audio short. Fix: add Thread.sleep(clip.getMicrosecondLength() / 1000) or use a CountDownLatch with a LineListener to wait for STOP event."
+}

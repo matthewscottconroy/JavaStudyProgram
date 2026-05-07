@@ -1,0 +1,10 @@
+{
+  "id": "ut-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What is the execution order of JUnit 5 lifecycle methods in this test class?",
+  "code": "import org.junit.jupiter.api.*;\npublic class LifecycleTest {\n    @BeforeAll  static void beforeAll()  { System.out.println(\"beforeAll\"); }\n    @AfterAll   static void afterAll()   { System.out.println(\"afterAll\"); }\n    @BeforeEach void beforeEach()        { System.out.println(\"beforeEach\"); }\n    @AfterEach  void afterEach()         { System.out.println(\"afterEach\"); }\n    @Test void test1() { System.out.println(\"test1\"); }\n    @Test void test2() { System.out.println(\"test2\"); }\n}",
+  "answer": "beforeAll\nbeforeEach\ntest1\nafterEach\nbeforeEach\ntest2\nafterEach\nafterAll",
+  "explanation": "@BeforeAll runs once at start. @AfterAll runs once at end. @BeforeEach and @AfterEach wrap each individual test method. (Assuming test1 runs before test2.)",
+  "alternatives": ["beforeAll\nbeforeEach\ntest1\nafterEach\nbeforeEach\ntest2\nafterEach\nafterAll\n"]
+}

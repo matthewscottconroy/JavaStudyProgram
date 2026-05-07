@@ -1,0 +1,15 @@
+{
+  "id": "arr-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The method should return the index of the minimum element, but it sometimes returns a wrong index. What is the bug?",
+  "code": "public class MinIndex {\n    static int indexOfMin(int[] arr) {\n        int minIdx = 1;          // bug: should start at 0\n        for (int i = 2; i < arr.length; i++) {\n            if (arr[i] < arr[minIdx]) minIdx = i;\n        }\n        return minIdx;\n    }\n    public static void main(String[] args) {\n        System.out.println(indexOfMin(new int[]{5, 3, 8, 1}));\n        System.out.println(indexOfMin(new int[]{1, 3, 8}));\n    }\n}",
+  "choices": [
+    "The loop should use <= instead of < to include the last element",
+    "minIdx starts at 1 and the loop starts at 2, so arr[0] is never considered as a candidate minimum",
+    "int[] cannot hold negative values as the minimum",
+    "The method should return arr[minIdx] not minIdx"
+  ],
+  "answer": "b",
+  "explanation": "minIdx=1 assumes element 0 is not the minimum, and the loop starts at i=2 so element 0 is completely skipped. For {1,3,8}, the minimum is at index 0 but the method returns 1 (comparing only indices 1 and 2). Fix: int minIdx=0; for (int i=1; ...)"
+}

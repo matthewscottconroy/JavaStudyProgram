@@ -1,0 +1,10 @@
+{
+  "id": "dp-tr-comp-19",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class Composite {\n    interface Shape { int area(); }\n    static class Rect implements Shape {\n        int w, h;\n        Rect(int w, int h) { this.w=w; this.h=h; }\n        public int area() { return w * h; }\n    }\n    static class Group implements Shape {\n        java.util.List<Shape> shapes = new java.util.ArrayList<>();\n        void add(Shape s) { shapes.add(s); }\n        public int area() { return shapes.stream().mapToInt(Shape::area).sum(); }\n    }\n    public static void main(String[] args) {\n        Group g = new Group();\n        g.add(new Rect(3, 4));\n        g.add(new Rect(2, 5));\n        Group nested = new Group();\n        nested.add(new Rect(1, 1));\n        g.add(nested);\n        System.out.println(g.area());\n    }\n}",
+  "answer": "23",
+  "explanation": "Composite pattern: g contains Rect(3,4)=12, Rect(2,5)=10, and nested Group with Rect(1,1)=1. Total area = 12+10+1=23.",
+  "alternatives": ["23\n"]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "sapi-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The stream operation throws IllegalStateException. What is the bug?",
+  "code": "import java.util.stream.*;\npublic class StreamReuse {\n    public static void main(String[] args) {\n        Stream<Integer> s = Stream.of(1, 2, 3);\n        long count = s.count();\n        System.out.println(count);\n        long sum = s.mapToInt(Integer::intValue).sum();  // exception!\n    }\n}",
+  "choices": [
+    "Stream.of() cannot hold Integer values",
+    "A stream can only be consumed once; after s.count() the stream is closed and reusing it throws IllegalStateException",
+    "count() and sum() cannot both be called on the same type of stream",
+    "mapToInt() must be called before count()"
+  ],
+  "answer": "b",
+  "explanation": "Streams are single-use. After a terminal operation (count(), sum(), collect(), forEach(), etc.), the stream is consumed and closed. Attempting to use it again throws IllegalStateException. Fix: create the stream twice, or collect to a list first."
+}

@@ -1,0 +1,10 @@
+{
+  "id": "gui-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "In what order are these statements executed when the program starts?",
+  "code": "import javax.swing.*;\npublic class Window {\n    public static void main(String[] args) {\n        System.out.println(\"1: before EDT\");\n        SwingUtilities.invokeLater(() -> {\n            System.out.println(\"3: on EDT\");\n            JFrame frame = new JFrame(\"Demo\");\n            frame.setSize(400, 300);\n            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);\n            frame.setVisible(true);\n            System.out.println(\"4: frame visible\");\n        });\n        System.out.println(\"2: after invokeLater\");\n    }\n}",
+  "answer": "1: before EDT\n2: after invokeLater\n3: on EDT\n4: frame visible",
+  "explanation": "invokeLater() schedules the Runnable to run on the Event Dispatch Thread (EDT) but returns immediately. The main thread continues to print '2'. Once the EDT picks up the task, it runs '3' and '4'. Lines 1 and 2 always print before 3 and 4 because the EDT task is queued, not run inline.",
+  "alternatives": ["1: before EDT\n2: after invokeLater\n3: on EDT\n4: frame visible\n"]
+}

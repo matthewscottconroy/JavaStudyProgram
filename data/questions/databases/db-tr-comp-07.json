@@ -1,0 +1,10 @@
+{
+  "id": "db-tr-comp-07",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.sql.*;\npublic class PreparedParams {\n    public static void main(String[] args) throws Exception {\n        String sql = \"SELECT * FROM users WHERE id = ? AND active = ?\";\n        int count = 0;\n        for (char c : sql.toCharArray()) if (c == '?') count++;\n        System.out.println(count);\n        System.out.println(sql.contains(\"WHERE\"));\n    }\n}",
+  "answer": "2\ntrue",
+  "explanation": "The SQL string has two '?' parameter placeholders, so the loop counts 2. sql.contains(\"WHERE\") is true because the string contains that substring.",
+  "alternatives": ["2\ntrue\n"]
+}

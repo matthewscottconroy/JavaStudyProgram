@@ -1,0 +1,10 @@
+{
+  "id": "ic-tr-comp-13",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Nested {\n    public static void main(String[] args) {\n        for (int i = 1; i <= 3; i++) {\n            for (int j = 1; j <= 3; j++) {\n                if (i == j) System.out.print(\"D \");\n                else if (i > j) System.out.print(\"L \");\n                else System.out.print(\". \");\n            }\n            System.out.println();\n        }\n    }\n}",
+  "answer": "D . . \nL D . \nL L D ",
+  "explanation": "For each (i,j): i==j→'D', i>j→'L', i<j→'.'. Row 1: D . . Row 2: L D . Row 3: L L D.",
+  "alternatives": ["D . . \nL D . \nL L D \n"]
+}

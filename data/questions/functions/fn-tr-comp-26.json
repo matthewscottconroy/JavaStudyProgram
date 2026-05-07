@@ -1,0 +1,10 @@
+{
+  "id": "fn-tr-comp-26",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Interleave {\n    static String interleave(String a, String b) {\n        StringBuilder sb = new StringBuilder();\n        int len = Math.max(a.length(), b.length());\n        for (int i = 0; i < len; i++) {\n            if (i < a.length()) sb.append(a.charAt(i));\n            if (i < b.length()) sb.append(b.charAt(i));\n        }\n        return sb.toString();\n    }\n    public static void main(String[] args) {\n        System.out.println(interleave(\"abc\", \"12\"));\n        System.out.println(interleave(\"\", \"xyz\"));\n    }\n}",
+  "answer": "a1b2c\nxyz",
+  "explanation": "interleave(\"abc\",\"12\"): i=0→a1, i=1→b2, i=2→c (b exhausted) → \"a1b2c\". interleave(\"\",\"xyz\"): a is empty so only b chars appended → \"xyz\".",
+  "alternatives": ["a1b2c\nxyz\n"]
+}

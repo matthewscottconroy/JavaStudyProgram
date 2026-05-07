@@ -1,0 +1,10 @@
+{
+  "id": "cls-tr-comp-13",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class Record {\n    record Point(int x, int y) {\n        double distance() { return Math.sqrt(x*x + y*y); }\n    }\n    public static void main(String[] args) {\n        Point p1 = new Point(3, 4);\n        Point p2 = new Point(3, 4);\n        System.out.println(p1.x());\n        System.out.println(p1.equals(p2));\n        System.out.println(p1 == p2);\n        System.out.println((int) p1.distance());\n    }\n}",
+  "answer": "3\ntrue\nfalse\n5",
+  "explanation": "Records auto-generate accessors, equals, and hashCode based on components. p1.x()=3. p1.equals(p2) is true (same component values). p1==p2 is false (different objects). distance()=sqrt(9+16)=sqrt(25)=5.",
+  "alternatives": ["3\ntrue\nfalse\n5\n"]
+}

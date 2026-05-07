@@ -1,0 +1,10 @@
+{
+  "id": "gui-tr-comp-06",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "import javax.swing.*;\npublic class CheckBoxState {\n    public static void main(String[] args) {\n        JCheckBox cb = new JCheckBox(\"Accept\");\n        System.out.println(cb.isSelected());\n        cb.setSelected(true);\n        System.out.println(cb.isSelected());\n        cb.setSelected(false);\n        System.out.println(cb.isSelected());\n    }\n}",
+  "answer": "false\ntrue\nfalse",
+  "explanation": "JCheckBox is unselected by default. isSelected() returns false. After setSelected(true) it returns true. After setSelected(false) it returns false.",
+  "alternatives": ["false\ntrue\nfalse\n"]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "aal-tr-comp-09",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class ListVsArray {\n    public static void main(String[] args) {\n        int[] arr = {3, 1, 4, 1, 5};\n        List<Integer> list = new ArrayList<>();\n        for (int x : arr) list.add(x);\n        Collections.sort(list);\n        System.out.println(list);\n        System.out.println(list.get(0));\n        System.out.println(list.indexOf(4));\n    }\n}",
+  "answer": "[1, 1, 3, 4, 5]\n1\n3",
+  "explanation": "Array {3,1,4,1,5} added to list, sorted ascending: [1,1,3,4,5]. get(0)=1. indexOf(4)=3 (0-indexed position of 4).",
+  "alternatives": ["[1, 1, 3, 4, 5]\n1\n3\n"]
+}

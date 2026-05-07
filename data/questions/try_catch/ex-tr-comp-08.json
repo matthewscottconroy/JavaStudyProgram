@@ -1,0 +1,10 @@
+{
+  "id": "ex-tr-comp-08",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class CustomEx {\n    static class AppException extends RuntimeException {\n        int code;\n        AppException(String msg, int code) { super(msg); this.code = code; }\n    }\n    static void validate(int n) {\n        if (n < 0) throw new AppException(\"negative\", 400);\n    }\n    public static void main(String[] args) {\n        try {\n            validate(-1);\n        } catch (AppException e) {\n            System.out.println(e.getMessage() + \" code=\" + e.code);\n        }\n        System.out.println(\"done\");\n    }\n}",
+  "answer": "negative code=400\ndone",
+  "explanation": "validate(-1) throws AppException(\"negative\", 400). Caught by catch(AppException e). getMessage() returns \"negative\", e.code=400. After catch, execution continues to \"done\".",
+  "alternatives": ["negative code=400\ndone\n"]
+}

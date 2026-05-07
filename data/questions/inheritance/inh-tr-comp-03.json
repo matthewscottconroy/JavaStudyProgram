@@ -1,0 +1,10 @@
+{
+  "id": "inh-tr-comp-03",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "class Vehicle {}\nclass Car   extends Vehicle { public String honk() { return \"Beep!\"; } }\nclass Truck extends Vehicle { public String honk() { return \"Honk!\"; } }\n\npublic class Main {\n    public static void honkAll(Vehicle[] vehicles) {\n        for (Vehicle v : vehicles) {\n            if      (v instanceof Car c)   System.out.println(c.honk());\n            else if (v instanceof Truck t) System.out.println(t.honk());\n        }\n    }\n\n    public static void main(String[] args) {\n        honkAll(new Vehicle[]{new Car(), new Truck(), new Car()});\n    }\n}",
+  "answer": "Beep!\nHonk!\nBeep!",
+  "explanation": "Pattern-matching instanceof (Java 16+) checks and casts in one step. Car → c.honk() = 'Beep!'. Truck → t.honk() = 'Honk!'. Car → 'Beep!'. A plain Vehicle object would match neither pattern and produce no output.",
+  "alternatives": ["Beep!\nHonk!\nBeep!\n"]
+}

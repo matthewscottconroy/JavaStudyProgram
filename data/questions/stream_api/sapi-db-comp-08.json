@@ -1,0 +1,15 @@
+{
+  "id": "sapi-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The stream peek() is used to mutate elements, causing undefined behavior. What is the bug?",
+  "code": "import java.util.*;\nimport java.util.stream.*;\npublic class PeekMutate {\n    public static void main(String[] args) {\n        List<StringBuilder> list = new ArrayList<>();\n        list.add(new StringBuilder(\"hello\"));\n        list.add(new StringBuilder(\"world\"));\n        list.stream()\n            .peek(sb -> sb.append(\"!\"))  // bug: side effects in peek\n            .collect(Collectors.toList());\n        list.forEach(System.out::println);\n    }\n}",
+  "choices": [
+    "peek() cannot access mutable objects",
+    "peek() is intended for debugging (observing values), not for mutation; mutating elements in peek() is a side effect that produces correct results in sequential streams but breaks in parallel streams",
+    "append() cannot be called on a StringBuilder inside a lambda",
+    "collect() discards the peek() results"
+  ],
+  "answer": "b",
+  "explanation": "peek() is designed for debugging/observing intermediate values. Mutating elements inside peek() is a side effect — it works in sequential streams but the order is unspecified in parallel streams. Fix: use map() to transform elements (though for in-place mutation of existing objects, peek() technically works sequentially)."
+}

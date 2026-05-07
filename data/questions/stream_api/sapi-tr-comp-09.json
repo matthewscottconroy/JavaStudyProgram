@@ -1,0 +1,10 @@
+{
+  "id": "sapi-tr-comp-09",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.stream.*;\nimport java.util.*;\npublic class GroupBy {\n    public static void main(String[] args) {\n        List<String> words = List.of(\"ant\",\"bee\",\"cat\",\"ape\",\"bat\");\n        Map<Character,List<String>> grouped = words.stream()\n            .collect(Collectors.groupingBy(s -> s.charAt(0)));\n        List<String> aWords = new ArrayList<>(grouped.get('a'));\n        Collections.sort(aWords);\n        System.out.println(aWords);\n        System.out.println(grouped.size());\n    }\n}",
+  "answer": "[ant, ape]\n3",
+  "explanation": "Group by first char: a→[ant,ape], b→[bee,bat], c→[cat]. grouped.get('a') sorted → [ant,ape]. 3 distinct first chars.",
+  "alternatives": ["[ant, ape]\n3\n"]
+}

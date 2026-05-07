@@ -1,0 +1,15 @@
+{
+  "id": "lp-db-comp-13",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The search returns the wrong index when duplicates exist. What is the bug?",
+  "code": "public class LinearSearch {\n    static int find(int[] arr, int target) {\n        int idx = -1;\n        for (int i = 0; i < arr.length; i++) {\n            if (arr[i] == target) idx = i;  // bug: keeps overwriting\n        }\n        return idx;\n    }\n    public static void main(String[] args) {\n        System.out.println(find(new int[]{3,1,4,1,5}, 1));\n    }\n}",
+  "choices": [
+    "The loop should start at i=1 to skip the first element",
+    "The method keeps updating idx on every match, returning the last occurrence; to return the first occurrence, add return i inside the if",
+    "int idx should be initialized to 0, not -1",
+    "arr[i] == target should use .equals() for integers"
+  ],
+  "answer": "b",
+  "explanation": "Target 1 appears at indices 1 and 3. The loop overwrites idx each time, ending with idx=3 (last occurrence). To return the first match, exit immediately: if (arr[i] == target) return i; and keep return -1 at the end."
+}

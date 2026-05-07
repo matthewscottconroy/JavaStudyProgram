@@ -1,0 +1,10 @@
+{
+  "id": "thr-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program definitely print (ignoring race conditions)?",
+  "code": "import java.util.concurrent.*;\npublic class CallableDemo {\n    public static void main(String[] args) throws Exception {\n        ExecutorService ex = Executors.newSingleThreadExecutor();\n        Future<Integer> f = ex.submit(() -> {\n            Thread.sleep(10);\n            return 42;\n        });\n        System.out.println(\"submitted\");\n        System.out.println(f.get());  // blocks until done\n        ex.shutdown();\n        System.out.println(\"done\");\n    }\n}",
+  "answer": "submitted\n42\ndone",
+  "explanation": "\"submitted\" prints immediately after submit() (non-blocking). f.get() blocks until the Callable returns 42. Then \"done\" prints. Order is deterministic here because of the blocking get().",
+  "alternatives": ["submitted\n42\ndone\n"]
+}

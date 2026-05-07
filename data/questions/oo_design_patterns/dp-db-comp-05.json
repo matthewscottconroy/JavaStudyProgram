@@ -1,0 +1,15 @@
+{
+  "id": "dp-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The adapter incorrectly delegates — the adapted method signature doesn't match. What is the bug?",
+  "code": "public class AdapterBug {\n    interface NewLogger { void log(String level, String message); }\n    static class OldLogger { void print(String msg) { System.out.println(msg); } }\n    static class LogAdapter implements NewLogger {\n        OldLogger old = new OldLogger();\n        @Override public void log(String level, String message) {\n            old.print(message);   // bug: level is dropped\n        }\n    }\n    public static void main(String[] args) {\n        NewLogger logger = new LogAdapter();\n        logger.log(\"ERROR\", \"something failed\");\n    }\n}",
+  "choices": [
+    "Adapter classes cannot implement interfaces",
+    "The adapter drops the level parameter; it should format and include it, e.g., old.print(\"[\" + level + \"] \" + message)",
+    "OldLogger.print() cannot be called from an interface implementation",
+    "The method must be synchronized to correctly adapt logging"
+  ],
+  "answer": "b",
+  "explanation": "The adapter's purpose is to bridge two interfaces. Dropping the level parameter means the adaptation is lossy — information is lost silently. Fix: old.print(\"[\" + level + \"] \" + message) to preserve the semantic intent of the NewLogger interface."
+}

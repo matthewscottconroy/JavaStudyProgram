@@ -1,0 +1,10 @@
+{
+  "id": "sapi-tr-comp-11",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.stream.*;\npublic class InfiniteStream {\n    public static void main(String[] args) {\n        Stream.iterate(1, n -> n * 2)\n            .limit(6)\n            .forEach(n -> System.out.print(n + \" \"));\n        System.out.println();\n        int sum = IntStream.range(1, 6).sum();\n        System.out.println(sum);\n    }\n}",
+  "answer": "1 2 4 8 16 32 \n15",
+  "explanation": "iterate(1, n->n*2) generates 1,2,4,8,16,32,... limit(6) takes first 6. IntStream.range(1,6)=[1,2,3,4,5], sum=15.",
+  "alternatives": ["1 2 4 8 16 32 \n15\n"]
+}

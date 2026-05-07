@@ -1,0 +1,15 @@
+{
+  "id": "ser-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The Externalizable class fails to deserialize. What is the bug?",
+  "code": "import java.io.*;\npublic class ExternBug implements Externalizable {\n    int value;\n    ExternBug(int v) { value = v; }  // bug: no no-arg constructor\n    public void writeExternal(ObjectOutput out) throws IOException {\n        out.writeInt(value);\n    }\n    public void readExternal(ObjectInput in) throws Exception {\n        value = in.readInt();\n    }\n}",
+  "choices": [
+    "Externalizable cannot use int fields",
+    "Externalizable requires a public no-arg constructor; deserialization instantiates the class using it before calling readExternal",
+    "writeExternal must be called before readExternal",
+    "int value must be declared transient for Externalizable"
+  ],
+  "answer": "b",
+  "explanation": "Unlike Serializable (which bypasses the constructor), Externalizable requires a public no-arg constructor. During deserialization, the JVM calls new ExternBug() (no-arg) to create the instance, then calls readExternal(). Without a no-arg constructor, an InvalidClassException is thrown. Fix: add public ExternBug() {}"
+}

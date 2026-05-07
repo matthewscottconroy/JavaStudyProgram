@@ -1,0 +1,15 @@
+{
+  "id": "img-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "ImageIO.read() returns null even though the file exists. What is the bug?",
+  "code": "import javax.imageio.*;\nimport java.awt.image.*;\nimport java.io.*;\npublic class Loader {\n    public static void main(String[] args) throws Exception {\n        File f = new File(\"photo.bmp\");          // BMP file\n        BufferedImage img = ImageIO.read(f);     // returns null\n        System.out.println(img.getWidth());      // NullPointerException\n    }\n}",
+  "choices": [
+    "BufferedImage cannot be used with BMP files — use a Bitmap class instead",
+    "ImageIO.read() returns null (not an exception) when it does not have a registered reader for the file format",
+    "The File constructor requires an absolute path, not a relative filename",
+    "ImageIO.read() is asynchronous and must be awaited before accessing the result"
+  ],
+  "answer": "b",
+  "explanation": "ImageIO.read() returns null when no suitable ImageReader plugin is registered for the format. Standard Java supports PNG, JPEG, GIF, and BMP on most JVMs, but plugin availability varies. Check with ImageIO.getReaderFormatNames(). Always null-check: if (img == null) throw new IOException('unsupported format or file not found'); Additionally, confirm the file actually exists with f.exists() before reading."
+}

@@ -1,0 +1,10 @@
+{
+  "id": "lam-tr-comp-07",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.function.*;\npublic class Closure {\n    public static void main(String[] args) {\n        int base = 100;  // effectively final\n        Function<Integer,Integer> adder = x -> x + base;\n        System.out.println(adder.apply(5));\n        System.out.println(adder.apply(20));\n        BiFunction<Integer,Integer,Integer> mul = (a,b) -> a * b + base;\n        System.out.println(mul.apply(3, 4));\n    }\n}",
+  "answer": "105\n120\n112",
+  "explanation": "adder captures base=100. adder.apply(5)=5+100=105. adder.apply(20)=20+100=120. mul.apply(3,4)=3*4+100=112.",
+  "alternatives": ["105\n120\n112\n"]
+}

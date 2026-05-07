@@ -4,6 +4,10 @@ import com.studyprogram.model.Question;
 import com.studyprogram.model.Topic;
 import com.studyprogram.questions.*;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -104,6 +108,23 @@ public class QuestionBank {
             List<Question> questions = loader.load();
             byTopic.computeIfAbsent(loader.getTopic(), k -> new ArrayList<>()).addAll(questions);
             for (Question q : questions) byId.put(q.getId(), q);
+        }
+
+        // Also load file-based questions from data/questions/<topic-slug>/ directories.
+        // Drop a new .json file into the right folder to add a question — no Java changes needed.
+        loadFromDirectory(Paths.get("data", "questions"));
+    }
+
+    private void loadFromDirectory(Path questionsRoot) {
+        if (!Files.isDirectory(questionsRoot)) return;
+        for (Topic topic : Topic.values()) {
+            String slug = topic.name().toLowerCase();
+            Path topicDir = questionsRoot.resolve(slug);
+            DirectoryQuestionLoader loader = new DirectoryQuestionLoader(topic, topicDir);
+            for (Question q : loader.load()) {
+                byTopic.computeIfAbsent(topic, k -> new ArrayList<>()).add(q);
+                byId.put(q.getId(), q);
+            }
         }
     }
 

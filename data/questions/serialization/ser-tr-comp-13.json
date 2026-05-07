@@ -1,0 +1,10 @@
+{
+  "id": "ser-tr-comp-13",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.io.*;\npublic class ByteStreams {\n    public static void main(String[] args) throws Exception {\n        ByteArrayOutputStream baos = new ByteArrayOutputStream();\n        DataOutputStream dos = new DataOutputStream(baos);\n        dos.writeInt(42);\n        dos.writeBoolean(true);\n        dos.writeUTF(\"hi\");\n        dos.flush();\n        DataInputStream dis = new DataInputStream(\n            new ByteArrayInputStream(baos.toByteArray()));\n        System.out.println(dis.readInt());\n        System.out.println(dis.readBoolean());\n        System.out.println(dis.readUTF());\n    }\n}",
+  "answer": "42\ntrue\nhi",
+  "explanation": "DataOutputStream/DataInputStream write and read primitive types in binary. readInt()=42, readBoolean()=true, readUTF()='hi'.",
+  "alternatives": ["42\ntrue\nhi\n"]
+}

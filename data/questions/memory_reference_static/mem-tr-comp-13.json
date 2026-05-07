@@ -1,0 +1,10 @@
+{
+  "id": "mem-tr-comp-13",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class EscapeAnalysis {\n    static Object leak;\n    static void noLeak() {\n        Object local = new Object();\n        System.out.println(local != null);\n    }\n    static void doesLeak() {\n        Object local = new Object();\n        leak = local;              // escapes: stored in static field\n        System.out.println(local == leak);\n    }\n    public static void main(String[] args) {\n        noLeak();\n        doesLeak();\n        System.out.println(leak != null);\n    }\n}",
+  "answer": "true\ntrue\ntrue",
+  "explanation": "noLeak(): local object created, not null → true. doesLeak(): leak=local, so local==leak → true. After doesLeak(), leak still holds the reference → true.",
+  "alternatives": ["true\ntrue\ntrue\n"]
+}

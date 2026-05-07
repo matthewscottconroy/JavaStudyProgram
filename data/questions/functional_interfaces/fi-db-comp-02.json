@@ -1,0 +1,15 @@
+{
+  "id": "fi-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The Predicate.negate() result is unexpected. What is the bug?",
+  "code": "import java.util.function.*;\npublic class NegateBug {\n    public static void main(String[] args) {\n        Predicate<Integer> isEven = n -> n % 2 == 0;\n        isEven.negate();  // bug: result not captured\n        System.out.println(isEven.test(3));  // still tests isEven\n    }\n}",
+  "choices": [
+    "negate() modifies the predicate in place",
+    "Predicate.negate() returns a new Predicate that negates the result; it does not modify the original; the negated predicate must be assigned to a variable to be used",
+    "negate() only works on Predicate<Boolean>, not Predicate<Integer>",
+    "test(3) throws ClassCastException when negate() has been called"
+  ],
+  "answer": "b",
+  "explanation": "Functional interfaces are immutable — negate() returns a new Predicate and does not change isEven. isEven.test(3) still tests for evenness: 3%2==0 is false. Fix: Predicate<Integer> isOdd = isEven.negate(); then isOdd.test(3) → true."
+}

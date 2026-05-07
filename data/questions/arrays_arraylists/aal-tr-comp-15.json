@@ -1,0 +1,10 @@
+{
+  "id": "aal-tr-comp-15",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class Fill {\n    public static void main(String[] args) {\n        int[] arr = new int[5];\n        Arrays.fill(arr, 7);\n        System.out.println(Arrays.toString(arr));\n        Arrays.fill(arr, 1, 4, 0);\n        System.out.println(Arrays.toString(arr));\n    }\n}",
+  "answer": "[7, 7, 7, 7, 7]\n[7, 0, 0, 0, 7]",
+  "explanation": "fill(arr,7): all elements become 7. fill(arr,1,4,0): fills indices 1,2,3 with 0 (exclusive end 4). Result: [7,0,0,0,7].",
+  "alternatives": ["[7, 7, 7, 7, 7]\n[7, 0, 0, 0, 7]\n"]
+}

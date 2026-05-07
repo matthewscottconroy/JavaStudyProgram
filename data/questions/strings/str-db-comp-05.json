@@ -1,0 +1,15 @@
+{
+  "id": "str-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The method should reverse a string, but returns the original. What is the bug?",
+  "code": "public class Reverser {\n    static String reverse(String s) {\n        StringBuilder sb = new StringBuilder(s);\n        sb.reverse();       // bug: return value ignored\n        return s;           // returns original, not reversed\n    }\n    public static void main(String[] args) {\n        System.out.println(reverse(\"hello\"));\n    }\n}",
+  "choices": [
+    "StringBuilder.reverse() throws an exception for odd-length strings",
+    "sb.reverse() works correctly but the method returns s instead of sb.toString()",
+    "StringBuilder cannot be constructed from a String directly",
+    "reverse() must be called on s, not on sb"
+  ],
+  "answer": "b",
+  "explanation": "sb.reverse() mutates the StringBuilder in place and returns it, but the return statement returns the original String s unchanged. Fix: return sb.reverse().toString(); (or call sb.reverse() then return sb.toString())."
+}

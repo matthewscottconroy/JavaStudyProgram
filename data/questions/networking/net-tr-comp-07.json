@@ -1,0 +1,10 @@
+{
+  "id": "net-tr-comp-07",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "import java.net.InetAddress;\npublic class LocalHost {\n    public static void main(String[] args) throws Exception {\n        InetAddress local = InetAddress.getLocalHost();\n        System.out.println(local.getHostAddress().equals(\"127.0.0.1\") ||\n                           local.getHostAddress().startsWith(\"192.\") ||\n                           local.getHostAddress().startsWith(\"10.\"));\n    }\n}",
+  "answer": "true",
+  "explanation": "InetAddress.getLocalHost() returns the machine's local IP. The condition checks for common local address patterns (loopback or private network ranges). On any typical host this evaluates to true.",
+  "alternatives": ["true\n"]
+}

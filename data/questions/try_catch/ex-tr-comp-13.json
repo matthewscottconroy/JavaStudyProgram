@@ -1,0 +1,10 @@
+{
+  "id": "ex-tr-comp-13",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class CustomEx {\n    static class AppException extends RuntimeException {\n        int code;\n        AppException(String msg, int code) { super(msg); this.code = code; }\n    }\n    public static void main(String[] args) {\n        try {\n            throw new AppException(\"oops\", 404);\n        } catch (AppException e) {\n            System.out.println(e.getMessage());\n            System.out.println(e.code);\n            System.out.println(e instanceof RuntimeException);\n        }\n    }\n}",
+  "answer": "oops\n404\ntrue",
+  "explanation": "AppException extends RuntimeException. getMessage()='oops', code=404, instanceof RuntimeException=true.",
+  "alternatives": ["oops\n404\ntrue\n"]
+}

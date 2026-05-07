@@ -1,0 +1,15 @@
+{
+  "id": "thr-db-comp-10",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The thread's exception is silently lost. What is the bug?",
+  "code": "public class LostException {\n    public static void main(String[] args) throws InterruptedException {\n        Thread t = new Thread(() -> {\n            throw new RuntimeException(\"oops\");  // thrown in thread\n        });\n        t.start();\n        t.join();\n        System.out.println(\"main continues\");\n    }\n}",
+  "choices": [
+    "RuntimeException cannot be thrown from a Runnable",
+    "Exceptions thrown in a thread only affect that thread; the main thread does not see them and continues after t.join()",
+    "t.join() re-throws any exception thrown by thread t",
+    "Threads print exceptions automatically to System.err"
+  ],
+  "answer": "b",
+  "explanation": "Unchecked exceptions in a thread are caught by the thread's uncaught exception handler (default: print to stderr) but do not propagate to the calling thread. After t.join(), main continues normally. Fix: use a Thread.UncaughtExceptionHandler or Future.get() (which wraps thread exceptions in ExecutionException)."
+}

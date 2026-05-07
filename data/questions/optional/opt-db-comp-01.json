@@ -1,0 +1,15 @@
+{
+  "id": "opt-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "Optional.of throws NullPointerException. What is the bug?",
+  "code": "import java.util.Optional;\npublic class OptOfBug {\n    static String findName(boolean found) { return found ? \"Alice\" : null; }\n    public static void main(String[] args) {\n        String name = findName(false);\n        Optional<String> opt = Optional.of(name);  // bug: wraps null\n        System.out.println(opt.isPresent());\n    }\n}",
+  "choices": [
+    "Optional.of returns Optional.empty() when passed null",
+    "Optional.of(null) throws NullPointerException; use Optional.ofNullable(name) to safely wrap a value that may be null",
+    "Optional cannot hold String values; use OptionalObject instead",
+    "findName must declare throws NullPointerException"
+  ],
+  "answer": "b",
+  "explanation": "Optional.of() requires a non-null argument and throws NullPointerException if null is passed. When the value may be null, use Optional.ofNullable(name), which returns Optional.empty() for null and Optional.of(value) otherwise."
+}

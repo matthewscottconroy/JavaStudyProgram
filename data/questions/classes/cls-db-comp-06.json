@@ -1,0 +1,15 @@
+{
+  "id": "cls-db-comp-06",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The mutable field leaks out of the class, allowing external code to modify internal state. What is the bug?",
+  "code": "import java.util.*;\npublic class Leaky {\n    private List<String> items = new ArrayList<>();\n    void add(String s) { items.add(s); }\n    List<String> getItems() { return items; }  // returns internal list\n    public static void main(String[] args) {\n        Leaky l = new Leaky();\n        l.add(\"a\");\n        List<String> ref = l.getItems();\n        ref.add(\"injected\");  // modifies internal state!\n        System.out.println(l.getItems().size());\n    }\n}",
+  "choices": [
+    "ArrayList cannot be stored in a private field",
+    "getItems() returns a reference to the internal list; callers can mutate it directly, breaking encapsulation",
+    "items must be declared static to be accessed from main",
+    "List.add does not work on references returned from methods"
+  ],
+  "answer": "b",
+  "explanation": "Returning the internal List reference allows callers to bypass the class's API and modify internal state. Fix: return a defensive copy — return new ArrayList<>(items); — or return Collections.unmodifiableList(items). This is called a defensive copy."
+}

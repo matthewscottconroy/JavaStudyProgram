@@ -1,0 +1,15 @@
+{
+  "id": "aal-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "This method throws NullPointerException when summing the list. What is the bug?",
+  "code": "import java.util.*;\npublic class Summer {\n    public static int sum(List<Integer> nums) {\n        int total = 0;\n        for (int n : nums) {\n            total += n;\n        }\n        return total;\n    }\n\n    public static void main(String[] args) {\n        List<Integer> data = new ArrayList<>(Arrays.asList(1, 2, null, 4));\n        System.out.println(sum(data));\n    }\n}",
+  "choices": [
+    "ArrayList cannot store null — use an int[] array instead",
+    "The for-each loop unboxes each Integer to int; unboxing null throws NullPointerException",
+    "total += n requires n to be cast to Integer before addition",
+    "Arrays.asList does not support null elements"
+  ],
+  "answer": "b",
+  "explanation": "List<Integer> stores boxed Integer objects. The enhanced for loop declares 'int n', which causes auto-unboxing: n = (int) element. Unboxing a null Integer throws NullPointerException. Fix: use Integer n in the loop and skip nulls, or filter nulls before summing."
+}

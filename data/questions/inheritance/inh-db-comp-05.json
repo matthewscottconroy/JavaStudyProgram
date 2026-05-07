@@ -1,0 +1,15 @@
+{
+  "id": "inh-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The code does not compile. What is the bug?",
+  "code": "public class FinalBug {\n    static final class Utility {\n        static int square(int n) { return n * n; }\n    }\n    static class Extended extends Utility {   // compile error\n        static int cube(int n) { return n * n * n; }\n    }\n}",
+  "choices": [
+    "Static methods cannot be inherited in Java",
+    "final classes cannot be subclassed; Utility is final so Extended cannot extend it",
+    "A class cannot extend an inner static class",
+    "Extended must also be declared final to extend Utility"
+  ],
+  "answer": "b",
+  "explanation": "Declaring a class final prevents it from being subclassed. Attempting to extend Utility is a compile error: \"cannot inherit from final class\". Fix: remove the final modifier from Utility if extension is intended, or keep final and use composition."
+}

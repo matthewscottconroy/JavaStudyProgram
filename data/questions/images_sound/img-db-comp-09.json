@@ -1,0 +1,15 @@
+{
+  "id": "img-db-comp-09",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "Drawing on a BufferedImage has no visible effect on the JPanel. What is the bug?",
+  "code": "import java.awt.*;\nimport java.awt.image.BufferedImage;\nimport javax.swing.*;\npublic class DrawBug extends JPanel {\n    BufferedImage img = new BufferedImage(200, 200, BufferedImage.TYPE_INT_RGB);\n    public DrawBug() {\n        Graphics g = img.getGraphics();\n        g.setColor(Color.RED);\n        g.fillRect(0, 0, 200, 200);\n        // bug: forgot to call g.dispose() and repaint()\n    }\n    protected void paintComponent(Graphics g) {\n        super.paintComponent(g);\n        g.drawImage(img, 0, 0, null);  // will display the image\n    }\n}",
+  "choices": [
+    "Graphics.fillRect requires the bounds to be set relative to the panel, not the image",
+    "img.getGraphics() returns a read-only Graphics object that does not support drawing",
+    "Not calling g.dispose() leaks resources but does not affect visibility; the panel is never shown because no JFrame was created and setVisible(true) was never called",
+    "drawImage requires an ImageObserver that is not null"
+  ],
+  "answer": "c",
+  "explanation": "The drawing into the BufferedImage is correct. The bug is that no JFrame is ever created to host the DrawBug panel, and setVisible(true) is never called. Without displaying the frame, paintComponent is never invoked and nothing appears on screen. Fix: create a JFrame, add the panel, set its size, and call frame.setVisible(true). Calling g.dispose() is also good practice but not the visibility issue."
+}

@@ -1,0 +1,15 @@
+{
+  "id": "dp-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The Iterator pattern implementation has a bug causing ConcurrentModificationException. What is the bug?",
+  "code": "import java.util.*;\npublic class IterBug {\n    public static void main(String[] args) {\n        List<String> list = new ArrayList<>(Arrays.asList(\"a\",\"b\",\"c\",\"d\"));\n        Iterator<String> it = list.iterator();\n        while (it.hasNext()) {\n            String s = it.next();\n            if (s.equals(\"b\")) list.remove(s);  // bug: should use it.remove()\n        }\n    }\n}",
+  "choices": [
+    "Iterator cannot iterate over String collections",
+    "list.remove() modifies the list while the iterator is active, invalidating the iterator's state and throwing ConcurrentModificationException",
+    "it.next() must be called before hasNext() in each iteration",
+    "while loops cannot use Iterator — use for-each instead"
+  ],
+  "answer": "b",
+  "explanation": "Modifying a collection while iterating throws ConcurrentModificationException. The Iterator tracks a modification count internally. list.remove() changes the count. Fix: use it.remove() which safely removes the current element through the iterator without invalidating it."
+}

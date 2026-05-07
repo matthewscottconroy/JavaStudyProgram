@@ -1,0 +1,10 @@
+{
+  "id": "inh-tr-comp-15",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class SuperCall {\n    static class Base {\n        String greet(String name) { return \"Hello, \" + name; }\n    }\n    static class Formal extends Base {\n        String greet(String name) { return super.greet(name) + \"! How do you do?\"; }\n    }\n    static class Casual extends Formal {\n        String greet(String name) { return \"Hey \" + name + \"!\"; }\n    }\n    public static void main(String[] args) {\n        Base b = new Formal();\n        System.out.println(b.greet(\"Alice\"));\n        b = new Casual();\n        System.out.println(b.greet(\"Bob\"));\n    }\n}",
+  "answer": "Hello, Alice! How do you do?\nHey Bob!",
+  "explanation": "b is Formal: greet calls super.greet('Alice')='Hello, Alice' + '! How do you do?' . b is Casual: greet returns 'Hey Bob!' (overrides Formal entirely).",
+  "alternatives": ["Hello, Alice! How do you do?\nHey Bob!\n"]
+}

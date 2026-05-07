@@ -1,0 +1,15 @@
+{
+  "id": "cc-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The sort produces wrong order due to integer overflow. What is the bug?",
+  "code": "import java.util.*;\npublic class SubtractComparator {\n    public static void main(String[] args) {\n        List<Integer> nums = new ArrayList<>(Arrays.asList(Integer.MIN_VALUE, 1));\n        nums.sort((a, b) -> a - b);  // bug: subtraction overflow\n        System.out.println(nums);\n    }\n}",
+  "choices": [
+    "Lambda comparators must return only -1, 0, or 1",
+    "a - b overflows when a is Integer.MIN_VALUE and b is positive; the result wraps to a large positive number, inverting the order; use Integer.compare(a, b) instead",
+    "Collections.sort must be used instead of List.sort for correct ordering",
+    "Integer.MIN_VALUE cannot be placed in an ArrayList"
+  ],
+  "answer": "b",
+  "explanation": "Integer.MIN_VALUE - 1 overflows to Integer.MAX_VALUE (a positive number), making the comparator return the wrong sign. The subtraction trick is only safe when values are guaranteed never to overflow. Fix: always use Integer.compare(a, b) for integer comparisons."
+}

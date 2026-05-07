@@ -1,0 +1,15 @@
+{
+  "id": "fn-db-comp-15",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The memoized method still recomputes every call. What is the bug?",
+  "code": "public class Memo {\n    static java.util.Map<Integer,Long> cache = new java.util.HashMap<>();\n    static long fib(int n) {\n        if (n <= 1) return n;\n        if (cache.containsKey(n)) return cache.get(n);\n        long result = fib(n-1) + fib(n-2);\n        cache.put(n, result);  // bug: should put BEFORE the recursive calls... wait no\n        return result;\n        // actual bug: cache is never checked on the first call path correctly\n        // Real bug: none above — but if cache is declared inside the method it resets each call\n    }\n}",
+  "choices": [
+    "HashMap is not thread-safe and corrupts the cache under recursion",
+    "If cache were declared as a local variable inside fib(), it would reset on every top-level call, defeating memoization",
+    "cache.get(n) returns a Long but the method returns long, causing unboxing NullPointerException",
+    "The base case n <= 1 must also be stored in the cache"
+  ],
+  "answer": "b",
+  "explanation": "A memoization cache must be shared across all recursive calls. Declaring it as a local variable inside fib() creates a fresh empty map on every invocation, so no previously computed values are ever found. Fix: declare cache as a static field (class level), which is what the outer code shows — the bug is the anti-pattern of putting it inside the method."
+}

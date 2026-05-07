@@ -1,0 +1,15 @@
+{
+  "id": "mem-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The method modifies a String thinking it mutates the caller's variable. What is the bug?",
+  "code": "public class StringMutate {\n    static void addPrefix(String s) {\n        s = \"prefix_\" + s;   // bug: rebinds local, caller unchanged\n    }\n    public static void main(String[] args) {\n        String msg = \"hello\";\n        addPrefix(msg);\n        System.out.println(msg);\n    }\n}",
+  "choices": [
+    "String concatenation is not allowed in method parameters",
+    "Strings are immutable and Java is pass-by-value; s = 'prefix_' + s rebinds the local parameter and does not affect the caller's msg variable",
+    "msg must be declared as StringBuilder to allow modification",
+    "addPrefix() should be declared void to indicate it modifies in place"
+  ],
+  "answer": "b",
+  "explanation": "Java passes the String reference by value. s starts as a copy of the reference to 'hello'. s = 'prefix_' + s creates a new String and assigns it to the local s — the caller's msg is never touched. msg remains 'hello'. Fix: return the new string or use StringBuilder."
+}

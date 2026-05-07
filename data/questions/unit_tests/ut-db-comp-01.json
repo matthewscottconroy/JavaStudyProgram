@@ -1,0 +1,15 @@
+{
+  "id": "ut-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "This test always passes even when divide() is broken. What is the bug?",
+  "code": "import org.junit.jupiter.api.*;\nclass DivideTest {\n    @Test\n    void testDivideByZero() {\n        try {\n            int result = 10 / 0;\n            assertEquals(0, result);\n        } catch (ArithmeticException e) {\n            // swallowed\n        }\n    }\n}",
+  "choices": [
+    "assertEquals must compare two ints, not int and literal 0",
+    "The catch block swallows the exception silently — no assertion runs in the catch, so the test passes whether or not an exception is thrown",
+    "ArithmeticException is a checked exception and must be declared in the method signature",
+    "@Test methods cannot contain try/catch blocks"
+  ],
+  "answer": "b",
+  "explanation": "10 / 0 throws ArithmeticException, which skips assertEquals and lands in the catch. The empty catch block does nothing — JUnit sees no failure and marks the test passed. The test gives no signal when the behavior changes. Fix: assertThrows(ArithmeticException.class, () -> 10 / 0); which passes only when the exception is actually thrown."
+}

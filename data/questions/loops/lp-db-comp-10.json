@@ -1,0 +1,15 @@
+{
+  "id": "lp-db-comp-10",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The bubble sort does not complete sorting. What is the bug?",
+  "code": "public class BubbleBug {\n    static void bubbleSort(int[] a) {\n        for (int i = 0; i < a.length; i++) {\n            for (int j = 0; j < a.length - 1; j++) {  // bug: should be a.length-i-1\n                if (a[j] > a[j+1]) {\n                    int t = a[j]; a[j] = a[j+1]; a[j+1] = t;\n                }\n            }\n        }\n    }\n}",
+  "choices": [
+    "The outer loop should count down instead of up",
+    "The inner loop bound a.length-1 should be a.length-i-1; current code still works but does redundant comparisons on already-sorted tail",
+    "int t must be declared outside the loop",
+    "The swap condition should use >= instead of >"
+  ],
+  "answer": "b",
+  "explanation": "The code is functionally correct but not optimized. After each outer pass, the largest unsorted element bubbles to position a.length-i-1. Using a.length-i-1 as the inner bound avoids re-examining already-placed elements. The question tests whether students spot inefficiency vs. actual bugs."
+}

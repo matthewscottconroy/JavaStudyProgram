@@ -1,0 +1,10 @@
+{
+  "id": "col-tr-comp-14",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\npublic class LinkedMapOrder {\n    public static void main(String[] args) {\n        Map<String,Integer> map = new LinkedHashMap<>();\n        map.put(\"c\", 3);\n        map.put(\"a\", 1);\n        map.put(\"b\", 2);\n        for (Map.Entry<String,Integer> e : map.entrySet()) {\n            System.out.println(e.getKey() + \"=\" + e.getValue());\n        }\n    }\n}",
+  "answer": "c=3\na=1\nb=2",
+  "explanation": "LinkedHashMap maintains insertion order: c, a, b. Iterating entrySet() yields entries in that order.",
+  "alternatives": ["c=3\na=1\nb=2\n"]
+}

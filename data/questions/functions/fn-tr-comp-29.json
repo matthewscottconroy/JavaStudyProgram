@@ -1,0 +1,10 @@
+{
+  "id": "fn-tr-comp-29",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Curry {\n    static java.util.function.Function<Integer,java.util.function.Function<Integer,Integer>> add =\n        a -> b -> a + b;\n    public static void main(String[] args) {\n        var add5 = add.apply(5);\n        System.out.println(add5.apply(3));\n        System.out.println(add5.apply(10));\n        System.out.println(add.apply(1).apply(2));\n    }\n}",
+  "answer": "8\n15\n3",
+  "explanation": "add is a curried addition. add5 = add.apply(5) returns b->5+b. add5.apply(3)=8, add5.apply(10)=15. add.apply(1).apply(2)=3.",
+  "alternatives": ["8\n15\n3\n"]
+}

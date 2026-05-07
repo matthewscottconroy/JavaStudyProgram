@@ -1,0 +1,15 @@
+{
+  "id": "dp-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The Singleton is not thread-safe. What is the bug?",
+  "code": "public class Singleton {\n    private static Singleton instance;\n    private Singleton() {}\n    public static Singleton getInstance() {\n        if (instance == null) {           // bug: not synchronized\n            instance = new Singleton();\n        }\n        return instance;\n    }\n}",
+  "choices": [
+    "The constructor must be public for Singleton to work",
+    "The check-then-act on instance == null is not atomic; two threads can both see null and each create a new instance",
+    "Static fields cannot hold object references in Java",
+    "getInstance() must be declared synchronized at the class level"
+  ],
+  "answer": "b",
+  "explanation": "Without synchronization, two threads can both read instance == null simultaneously and each create a separate Singleton instance. Fix: use double-checked locking with volatile, or the initialization-on-demand holder idiom: private static class Holder { static final Singleton INSTANCE = new Singleton(); }"
+}

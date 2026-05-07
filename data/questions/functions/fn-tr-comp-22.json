@@ -1,0 +1,10 @@
+{
+  "id": "fn-tr-comp-22",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class PalindromeRec {\n    static boolean isPalin(String s, int lo, int hi) {\n        if (lo >= hi) return true;\n        if (s.charAt(lo) != s.charAt(hi)) return false;\n        return isPalin(s, lo + 1, hi - 1);\n    }\n    public static void main(String[] args) {\n        String[] words = {\"racecar\", \"hello\", \"level\", \"a\"};\n        for (String w : words) {\n            System.out.println(isPalin(w, 0, w.length()-1));\n        }\n    }\n}",
+  "answer": "true\nfalse\ntrue\ntrue",
+  "explanation": "racecar: r==r, a==a, c==c, lo>hi → true. hello: h!=o → false. level: l==l, e==e, lo>hi → true. a: lo=0,hi=0, lo>=hi → true.",
+  "alternatives": ["true\nfalse\ntrue\ntrue\n"]
+}

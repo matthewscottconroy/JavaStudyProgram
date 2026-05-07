@@ -1,0 +1,10 @@
+{
+  "id": "sapi-tr-comp-05",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.util.*;\nimport java.util.stream.*;\npublic class CollectStream {\n    public static void main(String[] args) {\n        List<String> words = Arrays.asList(\"apple\",\"banana\",\"avocado\",\"blueberry\",\"apricot\");\n        List<String> aWords = words.stream()\n            .filter(w -> w.startsWith(\"a\"))\n            .sorted()\n            .collect(Collectors.toList());\n        System.out.println(aWords);\n        Map<Character,Long> freq = words.stream()\n            .collect(Collectors.groupingBy(w -> w.charAt(0), Collectors.counting()));\n        System.out.println(freq.get('a'));\n        System.out.println(freq.get('b'));\n    }\n}",
+  "answer": "[apple, apricot, avocado]\n3\n2",
+  "explanation": "Words starting with 'a': apple, avocado, apricot → sorted: [apple, apricot, avocado]. groupingBy first char: 'a'→3 (apple, avocado, apricot), 'b'→2 (banana, blueberry).",
+  "alternatives": ["[apple, apricot, avocado]\n3\n2\n"]
+}

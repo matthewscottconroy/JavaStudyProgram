@@ -1,0 +1,15 @@
+{
+  "id": "col-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "This method throws ConcurrentModificationException at runtime. What is the bug?",
+  "code": "import java.util.*;\npublic class Cleaner {\n    public static void removeShort(List<String> words) {\n        for (String w : words) {\n            if (w.length() < 4) {\n                words.remove(w);\n            }\n        }\n    }\n}",
+  "choices": [
+    "words.length should be used instead of w.length() for list size",
+    "The enhanced for loop cannot iterate over a List — use a traditional indexed loop",
+    "Calling words.remove() while iterating with the enhanced for loop invalidates the iterator, causing ConcurrentModificationException",
+    "remove() requires the index of the element, not the element itself"
+  ],
+  "answer": "c",
+  "explanation": "The enhanced for loop relies on an Iterator internally. ArrayList's iterator tracks a modification count; calling list.remove() changes that count, which the iterator detects on the next iteration and throws ConcurrentModificationException. Fix options: (1) use an explicit iterator — while (it.hasNext()) { if (it.next().length() < 4) it.remove(); } — or (2) words.removeIf(w -> w.length() < 4)."
+}

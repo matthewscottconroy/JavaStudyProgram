@@ -1,0 +1,15 @@
+{
+  "id": "thr-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "These two threads can deadlock. What is the bug?",
+  "code": "public class Deadlock {\n    static final Object lockA = new Object();\n    static final Object lockB = new Object();\n    public static void main(String[] args) {\n        Thread t1 = new Thread(() -> {\n            synchronized(lockA) {\n                synchronized(lockB) { System.out.println(\"T1\"); }\n            }\n        });\n        Thread t2 = new Thread(() -> {\n            synchronized(lockB) {         // acquires B first\n                synchronized(lockA) { System.out.println(\"T2\"); }  // then A\n            }\n        });\n        t1.start(); t2.start();\n    }\n}",
+  "choices": [
+    "Two threads cannot print to System.out simultaneously",
+    "T1 acquires lockA then waits for lockB; T2 acquires lockB then waits for lockA — circular dependency causes deadlock",
+    "synchronized blocks cannot be nested in Java",
+    "lockA and lockB must be declared volatile to be used as monitors"
+  ],
+  "answer": "b",
+  "explanation": "T1 holds lockA and waits for lockB. T2 holds lockB and waits for lockA. Neither can proceed — deadlock. Fix: always acquire locks in the same order in both threads (both acquire lockA before lockB). This is the lock ordering principle."
+}

@@ -1,0 +1,15 @@
+{
+  "id": "ex-db-comp-07",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The resource is not always closed when an exception is thrown. What is the bug?",
+  "code": "import java.io.*;\npublic class ResourceLeak {\n    static void readFile(String path) throws IOException {\n        FileReader fr = new FileReader(path);\n        BufferedReader br = new BufferedReader(fr);\n        String line = br.readLine();   // if this throws, fr is never closed\n        System.out.println(line);\n        br.close();\n    }\n}",
+  "choices": [
+    "BufferedReader should be created before FileReader",
+    "If readLine() throws, br.close() is never reached and the file descriptor leaks; use try-with-resources instead",
+    "FileReader must be closed separately from BufferedReader",
+    "readLine() cannot throw IOException"
+  ],
+  "answer": "b",
+  "explanation": "If readLine() throws, the remaining br.close() is skipped and the file handle leaks. Fix: use try-with-resources: try (BufferedReader br = new BufferedReader(new FileReader(path))) { ... } which guarantees close() is called even if an exception occurs."
+}

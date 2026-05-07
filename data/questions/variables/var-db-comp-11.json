@@ -1,0 +1,15 @@
+{
+  "id": "var-db-comp-11",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The local variable causes a compile error. What is the bug?",
+  "code": "public class UninitLocal {\n    public static void main(String[] args) {\n        int x;\n        if (true) x = 5;\n        System.out.println(x);  // bug: x may not be initialized\n    }\n}",
+  "choices": [
+    "int x must be declared as final to be used in println",
+    "The compiler cannot determine that the if(true) branch always executes; it treats x as possibly uninitialized at the println line",
+    "if(true) is not a valid Java statement",
+    "Local variables in Java are automatically initialized to 0"
+  ],
+  "answer": "b",
+  "explanation": "Java requires definite assignment for local variables. The compiler performs conservative analysis and cannot always simplify constant conditions like if(true). It sees a branch where x might not be assigned. Fix: initialize x: int x = 0; or use if/else so both paths assign x."
+}

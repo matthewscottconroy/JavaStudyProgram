@@ -1,0 +1,15 @@
+{
+  "id": "net-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The DatagramSocket send throws IllegalArgumentException. What is the bug?",
+  "code": "import java.net.*;\npublic class UdpBug {\n    public static void main(String[] args) throws Exception {\n        DatagramSocket socket = new DatagramSocket();\n        byte[] data = \"hello\".getBytes();\n        // bug: packet created without destination address\n        DatagramPacket packet = new DatagramPacket(data, data.length);\n        socket.send(packet);\n        socket.close();\n    }\n}",
+  "choices": [
+    "DatagramSocket.send requires the socket to be connected first",
+    "DatagramPacket must be created with a destination InetAddress and port; without them the packet has no target and send throws IllegalArgumentException",
+    "\"hello\".getBytes() must specify a charset to avoid encoding issues",
+    "DatagramSocket cannot send packets unless it is bound to a specific port"
+  ],
+  "answer": "b",
+  "explanation": "DatagramPacket(byte[], int) creates a packet for receiving. To send, you must use DatagramPacket(byte[], int, InetAddress, int) which includes the destination address and port. Calling send() on a packet without an address throws IllegalArgumentException. Fix: DatagramPacket packet = new DatagramPacket(data, data.length, InetAddress.getByName(\"host\"), port);"
+}

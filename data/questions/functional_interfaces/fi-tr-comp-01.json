@@ -1,0 +1,10 @@
+{
+  "id": "fi-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "import java.util.function.*;\npublic class PredicateDemo {\n    public static void main(String[] args) {\n        Predicate<Integer> isEven = n -> n % 2 == 0;\n        Predicate<Integer> isPos  = n -> n > 0;\n        System.out.println(isEven.test(4));\n        System.out.println(isEven.and(isPos).test(-2));\n        System.out.println(isEven.or(isPos).test(3));\n    }\n}",
+  "answer": "true\nfalse\ntrue",
+  "explanation": "isEven.test(4)=true. isEven.and(isPos): -2 is even but not positive → false. isEven.or(isPos): 3 is not even but is positive → true.",
+  "alternatives": ["true\nfalse\ntrue\n"]
+}

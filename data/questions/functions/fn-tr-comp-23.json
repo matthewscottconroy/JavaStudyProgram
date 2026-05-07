@@ -1,0 +1,10 @@
+{
+  "id": "fn-tr-comp-23",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class FlatMap {\n    static int[] flatten(int[][] matrix) {\n        int total = 0;\n        for (int[] row : matrix) total += row.length;\n        int[] result = new int[total];\n        int idx = 0;\n        for (int[] row : matrix) {\n            for (int v : row) result[idx++] = v;\n        }\n        return result;\n    }\n    public static void main(String[] args) {\n        int[][] m = {{1,2},{3},{4,5,6}};\n        int[] flat = flatten(m);\n        System.out.println(flat.length);\n        System.out.println(flat[0] + flat[flat.length-1]);\n    }\n}",
+  "answer": "6\n7",
+  "explanation": "flatten merges {{1,2},{3},{4,5,6}} into {1,2,3,4,5,6}. Length is 6. flat[0]=1, flat[5]=6, sum=7.",
+  "alternatives": ["6\n7\n"]
+}

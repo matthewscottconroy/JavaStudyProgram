@@ -1,0 +1,10 @@
+{
+  "id": "ifc-tr-comp-11",
+  "type": "TRACING",
+  "difficulty": 4,
+  "prompt": "What does this program print?",
+  "code": "public class PrivateInterface {\n    interface Validator {\n        boolean validate(String s);\n        default boolean validateAndLog(String s) {\n            boolean result = validate(s);\n            log(s, result);\n            return result;\n        }\n        private void log(String s, boolean r) {\n            System.out.println(s + \":\" + r);\n        }\n    }\n    public static void main(String[] args) {\n        Validator v = s -> s != null && !s.isEmpty();\n        v.validateAndLog(\"hello\");\n        v.validateAndLog(\"\");\n    }\n}",
+  "answer": "hello:true\n:false",
+  "explanation": "validateAndLog calls validate then private log(). 'hello': not null and not empty → true, logs 'hello:true'. '': isEmpty → false, logs ':false'.",
+  "alternatives": ["hello:true\n:false\n"]
+}

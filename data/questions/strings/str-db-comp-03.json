@@ -1,0 +1,15 @@
+{
+  "id": "str-db-comp-03",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The comparison always prints \"not equal\" even when the user inputs \"hello\". What is the bug?",
+  "code": "import java.util.Scanner;\npublic class StrCompare {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String input = sc.nextLine();\n        if (input == \"hello\") {        // bug\n            System.out.println(\"equal\");\n        } else {\n            System.out.println(\"not equal\");\n        }\n    }\n}",
+  "choices": [
+    "Scanner.nextLine() returns null when the user presses Enter",
+    "== compares string references, not content; use input.equals(\"hello\") instead",
+    "String literals must be compared with .compareTo() returning 0",
+    "The Scanner must be closed before comparing its output"
+  ],
+  "answer": "b",
+  "explanation": "== on Strings checks if both variables point to the exact same object in memory. The string read from Scanner is a different object than the literal \"hello\", so == returns false. Fix: use input.equals(\"hello\") or input.equalsIgnoreCase(\"hello\")."
+}

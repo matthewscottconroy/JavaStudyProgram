@@ -1,0 +1,10 @@
+{
+  "id": "gui-db-comp-09",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The JTable does not reflect data changes after the table is shown. What is the bug?",
+  "code": "import javax.swing.*;\nimport javax.swing.table.*;\npublic class TableModelBug {\n    public static void main(String[] args) {\n        DefaultTableModel model = new DefaultTableModel(new Object[][]{{\"A\",1}}, new Object[]{\"Name\",\"Val\"});\n        JTable table = new JTable(model);\n        // show table ...\n        model.setValueAt(\"B\", 0, 0);  // correct, uses model directly\n        // bug: using table.getModel() but casting to wrong type\n        TableModel m = table.getModel();\n        ((DefaultTableModel) m).setValueAt(\"C\", 0, 0);  // actually fine\n        // The real bug scenario: editing the underlying array directly\n        Object[][] data = {{\"X\", 2}};\n        // data[0][0] = \"Y\";  // would NOT update the model or fire events\n        System.out.println(model.getValueAt(0, 0));\n    }\n}",
+  "answer": "C",
+  "explanation": "model.setValueAt(\"B\", 0, 0) sets the cell to B. Then the cast to DefaultTableModel and setValueAt(\"C\", 0, 0) sets it to C. getValueAt(0, 0) returns C. Both model mutations fire TableModelEvents automatically.",
+  "alternatives": ["C\n"]
+}

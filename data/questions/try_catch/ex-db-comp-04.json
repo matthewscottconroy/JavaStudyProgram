@@ -1,0 +1,15 @@
+{
+  "id": "ex-db-comp-04",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "Exceptions are silently swallowed and the user never knows something went wrong. What is the problem?",
+  "code": "public class SilentSwallow {\n    static int parse(String s) {\n        try {\n            return Integer.parseInt(s);\n        } catch (NumberFormatException e) {\n            // ignore              // bug: silent catch\n        }\n        return 0;\n    }\n    public static void main(String[] args) {\n        System.out.println(parse(\"abc\")); // prints 0 — no error shown\n    }\n}",
+  "choices": [
+    "Integer.parseInt should be replaced with Integer.valueOf",
+    "Catching an exception without logging or rethrowing hides errors; callers receive 0 and cannot tell whether parsing succeeded",
+    "The catch block must always call e.printStackTrace()",
+    "return 0 inside catch is not valid Java"
+  ],
+  "answer": "b",
+  "explanation": "Silently swallowing exceptions is an antipattern. Callers cannot distinguish success from failure. Fix options: log the error (e.printStackTrace()), rethrow (throw new RuntimeException(e)), return Optional.empty(), or document that 0 is the error sentinel — but whatever you do, do it explicitly."
+}

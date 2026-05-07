@@ -1,0 +1,10 @@
+{
+  "id": "cls-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class StaticDemo {\n    static int count = 0;\n    int id;\n    StaticDemo() { id = ++count; }\n    static int getCount() { return count; }\n    public static void main(String[] args) {\n        StaticDemo a = new StaticDemo();\n        StaticDemo b = new StaticDemo();\n        StaticDemo c = new StaticDemo();\n        System.out.println(a.id + \" \" + b.id + \" \" + c.id);\n        System.out.println(StaticDemo.getCount());\n        System.out.println(a.count);   // accessing static via instance\n    }\n}",
+  "answer": "1 2 3\n3\n3",
+  "explanation": "Each constructor call increments the shared static count and assigns the new value to the instance's id. After 3 calls: a.id=1, b.id=2, c.id=3. getCount()=3. a.count accesses the static field via instance (same as StaticDemo.count=3).",
+  "alternatives": ["1 2 3\n3\n3\n"]
+}

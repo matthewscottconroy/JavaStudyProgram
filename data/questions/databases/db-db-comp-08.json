@@ -1,0 +1,15 @@
+{
+  "id": "db-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The PreparedStatement always queries for the literal string \"?\" instead of the parameter value. What is the bug?",
+  "code": "import java.sql.*;\npublic class PreparedBug {\n    static void query(Connection conn, int id) throws Exception {\n        String sql = \"SELECT * FROM users WHERE id = '?'\";  // bug: ? in quotes\n        PreparedStatement ps = conn.prepareStatement(sql);\n        ps.setInt(1, id);\n        ps.executeQuery();\n    }\n}",
+  "choices": [
+    "PreparedStatement.setInt uses 0-based parameter indices",
+    "The ? placeholder is inside single quotes, making it a SQL string literal rather than a parameter marker; the driver treats the SQL as having no parameters and setInt(1, id) throws an exception",
+    "PreparedStatement cannot be used for SELECT queries; use Statement instead",
+    "setInt must be called before prepareStatement to register parameters"
+  ],
+  "answer": "b",
+  "explanation": "In SQL, '?' (inside single quotes) is a string literal, not a placeholder. The JDBC driver counts zero parameters in the prepared statement, so setInt(1, id) throws SQLException (parameter index out of range). Fix: remove the quotes: \"SELECT * FROM users WHERE id = ?\"."
+}

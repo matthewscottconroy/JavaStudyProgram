@@ -1,0 +1,15 @@
+{
+  "id": "lam-db-comp-08",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The lambda throws a checked exception that is not declared. What is the bug?",
+  "code": "import java.util.function.*;\nimport java.io.*;\npublic class CheckedLambda {\n    public static void main(String[] args) {\n        Function<String, String> reader = path -> new java.io.FileReader(path).read() + \"\";  // bug: IOException\n    }\n}",
+  "choices": [
+    "Function lambdas cannot perform file operations",
+    "new FileReader() and read() throw IOException (checked); Function<T,R>.apply() does not declare throws IOException, so the compiler rejects the lambda",
+    "IOException is an unchecked exception and does not need handling",
+    "The lambda should return void when performing IO operations"
+  ],
+  "answer": "b",
+  "explanation": "Function.apply() does not declare any checked exceptions. A lambda assigned to Function cannot throw checked exceptions without wrapping them. Fix: (1) wrap in try/catch inside the lambda; (2) define a custom functional interface that declares throws IOException; or (3) use a helper to wrap: throw new RuntimeException(e);"
+}

@@ -1,0 +1,15 @@
+{
+  "id": "g2d-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The panel shows graphical artifacts from previous frames — old shapes are not erased. What is the bug?",
+  "code": "import javax.swing.*;\nimport java.awt.*;\npublic class Flicker extends JPanel {\n    int x = 0;\n\n    @Override\n    protected void paintComponent(Graphics g) {\n        // super.paintComponent(g);  <-- commented out\n        g.setColor(Color.RED);\n        g.fillOval(x, 50, 30, 30);\n        x += 5;\n    }\n}",
+  "choices": [
+    "fillOval cannot be called without first calling setStroke()",
+    "super.paintComponent(g) is not called — it clears the background before each paint; without it, previous drawings accumulate as artifacts",
+    "x must be declared volatile for repaint() to pick up the new value",
+    "paintComponent must call repaint() at the end to schedule the next frame"
+  ],
+  "answer": "b",
+  "explanation": "super.paintComponent(g) fills the panel with the background color, effectively erasing everything before you draw the new frame. Skipping it means old drawings remain on screen, leaving a trail of overlapping ovals. Always call super.paintComponent(g) as the very first line of paintComponent."
+}

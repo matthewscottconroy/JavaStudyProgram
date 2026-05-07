@@ -1,0 +1,15 @@
+{
+  "id": "cc-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "Collections.sort throws ClassCastException. What is the bug?",
+  "code": "import java.util.*;\npublic class NoComparableBug {\n    static class Widget { int id; Widget(int id) { this.id = id; } }\n    public static void main(String[] args) {\n        List<Widget> widgets = new ArrayList<>(List.of(new Widget(3), new Widget(1)));\n        Collections.sort(widgets);  // bug: Widget does not implement Comparable\n    }\n}",
+  "choices": [
+    "Collections.sort requires an explicit Comparator for any List",
+    "Widget does not implement Comparable<Widget>; sort attempts to cast elements to Comparable and fails with ClassCastException",
+    "Collections.sort cannot be called on custom objects",
+    "Widget must override equals() and hashCode() to be sortable"
+  ],
+  "answer": "b",
+  "explanation": "Collections.sort(list) requires elements to be Comparable. Widget doesn't implement it, so at runtime the cast to Comparable throws ClassCastException. Fix: either implement Comparable<Widget> in Widget, or pass a Comparator: Collections.sort(widgets, Comparator.comparingInt(w -> w.id))."
+}

@@ -1,0 +1,15 @@
+{
+  "id": "fi-db-comp-05",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The method reference does not compile. What is the bug?",
+  "code": "import java.util.function.*;\npublic class MethodRefBug {\n    int multiplier = 3;\n    int triple(int x) { return x * multiplier; }\n    public static void main(String[] args) {\n        Function<Integer, Integer> fn = MethodRefBug::triple;  // bug: instance method referenced statically\n        System.out.println(fn.apply(5));\n    }\n}",
+  "choices": [
+    "Method references cannot reference methods with parameters",
+    "triple is an instance method; referencing it as ClassName::method without an instance produces a Function<MethodRefBug, Integer> not Function<Integer, Integer>; use an instance reference: new MethodRefBug()::triple",
+    "Method references to non-static methods must use super:: syntax",
+    "multiplier must be static for method references to work"
+  ],
+  "answer": "b",
+  "explanation": "An unbound instance method reference ClassName::instanceMethod creates a function that takes the receiver as the first argument. MethodRefBug::triple fits BiFunction<MethodRefBug, Integer, Integer> or requires an instance reference. Fix: MethodRefBug obj = new MethodRefBug(); Function<Integer,Integer> fn = obj::triple;"
+}

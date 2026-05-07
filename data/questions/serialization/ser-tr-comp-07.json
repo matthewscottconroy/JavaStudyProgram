@@ -1,0 +1,10 @@
+{
+  "id": "ser-tr-comp-07",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "import java.io.*;\npublic class SerialVersion {\n    static class Widget implements Serializable {\n        private static final long serialVersionUID = 42L;\n        int value;\n        Widget(int v) { value = v; }\n    }\n    public static void main(String[] args) throws Exception {\n        Widget w = new Widget(99);\n        ByteArrayOutputStream baos = new ByteArrayOutputStream();\n        new ObjectOutputStream(baos).writeObject(w);\n        ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(baos.toByteArray()));\n        Widget w2 = (Widget) ois.readObject();\n        System.out.println(w2.value);\n        System.out.println(w2 == w);\n        System.out.println(Widget.class.getDeclaredField(\"serialVersionUID\").getLong(null));\n    }\n}",
+  "answer": "99\nfalse\n42",
+  "explanation": "Deserialization creates a new object: w2.value=99, w2!=w. serialVersionUID field is 42.",
+  "alternatives": ["99\nfalse\n42\n"]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "arr-db-comp-11",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "The method should find the missing number in 1..n but returns 0. What is the bug?",
+  "code": "public class MissingNum {\n    static int missing(int[] arr, int n) {\n        int expected = n * (n + 1) / 2;\n        int actual = 0;\n        for (int x : arr) actual += x;\n        return expected - actual;   // bug: none — but if the method were static and\n        // arr had n-1 elements this is correct — REAL bug below:\n    }\n    // Real buggy version:\n    static int missingBug(int[] arr, int n) {\n        int expected = n * (n + 1);   // bug: forgot to divide by 2\n        int actual = 0;\n        for (int x : arr) actual += x;\n        return expected - actual;\n    }\n}",
+  "choices": [
+    "The for-each loop cannot sum an int array",
+    "expected = n * (n + 1) is missing the / 2 divisor; it computes twice the expected sum",
+    "The method should use XOR instead of arithmetic sum",
+    "actual must be initialized to 1 instead of 0"
+  ],
+  "answer": "b",
+  "explanation": "The sum of integers 1 through n is n*(n+1)/2. Omitting the / 2 doubles the expected sum, so expected - actual gives n*(n+1)/2 + missingNumber instead of just missingNumber. Fix: expected = n * (n + 1) / 2;"
+}

@@ -1,0 +1,15 @@
+{
+  "id": "aal-db-comp-09",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "Printing an array directly shows a reference instead of its contents. What is the bug?",
+  "code": "public class PrintArray {\n    public static void main(String[] args) {\n        int[] arr = {1, 2, 3};\n        System.out.println(arr);   // bug: prints something like [I@6d06d69c\n    }\n}",
+  "choices": [
+    "System.out.println() cannot accept int[] arguments",
+    "Arrays do not override toString(); println(arr) prints the default Object identity string; use Arrays.toString(arr) instead",
+    "int[] must be converted to String[] before printing",
+    "println() prints the array length, not its contents"
+  ],
+  "answer": "b",
+  "explanation": "int[] inherits toString() from Object, which returns a type descriptor and hash code (like '[I@1b6d3586'). Fix: use System.out.println(Arrays.toString(arr)) for 1D arrays, or Arrays.deepToString(arr) for multidimensional arrays."
+}

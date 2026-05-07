@@ -1,0 +1,10 @@
+{
+  "id": "ex-tr-comp-01",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class Order {\n    public static String run(boolean throwIt) {\n        StringBuilder log = new StringBuilder();\n        try {\n            log.append(\"try \");\n            if (throwIt) throw new RuntimeException(\"oops\");\n            log.append(\"end \");\n        } catch (RuntimeException e) {\n            log.append(\"catch \");\n        } finally {\n            log.append(\"finally\");\n        }\n        return log.toString();\n    }\n\n    public static void main(String[] args) {\n        System.out.println(run(false));\n        System.out.println(run(true));\n    }\n}",
+  "answer": "try end finally\ntry catch finally",
+  "explanation": "run(false): no exception; try body completes fully → 'try end ', then finally → 'try end finally'. run(true): 'try ' is appended, then the exception is thrown, skipping 'end '; catch appends 'catch '; finally always runs → 'try catch finally'.",
+  "alternatives": ["try end finally\ntry catch finally\n"]
+}

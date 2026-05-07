@@ -1,0 +1,10 @@
+{
+  "id": "ex-tr-comp-12",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class TryResources {\n    static class Res implements AutoCloseable {\n        String name;\n        Res(String n) { name = n; System.out.println(\"open:\" + n); }\n        public void close() { System.out.println(\"close:\" + name); }\n    }\n    public static void main(String[] args) throws Exception {\n        try (Res a = new Res(\"A\"); Res b = new Res(\"B\")) {\n            System.out.println(\"body\");\n        }\n    }\n}",
+  "answer": "open:A\nopen:B\nbody\nclose:B\nclose:A",
+  "explanation": "Resources open in declaration order (A then B). Body executes. Resources close in reverse order (B then A) — guaranteed by try-with-resources.",
+  "alternatives": ["open:A\nopen:B\nbody\nclose:B\nclose:A\n"]
+}

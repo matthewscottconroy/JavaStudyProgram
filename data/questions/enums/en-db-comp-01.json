@@ -1,0 +1,15 @@
+{
+  "id": "en-db-comp-01",
+  "type": "DEBUGGING",
+  "difficulty": 2,
+  "prompt": "Enum.valueOf throws IllegalArgumentException. What is the bug?",
+  "code": "public class EnumValueOf {\n    enum Status { ACTIVE, INACTIVE, PENDING }\n    public static void main(String[] args) {\n        Status s = Status.valueOf(\"active\");  // bug: case mismatch\n        System.out.println(s);\n    }\n}",
+  "choices": [
+    "valueOf is not defined on enums; use Enum.parse() instead",
+    "valueOf performs a case-sensitive lookup; \"active\" does not match the declared constant \"ACTIVE\", so it throws IllegalArgumentException",
+    "Enum constants cannot be retrieved by name at runtime",
+    "valueOf requires the enum class as the first argument: Status.valueOf(Status.class, \"active\")"
+  ],
+  "answer": "b",
+  "explanation": "Enum.valueOf() does an exact, case-sensitive match against the declared constant names. \"active\" != \"ACTIVE\", so it throws IllegalArgumentException. Fix: Status.valueOf(\"ACTIVE\") or convert the input first: Status.valueOf(input.toUpperCase())."
+}

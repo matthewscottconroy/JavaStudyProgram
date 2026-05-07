@@ -1,0 +1,15 @@
+{
+  "id": "gen-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The code does not compile. What is the bug?",
+  "code": "import java.util.*;\npublic class GenBug {\n    static void addNumbers(List<Number> list) {\n        list.add(42);\n    }\n    public static void main(String[] args) {\n        List<Integer> ints = new ArrayList<>();\n        addNumbers(ints);   // compile error\n    }\n}",
+  "choices": [
+    "ArrayList<Integer> cannot hold Integer values",
+    "List<Integer> is not a List<Number> despite Integer extending Number; use List<? extends Number> or List<? super Integer>",
+    "addNumbers must accept ArrayList, not List",
+    "42 must be cast to Number before calling list.add()"
+  ],
+  "answer": "b",
+  "explanation": "Generics are invariant in Java: List<Integer> is NOT a List<Number> even though Integer extends Number. If it were, you could add a Double to a List<Integer> via the Number reference. Fix: change the parameter to List<? extends Number> (read-only) or List<? super Integer> (write-only — PECS rule)."
+}

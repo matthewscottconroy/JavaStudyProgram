@@ -1,0 +1,10 @@
+{
+  "id": "rx-tr-comp-04",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class SplitDemo {\n    public static void main(String[] args) {\n        String csv = \"a,b,,c,\";\n        String[] parts = csv.split(\",\");\n        System.out.println(parts.length);\n        String[] all = csv.split(\",\", -1);\n        System.out.println(all.length);\n    }\n}",
+  "answer": "4\n5",
+  "explanation": "split(\",\") with no limit removes trailing empty strings: [\"a\",\"b\",\"\",\"c\"] → 4 elements. split(\",\", -1) with negative limit preserves trailing empty strings: [\"a\",\"b\",\"\",\"c\",\"\"] → 5 elements.",
+  "alternatives": ["4\n5\n"]
+}

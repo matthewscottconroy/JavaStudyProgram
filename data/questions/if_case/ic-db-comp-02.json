@@ -1,0 +1,15 @@
+{
+  "id": "ic-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "This isAdult method always returns true even when age is 16. What is the bug?",
+  "code": "public class AgeCheck {\n    public static boolean isAdult(int age) {\n        if (age >= 18);\n            return true;\n        return false;\n    }\n}",
+  "choices": [
+    "The method should use == instead of >= to compare age",
+    "There is a semicolon after the if condition — the if body is an empty statement; return true is unconditional",
+    "return false should be return null for ages under 18",
+    "if/else must be used; a standalone if cannot guard a return statement"
+  ],
+  "answer": "b",
+  "explanation": "The semicolon directly after 'if (age >= 18)' terminates the if statement with an empty body. The indented 'return true;' on the next line is not part of the if — it executes unconditionally every time the method is called, regardless of age. Fix: remove the semicolon so 'return true;' is inside the if block."
+}

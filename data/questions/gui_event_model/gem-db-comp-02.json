@@ -1,0 +1,15 @@
+{
+  "id": "gem-db-comp-02",
+  "type": "DEBUGGING",
+  "difficulty": 4,
+  "prompt": "The UI freezes for 5 seconds when the button is clicked. What is the bug?",
+  "code": "import javax.swing.*;\npublic class SlowAction {\n    public static void main(String[] args) {\n        JButton btn = new JButton(\"Fetch Data\");\n        btn.addActionListener(e -> {\n            try {\n                Thread.sleep(5000);  // simulates slow network call\n                btn.setText(\"Done\");\n            } catch (InterruptedException ex) { ex.printStackTrace(); }\n        });\n        JFrame f = new JFrame();\n        f.add(btn);\n        f.pack();\n        f.setVisible(true);\n    }\n}",
+  "choices": [
+    "Thread.sleep() is not available inside ActionListeners",
+    "The ActionListener runs on the EDT — blocking it with Thread.sleep() prevents the EDT from processing repaints and other events, freezing the UI",
+    "btn.setText() cannot be called from inside the ActionListener that belongs to btn",
+    "The JFrame must use invokeLater() for ActionListeners to work correctly"
+  ],
+  "answer": "b",
+  "explanation": "ActionListeners run on the Event Dispatch Thread. The EDT is responsible for all UI painting and event handling. Blocking it (with sleep, network I/O, or heavy computation) freezes the entire UI until the block completes. Fix: perform slow work on a background thread using SwingWorker or a separate Thread, then call setText() back on the EDT via SwingUtilities.invokeLater()."
+}

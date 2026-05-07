@@ -1,0 +1,15 @@
+{
+  "id": "fn-db-comp-17",
+  "type": "DEBUGGING",
+  "difficulty": 3,
+  "prompt": "The binary search always returns -1. What is the bug?",
+  "code": "public class BinarySearch {\n    static int search(int[] arr, int target) {\n        int lo = 0, hi = arr.length;\n        while (lo < hi) {\n            int mid = (lo + hi) / 2;\n            if (arr[mid] == target) return mid;\n            if (arr[mid] < target) lo = mid;   // bug: should be mid + 1\n            else hi = mid;\n        }\n        return -1;\n    }\n}",
+  "choices": [
+    "hi should be initialized to arr.length - 1",
+    "lo = mid causes an infinite loop when arr[mid] < target, because lo never advances past mid",
+    "The mid calculation overflows for large arrays; use lo + (hi - lo) / 2",
+    "Binary search requires a LinkedList, not an array"
+  ],
+  "answer": "b",
+  "explanation": "When arr[mid] < target, we know target is to the right, so lo should advance to mid + 1. Setting lo = mid means the loop can stall: if lo == mid and the condition arr[mid] < target holds, lo never changes and the loop runs forever (or until a timeout). Fix: lo = mid + 1."
+}

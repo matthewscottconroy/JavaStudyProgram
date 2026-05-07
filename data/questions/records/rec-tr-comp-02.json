@@ -1,0 +1,10 @@
+{
+  "id": "rec-tr-comp-02",
+  "type": "TRACING",
+  "difficulty": 2,
+  "prompt": "What does this program print?",
+  "code": "public class RecordEquality {\n    record Color(int r, int g, int b) {}\n    public static void main(String[] args) {\n        Color a = new Color(255, 0, 0);\n        Color b = new Color(255, 0, 0);\n        Color c = new Color(0, 255, 0);\n        System.out.println(a == b);\n        System.out.println(a.equals(b));\n        System.out.println(a.equals(c));\n    }\n}",
+  "answer": "false\ntrue\nfalse",
+  "explanation": "Records are objects, so == compares references (false for two distinct objects). The auto-generated equals() compares all components by value: (255,0,0) == (255,0,0) → true. (255,0,0) != (0,255,0) → false.",
+  "alternatives": ["false\ntrue\nfalse\n"]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "cls-tr-comp-07",
+  "type": "TRACING",
+  "difficulty": 3,
+  "prompt": "What does this program print?",
+  "code": "public class ThisCall {\n    int a, b;\n    ThisCall(int a) { this(a, 0); System.out.println(\"1-arg\"); }\n    ThisCall(int a, int b) { this.a = a; this.b = b; System.out.println(\"2-arg\"); }\n    public static void main(String[] args) {\n        ThisCall t = new ThisCall(5);\n        System.out.println(t.a + \" \" + t.b);\n    }\n}",
+  "answer": "2-arg\n1-arg\n5 0",
+  "explanation": "new ThisCall(5) calls the 1-arg constructor, which delegates to this(5,0). The 2-arg constructor runs first (prints \"2-arg\"), then control returns to 1-arg (prints \"1-arg\"). t.a=5, t.b=0.",
+  "alternatives": ["2-arg\n1-arg\n5 0\n"]
+}
