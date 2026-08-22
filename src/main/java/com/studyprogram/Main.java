@@ -19,14 +19,15 @@ import java.nio.file.Path;
  * Optional environment variables:
  *   ANTHROPIC_API_KEY  — enables AI-powered hints, explanations, and dynamic question generation
  *   PROFILE_DIR        — override the directory where profiles are stored
- *                        (defaults to ./data/profiles)
+ *                        (defaults to ./data/profiles when it exists — i.e. running from a
+ *                        checkout — and to ~/.javastudy/profiles otherwise)
  */
 public class Main {
 
     public static void main(String[] args) throws IOException {
         AnsiConsole.systemInstall();
         try {
-            Path profileDir = Path.of(System.getenv().getOrDefault("PROFILE_DIR", "data/profiles"));
+            Path profileDir = resolveProfileDir();
 
             QuestionBank   bank    = new QuestionBank();
             ProfileStorage storage = new JsonProfileStorage(profileDir);
@@ -36,5 +37,17 @@ public class Main {
         } finally {
             AnsiConsole.systemUninstall();
         }
+    }
+
+    /**
+     * PROFILE_DIR wins when set; otherwise ./data/profiles is kept when it already exists
+     * (a repo checkout), and downloaded-jar users get a stable home-directory location.
+     */
+    private static Path resolveProfileDir() {
+        String env = System.getenv("PROFILE_DIR");
+        if (env != null && !env.isBlank()) return Path.of(env);
+        Path repoDir = Path.of("data", "profiles");
+        if (java.nio.file.Files.isDirectory(repoDir)) return repoDir;
+        return Path.of(System.getProperty("user.home"), ".javastudy", "profiles");
     }
 }

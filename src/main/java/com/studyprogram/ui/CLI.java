@@ -1,5 +1,7 @@
 package com.studyprogram.ui;
 
+import com.studyprogram.coding.CodingExerciseRunner;
+import com.studyprogram.coding.CodingResult;
 import com.studyprogram.core.*;
 import com.studyprogram.grading.CompositeGrader;
 import com.studyprogram.grading.Grader;
@@ -8,6 +10,7 @@ import com.studyprogram.model.*;
 import com.studyprogram.storage.ProfileStorage;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -22,15 +25,17 @@ public class CLI {
     private final LLMService     llm;
     private final Grader         grader;
     private final Scanner        in;
+    private final CodingExerciseRunner codingRunner;
 
     private StudentProfile currentProfile;
 
     public CLI(QuestionBank bank, ProfileStorage storage, LLMService llm) {
-        this.bank    = bank;
-        this.storage = storage;
-        this.llm     = llm;
-        this.grader  = new CompositeGrader(llm);
-        this.in      = new Scanner(System.in);
+        this.bank         = bank;
+        this.storage      = storage;
+        this.llm          = llm;
+        this.grader       = new CompositeGrader(llm);
+        this.in           = new Scanner(System.in);
+        this.codingRunner = new CodingExerciseRunner();
     }
 
     public void run() {
@@ -39,6 +44,15 @@ public class CLI {
         System.out.printf("  LLM support:       %s%n",
                           llm.isAvailable() ? Display.GREEN + "enabled" + Display.RESET
                                             : Display.DIM   + "disabled (set ANTHROPIC_API_KEY)" + Display.RESET);
+        System.out.printf("  Coding exercises:  %s%n",
+                          CodingExerciseRunner.compilerAvailable()
+                                  ? Display.GREEN + "enabled" + Display.RESET
+                                  : Display.YELLOW + "disabled — run with a full JDK (not a JRE) to "
+                                    + "compile and test real programs" + Display.RESET);
+
+        for (String warning : bank.getWarnings()) {
+            System.out.println("  " + Display.YELLOW + "⚠ " + warning + Display.RESET);
+        }
 
         profileMenu();
 
@@ -158,7 +172,18 @@ public class CLI {
         String input = in.nextLine().trim();
 
         if (input.equalsIgnoreCase("all")) {
-            selected.addAll(Arrays.asList(allTopics));
+            int lockedSkipped = 0;
+            for (Topic t : allTopics) {
+                if (t.prerequisites.isEmpty() || t.isUnlocked(perf)) {
+                    selected.add(t);
+                } else {
+                    lockedSkipped++;
+                }
+            }
+            if (lockedSkipped > 0) {
+                System.out.printf("  %d locked topic(s) not added — select them individually to override.%n",
+                        lockedSkipped);
+            }
         } else if (!input.equalsIgnoreCase("done")) {
             for (String part : input.split(",")) {
                 try {
@@ -225,7 +250,45 @@ public class CLI {
 
             Question q = next.get();
             qNum++;
-            Display.question(q, qNum, sessionLen > 0 ? sessionLen : qNum);
+            int displayTotal = sessionLen > 0 ? sessionLen : qNum;
+
+            // Coding exercises have their own compile-and-test flow
+            if (q.isCoding()) {
+                CodingOutcome outcome = codingFlow(q, qNum, displayTotal);
+                switch (outcome) {
+                    case QUIT -> quit = true;
+                    case SKIPPED -> {
+                        session.skip(q);
+                        System.out.println("  Skipped.");
+                    }
+                    case CORRECT -> {
+                        GradingResult r = GradingResult.correct(q.getExplanation());
+                        session.recordAnswer(q, r);
+                        saveProfile();
+                        Display.correct(r);
+                    }
+                    case GAVE_UP -> {
+                        GradingResult r = GradingResult.incorrect(
+                                "Recorded as incorrect — study the reference solution and it "
+                                + "will come around again.", q.getExplanation());
+                        session.recordAnswer(q, r);
+                        saveProfile();
+                    }
+                }
+                if (quit) break;
+                if (outcome == CodingOutcome.CORRECT || outcome == CodingOutcome.GAVE_UP) {
+                    System.out.print("\n  [Enter] next  [q] quit: ");
+                    if (in.nextLine().trim().equalsIgnoreCase("q")) break;
+                }
+                if (masteryMode && allTopicsMastered(active)) {
+                    System.out.println("\n  " + Display.GREEN + Display.BOLD
+                            + "All topics mastered! Session complete." + Display.RESET);
+                    break;
+                }
+                continue;
+            }
+
+            Display.question(q, qNum, displayTotal);
 
             // Pre-answer command loop — student can request hints/explains before answering
             String answer = null;
@@ -234,7 +297,7 @@ public class CLI {
 
                 if (input.equalsIgnoreCase("q")) { quit = true; break; }
                 if (input.equalsIgnoreCase("s")) {
-                    session.skip();
+                    session.skip(q);
                     System.out.println("  Skipped.");
                     answer = null;
                     break;
@@ -300,6 +363,72 @@ public class CLI {
         }
     }
 
+    // ── Coding exercises ──────────────────────────────────────────────────────
+
+    private enum CodingOutcome { CORRECT, GAVE_UP, SKIPPED, QUIT }
+
+    /**
+     * Drives one coding exercise: writes the starter file to the workspace, then loops
+     * compile-and-test runs until the tests pass or the student gives up, skips, or quits.
+     */
+    private CodingOutcome codingFlow(Question q, int qNum, int total) {
+        Path file;
+        try {
+            file = codingRunner.prepareWorkspace(q);
+        } catch (IOException e) {
+            System.out.println("  Could not prepare the workspace: " + e.getMessage());
+            return CodingOutcome.SKIPPED;
+        }
+
+        Display.codingQuestion(q, qNum, total, file);
+        int hintsShown = 0;
+
+        while (true) {
+            String input = in.nextLine().trim().toLowerCase();
+            switch (input) {
+                case "q" -> { return CodingOutcome.QUIT; }
+                case "s" -> { return CodingOutcome.SKIPPED; }
+                case "g" -> {
+                    Display.referenceSolution(q);
+                    return CodingOutcome.GAVE_UP;
+                }
+                case "r" -> {
+                    try {
+                        codingRunner.resetToStarter(q);
+                        System.out.println("  File reset to the original starter code.");
+                    } catch (IOException e) {
+                        System.out.println("  Could not reset the file: " + e.getMessage());
+                    }
+                    Display.codingMenu();
+                }
+                case "h" -> {
+                    List<String> hints = q.getHints();
+                    String hint = hintsShown < hints.size()
+                            ? hints.get(hintsShown++)
+                            : llm.generateHint(q);
+                    System.out.println("  Hint: " + Display.YELLOW + hint + Display.RESET);
+                    Display.codingMenu();
+                }
+                case "e" -> {
+                    System.out.println("  " + Display.DIM
+                            + llm.explainConcept(q.getTopic(), q.getPrompt()) + Display.RESET);
+                    Display.codingMenu();
+                }
+                default -> {   // Enter (or anything else) runs the tests
+                    System.out.println("  Compiling and running tests…");
+                    CodingResult result = codingRunner.run(q);
+                    Display.codingResult(result);
+                    if (result.passed()) return CodingOutcome.CORRECT;
+                    if (result.status() == CodingResult.Status.ENVIRONMENT_ERROR) {
+                        // not the student's fault — don't count it against them
+                        return CodingOutcome.SKIPPED;
+                    }
+                    Display.codingMenu();
+                }
+            }
+        }
+    }
+
     /** Brief review pass over questions the student got wrong this session. */
     private void reviewWrongAnswers(List<Question> wrong) {
         Display.header("Review — Wrong Answers");
@@ -308,6 +437,21 @@ public class CLI {
         int correct = 0;
         for (int i = 0; i < wrong.size(); i++) {
             Question q = wrong.get(i);
+
+            if (q.isCoding()) {
+                CodingOutcome outcome = codingFlow(q, i + 1, wrong.size());
+                if (outcome == CodingOutcome.QUIT) return;
+                if (outcome == CodingOutcome.CORRECT) {
+                    currentProfile.recordAnswer(q, true);
+                    Display.correct(GradingResult.correct(q.getExplanation()));
+                    correct++;
+                } else if (outcome == CodingOutcome.GAVE_UP) {
+                    currentProfile.recordAnswer(q, false);
+                }
+                saveProfile();
+                continue;
+            }
+
             Display.question(q, i + 1, wrong.size());
 
             String answer = null;

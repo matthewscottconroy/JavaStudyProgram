@@ -1,0 +1,15 @@
+{
+  "id": "var-code-01",
+  "type": "CODING",
+  "difficulty": 1,
+  "prompt": "Convert a temperature from Celsius to Fahrenheit using the formula F = C * 9/5 + 32. Complete the celsiusToFahrenheit method in the starter file, then run the tests.",
+  "starterCode": "/**\n * TASK: Complete the celsiusToFahrenheit method.\n *\n * Convert a temperature in degrees Celsius to degrees Fahrenheit\n * using the formula: F = c * 9.0 / 5.0 + 32.\n *\n * Example: celsiusToFahrenheit(100.0) -> 212.0\n * Example: celsiusToFahrenheit(0.0) -> 32.0\n */\npublic class TemperatureConverter {\n\n    public static double celsiusToFahrenheit(double c) {\n        // TODO: apply the conversion formula and return the result\n        return 0;\n    }\n}\n",
+  "testCode": "public class TemperatureConverterTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        check(\"celsiusToFahrenheit(0.0)\", 32.0, TemperatureConverter.celsiusToFahrenheit(0.0));\n        check(\"celsiusToFahrenheit(100.0)\", 212.0, TemperatureConverter.celsiusToFahrenheit(100.0));\n        check(\"celsiusToFahrenheit(-40.0)\", -40.0, TemperatureConverter.celsiusToFahrenheit(-40.0));\n        check(\"celsiusToFahrenheit(20.0)\", 68.0, TemperatureConverter.celsiusToFahrenheit(20.0));\n        check(\"celsiusToFahrenheit(-10.0)\", 14.0, TemperatureConverter.celsiusToFahrenheit(-10.0));\n        check(\"celsiusToFahrenheit(5.0)\", 41.0, TemperatureConverter.celsiusToFahrenheit(5.0));\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class TemperatureConverter {\n\n    public static double celsiusToFahrenheit(double c) {\n        return c * 9.0 / 5.0 + 32;\n    }\n}\n",
+  "explanation": "The conversion is a single arithmetic expression stored nowhere -- it is computed and returned directly. Writing 9.0 / 5.0 with doubles keeps the fraction 1.8 instead of truncating to 1, which is what would happen with the int expression 9 / 5. Operator precedence handles the rest: multiplication and division happen before the addition of 32.",
+  "hints": [
+    "The formula is F = c * 9.0 / 5.0 + 32. Return the value of that expression.",
+    "Use 9.0 and 5.0 (doubles), not 9 and 5 -- integer division would turn 9 / 5 into 1.",
+    "You do not need any if statements or loops; one return statement is enough."
+  ]
+}

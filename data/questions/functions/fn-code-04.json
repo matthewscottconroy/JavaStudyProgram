@@ -1,0 +1,15 @@
+{
+  "id": "fn-code-04",
+  "type": "CODING",
+  "difficulty": 4,
+  "prompt": "Recursively sum the decimal digits of an integer, treating a negative number as its absolute value. Complete the sumDigits method so sumDigits(-905) returns 14.",
+  "starterCode": "/**\n * TASK: Complete the sumDigits method USING RECURSION.\n *\n * Return the sum of the decimal digits of n.\n * For a negative n, sum the digits of its absolute value.\n * The method must call itself -- do not use a loop.\n *\n * Example: sumDigits(1234) -> 1 + 2 + 3 + 4 = 10\n * Example: sumDigits(-905) -> 9 + 0 + 5 = 14\n * Example: sumDigits(0)    -> 0\n */\npublic class DigitSummer {\n\n    public static int sumDigits(int n) {\n        // TODO: handle negatives, then base case, then recurse on n / 10\n        return 0;\n    }\n}\n",
+  "testCode": "public class DigitSummerTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        check(\"sumDigits(0)\", 0, DigitSummer.sumDigits(0));\n        check(\"sumDigits(7)\", 7, DigitSummer.sumDigits(7));\n        check(\"sumDigits(1234)\", 10, DigitSummer.sumDigits(1234));\n        check(\"sumDigits(-905)\", 14, DigitSummer.sumDigits(-905));\n        check(\"sumDigits(999999999)\", 81, DigitSummer.sumDigits(999999999));\n        check(\"sumDigits(58)\", 13, DigitSummer.sumDigits(58));\n        check(\"sumDigits(-1)\", 1, DigitSummer.sumDigits(-1));\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class DigitSummer {\n\n    public static int sumDigits(int n) {\n        if (n < 0) {\n            return sumDigits(-n);\n        }\n        if (n < 10) {\n            return n;\n        }\n        return n % 10 + sumDigits(n / 10);\n    }\n}\n",
+  "explanation": "The two integer operators do all the digit work: n % 10 peels off the last digit and n / 10 removes it, so the recursion sums one digit and hands the rest to a smaller call. A single-digit number (n < 10) is its own digit sum -- that is the base case, and it covers 0 too. Negatives are handled by one extra recursive step that flips the sign first; without it, -905 % 10 would be -5 in Java and the sum would come out negative.",
+  "hints": [
+    "n % 10 gives the last digit and n / 10 drops it -- that is your recursive step.",
+    "Base case: any n from 0 to 9 is a single digit, so just return n.",
+    "For negative n, Java's % keeps the sign (-905 % 10 is -5). Flip the sign first: return sumDigits(-n)."
+  ]
+}

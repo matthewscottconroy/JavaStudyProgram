@@ -1,0 +1,15 @@
+{
+  "id": "lp-code-08",
+  "type": "CODING",
+  "difficulty": 3,
+  "prompt": "Compute the nth Fibonacci number iteratively, returning a long so large values fit. Complete the fibonacci method in the starter file, then run the tests.",
+  "starterCode": "/**\n * TASK: Complete the fibonacci method WITHOUT recursion.\n *\n * The Fibonacci sequence starts fib(0) = 0, fib(1) = 1, and each later\n * term is the sum of the two before it. Return fib(n) as a long -- the\n * tests go up to fib(50), which overflows an int.\n *\n * Example: fibonacci(10) -> 55, fibonacci(50) -> 12586269025\n */\npublic class FibonacciIterative {\n\n    public static long fibonacci(int n) {\n        // TODO: iterate with two rolling variables, no recursion\n        return 0;\n    }\n}\n",
+  "testCode": "public class FibonacciIterativeTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        check(\"fibonacci(0)\", 0L, FibonacciIterative.fibonacci(0));\n        check(\"fibonacci(1)\", 1L, FibonacciIterative.fibonacci(1));\n        check(\"fibonacci(2)\", 1L, FibonacciIterative.fibonacci(2));\n        check(\"fibonacci(10)\", 55L, FibonacciIterative.fibonacci(10));\n        check(\"fibonacci(20)\", 6765L, FibonacciIterative.fibonacci(20));\n        check(\"fibonacci(30)\", 832040L, FibonacciIterative.fibonacci(30));\n        check(\"fibonacci(50)\", 12586269025L, FibonacciIterative.fibonacci(50));\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class FibonacciIterative {\n\n    public static long fibonacci(int n) {\n        long previous = 0;\n        long current = 1;\n        for (int i = 0; i < n; i++) {\n            long next = previous + current;\n            previous = current;\n            current = next;\n        }\n        return previous;\n    }\n}\n",
+  "explanation": "An iterative Fibonacci keeps just two rolling values instead of recomputing the whole sequence, so it runs in linear time with constant memory. Each loop pass slides the pair forward: the old current becomes the new previous, and their sum becomes the new current. Using long matters because fib(50) = 12,586,269,025 does not fit in an int.",
+  "hints": [
+    "Keep two variables, previous = 0 and current = 1, and loop n times.",
+    "In each pass compute next = previous + current, then shift previous = current and current = next.",
+    "After looping n times, previous holds fib(n). Make sure all three working variables are long, not int."
+  ]
+}

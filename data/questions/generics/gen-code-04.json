@@ -1,0 +1,15 @@
+{
+  "id": "gen-code-04",
+  "type": "CODING",
+  "difficulty": 4,
+  "prompt": "Complete NumberMath.sumOf so it totals any list of numbers -- List<Integer>, List<Double>, List<Long> -- using an upper-bounded wildcard and doubleValue().",
+  "starterCode": "/**\n * TASK: Complete the sumOf method.\n *\n * It accepts a list of ANY Number subtype (List<Integer>, List<Double>,\n * List<Long>, ...) thanks to the upper-bounded wildcard\n * \"? extends Number\", and returns the sum as a double.\n * Call doubleValue() on each element to convert it.\n *\n * Example: sumOf(List.of(1, 2, 3, 4)) -> 10.0\n *          sumOf(List.of(1.5, 2.5, 3.0)) -> 7.0\n */\npublic class NumberMath {\n\n    public static double sumOf(java.util.List<? extends Number> nums) {\n        // TODO: add up every element via doubleValue()\n        return 0.0;\n    }\n}\n",
+  "testCode": "public class NumberMathTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        java.util.List<Integer> ints = java.util.List.of(1, 2, 3, 4);\n        check(\"sumOf List<Integer> [1, 2, 3, 4]\", 10.0, NumberMath.sumOf(ints));\n        java.util.List<Double> doubles = java.util.List.of(1.5, 2.5, 3.0);\n        check(\"sumOf List<Double> [1.5, 2.5, 3.0]\", 7.0, NumberMath.sumOf(doubles));\n        java.util.List<Long> longs = java.util.List.of(5L, 7L);\n        check(\"sumOf List<Long> [5, 7]\", 12.0, NumberMath.sumOf(longs));\n        check(\"sumOf single element\", 42.0, NumberMath.sumOf(java.util.List.of(42)));\n        check(\"sumOf mixed signs\", -2.5, NumberMath.sumOf(java.util.List.of(-5.0, 2.5)));\n        check(\"sumOf empty list\", 0.0, NumberMath.sumOf(new java.util.ArrayList<Integer>()));\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class NumberMath {\n\n    public static double sumOf(java.util.List<? extends Number> nums) {\n        double total = 0.0;\n        for (Number n : nums) {\n            total += n.doubleValue();\n        }\n        return total;\n    }\n}\n",
+  "explanation": "List<Integer> is NOT a subtype of List<Number>, so a plain List<Number> parameter would reject it. The upper-bounded wildcard List<? extends Number> accepts a list of Number or any of its subtypes, which is exactly what a read-only consumer of numbers needs. Every Number provides doubleValue(), giving a uniform way to accumulate the total as a double.",
+  "hints": [
+    "Loop over the list with an enhanced for loop typed as Number: for (Number n : nums).",
+    "Each element, whatever its concrete type, supports n.doubleValue().",
+    "Start a double accumulator at 0.0 and add each converted value to it."
+  ]
+}

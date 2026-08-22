@@ -9,7 +9,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JsonQuestionDto {
     public String id;
-    public String type;           // MULTIPLE_CHOICE | TRACING | DEBUGGING | CODE_GENERATION
+    public String type;           // MULTIPLE_CHOICE | TRACING | DEBUGGING | CODE_GENERATION | CODING
     public int difficulty;
     public String prompt;
     public String code;
@@ -18,4 +18,6 @@ public class JsonQuestionDto {
     public String explanation        = "";
     public List<String> alternatives = Collections.emptyList();
     public List<String> hints        = Collections.emptyList();
+    public String starterCode;    // CODING only
+    public String testCode;       // CODING only
 }

@@ -1,6 +1,9 @@
 # Maven build output
 target/
 
+# Student coding-exercise workspace (created at runtime)
+workspace/
+
 # Compiled class file
 *.class
 

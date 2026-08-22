@@ -1,0 +1,15 @@
+{
+  "id": "rnd-code-03",
+  "type": "CODING",
+  "difficulty": 3,
+  "prompt": "Simulate a seeded one-dimensional random walk: starting at 0, step +1 or -1 depending on nextBoolean() and return the final position. Complete the walk method in the starter file.",
+  "starterCode": "/**\n * TASK: Complete the walk method.\n *\n * Simulate a one-dimensional random walk. Start at position 0 and use ONE\n * java.util.Random created with new Random(seed). For each of the `steps`\n * steps, call random.nextBoolean(): move +1 if it returns true, otherwise\n * move -1. Return the final position.\n *\n * Example: walk(42L, 1) -> 1 (the first nextBoolean() for seed 42 is true)\n */\npublic class RandomWalker {\n\n    public static int walk(long seed, int steps) {\n        // TODO: start at 0; for each step, +1 if nextBoolean() else -1\n        return 0;\n    }\n}\n",
+  "testCode": "public class RandomWalkerTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        check(\"walk(42, 1)\", 1, RandomWalker.walk(42L, 1));\n        check(\"walk(42, 10)\", 0, RandomWalker.walk(42L, 10));\n        check(\"walk(1, 100)\", -10, RandomWalker.walk(1L, 100));\n        check(\"walk(7, 25)\", 7, RandomWalker.walk(7L, 25));\n        check(\"walk(2024, 50)\", 0, RandomWalker.walk(2024L, 50));\n        check(\"walk(5, 0) -- no steps\", 0, RandomWalker.walk(5L, 0));\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "import java.util.Random;\n\npublic class RandomWalker {\n\n    public static int walk(long seed, int steps) {\n        Random random = new Random(seed);\n        int position = 0;\n        for (int i = 0; i < steps; i++) {\n            if (random.nextBoolean()) {\n                position++;\n            } else {\n                position--;\n            }\n        }\n        return position;\n    }\n}\n",
+  "explanation": "A random walk accumulates many small random moves into one running position, a pattern used in simulations from physics to finance. Because Java's Random is a deterministic algorithm, seeding it fixes the entire sequence of nextBoolean() results, making every walk reproducible. The ternary or if/else on nextBoolean() maps the boolean stream onto +1/-1 moves.",
+  "hints": [
+    "Create one new java.util.Random(seed) before the loop and keep an int position starting at 0.",
+    "Each iteration: if (random.nextBoolean()) position++; else position--;",
+    "Return the position after the loop -- with 0 steps the answer is just 0."
+  ]
+}

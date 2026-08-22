@@ -81,6 +81,69 @@ public class Display {
         }
     }
 
+    /** Renders a CODING exercise: prompt plus workspace instructions and the command menu. */
+    public static void codingQuestion(Question q, int number, int total, java.nio.file.Path file) {
+        System.out.println();
+        rule();
+        System.out.printf(BOLD + "  Question %d/%d" + RESET
+                + "  │  Topic: " + CYAN + "%s" + RESET
+                + "  │  Type: " + YELLOW + "%s" + RESET
+                + "  │  Difficulty: %s%n",
+                number, total,
+                q.getTopic().displayName,
+                q.getType().displayName,
+                stars(q.getDifficulty()));
+        rule();
+        System.out.println();
+        System.out.println(q.getPrompt());
+        System.out.println();
+        System.out.println("  Edit this file in your editor or IDE:");
+        System.out.println("  " + BOLD + CYAN + file.toAbsolutePath() + RESET);
+        System.out.println();
+        System.out.println("  The full task description is in a comment at the top of the file.");
+        codingMenu();
+    }
+
+    public static void codingMenu() {
+        System.out.println();
+        System.out.print("  [Enter] compile & test   [h]int  [e]xplain  [r]eset file  "
+                + "[g]ive up  [s]kip  [q]uit\n  > ");
+    }
+
+    /** Renders the outcome of one compile-and-test run. */
+    public static void codingResult(com.studyprogram.coding.CodingResult result) {
+        System.out.println();
+        switch (result.status()) {
+            case PASS -> System.out.println(GREEN + BOLD + "✓ Compiled — all tests passed!" + RESET);
+            case TEST_FAILURE -> System.out.println(RED + BOLD + "✗ Compiled, but some tests failed:" + RESET);
+            case COMPILE_ERROR -> System.out.println(RED + BOLD + "✗ Compile error:" + RESET);
+            case TIMEOUT -> System.out.println(RED + BOLD + "✗ Timed out:" + RESET);
+            case ENVIRONMENT_ERROR -> System.out.println(YELLOW + BOLD + "! Environment problem:" + RESET);
+        }
+        String body = result.output();
+        if (body != null && !body.isBlank()) {
+            for (String line : body.split("\n")) {
+                String color = line.startsWith("PASS") ? GREEN : line.startsWith("FAIL") ? RED : DIM;
+                System.out.println("  " + color + line + RESET);
+            }
+        }
+    }
+
+    /** Shows the reference solution (used when the student gives up on a coding exercise). */
+    public static void referenceSolution(Question q) {
+        System.out.println();
+        System.out.println(YELLOW + BOLD + "  Reference solution:" + RESET);
+        System.out.println(DIM + "  ┌─ Java " + "─".repeat(WIDTH - 10) + RESET);
+        for (String line : q.getAnswer().split("\n")) {
+            System.out.println(DIM + "  │" + RESET + "  " + line);
+        }
+        System.out.println(DIM + "  └" + "─".repeat(WIDTH - 3) + RESET);
+        if (!q.getExplanation().isBlank()) {
+            System.out.println();
+            System.out.println(DIM + "  " + q.getExplanation() + RESET);
+        }
+    }
+
     public static void correct(GradingResult result) {
         System.out.println();
         System.out.println(GREEN + BOLD + "✓ Correct!" + RESET);

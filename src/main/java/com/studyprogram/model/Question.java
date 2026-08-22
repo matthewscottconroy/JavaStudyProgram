@@ -19,6 +19,8 @@ public final class Question {
     private final List<String> alternativeAnswers; // other accepted phrasings
     private final String explanation;   // shown after the student answers
     private final List<String> hints;   // progressive hints, requested on demand
+    private final String starterCode;   // CODING: skeleton written to the workspace
+    private final String testCode;      // CODING: test harness compiled against the student's code
 
     private Question(Builder b) {
         this.id                 = b.id;
@@ -32,6 +34,8 @@ public final class Question {
         this.alternativeAnswers = Collections.unmodifiableList(new ArrayList<>(b.alternatives));
         this.explanation        = b.explanation;
         this.hints              = Collections.unmodifiableList(new ArrayList<>(b.hints));
+        this.starterCode        = b.starterCode;
+        this.testCode           = b.testCode;
     }
 
     // ── Accessors ────────────────────────────────────────────────────────────
@@ -49,6 +53,9 @@ public final class Question {
     public List<String> getAlternativeAnswers() { return alternativeAnswers; }
     public String getExplanation()            { return explanation; }
     public List<String> getHints()            { return hints; }
+    public String getStarterCode()            { return starterCode; }
+    public String getTestCode()               { return testCode; }
+    public boolean isCoding()                 { return type == QuestionType.CODING; }
 
     // ── Builder ──────────────────────────────────────────────────────────────
 
@@ -66,6 +73,8 @@ public final class Question {
         private final List<String> alternatives = new ArrayList<>();
         private String explanation = "";
         private final List<String> hints    = new ArrayList<>();
+        private String starterCode;
+        private String testCode;
 
         public Builder id(String id)                  { this.id = id; return this; }
         public Builder topic(Topic t)                 { this.topic = t; return this; }
@@ -84,11 +93,19 @@ public final class Question {
         public Builder alternative(String a)          { this.alternatives.add(a.trim()); return this; }
         public Builder explanation(String e)          { this.explanation = e; return this; }
         public Builder hint(String h)                 { this.hints.add(h); return this; }
+        public Builder starterCode(String c)          { this.starterCode = c; return this; }
+        public Builder testCode(String c)             { this.testCode = c; return this; }
 
         public Question build() {
             if (topic == null)  throw new IllegalStateException("topic required");
             if (prompt == null) throw new IllegalStateException("prompt required");
             if (answer == null) throw new IllegalStateException("answer required");
+            if (type == QuestionType.CODING) {
+                if (starterCode == null || starterCode.isBlank())
+                    throw new IllegalStateException("starterCode required for CODING questions");
+                if (testCode == null || testCode.isBlank())
+                    throw new IllegalStateException("testCode required for CODING questions");
+            }
             return new Question(this);
         }
     }

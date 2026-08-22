@@ -1,0 +1,15 @@
+{
+  "id": "ml-code-03",
+  "type": "CODING",
+  "difficulty": 3,
+  "prompt": "Implement mean squared error, the classic loss function comparing predictions to actual values. Complete the mse method in the starter file.",
+  "starterCode": "/**\n * TASK: Complete the mse method.\n *\n * Return the mean squared error between the two equal-length arrays:\n * the average of (predicted[i] - actual[i]) squared over all indexes.\n * Both arrays always contain at least one element.\n *\n * Example: mse({2, 4}, {1, 2}) -> ((2-1)^2 + (4-2)^2) / 2 = (1 + 4) / 2 = 2.5\n */\npublic class ErrorMetrics {\n\n    public static double mse(double[] predicted, double[] actual) {\n        // TODO: sum the squared differences, then divide by the length\n        return 0.0;\n    }\n}\n",
+  "testCode": "public class ErrorMetricsTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        check(\"mse({2,4}, {1,2})\", 2.5, ErrorMetrics.mse(new double[]{2, 4}, new double[]{1, 2}));\n        check(\"perfect predictions\", 0.0, ErrorMetrics.mse(new double[]{1, 2, 3}, new double[]{1, 2, 3}));\n        check(\"mse({3}, {1})\", 4.0, ErrorMetrics.mse(new double[]{3}, new double[]{1}));\n        check(\"mse({1,2,3,4}, {0,0,0,0})\", 7.5, ErrorMetrics.mse(new double[]{1, 2, 3, 4}, new double[]{0, 0, 0, 0}));\n        check(\"mse({0.5,1.5}, {0,1})\", 0.25, ErrorMetrics.mse(new double[]{0.5, 1.5}, new double[]{0, 1}));\n        check(\"negative errors square positive\", 2.5, ErrorMetrics.mse(new double[]{0, 0}, new double[]{1, -2}));\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class ErrorMetrics {\n\n    public static double mse(double[] predicted, double[] actual) {\n        double sum = 0.0;\n        for (int i = 0; i < predicted.length; i++) {\n            double diff = predicted[i] - actual[i];\n            sum += diff * diff;\n        }\n        return sum / predicted.length;\n    }\n}\n",
+  "explanation": "Mean squared error measures how far predictions are from reality: square each difference (so under- and over-shooting both count positively), then average. Squaring also punishes large errors more than small ones, which is why MSE is the default regression loss in machine learning. Store the difference in a local variable and multiply it by itself -- no Math.pow needed.",
+  "hints": [
+    "Loop over the indexes; compute double diff = predicted[i] - actual[i]; each time.",
+    "Add diff * diff to a running sum -- squaring makes negatives positive.",
+    "After the loop, return sum / predicted.length (the mean)."
+  ]
+}

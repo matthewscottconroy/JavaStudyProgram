@@ -1,0 +1,15 @@
+{
+  "id": "fn-code-03",
+  "type": "CODING",
+  "difficulty": 3,
+  "prompt": "Implement factorial using recursion -- the method must call itself rather than loop. Complete the factorial method so factorial(5) returns 120.",
+  "starterCode": "/**\n * TASK: Complete the factorial method USING RECURSION.\n *\n * factorial(n) = n * (n-1) * (n-2) * ... * 1, and factorial(0) = 1.\n * The method must call itself -- do not use a loop.\n * You may assume n is between 0 and 15, so the result fits in a long.\n *\n * Example: factorial(0) -> 1\n * Example: factorial(5) -> 120   (5 * 4 * 3 * 2 * 1)\n */\npublic class RecursiveFactorial {\n\n    public static long factorial(long n) {\n        // TODO: base case first, then the recursive call\n        return 0;\n    }\n}\n",
+  "testCode": "public class RecursiveFactorialTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        check(\"factorial(0)\", 1L, RecursiveFactorial.factorial(0));\n        check(\"factorial(1)\", 1L, RecursiveFactorial.factorial(1));\n        check(\"factorial(5)\", 120L, RecursiveFactorial.factorial(5));\n        check(\"factorial(10)\", 3628800L, RecursiveFactorial.factorial(10));\n        check(\"factorial(12)\", 479001600L, RecursiveFactorial.factorial(12));\n        check(\"factorial(15)\", 1307674368000L, RecursiveFactorial.factorial(15));\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class RecursiveFactorial {\n\n    public static long factorial(long n) {\n        if (n <= 1) {\n            return 1;\n        }\n        return n * factorial(n - 1);\n    }\n}\n",
+  "explanation": "A recursive method needs a base case that stops the calls and a recursive case that shrinks the problem. Here factorial(0) and factorial(1) are both 1 (the base case), and every larger n is defined in terms of a smaller problem: n * factorial(n - 1). Each call waits for the smaller call to finish, so factorial(5) unwinds as 5 * 4 * 3 * 2 * 1. The long return type matters -- factorial(15) is 1,307,674,368,000, far beyond what an int can hold.",
+  "hints": [
+    "Start with the base case: when n is 0 (or 1), return 1 without calling anything.",
+    "For larger n, the definition itself is the code: factorial(n) = n * factorial(n - 1).",
+    "Make sure the recursive call uses n - 1, so every call gets closer to the base case."
+  ]
+}

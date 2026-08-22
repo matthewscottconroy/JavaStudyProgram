@@ -61,6 +61,19 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <!-- Bundle the JSON question bank into the jar so a downloaded jar is
+                 self-contained; an on-disk data/questions directory overlays it. -->
+            <resource>
+                <directory>data</directory>
+                <includes>
+                    <include>questions/**</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

@@ -45,6 +45,9 @@ public enum Topic {
     STRINGS("Strings",
             "String API, immutability, StringBuilder, String.format",
             2, VARIABLES, PRINTING),
+    REGEX("Regular Expressions",
+            "Pattern, Matcher, String.matches, common regex syntax",
+            3, STRINGS),
     ARRAYS("Arrays",
             "1D and 2D arrays, length, initialization, iteration",
             2, VARIABLES, LOOPS),
@@ -59,6 +62,15 @@ public enum Topic {
     CLASSES("Classes",
             "Fields, constructors, instance methods, this keyword",
             3, FUNCTIONS, STRINGS),
+    ENUMS("Enums",
+            "enum types, constants, fields, methods, values(), switch on enums",
+            3, CLASSES, IF_CASE),
+    RECORDS("Records",
+            "record classes, canonical constructors, accessors, immutability",
+            3, CLASSES),
+    DATE_TIME("Date and Time",
+            "LocalDate, LocalDateTime, Duration, Period, DateTimeFormatter",
+            3, CLASSES, STRINGS),
     PUBLIC_PRIVATE_PROTECTED("Access Modifiers",
             "public, private, protected, package-private, getters/setters",
             3, CLASSES),
@@ -80,6 +92,9 @@ public enum Topic {
     JAVA_CLASS_HIERARCHY("Java Class Hierarchy",
             "java.lang.Object methods, Comparable, Cloneable, Iterable",
             4, CLASS_HIERARCHY, COLLECTIONS),
+    COMPARABLE_COMPARATOR("Comparable and Comparator",
+            "compareTo, Comparator.comparing, sorting objects, natural ordering",
+            4, INTERFACES, COLLECTIONS),
     INHERITANCE_POLYMORPHISM_ENCAPSULATION("Inheritance, Polymorphism & Encapsulation",
             "Liskov substitution, dynamic dispatch, encapsulation patterns",
             4, INHERITANCE, INTERFACES),
@@ -102,6 +117,9 @@ public enum Topic {
     GENERICS("Generics",
             "Type parameters, bounded wildcards, generic methods",
             4, COLLECTIONS, INHERITANCE_POLYMORPHISM_ENCAPSULATION),
+    OPTIONAL("Optional",
+            "Optional.of/empty/ofNullable, map, orElse, avoiding null",
+            4, GENERICS),
     OO_DESIGN_PATTERNS("OO Design Patterns",
             "Singleton, Factory, Strategy, Observer, Builder, Decorator",
             5, INHERITANCE_POLYMORPHISM_ENCAPSULATION, COMPOSITION),
@@ -110,6 +128,9 @@ public enum Topic {
     LAMBDAS("Lambdas",
             "Lambda syntax, method references, functional interfaces",
             4, FUNCTIONS, INTERFACES, GENERICS),
+    FUNCTIONAL_INTERFACES("Functional Interfaces",
+            "Function, Supplier, Consumer, Predicate, BiFunction, @FunctionalInterface",
+            4, INTERFACES, LAMBDAS),
     STREAM_API("Stream API",
             "stream(), filter, map, reduce, collect, Optional",
             4, LAMBDAS, COLLECTIONS),
@@ -209,6 +230,24 @@ public enum Topic {
 
     /** Returns the list of topics that must be mastered before this one is unlocked. */
     public List<Topic> getPrerequisites() { return prerequisites; }
+
+    /**
+     * The directory name under {@code data/questions/} (and the {@code questions/}
+     * classpath root) holding this topic's JSON question files.
+     */
+    public String dirSlug() {
+        // FILE_PROCESSING predates the data directory, which was created as file_io
+        if (this == FILE_PROCESSING) return "file_io";
+        return name().toLowerCase();
+    }
+
+    /** Look up a topic by its question-directory slug, or null if none matches. */
+    public static Topic fromDirSlug(String slug) {
+        for (Topic t : values()) {
+            if (t.dirSlug().equals(slug)) return t;
+        }
+        return null;
+    }
 
     /** True when the student has ≥40% mastery in every prerequisite. */
     public boolean isUnlocked(Map<Topic, TopicPerformance> performance) {

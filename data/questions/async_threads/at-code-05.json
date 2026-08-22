@@ -1,0 +1,15 @@
+{
+  "id": "at-code-05",
+  "type": "CODING",
+  "difficulty": 4,
+  "prompt": "Chain asynchronous steps with CompletableFuture: supplyAsync produces a value, thenApply transforms it, and join collects it. Complete the fetchAndFormat method.",
+  "starterCode": "/**\n * TASK: Complete the fetchAndFormat method.\n *\n * Use CompletableFuture.supplyAsync to produce the string \"item-\" + id\n * on another thread, chain .thenApply(String::toUpperCase) to\n * transform it, and call .join() to wait for and return the result.\n *\n * Example: fetchAndFormat(7) -> \"ITEM-7\"\n */\npublic class FutureChain {\n\n    public static String fetchAndFormat(int id) {\n        // TODO: supplyAsync -> thenApply -> join\n        return \"\";\n    }\n}\n",
+  "testCode": "public class FutureChainTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        try {\n            check(\"fetchAndFormat(7)\", \"ITEM-7\", FutureChain.fetchAndFormat(7));\n            check(\"fetchAndFormat(0)\", \"ITEM-0\", FutureChain.fetchAndFormat(0));\n            check(\"fetchAndFormat(42)\", \"ITEM-42\", FutureChain.fetchAndFormat(42));\n            check(\"fetchAndFormat(123)\", \"ITEM-123\", FutureChain.fetchAndFormat(123));\n            check(\"fetchAndFormat(999)\", \"ITEM-999\", FutureChain.fetchAndFormat(999));\n        } catch (Exception e) {\n            System.out.println(\"FAIL  unexpected exception -- \" + e);\n            failures++;\n        }\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "import java.util.concurrent.CompletableFuture;\n\npublic class FutureChain {\n\n    public static String fetchAndFormat(int id) {\n        return CompletableFuture\n                .supplyAsync(() -> \"item-\" + id)\n                .thenApply(String::toUpperCase)\n                .join();\n    }\n}\n",
+  "explanation": "CompletableFuture describes a pipeline of asynchronous steps: supplyAsync runs a Supplier on a background thread, and thenApply registers a transformation to run on that step's result when it arrives. Nothing in the chain blocks until join(), which waits for the whole pipeline and returns the final value (rethrowing any failure as an unchecked exception, so no throws clause is needed).",
+  "hints": [
+    "Start the chain with CompletableFuture.supplyAsync(() -> \"item-\" + id).",
+    "thenApply takes a function from the previous result to a new value -- the method reference String::toUpperCase fits perfectly.",
+    "join() blocks until the chained result is ready and returns it; unlike get(), it does not throw checked exceptions."
+  ]
+}

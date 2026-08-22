@@ -11,7 +11,9 @@ public enum QuestionType {
     /** Write code from scratch given a specification (shown as multiple choice). */
     CODE_GENERATION("Code Generation"),
     /** Standard A/B/C/D multiple-choice question. */
-    MULTIPLE_CHOICE("Multiple Choice");
+    MULTIPLE_CHOICE("Multiple Choice"),
+    /** Write a real program in the workspace; it is compiled and run against tests. */
+    CODING("Coding");
 
     public final String displayName;
 

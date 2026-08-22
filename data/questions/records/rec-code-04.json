@@ -1,0 +1,14 @@
+{
+  "id": "rec-code-04",
+  "type": "CODING",
+  "difficulty": 3,
+  "prompt": "Make the Box record satisfy the provided Sized interface with area(), and add a static factory method square(side).",
+  "starterCode": "/**\n * TASK: Complete the Box record. The Sized interface above the record\n * is provided -- do not edit it.\n *\n * - area() returns width * height.\n *   Example: new Box(2.5, 4.0).area() -> 10.0\n * - static Box square(double side) returns a Box whose width and\n *   height are both side.\n */\ninterface Sized {\n    double area();\n}\n\npublic record Box(double width, double height) implements Sized {\n\n    public double area() {\n        // TODO: width times height\n        return 0.0;\n    }\n\n    public static Box square(double side) {\n        // TODO: return a square Box\n        return null;\n    }\n}\n",
+  "testCode": "public class BoxTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        check(\"new Box(2.5, 4.0).area()\", 10.0, new Box(2.5, 4.0).area());\n        check(\"new Box(7.0, 1.0).area()\", 7.0, new Box(7.0, 1.0).area());\n        Sized s = new Box(1.5, 2.0);\n        check(\"area() through a Sized reference\", 3.0, s.area());\n        Box sq = Box.square(3.0);\n        check(\"square(3.0).area()\", 9.0, sq == null ? null : sq.area());\n        check(\"square(3.0).width()\", 3.0, sq == null ? null : sq.width());\n        check(\"square(3.0).height()\", 3.0, sq == null ? null : sq.height());\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "interface Sized {\n    double area();\n}\n\npublic record Box(double width, double height) implements Sized {\n\n    public double area() {\n        return width * height;\n    }\n\n    public static Box square(double side) {\n        return new Box(side, side);\n    }\n}\n",
+  "explanation": "Records can implement interfaces just like classes; Box supplies the area() implementation that Sized demands, so a Box can be used anywhere a Sized is expected. Static factory methods such as square are a common way to give records convenient alternative constructors. The tests also use the auto-generated accessors width() and height().",
+  "hints": [
+    "area() is just width * height -- the record components are in scope inside instance methods.",
+    "square is static, so it cannot use width or height: return new Box(side, side);"
+  ]
+}

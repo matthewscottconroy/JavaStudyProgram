@@ -1,0 +1,15 @@
+{
+  "id": "hb-code-01",
+  "type": "CODING",
+  "difficulty": 3,
+  "prompt": "Build the binary string of a non-negative int by hand with a loop of % 2 and / 2 -- calling Integer.toBinaryString is not allowed.",
+  "starterCode": "/**\n * TASK: Complete the toBinary method WITHOUT calling\n * Integer.toBinaryString (build the string yourself with a loop).\n *\n * Return the binary representation of n (n >= 0) with no leading\n * zeros. toBinary(0) returns \"0\".\n *\n * Examples: toBinary(5)  -> \"101\"\n *           toBinary(10) -> \"1010\"\n *           toBinary(0)  -> \"0\"\n * Idea: n % 2 is the LAST binary digit; n / 2 drops that digit.\n */\npublic class BinaryWriter {\n\n    public static String toBinary(int n) {\n        // TODO: special-case 0, then loop collecting n % 2 digits\n        return \"\";\n    }\n}\n",
+  "testCode": "public class BinaryWriterTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        check(\"toBinary(0)\", \"0\", BinaryWriter.toBinary(0));\n        check(\"toBinary(1)\", \"1\", BinaryWriter.toBinary(1));\n        check(\"toBinary(2)\", \"10\", BinaryWriter.toBinary(2));\n        check(\"toBinary(5)\", \"101\", BinaryWriter.toBinary(5));\n        check(\"toBinary(10)\", \"1010\", BinaryWriter.toBinary(10));\n        check(\"toBinary(255)\", \"11111111\", BinaryWriter.toBinary(255));\n        check(\"toBinary(256)\", \"100000000\", BinaryWriter.toBinary(256));\n        check(\"toBinary(1023)\", \"1111111111\", BinaryWriter.toBinary(1023));\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class BinaryWriter {\n\n    public static String toBinary(int n) {\n        if (n == 0) {\n            return \"0\";\n        }\n        StringBuilder bits = new StringBuilder();\n        while (n > 0) {\n            bits.append(n % 2);\n            n = n / 2;\n        }\n        return bits.reverse().toString();\n    }\n}\n",
+  "explanation": "Repeatedly taking n % 2 peels off the lowest binary digit and n / 2 shifts the rest of the number down, so the loop produces the digits from last to first. Collecting them in a StringBuilder and calling reverse() at the end puts them in the right order. Zero needs a special case because the loop body never runs when n is already 0.",
+  "hints": [
+    "Handle n == 0 first by returning \"0\" -- the loop below will not produce anything for it.",
+    "While n > 0: append n % 2 to a StringBuilder, then set n = n / 2.",
+    "The digits come out backwards; StringBuilder.reverse() fixes the order in one call."
+  ]
+}

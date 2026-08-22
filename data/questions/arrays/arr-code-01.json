@@ -1,0 +1,15 @@
+{
+  "id": "arr-code-01",
+  "type": "CODING",
+  "difficulty": 2,
+  "prompt": "Write a method that returns the average of an int array as a double. Complete the average method in the starter file, then run the tests.",
+  "starterCode": "/**\n * TASK: Complete the average method.\n *\n * Return the average (mean) of all values in the array as a double.\n * If the array is empty, return 0.0.\n *\n * Example: average(new int[] {1, 2, 3, 4}) -> 2.5\n * Careful: dividing one int by another int throws away the fraction,\n * so make sure the division happens with double values.\n */\npublic class ArrayAverage {\n\n    public static double average(int[] values) {\n        // TODO: sum the elements, then divide as a double\n        return 0.0;\n    }\n}\n",
+  "testCode": "public class ArrayAverageTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        check(\"average({1, 2, 3, 4})\", 2.5, ArrayAverage.average(new int[] {1, 2, 3, 4}));\n        check(\"average({5})\", 5.0, ArrayAverage.average(new int[] {5}));\n        check(\"average({})\", 0.0, ArrayAverage.average(new int[] {}));\n        check(\"average({1, 2})\", 1.5, ArrayAverage.average(new int[] {1, 2}));\n        check(\"average({-3, 3})\", 0.0, ArrayAverage.average(new int[] {-3, 3}));\n        check(\"average({10, 20, 30})\", 20.0, ArrayAverage.average(new int[] {10, 20, 30}));\n        check(\"average({1, 2, 2})\", 1.6666666666666667, ArrayAverage.average(new int[] {1, 2, 2}));\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class ArrayAverage {\n\n    public static double average(int[] values) {\n        if (values.length == 0) {\n            return 0.0;\n        }\n        double sum = 0;\n        for (int value : values) {\n            sum += value;\n        }\n        return sum / values.length;\n    }\n}\n",
+  "explanation": "An enhanced for loop visits every element to build the sum, and values.length gives the count for the division. Declaring the sum as a double (or casting before dividing) is the key step: int / int would truncate 5 / 2 to 2 instead of 2.5. The empty-array guard also avoids dividing by zero.",
+  "hints": [
+    "Check values.length == 0 first and return 0.0 for that case.",
+    "Loop over the array with for (int value : values) and add each element to a running sum.",
+    "Declare the sum as a double (double sum = 0) so sum / values.length keeps the fraction."
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "str-code-05",
+  "type": "CODING",
+  "difficulty": 2,
+  "prompt": "Write a method that removes every vowel from a string. Complete the removeVowels method in the starter file, then run the tests.",
+  "starterCode": "/**\n * TASK: Complete the removeVowels method.\n *\n * Return a copy of s with every vowel (a, e, i, o, u) removed.\n * Both uppercase and lowercase vowels are removed; every other\n * character stays in its original order.\n *\n * Example: removeVowels(\"Beautiful Day\") -> \"Btfl Dy\"\n */\npublic class VowelRemover {\n\n    public static String removeVowels(String s) {\n        // TODO: build a new string from the non-vowel characters\n        return \"\";\n    }\n}\n",
+  "testCode": "public class VowelRemoverTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        check(\"removeVowels(\\\"hello\\\")\", \"hll\", VowelRemover.removeVowels(\"hello\"));\n        check(\"removeVowels(\\\"AEIOU\\\")\", \"\", VowelRemover.removeVowels(\"AEIOU\"));\n        check(\"removeVowels(\\\"xyz\\\")\", \"xyz\", VowelRemover.removeVowels(\"xyz\"));\n        check(\"removeVowels(\\\"\\\")\", \"\", VowelRemover.removeVowels(\"\"));\n        check(\"removeVowels(\\\"Programming\\\")\", \"Prgrmmng\", VowelRemover.removeVowels(\"Programming\"));\n        check(\"removeVowels(\\\"Beautiful Day\\\")\", \"Btfl Dy\", VowelRemover.removeVowels(\"Beautiful Day\"));\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class VowelRemover {\n\n    public static String removeVowels(String s) {\n        StringBuilder result = new StringBuilder();\n        for (int i = 0; i < s.length(); i++) {\n            char c = s.charAt(i);\n            char lower = Character.toLowerCase(c);\n            if (lower != 'a' && lower != 'e' && lower != 'i' && lower != 'o' && lower != 'u') {\n                result.append(c);\n            }\n        }\n        return result.toString();\n    }\n}\n",
+  "explanation": "Building a new string one character at a time is a core pattern: a StringBuilder collects the characters you want to keep while a loop examines each one. Lowercasing the character before comparing lets one set of tests handle both cases. Strings are immutable in Java, so you never modify s itself -- you construct a new result.",
+  "hints": [
+    "Loop over s with charAt(i) and decide for each character whether to keep it.",
+    "Compare Character.toLowerCase(c) against the five vowel letters so 'A' and 'a' are treated alike.",
+    "Append the characters you keep to a StringBuilder and return builder.toString() at the end."
+  ]
+}

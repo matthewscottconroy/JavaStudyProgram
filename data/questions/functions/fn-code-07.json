@@ -1,0 +1,15 @@
+{
+  "id": "fn-code-07",
+  "type": "CODING",
+  "difficulty": 4,
+  "prompt": "Implement Euclid's greatest-common-divisor algorithm as a RECURSIVE method with base case b == 0. Complete the gcd method, then run the tests.",
+  "starterCode": "/**\n * TASK: Complete gcd RECURSIVELY -- the method must call itself.\n * Do not use any loops.\n *\n * Euclid's insight: gcd(a, b) == gcd(b, a % b), and when b is 0 the\n * answer is a. Negative inputs use their absolute value, so take\n * Math.abs of both arguments before recursing.\n *\n * Example: gcd(48, 18) -> gcd(18, 12) -> gcd(12, 6) -> gcd(6, 0) -> 6\n */\npublic class GcdRecursive {\n\n    public static int gcd(int a, int b) {\n        // TODO: base case b == 0, otherwise recurse on (b, a % b)\n        return 0;\n    }\n}\n",
+  "testCode": "public class GcdRecursiveTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        check(\"gcd(48, 18)\", 6, GcdRecursive.gcd(48, 18));\n        check(\"gcd(18, 48)\", 6, GcdRecursive.gcd(18, 48));\n        check(\"gcd(17, 5)\", 1, GcdRecursive.gcd(17, 5));\n        check(\"gcd(0, 9)\", 9, GcdRecursive.gcd(0, 9));\n        check(\"gcd(9, 0)\", 9, GcdRecursive.gcd(9, 0));\n        check(\"gcd(0, 0)\", 0, GcdRecursive.gcd(0, 0));\n        check(\"gcd(-48, 18)\", 6, GcdRecursive.gcd(-48, 18));\n        check(\"gcd(1071, 462)\", 21, GcdRecursive.gcd(1071, 462));\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class GcdRecursive {\n\n    public static int gcd(int a, int b) {\n        a = Math.abs(a);\n        b = Math.abs(b);\n        if (b == 0) {\n            return a;\n        }\n        return gcd(b, a % b);\n    }\n}\n",
+  "explanation": "Recursive Euclid is a textbook example of shrinking a problem toward a base case: each call replaces (a, b) with (b, a % b), and the remainder strictly decreases until it hits 0. The base case b == 0 returns a, which at that point is the greatest common divisor. Applying Math.abs on entry normalizes negatives once; every deeper call already works with non-negative values because a % b keeps the sign of a.",
+  "hints": [
+    "Write the base case first: if b == 0, the answer is a.",
+    "Otherwise return gcd(b, a % b) -- the method calls itself with a smaller second argument.",
+    "Normalize negatives by reassigning a = Math.abs(a) and b = Math.abs(b) at the top of the method before anything else."
+  ]
+}

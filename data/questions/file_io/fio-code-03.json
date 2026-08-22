@@ -1,0 +1,15 @@
+{
+  "id": "fio-code-03",
+  "type": "CODING",
+  "difficulty": 3,
+  "prompt": "Complete CsvSplitter.parseLine so it splits a CSV line on commas and trims whitespace from every field, keeping empty fields.",
+  "starterCode": "/**\n * TASK: Complete the parseLine method.\n *\n * Split the line on commas and trim leading/trailing whitespace from\n * each field. Empty fields must be preserved, including trailing ones.\n *\n * Example: parseLine(\"a, b ,c\") -> {\"a\", \"b\", \"c\"}\n * Example: parseLine(\"a,,c\")    -> {\"a\", \"\", \"c\"}\n * Example: parseLine(\"a,b,\")    -> {\"a\", \"b\", \"\"}\n */\npublic class CsvSplitter {\n\n    public static String[] parseLine(String line) {\n        // TODO: split on commas (keep empty fields!) and trim each part\n        return new String[0];\n    }\n}\n",
+  "testCode": "public class CsvSplitterTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    static String call(String line) {\n        try {\n            String[] result = CsvSplitter.parseLine(line);\n            return result == null ? \"null\" : java.util.Arrays.toString(result);\n        } catch (Exception e) {\n            return \"threw \" + e.getClass().getSimpleName();\n        }\n    }\n\n    public static void main(String[] args) {\n        check(\"parseLine(\\\"a, b ,c\\\")\", \"[a, b, c]\", call(\"a, b ,c\"));\n        check(\"parseLine(\\\"one\\\")\", \"[one]\", call(\"one\"));\n        check(\"parseLine(\\\"a,,c\\\") keeps empty middle\", \"[a, , c]\", call(\"a,,c\"));\n        check(\"parseLine(\\\"a,b,\\\") keeps empty last\", \"[a, b, ]\", call(\"a,b,\"));\n        check(\"parseLine(\\\" x , y \\\")\", \"[x, y]\", call(\" x , y \"));\n        check(\"parseLine(\\\"10, 20,30\\\")\", \"[10, 20, 30]\", call(\"10, 20,30\"));\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class CsvSplitter {\n\n    public static String[] parseLine(String line) {\n        String[] parts = line.split(\",\", -1);\n        for (int i = 0; i < parts.length; i++) {\n            parts[i] = parts[i].trim();\n        }\n        return parts;\n    }\n}\n",
+  "explanation": "String.split(\",\") silently drops trailing empty strings, so \"a,b,\" would lose its last field. Passing a negative limit -- split(\",\", -1) -- keeps every field, empty or not. A simple loop then trims each element in place with String.trim().",
+  "hints": [
+    "String.split takes a second 'limit' argument; a negative limit keeps trailing empty fields.",
+    "split(\",\", -1) returns the raw fields; each may still have spaces around it.",
+    "Loop over the array and replace each element with element.trim() before returning it."
+  ]
+}

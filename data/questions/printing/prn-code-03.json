@@ -1,0 +1,15 @@
+{
+  "id": "prn-code-03",
+  "type": "CODING",
+  "difficulty": 2,
+  "prompt": "Print a rocket countdown: the numbers n down to 1 on separate lines, then the word liftoff. Complete the countdown method.",
+  "starterCode": "/**\n * TASK: Complete the countdown method.\n *\n * Print the numbers n, n-1, ..., 2, 1 -- one per line -- and then\n * print the word \"liftoff\" on its own line.\n *\n * Example: countdown(3) prints\n * 3\n * 2\n * 1\n * liftoff\n */\npublic class CountdownPrinter {\n\n    public static void countdown(int n) {\n        // TODO: loop from n down to 1, then print liftoff\n    }\n}\n",
+  "testCode": "public class CountdownPrinterTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected [\" + expected + \"] but got [\" + actual + \"]\");\n            failures++;\n        }\n    }\n\n    static String capture(int n) {\n        java.io.ByteArrayOutputStream buf = new java.io.ByteArrayOutputStream();\n        java.io.PrintStream old = System.out;\n        System.setOut(new java.io.PrintStream(buf));\n        try {\n            CountdownPrinter.countdown(n);\n        } finally {\n            System.setOut(old);\n        }\n        return buf.toString().replace(System.lineSeparator(), \"\\n\");\n    }\n\n    public static void main(String[] args) {\n        check(\"countdown(3)\", \"3\\n2\\n1\\nliftoff\\n\", capture(3));\n        check(\"countdown(1)\", \"1\\nliftoff\\n\", capture(1));\n        check(\"countdown(0) goes straight to liftoff\", \"liftoff\\n\", capture(0));\n        check(\"countdown(5)\", \"5\\n4\\n3\\n2\\n1\\nliftoff\\n\", capture(5));\n        check(\"countdown(2)\", \"2\\n1\\nliftoff\\n\", capture(2));\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class CountdownPrinter {\n\n    public static void countdown(int n) {\n        for (int i = n; i >= 1; i--) {\n            System.out.println(i);\n        }\n        System.out.println(\"liftoff\");\n    }\n}\n",
+  "explanation": "A for loop can count downward just as easily as upward: start at n, continue while i >= 1, and step with i--. Each println prints its argument and a line separator, so one call per number gives one number per line. When n is 0 the loop body never runs and only \"liftoff\" is printed.",
+  "hints": [
+    "Write a for loop that starts at n and uses i-- to count down; the condition i >= 1 stops it after printing 1.",
+    "System.out.println(i) prints the number and moves to the next line in one call.",
+    "After the loop finishes, one more println prints \"liftoff\"."
+  ]
+}

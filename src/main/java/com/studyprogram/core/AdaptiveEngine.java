@@ -94,6 +94,8 @@ public class AdaptiveEngine {
      *  - Low mastery topics score higher (student needs more practice)
      *  - Difficulty match: questions near the student's current level score higher
      *  - Penalty if the question was recently answered correctly
+     *  - Bonus for CODING exercises: writing real programs is the core of the app,
+     *    so hands-on exercises are preferred whenever the topic has them
      */
     private double score(Question q, StudentProfile profile) {
         // Read-only lookup — never create phantom performance records as a scoring side-effect
@@ -108,7 +110,9 @@ public class AdaptiveEngine {
 
         double recentPenalty    = (perf != null && perf.wasRecentlySeen(q.getId())) ? -0.5 : 0.0;
 
-        return topicPriority + difficultyMatch + recentPenalty + rng.nextDouble() * 0.1;
+        double codingBonus      = (q.getType() == QuestionType.CODING) ? 0.6 : 0.0;
+
+        return topicPriority + difficultyMatch + recentPenalty + codingBonus + rng.nextDouble() * 0.1;
     }
 
     /** Weighted random selection from the top-N candidates. */

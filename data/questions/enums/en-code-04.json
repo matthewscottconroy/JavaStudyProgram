@@ -1,0 +1,15 @@
+{
+  "id": "en-code-04",
+  "type": "CODING",
+  "difficulty": 2,
+  "prompt": "Complete the Signal helpers for a traffic-light enum: next cycles GREEN -> YELLOW -> RED -> GREEN, and isGo is true only for GREEN.",
+  "starterCode": "/**\n * TASK: Complete the two helper methods for the Light enum.\n *\n * next(Light l) returns the light that follows l in the cycle\n *   GREEN -> YELLOW -> RED -> GREEN\n * Example: next(Light.GREEN) -> Light.YELLOW\n *\n * isGo(Light l) returns true only for GREEN.\n */\npublic class Signal {\n\n    public enum Light { RED, GREEN, YELLOW }\n\n    public static Light next(Light l) {\n        // TODO: use a switch or an if/else chain\n        return null;\n    }\n\n    public static boolean isGo(Light l) {\n        // TODO: compare with ==\n        return false;\n    }\n}\n",
+  "testCode": "public class SignalTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        check(\"next(GREEN)\", Signal.Light.YELLOW, Signal.next(Signal.Light.GREEN));\n        check(\"next(YELLOW)\", Signal.Light.RED, Signal.next(Signal.Light.YELLOW));\n        check(\"next(RED)\", Signal.Light.GREEN, Signal.next(Signal.Light.RED));\n        check(\"isGo(GREEN)\", true, Signal.isGo(Signal.Light.GREEN));\n        check(\"isGo(RED)\", false, Signal.isGo(Signal.Light.RED));\n        check(\"isGo(YELLOW)\", false, Signal.isGo(Signal.Light.YELLOW));\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class Signal {\n\n    public enum Light { RED, GREEN, YELLOW }\n\n    public static Light next(Light l) {\n        switch (l) {\n            case GREEN:\n                return Light.YELLOW;\n            case YELLOW:\n                return Light.RED;\n            default:\n                return Light.GREEN;\n        }\n    }\n\n    public static boolean isGo(Light l) {\n        return l == Light.GREEN;\n    }\n}\n",
+  "explanation": "Enums are compared with == and work directly in switch statements, which makes them ideal for small state machines like a traffic light. next encodes the cycle explicitly, and isGo shows that a simple identity comparison (l == Light.GREEN) is all a predicate needs.",
+  "hints": [
+    "A switch on l with one case per constant is the clearest way to encode the cycle.",
+    "Follow the cycle order: GREEN goes to YELLOW, YELLOW to RED, RED back to GREEN.",
+    "isGo is a one-liner: return l == Light.GREEN;"
+  ]
+}

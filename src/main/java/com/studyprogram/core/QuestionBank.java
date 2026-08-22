@@ -4,30 +4,52 @@ import com.studyprogram.model.Question;
 import com.studyprogram.model.Topic;
 import com.studyprogram.questions.*;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
- * Central registry of all questions. Loads from every registered {@link QuestionLoader}.
- * To add questions for a new topic, create a QuestionLoader implementation and add it
- * to the {@code ALL_LOADERS} list in {@link #registerAll()}.
+ * Central registry of all questions.
+ *
+ * Questions come from three sources, loaded in order:
+ *   1. Hardcoded {@link QuestionLoader} implementations.
+ *   2. JSON files bundled inside the jar under the {@code questions/} classpath root.
+ *   3. JSON files in an external {@code data/questions/<topic-slug>/} directory next to
+ *      the working directory. External files override bundled questions with the same ID,
+ *      so users can fix or replace shipped questions without rebuilding.
+ *
+ * Problems found while loading (duplicate IDs, directories that match no topic) are
+ * collected as warnings via {@link #getWarnings()} rather than failing the whole load.
  */
 public class QuestionBank {
 
+    public static final Path DEFAULT_EXTERNAL_DIR = Paths.get("data", "questions");
+    private static final String CLASSPATH_ROOT = "/questions";
+
+    private final Map<String, Question> byId = new LinkedHashMap<>();
     private final Map<Topic, List<Question>> byTopic = new EnumMap<>(Topic.class);
-    private final Map<String, Question> byId = new HashMap<>();
+    private final List<String> warnings = new ArrayList<>();
 
     public QuestionBank() {
-        registerAll();
+        this(DEFAULT_EXTERNAL_DIR);
     }
 
-    // ── Registration ─────────────────────────────────────────────────────────
+    public QuestionBank(Path externalQuestionsDir) {
+        loadHardcoded();
+        loadFromClasspath();
+        loadExternal(externalQuestionsDir);
+        rebuildTopicIndex();
+    }
 
-    private void registerAll() {
+    // ── Loading ──────────────────────────────────────────────────────────────
+
+    private void loadHardcoded() {
         List<QuestionLoader> loaders = List.of(
                 // ── Fundamentals ──────────────────────────────────────────
                 new VariablesQuestionLoader(),
@@ -104,27 +126,100 @@ public class QuestionBank {
                 new FunctionalParadigmQuestionLoader()
         );
 
+        Set<String> seen = new HashSet<>();
         for (QuestionLoader loader : loaders) {
-            List<Question> questions = loader.load();
-            byTopic.computeIfAbsent(loader.getTopic(), k -> new ArrayList<>()).addAll(questions);
-            for (Question q : questions) byId.put(q.getId(), q);
+            for (Question q : loader.load()) {
+                putQuestion(q, seen, "loader " + loader.getClass().getSimpleName());
+            }
         }
-
-        // Also load file-based questions from data/questions/<topic-slug>/ directories.
-        // Drop a new .json file into the right folder to add a question — no Java changes needed.
-        loadFromDirectory(Paths.get("data", "questions"));
     }
 
-    private void loadFromDirectory(Path questionsRoot) {
-        if (!Files.isDirectory(questionsRoot)) return;
-        for (Topic topic : Topic.values()) {
-            String slug = topic.name().toLowerCase();
-            Path topicDir = questionsRoot.resolve(slug);
-            DirectoryQuestionLoader loader = new DirectoryQuestionLoader(topic, topicDir);
-            for (Question q : loader.load()) {
-                byTopic.computeIfAbsent(topic, k -> new ArrayList<>()).add(q);
-                byId.put(q.getId(), q);
+    /**
+     * Loads JSON questions bundled inside the jar (or target/classes) under
+     * {@code questions/<topic-slug>/}. Works both when running from an exploded
+     * classpath directory and from inside a fat jar.
+     */
+    private void loadFromClasspath() {
+        var url = QuestionBank.class.getResource(CLASSPATH_ROOT);
+        if (url == null) return;   // nothing bundled (e.g. running from an IDE before packaging)
+        try {
+            URI uri = url.toURI();
+            if ("jar".equals(uri.getScheme())) {
+                try (FileSystem fs = FileSystems.newFileSystem(uri, Map.of())) {
+                    loadQuestionTree(fs.getPath(CLASSPATH_ROOT), "bundled");
+                }
+            } else {
+                loadQuestionTree(Path.of(uri), "bundled");
             }
+        } catch (IOException | URISyntaxException e) {
+            warnings.add("Could not read bundled questions: " + e.getMessage());
+        }
+    }
+
+    /** Loads the external overlay directory. Same-ID questions override earlier sources. */
+    private void loadExternal(Path root) {
+        if (root == null || !Files.isDirectory(root)) return;
+        try {
+            loadQuestionTree(root, "external");
+        } catch (IOException e) {
+            warnings.add("Could not read external questions from " + root + ": " + e.getMessage());
+        }
+    }
+
+    /**
+     * Walks {@code root}/&lt;topic-slug&gt;/*.json. Directories that match no topic slug
+     * are reported as warnings so misnamed content is never silently dropped.
+     */
+    private void loadQuestionTree(Path root, String sourceLabel) throws IOException {
+        Set<String> seen = new HashSet<>();
+        boolean override = "external".equals(sourceLabel);
+        try (Stream<Path> dirs = Files.list(root)) {
+            for (Path dir : dirs.filter(Files::isDirectory).sorted().toList()) {
+                String slug = dir.getFileName().toString();
+                Topic topic = Topic.fromDirSlug(slug);
+                if (topic == null) {
+                    warnings.add("Question directory '" + slug + "' (" + sourceLabel
+                            + ") matches no topic — its questions were NOT loaded.");
+                    continue;
+                }
+                try (Stream<Path> files = Files.list(dir)) {
+                    for (Path p : files.filter(f -> f.getFileName().toString().endsWith(".json"))
+                                       .sorted().toList()) {
+                        try (InputStream in = Files.newInputStream(p)) {
+                            Question q = JsonQuestionParser.parse(in, topic);
+                            if (override && byId.containsKey(q.getId()) && !seen.contains(q.getId())) {
+                                byId.put(q.getId(), q);   // external file replaces bundled question
+                                seen.add(q.getId());
+                            } else {
+                                putQuestion(q, seen, sourceLabel + " file " + p.getFileName());
+                            }
+                        } catch (IOException | RuntimeException e) {
+                            warnings.add("Skipping " + p + " — " + e.getMessage());
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void putQuestion(Question q, Set<String> seenThisPhase, String source) {
+        if (seenThisPhase.contains(q.getId())) {
+            warnings.add("Duplicate question ID '" + q.getId() + "' (" + source + ") — skipped.");
+            return;
+        }
+        if (byId.containsKey(q.getId())) {
+            // same ID from an earlier phase: hardcoded questions win over bundled JSON copies
+            seenThisPhase.add(q.getId());
+            return;
+        }
+        byId.put(q.getId(), q);
+        seenThisPhase.add(q.getId());
+    }
+
+    private void rebuildTopicIndex() {
+        byTopic.clear();
+        for (Question q : byId.values()) {
+            byTopic.computeIfAbsent(q.getTopic(), k -> new ArrayList<>()).add(q);
         }
     }
 
@@ -154,5 +249,10 @@ public class QuestionBank {
                                                 e -> e.getValue().size(),
                                                 (a, b) -> a,
                                                 () -> new EnumMap<>(Topic.class)));
+    }
+
+    /** Problems found while loading (misnamed directories, duplicate IDs, bad JSON). */
+    public List<String> getWarnings() {
+        return Collections.unmodifiableList(warnings);
     }
 }

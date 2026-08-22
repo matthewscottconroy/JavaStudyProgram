@@ -1,0 +1,15 @@
+{
+  "id": "ic-code-07",
+  "type": "CODING",
+  "difficulty": 2,
+  "prompt": "Classify a BMI value into a category: below 18.5 is \"underweight\", below 25 is \"normal\", below 30 is \"overweight\", and 30 or above is \"obese\".",
+  "starterCode": "/**\n * TASK: Complete the bmiCategory method.\n *\n * bmi < 18.5          -> \"underweight\"\n * 18.5 <= bmi < 25    -> \"normal\"\n * 25 <= bmi < 30      -> \"overweight\"\n * bmi >= 30           -> \"obese\"\n *\n * Example: bmiCategory(22.0) -> \"normal\"\n */\npublic class BmiClassifier {\n\n    public static String bmiCategory(double bmi) {\n        // TODO: an if / else if chain checking the ranges in order\n        return \"\";\n    }\n}\n",
+  "testCode": "public class BmiClassifierTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        check(\"bmiCategory(10.0)\", \"underweight\", BmiClassifier.bmiCategory(10.0));\n        check(\"bmiCategory(18.5) boundary\", \"normal\", BmiClassifier.bmiCategory(18.5));\n        check(\"bmiCategory(22.0)\", \"normal\", BmiClassifier.bmiCategory(22.0));\n        check(\"bmiCategory(25.0) boundary\", \"overweight\", BmiClassifier.bmiCategory(25.0));\n        check(\"bmiCategory(29.9)\", \"overweight\", BmiClassifier.bmiCategory(29.9));\n        check(\"bmiCategory(30.0) boundary\", \"obese\", BmiClassifier.bmiCategory(30.0));\n        check(\"bmiCategory(41.5)\", \"obese\", BmiClassifier.bmiCategory(41.5));\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class BmiClassifier {\n\n    public static String bmiCategory(double bmi) {\n        if (bmi < 18.5) {\n            return \"underweight\";\n        } else if (bmi < 25) {\n            return \"normal\";\n        } else if (bmi < 30) {\n            return \"overweight\";\n        } else {\n            return \"obese\";\n        }\n    }\n}\n",
+  "explanation": "When ranges are checked in increasing order with an if / else if chain, each branch only needs an upper bound: reaching else if (bmi < 25) already guarantees bmi >= 18.5, because the earlier branch would have caught anything smaller. This makes range classification code short and avoids duplicated compound conditions like bmi >= 18.5 && bmi < 25. The final else catches everything at 30 and above.",
+  "hints": [
+    "Check the smallest range first: if (bmi < 18.5) return \"underweight\";",
+    "In an else if chain each later branch already knows the earlier tests failed, so else if (bmi < 25) alone means 18.5 <= bmi < 25.",
+    "Boundary values go up: exactly 18.5 is \"normal\", exactly 25 is \"overweight\", exactly 30 is \"obese\"."
+  ]
+}

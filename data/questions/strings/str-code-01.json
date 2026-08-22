@@ -1,0 +1,15 @@
+{
+  "id": "str-code-01",
+  "type": "CODING",
+  "difficulty": 2,
+  "prompt": "Write a method that counts the vowels in a string, ignoring case. Complete the countVowels method in the starter file, then run the tests.",
+  "starterCode": "/**\n * TASK: Complete the countVowels method.\n *\n * Return the number of vowels (a, e, i, o, u) in the string s.\n * Counting is case-insensitive, so both 'A' and 'a' count.\n *\n * Example: countVowels(\"Hello World\") -> 3 (e, o, o)\n */\npublic class VowelCounter {\n\n    public static int countVowels(String s) {\n        // TODO: loop over the characters and count the vowels\n        return 0;\n    }\n}\n",
+  "testCode": "public class VowelCounterTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        check(\"countVowels(\\\"hello\\\")\", 2, VowelCounter.countVowels(\"hello\"));\n        check(\"countVowels(\\\"AEIOU\\\")\", 5, VowelCounter.countVowels(\"AEIOU\"));\n        check(\"countVowels(\\\"xyz\\\")\", 0, VowelCounter.countVowels(\"xyz\"));\n        check(\"countVowels(\\\"\\\")\", 0, VowelCounter.countVowels(\"\"));\n        check(\"countVowels(\\\"Programming\\\")\", 3, VowelCounter.countVowels(\"Programming\"));\n        check(\"countVowels(\\\"Queue\\\")\", 4, VowelCounter.countVowels(\"Queue\"));\n        check(\"countVowels(\\\"Why?\\\")\", 0, VowelCounter.countVowels(\"Why?\"));\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class VowelCounter {\n\n    public static int countVowels(String s) {\n        int count = 0;\n        String lower = s.toLowerCase();\n        for (int i = 0; i < lower.length(); i++) {\n            char c = lower.charAt(i);\n            if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {\n                count++;\n            }\n        }\n        return count;\n    }\n}\n",
+  "explanation": "Strings are walked one character at a time with charAt(i) inside a loop bounded by length(). Lower-casing the whole string once up front means each character only needs to be compared against the five lowercase vowels, instead of ten cases. A counter variable accumulates the matches, mirroring the standard counting-loop pattern.",
+  "hints": [
+    "Call s.toLowerCase() once so you only have to compare against lowercase vowels.",
+    "Loop with for (int i = 0; i < s.length(); i++) and read each character with charAt(i).",
+    "Compare the character against 'a', 'e', 'i', 'o', 'u' with == and ||, incrementing a counter on a match."
+  ]
+}

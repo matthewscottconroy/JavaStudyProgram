@@ -1,0 +1,15 @@
+{
+  "id": "ic-code-02",
+  "type": "CODING",
+  "difficulty": 2,
+  "prompt": "Decide whether a year is a leap year: divisible by 4, except century years, which must be divisible by 400. Complete the isLeapYear method.",
+  "starterCode": "/**\n * TASK: Complete the isLeapYear method.\n *\n * A year is a leap year when it is divisible by 4,\n * EXCEPT century years (divisible by 100), which are leap years\n * only when they are also divisible by 400.\n *\n * Example: isLeapYear(2024) -> true   (divisible by 4)\n * Example: isLeapYear(1900) -> false  (century, not divisible by 400)\n * Example: isLeapYear(2000) -> true   (divisible by 400)\n */\npublic class LeapYearChecker {\n\n    public static boolean isLeapYear(int year) {\n        // TODO: combine the divisibility rules with % and boolean logic\n        return false;\n    }\n}\n",
+  "testCode": "public class LeapYearCheckerTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        check(\"isLeapYear(2000)\", true, LeapYearChecker.isLeapYear(2000));\n        check(\"isLeapYear(1900)\", false, LeapYearChecker.isLeapYear(1900));\n        check(\"isLeapYear(2024)\", true, LeapYearChecker.isLeapYear(2024));\n        check(\"isLeapYear(2023)\", false, LeapYearChecker.isLeapYear(2023));\n        check(\"isLeapYear(1600)\", true, LeapYearChecker.isLeapYear(1600));\n        check(\"isLeapYear(2100)\", false, LeapYearChecker.isLeapYear(2100));\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class LeapYearChecker {\n\n    public static boolean isLeapYear(int year) {\n        if (year % 400 == 0) {\n            return true;\n        }\n        if (year % 100 == 0) {\n            return false;\n        }\n        return year % 4 == 0;\n    }\n}\n",
+  "explanation": "Checking the most specific rule first makes the logic simple: divisible by 400 is always a leap year, then any other century year is not, and finally the plain divisible-by-4 rule decides the rest. Each early return removes a case so the later checks stay one condition each. The same logic can be written as a single boolean expression: year % 4 == 0 && (year % 100 != 0 || year % 400 == 0).",
+  "hints": [
+    "year % 4 == 0 tests divisibility by 4; the same pattern works for 100 and 400.",
+    "Handle the special cases in order: divisible by 400 first, then divisible by 100, then by 4.",
+    "Early returns keep it clean -- once you return true for % 400, the % 100 check only sees the remaining years."
+  ]
+}

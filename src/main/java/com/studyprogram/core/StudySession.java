@@ -53,7 +53,13 @@ public class StudySession {
     }
 
     /** Record that the student skipped this question (not counted in history). */
-    public void skip() { skipped++; }
+    public void skip(Question question) {
+        skipped++;
+        if (question != null) {
+            lastQuestionId = question.getId();   // don't immediately re-serve the skipped question
+            profile.getOrCreatePerformance(question.getTopic()).recordSkip();
+        }
+    }
 
     // ── Summary ───────────────────────────────────────────────────────────────
 

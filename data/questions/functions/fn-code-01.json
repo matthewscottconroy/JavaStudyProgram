@@ -1,0 +1,14 @@
+{
+  "id": "fn-code-01",
+  "type": "CODING",
+  "difficulty": 1,
+  "prompt": "Write a method that returns the largest of three int values. Complete the maxOfThree method in the starter file, then run the tests.",
+  "starterCode": "/**\n * TASK: Complete the maxOfThree method.\n *\n * Return the largest of the three int parameters a, b, and c.\n *\n * Example: maxOfThree(4, 9, 2) -> 9\n * If two or more values tie for largest, return that value.\n */\npublic class MaxOfThree {\n\n    public static int maxOfThree(int a, int b, int c) {\n        // TODO: implement using comparisons\n        return 0;\n    }\n}\n",
+  "testCode": "public class MaxOfThreeTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        check(\"maxOfThree(1, 2, 3)\", 3, MaxOfThree.maxOfThree(1, 2, 3));\n        check(\"maxOfThree(3, 2, 1)\", 3, MaxOfThree.maxOfThree(3, 2, 1));\n        check(\"maxOfThree(2, 3, 1)\", 3, MaxOfThree.maxOfThree(2, 3, 1));\n        check(\"maxOfThree(5, 5, 5)\", 5, MaxOfThree.maxOfThree(5, 5, 5));\n        check(\"maxOfThree(-1, -2, -3)\", -1, MaxOfThree.maxOfThree(-1, -2, -3));\n        check(\"maxOfThree(0, -10, -5)\", 0, MaxOfThree.maxOfThree(0, -10, -5));\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class MaxOfThree {\n\n    public static int maxOfThree(int a, int b, int c) {\n        int max = a;\n        if (b > max) {\n            max = b;\n        }\n        if (c > max) {\n            max = c;\n        }\n        return max;\n    }\n}\n",
+  "explanation": "A method takes parameters, computes a result, and hands it back with return. The running-maximum pattern starts by assuming the first value is the largest, then lets each remaining value overwrite it if it is bigger. This scales naturally to any number of values and works for ties and negatives without special cases.",
+  "hints": [
+    "Start with int max = a; then compare the other two values against max.",
+    "Use if (b > max) max = b; and do the same for c before returning max."
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "ex-code-01",
+  "type": "CODING",
+  "difficulty": 2,
+  "prompt": "Complete the parseOrDefault method: return Integer.parseInt(text), but catch NumberFormatException and return the fallback value when the text cannot be parsed.",
+  "starterCode": "/**\n * TASK: Complete the parseOrDefault method.\n *\n * Try to convert text to an int with Integer.parseInt. If parsing fails\n * because the text is not a valid integer (this includes null and the\n * empty string), catch the NumberFormatException and return fallback\n * instead of crashing.\n *\n * Example: parseOrDefault(\"42\", 0)  -> 42\n *          parseOrDefault(\"abc\", 0) -> 0\n */\npublic class SafeParser {\n\n    public static int parseOrDefault(String text, int fallback) {\n        // TODO: parse text, returning fallback when a NumberFormatException is thrown\n        return 0;\n    }\n}\n",
+  "testCode": "public class SafeParserTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        check(\"valid number\", 42, SafeParser.parseOrDefault(\"42\", 0));\n        check(\"negative number\", -7, SafeParser.parseOrDefault(\"-7\", 0));\n        check(\"letters fall back\", 99, SafeParser.parseOrDefault(\"abc\", 99));\n        check(\"empty string falls back\", 5, SafeParser.parseOrDefault(\"\", 5));\n        check(\"null falls back\", 3, SafeParser.parseOrDefault(null, 3));\n        check(\"decimal text falls back\", 1, SafeParser.parseOrDefault(\"12.5\", 1));\n        check(\"text with spaces falls back\", 8, SafeParser.parseOrDefault(\" 4 \", 8));\n\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class SafeParser {\n\n    public static int parseOrDefault(String text, int fallback) {\n        try {\n            return Integer.parseInt(text);\n        } catch (NumberFormatException e) {\n            return fallback;\n        }\n    }\n}\n",
+  "explanation": "Integer.parseInt throws a NumberFormatException for any input it cannot convert, including letters, decimals, strings with spaces, the empty string, and even null. Wrapping the call in a try block and catching that specific exception turns a crash into a controlled fallback value. Catching the narrow NumberFormatException (rather than Exception) is good practice because it only handles the failure you expect.",
+  "hints": [
+    "Put the return Integer.parseInt(text); call inside a try block.",
+    "Add catch (NumberFormatException e) after the try block and return fallback there.",
+    "You do not need a special null check: Integer.parseInt(null) also throws NumberFormatException, so the same catch handles it."
+  ]
+}

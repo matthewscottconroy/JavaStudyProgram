@@ -1,6 +1,7 @@
 package com.studyprogram.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.LocalDateTime;
 import java.util.ArrayDeque;
@@ -14,10 +15,13 @@ public class TopicPerformance {
     private Topic topic;
     private int attempts;
     private int correct;
+    private int skipped;
     private double masteryScore;          // 0.0–1.0 (SM-2-inspired running score)
     private LocalDateTime lastAttempted;
     private LocalDateTime lastCorrect;
-    @JsonIgnore
+    // NOTE: no @JsonIgnore here — the field must persist so the "recently seen"
+    // spaced-repetition penalty survives across program runs. Jackson serializes it
+    // through the List-typed accessor pair below.
     private Deque<String> recentlyAnswered = new ArrayDeque<>(); // question IDs, capped at 20
 
     private static final int RECENT_CAP = 20;
@@ -46,6 +50,12 @@ public class TopicPerformance {
         if (recentlyAnswered.size() > RECENT_CAP) recentlyAnswered.removeLast();
     }
 
+    /** Record that the student chose to skip a question on this topic (an avoidance signal). */
+    public void recordSkip() {
+        skipped++;
+        lastAttempted = LocalDateTime.now();
+    }
+
     /** Whether this question was answered in the current session window (spaced repetition). */
     @JsonIgnore
     public boolean wasRecentlySeen(String questionId) {
@@ -71,6 +81,8 @@ public class TopicPerformance {
     public void setAttempts(int a)           { this.attempts = a; }
     public int getCorrect()                  { return correct; }
     public void setCorrect(int c)            { this.correct = c; }
+    public int getSkipped()                  { return skipped; }
+    public void setSkipped(int s)            { this.skipped = s; }
     public double getMasteryScore()          { return masteryScore; }
     public void setMasteryScore(double s)    { this.masteryScore = s; }
     public LocalDateTime getLastAttempted()  { return lastAttempted; }
@@ -79,6 +91,7 @@ public class TopicPerformance {
     public void setLastCorrect(LocalDateTime t)   { this.lastCorrect = t; }
 
     // Persist the spaced-repetition deque as a plain list for Jackson
+    @JsonProperty("recentlyAnswered")
     public List<String> getRecentlyAnswered() { return new ArrayList<>(recentlyAnswered); }
     public void setRecentlyAnswered(List<String> ids) {
         recentlyAnswered = ids == null ? new ArrayDeque<>() : new ArrayDeque<>(ids);

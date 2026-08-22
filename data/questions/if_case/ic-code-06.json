@@ -1,0 +1,15 @@
+{
+  "id": "ic-code-06",
+  "type": "CODING",
+  "difficulty": 2,
+  "prompt": "Classic FizzBuzz for a single number: return \"fizzbuzz\" for multiples of both 3 and 5, \"fizz\" for multiples of 3, \"buzz\" for multiples of 5, otherwise the number itself as a String.",
+  "starterCode": "/**\n * TASK: Complete the fizzBuzz method.\n *\n * Multiples of both 3 and 5 -> \"fizzbuzz\"\n * Multiples of 3 only       -> \"fizz\"\n * Multiples of 5 only       -> \"buzz\"\n * Everything else           -> the number as a String, e.g. \"7\"\n *\n * Example: fizzBuzz(15) -> \"fizzbuzz\"\n * Careful: the order of the checks matters!\n */\npublic class FizzBuzzer {\n\n    public static String fizzBuzz(int n) {\n        // TODO: check the combined case first\n        return \"\";\n    }\n}\n",
+  "testCode": "public class FizzBuzzerTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        check(\"fizzBuzz(3)\", \"fizz\", FizzBuzzer.fizzBuzz(3));\n        check(\"fizzBuzz(5)\", \"buzz\", FizzBuzzer.fizzBuzz(5));\n        check(\"fizzBuzz(15)\", \"fizzbuzz\", FizzBuzzer.fizzBuzz(15));\n        check(\"fizzBuzz(30)\", \"fizzbuzz\", FizzBuzzer.fizzBuzz(30));\n        check(\"fizzBuzz(7)\", \"7\", FizzBuzzer.fizzBuzz(7));\n        check(\"fizzBuzz(1)\", \"1\", FizzBuzzer.fizzBuzz(1));\n        check(\"fizzBuzz(9)\", \"fizz\", FizzBuzzer.fizzBuzz(9));\n        check(\"fizzBuzz(10)\", \"buzz\", FizzBuzzer.fizzBuzz(10));\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class FizzBuzzer {\n\n    public static String fizzBuzz(int n) {\n        if (n % 3 == 0 && n % 5 == 0) {\n            return \"fizzbuzz\";\n        } else if (n % 3 == 0) {\n            return \"fizz\";\n        } else if (n % 5 == 0) {\n            return \"buzz\";\n        } else {\n            return String.valueOf(n);\n        }\n    }\n}\n",
+  "explanation": "An if / else if chain evaluates conditions top to bottom and takes the first match, so the most specific condition -- divisible by both 3 and 5 -- must come first, or 15 would return \"fizz\" and never reach the combined case. n % 3 == 0 tests divisibility, and String.valueOf(n) converts the int to its text form for the default branch.",
+  "hints": [
+    "Test n % 3 == 0 && n % 5 == 0 first; if \"fizz\" is checked earlier, 15 never reaches \"fizzbuzz\".",
+    "Use an if / else if / else if / else chain so exactly one branch runs.",
+    "String.valueOf(n) (or \"\" + n) turns the int into a String for the final else."
+  ]
+}
