@@ -11,5 +11,9 @@
     "java.util.List has a sort method that takes a Comparator; Comparator.comparingInt with a key-extractor covers sortByLength.",
     "list.sort is guaranteed stable, so equal-length words keep their original order automatically -- no extra work needed.",
     "For sortByLastChar, extract w.charAt(w.length() - 1) in the comparator lambda; a char is fine where an int is expected."
+  ],
+  "relatedTopics": [
+    "INTERFACES",
+    "STRINGS"
   ]
 }

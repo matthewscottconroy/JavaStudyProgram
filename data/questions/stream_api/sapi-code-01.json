@@ -11,5 +11,8 @@
     "Start each method with the list's stream() and chain operations on it.",
     "For the sum: filter keeps the evens (n % 2 == 0), map squares them, and reduce (or an IntStream sum) totals them.",
     "For upperSorted: map with String::toUpperCase, then sorted(), then collect into a new list with Collectors.toList()."
+  ],
+  "relatedTopics": [
+    "LAMBDAS"
   ]
 }

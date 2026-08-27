@@ -83,6 +83,17 @@ public class TopicPerformance {
         masteryUpdatedAt = now;
     }
 
+    /**
+     * A small indirect signal from a question on ANOTHER topic that exercises this
+     * topic's skills (concept drill-down). A miss elsewhere nudges this mastery down —
+     * bringing the topic back into the auto feed — without counting as an attempt here.
+     */
+    public void recordIndirect(boolean wasCorrect) {
+        double delta = wasCorrect ? 0.01 : -0.03;
+        masteryScore = Math.max(0.0, Math.min(1.0, masteryScore + delta));
+        masteryUpdatedAt = LocalDateTime.now();
+    }
+
     /** Record that the student chose to skip a question on this topic (an avoidance signal). */
     public void recordSkip() {
         skipped++;

@@ -11,5 +11,8 @@
     "Use an outer loop for rows 1..n and an inner loop that appends row-number stars.",
     "Append to a StringBuilder and return sb.toString() at the end.",
     "To avoid a trailing newline, only append '\\n' when the current row is not the last one (row < n)."
+  ],
+  "relatedTopics": [
+    "IF_CASE"
   ]
 }

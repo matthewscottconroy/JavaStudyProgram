@@ -11,5 +11,10 @@
     "Use two nested for loops, r over rows and c over cols, and get each cell with cell.apply(r, c).",
     "Build the result in a StringBuilder rather than concatenating strings in the loop.",
     "To avoid trailing separators, append \" \" only when c > 0 and \"\\n\" only when r > 0."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "STRINGS",
+    "IF_CASE"
   ]
 }

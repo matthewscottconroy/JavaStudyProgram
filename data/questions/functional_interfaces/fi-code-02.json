@@ -11,5 +11,9 @@
     "shout() returns behavior, not a value: return a lambda such as s -> ... that uppercases and appends the exclamation mark.",
     "In compose, the returned lambda receives a T; inside it, call f.apply first and pass that result to g.apply.",
     "Mind the order: compose(f, g) must apply f BEFORE g -- one of the tests fails if you swap them."
+  ],
+  "relatedTopics": [
+    "LAMBDAS",
+    "GENERICS"
   ]
 }

@@ -11,5 +11,8 @@
     "Build the mask the same way for both methods: int mask = 1 << bit;",
     "setBit: value | mask -- OR with 0 leaves bits alone, OR with 1 forces a 1.",
     "clearBit: value & ~mask -- ~ flips the mask to all 1s with one 0, and AND keeps every bit except that one."
+  ],
+  "relatedTopics": [
+    "VARIABLES"
   ]
 }

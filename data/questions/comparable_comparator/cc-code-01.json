@@ -11,5 +11,9 @@
     "Compare durations first: Integer.compare(seconds, other.seconds) yields a negative, zero, or positive result.",
     "Only when the seconds comparison is 0 should the titles decide; String already implements alphabetical compareTo.",
     "Return the non-zero primary result immediately, and fall through to the title comparison only on a tie."
+  ],
+  "relatedTopics": [
+    "INTERFACES",
+    "IF_CASE"
   ]
 }

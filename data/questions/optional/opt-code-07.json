@@ -11,5 +11,8 @@
     "Optional.ofNullable(cli.get(key)) is an Optional that is empty exactly when cli lacks the key.",
     "Chain .or(() -> java.util.Optional.ofNullable(env.get(key))) -- note that or takes a Supplier of another Optional, not a plain value.",
     "Add a second .or(...) for defaults and finish with .orElse(\"missing:\" + key)."
+  ],
+  "relatedTopics": [
+    "COLLECTIONS"
   ]
 }

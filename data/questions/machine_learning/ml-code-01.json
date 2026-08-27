@@ -10,5 +10,9 @@
   "hints": [
     "Loop one index i over 0 .. a.length-1; both arrays share that index.",
     "Accumulate: sum += a[i] * b[i];"
+  ],
+  "relatedTopics": [
+    "ARRAYS",
+    "LOOPS"
   ]
 }

@@ -11,5 +11,9 @@
     "Swapping two array slots needs a temp variable: temp = a[i]; a[i] = a[i+1]; a[i+1] = temp;",
     "Repeat sweeps until a whole sweep performs zero swaps -- track that with a boolean flag.",
     "Return a itself at the end. The test checks result == input, so a new array will fail."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE"
   ]
 }

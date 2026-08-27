@@ -11,5 +11,9 @@
     "Use a for loop that counts i from 1 up to (but not including) limit.",
     "i % 3 == 0 is true exactly when i is a multiple of 3. Combine two of these tests with ||.",
     "Declare int sum = 0 before the loop and add qualifying values of i to it inside the loop."
+  ],
+  "relatedTopics": [
+    "IF_CASE",
+    "VARIABLES"
   ]
 }

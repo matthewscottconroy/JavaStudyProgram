@@ -11,5 +11,9 @@
     "args is a String[]; loop over it with for (String arg : args).",
     "Integer.parseInt(arg) turns the text \"42\" into the int 42 so it can be added.",
     "Initialize int sum = 0 before the loop -- with no arguments the loop is skipped and 0 is exactly what should be printed."
+  ],
+  "relatedTopics": [
+    "VARIABLES",
+    "PRINTING"
   ]
 }

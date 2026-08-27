@@ -11,5 +11,8 @@
     "Assigning an array parameter straight to a field copies only the REFERENCE -- both variables then point at the same array object.",
     "java.util.Arrays.copyOf(source, source.length) (or source.clone()) produces an independent copy.",
     "You need two copies: one when the array comes in through the constructor, and one every time getValues() hands an array out."
+  ],
+  "relatedTopics": [
+    "CLASSES"
   ]
 }

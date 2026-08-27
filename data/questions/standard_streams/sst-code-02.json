@@ -11,5 +11,9 @@
     "Use the classic loop: int c; while ((c = in.read()) != -1) { ... }.",
     "Cast the int to char before calling Character.toUpperCase on it.",
     "Write each transformed character with out.write(...); no return value is needed."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "VARIABLES"
   ]
 }

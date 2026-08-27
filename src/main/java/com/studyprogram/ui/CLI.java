@@ -66,10 +66,11 @@ public class CLI {
             System.out.println("  [1] Start Study Session");
             System.out.println("  [2] View Performance");
             System.out.println("  [3] Concept Map");
-            System.out.println("  [4] Progress Report (HTML)");
-            System.out.println("  [5] Select Topics");
-            System.out.println("  [6] Switch Profile");
-            System.out.println("  [7] Exit");
+            System.out.println("  [4] Boss Challenge");
+            System.out.println("  [5] Progress Report (HTML)");
+            System.out.println("  [6] Select Topics");
+            System.out.println("  [7] Switch Profile");
+            System.out.println("  [8] Exit");
             System.out.print("\n  Choice: ");
             String choice = in.nextLine().trim();
 
@@ -78,10 +79,11 @@ public class CLI {
                 case "2" -> Display.performanceTable(currentProfile.getPerformance(),
                                                       currentProfile.getSelectedTopicsList());
                 case "3" -> conceptMap();
-                case "4" -> progressReport();
-                case "5" -> selectTopics();
-                case "6" -> profileMenu();
-                case "7" -> { saveProfile(); return; }
+                case "4" -> bossChallenge();
+                case "5" -> progressReport();
+                case "6" -> selectTopics();
+                case "7" -> profileMenu();
+                case "8" -> { saveProfile(); return; }
                 default  -> System.out.println("  Invalid choice.");
             }
         }
@@ -133,6 +135,90 @@ public class CLI {
         attemptLog = AttemptLog.forProfile(storage.directory(), name);
         System.out.printf("  Profile created for %s.%n", name);
         selectTopics();
+    }
+
+    /**
+     * World boss fights: a 10-question, no-hints quiz across one level band's topics.
+     * Clearing one (80%+) is recorded on the profile and shown on the concept map.
+     */
+    private void bossChallenge() {
+        Display.header("Boss Challenges");
+        String[] worldNames = {"", "Foundations", "Elementary", "Intermediate", "Advanced", "Expert"};
+        for (int level = 1; level <= 5; level++) {
+            String status;
+            if (BossChallenge.cleared(currentProfile, level)) {
+                status = Display.GREEN + "CLEARED ★" + Display.RESET;
+            } else if (BossChallenge.unlocked(currentProfile, level)) {
+                status = Display.CYAN + "READY — face the boss!" + Display.RESET;
+            } else {
+                status = Display.DIM + "locked (raise the world's average mastery to "
+                        + (int) (BossChallenge.UNLOCK_AVG_MASTERY * 100) + "%)" + Display.RESET;
+            }
+            System.out.printf("  [%d] World %d · %-14s %s%n", level, level, worldNames[level], status);
+        }
+        System.out.print("\n  World number (Enter to cancel): ");
+        String input = in.nextLine().trim();
+        if (input.isBlank()) return;
+
+        int level;
+        try {
+            level = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            return;
+        }
+        if (level < 1 || level > 5) return;
+        if (!BossChallenge.unlocked(currentProfile, level)) {
+            System.out.println("  That boss is still locked — keep practicing its world first.");
+            return;
+        }
+
+        Random rng = new Random(level * 1000L + currentProfile.getBossAttempts());
+        currentProfile.setBossAttempts(currentProfile.getBossAttempts() + 1);
+        List<Question> quiz = BossChallenge.pickQuestions(bank, level, rng);
+
+        Display.header("BOSS FIGHT — World " + level + " · " + worldNames[level]);
+        System.out.println("  " + quiz.size() + " questions. No hints. Skipping counts as a miss. "
+                + "Score " + (int) (BossChallenge.PASS_RATIO * 100) + "%+ to clear the world!");
+
+        int correct = 0, asked = 0;
+        for (Question q : quiz) {
+            asked++;
+            Display.question(q, asked, quiz.size());
+            long qStart = System.nanoTime();
+            String answer = in.nextLine().trim();
+            if (answer.equalsIgnoreCase("q")) {
+                System.out.println("  You fled the boss fight!");
+                asked--;
+                break;
+            }
+            if (answer.equalsIgnoreCase("h") || answer.equalsIgnoreCase("e")) {
+                System.out.println("  " + Display.YELLOW + "No help during a boss fight!"
+                        + Display.RESET + " Your answer counts as given:");
+                answer = in.nextLine().trim();
+            }
+            GradingResult result = grader.grade(q, answer.equalsIgnoreCase("s") ? "" : answer);
+            currentProfile.recordAnswer(q, result.correct());
+            logAttempt(q, result.correct() ? AttemptRecord.OUTCOME_CORRECT
+                                           : AttemptRecord.OUTCOME_INCORRECT, qStart, 0);
+            if (result.correct()) {
+                correct++;
+                Display.correct(result);
+            } else {
+                Display.incorrect(result);
+            }
+        }
+
+        System.out.printf("%n  Boss result: %d/%d%n", correct, asked);
+        if (BossChallenge.passed(correct, quiz.size())) {
+            currentProfile.getBossesCleared().add(level);
+            System.out.println("  " + Display.GREEN + Display.BOLD
+                    + "★ WORLD " + level + " CLEARED! ★" + Display.RESET
+                    + "  It now shows on your concept map.");
+        } else if (asked == quiz.size()) {
+            System.out.println("  The boss survives… study up and challenge it again "
+                    + "(the questions change each attempt).");
+        }
+        saveProfile();
     }
 
     /** Opens the Swing overworld map (non-blocking; selections there update the profile). */

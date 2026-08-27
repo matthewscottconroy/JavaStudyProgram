@@ -11,5 +11,8 @@
     "replaceAll wants a lambda that takes one element and returns its replacement.",
     "For the numbers: nums.replaceAll(n -> n * 2).",
     "For the strings, return w.trim() from the lambda (or use the method reference String::trim)."
+  ],
+  "relatedTopics": [
+    "ARRAYS_ARRAYLISTS"
   ]
 }

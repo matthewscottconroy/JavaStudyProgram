@@ -11,5 +11,8 @@
     "In deposit, reject amount <= 0 by returning false before modifying anything; otherwise add and return true.",
     "withdraw has two ways to fail: a non-positive amount, or an amount greater than the current balance.",
     "Return false BEFORE changing the balance so a rejected operation leaves the state untouched."
+  ],
+  "relatedTopics": [
+    "IF_CASE"
   ]
 }

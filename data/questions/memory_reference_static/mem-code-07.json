@@ -11,5 +11,8 @@
     "register maps directly onto services.put(name, url).",
     "Map.get returns null when the key is absent -- exactly what lookup should do.",
     "clearAll calls the map's clear() method; because everything is static, this affects every caller at once."
+  ],
+  "relatedTopics": [
+    "CLASSES"
   ]
 }

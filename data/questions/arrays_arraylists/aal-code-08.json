@@ -11,5 +11,8 @@
     "Keep an int total = 0 accumulator declared before the loop.",
     "For each element: first add it to total, then add total to the result list.",
     "The result is a new ArrayList; never call set or add on the input list."
+  ],
+  "relatedTopics": [
+    "LOOPS"
   ]
 }

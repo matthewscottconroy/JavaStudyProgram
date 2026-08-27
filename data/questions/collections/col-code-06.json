@@ -11,5 +11,10 @@
     "Put the indexes 0..names.length-1 into an ArrayDeque<Integer>; removeFirst and addLast give queue behavior.",
     "Clone the needs array (needs.clone()) so you can decrement counts without mutating the input.",
     "Loop while the queue is not empty: take the front index, decrement its count, then either record the name or addLast the index back."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE",
+    "ARRAYS"
   ]
 }

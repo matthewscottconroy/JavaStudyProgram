@@ -11,5 +11,8 @@
     "year % 4 == 0 tests divisibility by 4; the same pattern works for 100 and 400.",
     "Handle the special cases in order: divisible by 400 first, then divisible by 100, then by 4.",
     "Early returns keep it clean -- once you return true for % 400, the % 100 check only sees the remaining years."
+  ],
+  "relatedTopics": [
+    "VARIABLES"
   ]
 }

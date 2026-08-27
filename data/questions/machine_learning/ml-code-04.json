@@ -11,5 +11,9 @@
     "For each point compute the residual (w * xs[i] - ys[i]), multiply by 2 * xs[i], and add it to a sum.",
     "Divide the sum by xs.length to get the mean gradient.",
     "The updated weight is w - lr * gradient; return it directly."
+  ],
+  "relatedTopics": [
+    "ARRAYS",
+    "LOOPS"
   ]
 }

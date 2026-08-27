@@ -11,5 +11,6 @@
     "hasFlag: loop over args and return true as soon as arg.equals(flag); return false after the loop.",
     "valueAfter: use an index loop so that when args[i] equals key you can return args[i + 1].",
     "Make valueAfter's loop condition i < args.length - 1 -- then a key in the last slot is never matched, which is exactly the null case the spec wants."
-  ]
+  ],
+  "relatedTopics": []
 }

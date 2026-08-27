@@ -10,5 +10,8 @@
   "hints": [
     "Start with int max = a; then compare the other two values against max.",
     "Use if (b > max) max = b; and do the same for c before returning max."
+  ],
+  "relatedTopics": [
+    "IF_CASE"
   ]
 }

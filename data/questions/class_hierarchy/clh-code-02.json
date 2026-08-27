@@ -11,5 +11,8 @@
     "Start sameContent with reference checks: if a == b you can return true immediately (this covers two nulls).",
     "After that, if either argument is null the other cannot equal it -- only then is it safe to call a.equals(b).",
     "For classNameOf, guard against null first, then use o.getClass().getSimpleName() -- getClass() reports the object's actual runtime class."
+  ],
+  "relatedTopics": [
+    "IF_CASE"
   ]
 }

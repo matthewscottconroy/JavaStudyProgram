@@ -11,5 +11,9 @@
     "Pipeline shape: words.stream().sorted(...).limit(n).collect(Collectors.toList()).",
     "Build the comparator with java.util.Comparator.comparingInt(String::length).reversed().",
     "Chain .thenComparing(java.util.Comparator.naturalOrder()) AFTER reversed() so ties are alphabetical ascending; limit(n) handles both n = 0 and n larger than the list."
+  ],
+  "relatedTopics": [
+    "LAMBDAS",
+    "INTERFACES"
   ]
 }

@@ -11,5 +11,9 @@
     "Push '(' '[' '{' onto an ArrayDeque<Character> with push; handle closers in an else-if.",
     "On a closing bracket: if the stack is empty, or pop() returns the wrong kind of opener, return false.",
     "Do not return true inside the loop -- after the loop, the string is balanced only if the stack is empty."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE"
   ]
 }

@@ -11,5 +11,8 @@
     "Start with java.util.Comparator.comparingInt(Student::grade) for the primary key.",
     "Chain .thenComparing(Student::name) so equal grades fall back to name order.",
     "Pass the finished comparator to list.sort(...); no return value is needed."
+  ],
+  "relatedTopics": [
+    "INTERFACES"
   ]
 }

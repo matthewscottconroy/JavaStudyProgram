@@ -11,5 +11,6 @@
     "firstKey() and lastKey() give the smallest and largest keys; concatenate them into the required string.",
     "floorKey(key) returns the greatest key <= key, or null if there is none.",
     "Store floorKey's result in an Integer variable and return null if it is null; otherwise return map.get(thatKey)."
-  ]
+  ],
+  "relatedTopics": []
 }

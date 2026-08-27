@@ -11,5 +11,8 @@
     "s.matches(regex) already requires the regex to cover the entire string.",
     "Split the hour into two cases: first digit 0 or 1 allows any second digit, but first digit 2 only allows 0-3. Group the alternation in parentheses.",
     "Minutes are one range: [0-5][0-9]. Put a plain : between the hour group and the minutes."
+  ],
+  "relatedTopics": [
+    "STRINGS"
   ]
 }

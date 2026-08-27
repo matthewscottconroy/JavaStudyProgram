@@ -11,5 +11,9 @@
     "Start with a guard clause: if (n < 2) return false;",
     "Loop a candidate divisor i from 2 upward and return false as soon as n % i == 0.",
     "You only need to test divisors while i * i <= n; if the loop finishes, return true."
+  ],
+  "relatedTopics": [
+    "IF_CASE",
+    "VARIABLES"
   ]
 }

@@ -11,5 +11,8 @@
     "Start equals with: if (this == obj) return true; then if (!(obj instanceof Book)) return false; -- instanceof is false for null, which handles the null case.",
     "After the instanceof check, cast obj to Book and compare only the isbn fields with java.util.Objects.equals.",
     "hashCode must use exactly the fields equals uses: return java.util.Objects.hashCode(isbn)."
+  ],
+  "relatedTopics": [
+    "IF_CASE"
   ]
 }

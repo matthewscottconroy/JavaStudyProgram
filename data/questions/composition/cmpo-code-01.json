@@ -11,5 +11,9 @@
     "Declare the field like: private final ArrayList<String> titles = new ArrayList<>(); -- composition means Playlist HAS a list, it IS NOT a list.",
     "add and size are one-line delegations to the field's own add and size methods.",
     "In get, test i < 0 || i >= size() before calling titles.get(i); in totalCharacters, loop over the list adding each title.length()."
+  ],
+  "relatedTopics": [
+    "CLASSES",
+    "IF_CASE"
   ]
 }

@@ -11,5 +11,9 @@
     "Return a lambda: () -> { ... } that decides whether to call inner.get() or reuse a stored value.",
     "Captured locals are effectively final, so store the state in one-element arrays created before the return: boolean[] called = { false }; String[] cache = { null };.",
     "Inside the lambda: if called[0] is false, set cache[0] = inner.get() and flip called[0] to true; always return cache[0]."
+  ],
+  "relatedTopics": [
+    "LAMBDAS",
+    "IF_CASE"
   ]
 }

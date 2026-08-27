@@ -11,5 +11,8 @@
     "Implement kind() first: return \"robot\";",
     "Override describe() in Robot with the public modifier and return \"unit of kind \" + kind();",
     "Do not override shout() -- it already calls describe(), and at runtime that resolves to your override."
+  ],
+  "relatedTopics": [
+    "CLASSES"
   ]
 }

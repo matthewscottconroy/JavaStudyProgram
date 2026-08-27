@@ -11,5 +11,10 @@
     "First build a HashMap<String, Integer> of word counts with getOrDefault(word, 0) + 1.",
     "Copy counts.keySet() into an ArrayList and sort it with a comparator: higher count first, then compareTo for ties.",
     "counts.get(y) - counts.get(x) sorts by descending count; after sorting, take element 0 and (if present) element 1."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE",
+    "ARRAYS_ARRAYLISTS"
   ]
 }

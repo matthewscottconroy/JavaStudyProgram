@@ -11,5 +11,8 @@
     "Loop over m.entrySet() so each iteration hands you both the key and the value.",
     "For each entry, call result.put(entry.getValue(), entry.getKey()) -- value and key swap roles.",
     "Create the result as new TreeMap<Integer, String>() before the loop and return it after."
+  ],
+  "relatedTopics": [
+    "LOOPS"
   ]
 }

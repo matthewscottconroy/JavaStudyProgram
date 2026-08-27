@@ -11,5 +11,8 @@
     "increment is just count++ and reset is count = 0.",
     "In decrement, only subtract when count is greater than 0.",
     "Fields of type int start at 0 by default, so no constructor is required."
+  ],
+  "relatedTopics": [
+    "IF_CASE"
   ]
 }

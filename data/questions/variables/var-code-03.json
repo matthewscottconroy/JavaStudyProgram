@@ -11,5 +11,6 @@
     "For the truncated version, (a + b) / 2 with all ints already drops the fraction for you.",
     "For the exact version, if both operands are ints the fraction is lost BEFORE the return happens.",
     "Divide by 2.0 instead of 2, or cast the sum: (double)(a + b) / 2."
-  ]
+  ],
+  "relatedTopics": []
 }

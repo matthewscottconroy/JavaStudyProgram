@@ -11,5 +11,9 @@
     "Start with Class<?> c = Class.forName(className);",
     "c.getDeclaredConstructor() with no arguments selects the no-arg constructor.",
     "Chain .newInstance() on the constructor and return the result; the throws Exception clause absorbs the checked exceptions."
+  ],
+  "relatedTopics": [
+    "CLASS_HIERARCHY",
+    "CLASSES"
   ]
 }

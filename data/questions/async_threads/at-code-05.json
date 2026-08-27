@@ -11,5 +11,8 @@
     "Start the chain with CompletableFuture.supplyAsync(() -> \"item-\" + id).",
     "thenApply takes a function from the previous result to a new value -- the method reference String::toUpperCase fits perfectly.",
     "join() blocks until the chained result is ready and returns it; unlike get(), it does not throw checked exceptions."
+  ],
+  "relatedTopics": [
+    "FUNCTIONS"
   ]
 }

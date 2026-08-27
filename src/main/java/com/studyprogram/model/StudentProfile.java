@@ -16,12 +16,15 @@ public class StudentProfile {
     private int totalCorrect;
     private Set<Topic> selectedTopics;
     private Map<Topic, TopicPerformance> performance;
+    private Set<Integer> bossesCleared;    // level bands whose boss quiz was passed
+    private int bossAttempts;              // total boss attempts (also seeds quiz variety)
 
     public StudentProfile() {
         this.id              = UUID.randomUUID().toString();
         this.createdAt       = LocalDateTime.now();
         this.selectedTopics  = new LinkedHashSet<>();
         this.performance     = new EnumMap<>(Topic.class);
+        this.bossesCleared   = new TreeSet<>();
     }
 
     public StudentProfile(String name) {
@@ -41,6 +44,13 @@ public class StudentProfile {
         lastStudied = LocalDateTime.now();
         getOrCreatePerformance(question.getTopic())
                 .record(question.getId(), correct, question.getDifficulty());
+        // Concept drill-down: the question also exercised these prerequisite topics.
+        // A miss nudges them down so the auto feed resurfaces the real weak spot;
+        // only topics already practiced are touched — no phantom progress records.
+        for (Topic related : question.getRelatedTopics()) {
+            TopicPerformance p = performance.get(related);
+            if (p != null && p.getAttempts() > 0) p.recordIndirect(correct);
+        }
     }
 
     /** Applies time decay to every topic's mastery. Call once after loading a profile. */
@@ -78,4 +88,8 @@ public class StudentProfile {
     public void setSelectedTopics(Set<Topic> t){ this.selectedTopics = t; }
     public Map<Topic, TopicPerformance> getPerformance() { return performance; }
     public void setPerformance(Map<Topic, TopicPerformance> p){ this.performance = p; }
+    public Set<Integer> getBossesCleared()   { return bossesCleared; }
+    public void setBossesCleared(Set<Integer> b) { this.bossesCleared = b == null ? new TreeSet<>() : b; }
+    public int getBossAttempts()             { return bossAttempts; }
+    public void setBossAttempts(int n)       { this.bossAttempts = n; }
 }

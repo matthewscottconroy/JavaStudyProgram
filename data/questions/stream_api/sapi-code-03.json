@@ -11,5 +11,9 @@
     "Start with words.stream() and reach for flatMap, since one word becomes many output elements.",
     "word.chars() gives an IntStream of character codes; use .mapToObj(...) to turn each code into a String.",
     "Cast the int code to char and wrap it: String.valueOf((char) code); finish with collect(Collectors.toList())."
+  ],
+  "relatedTopics": [
+    "LAMBDAS",
+    "STRINGS"
   ]
 }

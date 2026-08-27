@@ -11,5 +11,9 @@
     "n % 10 gives the last digit and n / 10 drops it -- that is your recursive step.",
     "Base case: any n from 0 to 9 is a single digit, so just return n.",
     "For negative n, Java's % keeps the sign (-905 % 10 is -5). Flip the sign first: return sumDigits(-n)."
+  ],
+  "relatedTopics": [
+    "IF_CASE",
+    "VARIABLES"
   ]
 }

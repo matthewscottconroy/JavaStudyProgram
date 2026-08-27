@@ -11,5 +11,9 @@
     "Handle the empty array first: if values.length == 0, return -1 immediately.",
     "Keep a variable minIndex starting at 0 and compare each values[i] against values[minIndex].",
     "Use < rather than <= so ties keep the earlier index."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE"
   ]
 }

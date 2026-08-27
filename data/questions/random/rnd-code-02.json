@@ -11,5 +11,6 @@
     "Collections.shuffle modifies the list you give it -- so do not give it the original.",
     "Make a copy first: java.util.List<String> copy = new java.util.ArrayList<>(cards);",
     "Shuffle with Collections.shuffle(copy, new java.util.Random(seed)) and return copy."
-  ]
+  ],
+  "relatedTopics": []
 }

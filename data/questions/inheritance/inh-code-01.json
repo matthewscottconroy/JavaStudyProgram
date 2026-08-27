@@ -11,5 +11,8 @@
     "The Animal constructor already stores the name. Inside Dog's constructor, call super(name) so the real name gets stored.",
     "To override, declare a method with the exact same signature as in Animal: public String speak(). The @Override annotation lets the compiler check you got it right.",
     "The name field is private to Animal, so fetch() should build its string with the inherited getName() method."
+  ],
+  "relatedTopics": [
+    "CLASSES"
   ]
 }

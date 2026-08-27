@@ -11,5 +11,8 @@
     "In the constructor, copy with new java.util.ArrayList<>(items) into a private final field.",
     "Storing the parameter reference directly fails the test where the caller mutates the original afterwards.",
     "getItems() should wrap the field with java.util.Collections.unmodifiableList(...) -- the view reads through but rejects add/remove."
+  ],
+  "relatedTopics": [
+    "COLLECTIONS"
   ]
 }

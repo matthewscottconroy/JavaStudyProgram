@@ -11,5 +11,8 @@
     "java.time.LocalTime.parse(\"23:30\") needs no explicit formatter -- HH:mm is the ISO local-time format.",
     "plusMinutes already wraps past midnight and accepts negative values; no manual arithmetic is needed.",
     "Format the result with DateTimeFormatter.ofPattern(\"HH:mm\", java.util.Locale.US) so single-digit hours keep their leading zero."
+  ],
+  "relatedTopics": [
+    "STRINGS"
   ]
 }

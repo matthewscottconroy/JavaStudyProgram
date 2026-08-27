@@ -11,5 +11,8 @@
     "Executors.newFixedThreadPool(4) gives you an ExecutorService; pool.submit(() -> n * n) returns a Future<Integer>.",
     "First loop: submit every task and add each Future to a List<Future<Integer>>. Do not call get() inside this first loop.",
     "Second loop: call get() on each Future in list order and add the values to the result list; call pool.shutdown() before returning (a finally block is a good place)."
+  ],
+  "relatedTopics": [
+    "INTERFACES"
   ]
 }

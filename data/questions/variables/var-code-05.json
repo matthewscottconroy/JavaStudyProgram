@@ -11,5 +11,6 @@
     "sumAsInt is just a + b; the interesting part is watching what the tests say it does at Integer.MAX_VALUE.",
     "In sumAsLong, cast one operand: (long) a + b. That makes the + itself a long addition.",
     "(long) (a + b) does NOT work: the ints are added (and wrap) before the cast is applied."
-  ]
+  ],
+  "relatedTopics": []
 }

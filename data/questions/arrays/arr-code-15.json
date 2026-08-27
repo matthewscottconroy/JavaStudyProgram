@@ -11,5 +11,9 @@
     "Count chunks with ceiling division: (a.length + size - 1) / size.",
     "Chunk c covers indexes c * size up to (but not including) c * size + size.",
     "Clamp the end of each chunk with Math.min(start + size, a.length) so the last, shorter chunk stays in bounds."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "VARIABLES"
   ]
 }

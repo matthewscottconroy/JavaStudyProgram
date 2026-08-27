@@ -11,5 +11,8 @@
     "The number of rows in the result equals the number of columns in the input: new int[m[0].length][m.length].",
     "Use nested loops over the input's rows and columns, not the result's.",
     "Inside the loops the whole job is one assignment: result[c][r] = m[r][c]."
+  ],
+  "relatedTopics": [
+    "LOOPS"
   ]
 }

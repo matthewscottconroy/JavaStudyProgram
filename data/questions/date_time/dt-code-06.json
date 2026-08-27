@@ -11,5 +11,6 @@
     "java.time.Period.between(startDate, endDate) returns a Period object.",
     "A Period breaks the gap into years, months, and days -- call getYears() for the completed years.",
     "The whole method is one line; no if statements are needed for the birthday edge cases."
-  ]
+  ],
+  "relatedTopics": []
 }

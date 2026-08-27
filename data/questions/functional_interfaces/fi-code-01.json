@@ -11,5 +11,9 @@
     "UnaryOperator<Integer> has an apply method -- call it with start, then call it again with that first result.",
     "IntPredicate's test method returns a boolean; count how many array entries make it true.",
     "A simple for-each loop over values with a counter variable is all countMatching needs."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE"
   ]
 }

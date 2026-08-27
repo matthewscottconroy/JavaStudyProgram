@@ -11,5 +11,6 @@
     "A switch expression can be returned directly: return switch (month) { ... };",
     "Arrow cases take several labels at once: case 12, 1, 2 -> \"winter\";",
     "Use default -> \"invalid\"; to cover everything outside 1..12."
-  ]
+  ],
+  "relatedTopics": []
 }

@@ -11,5 +11,8 @@
     "Handle n == 0 first by returning \"0\" -- the loop below will not produce anything for it.",
     "While n > 0: append n % 2 to a StringBuilder, then set n = n / 2.",
     "The digits come out backwards; StringBuilder.reverse() fixes the order in one call."
+  ],
+  "relatedTopics": [
+    "VARIABLES"
   ]
 }

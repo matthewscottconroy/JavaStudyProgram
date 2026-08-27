@@ -11,5 +11,8 @@
     "sameObject is a single expression: a == b.",
     "Calling a.equals(b) crashes when a is null -- handle the null case before delegating.",
     "If a == null, return b == null; otherwise return a.equals(b). (java.util.Objects.equals does the same.)"
+  ],
+  "relatedTopics": [
+    "IF_CASE"
   ]
 }

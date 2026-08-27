@@ -11,5 +11,8 @@
     "A field declared with the static keyword is shared by all instances of the class; a normal instance field is separate for each object.",
     "In the constructor, increment the static count first, then store its new value into the instance's final id field.",
     "resetCount() only sets the static count back to 0 -- ids already handed out do not change."
+  ],
+  "relatedTopics": [
+    "CLASSES"
   ]
 }

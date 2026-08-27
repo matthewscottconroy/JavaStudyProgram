@@ -11,5 +11,9 @@
     "Declare R acc = seed; before the loop -- the seed is the accumulator's starting value.",
     "For each item, reassign acc = f.apply(acc, item); the accumulator always goes in as the FIRST argument.",
     "Return acc after the loop; with an empty list the loop body never runs, so the seed comes straight back."
+  ],
+  "relatedTopics": [
+    "GENERICS",
+    "LOOPS"
   ]
 }

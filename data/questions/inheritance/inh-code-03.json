@@ -11,5 +11,8 @@
     "Declare private double bonus; in Manager and assign it in the constructor after the super(...) call.",
     "In pay(), you cannot touch the private baseSalary field directly -- use the inherited getBaseSalary() getter.",
     "pay() should return getBaseSalary() + bonus; getBonus() just returns the field."
+  ],
+  "relatedTopics": [
+    "CLASSES"
   ]
 }

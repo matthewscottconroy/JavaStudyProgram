@@ -11,5 +11,9 @@
     "Loop over the indexes; compute double diff = predicted[i] - actual[i]; each time.",
     "Add diff * diff to a running sum -- squaring makes negatives positive.",
     "After the loop, return sum / predicted.length (the mean)."
+  ],
+  "relatedTopics": [
+    "ARRAYS",
+    "LOOPS"
   ]
 }

@@ -11,5 +11,8 @@
     "Start with long result = 1 and loop exactly exp times.",
     "Each pass, multiply: result = result * base.",
     "Starting at 1 means power(anything, 0) returns 1 without any special case."
+  ],
+  "relatedTopics": [
+    "VARIABLES"
   ]
 }

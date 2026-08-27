@@ -10,5 +10,6 @@
   "hints": [
     "Clamp first: int clamped = Math.max(0, Math.min(cut, a.length()));",
     "a.substring(0, clamped) is the prefix; b.substring(clamped) is the suffix; concatenate them with +."
-  ]
+  ],
+  "relatedTopics": []
 }

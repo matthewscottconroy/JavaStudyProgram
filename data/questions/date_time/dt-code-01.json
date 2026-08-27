@@ -11,5 +11,6 @@
     "ChronoUnit.DAYS.between(a, b) already counts the days -- but the result is negative when b is before a.",
     "Math.abs(...) turns that signed count into the required non-negative distance.",
     "d.with(TemporalAdjusters.next(DayOfWeek.MONDAY)) gives the first Monday after d; note that next(...) skips d itself, unlike nextOrSame(...). A manual plusDays loop checking getDayOfWeek() also works."
-  ]
+  ],
+  "relatedTopics": []
 }

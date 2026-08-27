@@ -10,5 +10,8 @@
   "hints": [
     "area() is just width * height -- the record components are in scope inside instance methods.",
     "square is static, so it cannot use width or height: return new Box(side, side);"
+  ],
+  "relatedTopics": [
+    "CLASSES"
   ]
 }

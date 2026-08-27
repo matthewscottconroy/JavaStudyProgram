@@ -11,5 +11,9 @@
     "Use the three-argument overload: Arrays.binarySearch(array, target, comparator).",
     "String.CASE_INSENSITIVE_ORDER is a ready-made Comparator<String> constant on the String class.",
     "binarySearch returns a negative insertion point for misses -- test the result with >= 0 and return -1 otherwise."
+  ],
+  "relatedTopics": [
+    "ARRAYS",
+    "INTERFACES"
   ]
 }

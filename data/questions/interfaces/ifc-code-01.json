@@ -11,5 +11,8 @@
     "Declare private double radius; in the class, then set this.radius = radius; inside the constructor.",
     "The area of a circle is pi times radius squared: Math.PI * radius * radius.",
     "The perimeter (circumference) is 2 * Math.PI * radius. The tests round to 3 decimal places, so exact floating point digits beyond that do not matter."
+  ],
+  "relatedTopics": [
+    "CLASSES"
   ]
 }

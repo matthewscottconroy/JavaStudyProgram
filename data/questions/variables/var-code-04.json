@@ -11,5 +11,6 @@
     "totalMinutes / 60 is integer division: 125 / 60 is 2, not 2.08.",
     "totalMinutes % 60 gives the remainder after removing whole hours: 125 % 60 is 5.",
     "Build the result with new int[]{hours, minutes} and return it."
-  ]
+  ],
+  "relatedTopics": []
 }

@@ -11,5 +11,9 @@
     "Check values.length == 0 first and return 0.0 for that case.",
     "Loop over the array with for (int value : values) and add each element to a running sum.",
     "Declare the sum as a double (double sum = 0) so sum / values.length keeps the fraction."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "VARIABLES"
   ]
 }

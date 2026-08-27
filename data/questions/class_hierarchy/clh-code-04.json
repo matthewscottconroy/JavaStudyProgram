@@ -11,5 +11,8 @@
     "Use pattern instanceof: if (o instanceof String s) { return s; }",
     "For doubled, the matched Integer unboxes automatically, so i * 2 works; return the result directly.",
     "Anything that fails the instanceof test -- including null -- should reach return null;"
+  ],
+  "relatedTopics": [
+    "IF_CASE"
   ]
 }

@@ -11,5 +11,8 @@
     "Return \"zero\" first -- if you test even/odd or size before the zero case, 0 will match the wrong rule.",
     "Math.abs(n) <= 10 decides small vs large in one comparison for both positives and negatives.",
     "For odd negatives, remember -7 % 2 is -1 in Java; test n % 2 == 0 for even and use else for odd."
+  ],
+  "relatedTopics": [
+    "VARIABLES"
   ]
 }

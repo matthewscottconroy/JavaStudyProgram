@@ -11,5 +11,9 @@
     "n % 10 gives the last digit of a non-negative n, and n / 10 removes it.",
     "Keep a running result: reversed = reversed * 10 + digit on every pass, looping while the remaining value is greater than 0.",
     "For negatives, record the sign first, reverse Math.abs(n), then negate the result before returning."
+  ],
+  "relatedTopics": [
+    "IF_CASE",
+    "VARIABLES"
   ]
 }

@@ -11,5 +11,10 @@
     "In plus, compare the two currency fields with equals (not ==) and throw new IllegalArgumentException(...) when they differ.",
     "A record cannot change its fields -- plus must build and return a new Money from the summed cents.",
     "For pretty, cents / 100 gives whole units and cents % 100 gives leftover cents; String.format with %02d pads a number to two digits."
+  ],
+  "relatedTopics": [
+    "STRINGS",
+    "VARIABLES",
+    "IF_CASE"
   ]
 }

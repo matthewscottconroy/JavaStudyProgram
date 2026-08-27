@@ -11,5 +11,6 @@
     "Loop over s with charAt(i) and decide for each character whether to keep it.",
     "Compare Character.toLowerCase(c) against the five vowel letters so 'A' and 'a' are treated alike.",
     "Append the characters you keep to a StringBuilder and return builder.toString() at the end."
-  ]
+  ],
+  "relatedTopics": []
 }

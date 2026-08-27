@@ -11,5 +11,9 @@
     "Write the base case first: if b == 0, the answer is a.",
     "Otherwise return gcd(b, a % b) -- the method calls itself with a smaller second argument.",
     "Normalize negatives by reassigning a = Math.abs(a) and b = Math.abs(b) at the top of the method before anything else."
+  ],
+  "relatedTopics": [
+    "IF_CASE",
+    "VARIABLES"
   ]
 }

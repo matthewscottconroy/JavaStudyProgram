@@ -11,5 +11,6 @@
     "Create one new java.util.Random(seed) before the loop and keep an int position starting at 0.",
     "Each iteration: if (random.nextBoolean()) position++; else position--;",
     "Return the position after the loop -- with 0 steps the answer is just 0."
-  ]
+  ],
+  "relatedTopics": []
 }

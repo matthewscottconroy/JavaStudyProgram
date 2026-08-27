@@ -11,5 +11,9 @@
     "Walk the input in order and only append strings you have not seen before.",
     "A HashSet<String> remembers what you have already added; contains/add check membership fast.",
     "HashSet.add returns false if the element was already in the set -- perfect inside an if."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE"
   ]
 }

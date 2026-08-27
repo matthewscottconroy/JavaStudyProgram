@@ -11,5 +11,8 @@
     "Base case: when n is 0, return exactly \"go\" -- no numbers, no spaces.",
     "Recursive case: the result is n, a space, then whatever countdown(n - 1) returns.",
     "n + \" \" + countdown(n - 1) does the string building; the base case guarantees the string always ends in \"go\"."
+  ],
+  "relatedTopics": [
+    "IF_CASE"
   ]
 }

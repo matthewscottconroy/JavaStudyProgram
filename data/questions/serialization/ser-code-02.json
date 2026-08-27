@@ -11,5 +11,9 @@
     "Write s with an ObjectOutputStream over a ByteArrayOutputStream, then grab toByteArray().",
     "Read the copy back with an ObjectInputStream over a ByteArrayInputStream of those bytes.",
     "You do not touch the token field at all -- 'transient' alone makes serialization skip it."
+  ],
+  "relatedTopics": [
+    "TRY_CATCH",
+    "FILE_PROCESSING"
   ]
 }

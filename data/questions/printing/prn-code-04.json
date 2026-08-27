@@ -11,5 +11,6 @@
     "Loop with an index i from 0 to items.length - 1 so you can read items[i] and prices[i] together.",
     "System.out.printf(\"%s: $%.2f%n\", items[i], prices[i]) prints one receipt line; %.2f forces two decimals.",
     "Keep a running double total inside the loop and print the \"total: $...\" line with the same %.2f formatting after the loop."
-  ]
+  ],
+  "relatedTopics": []
 }

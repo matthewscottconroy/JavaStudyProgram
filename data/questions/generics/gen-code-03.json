@@ -11,5 +11,9 @@
     "Treat the END of the ArrayList as the top: push is items.add(item).",
     "The top item lives at index items.size() - 1; pop uses items.remove(...) and peek uses items.get(...).",
     "In pop and peek, first test items.isEmpty() and return null in that case."
+  ],
+  "relatedTopics": [
+    "ARRAYS_ARRAYLISTS",
+    "IF_CASE"
   ]
 }

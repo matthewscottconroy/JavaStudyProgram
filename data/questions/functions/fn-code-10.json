@@ -11,5 +11,9 @@
     "Base case: when n is 0 or 1, its binary form is just itself -- return String.valueOf(n).",
     "Recursive case: the bits of n / 2 come first, then the single bit n % 2.",
     "Return toBinary(n / 2) + (n % 2); concatenating the int n % 2 onto a String turns it into \"0\" or \"1\" automatically."
+  ],
+  "relatedTopics": [
+    "IF_CASE",
+    "VARIABLES"
   ]
 }

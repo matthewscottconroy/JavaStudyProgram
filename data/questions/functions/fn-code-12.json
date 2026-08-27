@@ -11,5 +11,8 @@
     "You never need factorials: nPk(5, 2) is just 5 * 4 -- k factors counting down from n.",
     "Initialize long result = 1L and loop i from 0 to k-1, multiplying result by (n - i).",
     "Starting at 1 makes k == 0 return 1 automatically -- the empty product needs no if statement."
+  ],
+  "relatedTopics": [
+    "VARIABLES"
   ]
 }

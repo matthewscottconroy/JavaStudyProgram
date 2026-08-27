@@ -11,5 +11,8 @@
     "Allocate int[] counts = new int[10]; Java fills it with zeros automatically.",
     "The score itself is the index: for each score s, do counts[s]++.",
     "An enhanced for loop (for (int s : scores)) is enough -- you never need the position in the input."
+  ],
+  "relatedTopics": [
+    "LOOPS"
   ]
 }

@@ -11,5 +11,8 @@
     "Create the Random exactly once, before the loop: java.util.Random random = new java.util.Random(seed);",
     "nextInt(6) gives 0..5, so each roll is random.nextInt(6) + 1.",
     "Accumulate the rolls in an int sum inside a for loop that runs `times` iterations, then return the sum."
+  ],
+  "relatedTopics": [
+    "VARIABLES"
   ]
 }

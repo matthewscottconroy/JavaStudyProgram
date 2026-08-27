@@ -11,5 +11,6 @@
     "Put return Integer.parseInt(s) inside a try block and catch NumberFormatException.",
     "IllegalStateException has a (String message, Throwable cause) constructor -- use both arguments.",
     "Build the message with string concatenation: \"bad input: \" + s, and pass the caught exception as the cause."
-  ]
+  ],
+  "relatedTopics": []
 }

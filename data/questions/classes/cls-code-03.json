@@ -11,5 +11,10 @@
     "In the constructor, first check if den < 0 and if so negate both num and den.",
     "The Euclidean algorithm: while b != 0, replace (a, b) with (b, a % b); a is then the gcd. Use Math.abs(num) so negatives do not break it.",
     "For plus, compute (a*d + c*b) and (b*d), then return new Fraction(...) -- the constructor will simplify it for you."
+  ],
+  "relatedTopics": [
+    "FUNCTIONS",
+    "VARIABLES",
+    "IF_CASE"
   ]
 }

@@ -11,5 +11,8 @@
     "Create the result with new int[grid.length] -- one slot per row.",
     "Use an outer loop over rows and an inner loop over grid[row], which may have a different length for each row.",
     "Reset your running total to 0 at the start of each row before adding that row's values."
+  ],
+  "relatedTopics": [
+    "LOOPS"
   ]
 }

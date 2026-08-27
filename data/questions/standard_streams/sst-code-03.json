@@ -11,5 +11,10 @@
     "Loop with while ((line = in.readLine()) != null) and keep a counter starting at 1.",
     "Build the result in a StringBuilder: number, then \": \", then the line text.",
     "Append \"\\n\" only before the second and later lines -- that leaves no trailing newline."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "STRINGS",
+    "IF_CASE"
   ]
 }

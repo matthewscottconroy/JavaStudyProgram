@@ -11,5 +11,9 @@
     "Inside a record's methods you can read the components directly as name and level.",
     "withName(newName) is one line: return new Profile(newName, level); -- withLevel mirrors it.",
     "display() concatenates: name + \" [\" + level + \"]\"."
+  ],
+  "relatedTopics": [
+    "CLASSES",
+    "STRINGS"
   ]
 }

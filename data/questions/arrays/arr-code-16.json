@@ -11,5 +11,9 @@
     "Only indexes 1 through a.length - 2 can be peaks; a loop over that range never goes out of bounds.",
     "The condition is a[i] > a[i - 1] && a[i] > a[i + 1] -- strictly greater on BOTH sides.",
     "Collect matches into a temp array with a count, then trim with java.util.Arrays.copyOf(found, count)."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE"
   ]
 }

@@ -11,5 +11,8 @@
     "Optional.map transforms the value inside only when one is present; an empty Optional passes through map unchanged.",
     "Inside the map lambda, build the whole greeting string and uppercase the name with toUpperCase.",
     "Finish the chain with orElse(\"Hello, guest!\") so the empty case is handled in the same expression."
+  ],
+  "relatedTopics": [
+    "STRINGS"
   ]
 }

@@ -11,5 +11,8 @@
     "Start with java.util.Optional.ofNullable(c) so a null Customer is handled by the same chain.",
     "Chain .map(Customer::address).map(Address::city) -- map is skipped when the Optional is empty, and a mapper returning null yields an empty Optional.",
     "Finish with .map(city -> city.toLowerCase(java.util.Locale.ROOT)).orElse(\"unknown\")."
+  ],
+  "relatedTopics": [
+    "FUNCTIONS"
   ]
 }

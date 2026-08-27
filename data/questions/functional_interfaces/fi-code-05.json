@@ -11,5 +11,9 @@
     "inRange should return a lambda taking one int: v -> (some boolean expression using lo, hi and v).",
     "Inclusive on both ends means lo <= v && v <= hi.",
     "In countWhere, loop over the array and increment a counter whenever p.test(v) is true."
+  ],
+  "relatedTopics": [
+    "LAMBDAS",
+    "LOOPS"
   ]
 }

@@ -11,5 +11,8 @@
     "values()[(ordinal() + 1) % 4] is the next constant in declaration order -- that is one step clockwise.",
     "For left, add 3 instead of subtracting 1 so the index never goes negative.",
     "opposite is two steps in either direction: values()[(ordinal() + 2) % 4]."
+  ],
+  "relatedTopics": [
+    "VARIABLES"
   ]
 }

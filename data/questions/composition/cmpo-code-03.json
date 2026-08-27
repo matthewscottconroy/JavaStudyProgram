@@ -11,5 +11,9 @@
     "Declare private Engine engine; and assign this.engine = new Engine(fuel); in the constructor.",
     "start(), isRunning(), and getFuel() each just call the matching engine method and return its result.",
     "In drive, first check engine.isRunning(); if true, call engine.consumeFuel(km * 0.5)."
+  ],
+  "relatedTopics": [
+    "CLASSES",
+    "IF_CASE"
   ]
 }

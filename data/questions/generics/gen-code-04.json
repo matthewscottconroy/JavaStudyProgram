@@ -11,5 +11,9 @@
     "Loop over the list with an enhanced for loop typed as Number: for (Number n : nums).",
     "Each element, whatever its concrete type, supports n.doubleValue().",
     "Start a double accumulator at 0.0 and add each converted value to it."
+  ],
+  "relatedTopics": [
+    "INHERITANCE",
+    "LOOPS"
   ]
 }

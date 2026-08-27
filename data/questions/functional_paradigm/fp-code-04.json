@@ -11,5 +11,9 @@
     "Start a local variable at input and reassign it inside a loop over steps.",
     "Each iteration is result = step.apply(result) -- the previous output feeds the next step.",
     "Do not special-case the empty list: if the loop body never runs, returning the accumulator already returns input."
+  ],
+  "relatedTopics": [
+    "LAMBDAS",
+    "LOOPS"
   ]
 }

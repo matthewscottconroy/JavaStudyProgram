@@ -11,5 +11,9 @@
     "If the sizes differ the answer is immediately false.",
     "Build a HashMap<Integer, Integer> of value -> count for each list using getOrDefault(value, 0) + 1.",
     "Two HashMaps with the same keys and counts are equal via countsA.equals(countsB)."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE"
   ]
 }

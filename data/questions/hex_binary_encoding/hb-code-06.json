@@ -11,5 +11,8 @@
     "char to int is a widening conversion: simply return c and Java converts it.",
     "int to char is narrowing, so the compiler requires (char) code.",
     "'A' is 65 and 'a' is 97 -- lowercase codes sit exactly 32 above uppercase."
+  ],
+  "relatedTopics": [
+    "VARIABLES"
   ]
 }

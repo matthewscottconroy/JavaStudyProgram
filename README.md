@@ -46,6 +46,21 @@ prerequisites are mastered. Click nodes to add or remove them from your session
 topics. (The map is itself a custom-painted `Graphics2D` component — once you
 reach the GUI world, you can read its source as course material.)
 
+**Boss Challenges** gate each world: once a world's average mastery reaches
+50%, its boss appears — a 10-question, no-hints quiz across the whole world.
+Score 80%+ to clear it (retries draw different questions), and the cleared
+star shows on the concept map.
+
+Questions can also carry `relatedTopics` — prerequisite topics they genuinely
+exercise. Missing an arrays question whose solution hinges on reference
+semantics nudges *that* prerequisite's mastery down too, so the auto feed
+drills into the real gap instead of just repeating the surface topic.
+
+GUI topics have real coding exercises too: you build actual Swing panels and
+the tests interact with them programmatically (`doClick()`, component-tree
+inspection, pixel-sampling painted `BufferedImage`s) — fully headless, so they
+work everywhere including CI.
+
 ## Question types
 
 | Type | What you do |

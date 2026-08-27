@@ -11,5 +11,8 @@
     "Increment the static counter inside the constructor before building the id string.",
     "Store prefix + \"-\" + counter in the instance field id; the instance keeps that snapshot forever.",
     "resetCounter just assigns 0 to the static field -- it needs no instance, which is why it is static."
+  ],
+  "relatedTopics": [
+    "CLASSES"
   ]
 }

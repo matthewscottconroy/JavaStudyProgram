@@ -11,5 +11,8 @@
     "Create a HashMap<String, Integer> and loop over the words array with a for-each loop.",
     "Call word.toLowerCase() once per word and use that lowercase string as the map key.",
     "counts.getOrDefault(key, 0) + 1 gives the new count whether or not the key is already in the map; put the result back with counts.put(key, ...)."
+  ],
+  "relatedTopics": [
+    "LOOPS"
   ]
 }

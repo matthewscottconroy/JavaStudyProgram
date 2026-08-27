@@ -11,5 +11,9 @@
     "Create a new ArrayList<Integer> before the loop and return it at the end; never call remove() on the input list.",
     "A for-each loop (for (int value : numbers)) visits every element without index bookkeeping.",
     "A number is even when value % 2 == 0. This is also true for 0 and for negative even numbers like -2."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE"
   ]
 }

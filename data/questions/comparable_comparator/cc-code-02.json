@@ -11,5 +11,9 @@
     "Comparator.comparingInt turns an int-extracting function such as an age accessor reference into a whole Comparator.",
     "For the second comparator, extract the name length with a lambda; spelling the parameter type, e.g. (Person p) -> ..., helps inference when you chain calls.",
     "Chain .thenComparing with a name extractor to break length ties alphabetically."
+  ],
+  "relatedTopics": [
+    "INTERFACES",
+    "FUNCTIONS"
   ]
 }

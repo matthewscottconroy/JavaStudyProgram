@@ -11,5 +11,8 @@
     "The result has a.length rows and b[0].length columns; allocate new int[a.length][b[0].length].",
     "Use three nested loops: i over result rows, j over result columns, k over the shared inner dimension (b.length).",
     "Accumulate sum += a[i][k] * b[k][j] in the innermost loop, then store it in result[i][j]."
+  ],
+  "relatedTopics": [
+    "LOOPS"
   ]
 }

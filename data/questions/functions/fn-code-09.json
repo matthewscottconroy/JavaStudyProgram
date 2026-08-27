@@ -11,5 +11,8 @@
     "Base case: any string of length 0 or 1 is a palindrome, so return true when s.length() <= 1.",
     "Compare s.charAt(0) with s.charAt(s.length() - 1); if they differ, return false right away.",
     "If they match, the answer is isPalindrome of the middle: s.substring(1, s.length() - 1)."
+  ],
+  "relatedTopics": [
+    "IF_CASE"
   ]
 }

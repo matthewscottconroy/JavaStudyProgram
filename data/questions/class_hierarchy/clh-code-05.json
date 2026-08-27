@@ -11,5 +11,9 @@
     "Standard equals skeleton: if (this == o) return true; if (o == null || getClass() != o.getClass()) return false; then cast and compare fields.",
     "Compare the String field with Objects.equals(code, other.code) so null codes cannot throw.",
     "hashCode is one line -- return Objects.hash(code, percent); -- and toString is code + \" (\" + percent + \"%)\";"
+  ],
+  "relatedTopics": [
+    "CLASSES",
+    "IF_CASE"
   ]
 }

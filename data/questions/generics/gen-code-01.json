@@ -11,5 +11,8 @@
     "Declare the fields as private T first; and private T second; -- T works anywhere a type name would.",
     "The getters simply return the matching field.",
     "In swapped(), do not modify this pair. Return new Pair<>(second, first); the compiler infers the type argument."
+  ],
+  "relatedTopics": [
+    "CLASSES"
   ]
 }

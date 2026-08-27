@@ -11,5 +11,8 @@
     "Start with the base case: when n is 0 (or 1), return 1 without calling anything.",
     "For larger n, the definition itself is the code: factorial(n) = n * factorial(n - 1).",
     "Make sure the recursive call uses n - 1, so every call gets closer to the base case."
+  ],
+  "relatedTopics": [
+    "IF_CASE"
   ]
 }

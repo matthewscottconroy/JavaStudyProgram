@@ -11,5 +11,8 @@
     "Read coordinates through the accessors: dx = b.x() - a.x() and dy = b.y() - a.y(), then Math.sqrt(dx * dx + dy * dy).",
     "midpoint returns new Pt((a.x() + b.x()) / 2.0, (a.y() + b.y()) / 2.0).",
     "Record equality is by value, so returning an equal Pt is enough -- it does not need to be the same object the test built."
+  ],
+  "relatedTopics": [
+    "VARIABLES"
   ]
 }

@@ -11,5 +11,9 @@
     "Use an outer loop from 2 up to (but not including) n; numbers below 2 are never prime.",
     "For each candidate, use an inner loop that looks for a divisor d with candidate % d == 0. You only need to try d while d * d <= candidate.",
     "Track primality with a boolean flag set to true before the inner loop; set it to false and break when a divisor is found, and count the candidate if the flag is still true."
+  ],
+  "relatedTopics": [
+    "IF_CASE",
+    "VARIABLES"
   ]
 }

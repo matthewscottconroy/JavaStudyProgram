@@ -11,5 +11,9 @@
     "Loop i from 0 up to Math.max(a.size(), b.size()).",
     "Inside the loop use two separate if statements: add a.get(i) when i < a.size(), then add b.get(i) when i < b.size().",
     "Add everything to a brand-new ArrayList and return it -- never call add or remove on a or b."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE"
   ]
 }

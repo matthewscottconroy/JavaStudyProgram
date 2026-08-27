@@ -11,5 +11,6 @@
     "In the constructor, the parameter names shadow the fields; write this.width = width; and this.height = height;.",
     "The getters simply return the corresponding field.",
     "area() and perimeter() compute directly from the fields: width * height and 2 * (width + height)."
-  ]
+  ],
+  "relatedTopics": []
 }

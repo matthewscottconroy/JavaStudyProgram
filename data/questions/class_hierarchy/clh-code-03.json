@@ -11,5 +11,9 @@
     "Start with if (o == null) return \"null\"; -- instanceof never matches null.",
     "Each branch looks like: if (o instanceof Integer i) { return \"int: \" + i; }",
     "Arrays have a .length field (not a method); an int[] pattern only matches arrays of primitive int."
+  ],
+  "relatedTopics": [
+    "IF_CASE",
+    "STRINGS"
   ]
 }

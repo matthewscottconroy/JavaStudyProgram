@@ -11,5 +11,9 @@
     "Track two indexes, low = 0 and high = length - 1, describing where the target could still be.",
     "Compare sorted[mid] with target: equal means done; smaller means move low to mid + 1; larger means move high to mid - 1.",
     "Loop while low <= high. If the loop exits, the target is not in the array -- return -1."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE"
   ]
 }

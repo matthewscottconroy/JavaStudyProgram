@@ -11,5 +11,8 @@
     "List has a sort(Comparator) method that sorts in place -- you just need the right comparator.",
     "Comparator.nullsFirst(...) takes another comparator and handles the nulls before delegating to it.",
     "Pass Comparator.naturalOrder() as the inner comparator so non-null strings sort alphabetically."
+  ],
+  "relatedTopics": [
+    "INTERFACES"
   ]
 }

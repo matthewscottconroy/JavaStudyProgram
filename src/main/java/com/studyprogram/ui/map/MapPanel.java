@@ -142,8 +142,13 @@ public class MapPanel extends JPanel {
                 g2.setColor(BAND);
                 g2.fillRect(x, 0, COL_W, getHeight());
             }
+            boolean bossDown = profile.getBossesCleared().contains(col + 1);
             g2.setColor(new Color(255, 255, 255, 170));
             g2.drawString(WORLDS[col], x + 12, 30);
+            if (bossDown) {
+                g2.setColor(new Color(0xff, 0xd5, 0x4f));
+                g2.drawString("★ boss cleared", x + 12, 48);
+            }
         }
     }
 

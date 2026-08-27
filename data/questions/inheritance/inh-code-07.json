@@ -11,5 +11,8 @@
     "Widget inherits access to the protected static field, so you can just write 'created' inside Widget's methods.",
     "createdCount() should return created; reset() should assign created = 0;",
     "You do not need to write a Widget constructor -- the implicit default constructor already calls super(), which increments the counter."
+  ],
+  "relatedTopics": [
+    "CLASSES"
   ]
 }

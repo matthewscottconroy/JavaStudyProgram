@@ -11,5 +11,8 @@
     "Create int[] result = new int[1]; a lambda can write into an array element even though it cannot reassign a local variable.",
     "Build the thread with new Thread(() -> result[0] = n * n), then call start() on it.",
     "Call worker.join() before returning result[0] -- without the join, the thread may not have finished writing yet."
+  ],
+  "relatedTopics": [
+    "INTERFACES"
   ]
 }

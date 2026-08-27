@@ -11,5 +11,9 @@
     "Each method should RETURN a lambda like s -> ... ; the parameters (n, vs) are captured inside it.",
     "For containsDigit, loop over the characters and test Character.isDigit(s.charAt(i)).",
     "allOf's lambda loops over vs; return false as soon as one validator's ok(s) is false, and true after the loop."
+  ],
+  "relatedTopics": [
+    "FUNCTIONS",
+    "IF_CASE"
   ]
 }

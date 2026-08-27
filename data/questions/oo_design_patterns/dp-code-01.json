@@ -11,5 +11,9 @@
     "You need a private static Config field -- static, because the single instance belongs to the class, not to any object.",
     "In getInstance(), check whether the static field is still null; if so create the instance with the private constructor, then return the field.",
     "set and get are thin wrappers over HashMap.put and HashMap.get; map.get returns null for missing keys, which is exactly what the spec wants."
+  ],
+  "relatedTopics": [
+    "CLASSES",
+    "IF_CASE"
   ]
 }

@@ -11,5 +11,8 @@
     "Declare private double side; and assign this.side = side; in the constructor.",
     "area() just returns side * side. That single override satisfies the abstract method requirement.",
     "You do not write describe() at all -- the inherited version calls area(), and at runtime that resolves to Square's implementation."
+  ],
+  "relatedTopics": [
+    "CLASSES"
   ]
 }

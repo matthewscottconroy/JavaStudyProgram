@@ -11,5 +11,9 @@
     "For isWeekend, compare with ==: d == Day.SAT || d == Day.SUN.",
     "Day.values() returns the array {MON, TUE, ..., SUN} and d.ordinal() is d's index in that array.",
     "To wrap SUN (ordinal 6) back to MON (ordinal 0), use (d.ordinal() + 1) % Day.values().length as the index."
+  ],
+  "relatedTopics": [
+    "IF_CASE",
+    "VARIABLES"
   ]
 }

@@ -11,5 +11,6 @@
     "The syntax is try (Res a = ...; Res b = ...) { ... } -- both declarations go inside the parentheses.",
     "Construct each TrackedResource with the log and its name: new TrackedResource(log, \"a\").",
     "You write no close() calls at all -- the compiler inserts them, closing b first because it was declared last."
-  ]
+  ],
+  "relatedTopics": []
 }

@@ -11,5 +11,9 @@
     "runAll is a plain loop: for each Runnable in the list, call its run() method.",
     "A Runnable lambda takes no parameters: () -> doSomething().",
     "appender should return () -> log.add(msg); the lambda captures log and msg and reuses them every run."
+  ],
+  "relatedTopics": [
+    "INTERFACES",
+    "LOOPS"
   ]
 }

@@ -11,5 +11,8 @@
     "Use a counting loop: for (int i = args.length - 1; i >= 0; i--).",
     "Collect the pieces in a StringBuilder instead of printing each one, so you control the separators.",
     "Append a space only when i > 0 -- that puts spaces between words but never after the last one. Finish with one println."
+  ],
+  "relatedTopics": [
+    "PRINTING"
   ]
 }

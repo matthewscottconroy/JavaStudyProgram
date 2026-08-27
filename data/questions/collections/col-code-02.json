@@ -11,5 +11,9 @@
     "You cannot know a string is unique until you have seen the whole array, so plan on two passes.",
     "Pass 1: build a Map<String, Integer> of counts using counts.getOrDefault(item, 0) + 1.",
     "Pass 2: loop over the array (not the map) and return the first item whose count equals 1; return null after the loop."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE"
   ]
 }

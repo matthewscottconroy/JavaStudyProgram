@@ -11,5 +11,8 @@
     "You only need to change one method: name(). Do not try to override greet() -- final forbids it.",
     "greet() calls name() on 'this', so at runtime it will call your override automatically.",
     "Return exactly \"mon ami\" (greet() adds the \"Hello, \" and \"!\" parts itself)."
+  ],
+  "relatedTopics": [
+    "CLASSES"
   ]
 }

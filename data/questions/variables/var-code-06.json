@@ -11,5 +11,6 @@
     "First guard: if c is below 'a' or above 'z', return it unchanged.",
     "c - 'a' gives the letter's position 0..25; add shift and use % 26 to wrap.",
     "'a' + position is an int, so return (char) ('a' + position)."
-  ]
+  ],
+  "relatedTopics": []
 }

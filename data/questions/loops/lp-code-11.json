@@ -11,5 +11,9 @@
     "Write an inner while (x != 1) loop that applies x/2 or 3*x+1 and counts iterations; declare x as a long.",
     "Track two variables across the outer loop: the best start so far and its step count.",
     "Update the champion only when steps > bestSteps (strictly greater) -- that makes the smallest start win ties automatically."
+  ],
+  "relatedTopics": [
+    "IF_CASE",
+    "VARIABLES"
   ]
 }

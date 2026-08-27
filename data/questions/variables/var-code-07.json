@@ -11,5 +11,6 @@
     "7 / 2 in int arithmetic is 3; the fraction is lost before any cast can save it.",
     "(double) (a / b) is the classic mistake -- it casts the already-truncated result.",
     "Write (double) a / b: the cast binds to a alone, so the division is done in double."
-  ]
+  ],
+  "relatedTopics": []
 }

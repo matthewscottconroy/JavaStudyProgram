@@ -11,5 +11,8 @@
     "Loop over scores.entrySet(); for each entry the VALUE becomes the new key and the KEY joins a list.",
     "result.computeIfAbsent(score, k -> new ArrayList<>()).add(name) creates the list on first use and appends in one line.",
     "After grouping, loop over result.values() and Collections.sort each list to get alphabetical order."
+  ],
+  "relatedTopics": [
+    "LOOPS"
   ]
 }

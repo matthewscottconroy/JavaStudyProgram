@@ -11,5 +11,9 @@
     "Terminal operation: .collect(java.util.stream.Collectors.groupingBy(...)).",
     "The classifier function maps a word to its grouping key -- its length, i.e. String::length.",
     "The single-argument groupingBy already collects each group into a List, so no second collector is needed."
+  ],
+  "relatedTopics": [
+    "LAMBDAS",
+    "COLLECTIONS"
   ]
 }

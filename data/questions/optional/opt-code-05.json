@@ -10,5 +10,6 @@
   "hints": [
     "Optional has an or method (since Java 9) that takes a Supplier<Optional<T>> used only when the receiver is empty.",
     "Chain twice: a.or(() -> b).or(() -> c). If all three are empty, the chain result is simply empty."
-  ]
+  ],
+  "relatedTopics": []
 }

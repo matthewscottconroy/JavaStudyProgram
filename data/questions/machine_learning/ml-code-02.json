@@ -11,5 +11,9 @@
     "Allocate the result first: double[] result = new double[m.length];",
     "Outer loop over rows r, inner loop over columns c, accumulating m[r][c] * v[c].",
     "Store each row's finished sum in result[r]; the matrix can be non-square, so use m.length for rows and v.length for columns."
+  ],
+  "relatedTopics": [
+    "ARRAYS",
+    "LOOPS"
   ]
 }

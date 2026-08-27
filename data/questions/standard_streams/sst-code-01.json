@@ -11,5 +11,8 @@
     "in.read() returns one byte at a time; -1 means the stream is finished.",
     "Use a while loop whose condition calls in.read() and compares against -1.",
     "Increment a counter inside the loop body and return it after the loop ends."
+  ],
+  "relatedTopics": [
+    "LOOPS"
   ]
 }

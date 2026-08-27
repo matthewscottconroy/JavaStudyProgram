@@ -11,5 +11,10 @@
     "The bound <T extends Comparable<T>> is what lets max call compareTo on the elements.",
     "Track a best-so-far variable that starts as null; any element beats null, and later elements must beat the current best.",
     "In lastOrDefault, guard with items.isEmpty(); otherwise the last element sits at index items.size() - 1."
+  ],
+  "relatedTopics": [
+    "INTERFACES",
+    "LOOPS",
+    "IF_CASE"
   ]
 }

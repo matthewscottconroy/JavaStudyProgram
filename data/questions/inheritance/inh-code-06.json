@@ -11,5 +11,8 @@
     "Rect needs two final double fields set in the constructor; area() is just width * height.",
     "In totalArea, loop over the array with for (Shape s : shapes) and accumulate s.area() into a double sum.",
     "You never need instanceof here -- polymorphism picks the right area() for each element."
+  ],
+  "relatedTopics": [
+    "CLASSES"
   ]
 }

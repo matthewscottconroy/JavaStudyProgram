@@ -11,5 +11,9 @@
     "The result length is a.length - window + 1; allocate the double array first.",
     "Loop over each valid starting index, then use an inner loop to sum window elements from that start.",
     "Divide as doubles: (double) sum / window. Plain sum / window is integer division and drops the fraction."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "VARIABLES"
   ]
 }

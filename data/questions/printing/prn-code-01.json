@@ -11,5 +11,6 @@
     "Use an outer loop that runs height times -- one iteration per printed line.",
     "Inside it, build a string of width '*' characters (a StringBuilder or \"*\".repeat(width) both work).",
     "Print each finished line with System.out.println so every row ends with a line separator."
-  ]
+  ],
+  "relatedTopics": []
 }

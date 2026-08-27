@@ -11,5 +11,8 @@
     "A switch on l with one case per constant is the clearest way to encode the cycle.",
     "Follow the cycle order: GREEN goes to YELLOW, YELLOW to RED, RED back to GREEN.",
     "isGo is a one-liner: return l == Light.GREEN;"
+  ],
+  "relatedTopics": [
+    "IF_CASE"
   ]
 }

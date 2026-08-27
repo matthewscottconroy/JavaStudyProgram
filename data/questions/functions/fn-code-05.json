@@ -11,5 +11,8 @@
     "All three methods keep the name describe; only the parameter type changes (int, double, String).",
     "Each body is one line: return the label, a colon and space, then the value using + concatenation.",
     "Concatenating a number to a String converts it automatically -- \"int: \" + 5 gives \"int: 5\"."
+  ],
+  "relatedTopics": [
+    "VARIABLES"
   ]
 }

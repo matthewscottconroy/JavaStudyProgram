@@ -11,5 +11,6 @@
     "Loop over the characters and test each with Character.isUpperCase(c).",
     "On an uppercase letter, append '_' and then Character.toLowerCase(c); otherwise append c as-is.",
     "Guard the underscore with i > 0 so a name starting with a capital (like \"Value\") does not get a leading underscore."
-  ]
+  ],
+  "relatedTopics": []
 }

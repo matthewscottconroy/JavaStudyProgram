@@ -11,5 +11,9 @@
     "In swap, store list.get(i) in a variable of type T before overwriting index i.",
     "list.set(index, value) replaces an element and is all you need besides get.",
     "For reverseInPlace, use two counters: left starting at 0 and right at size() - 1; swap and move them toward each other while left < right."
+  ],
+  "relatedTopics": [
+    "ARRAYS_ARRAYLISTS",
+    "LOOPS"
   ]
 }

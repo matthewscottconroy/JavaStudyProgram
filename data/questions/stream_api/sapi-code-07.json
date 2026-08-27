@@ -11,5 +11,10 @@
     "Start with java.util.Arrays.stream(text.toLowerCase(java.util.Locale.ROOT).split(\"[^a-z]+\")) and filter out empty strings.",
     "Collect with Collectors.groupingBy(w -> w, Collectors.counting()) to get a Map<String, Long> of frequencies.",
     "Stream counts.entrySet(), sort with Map.Entry.<String, Long>comparingByValue().reversed().thenComparing(Map.Entry.comparingByKey()), then map to getKey and use findFirst().orElse(\"\")."
+  ],
+  "relatedTopics": [
+    "LAMBDAS",
+    "STRINGS",
+    "COLLECTIONS"
   ]
 }

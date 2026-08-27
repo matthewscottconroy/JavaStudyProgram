@@ -11,5 +11,6 @@
     "Keep an int depth starting at 0: add 1 on '(' and subtract 1 on ')', ignoring every other character.",
     "If depth ever becomes negative, you can return false immediately -- a ')' had no matching '('.",
     "After the loop, the string is balanced only if depth is exactly 0."
-  ]
+  ],
+  "relatedTopics": []
 }

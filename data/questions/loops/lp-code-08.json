@@ -11,5 +11,8 @@
     "Keep two variables, previous = 0 and current = 1, and loop n times.",
     "In each pass compute next = previous + current, then shift previous = current and current = next.",
     "After looping n times, previous holds fib(n). Make sure all three working variables are long, not int."
+  ],
+  "relatedTopics": [
+    "VARIABLES"
   ]
 }

@@ -11,5 +11,9 @@
     "Handle the empty array first: if values.length == 0, return new int[] { 0, 0, 0 }.",
     "java.util.stream.IntStream.of(values).summaryStatistics() gives an object with getMin(), getMax() and getSum().",
     "getSum() returns a long, so cast it to int when building the result array."
+  ],
+  "relatedTopics": [
+    "ARRAYS",
+    "IF_CASE"
   ]
 }

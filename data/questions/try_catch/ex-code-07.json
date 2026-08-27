@@ -11,5 +11,6 @@
     "Declare Exception last = null; before the loop so the variable outlives each iteration.",
     "Inside the loop: try { return task.attempt(); } catch (Exception e) { last = e; } -- returning on success ends the retrying instantly.",
     "Code after the loop only runs when every attempt failed, so throw new RuntimeException(last); there. The RuntimeException(Throwable) constructor sets the cause."
-  ]
+  ],
+  "relatedTopics": []
 }

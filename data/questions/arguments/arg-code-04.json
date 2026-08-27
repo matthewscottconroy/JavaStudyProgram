@@ -11,5 +11,8 @@
     "args[0] is the command; the text to transform is args[1] through args[args.length - 1].",
     "Join the remaining arguments by looping from i = 1 and appending a space before every element except the first.",
     "Compare the command with equals(\"upper\") / equals(\"lower\") and call text.toUpperCase() or text.toLowerCase(); anything else prints the literal line unknown command."
+  ],
+  "relatedTopics": [
+    "PRINTING"
   ]
 }

@@ -11,5 +11,8 @@
     "String has a replaceAll(regex, replacement) method -- think about removing the characters you do not want.",
     "A character class in square brackets matches one character; putting ^ first, as in [^0-9], negates it.",
     "Replace every non-digit with the empty string \"\" and return the result."
+  ],
+  "relatedTopics": [
+    "STRINGS"
   ]
 }

@@ -11,5 +11,8 @@
     "Start with new TreeMap<>(a) -- a sorted copy of the first inventory.",
     "Loop over b.entrySet() and combine each entry into the result.",
     "result.getOrDefault(key, 0) + value handles both new and shared items; merge(key, value, Integer::sum) does the same."
+  ],
+  "relatedTopics": [
+    "LOOPS"
   ]
 }

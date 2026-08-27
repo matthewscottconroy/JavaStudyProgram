@@ -11,5 +11,9 @@
     "Create a ByteArrayOutputStream, wrap it in an ObjectOutputStream, and call writeObject(s).",
     "After the ObjectOutputStream is closed, ByteArrayOutputStream.toByteArray() gives you the byte[].",
     "For reading: new ObjectInputStream(new ByteArrayInputStream(b)), call readObject(), and cast to Score."
+  ],
+  "relatedTopics": [
+    "TRY_CATCH",
+    "FILE_PROCESSING"
   ]
 }

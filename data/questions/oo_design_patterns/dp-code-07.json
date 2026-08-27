@@ -11,5 +11,8 @@
     "SalesReport only needs two small methods -- build() is inherited and must not (and cannot) be redefined.",
     "Implement String body() to return \"sales\"; the abstract keyword in Report forces you to.",
     "Add String header() returning \"SALES\" with the same package-private signature; skip footer() so the inherited \"F\" is used."
+  ],
+  "relatedTopics": [
+    "INHERITANCE"
   ]
 }

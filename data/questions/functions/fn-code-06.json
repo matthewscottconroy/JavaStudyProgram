@@ -11,5 +11,8 @@
     "Inside the method, treat values exactly like an int[] -- loop over it with for (int v : values).",
     "For sum, accumulate into a total that starts at 0; an empty call skips the loop and returns 0 naturally.",
     "For max, start largest at Integer.MIN_VALUE, not 0 -- otherwise max(-3, -7) would wrongly return 0, and the empty call needs MIN_VALUE anyway."
+  ],
+  "relatedTopics": [
+    "IF_CASE"
   ]
 }

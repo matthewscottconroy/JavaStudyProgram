@@ -11,5 +11,8 @@
     "You need two loops: the outer one iterates over the inner lists, the inner one over their elements.",
     "for (ArrayList<Integer> innerList : nested) gives you each inner list in turn.",
     "Add every element to one result ArrayList created before the loops; result.addAll(innerList) is a shortcut for the inner loop."
+  ],
+  "relatedTopics": [
+    "LOOPS"
   ]
 }

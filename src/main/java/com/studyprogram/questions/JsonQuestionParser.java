@@ -46,6 +46,10 @@ public final class JsonQuestionParser {
         if (dto.hints != null) dto.hints.forEach(b::hint);
         if (dto.starterCode != null) b.starterCode(dto.starterCode);
         if (dto.testCode != null) b.testCode(dto.testCode);
+        if (dto.relatedTopics != null) {
+            // strict: an unknown name throws, so a typo'd tag surfaces as a load warning
+            dto.relatedTopics.forEach(name -> b.relatedTopic(Topic.valueOf(name)));
+        }
 
         return b.build();
     }

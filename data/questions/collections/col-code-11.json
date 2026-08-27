@@ -11,5 +11,8 @@
     "Store the entries in a LinkedHashMap<String, String> field and the capacity in an int field set by the constructor.",
     "In put, evict only when the key is NOT already present and size() has reached capacity.",
     "entries.keySet().iterator().next() gives the oldest inserted key -- remove it, then put the new pair."
+  ],
+  "relatedTopics": [
+    "IF_CASE"
   ]
 }

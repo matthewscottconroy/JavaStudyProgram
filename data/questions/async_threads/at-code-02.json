@@ -11,5 +11,8 @@
     "Compute int mid = values.length / 2; the first thread covers indexes [0, mid) and the second covers [mid, length).",
     "Each lambda should total its range into a local long and then store it into its own slot: partial[0] or partial[1]. Local variables captured by the lambdas (like mid) must not be reassigned.",
     "Start both threads before joining either, then join BOTH before returning partial[0] + partial[1]."
+  ],
+  "relatedTopics": [
+    "VARIABLES"
   ]
 }

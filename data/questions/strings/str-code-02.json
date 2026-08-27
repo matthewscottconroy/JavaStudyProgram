@@ -11,5 +11,6 @@
     "First build a cleaned string: loop over s, keep only characters where Character.isLetter(c) is true, and lowercase them.",
     "A StringBuilder with append is a convenient way to collect the kept characters.",
     "Compare with two indexes, one starting at each end of the cleaned string, moving toward the middle until they cross."
-  ]
+  ],
+  "relatedTopics": []
 }

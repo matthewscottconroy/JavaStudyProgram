@@ -11,5 +11,9 @@
     "Declare private final double surfaceGravity; inside the enum and assign it in the constructor with this.surfaceGravity = surfaceGravity;.",
     "Each constant's parenthesized value is simply a constructor argument -- MERCURY(3.7) calls Planet(3.7).",
     "In weightOn, use Planet.EARTH.getSurfaceGravity() as the divisor: weight / earthGravity * p.getSurfaceGravity()."
+  ],
+  "relatedTopics": [
+    "CLASSES",
+    "VARIABLES"
   ]
 }

@@ -11,5 +11,9 @@
     "Two fields suffice: a boolean (start it at locked = true) and an int counter.",
     "coin() can simply set locked = false -- if it was already unlocked nothing visibly changes.",
     "push() needs the if: locked ? increment the counter : set locked = true. state() just maps the boolean to \"locked\"/\"unlocked\"."
+  ],
+  "relatedTopics": [
+    "CLASSES",
+    "IF_CASE"
   ]
 }

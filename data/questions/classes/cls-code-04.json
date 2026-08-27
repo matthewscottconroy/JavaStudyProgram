@@ -11,5 +11,8 @@
     "Final fields cannot be reassigned, so translate must call the constructor with new coordinate values.",
     "The new coordinates are x + dx, y + dy, and z + dz.",
     "For toString, concatenate the parts: \"(\" + x + \", \" + y + \", \" + z + \")\"."
+  ],
+  "relatedTopics": [
+    "STRINGS"
   ]
 }

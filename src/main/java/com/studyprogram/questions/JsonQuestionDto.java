@@ -20,4 +20,5 @@ public class JsonQuestionDto {
     public List<String> hints        = Collections.emptyList();
     public String starterCode;    // CODING only
     public String testCode;       // CODING only
+    public List<String> relatedTopics = Collections.emptyList(); // prerequisite Topic names
 }

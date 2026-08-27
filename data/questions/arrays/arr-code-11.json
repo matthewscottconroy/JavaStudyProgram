@@ -11,5 +11,9 @@
     "You cannot resize an array, so collect into a temp array of length a.length and track how many slots are used.",
     "For each value, scan only the used part of the temp array to see if it was already kept.",
     "java.util.Arrays.copyOf(kept, count) produces the exact-length final result."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE"
   ]
 }

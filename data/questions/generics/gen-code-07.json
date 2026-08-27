@@ -11,5 +11,10 @@
     "Handle the empty list first: return null before touching items.get(0).",
     "Seed min and max with items.get(0), then walk the list comparing with compareTo: negative means smaller, positive means larger.",
     "Finish with new Bounds<>(min, max) -- the diamond infers T from the method's type parameter."
+  ],
+  "relatedTopics": [
+    "INTERFACES",
+    "LOOPS",
+    "IF_CASE"
   ]
 }

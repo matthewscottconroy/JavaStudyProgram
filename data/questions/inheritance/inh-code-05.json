@@ -11,5 +11,8 @@
     "Follow the same pattern ChainB uses: return super.toString() plus your own suffix.",
     "super.toString() inside ChainEnd runs the ChainB version, which already produces \"A>B\".",
     "Your override is one line: return super.toString() + \">C\";"
+  ],
+  "relatedTopics": [
+    "CLASSES"
   ]
 }

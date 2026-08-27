@@ -11,5 +11,8 @@
     "Assign 20.0 to the target field inside the no-argument constructor.",
     "In setTarget, use if/else if to raise values below 10.0 and lower values above 30.0 before storing.",
     "Equivalent one-liner: target = Math.max(10.0, Math.min(30.0, value));"
+  ],
+  "relatedTopics": [
+    "IF_CASE"
   ]
 }

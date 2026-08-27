@@ -11,5 +11,8 @@
     "Give each method its own base case at n == 0: isEven(0) is true, isOdd(0) is false.",
     "For n > 0, isEven(n) should return isOdd(n - 1) -- it calls the OTHER method, not itself.",
     "Symmetrically, isOdd(n) returns isEven(n - 1). Each call reduces n by 1 until one of the base cases is reached."
+  ],
+  "relatedTopics": [
+    "IF_CASE"
   ]
 }

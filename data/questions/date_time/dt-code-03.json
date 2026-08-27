@@ -10,5 +10,6 @@
   "hints": [
     "java.time.Period.between(birth, on) returns a Period object describing the gap.",
     "Pull the parts out with p.getYears(), p.getMonths(), and p.getDays(), then pack them into a new int[]."
-  ]
+  ],
+  "relatedTopics": []
 }

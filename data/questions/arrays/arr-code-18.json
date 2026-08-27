@@ -11,5 +11,9 @@
     "Maintain top, bottom, left, right boundaries and loop while top <= bottom && left <= right.",
     "Each ring is four for loops: top row left-to-right, right column top-to-bottom, bottom row right-to-left, left column bottom-to-top; move the matching boundary after each.",
     "Before walking the bottom row re-check top <= bottom, and before the left column re-check left <= right -- otherwise a single row or column gets read twice."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE"
   ]
 }

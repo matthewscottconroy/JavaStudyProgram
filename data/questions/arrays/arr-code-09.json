@@ -11,5 +11,8 @@
     "Main diagonal elements have equal row and column index: square[i][i].",
     "For the anti-diagonal, row i uses column n - 1 - i where n is the matrix size.",
     "One loop from 0 to n-1 can add to both running sums; return new int[]{main, anti}."
+  ],
+  "relatedTopics": [
+    "LOOPS"
   ]
 }

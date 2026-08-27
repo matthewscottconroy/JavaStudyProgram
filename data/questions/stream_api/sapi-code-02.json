@@ -11,5 +11,9 @@
     "For initials, filter out blank names first (String has an isBlank method), then map each survivor to a one-character String.",
     "Collectors.joining(\".\") puts the separator only between elements and produces \"\" for an empty stream.",
     "For counting, split on the regex \\s+, lowercase every word, then distinct().count(). Watch out: splitting a blank sentence can produce one empty string."
+  ],
+  "relatedTopics": [
+    "LAMBDAS",
+    "STRINGS"
   ]
 }

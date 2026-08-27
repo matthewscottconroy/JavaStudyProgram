@@ -11,5 +11,6 @@
     "trim() the sentence first, and return \"\" right away if nothing is left.",
     "split(\"\\\\s+\") splits on one-or-more whitespace characters, so repeated spaces do not create empty words.",
     "Track the longest word seen so far and only replace it when a word is STRICTLY longer -- that makes the first of a tie win."
-  ]
+  ],
+  "relatedTopics": []
 }

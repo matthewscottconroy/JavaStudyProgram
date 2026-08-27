@@ -61,6 +61,7 @@ public class HtmlReportGenerator {
         tile(h, String.valueOf(codingSolved), "programs written & passed");
         tile(h, String.valueOf(studyDays.size()), "study days");
         tile(h, String.valueOf(streak), "day streak");
+        tile(h, p.getBossesCleared().size() + "/5", "bosses cleared");
         h.append("</div>");
     }
 

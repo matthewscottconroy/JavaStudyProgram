@@ -11,5 +11,8 @@
     "Build the formatter with DateTimeFormatter.ofPattern(\"MMM dd, yyyy\", Locale.US); then d.format(formatter) produces the string.",
     "Without the Locale argument, MMM would use the computer's default language -- the tests demand English month names.",
     "For parsing, create a formatter from \"M/d/yyyy\" and call LocalDate.parse(s, formatter); one-letter M and d happily accept one- or two-digit numbers."
+  ],
+  "relatedTopics": [
+    "STRINGS"
   ]
 }

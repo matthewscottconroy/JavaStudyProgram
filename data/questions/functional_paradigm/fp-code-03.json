@@ -11,5 +11,9 @@
     "You are returning a function, not a number -- the return statement should produce a lambda like x -> ...",
     "Inside the lambda, call f.apply on x, then call f.apply again on that result.",
     "Equivalently, f.andThen(f)::apply composes f with itself -- but the plain lambda x -> f.apply(f.apply(x)) is clearest."
+  ],
+  "relatedTopics": [
+    "LAMBDAS",
+    "FUNCTIONS"
   ]
 }

@@ -11,5 +11,9 @@
     "Declare private final double a, b, c, d and assign them with this.a = a; ... in the constructor.",
     "times can read other.a, other.b, etc. directly -- private fields are visible between two objects of the same class. Build the four new entries and pass them to new Matrix2(...).",
     "identity() is static, so it cannot use fields; it simply returns new Matrix2(1, 0, 0, 1). For toString, concatenate the fields: \"[\" + a + \" \" + b + \"; \" + c + \" \" + d + \"]\"."
+  ],
+  "relatedTopics": [
+    "VARIABLES",
+    "STRINGS"
   ]
 }

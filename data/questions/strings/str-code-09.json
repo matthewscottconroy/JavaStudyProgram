@@ -11,5 +11,8 @@
     "For a lowercase letter, c - 'a' gives its position 0-25; shift that position, then add 'a' back and cast to char.",
     "Wrap with modulo -- but Java's % can be negative, so use ((pos + shift) % 26 + 26) % 26 to stay in 0-25.",
     "Check c >= 'a' && c <= 'z' and c >= 'A' && c <= 'Z' separately so case is preserved, and append anything else unchanged."
+  ],
+  "relatedTopics": [
+    "VARIABLES"
   ]
 }

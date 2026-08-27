@@ -11,5 +11,9 @@
     "A forward index loop that calls words.remove(i) will skip the element after each removal -- try it mentally on [a, b, c].",
     "Get an Iterator with words.iterator(); calling it.remove() right after it.next() deletes safely. words.removeIf(...) is the one-line shortcut.",
     "Mutate the list you were handed and return that exact reference; do not construct a new ArrayList."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE"
   ]
 }

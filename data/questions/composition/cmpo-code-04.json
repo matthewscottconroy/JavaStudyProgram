@@ -11,5 +11,8 @@
     "add just wraps the three arguments: items.add(new CartItem(name, price, qty));",
     "Record components are read via methods: item.qty(), not item.qty -- sum those in a loop for itemCount.",
     "For total, accumulate item.price() * item.qty() into a double starting at 0.0."
+  ],
+  "relatedTopics": [
+    "CLASSES"
   ]
 }

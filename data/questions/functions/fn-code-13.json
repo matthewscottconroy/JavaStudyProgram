@@ -11,5 +11,8 @@
     "Think per element: each one doubles the number of possible subsets.",
     "long total = 1L; then a loop running n times doing total *= 2.",
     "A one-line recursive version also works: n == 0 ? 1L : 2L * subsets(n - 1). Bit-shift fans can even write 1L << n."
+  ],
+  "relatedTopics": [
+    "VARIABLES"
   ]
 }

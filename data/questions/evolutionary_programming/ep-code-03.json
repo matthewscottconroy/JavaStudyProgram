@@ -11,5 +11,8 @@
     "Create new java.util.Random(seed) once; call nextInt(s.length()) BEFORE nextInt(26).",
     "'a' + random.nextInt(26) is an int; cast it with (char) to get the letter.",
     "Use new StringBuilder(s), setCharAt(pos, letter), then toString() -- strings themselves cannot be modified."
+  ],
+  "relatedTopics": [
+    "VARIABLES"
   ]
 }

@@ -11,5 +11,6 @@
     "Check the lengths first and return -1 when they differ -- that also protects the loop from running off the shorter string.",
     "Use one loop index i and compare a.charAt(i) with b.charAt(i).",
     "Count the positions where the characters differ and return the count."
-  ]
+  ],
+  "relatedTopics": []
 }

@@ -11,5 +11,8 @@
     "Guard the empty list first -- k % list.size() would divide by zero otherwise.",
     "Normalize the shift with int shift = k % list.size() so a k bigger than the size wraps around.",
     "Loop i from 0 to size-1 and add list.get((i + shift) % list.size()) to a brand-new ArrayList."
+  ],
+  "relatedTopics": [
+    "LOOPS"
   ]
 }

@@ -145,8 +145,11 @@ public class CodingExerciseRunner {
     // ── Private helpers ───────────────────────────────────────────────────────
 
     private CodingResult execute(Path buildDir, String testClass) throws IOException {
+        // headless=true keeps GUI exercises deterministic everywhere (components work,
+        // but no exercise can open real windows during a test run)
         Process process = new ProcessBuilder(
-                javaExecutable().toString(), MEMORY_CAP, "-cp", buildDir.toString(), testClass)
+                javaExecutable().toString(), MEMORY_CAP, "-Djava.awt.headless=true",
+                "-cp", buildDir.toString(), testClass)
                 .redirectErrorStream(true)
                 .start();
 

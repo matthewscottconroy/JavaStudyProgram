@@ -11,5 +11,8 @@
     "Append \"start\" before the try block, then do the work inside try.",
     "Inside try: if explode, add \"work-failed\" and throw new RuntimeException(...); otherwise add \"work-done\".",
     "Put log.add(\"cleanup\") in a finally block -- it runs even while the exception is propagating out."
+  ],
+  "relatedTopics": [
+    "IF_CASE"
   ]
 }

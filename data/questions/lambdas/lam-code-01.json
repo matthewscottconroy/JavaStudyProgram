@@ -11,5 +11,8 @@
     "Operation has a single abstract method, so a lambda of shape (a, b) -> ... can implement it.",
     "add() and multiply() should each return such a lambda directly -- no new class, no anonymous class.",
     "calculate just forwards its two ints to op.apply and returns the result."
+  ],
+  "relatedTopics": [
+    "INTERFACES"
   ]
 }

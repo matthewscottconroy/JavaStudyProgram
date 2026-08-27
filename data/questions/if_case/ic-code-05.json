@@ -11,5 +11,6 @@
     "Compare strings with equals, not ==. Start with: if (a.equals(b)) return \"tie\";",
     "After the tie is gone, list the exact three combinations where a wins.",
     "If it is not a tie and a did not win, the only possibility left is \"b\"."
-  ]
+  ],
+  "relatedTopics": []
 }

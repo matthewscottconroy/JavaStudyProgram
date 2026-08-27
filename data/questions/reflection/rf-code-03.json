@@ -11,5 +11,9 @@
     "Loop over c.getDeclaredMethods() just like listing methods.",
     "m.isAnnotationPresent(Marked.class) returns true when the method is annotated.",
     "Only RUNTIME-retained annotations are visible here -- that is why @Marked declares its @Retention."
+  ],
+  "relatedTopics": [
+    "CLASS_HIERARCHY",
+    "IF_CASE"
   ]
 }

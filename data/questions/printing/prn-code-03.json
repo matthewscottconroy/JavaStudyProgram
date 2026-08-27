@@ -11,5 +11,6 @@
     "Write a for loop that starts at n and uses i-- to count down; the condition i >= 1 stops it after printing 1.",
     "System.out.println(i) prints the number and moves to the next line in one call.",
     "After the loop finishes, one more println prints \"liftoff\"."
-  ]
+  ],
+  "relatedTopics": []
 }

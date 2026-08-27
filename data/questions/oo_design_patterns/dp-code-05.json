@@ -11,5 +11,9 @@
     "Use a switch (or if/else chain) on the kind string with cases for \"circle\" and \"square\".",
     "Shape has a single abstract method, so a lambda works: return () -> size * size;",
     "The default branch should throw new IllegalArgumentException(...), not return null."
+  ],
+  "relatedTopics": [
+    "INTERFACES",
+    "IF_CASE"
   ]
 }

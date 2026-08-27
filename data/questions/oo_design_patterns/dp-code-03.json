@@ -11,5 +11,10 @@
     "Give the Builder its own fields: a final String size set in its constructor, a boolean cheese, and a List<String> toppings initialized to an empty ArrayList.",
     "cheese() and addTopping(...) mutate the Builder's fields and return this -- that is what enables chaining.",
     "build() simply calls the private Pizza constructor with the three collected values; describe() then branches on the cheese flag and toppings.size()."
+  ],
+  "relatedTopics": [
+    "CLASSES",
+    "STRINGS",
+    "IF_CASE"
   ]
 }

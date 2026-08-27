@@ -11,5 +11,9 @@
     "Do two passes: first find the largest value in the array.",
     "In the second pass, look for the largest value that is strictly less than the maximum -- the strict < is what skips duplicates of the largest.",
     "Use a boolean flag like foundSecond to detect the case where no such value exists, and return Integer.MIN_VALUE then."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE"
   ]
 }

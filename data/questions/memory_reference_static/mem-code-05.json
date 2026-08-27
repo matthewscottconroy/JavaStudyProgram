@@ -11,5 +11,8 @@
     "You cannot assign to a final field after construction -- so build a new ImmutableAccount instead.",
     "withDeposit passes the SAME owner and balance + amount to the constructor.",
     "withOwner passes the new owner and the SAME balance; neither method touches this object's fields."
+  ],
+  "relatedTopics": [
+    "CLASSES"
   ]
 }

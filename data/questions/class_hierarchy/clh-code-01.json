@@ -11,5 +11,9 @@
     "Loop over the array and call describe() on each element -- the override in Bicycle runs automatically thanks to dynamic dispatch.",
     "Append \", \" before every element except the first (for example, when the loop index is greater than 0).",
     "The expression (v instanceof Bicycle) is true exactly when the object v points to really is a Bicycle."
+  ],
+  "relatedTopics": [
+    "INHERITANCE",
+    "STRINGS"
   ]
 }

@@ -11,5 +11,8 @@
     "Start by replacing a and b with Math.abs(a) and Math.abs(b).",
     "Loop while b != 0. Inside, compute a % b, then shift: the old b becomes the new a, and the remainder becomes the new b.",
     "Save a % b in a temporary variable before overwriting a, or the second assignment will use the wrong value. Return a after the loop."
+  ],
+  "relatedTopics": [
+    "VARIABLES"
   ]
 }

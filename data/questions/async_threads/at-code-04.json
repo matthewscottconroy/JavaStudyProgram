@@ -11,5 +11,8 @@
     "Store the count in a private int field; increment() just does count++, and the synchronized keyword on the method supplies the locking.",
     "In hammer, create one SyncCounter, then fill a Thread[] where each thread's lambda loops perThread times calling counter.increment().",
     "Start every thread first, then join every thread in a second loop, and only then return counter.value()."
+  ],
+  "relatedTopics": [
+    "CLASSES"
   ]
 }

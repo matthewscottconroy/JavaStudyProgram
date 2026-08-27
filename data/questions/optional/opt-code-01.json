@@ -11,5 +11,9 @@
     "Loop over the array with an enhanced for loop and test word.length() > len -- strictly greater, so equal lengths do not count.",
     "Return Optional.of(word) as soon as a match is found; returning ends the search at the first qualifying word.",
     "If the loop finishes without returning, no word qualified -- return Optional.empty()."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE"
   ]
 }

@@ -11,5 +11,9 @@
     "Each constant body acts like a small anonymous subclass: ADD { public int apply(int a, int b) { ... } } overrides the abstract method just for ADD.",
     "ADD returns a + b, SUB returns a - b, MUL returns a * b.",
     "compute needs no switch at all -- polymorphism does the work: return op.apply(a, b);"
+  ],
+  "relatedTopics": [
+    "CLASSES",
+    "FUNCTIONS"
   ]
 }

@@ -11,5 +11,9 @@
     "Create the set with java.util.EnumSet.noneOf(Permission.class), then loop over csv.split(\",\").",
     "For each piece: trim it, skip it if it is empty, and add Permission.valueOf(piece.toUpperCase(java.util.Locale.ROOT)).",
     "canWrite is one boolean expression: perms.contains(Permission.WRITE) || perms.contains(Permission.ADMIN)."
+  ],
+  "relatedTopics": [
+    "STRINGS",
+    "IF_CASE"
   ]
 }

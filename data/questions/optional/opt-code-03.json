@@ -10,5 +10,9 @@
   "hints": [
     "Map.get returns null for a missing key -- wrap the call: java.util.Optional.ofNullable(nicks.get(user)).",
     "Chain .filter(s -> !s.isBlank()) so empty and whitespace-only values become Optional.empty()."
+  ],
+  "relatedTopics": [
+    "COLLECTIONS",
+    "STRINGS"
   ]
 }

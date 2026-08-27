@@ -11,5 +11,6 @@
     "Put the return Integer.parseInt(text); call inside a try block.",
     "Add catch (NumberFormatException e) after the try block and return fallback there.",
     "You do not need a special null check: Integer.parseInt(null) also throws NumberFormatException, so the same catch handles it."
-  ]
+  ],
+  "relatedTopics": []
 }

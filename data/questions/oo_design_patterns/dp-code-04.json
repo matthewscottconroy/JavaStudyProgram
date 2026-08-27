@@ -11,5 +11,9 @@
     "Store the listeners in a List<Consumer<String>> field initialized to an empty ArrayList.",
     "subscribe is just listeners.add(listener) -- an ArrayList keeps them in subscription order.",
     "In publish, loop over the list and call listener.accept(event) on each one."
+  ],
+  "relatedTopics": [
+    "INTERFACES",
+    "COMPOSITION"
   ]
 }

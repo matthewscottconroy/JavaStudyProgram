@@ -22,6 +22,7 @@ public final class Question {
     private final String starterCode;   // CODING: skeleton written to the workspace
     private final String testCode;      // CODING: test harness compiled against the student's code
     private final List<String> shuffledLines; // PARSONS: solution lines in shuffled order
+    private final List<Topic> relatedTopics;  // prerequisite topics this question also exercises
 
     private Question(Builder b) {
         this.id                 = b.id;
@@ -38,6 +39,7 @@ public final class Question {
         this.starterCode        = b.starterCode;
         this.testCode           = b.testCode;
         this.shuffledLines      = Collections.unmodifiableList(new ArrayList<>(b.shuffledLines));
+        this.relatedTopics      = Collections.unmodifiableList(new ArrayList<>(b.relatedTopics));
     }
 
     // ── Accessors ────────────────────────────────────────────────────────────
@@ -59,6 +61,7 @@ public final class Question {
     public String getTestCode()               { return testCode; }
     public boolean isCoding()                 { return type == QuestionType.CODING; }
     public List<String> getShuffledLines()    { return shuffledLines; }
+    public List<Topic> getRelatedTopics()     { return relatedTopics; }
 
     // ── Builder ──────────────────────────────────────────────────────────────
 
@@ -79,6 +82,7 @@ public final class Question {
         private String starterCode;
         private String testCode;
         private final List<String> shuffledLines = new ArrayList<>();
+        private final List<Topic> relatedTopics  = new ArrayList<>();
 
         public Builder id(String id)                  { this.id = id; return this; }
         public Builder topic(Topic t)                 { this.topic = t; return this; }
@@ -101,6 +105,7 @@ public final class Question {
         public Builder testCode(String c)             { this.testCode = c; return this; }
         public Builder shuffledLines(List<String> l)  { this.shuffledLines.clear();
                                                         this.shuffledLines.addAll(l); return this; }
+        public Builder relatedTopic(Topic t)          { this.relatedTopics.add(t); return this; }
 
         public Question build() {
             if (topic == null)  throw new IllegalStateException("topic required");

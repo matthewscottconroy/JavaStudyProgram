@@ -11,5 +11,10 @@
     "Each decorator needs a private final Text field assigned from the constructor parameter.",
     "In render(), call inner.render() first, then transform that result (toUpperCase() or + \"!\").",
     "Do not touch PlainText -- stacking works because a decorator's constructor accepts ANY Text, including another decorator."
+  ],
+  "relatedTopics": [
+    "INTERFACES",
+    "COMPOSITION",
+    "STRINGS"
   ]
 }

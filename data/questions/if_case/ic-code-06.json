@@ -11,5 +11,8 @@
     "Test n % 3 == 0 && n % 5 == 0 first; if \"fizz\" is checked earlier, 15 never reaches \"fizzbuzz\".",
     "Use an if / else if / else if / else chain so exactly one branch runs.",
     "String.valueOf(n) (or \"\" + n) turns the int into a String for the final else."
+  ],
+  "relatedTopics": [
+    "VARIABLES"
   ]
 }

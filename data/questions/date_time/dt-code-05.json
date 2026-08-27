@@ -10,5 +10,8 @@
   "hints": [
     "Loop with for (LocalDate d = start; !d.isAfter(end); d = d.plusDays(1)) -- isAfter keeps the end date inclusive.",
     "Compare d.getDayOfWeek() == java.time.DayOfWeek.FRIDAY and count the matches."
+  ],
+  "relatedTopics": [
+    "IF_CASE"
   ]
 }

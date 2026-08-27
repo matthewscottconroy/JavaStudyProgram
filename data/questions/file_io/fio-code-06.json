@@ -11,5 +11,8 @@
     "Files.readAllLines(p) gives you every line; loop over them.",
     "line.split(\"\\\\W+\") splits a line into words, discarding punctuation between them.",
     "Compare each token to the target with equalsIgnoreCase and increment a counter on match."
+  ],
+  "relatedTopics": [
+    "STRINGS"
   ]
 }

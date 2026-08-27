@@ -11,5 +11,9 @@
     "java.nio.file.Files.readAllLines(path) returns a List<String> with one element per line.",
     "line.isBlank() is true for \"\" and for lines containing only spaces or tabs -- count the lines where it is false.",
     "You do not need try/catch here: the method's throws IOException clause passes the checked exception to the caller."
+  ],
+  "relatedTopics": [
+    "STRINGS",
+    "IF_CASE"
   ]
 }

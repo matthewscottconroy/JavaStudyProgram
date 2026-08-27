@@ -11,5 +11,9 @@
     "The result array has exactly a.length + b.length slots -- allocate it up front.",
     "Keep three indexes: i into a, j into b, and out into the result. Compare a[i] with b[j] each step.",
     "After the main loop one array may still have elements left; copy its tail with a simple while loop."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE"
   ]
 }

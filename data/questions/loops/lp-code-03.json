@@ -11,5 +11,8 @@
     "Loop i from 1 to upTo and append n * i each time.",
     "The trailing-space trap: k numbers need only k - 1 separators. Decide where the space goes.",
     "Append the separator before each number except the first (guard it with if (i > 1)), and use a StringBuilder."
+  ],
+  "relatedTopics": [
+    "IF_CASE"
   ]
 }

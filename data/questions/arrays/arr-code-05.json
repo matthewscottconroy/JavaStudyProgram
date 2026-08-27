@@ -11,5 +11,9 @@
     "Reduce k first: rotating by the array length returns the same order, so only k % a.length matters.",
     "Create a new array of the same length and copy each element to its shifted position instead of moving things inside a.",
     "Element a[i] lands at index (i + k % n) % n in the result. Watch out for the empty array before doing any % n."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "VARIABLES"
   ]
 }

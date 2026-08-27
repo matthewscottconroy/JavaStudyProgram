@@ -11,5 +11,6 @@
     "The whole method is a single System.out.printf call using the format string from the task description.",
     "%-10s means: string, minimum 10 characters, and the '-' flag left-justifies it (pads on the right).",
     "%6.2f means: floating point, at least 6 characters total, exactly 2 after the decimal point, padded with spaces on the left; end the format with %n for the newline."
-  ]
+  ],
+  "relatedTopics": []
 }

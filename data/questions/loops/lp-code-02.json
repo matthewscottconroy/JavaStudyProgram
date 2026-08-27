@@ -11,5 +11,9 @@
     "Use while (n != 1) so the loop stops exactly when n reaches 1.",
     "Inside the loop, use n % 2 == 0 to decide whether to divide by 2 or compute 3 * n + 1.",
     "Declare int steps = 0 before the loop and increment it once every time you change n."
+  ],
+  "relatedTopics": [
+    "IF_CASE",
+    "VARIABLES"
   ]
 }

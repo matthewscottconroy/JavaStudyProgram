@@ -11,5 +11,8 @@
     "Check c >= '0' && c <= '9' first and return c - '0'.",
     "For letters, c - 'a' gives 0 for 'a' -- add 10 because 'a' means ten in hex.",
     "Uppercase needs its own range check with 'A'; everything left over returns -1."
+  ],
+  "relatedTopics": [
+    "VARIABLES"
   ]
 }

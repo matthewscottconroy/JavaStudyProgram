@@ -11,5 +11,8 @@
     "Rabbit only needs its dailyCost() override to return 2.5 -- compare it with how Lion is written.",
     "In totalDailyCost, start an accumulator at 0.0 and use a for-each loop over the array.",
     "Call animal.dailyCost() on the Animal2 reference; you never need instanceof -- each object runs its own override."
+  ],
+  "relatedTopics": [
+    "CLASSES"
   ]
 }

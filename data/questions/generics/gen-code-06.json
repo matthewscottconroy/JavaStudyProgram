@@ -11,5 +11,9 @@
     "put, get, getOrDefault, containsKey and size can each delegate directly to the private map.",
     "Removing from a map while looping over it with for-each throws ConcurrentModificationException -- use a collection view instead.",
     "map.values().removeIf(v -> ...) removes every entry whose value matches; compare with Objects.equals."
+  ],
+  "relatedTopics": [
+    "COLLECTIONS",
+    "CLASSES"
   ]
 }

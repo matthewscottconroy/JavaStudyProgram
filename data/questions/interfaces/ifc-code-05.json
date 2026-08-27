@@ -11,5 +11,8 @@
     "Because Sized has one abstract method, ofFixed can return the lambda () -> n.",
     "In largest, handle the empty array first (return null), then track a 'best' element while looping.",
     "Compare with items[i].size() > best.size() and replace best when the new element is bigger."
+  ],
+  "relatedTopics": [
+    "IF_CASE"
   ]
 }

@@ -11,5 +11,9 @@
     "push is one line: items.add(s); -- adding at the end makes the end the top of the stack.",
     "In pop(), first return null if items.isEmpty(); otherwise remove the element at index items.size() - 1.",
     "ArrayList already has an isEmpty() method you can delegate to."
+  ],
+  "relatedTopics": [
+    "CLASSES",
+    "IF_CASE"
   ]
 }

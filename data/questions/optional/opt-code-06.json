@@ -11,5 +11,10 @@
     "Loop over tokens with try { sum += Integer.parseInt(t); count++; } catch (NumberFormatException e) { /* skip */ }.",
     "After the loop, return -1.0 when count is 0.",
     "Divide as (double) sum / count so the average of 3 and 4 is 3.5, not 3."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE",
+    "VARIABLES"
   ]
 }

@@ -11,5 +11,10 @@
     "Delegate the easy parts: addTitle calls titles.add(...), count returns titles.size().",
     "For hasTitle, loop over the list and use String's equalsIgnoreCase method.",
     "For longestTitle, track the best candidate starting from \"\" and replace it whenever a stored title is longer."
+  ],
+  "relatedTopics": [
+    "CLASSES",
+    "IF_CASE",
+    "STRINGS"
   ]
 }

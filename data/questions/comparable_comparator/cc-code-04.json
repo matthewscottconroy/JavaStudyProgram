@@ -11,5 +11,9 @@
     "Start with Comparator.comparing(Employee::dept) and chain the other keys with thenComparing.",
     "To make one level descending, pass an already-reversed comparator: Comparator.comparingInt(Employee::salary).reversed().",
     "Calling .reversed() at the very end would flip ALL levels -- reverse only the salary comparator before chaining it."
+  ],
+  "relatedTopics": [
+    "INTERFACES",
+    "FUNCTIONS"
   ]
 }

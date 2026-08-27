@@ -11,5 +11,10 @@
     "Create a new ArrayList and add to it -- never call remove or removeIf on nums.",
     "Loop over nums with a for-each loop and keep values where n >= 0 (zero stays).",
     "Return the new list; the test verifies the original list still holds all five elements afterwards."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE",
+    "ARRAYS_ARRAYLISTS"
   ]
 }

@@ -11,5 +11,8 @@
     "Start with int result = 0 and loop i from 0 to bits.length() - 1.",
     "bits.charAt(i) - '0' turns the character '0' or '1' into the int 0 or 1.",
     "Each step: result = result * 2 + digit. After the loop, result is the answer."
+  ],
+  "relatedTopics": [
+    "VARIABLES"
   ]
 }

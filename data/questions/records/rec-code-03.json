@@ -11,5 +11,9 @@
     "In the compact constructor: if (celsius < -273.15) throw new IllegalArgumentException(...). Exactly -273.15 must NOT throw.",
     "fahrenheit is celsius * 9.0 / 5.0 + 32.0 -- use the doubles 9.0 and 5.0 to avoid integer division.",
     "warmer cannot modify this record; return new Temperature(celsius + delta)."
+  ],
+  "relatedTopics": [
+    "IF_CASE",
+    "VARIABLES"
   ]
 }

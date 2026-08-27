@@ -11,5 +11,9 @@
     "The record header (int x, int y) already generates x() and y() accessors plus value-based equals -- you only fill in the two method bodies.",
     "For distanceTo, use the Pythagorean theorem: the distance is Math.sqrt of dx squared plus dy squared.",
     "origin() is static, so it cannot read x or y -- just construct and return a new Point."
+  ],
+  "relatedTopics": [
+    "CLASSES",
+    "VARIABLES"
   ]
 }

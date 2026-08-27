@@ -11,5 +11,6 @@
     "list.get(i) reads an element; list.set(i, value) overwrites the element at that index.",
     "Save list.get(i) in a temporary String variable before you overwrite position i.",
     "After the two set calls, return the same list variable that was passed in -- do not create a new ArrayList."
-  ]
+  ],
+  "relatedTopics": []
 }

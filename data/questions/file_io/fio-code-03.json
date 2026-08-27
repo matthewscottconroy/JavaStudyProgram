@@ -11,5 +11,8 @@
     "String.split takes a second 'limit' argument; a negative limit keeps trailing empty fields.",
     "split(\",\", -1) returns the raw fields; each may still have spaces around it.",
     "Loop over the array and replace each element with element.trim() before returning it."
+  ],
+  "relatedTopics": [
+    "STRINGS"
   ]
 }

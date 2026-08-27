@@ -11,5 +11,9 @@
     "PricingStrategy has exactly one abstract method, so a lambda like (q, u) -> ... can implement it.",
     "bulkDiscount() computes the full total first, then returns full * 0.9 only when quantity >= 10.",
     "total should contain no pricing math at all -- just return s.priceFor(qty, unit)."
+  ],
+  "relatedTopics": [
+    "INTERFACES",
+    "IF_CASE"
   ]
 }

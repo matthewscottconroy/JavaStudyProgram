@@ -11,5 +11,9 @@
     "Start with int[] copy = java.util.Arrays.copyOf(a, a.length); sorting a directly would change the caller's array.",
     "Outer loop over position i; inner loop from i + 1 onward finds the INDEX of the minimum, not just its value.",
     "After the inner loop, swap copy[i] with copy[minIndex] using a temp variable."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE"
   ]
 }

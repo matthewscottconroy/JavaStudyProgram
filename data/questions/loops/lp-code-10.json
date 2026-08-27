@@ -11,5 +11,8 @@
     "A number is a single digit exactly when it is less than 10, so the outer loop runs while n >= 10.",
     "Inside, sum the digits of n with the usual pattern: sum += n % 10 then divide n by 10, looping while the value is positive.",
     "After the inner loop finishes, assign the digit sum back to n and let the outer loop decide whether another round is needed. Reset sum to 0 each round."
+  ],
+  "relatedTopics": [
+    "VARIABLES"
   ]
 }

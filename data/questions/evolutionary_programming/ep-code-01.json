@@ -10,5 +10,9 @@
   "hints": [
     "Compute the loop bound first: int limit = Math.min(candidate.length(), target.length());",
     "Compare candidate.charAt(i) == target.charAt(i) inside the loop and count the matches."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE"
   ]
 }
