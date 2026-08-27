@@ -56,6 +56,11 @@ public class JsonProfileStorage implements ProfileStorage {
         Files.deleteIfExists(profilePath(name));
     }
 
+    @Override
+    public Path directory() {
+        return directory;
+    }
+
     private Path profilePath(String name) {
         String safe = name.replaceAll("[^a-zA-Z0-9_\\-]", "_");
         return directory.resolve(safe + ".json");

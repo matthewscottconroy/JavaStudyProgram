@@ -34,12 +34,19 @@ public class StudentProfile {
         return performance.computeIfAbsent(topic, TopicPerformance::new);
     }
 
-    /** Record the result of answering one question. */
+    /** Record the result of answering one question (difficulty-weighted). */
     public void recordAnswer(Question question, boolean correct) {
         totalQuestionsAnswered++;
         if (correct) totalCorrect++;
         lastStudied = LocalDateTime.now();
-        getOrCreatePerformance(question.getTopic()).record(question.getId(), correct);
+        getOrCreatePerformance(question.getTopic())
+                .record(question.getId(), correct, question.getDifficulty());
+    }
+
+    /** Applies time decay to every topic's mastery. Call once after loading a profile. */
+    public void applyDecay() {
+        LocalDateTime now = LocalDateTime.now();
+        performance.values().forEach(p -> p.applyDecay(now));
     }
 
     @JsonIgnore

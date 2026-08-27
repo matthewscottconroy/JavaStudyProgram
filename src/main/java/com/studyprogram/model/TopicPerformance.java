@@ -19,6 +19,7 @@ public class TopicPerformance {
     private double masteryScore;          // 0.0–1.0 (SM-2-inspired running score)
     private LocalDateTime lastAttempted;
     private LocalDateTime lastCorrect;
+    private LocalDateTime masteryUpdatedAt; // last time masteryScore changed (incl. decay)
     // NOTE: no @JsonIgnore here — the field must persist so the "recently seen"
     // spaced-repetition penalty survives across program runs. Jackson serializes it
     // through the List-typed accessor pair below.
@@ -35,19 +36,51 @@ public class TopicPerformance {
         this.masteryScore = 0.0;
     }
 
-    /** Record the outcome of one question attempt. */
+    /** Record the outcome of one question attempt with the default (flat) weighting. */
     public void record(String questionId, boolean wasCorrect) {
+        recordWeighted(questionId, wasCorrect, wasCorrect ? CORRECT_DELTA : INCORRECT_DELTA);
+    }
+
+    /**
+     * Record an attempt with difficulty-weighted mastery deltas: solving a hard
+     * question earns more than an easy one, while missing an easy question costs
+     * more than missing a hard one (a miss on easy material is the stronger signal).
+     */
+    public void record(String questionId, boolean wasCorrect, int difficulty) {
+        int d = Math.max(1, Math.min(5, difficulty));
+        double delta = wasCorrect
+                ? 0.05 + 0.02 * d          // d1 +0.07 … d5 +0.15
+                : 0.09 - 0.01 * d;         // d1 −0.08 … d5 −0.04
+        recordWeighted(questionId, wasCorrect, delta);
+    }
+
+    private void recordWeighted(String questionId, boolean wasCorrect, double delta) {
         attempts++;
         lastAttempted = LocalDateTime.now();
         if (wasCorrect) {
             correct++;
             lastCorrect = LocalDateTime.now();
-            masteryScore = Math.min(1.0, masteryScore + CORRECT_DELTA);
+            masteryScore = Math.min(1.0, masteryScore + delta);
         } else {
-            masteryScore = Math.max(0.0, masteryScore - INCORRECT_DELTA);
+            masteryScore = Math.max(0.0, masteryScore - delta);
         }
+        masteryUpdatedAt = lastAttempted;
         recentlyAnswered.addFirst(questionId);
         if (recentlyAnswered.size() > RECENT_CAP) recentlyAnswered.removeLast();
+    }
+
+    /**
+     * Applies time decay: after a one-week grace period, mastery halves every
+     * ~120 days of inactivity, so stale topics resurface in the auto feed.
+     * Tracked via {@code masteryUpdatedAt} so repeated application is stable.
+     */
+    public void applyDecay(LocalDateTime now) {
+        LocalDateTime base = masteryUpdatedAt != null ? masteryUpdatedAt : lastAttempted;
+        if (base == null || masteryScore <= 0) return;
+        double days = java.time.Duration.between(base, now).toHours() / 24.0;
+        if (days <= 7) return;
+        masteryScore *= Math.pow(0.5, (days - 7) / 120.0);
+        masteryUpdatedAt = now;
     }
 
     /** Record that the student chose to skip a question on this topic (an avoidance signal). */
@@ -89,6 +122,8 @@ public class TopicPerformance {
     public void setLastAttempted(LocalDateTime t) { this.lastAttempted = t; }
     public LocalDateTime getLastCorrect()    { return lastCorrect; }
     public void setLastCorrect(LocalDateTime t)   { this.lastCorrect = t; }
+    public LocalDateTime getMasteryUpdatedAt()    { return masteryUpdatedAt; }
+    public void setMasteryUpdatedAt(LocalDateTime t) { this.masteryUpdatedAt = t; }
 
     // Persist the spaced-repetition deque as a plain list for Jackson
     @JsonProperty("recentlyAnswered")

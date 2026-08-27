@@ -112,7 +112,12 @@ public class AdaptiveEngine {
 
         double codingBonus      = (q.getType() == QuestionType.CODING) ? 0.6 : 0.0;
 
-        return topicPriority + difficultyMatch + recentPenalty + codingBonus + rng.nextDouble() * 0.1;
+        // Gentle introduction: a topic the student has barely touched starts easy
+        int attempts            = (perf == null) ? 0 : perf.getAttempts();
+        double gentleIntro      = (attempts < 3 && q.getDifficulty() > 2) ? -0.4 : 0.0;
+
+        return topicPriority + difficultyMatch + recentPenalty + codingBonus + gentleIntro
+                + rng.nextDouble() * 0.1;
     }
 
     /** Weighted random selection from the top-N candidates. */

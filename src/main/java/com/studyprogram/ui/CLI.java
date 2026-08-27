@@ -7,10 +7,13 @@ import com.studyprogram.grading.CompositeGrader;
 import com.studyprogram.grading.Grader;
 import com.studyprogram.llm.LLMService;
 import com.studyprogram.model.*;
+import com.studyprogram.report.HtmlReportGenerator;
+import com.studyprogram.storage.AttemptLog;
 import com.studyprogram.storage.ProfileStorage;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -28,6 +31,8 @@ public class CLI {
     private final CodingExerciseRunner codingRunner;
 
     private StudentProfile currentProfile;
+    private AttemptLog     attemptLog;
+    private int            lastCodingHints;   // hints used in the most recent codingFlow run
 
     public CLI(QuestionBank bank, ProfileStorage storage, LLMService llm) {
         this.bank         = bank;
@@ -60,9 +65,10 @@ public class CLI {
             System.out.println();
             System.out.println("  [1] Start Study Session");
             System.out.println("  [2] View Performance");
-            System.out.println("  [3] Select Topics");
-            System.out.println("  [4] Switch Profile");
-            System.out.println("  [5] Exit");
+            System.out.println("  [3] Progress Report (HTML)");
+            System.out.println("  [4] Select Topics");
+            System.out.println("  [5] Switch Profile");
+            System.out.println("  [6] Exit");
             System.out.print("\n  Choice: ");
             String choice = in.nextLine().trim();
 
@@ -70,9 +76,10 @@ public class CLI {
                 case "1" -> studySession();
                 case "2" -> Display.performanceTable(currentProfile.getPerformance(),
                                                       currentProfile.getSelectedTopicsList());
-                case "3" -> selectTopics();
-                case "4" -> profileMenu();
-                case "5" -> { saveProfile(); return; }
+                case "3" -> progressReport();
+                case "4" -> selectTopics();
+                case "5" -> profileMenu();
+                case "6" -> { saveProfile(); return; }
                 default  -> System.out.println("  Invalid choice.");
             }
         }
@@ -99,6 +106,9 @@ public class CLI {
                             Optional<StudentProfile> loaded = storage.load(profiles.get(idx));
                             if (loaded.isPresent()) {
                                 currentProfile = loaded.get();
+                                currentProfile.applyDecay();
+                                attemptLog = AttemptLog.forProfile(storage.directory(),
+                                                                   currentProfile.getName());
                                 System.out.printf("  Welcome back, %s!%n", currentProfile.getName());
                                 return;
                             }
@@ -118,8 +128,39 @@ public class CLI {
         String name = in.nextLine().trim();
         if (name.isBlank()) name = "Student";
         currentProfile = new StudentProfile(name);
+        attemptLog = AttemptLog.forProfile(storage.directory(), name);
         System.out.printf("  Profile created for %s.%n", name);
         selectTopics();
+    }
+
+    /** Generates the self-contained HTML progress report and tries to open it. */
+    private void progressReport() {
+        try {
+            String safe = currentProfile.getName().replaceAll("[^a-zA-Z0-9_\\-]", "_");
+            Path out = storage.directory().resolveSibling("reports").resolve(safe + "-progress.html");
+            Path written = new HtmlReportGenerator()
+                    .generate(currentProfile, attemptLog.readAll(), out);
+            System.out.println("  Report written to: " + Display.CYAN
+                    + written.toAbsolutePath() + Display.RESET);
+            try {
+                if (java.awt.Desktop.isDesktopSupported()
+                        && java.awt.Desktop.getDesktop().isSupported(java.awt.Desktop.Action.BROWSE)) {
+                    java.awt.Desktop.getDesktop().browse(written.toAbsolutePath().toUri());
+                    System.out.println("  Opened in your browser.");
+                }
+            } catch (Exception ignored) {
+                // headless or no browser — the path above is enough
+            }
+        } catch (IOException e) {
+            System.out.println("  Could not generate report: " + e.getMessage());
+        }
+    }
+
+    /** Appends one attempt to the append-only log (timings in whole seconds). */
+    private void logAttempt(Question q, String outcome, long startNano, int hintsUsed) {
+        if (attemptLog == null) return;
+        long secs = Math.max(0, (System.nanoTime() - startNano) / 1_000_000_000L);
+        attemptLog.append(new AttemptRecord(LocalDateTime.now(), q, outcome, secs, hintsUsed));
     }
 
     private void saveProfile() {
@@ -215,12 +256,24 @@ public class CLI {
     // ── Study session ─────────────────────────────────────────────────────────
 
     private void studySession() {
-        List<Topic> active = currentProfile.getSelectedTopicsList();
-        if (active.isEmpty()) {
-            System.out.println("  No topics selected. Please select topics first.");
-            selectTopics();
+        System.out.print("\n  Feed: [a] auto — follows the concept map (recommended)  "
+                + "[m] my selected topics  [a]: ");
+        boolean manual = in.nextLine().trim().equalsIgnoreCase("m");
+
+        List<Topic> active;
+        if (manual) {
             active = currentProfile.getSelectedTopicsList();
-            if (active.isEmpty()) return;
+            if (active.isEmpty()) {
+                System.out.println("  No topics selected. Please select topics first.");
+                selectTopics();
+                active = currentProfile.getSelectedTopicsList();
+                if (active.isEmpty()) return;
+            }
+        } else {
+            active = Curriculum.autoTopics(currentProfile, 6);
+            System.out.println("  Auto plan: " + Display.CYAN
+                    + active.stream().map(t -> t.displayName).collect(Collectors.joining(", "))
+                    + Display.RESET);
         }
 
         System.out.println();
@@ -254,16 +307,19 @@ public class CLI {
 
             // Coding exercises have their own compile-and-test flow
             if (q.isCoding()) {
+                long qStart = System.nanoTime();
                 CodingOutcome outcome = codingFlow(q, qNum, displayTotal);
                 switch (outcome) {
                     case QUIT -> quit = true;
                     case SKIPPED -> {
                         session.skip(q);
+                        logAttempt(q, AttemptRecord.OUTCOME_SKIPPED, qStart, lastCodingHints);
                         System.out.println("  Skipped.");
                     }
                     case CORRECT -> {
                         GradingResult r = GradingResult.correct(q.getExplanation());
                         session.recordAnswer(q, r);
+                        logAttempt(q, AttemptRecord.OUTCOME_CORRECT, qStart, lastCodingHints);
                         saveProfile();
                         Display.correct(r);
                     }
@@ -272,6 +328,7 @@ public class CLI {
                                 "Recorded as incorrect — study the reference solution and it "
                                 + "will come around again.", q.getExplanation());
                         session.recordAnswer(q, r);
+                        logAttempt(q, AttemptRecord.OUTCOME_INCORRECT, qStart, lastCodingHints);
                         saveProfile();
                     }
                 }
@@ -289,6 +346,8 @@ public class CLI {
             }
 
             Display.question(q, qNum, displayTotal);
+            long qStart = System.nanoTime();
+            int hintsUsed = 0;
 
             // Pre-answer command loop — student can request hints/explains before answering
             String answer = null;
@@ -298,11 +357,13 @@ public class CLI {
                 if (input.equalsIgnoreCase("q")) { quit = true; break; }
                 if (input.equalsIgnoreCase("s")) {
                     session.skip(q);
+                    logAttempt(q, AttemptRecord.OUTCOME_SKIPPED, qStart, hintsUsed);
                     System.out.println("  Skipped.");
                     answer = null;
                     break;
                 }
                 if (input.equalsIgnoreCase("h")) {
+                    hintsUsed++;
                     System.out.println("  Hint: " + Display.YELLOW + llm.generateHint(q) + Display.RESET);
                     System.out.print("  Your answer: ");
                     continue;
@@ -325,6 +386,8 @@ public class CLI {
 
             GradingResult result = grader.grade(q, answer);
             session.recordAnswer(q, result);
+            logAttempt(q, result.correct() ? AttemptRecord.OUTCOME_CORRECT
+                                           : AttemptRecord.OUTCOME_INCORRECT, qStart, hintsUsed);
             saveProfile();   // auto-save after every answered question
 
             if (result.correct()) Display.correct(result);
@@ -381,7 +444,7 @@ public class CLI {
         }
 
         Display.codingQuestion(q, qNum, total, file);
-        int hintsShown = 0;
+        lastCodingHints = 0;
 
         while (true) {
             String input = in.nextLine().trim().toLowerCase();
@@ -403,9 +466,10 @@ public class CLI {
                 }
                 case "h" -> {
                     List<String> hints = q.getHints();
-                    String hint = hintsShown < hints.size()
-                            ? hints.get(hintsShown++)
+                    String hint = lastCodingHints < hints.size()
+                            ? hints.get(lastCodingHints)
                             : llm.generateHint(q);
+                    lastCodingHints++;
                     System.out.println("  Hint: " + Display.YELLOW + hint + Display.RESET);
                     Display.codingMenu();
                 }

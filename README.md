@@ -24,10 +24,20 @@ mvn package
 java -jar target/java-study-program-1.0-SNAPSHOT.jar
 ```
 
-Create a profile, pick topics (or `all`), and start a session. Your progress is
-saved automatically — to `data/profiles/` when running from a checkout, or
-`~/.javastudy/profiles/` when running a downloaded jar (`PROFILE_DIR` overrides
-both).
+Create a profile and start a session. By default the **auto feed** picks your
+topics for you: it follows the concept map's prerequisite graph, keeps you on
+your learning frontier, introduces newly unlocked topics gently, and mixes in
+spaced review of mastered material (mastery also decays slowly with inactivity,
+so stale topics resurface). Prefer to drive? Choose manual mode and select any
+topics yourself. Progress is saved automatically — to `data/profiles/` when
+running from a checkout, or `~/.javastudy/profiles/` when running a downloaded
+jar (`PROFILE_DIR` overrides both).
+
+Every attempt is also appended to a per-profile log (`<name>.attempts.jsonl`),
+which powers the **Progress Report** menu option: a self-contained HTML page
+with an activity calendar, accuracy-over-time chart, per-topic mastery bars,
+accuracy by difficulty and question type, and a prioritized "what to work on
+next" list derived from the prerequisite graph.
 
 ## Question types
 
@@ -85,8 +95,9 @@ must compile but fail its tests, and the reference solution must pass.
 
 ```
 src/main/java/com/studyprogram/
-  core/      question bank, adaptive engine, study session
+  core/      question bank, adaptive engine, curriculum (auto feed), study session
   coding/    JDK-compiler harness for coding exercises
+  report/    self-contained HTML progress report generator
   grading/   graders for each question type
   llm/       optional Anthropic-backed hints/explanations (null-object without a key)
   model/     Topic graph (with prerequisites), Question, StudentProfile

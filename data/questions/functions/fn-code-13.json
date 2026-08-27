@@ -1,0 +1,15 @@
+{
+  "id": "fn-code-13",
+  "type": "CODING",
+  "difficulty": 4,
+  "prompt": "Count the subsets of an n-element set: 2^n, computed with your own loop or recursion in a long (n up to 62) -- Math.pow is off limits because doubles lose precision at this size.",
+  "starterCode": "/**\n * TASK: Complete the subsets method.\n *\n * A set with n elements has exactly 2^n subsets (each element is\n * either in or out). Return that count for 0 <= n <= 62.\n *\n * Do NOT use Math.pow: it returns a double, and doubles cannot\n * represent every long beyond 2^53, so large powers come back\n * rounded. Build the power yourself with a loop (or recursion)\n * over long arithmetic.\n *\n * Examples:\n *   subsets(0)  -> 1      (only the empty set)\n *   subsets(3)  -> 8\n *   subsets(62) -> 4611686018427387904\n */\npublic class SubsetCounter {\n\n    public static long subsets(int n) {\n        // TODO: double an accumulator n times (no Math.pow)\n        return 0;\n    }\n}\n",
+  "testCode": "public class SubsetCounterTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        check(\"subsets(0)\", 1L, SubsetCounter.subsets(0));\n        check(\"subsets(1)\", 2L, SubsetCounter.subsets(1));\n        check(\"subsets(3)\", 8L, SubsetCounter.subsets(3));\n        check(\"subsets(10)\", 1024L, SubsetCounter.subsets(10));\n        check(\"subsets(32) -- beyond int range\", 4294967296L, SubsetCounter.subsets(32));\n        check(\"subsets(62) -- near the top of long\", 4611686018427387904L, SubsetCounter.subsets(62));\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class SubsetCounter {\n\n    public static long subsets(int n) {\n        long total = 1L;\n        for (int i = 0; i < n; i++) {\n            total *= 2;\n        }\n        return total;\n    }\n}\n",
+  "explanation": "Each of the n elements independently chooses in-or-out, so the counts multiply: 2 * 2 * ... * 2, n times. Starting a long accumulator at 1 and doubling it n times computes 2^n exactly in integer arithmetic; n = 0 naturally returns 1 for the lone empty set. The n <= 62 limit exists because 2^63 overflows a signed long -- and Math.pow would silently round long before that, which is why it is banned here.",
+  "hints": [
+    "Think per element: each one doubles the number of possible subsets.",
+    "long total = 1L; then a loop running n times doing total *= 2.",
+    "A one-line recursive version also works: n == 0 ? 1L : 2L * subsets(n - 1). Bit-shift fans can even write 1L << n."
+  ]
+}
