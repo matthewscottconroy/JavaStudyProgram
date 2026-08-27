@@ -1,0 +1,17 @@
+{
+  "id": "mem-code-01-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class Counter {\n\n    private static int instanceCount = 0;\n\n    private final int id;\n\n    public Counter() {\n        ____;\n        this.id = instanceCount;\n    }\n\n    public static int getInstanceCount() {\n        return instanceCount;\n    }\n\n    public static void resetCount() {\n        instanceCount = 0;\n    }\n\n    public int getId() {\n        return id;\n    }\n}\n",
+  "answer": "instanceCount++",
+  "alternatives": [
+    "++instanceCount",
+    "instanceCount += 1",
+    "instanceCount = instanceCount + 1"
+  ],
+  "explanation": "Incrementing the static field in the constructor is what makes the count shared across all instances: every construction bumps the one class-level counter, which then also serves as the new object's id.",
+  "hints": [
+    "Every constructor run must bump the one counter shared by the whole class before using it as this object's id."
+  ]
+}

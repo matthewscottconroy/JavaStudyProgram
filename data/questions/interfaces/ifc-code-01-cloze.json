@@ -1,0 +1,15 @@
+{
+  "id": "ifc-code-01-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "interface Measurable {\n    double area();\n\n    double perimeter();\n}\n\npublic class Circle implements Measurable {\n\n    private double radius;\n\n    public Circle(double radius) {\n        this.radius = radius;\n    }\n\n    @Override\n    public double area() {\n        return ____;\n    }\n\n    @Override\n    public double perimeter() {\n        return 2 * Math.PI * radius;\n    }\n}\n",
+  "answer": "Math.PI * radius * radius",
+  "alternatives": [
+    "radius * radius * Math.PI"
+  ],
+  "explanation": "The area override supplies the circle-specific formula pi times r squared; implementing the interface means providing exactly this behavior behind the area() contract.",
+  "hints": [
+    "What is the formula for the area of a circle, using the constant that java.lang.Math provides?"
+  ]
+}

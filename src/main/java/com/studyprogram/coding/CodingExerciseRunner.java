@@ -186,7 +186,9 @@ public class CodingExerciseRunner {
         Path base = Path.of(System.getProperty("java.home"), "bin", "java");
         if (Files.exists(base)) return base;
         Path exe = Path.of(System.getProperty("java.home"), "bin", "java.exe");
-        return Files.exists(exe) ? exe : base;
+        if (Files.exists(exe)) return exe;
+        // Packaged runtimes may strip launchers — fall back to `java` on PATH
+        return Path.of("java");
     }
 
     private static String formatDiagnostics(List<Diagnostic<? extends JavaFileObject>> diags) {

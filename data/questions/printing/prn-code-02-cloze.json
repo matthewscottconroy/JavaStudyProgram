@@ -1,0 +1,15 @@
+{
+  "id": "prn-code-02-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class PricePrinter {\n\n    public static void printPrice(String name, double price) {\n        System.out.printf(____, name, price);\n    }\n}\n",
+  "answer": "\"%-10s $%6.2f%n\"",
+  "alternatives": [
+    "\"%-10s $%6.2f\\n\""
+  ],
+  "explanation": "The format string does all the work: %-10s left-justifies the name in 10 columns, %6.2f right-aligns the price to two decimals in 6 columns after the dollar sign, and %n ends the line.",
+  "hints": [
+    "Build a printf format: left-justified width-10 string, a dollar sign, then a width-6 fixed-point number with 2 decimals, then a newline."
+  ]
+}

@@ -10,8 +10,10 @@ import com.studyprogram.model.Question;
  */
 public class CompositeGrader implements Grader {
 
-    private final MultipleChoiceGrader mcGrader   = new MultipleChoiceGrader();
-    private final ExactMatchGrader     exactGrader = new ExactMatchGrader();
+    private final MultipleChoiceGrader mcGrader     = new MultipleChoiceGrader();
+    private final ExactMatchGrader     exactGrader  = new ExactMatchGrader();
+    private final ParsonsGrader        parsonsGrader = new ParsonsGrader();
+    private final ClozeGrader          clozeGrader  = new ClozeGrader();
     private final LLMService           llm;
 
     public CompositeGrader(LLMService llm) {
@@ -20,9 +22,13 @@ public class CompositeGrader implements Grader {
 
     @Override
     public GradingResult grade(Question question, String studentAnswer) {
-        GradingResult base = question.isMultipleChoice()
-                ? mcGrader.grade(question, studentAnswer)
-                : exactGrader.grade(question, studentAnswer);
+        GradingResult base = switch (question.getType()) {
+            case PARSONS -> parsonsGrader.grade(question, studentAnswer);
+            case CLOZE   -> clozeGrader.grade(question, studentAnswer);
+            default      -> question.isMultipleChoice()
+                    ? mcGrader.grade(question, studentAnswer)
+                    : exactGrader.grade(question, studentAnswer);
+        };
 
         if (llm.isAvailable() && !base.correct()) {
             // Ask LLM for a richer explanation on wrong answers

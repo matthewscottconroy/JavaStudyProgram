@@ -1,0 +1,13 @@
+{
+  "id": "gen-code-05-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class ListUtils {\n\n    public static <T> void swap(java.util.List<T> list, int i, int j) {\n        T temp = list.get(i);\n        ____;\n        list.set(j, temp);\n    }\n\n    public static <T> void reverseInPlace(java.util.List<T> list) {\n        int left = 0;\n        int right = list.size() - 1;\n        while (left < right) {\n            swap(list, left, right);\n            left++;\n            right--;\n        }\n    }\n}\n",
+  "answer": "list.set(i, list.get(j))",
+  "alternatives": [],
+  "explanation": "After saving list.get(i) in temp, overwriting slot i with the element from slot j is the first half of the swap; temp then fills slot j. Losing this step would leave slot i unchanged.",
+  "hints": [
+    "With the element at i saved in temp, what has to be written into position i to complete a swap?"
+  ]
+}

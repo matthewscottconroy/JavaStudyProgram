@@ -1,0 +1,15 @@
+{
+  "id": "ml-code-01-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class VectorMath {\n\n    public static double dot(double[] a, double[] b) {\n        double sum = 0.0;\n        for (int i = 0; i < a.length; i++) {\n            sum += ____;\n        }\n        return sum;\n    }\n}\n",
+  "answer": "a[i] * b[i]",
+  "alternatives": [
+    "b[i] * a[i]"
+  ],
+  "explanation": "A dot product accumulates the product of the components at each index; this multiply inside the loop is the entire mathematical content of the method.",
+  "hints": [
+    "A dot product pairs up the two vectors index by index -- what gets added to the sum each iteration?"
+  ]
+}

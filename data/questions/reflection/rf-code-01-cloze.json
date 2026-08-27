@@ -1,0 +1,13 @@
+{
+  "id": "rf-code-01-cloze",
+  "type": "CLOZE",
+  "difficulty": 4,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "class Sample {\n    void gamma() {\n    }\n\n    void alpha() {\n    }\n\n    int beta(int x) {\n        return x;\n    }\n}\n\nclass Tiny {\n    void zed() {\n    }\n\n    void ant() {\n    }\n}\n\nclass Bare {\n}\n\npublic class MethodLister {\n\n    public static java.util.List<String> methodNames(Class<?> c) {\n        java.util.List<String> names = new java.util.ArrayList<>();\n        for (java.lang.reflect.Method m : ____) {\n            names.add(m.getName());\n        }\n        java.util.Collections.sort(names);\n        return names;\n    }\n}\n",
+  "answer": "c.getDeclaredMethods()",
+  "alternatives": [],
+  "explanation": "getDeclaredMethods() reflectively lists exactly the methods declared by the class itself, regardless of access modifier and without inherited ones like those from Object, which is what the method needs to enumerate.",
+  "hints": [
+    "Class has two method-listing calls; you want the one limited to methods declared directly in that class, not inherited ones."
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "sapi-code-01-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class StreamStats {\n\n    public static int sumOfSquaresOfEvens(java.util.List<Integer> nums) {\n        return nums.stream()\n                .filter(n -> n % 2 == 0)\n                .map(n -> n * n)\n                ____;\n    }\n\n    public static java.util.List<String> upperSorted(java.util.List<String> words) {\n        return words.stream()\n                .map(String::toUpperCase)\n                .sorted()\n                .collect(java.util.stream.Collectors.toList());\n    }\n}\n",
+  "answer": ".reduce(0, Integer::sum)",
+  "alternatives": [
+    ".reduce(0, (x, y) -> x + y)",
+    ".mapToInt(Integer::intValue).sum()"
+  ],
+  "explanation": "The reduction folds the stream of squared evens into a single total, starting from the identity 0 and combining with Integer::sum; it is the terminal operation that turns the pipeline into a value.",
+  "hints": [
+    "After filtering and mapping you still have a Stream -- which terminal operation folds it into one int total, given an identity and a combiner?"
+  ]
+}

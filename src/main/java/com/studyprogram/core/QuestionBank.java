@@ -44,7 +44,23 @@ public class QuestionBank {
         loadHardcoded();
         loadFromClasspath();
         loadExternal(externalQuestionsDir);
+        deriveParsons();
         rebuildTopicIndex();
+    }
+
+    /**
+     * Auto-derive a Parsons (reorder-the-lines) variant from every coding exercise
+     * with a suitably sized solution. Derived deterministically at load time, so the
+     * Parsons bank grows with the coding bank at no authoring cost.
+     */
+    private void deriveParsons() {
+        List<Question> derived = new ArrayList<>();
+        for (Question q : byId.values()) {
+            ParsonsDeriver.derive(q).ifPresent(derived::add);
+        }
+        for (Question p : derived) {
+            if (!byId.containsKey(p.getId())) byId.put(p.getId(), p);
+        }
     }
 
     // ── Loading ──────────────────────────────────────────────────────────────

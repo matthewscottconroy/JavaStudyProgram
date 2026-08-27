@@ -1,0 +1,15 @@
+{
+  "id": "arr-code-02-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class SecondLargest {\n\n    public static int secondLargest(int[] values) {\n        boolean foundMax = false;\n        int max = 0;\n        for (int value : values) {\n            if (!foundMax || value > max) {\n                max = value;\n                foundMax = true;\n            }\n        }\n        boolean foundSecond = false;\n        int second = 0;\n        for (int value : values) {\n            if (____ && (!foundSecond || value > second)) {\n                second = value;\n                foundSecond = true;\n            }\n        }\n        if (!foundSecond) {\n            return Integer.MIN_VALUE;\n        }\n        return second;\n    }\n}\n",
+  "answer": "value < max",
+  "alternatives": [
+    "max > value"
+  ],
+  "explanation": "The strict less-than comparison against the maximum is what makes duplicates of the largest value ineligible, so only a genuinely smaller distinct value can become the second largest.",
+  "hints": [
+    "The second pass must only consider values that are strictly below the maximum found in the first pass."
+  ]
+}

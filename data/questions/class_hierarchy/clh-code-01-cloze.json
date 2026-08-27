@@ -1,0 +1,13 @@
+{
+  "id": "clh-code-01-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "class Vehicle {\n    String describe() {\n        return \"vehicle\";\n    }\n}\n\nclass Bicycle extends Vehicle {\n    @Override\n    String describe() {\n        return \"bicycle\";\n    }\n}\n\npublic class Garage {\n\n    public static String describeAll(Vehicle[] vehicles) {\n        StringBuilder sb = new StringBuilder();\n        for (int i = 0; i < vehicles.length; i++) {\n            if (i > 0) {\n                sb.append(\", \");\n            }\n            sb.append(____);\n        }\n        return sb.toString();\n    }\n\n    public static int countBicycles(Vehicle[] vehicles) {\n        int count = 0;\n        for (Vehicle v : vehicles) {\n            if (v instanceof Bicycle) {\n                count++;\n            }\n        }\n        return count;\n    }\n}\n",
+  "answer": "vehicles[i].describe()",
+  "alternatives": [],
+  "explanation": "Calling describe() through the Vehicle reference uses dynamic dispatch: at runtime the JVM picks the override belonging to the object's actual class, so a Bicycle in the array reports \"bicycle\".",
+  "hints": [
+    "Polymorphism means calling the same method on each element and letting the runtime type decide which override runs."
+  ]
+}

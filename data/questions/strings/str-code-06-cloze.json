@@ -1,0 +1,13 @@
+{
+  "id": "str-code-06-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class AnagramChecker {\n\n    public static boolean isAnagram(String a, String b) {\n        char[] first = normalize(a);\n        char[] second = normalize(b);\n        return java.util.Arrays.equals(first, second);\n    }\n\n    private static char[] normalize(String s) {\n        String cleaned = s.replace(\" \", \"\").toLowerCase();\n        char[] chars = cleaned.toCharArray();\n        ____;\n        return chars;\n    }\n}\n",
+  "answer": "java.util.Arrays.sort(chars)",
+  "alternatives": [],
+  "explanation": "Sorting the cleaned characters puts both strings into a canonical form, so two strings are anagrams exactly when their sorted char arrays are equal.",
+  "hints": [
+    "How do you canonicalize a bag of characters so that any two anagrams become identical arrays?"
+  ]
+}

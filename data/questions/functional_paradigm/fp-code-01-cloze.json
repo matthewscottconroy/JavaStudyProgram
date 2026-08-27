@@ -1,0 +1,16 @@
+{
+  "id": "fp-code-01-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class PureFilters {\n\n    public static java.util.List<Integer> withoutNegatives(java.util.List<Integer> nums) {\n        java.util.List<Integer> result = new java.util.ArrayList<>();\n        for (Integer n : nums) {\n            if (____) {\n                result.add(n);\n            }\n        }\n        return result;\n    }\n}\n",
+  "answer": "n >= 0",
+  "alternatives": [
+    "0 <= n",
+    "!(n < 0)"
+  ],
+  "explanation": "The filter keeps exactly the non-negative numbers, so the predicate must accept zero as well as positives; that is what removing negatives means.",
+  "hints": [
+    "Which numbers survive a filter that removes negatives? Be careful that zero stays."
+  ]
+}

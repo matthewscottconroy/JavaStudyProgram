@@ -1,0 +1,15 @@
+{
+  "id": "ep-code-01-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class Fitness {\n\n    public static int score(String candidate, String target) {\n        int limit = Math.min(candidate.length(), target.length());\n        int matches = 0;\n        for (int i = 0; i < limit; i++) {\n            if (____) {\n                matches++;\n            }\n        }\n        return matches;\n    }\n}\n",
+  "answer": "candidate.charAt(i) == target.charAt(i)",
+  "alternatives": [
+    "target.charAt(i) == candidate.charAt(i)"
+  ],
+  "explanation": "The fitness score counts positions where candidate and target hold the same character, so the per-position equality test is the heart of the fitness function.",
+  "hints": [
+    "Fitness here is positional: compare the character at the same index in both strings."
+  ]
+}

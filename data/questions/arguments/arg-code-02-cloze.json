@@ -1,0 +1,13 @@
+{
+  "id": "arg-code-02-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class ArgReverser {\n\n    public static void main(String[] args) {\n        StringBuilder sb = new StringBuilder();\n        for (int i = ____; i >= 0; i--) {\n            sb.append(args[i]);\n            if (i > 0) {\n                sb.append(' ');\n            }\n        }\n        System.out.println(sb.toString());\n    }\n}\n",
+  "answer": "args.length - 1",
+  "alternatives": [],
+  "explanation": "The loop must start at the index of the last argument, which is args.length - 1 because array indices are zero-based. Starting there and counting down is what reverses the order.",
+  "hints": [
+    "Arrays are zero-indexed, so where does a backwards walk over args have to begin?"
+  ]
+}

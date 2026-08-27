@@ -1,0 +1,13 @@
+{
+  "id": "hb-code-01-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class BinaryWriter {\n\n    public static String toBinary(int n) {\n        if (n == 0) {\n            return \"0\";\n        }\n        StringBuilder bits = new StringBuilder();\n        while (n > 0) {\n            bits.append(n % 2);\n            n = n / 2;\n        }\n        return ____;\n    }\n}\n",
+  "answer": "bits.reverse().toString()",
+  "alternatives": [],
+  "explanation": "Repeated division by 2 emits the bits from least significant to most significant, so the collected digits must be reversed to read as a normal binary numeral.",
+  "hints": [
+    "Dividing by 2 produces the bits in back-to-front order -- what must happen to the StringBuilder before returning?"
+  ]
+}

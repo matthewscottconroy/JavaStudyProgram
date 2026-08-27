@@ -1,0 +1,16 @@
+{
+  "id": "lp-code-02-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class CollatzSteps {\n\n    public static int collatzSteps(int n) {\n        int steps = 0;\n        while (n != 1) {\n            if (n % 2 == 0) {\n                n = n / 2;\n            } else {\n                n = ____;\n            }\n            steps++;\n        }\n        return steps;\n    }\n}\n",
+  "answer": "3 * n + 1",
+  "alternatives": [
+    "n * 3 + 1",
+    "1 + 3 * n"
+  ],
+  "explanation": "The odd branch of the Collatz rule replaces n with 3n + 1; together with halving evens it drives every tested value down to 1, and the step count depends on it exactly.",
+  "hints": [
+    "Recall the Collatz rule for odd numbers: triple it and then do what?"
+  ]
+}

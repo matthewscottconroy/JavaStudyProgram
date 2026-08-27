@@ -1,0 +1,13 @@
+{
+  "id": "ser-code-01-cloze",
+  "type": "CLOZE",
+  "difficulty": 4,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "class Score implements java.io.Serializable {\n    private final String name;\n    private final int points;\n\n    Score(String name, int points) {\n        this.name = name;\n        this.points = points;\n    }\n\n    String getName() {\n        return name;\n    }\n\n    int getPoints() {\n        return points;\n    }\n}\n\npublic class ScoreSerializer {\n\n    public static byte[] toBytes(Score s) throws java.io.IOException {\n        java.io.ByteArrayOutputStream bytes = new java.io.ByteArrayOutputStream();\n        try (java.io.ObjectOutputStream out = new java.io.ObjectOutputStream(bytes)) {\n            out.writeObject(s);\n        }\n        return bytes.toByteArray();\n    }\n\n    public static Score fromBytes(byte[] b)\n            throws java.io.IOException, ClassNotFoundException {\n        try (java.io.ObjectInputStream in = new java.io.ObjectInputStream(\n                new java.io.ByteArrayInputStream(b))) {\n            return ____;\n        }\n    }\n}\n",
+  "answer": "(Score) in.readObject()",
+  "alternatives": [],
+  "explanation": "readObject() deserializes the next object from the stream but is declared to return Object, so the result must be cast back to Score; this call is the entire read side of Java serialization.",
+  "hints": [
+    "ObjectInputStream has one method that reconstructs the next serialized object -- and its return type forces a cast."
+  ]
+}

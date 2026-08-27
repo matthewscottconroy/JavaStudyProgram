@@ -1,0 +1,13 @@
+{
+  "id": "rnd-code-02-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "import java.util.ArrayList;\nimport java.util.Collections;\nimport java.util.List;\nimport java.util.Random;\n\npublic class DeckShuffler {\n\n    public static List<String> shuffled(List<String> cards, long seed) {\n        List<String> copy = new ArrayList<>(cards);\n        ____;\n        return copy;\n    }\n}\n",
+  "answer": "Collections.shuffle(copy, new Random(seed))",
+  "alternatives": [],
+  "explanation": "Passing a Random seeded with the given value to Collections.shuffle makes the shuffle deterministic and repeatable, while shuffling the copy leaves the caller's list untouched.",
+  "hints": [
+    "Collections.shuffle has an overload that takes a source of randomness -- seed it so the result is reproducible."
+  ]
+}

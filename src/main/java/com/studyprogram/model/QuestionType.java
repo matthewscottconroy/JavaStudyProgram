@@ -13,7 +13,11 @@ public enum QuestionType {
     /** Standard A/B/C/D multiple-choice question. */
     MULTIPLE_CHOICE("Multiple Choice"),
     /** Write a real program in the workspace; it is compiled and run against tests. */
-    CODING("Coding");
+    CODING("Coding"),
+    /** Reorder shuffled lines of a working program (a Parsons problem). */
+    PARSONS("Code Ordering"),
+    /** Fill in the single blanked expression in a working program. */
+    CLOZE("Fill in the Blank");
 
     public final String displayName;
 

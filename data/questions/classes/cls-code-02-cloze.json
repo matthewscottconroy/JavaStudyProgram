@@ -1,0 +1,15 @@
+{
+  "id": "cls-code-02-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class BankAccount {\n\n    private double balance;\n\n    public boolean deposit(double amount) {\n        if (amount <= 0) {\n            return false;\n        }\n        balance += amount;\n        return true;\n    }\n\n    public boolean withdraw(double amount) {\n        if (____) {\n            return false;\n        }\n        balance -= amount;\n        return true;\n    }\n\n    public double getBalance() {\n        return balance;\n    }\n}\n",
+  "answer": "amount <= 0 || amount > balance",
+  "alternatives": [
+    "amount > balance || amount <= 0"
+  ],
+  "explanation": "A withdrawal must be rejected both when the amount is not positive and when it exceeds the current balance; this guard is what protects the invariant that the balance never goes negative.",
+  "hints": [
+    "Two things make a withdrawal invalid: a non-positive amount, and asking for more than the account holds."
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "ic-code-03-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class NumberDescriber {\n\n    public static String describe(int n) {\n        if (n == 0) {\n            return \"zero\";\n        }\n        String size;\n        if (Math.abs(n) <= 10) {\n            size = \"small\";\n        } else {\n            size = \"large\";\n        }\n        if (____) {\n            return size + \" even\";\n        } else {\n            return size + \" odd\";\n        }\n    }\n}\n",
+  "answer": "n % 2 == 0",
+  "alternatives": [
+    "0 == n % 2"
+  ],
+  "explanation": "The remainder test n % 2 == 0 is the standard parity check that routes the description to \"even\" or \"odd\", and it works for negative numbers too because only equality with zero is tested.",
+  "hints": [
+    "Parity is decided by the remainder when dividing by 2."
+  ]
+}

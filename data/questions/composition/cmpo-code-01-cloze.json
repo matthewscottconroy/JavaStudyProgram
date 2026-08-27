@@ -1,0 +1,15 @@
+{
+  "id": "cmpo-code-01-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "import java.util.ArrayList;\n\npublic class Playlist {\n\n    private final ArrayList<String> titles = new ArrayList<>();\n\n    public void add(String title) {\n        titles.add(title);\n    }\n\n    public int size() {\n        return titles.size();\n    }\n\n    public String get(int i) {\n        if (____) {\n            return null;\n        }\n        return titles.get(i);\n    }\n\n    public int totalCharacters() {\n        int total = 0;\n        for (String title : titles) {\n            total += title.length();\n        }\n        return total;\n    }\n}\n",
+  "answer": "i < 0 || i >= titles.size()",
+  "alternatives": [
+    "i >= titles.size() || i < 0"
+  ],
+  "explanation": "The bounds check is what lets the wrapper return null for invalid indices instead of letting the inner ArrayList throw IndexOutOfBoundsException, which is the point of guarding the delegated call.",
+  "hints": [
+    "Which index values are invalid for the inner list? Check both ends of the range before delegating."
+  ]
+}

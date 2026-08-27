@@ -1,0 +1,13 @@
+{
+  "id": "at-code-01-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class ThreadStarter {\n\n    public static int computeInThread(int n) throws InterruptedException {\n        int[] result = new int[1];\n        Thread worker = new Thread(() -> result[0] = n * n);\n        worker.start();\n        ____;\n        return result[0];\n    }\n}\n",
+  "answer": "worker.join()",
+  "alternatives": [],
+  "explanation": "join() blocks the calling thread until the worker thread finishes, guaranteeing the result array has been written before it is read. Without it the method could return before the computation happens.",
+  "hints": [
+    "After starting the thread, how do you wait for it to finish before reading the result?"
+  ]
+}

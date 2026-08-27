@@ -1,0 +1,15 @@
+{
+  "id": "col-code-01-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "import java.util.HashMap;\nimport java.util.Map;\n\npublic class WordCounter {\n\n    public static Map<String, Integer> wordCounts(String[] words) {\n        Map<String, Integer> counts = new HashMap<>();\n        for (String word : words) {\n            String key = word.toLowerCase();\n            counts.put(key, ____);\n        }\n        return counts;\n    }\n}\n",
+  "answer": "counts.getOrDefault(key, 0) + 1",
+  "alternatives": [
+    "1 + counts.getOrDefault(key, 0)"
+  ],
+  "explanation": "getOrDefault supplies 0 for a word not yet in the map, so the same expression handles both the first sighting and every later one by adding 1 to the current count.",
+  "hints": [
+    "You need the current count for the key -- or zero if it is absent -- plus one. One Map method does the absent case for you."
+  ]
+}

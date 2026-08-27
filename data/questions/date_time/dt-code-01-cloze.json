@@ -1,0 +1,13 @@
+{
+  "id": "dt-code-01-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "import java.time.DayOfWeek;\nimport java.time.LocalDate;\nimport java.time.temporal.ChronoUnit;\nimport java.time.temporal.TemporalAdjusters;\n\npublic class DateMath {\n\n    public static long daysBetween(LocalDate a, LocalDate b) {\n        return Math.abs(ChronoUnit.DAYS.between(a, b));\n    }\n\n    public static LocalDate nextMonday(LocalDate d) {\n        return d.with(____);\n    }\n}\n",
+  "answer": "TemporalAdjusters.next(DayOfWeek.MONDAY)",
+  "alternatives": [],
+  "explanation": "TemporalAdjusters.next(DayOfWeek.MONDAY) produces an adjuster that with() applies to jump strictly forward to the following Monday, even when the starting date is itself a Monday.",
+  "hints": [
+    "java.time has a factory of ready-made adjusters; one of them means \"the next occurrence of this weekday, strictly after this date\"."
+  ]
+}

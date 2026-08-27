@@ -66,7 +66,20 @@ public class Display {
             System.out.println(DIM + "  └" + "─".repeat(WIDTH - 3) + RESET);
         }
 
-        if (q.isMultipleChoice()) {
+        if (q.getType() == QuestionType.PARSONS) {
+            System.out.println();
+            List<String> lines = q.getShuffledLines();
+            System.out.println(DIM + "  ┌─ Scrambled lines " + "─".repeat(WIDTH - 21) + RESET);
+            for (int i = 0; i < lines.size(); i++) {
+                System.out.printf("%s  │%s %2d:  %s%n", DIM, RESET, i + 1, lines.get(i));
+            }
+            System.out.println(DIM + "  └" + "─".repeat(WIDTH - 3) + RESET);
+            System.out.println();
+            System.out.print("  Line numbers in order (e.g. 3 1 4 2) or [h]int [e]xplain [s]kip [q]uit: ");
+        } else if (q.getType() == QuestionType.CLOZE) {
+            System.out.println();
+            System.out.print("  Type the missing code (the ____ part) or [h]int [e]xplain [s]kip [q]uit: ");
+        } else if (q.isMultipleChoice()) {
             System.out.println();
             List<String> choices = q.getChoices();
             String[] letters = {"A", "B", "C", "D"};

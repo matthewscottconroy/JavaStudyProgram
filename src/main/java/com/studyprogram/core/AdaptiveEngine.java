@@ -110,7 +110,19 @@ public class AdaptiveEngine {
 
         double recentPenalty    = (perf != null && perf.wasRecentlySeen(q.getId())) ? -0.5 : 0.0;
 
-        double codingBonus      = (q.getType() == QuestionType.CODING) ? 0.6 : 0.0;
+        // A Parsons puzzle is trivial right after its source solution was just written
+        if (q.getType() == QuestionType.PARSONS && perf != null
+                && perf.wasRecentlySeen(q.getId().replace("-parsons", ""))) {
+            recentPenalty -= 0.5;
+        }
+
+        // Hands-on construction beats recognition: coding first, then the two
+        // intermediate rungs (reorder and fill-in-the-blank)
+        double codingBonus = switch (q.getType()) {
+            case CODING          -> 0.6;
+            case PARSONS, CLOZE  -> 0.3;
+            default              -> 0.0;
+        };
 
         // Gentle introduction: a topic the student has barely touched starts easy
         int attempts            = (perf == null) ? 0 : perf.getAttempts();

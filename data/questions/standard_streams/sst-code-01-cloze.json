@@ -1,0 +1,15 @@
+{
+  "id": "sst-code-01-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class StreamCounter {\n\n    public static int countBytes(java.io.InputStream in)\n            throws java.io.IOException {\n        int count = 0;\n        while (____) {\n            count++;\n        }\n        return count;\n    }\n}\n",
+  "answer": "in.read() != -1",
+  "alternatives": [
+    "-1 != in.read()"
+  ],
+  "explanation": "InputStream.read() returns one byte at a time and the sentinel -1 at end of stream, so looping while the call is not -1 both consumes a byte and detects termination.",
+  "hints": [
+    "What does InputStream.read() return when the stream is exhausted? Loop until you see that sentinel."
+  ]
+}

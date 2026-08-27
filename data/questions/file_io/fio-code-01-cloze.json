@@ -1,0 +1,13 @@
+{
+  "id": "fio-code-01-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "import java.io.IOException;\nimport java.nio.file.Files;\nimport java.nio.file.Path;\nimport java.util.List;\n\npublic class LineCounter {\n\n    public static int countNonBlankLines(Path file) throws IOException {\n        List<String> lines = ____;\n        int count = 0;\n        for (String line : lines) {\n            if (!line.isBlank()) {\n                count++;\n            }\n        }\n        return count;\n    }\n}\n",
+  "answer": "Files.readAllLines(file)",
+  "alternatives": [],
+  "explanation": "Files.readAllLines reads the whole file into a List of line strings in one call, which is the key NIO convenience that lets the rest of the method be a simple loop and isBlank check.",
+  "hints": [
+    "java.nio.file.Files has a one-call method that returns every line of a file as a List of Strings."
+  ]
+}

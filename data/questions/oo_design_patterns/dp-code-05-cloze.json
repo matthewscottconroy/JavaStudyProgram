@@ -1,0 +1,15 @@
+{
+  "id": "dp-code-05-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "interface Shape {\n    double area();\n}\n\npublic class ShapeFactory {\n\n    public static Shape create(String kind, double size) {\n        switch (kind) {\n            case \"circle\":\n                return ____;\n            case \"square\":\n                return () -> size * size;\n            default:\n                throw new IllegalArgumentException(\"Unknown shape kind: \" + kind);\n        }\n    }\n}\n",
+  "answer": "() -> Math.PI * size * size",
+  "alternatives": [
+    "() -> size * size * Math.PI"
+  ],
+  "explanation": "The factory hides which concrete Shape the caller gets; for \"circle\" it returns a lambda implementing area() as pi r squared, showing that a functional interface implementation can be the factory's product.",
+  "hints": [
+    "Shape is a functional interface, so the factory can return a no-argument lambda computing a circle's area."
+  ]
+}

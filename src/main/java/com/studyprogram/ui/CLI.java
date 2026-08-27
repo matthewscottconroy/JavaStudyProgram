@@ -65,10 +65,11 @@ public class CLI {
             System.out.println();
             System.out.println("  [1] Start Study Session");
             System.out.println("  [2] View Performance");
-            System.out.println("  [3] Progress Report (HTML)");
-            System.out.println("  [4] Select Topics");
-            System.out.println("  [5] Switch Profile");
-            System.out.println("  [6] Exit");
+            System.out.println("  [3] Concept Map");
+            System.out.println("  [4] Progress Report (HTML)");
+            System.out.println("  [5] Select Topics");
+            System.out.println("  [6] Switch Profile");
+            System.out.println("  [7] Exit");
             System.out.print("\n  Choice: ");
             String choice = in.nextLine().trim();
 
@@ -76,10 +77,11 @@ public class CLI {
                 case "1" -> studySession();
                 case "2" -> Display.performanceTable(currentProfile.getPerformance(),
                                                       currentProfile.getSelectedTopicsList());
-                case "3" -> progressReport();
-                case "4" -> selectTopics();
-                case "5" -> profileMenu();
-                case "6" -> { saveProfile(); return; }
+                case "3" -> conceptMap();
+                case "4" -> progressReport();
+                case "5" -> selectTopics();
+                case "6" -> profileMenu();
+                case "7" -> { saveProfile(); return; }
                 default  -> System.out.println("  Invalid choice.");
             }
         }
@@ -131,6 +133,18 @@ public class CLI {
         attemptLog = AttemptLog.forProfile(storage.directory(), name);
         System.out.printf("  Profile created for %s.%n", name);
         selectTopics();
+    }
+
+    /** Opens the Swing overworld map (non-blocking; selections there update the profile). */
+    private void conceptMap() {
+        boolean opened = com.studyprogram.ui.map.OverworldFrame.open(currentProfile, this::saveProfile);
+        if (opened) {
+            System.out.println("  Map window opened. Click topics to add or remove them from "
+                    + "your session topic list — changes save automatically.");
+        } else {
+            System.out.println("  No display available (headless environment) — "
+                    + "use [5] Select Topics instead.");
+        }
     }
 
     /** Generates the self-contained HTML progress report and tries to open it. */

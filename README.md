@@ -39,14 +39,27 @@ with an activity calendar, accuracy-over-time chart, per-topic mastery bars,
 accuracy by difficulty and question type, and a prioritized "what to work on
 next" list derived from the prerequisite graph.
 
+The **Concept Map** menu option opens a Swing overworld: topics as nodes in
+five level-band "worlds", prerequisite paths between them, colors showing your
+progress, and advanced optional topics hidden as `? ? ?` until their
+prerequisites are mastered. Click nodes to add or remove them from your session
+topics. (The map is itself a custom-painted `Graphics2D` component — once you
+reach the GUI world, you can read its source as course material.)
+
 ## Question types
 
 | Type | What you do |
 |---|---|
 | **Coding** | Edit a real `.java` file in `workspace/<exercise-id>/`, press Enter to compile and run the tests. Repeat until green. |
+| **Code ordering (Parsons)** | Reorder the scrambled lines of a working program — auto-derived from every coding exercise, so this bank grows for free. |
+| **Fill in the blank** | Type the one missing expression in a working program. |
 | Tracing | Read code, predict its output. |
 | Debugging | Spot the bug in a snippet. |
 | Multiple choice / code generation | Classic A/B/C/D questions. |
+
+Together these form a skill ladder inside each topic: trace → debug → reorder →
+fill in → write from scratch. The adaptive engine prefers the hands-on end of
+the ladder whenever a topic has it.
 
 During a coding exercise: `Enter` compiles and tests, `h` gives progressive hints,
 `r` resets the file to the starter, `g` gives up and shows the reference solution,
@@ -114,6 +127,20 @@ workspace/        created at runtime; your coding-exercise files live here
 mvn test      # full suite, including compile-and-run verification of every coding exercise
 mvn package   # executable fat jar in target/
 ```
+
+CI (GitHub Actions) runs the same suite on every push, including the content
+gate that compiles and tests all coding exercises.
+
+### Native installer (no JDK needed by students)
+
+```bash
+mvn package
+./packaging/build-app-image.sh        # app image in target/dist/
+TYPE=deb ./packaging/build-app-image.sh   # or rpm / msi / dmg on the matching OS
+```
+
+The bundled runtime includes `jdk.compiler`, so coding exercises compile and
+run even on machines with no Java installed at all.
 
 ## License
 

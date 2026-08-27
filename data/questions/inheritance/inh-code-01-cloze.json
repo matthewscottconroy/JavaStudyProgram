@@ -1,0 +1,13 @@
+{
+  "id": "inh-code-01-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "class Animal {\n    private String name;\n\n    public Animal(String name) {\n        this.name = name;\n    }\n\n    public String getName() {\n        return name;\n    }\n\n    public String speak() {\n        return \"...\";\n    }\n}\n\npublic class Dog extends Animal {\n\n    public Dog(String name) {\n        ____;\n    }\n\n    @Override\n    public String speak() {\n        return \"Woof!\";\n    }\n\n    public String fetch() {\n        return getName() + \" fetches the ball!\";\n    }\n}\n",
+  "answer": "super(name)",
+  "alternatives": [],
+  "explanation": "Animal has no no-arg constructor, so Dog's constructor must explicitly chain to super(name) as its first statement to initialize the private name field in the superclass.",
+  "hints": [
+    "The superclass only has a constructor that takes the name -- how does a subclass constructor pass it up?"
+  ]
+}

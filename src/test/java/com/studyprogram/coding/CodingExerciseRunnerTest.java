@@ -93,24 +93,45 @@ class CodingExerciseRunnerTest {
     /**
      * Content gate for every shipped CODING exercise: the starter must compile cleanly
      * but fail its tests, and the reference solution must pass them. This keeps broken
-     * exercises from ever reaching students.
+     * exercises from ever reaching students. Exercises are verified in parallel
+     * (each compiles in its own temp directory) so the gate stays fast as the bank grows.
      */
     @Test
-    void everyCodingExerciseStarterFailsAndSolutionPasses() {
+    void everyCodingExerciseStarterFailsAndSolutionPasses() throws Exception {
         List<Question> coding = new QuestionBank().getQuestionsForTopics(List.of(Topic.values()))
                 .stream().filter(q -> q.getType() == QuestionType.CODING).toList();
         assertFalse(coding.isEmpty(), "expected shipped CODING exercises");
 
+        int threads = Math.max(2, Runtime.getRuntime().availableProcessors() - 1);
+        java.util.concurrent.ExecutorService pool =
+                java.util.concurrent.Executors.newFixedThreadPool(threads);
+        List<java.util.concurrent.Future<String>> futures = new java.util.ArrayList<>();
         for (Question q : coding) {
-            CodingResult starter = runner.compileAndTest(q.getStarterCode(), q.getTestCode());
-            assertEquals(CodingResult.Status.TEST_FAILURE, starter.status(),
-                    q.getId() + ": starter should compile but fail tests — got "
-                    + starter.status() + "\n" + starter.output());
-
-            CodingResult solution = runner.compileAndTest(q.getAnswer(), q.getTestCode());
-            assertEquals(CodingResult.Status.PASS, solution.status(),
-                    q.getId() + ": reference solution should pass — got "
-                    + solution.status() + "\n" + solution.output());
+            futures.add(pool.submit(() -> verifyExercise(q)));
         }
+        pool.shutdown();
+
+        List<String> failures = new java.util.ArrayList<>();
+        for (java.util.concurrent.Future<String> f : futures) {
+            String problem = f.get(10, java.util.concurrent.TimeUnit.MINUTES);
+            if (problem != null) failures.add(problem);
+        }
+        assertTrue(failures.isEmpty(),
+                failures.size() + " broken exercise(s):\n" + String.join("\n", failures));
+    }
+
+    /** Returns null when the exercise is healthy, else a description of the problem. */
+    private static String verifyExercise(Question q) {
+        CodingResult starter = runner.compileAndTest(q.getStarterCode(), q.getTestCode());
+        if (starter.status() != CodingResult.Status.TEST_FAILURE) {
+            return q.getId() + ": starter should compile but fail tests — got "
+                    + starter.status() + "\n" + starter.output();
+        }
+        CodingResult solution = runner.compileAndTest(q.getAnswer(), q.getTestCode());
+        if (solution.status() != CodingResult.Status.PASS) {
+            return q.getId() + ": reference solution should pass — got "
+                    + solution.status() + "\n" + solution.output();
+        }
+        return null;
     }
 }

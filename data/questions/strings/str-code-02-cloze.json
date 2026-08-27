@@ -1,0 +1,15 @@
+{
+  "id": "str-code-02-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class PalindromeCheck {\n\n    public static boolean isPalindrome(String s) {\n        StringBuilder cleaned = new StringBuilder();\n        for (int i = 0; i < s.length(); i++) {\n            char c = s.charAt(i);\n            if (Character.isLetter(c)) {\n                cleaned.append(Character.toLowerCase(c));\n            }\n        }\n        int left = 0;\n        int right = cleaned.length() - 1;\n        while (left < right) {\n            if (____) {\n                return false;\n            }\n            left++;\n            right--;\n        }\n        return true;\n    }\n}\n",
+  "answer": "cleaned.charAt(left) != cleaned.charAt(right)",
+  "alternatives": [
+    "cleaned.charAt(right) != cleaned.charAt(left)"
+  ],
+  "explanation": "The two-pointer scan declares the string not a palindrome the moment the characters at the mirrored positions differ; this comparison is the entire palindrome test.",
+  "hints": [
+    "Two indices walk inward from both ends of the cleaned text -- what mismatch proves it is not a palindrome?"
+  ]
+}

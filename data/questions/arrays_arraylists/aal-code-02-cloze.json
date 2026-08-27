@@ -1,0 +1,13 @@
+{
+  "id": "aal-code-02-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "import java.util.ArrayList;\nimport java.util.Iterator;\n\npublic class WordFilter {\n\n    public static ArrayList<String> removeShorterThan(ArrayList<String> words, int minLen) {\n        Iterator<String> it = words.iterator();\n        while (it.hasNext()) {\n            if (it.next().length() < minLen) {\n                ____;\n            }\n        }\n        return words;\n    }\n}\n",
+  "answer": "it.remove()",
+  "alternatives": [],
+  "explanation": "Removing through the Iterator is the only safe way to delete elements while iterating; calling words.remove(...) directly inside the loop would throw ConcurrentModificationException.",
+  "hints": [
+    "You cannot call remove on the list itself while iterating -- what object provides a safe remove during iteration?"
+  ]
+}

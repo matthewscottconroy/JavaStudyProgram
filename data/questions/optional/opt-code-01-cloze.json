@@ -1,0 +1,15 @@
+{
+  "id": "opt-code-01-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class WordFinder {\n\n    public static java.util.Optional<String> firstLongerThan(String[] words, int len) {\n        for (String word : words) {\n            if (word.length() > len) {\n                return ____;\n            }\n        }\n        return java.util.Optional.empty();\n    }\n}\n",
+  "answer": "java.util.Optional.of(word)",
+  "alternatives": [
+    "java.util.Optional.ofNullable(word)"
+  ],
+  "explanation": "When a matching word is found it must be wrapped in a present Optional with Optional.of; the empty() at the end covers the no-match case, so the two factory methods encode found versus not found.",
+  "hints": [
+    "A found value is returned inside a present Optional -- which factory method wraps a non-null value?"
+  ]
+}

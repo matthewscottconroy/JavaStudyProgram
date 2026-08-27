@@ -1,0 +1,16 @@
+{
+  "id": "var-code-05-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class OverflowDemo {\n\n    public static int sumAsInt(int a, int b) {\n        return a + b;\n    }\n\n    public static long sumAsLong(int a, int b) {\n        return ____;\n    }\n}\n",
+  "answer": "(long) a + b",
+  "alternatives": [
+    "a + (long) b",
+    "(long) a + (long) b"
+  ],
+  "explanation": "Casting one operand to long before the addition promotes the whole computation to 64-bit arithmetic, so the true sum is kept; casting the result of an int + int would be too late, after the overflow.",
+  "hints": [
+    "The cast must widen an operand BEFORE the addition happens -- casting the finished int sum would preserve the overflow."
+  ]
+}

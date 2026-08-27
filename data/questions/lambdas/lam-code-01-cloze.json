@@ -1,0 +1,15 @@
+{
+  "id": "lam-code-01-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "interface Operation {\n    int apply(int a, int b);\n}\n\npublic class Calculator {\n\n    public static Operation add() {\n        return ____;\n    }\n\n    public static Operation multiply() {\n        return (a, b) -> a * b;\n    }\n\n    public static int calculate(int a, int b, Operation op) {\n        return op.apply(a, b);\n    }\n}\n",
+  "answer": "(a, b) -> a + b",
+  "alternatives": [
+    "(a, b) -> b + a"
+  ],
+  "explanation": "The lambda is the whole implementation of the Operation interface for addition: its parameter list matches apply(int, int) and its body computes the sum.",
+  "hints": [
+    "Return an implementation of the two-int functional interface as a lambda that adds its parameters."
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "rec-code-01-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public record Point(int x, int y) {\n\n    public double distanceTo(Point other) {\n        double dx = other.x - x;\n        double dy = other.y - y;\n        return ____;\n    }\n\n    public static Point origin() {\n        return new Point(0, 0);\n    }\n}\n",
+  "answer": "Math.sqrt(dx * dx + dy * dy)",
+  "alternatives": [
+    "Math.hypot(dx, dy)"
+  ],
+  "explanation": "The Euclidean distance is the square root of the sum of squared coordinate differences; this expression is the geometric core the record method exists to compute.",
+  "hints": [
+    "Apply the Pythagorean theorem to the coordinate differences dx and dy."
+  ]
+}

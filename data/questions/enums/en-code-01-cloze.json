@@ -1,0 +1,13 @@
+{
+  "id": "en-code-01-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class Schedule {\n\n    public enum Day { MON, TUE, WED, THU, FRI, SAT, SUN }\n\n    public static boolean isWeekend(Day d) {\n        return d == Day.SAT || d == Day.SUN;\n    }\n\n    public static Day next(Day d) {\n        Day[] all = Day.values();\n        return all[____];\n    }\n}\n",
+  "answer": "(d.ordinal() + 1) % all.length",
+  "alternatives": [],
+  "explanation": "ordinal() gives the constant's position in declaration order, and adding 1 modulo the number of constants steps to the next day while wrapping SUN back around to MON.",
+  "hints": [
+    "Each enum constant knows its position in declaration order; step forward one and wrap around using the size of values()."
+  ]
+}

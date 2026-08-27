@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      # Runs the full suite, including the content gate that compiles every
+      # coding exercise and runs its tests (starter must fail, solution must pass).
+      - name: Test
+        run: mvn -B test
+      - name: Package
+        run: mvn -B package -DskipTests
+      - uses: actions/upload-artifact@v4
+        with:
+          name: java-study-program-jar
+          path: target/java-study-program-*.jar

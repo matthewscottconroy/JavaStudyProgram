@@ -1,0 +1,15 @@
+{
+  "id": "arr-code-05-cloze",
+  "type": "CLOZE",
+  "difficulty": 4,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class ArrayRotator {\n\n    public static int[] rotateRight(int[] a, int k) {\n        int n = a.length;\n        int[] result = new int[n];\n        if (n == 0) {\n            return result;\n        }\n        int shift = k % n;\n        for (int i = 0; i < n; i++) {\n            result[____] = a[i];\n        }\n        return result;\n    }\n}\n",
+  "answer": "(i + shift) % n",
+  "alternatives": [
+    "(shift + i) % n"
+  ],
+  "explanation": "Rotating right by k moves the element at index i to index i + shift, and the modulo by the array length wraps indices that run past the end back to the front.",
+  "hints": [
+    "Where does element i land after moving right by the shift amount, and how do you wrap around the end of the array?"
+  ]
+}

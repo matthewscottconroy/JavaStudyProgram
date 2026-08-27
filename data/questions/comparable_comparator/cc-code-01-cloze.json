@@ -1,0 +1,15 @@
+{
+  "id": "cc-code-01-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class Song implements Comparable<Song> {\n\n    private final String title;\n    private final int seconds;\n\n    public Song(String title, int seconds) {\n        this.title = title;\n        this.seconds = seconds;\n    }\n\n    public String getTitle() {\n        return title;\n    }\n\n    public int getSeconds() {\n        return seconds;\n    }\n\n    @Override\n    public String toString() {\n        return title + \" (\" + seconds + \")\";\n    }\n\n    @Override\n    public int compareTo(Song other) {\n        int bySeconds = ____;\n        if (bySeconds != 0) {\n            return bySeconds;\n        }\n        return title.compareTo(other.title);\n    }\n}\n",
+  "answer": "Integer.compare(seconds, other.seconds)",
+  "alternatives": [
+    "Integer.compare(this.seconds, other.seconds)"
+  ],
+  "explanation": "Integer.compare returns a negative, zero, or positive int that orders songs by duration; it is the primary key of the comparison and avoids the overflow risk of subtracting the two values.",
+  "hints": [
+    "Compare the two durations with the overflow-safe static helper on Integer rather than subtraction."
+  ]
+}

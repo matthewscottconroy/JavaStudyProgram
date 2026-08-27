@@ -1,0 +1,13 @@
+{
+  "id": "fi-code-01-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class Applier {\n\n    public static int applyTwice(java.util.function.UnaryOperator<Integer> op, int start) {\n        int once = op.apply(start);\n        return op.apply(once);\n    }\n\n    public static int countMatching(int[] values, java.util.function.IntPredicate p) {\n        int count = 0;\n        for (int value : values) {\n            if (____) {\n                count++;\n            }\n        }\n        return count;\n    }\n}\n",
+  "answer": "p.test(value)",
+  "alternatives": [],
+  "explanation": "test is the single abstract method of IntPredicate; invoking it on each element is how the passed-in behavior decides which values are counted.",
+  "hints": [
+    "A predicate is used by calling its single abstract method on each value -- what is that method named?"
+  ]
+}

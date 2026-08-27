@@ -1,0 +1,13 @@
+{
+  "id": "ex-code-03-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class SafeCalc {\n\n    public static String divide(String a, String b) {\n        try {\n            int quotient = Integer.parseInt(a) / Integer.parseInt(b);\n            return Integer.toString(quotient);\n        } catch (____ e) {\n            return \"not a number\";\n        } catch (ArithmeticException e) {\n            return \"division by zero\";\n        }\n    }\n}\n",
+  "answer": "NumberFormatException",
+  "alternatives": [],
+  "explanation": "Integer.parseInt throws NumberFormatException for non-numeric input, and catching that specific type first is what lets the method distinguish bad input from the ArithmeticException thrown by dividing by zero.",
+  "hints": [
+    "Which exception does Integer.parseInt throw when its argument is not a valid number?"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "rx-code-01-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class DigitExtractor {\n\n    public static String extractDigits(String s) {\n        return s.replaceAll(____, \"\");\n    }\n}\n",
+  "answer": "\"[^0-9]\"",
+  "alternatives": [
+    "\"[^0-9]+\"",
+    "\"\\\\D\"",
+    "\"\\\\D+\"",
+    "\"[^\\\\d]\""
+  ],
+  "explanation": "The negated character class [^0-9] matches every non-digit character, and replaceAll deletes each match by replacing it with the empty string, leaving only the digits.",
+  "hints": [
+    "Think of a character class that matches everything EXCEPT the digits, so replaceAll can delete those characters."
+  ]
+}
