@@ -1,0 +1,19 @@
+{
+  "id": "rx-code-05",
+  "type": "CODING",
+  "difficulty": 4,
+  "prompt": "Use Pattern and Matcher to find the first YYYY-MM-DD substring inside a larger text, returning null when there is none. Complete firstDate in DateExtractor.",
+  "starterCode": "/**\n * TASK: Complete the firstDate method.\n *\n * Scan the text for the first substring shaped like an ISO date:\n * four digits, dash, two digits, dash, two digits (YYYY-MM-DD).\n * Return that substring, or null when the text contains none.\n *\n * Example: firstDate(\"Due 2024-03-15, not 2024-04-01.\") -> \"2024-03-15\"\n * Example: firstDate(\"no dates here\") -> null\n */\npublic class DateExtractor {\n\n    public static String firstDate(String text) {\n        // TODO: compile a Pattern, create a Matcher, use find() and group()\n        return null;\n    }\n}\n",
+  "testCode": "public class DateExtractorTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        check(\"two dates, first wins\", \"2024-03-15\",\n                DateExtractor.firstDate(\"Due 2024-03-15, not 2024-04-01.\"));\n        check(\"whole text is a date\", \"2019-12-31\",\n                DateExtractor.firstDate(\"2019-12-31\"));\n        check(\"no dates at all\", null,\n                DateExtractor.firstDate(\"no dates here\"));\n        check(\"too few digits does not match\", null,\n                DateExtractor.firstDate(\"short date 7-04-01 today\"));\n        check(\"date embedded in other characters\", \"2023-01-07\",\n                DateExtractor.firstDate(\"log(2023-01-07)end\"));\n        check(\"find skips a partial match\", \"1999-08-24\",\n                DateExtractor.firstDate(\"ids 1234-56 then 1999-08-24 ok\"));\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class DateExtractor {\n\n    public static String firstDate(String text) {\n        java.util.regex.Pattern datePattern = java.util.regex.Pattern.compile(\"\\\\d{4}-\\\\d{2}-\\\\d{2}\");\n        java.util.regex.Matcher m = datePattern.matcher(text);\n        if (m.find()) {\n            return m.group();\n        }\n        return null;\n    }\n}\n",
+  "explanation": "Unlike matches(), Matcher.find() scans forward through the text looking for the pattern anywhere inside it, and returns true at the first hit. \\d{4}-\\d{2}-\\d{2} spells out the digit counts with the {n} quantifier, and group() with no argument returns exactly the substring the last successful find() matched. Calling group() is only legal after find() returned true, which is why the null case is handled first.",
+  "hints": [
+    "Pattern.compile(...) builds the regex once; pattern.matcher(text) gives you a Matcher for this specific text.",
+    "\\d matches one digit and {4} repeats it exactly four times. Remember the doubled backslashes inside a Java string.",
+    "if (m.find()) return m.group(); -- otherwise return null. find() locates the pattern anywhere in the text."
+  ],
+  "relatedTopics": [
+    "STRINGS",
+    "VARIABLES"
+  ]
+}

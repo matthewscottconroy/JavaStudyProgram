@@ -18,6 +18,7 @@ public class StudentProfile {
     private Map<Topic, TopicPerformance> performance;
     private Set<Integer> bossesCleared;    // level bands whose boss quiz was passed
     private int bossAttempts;              // total boss attempts (also seeds quiz variety)
+    private Set<Topic> revealedOnMap;      // topics the student has already seen unlocked on the map
 
     public StudentProfile() {
         this.id              = UUID.randomUUID().toString();
@@ -25,6 +26,7 @@ public class StudentProfile {
         this.selectedTopics  = new LinkedHashSet<>();
         this.performance     = new EnumMap<>(Topic.class);
         this.bossesCleared   = new TreeSet<>();
+        this.revealedOnMap   = new LinkedHashSet<>();
     }
 
     public StudentProfile(String name) {
@@ -92,4 +94,6 @@ public class StudentProfile {
     public void setBossesCleared(Set<Integer> b) { this.bossesCleared = b == null ? new TreeSet<>() : b; }
     public int getBossAttempts()             { return bossAttempts; }
     public void setBossAttempts(int n)       { this.bossAttempts = n; }
+    public Set<Topic> getRevealedOnMap()     { return revealedOnMap; }
+    public void setRevealedOnMap(Set<Topic> s) { this.revealedOnMap = s == null ? new LinkedHashSet<>() : s; }
 }

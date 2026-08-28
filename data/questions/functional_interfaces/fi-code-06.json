@@ -1,0 +1,20 @@
+{
+  "id": "fi-code-06",
+  "type": "CODING",
+  "difficulty": 3,
+  "prompt": "Write a Supplier factory that hands out a brand-new empty list on every get() call, plus a generic orDefault helper that falls back when a supplier yields null. Complete both methods in Suppliers.",
+  "starterCode": "/**\n * TASK: Complete both methods.\n *\n * emptyListSupplier(): return a Supplier whose get() creates a brand\n * new, empty ArrayList<String> on EVERY call (never the same list\n * object twice).\n *\n * orDefault(s, fallback): call s.get() once; if the result is null\n * return fallback, otherwise return the result.\n *\n * Example: orDefault(() -> null, \"backup\") -> \"backup\"\n *          orDefault(() -> \"value\", \"backup\") -> \"value\"\n */\npublic class Suppliers {\n\n    public static java.util.function.Supplier<java.util.List<String>> emptyListSupplier() {\n        // TODO: return a lambda that makes a fresh empty list each call\n        return null;\n    }\n\n    public static <T> T orDefault(java.util.function.Supplier<T> s, T fallback) {\n        // TODO: use the supplier once, fall back when it yields null\n        return null;\n    }\n}\n",
+  "testCode": "public class SuppliersTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        java.util.function.Supplier<java.util.List<String>> s = Suppliers.emptyListSupplier();\n        check(\"emptyListSupplier() is not null\", true, s != null);\n        try {\n            java.util.List<String> a = s.get();\n            java.util.List<String> b = s.get();\n            check(\"get() yields an empty list\", \"[]\", String.valueOf(a));\n            check(\"two calls yield distinct list objects\", true, a != b);\n            a.add(\"changed\");\n            check(\"later calls are still empty\", \"[]\", String.valueOf(s.get()));\n        } catch (RuntimeException e) {\n            System.out.println(\"FAIL  supplier usage -- threw \" + e.getClass().getSimpleName());\n            failures += 3;\n        }\n\n        check(\"orDefault uses the supplied value\", \"hello\", Suppliers.orDefault(() -> \"hello\", \"backup\"));\n        check(\"orDefault falls back on null\", \"backup\", Suppliers.orDefault(() -> null, \"backup\"));\n        check(\"orDefault works for Integer too\", 7, Suppliers.orDefault(() -> null, 7));\n\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class Suppliers {\n\n    public static java.util.function.Supplier<java.util.List<String>> emptyListSupplier() {\n        return () -> new java.util.ArrayList<>();\n    }\n\n    public static <T> T orDefault(java.util.function.Supplier<T> s, T fallback) {\n        T value = s.get();\n        if (value == null) {\n            return fallback;\n        }\n        return value;\n    }\n}\n",
+  "explanation": "A Supplier<T> is the functional interface for deferred creation: nothing happens until get() is called. Returning () -> new ArrayList<>() means every get() runs the lambda body again, producing a fresh list -- returning an already-built list would hand out the same object every time. The generic orDefault shows the common call-then-null-check pattern that Optional.ofNullable(...).orElse(...) also expresses.",
+  "hints": [
+    "The supplier lambda takes no arguments: () -> something.",
+    "Make sure the 'new ArrayList' happens INSIDE the lambda body, not before the return statement.",
+    "In orDefault, store s.get() in a local variable so you call the supplier exactly once, then null-check it."
+  ],
+  "relatedTopics": [
+    "LAMBDAS",
+    "GENERICS",
+    "COLLECTIONS"
+  ]
+}

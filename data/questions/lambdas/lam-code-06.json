@@ -1,0 +1,20 @@
+{
+  "id": "lam-code-06",
+  "type": "CODING",
+  "difficulty": 3,
+  "prompt": "Build a list by starting from a seed value and repeatedly applying a UnaryOperator step to the previous value. Complete the generate method in IterateWith, then run the tests.",
+  "starterCode": "/**\n * TASK: Complete the generate method.\n *\n * Build a list of exactly count values: the first is seed, and each\n * following value is step applied to the previous one.\n *\n * Example: generate(1, 5, x -> x * 2) -> [1, 2, 4, 8, 16]\n *          generate(10, 0, x -> x + 1) -> [] (count 0 -> empty list)\n */\npublic class IterateWith {\n\n    public static java.util.List<Integer> generate(\n            int seed, int count, java.util.function.UnaryOperator<Integer> step) {\n        // TODO: start from seed and apply step repeatedly\n        return new java.util.ArrayList<>();\n    }\n}\n",
+  "testCode": "public class IterateWithTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        check(\"doubling from 1\", \"[1, 2, 4, 8, 16]\",\n                String.valueOf(IterateWith.generate(1, 5, x -> x * 2)));\n        check(\"adding 5 from 3\", \"[3, 8, 13, 18]\",\n                String.valueOf(IterateWith.generate(3, 4, x -> x + 5)));\n        check(\"squaring from 2\", \"[2, 4, 16, 256]\",\n                String.valueOf(IterateWith.generate(2, 4, x -> x * x)));\n        check(\"count 1 -> just the seed\", \"[7]\",\n                String.valueOf(IterateWith.generate(7, 1, x -> x * x)));\n        check(\"count 0 -> empty list\", \"[]\",\n                String.valueOf(IterateWith.generate(10, 0, x -> x + 1)));\n        check(\"negative seed\", \"[-3, 0, 3]\",\n                String.valueOf(IterateWith.generate(-3, 3, x -> x + 3)));\n\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class IterateWith {\n\n    public static java.util.List<Integer> generate(\n            int seed, int count, java.util.function.UnaryOperator<Integer> step) {\n        java.util.List<Integer> result = new java.util.ArrayList<>();\n        Integer current = seed;\n        for (int i = 0; i < count; i++) {\n            result.add(current);\n            current = step.apply(current);\n        }\n        return result;\n    }\n}\n",
+  "explanation": "A UnaryOperator<Integer> is a Function whose input and output types match, which makes it perfect for feeding a value back into itself. The loop adds the current value first and only then advances it with step.apply, so the seed itself is element zero and exactly count elements are produced. This is the eager version of what Stream.iterate(seed, step).limit(count) does lazily.",
+  "hints": [
+    "Keep a 'current' variable that starts at seed.",
+    "Loop count times: add current to the list, THEN replace current with step.apply(current).",
+    "Adding before applying the step is what makes the seed the first element and keeps the list at exactly count values."
+  ],
+  "relatedTopics": [
+    "INTERFACES",
+    "COLLECTIONS",
+    "LOOPS"
+  ]
+}

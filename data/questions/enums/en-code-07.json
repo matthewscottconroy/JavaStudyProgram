@@ -1,0 +1,20 @@
+{
+  "id": "en-code-07",
+  "type": "CODING",
+  "difficulty": 3,
+  "prompt": "Give the nested Size enum a price carried by each constant (field, constructor, getter), then sum an order's prices. Complete the Size enum and totalFor in CoffeeOrder.",
+  "starterCode": "/**\n * TASK: Give the Size enum a price and complete totalFor.\n *\n * Each Size constant carries a price: SMALL 2.00, MEDIUM 2.75,\n * LARGE 3.50. Add a private final double field, a constructor\n * that sets it, and a getPrice() getter, then change the constant\n * list so each constant passes its price (e.g. SMALL(2.00)).\n * totalFor sums the prices of every size in the order array.\n *\n * Example: totalFor({SMALL, LARGE}) -> 5.50\n */\npublic class CoffeeOrder {\n\n    public enum Size {\n        SMALL, MEDIUM, LARGE;\n        // TODO: change constants to SMALL(2.00), MEDIUM(2.75), LARGE(3.50),\n        // then add a private final double price field and a constructor\n\n        public double getPrice() {\n            // TODO: return the stored price\n            return 0.0;\n        }\n    }\n\n    public static double totalFor(Size[] order) {\n        // TODO: loop over the array and add up getPrice()\n        return 0.0;\n    }\n}\n",
+  "testCode": "public class CoffeeOrderTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        check(\"SMALL price\", 2.00, CoffeeOrder.Size.SMALL.getPrice());\n        check(\"MEDIUM price\", 2.75, CoffeeOrder.Size.MEDIUM.getPrice());\n        check(\"LARGE price\", 3.50, CoffeeOrder.Size.LARGE.getPrice());\n        check(\"total of one of each\", 8.25, CoffeeOrder.totalFor(\n                new CoffeeOrder.Size[]{CoffeeOrder.Size.SMALL, CoffeeOrder.Size.MEDIUM, CoffeeOrder.Size.LARGE}));\n        check(\"total of two LARGE\", 7.00, CoffeeOrder.totalFor(\n                new CoffeeOrder.Size[]{CoffeeOrder.Size.LARGE, CoffeeOrder.Size.LARGE}));\n        check(\"total of empty order\", 0.0, CoffeeOrder.totalFor(new CoffeeOrder.Size[0]));\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class CoffeeOrder {\n\n    public enum Size {\n        SMALL(2.00), MEDIUM(2.75), LARGE(3.50);\n\n        private final double price;\n\n        Size(double price) {\n            this.price = price;\n        }\n\n        public double getPrice() {\n            return price;\n        }\n    }\n\n    public static double totalFor(Size[] order) {\n        double total = 0.0;\n        for (Size s : order) {\n            total += s.getPrice();\n        }\n        return total;\n    }\n}\n",
+  "explanation": "Enum constants can carry data: writing SMALL(2.00) calls the enum's constructor, which stores the value in a private final field just like an ordinary class. Enum constructors are implicitly private -- they only run once per constant when the enum is loaded. Outside the enum, each constant is a normal object, so totalFor just iterates the array and accumulates getPrice().",
+  "hints": [
+    "Change the constant list to SMALL(2.00), MEDIUM(2.75), LARGE(3.50); -- the parentheses are constructor calls.",
+    "Add: private final double price; and a constructor Size(double price) { this.price = price; } (no public keyword needed).",
+    "totalFor: start with double total = 0.0 and use a for-each loop over the order array."
+  ],
+  "relatedTopics": [
+    "CLASSES",
+    "FUNCTIONS",
+    "VARIABLES"
+  ]
+}

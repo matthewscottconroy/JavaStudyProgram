@@ -1,0 +1,20 @@
+{
+  "id": "lam-code-08",
+  "type": "CODING",
+  "difficulty": 4,
+  "prompt": "Call an IntSupplier up to maxCalls times and return the first positive value it produces, or -1 if none appears. Complete callUntilPositive in Retryable; the tests count calls with a counter-backed lambda.",
+  "starterCode": "/**\n * TASK: Complete the callUntilPositive method.\n *\n * Call source.getAsInt() up to maxCalls times. Return the FIRST\n * positive value (> 0) as soon as one appears -- make no further\n * calls after that. If no call yields a positive value, or maxCalls\n * is 0, return -1.\n *\n * Example: a source yielding 0, -2, 9, ... returns 9 (3 calls made).\n * The tests count exactly how many times the source is called.\n */\npublic class Retryable {\n\n    public static int callUntilPositive(java.util.function.IntSupplier source, int maxCalls) {\n        // TODO: loop at most maxCalls times, stop early on a positive value\n        return 0;\n    }\n}\n",
+  "testCode": "public class RetryableTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        int[] n1 = {0};\n        java.util.function.IntSupplier s1 = () -> { n1[0]++; return n1[0] >= 3 ? 7 : -1; };\n        check(\"returns the first positive value\", 7, Retryable.callUntilPositive(s1, 5));\n        check(\"stops as soon as it succeeds\", 3, n1[0]);\n\n        int[] n2 = {0};\n        java.util.function.IntSupplier s2 = () -> { n2[0]++; return 0; };\n        check(\"no positive value -> -1\", -1, Retryable.callUntilPositive(s2, 4));\n        check(\"exhausts exactly maxCalls attempts\", 4, n2[0]);\n\n        int[] n3 = {0};\n        java.util.function.IntSupplier s3 = () -> { n3[0]++; return 100; };\n        check(\"immediate success\", 100, Retryable.callUntilPositive(s3, 5));\n        check(\"only one call needed\", 1, n3[0]);\n\n        int[] n4 = {0};\n        java.util.function.IntSupplier s4 = () -> { n4[0]++; return 5; };\n        check(\"maxCalls 0 -> -1\", -1, Retryable.callUntilPositive(s4, 0));\n        check(\"maxCalls 0 makes no calls at all\", 0, n4[0]);\n\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class Retryable {\n\n    public static int callUntilPositive(java.util.function.IntSupplier source, int maxCalls) {\n        for (int i = 0; i < maxCalls; i++) {\n            int value = source.getAsInt();\n            if (value > 0) {\n                return value;\n            }\n        }\n        return -1;\n    }\n}\n",
+  "explanation": "IntSupplier is the primitive specialization of Supplier: getAsInt() returns an int with no boxing. The retry loop calls the supplier at most maxCalls times and returns immediately on the first positive result, so extra calls never happen -- the tests verify this with a lambda that increments a captured int[] counter. A captured local must be effectively final, which is why the counter is an int[] cell rather than a plain int.",
+  "hints": [
+    "Loop from 0 to maxCalls (exclusive); each iteration makes exactly one source.getAsInt() call.",
+    "Store the value in a local variable and return it right away when it is > 0.",
+    "Reaching the end of the loop means nothing positive appeared: return -1 there (this also covers maxCalls == 0)."
+  ],
+  "relatedTopics": [
+    "INTERFACES",
+    "FUNCTIONS",
+    "LOOPS"
+  ]
+}

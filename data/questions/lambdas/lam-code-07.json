@@ -1,0 +1,20 @@
+{
+  "id": "lam-code-07",
+  "type": "CODING",
+  "difficulty": 4,
+  "prompt": "Filter a list of Event records with a Predicate chosen by the caller. Complete the keep method in EventFilter; the tests pass in lambda predicates that combine both record fields.",
+  "starterCode": "/**\n * TASK: Complete the keep method.\n *\n * Event is a record with a kind (like \"click\") and a size. Return a\n * NEW list containing only the events the predicate accepts, in\n * their original order. Do not modify the input list.\n *\n * Example: with events [click/12, key/40, click/3],\n * keep(events, e -> e.kind().equals(\"click\")) returns\n * [click/12, click/3].\n */\n\nrecord Event(String kind, int size) {}\n\npublic class EventFilter {\n\n    public static java.util.List<Event> keep(\n            java.util.List<Event> events, java.util.function.Predicate<Event> p) {\n        // TODO: collect the events that p accepts into a new list\n        return new java.util.ArrayList<>();\n    }\n}\n",
+  "testCode": "public class EventFilterTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        java.util.List<Event> events = new java.util.ArrayList<>();\n        events.add(new Event(\"click\", 12));\n        events.add(new Event(\"key\", 40));\n        events.add(new Event(\"click\", 3));\n        events.add(new Event(\"scroll\", 7));\n\n        check(\"keep clicks only\",\n                \"[Event[kind=click, size=12], Event[kind=click, size=3]]\",\n                String.valueOf(EventFilter.keep(events, e -> e.kind().equals(\"click\"))));\n\n        check(\"keep size >= 10\",\n                \"[Event[kind=click, size=12], Event[kind=key, size=40]]\",\n                String.valueOf(EventFilter.keep(events, e -> e.size() >= 10)));\n\n        check(\"predicate combining both fields\",\n                \"[Event[kind=scroll, size=7]]\",\n                String.valueOf(EventFilter.keep(events, e -> e.kind().equals(\"scroll\") && e.size() < 10)));\n\n        check(\"keep everything\", 4, EventFilter.keep(events, e -> true).size());\n\n        check(\"keep nothing\", \"[]\", String.valueOf(EventFilter.keep(events, e -> false)));\n\n        check(\"input list is untouched\", 4, events.size());\n\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "record Event(String kind, int size) {}\n\npublic class EventFilter {\n\n    public static java.util.List<Event> keep(\n            java.util.List<Event> events, java.util.function.Predicate<Event> p) {\n        java.util.List<Event> kept = new java.util.ArrayList<>();\n        for (Event e : events) {\n            if (p.test(e)) {\n                kept.add(e);\n            }\n        }\n        return kept;\n    }\n}\n",
+  "explanation": "Taking a Predicate<Event> parameter inverts the usual control flow: keep supplies the looping, while the CALLER supplies the decision as a lambda. Inside the method the predicate is just an object with a test method returning a boolean. Because lambdas like e -> e.kind().equals(\"scroll\") && e.size() < 10 can read every record component, one generic keep method replaces a whole family of special-purpose filter methods.",
+  "hints": [
+    "Create a new empty ArrayList for the results -- never add to or remove from the input list.",
+    "Loop over the events and call p.test(e) to ask the caller's lambda whether to keep each one.",
+    "Add the event to the result list only when test returns true, then return the result list."
+  ],
+  "relatedTopics": [
+    "INTERFACES",
+    "COLLECTIONS",
+    "GENERICS"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "rx-code-03",
+  "type": "CODING",
+  "difficulty": 3,
+  "prompt": "Split a string into words using a regex: any run of non-letter characters is a separator, and empty strings never appear in the result. Complete the split method in WordSplitter.",
+  "starterCode": "/**\n * TASK: Complete the split method.\n *\n * Split the input into words: a word is a maximal run of ASCII\n * letters (A-Z or a-z). Every run of non-letter characters acts\n * as a separator, and no empty strings may appear in the result.\n *\n * Example: split(\"one,two;;three!\") -> {\"one\", \"two\", \"three\"}\n * Example: split(\"\") -> {} (an empty array)\n */\npublic class WordSplitter {\n\n    public static String[] split(String s) {\n        // TODO: use String.split with a regex, then drop empty entries\n        return new String[0];\n    }\n}\n",
+  "testCode": "public class WordSplitterTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    static String words(String s) {\n        return java.util.Arrays.toString(WordSplitter.split(s));\n    }\n\n    public static void main(String[] args) {\n        check(\"split(\\\"hello world\\\")\", \"[hello, world]\", words(\"hello world\"));\n        check(\"split(\\\"one,two;;three!\\\")\", \"[one, two, three]\", words(\"one,two;;three!\"));\n        check(\"split(\\\"  spaced  out  \\\")\", \"[spaced, out]\", words(\"  spaced  out  \"));\n        check(\"split(\\\"java8is;fun\\\")\", \"[java, is, fun]\", words(\"java8is;fun\"));\n        check(\"split(\\\"\\\")\", \"[]\", words(\"\"));\n        check(\"split(\\\"42 + 7\\\")\", \"[]\", words(\"42 + 7\"));\n        check(\"split(\\\"Words\\\")\", \"[Words]\", words(\"Words\"));\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class WordSplitter {\n\n    public static String[] split(String s) {\n        java.util.ArrayList<String> words = new java.util.ArrayList<>();\n        for (String part : s.split(\"[^A-Za-z]+\")) {\n            if (!part.isEmpty()) {\n                words.add(part);\n            }\n        }\n        return words.toArray(new String[0]);\n    }\n}\n",
+  "explanation": "String.split takes a regular expression, and the character class [^A-Za-z] matches any character that is NOT an ASCII letter; adding + makes a whole run of separators count as one split point. split can still produce an empty first element when the string starts with a separator, so the results are filtered before being copied into the returned array.",
+  "hints": [
+    "Inside [ ], a leading ^ negates the class: [^A-Za-z] matches any non-letter.",
+    "Append + so that a run like \";;\" or \"  \" acts as a single separator: s.split(\"[^A-Za-z]+\").",
+    "A leading separator leaves an empty string at index 0. Collect non-empty parts into an ArrayList and finish with toArray(new String[0])."
+  ],
+  "relatedTopics": [
+    "STRINGS",
+    "VARIABLES"
+  ]
+}
