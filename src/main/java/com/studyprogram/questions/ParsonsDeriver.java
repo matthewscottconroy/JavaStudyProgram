@@ -31,6 +31,7 @@ public final class ParsonsDeriver {
      */
     public static Optional<Question> derive(Question coding) {
         if (coding.getType() != QuestionType.CODING) return Optional.empty();
+        if (coding.isMultiFile()) return Optional.empty();  // one-file puzzles only
 
         List<String> lines = solutionLines(coding.getAnswer());
         if (lines.size() < MIN_LINES || lines.size() > MAX_LINES) return Optional.empty();

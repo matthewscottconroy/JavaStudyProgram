@@ -138,6 +138,59 @@ public class CLI {
     }
 
     /**
+     * Unit-review sessions: pick a course overlay file from data/courses/ and a unit
+     * range; the session covers exactly those units' topics — ideal quiz prep.
+     */
+    private List<Topic> unitReviewTopics() {
+        List<CourseOverlay> courses = CourseOverlay.loadAll(Path.of("data", "courses"));
+        if (courses.isEmpty()) {
+            System.out.println("  No course files found in data/courses/ — see the README "
+                    + "for the overlay format (a sample ships with the repo).");
+            return List.of();
+        }
+        CourseOverlay course = courses.get(0);
+        if (courses.size() > 1) {
+            for (int i = 0; i < courses.size(); i++) {
+                System.out.printf("  [%d] %s%n", i + 1, courses.get(i).getName());
+            }
+            System.out.print("  Course: ");
+            try {
+                int idx = Integer.parseInt(in.nextLine().trim()) - 1;
+                if (idx >= 0 && idx < courses.size()) course = courses.get(idx);
+            } catch (NumberFormatException ignored) {}
+        }
+        course.getWarnings().forEach(w ->
+                System.out.println("  " + Display.YELLOW + "⚠ " + w + Display.RESET));
+
+        System.out.println("  " + Display.BOLD + course.getName() + Display.RESET);
+        for (CourseOverlay.Unit u : course.getUnits()) {
+            System.out.printf("    %2d  %s%n", u.number(), u.title());
+        }
+        System.out.print("  Units to review (e.g. 3 or 1-4): ");
+        String range = in.nextLine().trim();
+        int from, to;
+        try {
+            if (range.contains("-")) {
+                String[] parts = range.split("-", 2);
+                from = Integer.parseInt(parts[0].trim());
+                to   = Integer.parseInt(parts[1].trim());
+            } else {
+                from = to = Integer.parseInt(range);
+            }
+        } catch (NumberFormatException e) {
+            return List.of();
+        }
+        List<Topic> topics = course.topicsForUnits(from, to);
+        if (topics.isEmpty()) {
+            System.out.println("  Those units cover no topics.");
+        } else {
+            System.out.println("  Reviewing: " + Display.CYAN + Display.topicSummary(topics)
+                    + Display.RESET);
+        }
+        return topics;
+    }
+
+    /**
      * World boss fights: a 10-question, no-hints quiz across one level band's topics.
      * Clearing one (80%+) is recorded on the profile and shown on the concept map.
      */
@@ -238,8 +291,12 @@ public class CLI {
         try {
             String safe = currentProfile.getName().replaceAll("[^a-zA-Z0-9_\\-]", "_");
             Path out = storage.directory().resolveSibling("reports").resolve(safe + "-progress.html");
+            QuestionCalibration calibration = QuestionCalibration.fromRecords(
+                    AttemptLog.readAllInDirectory(storage.directory()));
+            List<String> flagged = calibration.flaggedForReview(
+                    bank.getQuestionsForTopics(List.of(Topic.values())));
             Path written = new HtmlReportGenerator()
-                    .generate(currentProfile, attemptLog.readAll(), out);
+                    .generate(currentProfile, attemptLog.readAll(), flagged, out);
             System.out.println("  Report written to: " + Display.CYAN
                     + written.toAbsolutePath() + Display.RESET);
             try {
@@ -293,7 +350,7 @@ public class CLI {
             System.out.printf("  ── %s ─────────────────────────────────%n", levelNames[level]);
             for (Topic t : group) {
                 boolean sel    = selected.contains(t);
-                boolean locked = !t.prerequisites.isEmpty() && !t.isUnlocked(perf);
+                boolean locked = !t.getPrerequisites().isEmpty() && !t.isUnlocked(perf);
                 TopicPerformance tp = perf.get(t);
                 int pct = tp == null ? 0 : (int)(tp.getMasteryScore() * 100);
 
@@ -315,7 +372,7 @@ public class CLI {
         if (input.equalsIgnoreCase("all")) {
             int lockedSkipped = 0;
             for (Topic t : allTopics) {
-                if (t.prerequisites.isEmpty() || t.isUnlocked(perf)) {
+                if (t.getPrerequisites().isEmpty() || t.isUnlocked(perf)) {
                     selected.add(t);
                 } else {
                     lockedSkipped++;
@@ -334,8 +391,8 @@ public class CLI {
                         if (selected.contains(t)) {
                             selected.remove(t);
                         } else {
-                            if (!t.prerequisites.isEmpty() && !t.isUnlocked(perf)) {
-                                String prereqs = t.prerequisites.stream()
+                            if (!t.getPrerequisites().isEmpty() && !t.isUnlocked(perf)) {
+                                String prereqs = t.getPrerequisites().stream()
                                         .map(p -> p.displayName)
                                         .collect(Collectors.joining(", "));
                                 System.out.printf("  Note: %s recommends: %s (adding anyway)%n",
@@ -357,11 +414,11 @@ public class CLI {
 
     private void studySession() {
         System.out.print("\n  Feed: [a] auto — follows the concept map (recommended)  "
-                + "[m] my selected topics  [a]: ");
-        boolean manual = in.nextLine().trim().equalsIgnoreCase("m");
+                + "[m] my selected topics  [u] course unit review  [a]: ");
+        String mode = in.nextLine().trim().toLowerCase();
 
         List<Topic> active;
-        if (manual) {
+        if (mode.equals("m")) {
             active = currentProfile.getSelectedTopicsList();
             if (active.isEmpty()) {
                 System.out.println("  No topics selected. Please select topics first.");
@@ -369,6 +426,9 @@ public class CLI {
                 active = currentProfile.getSelectedTopicsList();
                 if (active.isEmpty()) return;
             }
+        } else if (mode.equals("u")) {
+            active = unitReviewTopics();
+            if (active.isEmpty()) return;
         } else {
             active = Curriculum.autoTopics(currentProfile, 6);
             System.out.println("  Auto plan: " + Display.CYAN
@@ -389,7 +449,11 @@ public class CLI {
             catch (NumberFormatException ignored) {}
         }
 
-        AdaptiveEngine engine  = new AdaptiveEngine(bank, llm);
+        // Calibrate question difficulty from every profile's attempt history on this
+        // machine — real student data gradually corrects the authored difficulty labels
+        QuestionCalibration calibration = QuestionCalibration.fromRecords(
+                AttemptLog.readAllInDirectory(storage.directory()));
+        AdaptiveEngine engine  = new AdaptiveEngine(bank, new Random(), llm, calibration);
         StudySession   session = new StudySession(currentProfile, active, engine, sessionLen);
 
         Display.header("Study Session — " + Display.topicSummary(active));

@@ -50,6 +50,8 @@ public final class JsonQuestionParser {
             // strict: an unknown name throws, so a typo'd tag surfaces as a load warning
             dto.relatedTopics.forEach(name -> b.relatedTopic(Topic.valueOf(name)));
         }
+        if (dto.starterFiles != null && !dto.starterFiles.isEmpty()) b.starterFiles(dto.starterFiles);
+        if (dto.solutionFiles != null && !dto.solutionFiles.isEmpty()) b.solutionFiles(dto.solutionFiles);
 
         return b.build();
     }

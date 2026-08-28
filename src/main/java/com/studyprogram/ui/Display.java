@@ -110,8 +110,18 @@ public class Display {
         System.out.println();
         System.out.println(q.getPrompt());
         System.out.println();
-        System.out.println("  Edit this file in your editor or IDE:");
-        System.out.println("  " + BOLD + CYAN + file.toAbsolutePath() + RESET);
+        if (q.isMultiFile()) {
+            System.out.println("  This is a project exercise — edit these files in your editor or IDE:");
+            java.nio.file.Path dir = file.getParent();
+            for (String name : q.getStarterFiles().keySet()) {
+                System.out.println("  " + BOLD + CYAN + dir.resolve(name).toAbsolutePath() + RESET);
+            }
+            System.out.println();
+            System.out.println("  You may also add extra .java files of your own to that folder.");
+        } else {
+            System.out.println("  Edit this file in your editor or IDE:");
+            System.out.println("  " + BOLD + CYAN + file.toAbsolutePath() + RESET);
+        }
         System.out.println();
         System.out.println("  The full task description is in a comment at the top of the file.");
         codingMenu();

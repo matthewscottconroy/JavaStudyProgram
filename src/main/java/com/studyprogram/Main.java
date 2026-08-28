@@ -29,6 +29,12 @@ public class Main {
         try {
             Path profileDir = resolveProfileDir();
 
+            // Optional instructor customization of the prerequisite graph
+            for (String warning : com.studyprogram.core.TopicGraphOverrides
+                    .loadAndApply(Path.of("data", "topic-graph.json"))) {
+                System.err.println("Warning: " + warning);
+            }
+
             QuestionBank   bank    = new QuestionBank();
             ProfileStorage storage = new JsonProfileStorage(profileDir);
             LLMService     llm     = LLMServiceFactory.create();

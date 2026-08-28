@@ -23,6 +23,7 @@ public class AdaptiveEngine {
     private final QuestionBank bank;
     private final Random rng;
     private final LLMService llm;
+    private final QuestionCalibration calibration;
 
     // LLM-generated questions cached for the lifetime of this engine instance
     private final Map<Topic, List<Question>> generated = new EnumMap<>(Topic.class);
@@ -40,9 +41,15 @@ public class AdaptiveEngine {
     }
 
     public AdaptiveEngine(QuestionBank bank, Random rng, LLMService llm) {
-        this.bank = bank;
-        this.rng  = rng;
-        this.llm  = llm;
+        this(bank, rng, llm, QuestionCalibration.none());
+    }
+
+    public AdaptiveEngine(QuestionBank bank, Random rng, LLMService llm,
+                          QuestionCalibration calibration) {
+        this.bank        = bank;
+        this.rng         = rng;
+        this.llm         = llm;
+        this.calibration = calibration == null ? QuestionCalibration.none() : calibration;
     }
 
     /**
@@ -104,8 +111,9 @@ public class AdaptiveEngine {
         double masteryScore     = (perf == null) ? 0.0 : perf.getMasteryScore();
         double topicPriority    = 1.0 - masteryScore;
 
+        // Match against the calibrated (measured) difficulty, not just the authored label
         int suggestedDifficulty = (perf == null) ? 1 : perf.suggestedDifficulty();
-        int diffGap             = Math.abs(q.getDifficulty() - suggestedDifficulty);
+        double diffGap          = Math.abs(calibration.effectiveDifficulty(q) - suggestedDifficulty);
         double difficultyMatch  = Math.max(0, 1.0 - (diffGap * 0.25));
 
         double recentPenalty    = (perf != null && perf.wasRecentlySeen(q.getId())) ? -0.5 : 0.0;

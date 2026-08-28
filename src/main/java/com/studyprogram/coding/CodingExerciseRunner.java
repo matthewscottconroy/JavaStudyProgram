@@ -52,52 +52,88 @@ public class CodingExerciseRunner {
         return ToolProvider.getSystemJavaCompiler() != null;
     }
 
-    /** The file the student should edit for this exercise. */
+    /** This exercise's workspace directory. */
+    public Path workspaceDir(Question q) {
+        return workspaceRoot.resolve(q.getId());
+    }
+
+    /** The file the student should edit (for multi-file projects: the first starter file). */
     public Path studentFile(Question q) {
-        String className = JavaSource.primaryTypeName(q.getStarterCode());
-        return workspaceRoot.resolve(q.getId()).resolve(className + ".java");
+        String name = q.isMultiFile()
+                ? q.getStarterFiles().keySet().iterator().next()
+                : JavaSource.primaryTypeName(q.getStarterCode()) + ".java";
+        return workspaceDir(q).resolve(name);
+    }
+
+    /** All starter files as filename → content (single-file exercises give one entry). */
+    private static java.util.Map<String, String> starterSet(Question q) {
+        if (q.isMultiFile()) return q.getStarterFiles();
+        return java.util.Map.of(
+                JavaSource.primaryTypeName(q.getStarterCode()) + ".java", q.getStarterCode());
     }
 
     /**
-     * Ensures the workspace directory and starter file exist.
-     * If the student already has a file there, it is left untouched.
+     * Ensures the workspace directory and starter file(s) exist.
+     * Files the student already has are left untouched.
      *
-     * @return the path to the file the student should edit
+     * @return the path to the (first) file the student should edit
      */
     public Path prepareWorkspace(Question q) throws IOException {
-        Path file = studentFile(q);
-        Files.createDirectories(file.getParent());
-        if (!Files.exists(file)) {
-            Files.writeString(file, q.getStarterCode(), StandardCharsets.UTF_8);
+        Path dir = workspaceDir(q);
+        Files.createDirectories(dir);
+        for (var entry : starterSet(q).entrySet()) {
+            Path file = dir.resolve(entry.getKey());
+            if (!Files.exists(file)) {
+                Files.writeString(file, entry.getValue(), StandardCharsets.UTF_8);
+            }
         }
-        return file;
+        return studentFile(q);
     }
 
-    /** Overwrites the student's file with the original starter code. */
+    /** Overwrites the student's file(s) with the original starter code. */
     public Path resetToStarter(Question q) throws IOException {
-        Path file = studentFile(q);
-        Files.createDirectories(file.getParent());
-        Files.writeString(file, q.getStarterCode(), StandardCharsets.UTF_8);
-        return file;
+        Path dir = workspaceDir(q);
+        Files.createDirectories(dir);
+        for (var entry : starterSet(q).entrySet()) {
+            Files.writeString(dir.resolve(entry.getKey()), entry.getValue(), StandardCharsets.UTF_8);
+        }
+        return studentFile(q);
     }
 
-    /** Compiles the student's current file with the test harness and runs the tests. */
+    /**
+     * Compiles the student's current workspace with the test harness and runs the tests.
+     * Every .java file in the workspace is included, so students can even add their own
+     * helper classes to a project exercise.
+     */
     public CodingResult run(Question q) {
         try {
-            String studentSource = Files.readString(prepareWorkspace(q), StandardCharsets.UTF_8);
-            return compileAndTest(studentSource, q.getTestCode());
+            prepareWorkspace(q);
+            java.util.Map<String, String> sources = new java.util.LinkedHashMap<>();
+            try (var files = Files.list(workspaceDir(q))) {
+                for (Path p : files.filter(f -> f.toString().endsWith(".java")).sorted().toList()) {
+                    sources.put(p.getFileName().toString(), Files.readString(p, StandardCharsets.UTF_8));
+                }
+            }
+            return compileAndTest(sources, q.getTestCode());
         } catch (IOException e) {
             return new CodingResult(CodingResult.Status.ENVIRONMENT_ERROR,
                     "Could not read workspace file: " + e.getMessage());
         }
     }
 
-    /**
-     * Compiles {@code mainSource} together with {@code testSource} in a throwaway build
-     * directory and runs the test class's {@code main}. Package-private core so tests can
-     * exercise it without touching the workspace.
-     */
+    /** Single-file variant — see {@link #compileAndTest(java.util.Map, String)}. */
     CodingResult compileAndTest(String mainSource, String testSource) {
+        return compileAndTest(
+                java.util.Map.of(JavaSource.primaryTypeName(mainSource) + ".java", mainSource),
+                testSource);
+    }
+
+    /**
+     * Compiles the given source set (filename → content) together with {@code testSource}
+     * in a throwaway build directory and runs the test class's {@code main}.
+     * Package-private core so tests can exercise it without touching the workspace.
+     */
+    CodingResult compileAndTest(java.util.Map<String, String> sources, String testSource) {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         if (compiler == null) {
             return new CodingResult(CodingResult.Status.ENVIRONMENT_ERROR,
@@ -110,18 +146,21 @@ public class CodingExerciseRunner {
         try {
             buildDir = Files.createTempDirectory("javastudy-build-");
 
-            String mainClass = JavaSource.primaryTypeName(mainSource);
             String testClass = JavaSource.primaryTypeName(testSource);
-            Path mainFile = buildDir.resolve(mainClass + ".java");
+            List<java.io.File> files = new ArrayList<>();
+            for (var entry : sources.entrySet()) {
+                Path f = buildDir.resolve(entry.getKey());
+                Files.writeString(f, entry.getValue(), StandardCharsets.UTF_8);
+                files.add(f.toFile());
+            }
             Path testFile = buildDir.resolve(testClass + ".java");
-            Files.writeString(mainFile, mainSource, StandardCharsets.UTF_8);
             Files.writeString(testFile, testSource, StandardCharsets.UTF_8);
+            files.add(testFile.toFile());
 
             DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<>();
             try (StandardJavaFileManager fm =
                          compiler.getStandardFileManager(diagnostics, null, StandardCharsets.UTF_8)) {
-                Iterable<? extends JavaFileObject> units =
-                        fm.getJavaFileObjectsFromFiles(List.of(mainFile.toFile(), testFile.toFile()));
+                Iterable<? extends JavaFileObject> units = fm.getJavaFileObjectsFromFiles(files);
                 boolean ok = compiler.getTask(null, fm, diagnostics,
                         List.of("-d", buildDir.toString()), null, units).call();
                 if (!ok) {

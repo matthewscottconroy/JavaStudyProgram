@@ -2,7 +2,9 @@ package com.studyprogram.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /** Immutable description of a single study question. Use {@link Builder} to construct. */
@@ -23,6 +25,8 @@ public final class Question {
     private final String testCode;      // CODING: test harness compiled against the student's code
     private final List<String> shuffledLines; // PARSONS: solution lines in shuffled order
     private final List<Topic> relatedTopics;  // prerequisite topics this question also exercises
+    private final Map<String, String> starterFiles;  // CODING multi-file: filename -> content
+    private final Map<String, String> solutionFiles; // CODING multi-file: reference solution set
 
     private Question(Builder b) {
         this.id                 = b.id;
@@ -40,6 +44,8 @@ public final class Question {
         this.testCode           = b.testCode;
         this.shuffledLines      = Collections.unmodifiableList(new ArrayList<>(b.shuffledLines));
         this.relatedTopics      = Collections.unmodifiableList(new ArrayList<>(b.relatedTopics));
+        this.starterFiles       = Collections.unmodifiableMap(new LinkedHashMap<>(b.starterFiles));
+        this.solutionFiles      = Collections.unmodifiableMap(new LinkedHashMap<>(b.solutionFiles));
     }
 
     // ── Accessors ────────────────────────────────────────────────────────────
@@ -62,6 +68,10 @@ public final class Question {
     public boolean isCoding()                 { return type == QuestionType.CODING; }
     public List<String> getShuffledLines()    { return shuffledLines; }
     public List<Topic> getRelatedTopics()     { return relatedTopics; }
+    public Map<String, String> getStarterFiles()  { return starterFiles; }
+    public Map<String, String> getSolutionFiles() { return solutionFiles; }
+    /** True for project-style CODING exercises spanning several source files. */
+    public boolean isMultiFile()              { return !starterFiles.isEmpty(); }
 
     // ── Builder ──────────────────────────────────────────────────────────────
 
@@ -83,6 +93,8 @@ public final class Question {
         private String testCode;
         private final List<String> shuffledLines = new ArrayList<>();
         private final List<Topic> relatedTopics  = new ArrayList<>();
+        private final Map<String, String> starterFiles  = new LinkedHashMap<>();
+        private final Map<String, String> solutionFiles = new LinkedHashMap<>();
 
         public Builder id(String id)                  { this.id = id; return this; }
         public Builder topic(Topic t)                 { this.topic = t; return this; }
@@ -106,16 +118,23 @@ public final class Question {
         public Builder shuffledLines(List<String> l)  { this.shuffledLines.clear();
                                                         this.shuffledLines.addAll(l); return this; }
         public Builder relatedTopic(Topic t)          { this.relatedTopics.add(t); return this; }
+        public Builder starterFiles(Map<String, String> f) { this.starterFiles.clear();
+                                                             this.starterFiles.putAll(f); return this; }
+        public Builder solutionFiles(Map<String, String> f) { this.solutionFiles.clear();
+                                                              this.solutionFiles.putAll(f); return this; }
 
         public Question build() {
             if (topic == null)  throw new IllegalStateException("topic required");
             if (prompt == null) throw new IllegalStateException("prompt required");
             if (answer == null) throw new IllegalStateException("answer required");
             if (type == QuestionType.CODING) {
-                if (starterCode == null || starterCode.isBlank())
-                    throw new IllegalStateException("starterCode required for CODING questions");
+                boolean hasSingle = starterCode != null && !starterCode.isBlank();
+                if (!hasSingle && starterFiles.isEmpty())
+                    throw new IllegalStateException("starterCode or starterFiles required for CODING questions");
                 if (testCode == null || testCode.isBlank())
                     throw new IllegalStateException("testCode required for CODING questions");
+                if (!starterFiles.isEmpty() && solutionFiles.isEmpty())
+                    throw new IllegalStateException("multi-file CODING questions need solutionFiles");
             }
             return new Question(this);
         }

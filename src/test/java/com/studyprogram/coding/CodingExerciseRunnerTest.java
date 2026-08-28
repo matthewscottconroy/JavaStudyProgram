@@ -122,12 +122,16 @@ class CodingExerciseRunnerTest {
 
     /** Returns null when the exercise is healthy, else a description of the problem. */
     private static String verifyExercise(Question q) {
-        CodingResult starter = runner.compileAndTest(q.getStarterCode(), q.getTestCode());
+        CodingResult starter = q.isMultiFile()
+                ? runner.compileAndTest(q.getStarterFiles(), q.getTestCode())
+                : runner.compileAndTest(q.getStarterCode(), q.getTestCode());
         if (starter.status() != CodingResult.Status.TEST_FAILURE) {
             return q.getId() + ": starter should compile but fail tests — got "
                     + starter.status() + "\n" + starter.output();
         }
-        CodingResult solution = runner.compileAndTest(q.getAnswer(), q.getTestCode());
+        CodingResult solution = q.isMultiFile()
+                ? runner.compileAndTest(q.getSolutionFiles(), q.getTestCode())
+                : runner.compileAndTest(q.getAnswer(), q.getTestCode());
         if (solution.status() != CodingResult.Status.PASS) {
             return q.getId() + ": reference solution should pass — got "
                     + solution.status() + "\n" + solution.output();

@@ -61,6 +61,29 @@ the tests interact with them programmatically (`doClick()`, component-tree
 inspection, pixel-sampling painted `BufferedImage`s) — fully headless, so they
 work everywhere including CI.
 
+Some coding exercises are **multi-file projects**: the workspace gets several
+`.java` files (some provided complete, some yours to finish), and every file in
+the folder — including extra helper classes you add yourself — is compiled and
+tested together.
+
+**Question calibration:** authored difficulty labels are self-correcting. The
+engine blends each question's label with its measured pass rate across every
+profile's attempt log on the machine, matches students against that *effective*
+difficulty, and the progress report lists questions whose measurement has
+drifted far from their label — instructor-ready content review, powered by
+ordinary use.
+
+## Instructor customization
+
+- **Course overlays** (`data/courses/*.json`): map your syllabus units onto
+  topics; students then pick `[u] course unit review` at session start and
+  enter a unit range ("1-4") for exactly-scoped quiz prep. A sample Java II
+  overlay ships in `data/courses/sample-java2.json`.
+- **Prerequisite overrides** (`data/topic-graph.json`): reshape the concept
+  map's prerequisite edges without rebuilding —
+  `{ "overrides": { "generics": { "prerequisites": ["collections"] } } }`.
+  Unknown slugs are warned about and cyclic overrides are rejected.
+
 ## Question types
 
 | Type | What you do |

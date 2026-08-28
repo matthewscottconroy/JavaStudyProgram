@@ -228,8 +228,20 @@ public enum Topic {
         this.prerequisites  = Arrays.asList(prerequisites);
     }
 
+    // Instructor overrides (loaded from data/topic-graph.json at startup); when a topic
+    // has an entry here it replaces the built-in prerequisite list everywhere.
+    private static final Map<Topic, List<Topic>> PREREQ_OVERRIDES = new java.util.EnumMap<>(Topic.class);
+
+    /** Replaces the current prerequisite overrides (empty map restores the defaults). */
+    public static void applyPrerequisiteOverrides(Map<Topic, List<Topic>> overrides) {
+        PREREQ_OVERRIDES.clear();
+        if (overrides != null) PREREQ_OVERRIDES.putAll(overrides);
+    }
+
     /** Returns the list of topics that must be mastered before this one is unlocked. */
-    public List<Topic> getPrerequisites() { return prerequisites; }
+    public List<Topic> getPrerequisites() {
+        return PREREQ_OVERRIDES.getOrDefault(this, prerequisites);
+    }
 
     /**
      * The directory name under {@code data/questions/} (and the {@code questions/}
@@ -251,7 +263,7 @@ public enum Topic {
 
     /** True when the student has ≥40% mastery in every prerequisite. */
     public boolean isUnlocked(Map<Topic, TopicPerformance> performance) {
-        return prerequisites.stream().allMatch(prereq -> {
+        return getPrerequisites().stream().allMatch(prereq -> {
             TopicPerformance p = performance.get(prereq);
             return p != null && p.getMasteryScore() >= 0.4;
         });

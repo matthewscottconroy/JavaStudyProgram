@@ -49,6 +49,25 @@ public class AttemptLog {
         }
     }
 
+    /**
+     * All attempt records from every profile's log in a directory — the classroom-level
+     * aggregate used for question calibration (on a shared machine, every student's
+     * attempts improve the difficulty estimates).
+     */
+    public static List<AttemptRecord> readAllInDirectory(Path dir) {
+        List<AttemptRecord> all = new ArrayList<>();
+        if (!Files.isDirectory(dir)) return all;
+        try (var files = Files.list(dir)) {
+            for (Path p : files.filter(f -> f.getFileName().toString().endsWith(".attempts.jsonl"))
+                               .sorted().toList()) {
+                all.addAll(new AttemptLog(p).readAll());
+            }
+        } catch (IOException e) {
+            System.err.println("Warning: could not scan attempt logs — " + e.getMessage());
+        }
+        return all;
+    }
+
     /** All records in chronological (append) order; malformed lines are skipped. */
     public List<AttemptRecord> readAll() {
         List<AttemptRecord> records = new ArrayList<>();

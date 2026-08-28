@@ -21,4 +21,6 @@ public class JsonQuestionDto {
     public String starterCode;    // CODING only
     public String testCode;       // CODING only
     public List<String> relatedTopics = Collections.emptyList(); // prerequisite Topic names
+    public java.util.Map<String, String> starterFiles  = Collections.emptyMap(); // multi-file CODING
+    public java.util.Map<String, String> solutionFiles = Collections.emptyMap(); // multi-file CODING
 }

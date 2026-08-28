@@ -1,0 +1,19 @@
+{
+  "name": "Sample Course — Java II",
+  "units": [
+    { "number": 1, "title": "Tools & Java I Review",
+      "topics": ["compiling_running", "variables", "printing", "if_case", "loops", "functions"] },
+    { "number": 2, "title": "Arrays, Collections & Strings",
+      "topics": ["arrays", "arrays_arraylists", "strings", "collections"] },
+    { "number": 3, "title": "Files & Exceptions",
+      "topics": ["try_catch", "file_io", "serialization"] },
+    { "number": 4, "title": "GUIs with Swing",
+      "topics": ["gui_swing", "gui_components", "gui_layout", "gui_event_model"] },
+    { "number": 5, "title": "Inheritance & Polymorphism",
+      "topics": ["classes", "inheritance", "interfaces", "class_hierarchy", "memory_reference_static"] },
+    { "number": 6, "title": "Packages, JUnit, Javadoc & Maven",
+      "topics": ["unit_tests", "javadoc", "maven", "project_organization"] },
+    { "number": 7, "title": "Simulations, Graphics & Randomness",
+      "topics": ["painting", "graphics_2d", "random", "images_sound"] }
+  ]
+}
