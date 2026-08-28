@@ -21,13 +21,21 @@ class MultiFileExerciseTest {
         assumeTrue(CodingExerciseRunner.compilerAvailable());
     }
 
-    private static final Map<String, String> STARTER = Map.of(
+    // LinkedHashMap: the FIRST entry is the primary file shown to the student
+    private static final Map<String, String> STARTER = ordered(
             "Greeter.java", "public class Greeter { public String greet() { return \"\"; } }",
             "App.java", "public class App { public static String run() { return new Greeter().greet(); } }");
 
-    private static final Map<String, String> SOLUTION = Map.of(
+    private static final Map<String, String> SOLUTION = ordered(
             "Greeter.java", "public class Greeter { public String greet() { return \"hi\"; } }",
             "App.java", "public class App { public static String run() { return new Greeter().greet(); } }");
+
+    private static Map<String, String> ordered(String k1, String v1, String k2, String v2) {
+        Map<String, String> m = new java.util.LinkedHashMap<>();
+        m.put(k1, v1);
+        m.put(k2, v2);
+        return m;
+    }
 
     private static final String TEST = """
             public class AppTest {

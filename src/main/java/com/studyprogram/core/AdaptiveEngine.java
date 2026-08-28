@@ -24,6 +24,7 @@ public class AdaptiveEngine {
     private final Random rng;
     private final LLMService llm;
     private final QuestionCalibration calibration;
+    private final ReviewScheduler scheduler;
 
     // LLM-generated questions cached for the lifetime of this engine instance
     private final Map<Topic, List<Question>> generated = new EnumMap<>(Topic.class);
@@ -46,10 +47,16 @@ public class AdaptiveEngine {
 
     public AdaptiveEngine(QuestionBank bank, Random rng, LLMService llm,
                           QuestionCalibration calibration) {
+        this(bank, rng, llm, calibration, ReviewScheduler.none());
+    }
+
+    public AdaptiveEngine(QuestionBank bank, Random rng, LLMService llm,
+                          QuestionCalibration calibration, ReviewScheduler scheduler) {
         this.bank        = bank;
         this.rng         = rng;
         this.llm         = llm;
         this.calibration = calibration == null ? QuestionCalibration.none() : calibration;
+        this.scheduler   = scheduler == null ? ReviewScheduler.none() : scheduler;
     }
 
     /**
@@ -136,8 +143,11 @@ public class AdaptiveEngine {
         int attempts            = (perf == null) ? 0 : perf.getAttempts();
         double gentleIntro      = (attempts < 3 && q.getDifficulty() > 2) ? -0.4 : 0.0;
 
+        // Cross-session spaced repetition: due reviews rise, not-yet-due repeats sink
+        double spacing = scheduler.scheduleBonus(q.getId(), java.time.LocalDateTime.now());
+
         return topicPriority + difficultyMatch + recentPenalty + codingBonus + gentleIntro
-                + rng.nextDouble() * 0.1;
+                + spacing + rng.nextDouble() * 0.1;
     }
 
     /** Weighted random selection from the top-N candidates. */

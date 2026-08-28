@@ -66,6 +66,20 @@ Some coding exercises are **multi-file projects**: the workspace gets several
 the folder — including extra helper classes you add yourself — is compiled and
 tested together.
 
+**Spaced repetition:** each question is individually scheduled from your
+attempt history — a correct answer doubles its review interval (1.5 days → 3 →
+6 → … capped at 60), a miss resets it. Sessions surface questions that are
+*due* and avoid re-asking ones that aren't, so review time goes where memory
+research says it matters.
+
+**Progress card:** the Progress Report menu option also prints and saves a
+compact text card (totals, streak, bosses, per-world mastery, and a
+verification code tied to the numbers) — ready to paste into a lab submission.
+
+**Instructor class report:** `java -jar java-study-program.jar --class-report`
+aggregates every profile on the machine into one HTML page: per-student
+summary, class-wide weakest topics, and calibration-flagged questions.
+
 **Question calibration:** authored difficulty labels are self-correcting. The
 engine blends each question's label with its measured pass rate across every
 profile's attempt log on the machine, matches students against that *effective*

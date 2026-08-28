@@ -99,11 +99,37 @@ public class MapPanel extends JPanel {
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(MARGIN_X * 2 + 5 * COL_W - (COL_W - NODE_W),
-                             MARGIN_Y + MapModel.maxRows(nodes) * ROW_H + 30);
+                             MARGIN_Y + MapModel.maxRows(nodes) * ROW_H + ROW_H + 50);
+    }
+
+    private int rowsInColumn(int col) {
+        int rows = 0;
+        for (Node n : nodes) if (n.col() == col) rows = Math.max(rows, n.row() + 1);
+        return rows;
+    }
+
+    /** The boss "castle" node at the foot of each world column. */
+    private Rectangle bossBounds(int col) {
+        return new Rectangle(MARGIN_X + col * COL_W + (NODE_W - 140) / 2,
+                             MARGIN_Y + rowsInColumn(col) * ROW_H + 10, 140, 32);
     }
 
     @Override
     public String getToolTipText(MouseEvent e) {
+        for (int col = 0; col < 5; col++) {
+            if (bossBounds(col).contains(e.getPoint())) {
+                int level = col + 1;
+                if (profile.getBossesCleared().contains(level)) {
+                    return "World " + level + "'s boss is defeated — the star is yours!";
+                }
+                if (com.studyprogram.core.BossChallenge.unlocked(profile, level)) {
+                    return "The World " + level + " boss awaits! Choose Boss Challenge "
+                            + "from the main menu to fight it.";
+                }
+                return "Reach " + (int) (com.studyprogram.core.BossChallenge.UNLOCK_AVG_MASTERY * 100)
+                        + "% average mastery across World " + level + " to summon its boss.";
+            }
+        }
         return nodeAt(e.getPoint()).map(n -> {
             if (n.state() == NodeState.SECRET) {
                 return "A secret path… master its prerequisites to reveal it.";
@@ -131,7 +157,34 @@ public class MapPanel extends JPanel {
         paintWorldBands(g2);
         paintEdges(g2);
         for (Node n : nodes) paintNode(g2, n);
+        paintBosses(g2);
         g2.dispose();
+    }
+
+    private void paintBosses(Graphics2D g2) {
+        for (int col = 0; col < 5; col++) {
+            int level = col + 1;
+            Rectangle r = bossBounds(col);
+            boolean cleared = profile.getBossesCleared().contains(level);
+            boolean ready = !cleared
+                    && com.studyprogram.core.BossChallenge.unlocked(profile, level);
+
+            Color fill = cleared ? DONE_FILL
+                       : ready   ? new Color(0xb8, 0x86, 0x1c)
+                                 : new Color(0x2c, 0x33, 0x3b);
+            g2.setColor(fill);
+            g2.fillRoundRect(r.x, r.y, r.width, r.height, 14, 14);
+            g2.setStroke(new BasicStroke(ready ? 2f : 1f));
+            g2.setColor(ready ? new Color(0xff, 0xd5, 0x4f) : new Color(255, 255, 255, 70));
+            g2.drawRoundRect(r.x, r.y, r.width, r.height, 14, 14);
+
+            g2.setFont(getFont().deriveFont(Font.BOLD, 12f));
+            g2.setColor(cleared || ready ? Color.WHITE : new Color(255, 255, 255, 110));
+            String label = cleared ? "★ BOSS DOWN" : ready ? "⚔ BOSS READY" : "BOSS";
+            FontMetrics fm = g2.getFontMetrics();
+            g2.drawString(label, r.x + (r.width - fm.stringWidth(label)) / 2,
+                          r.y + (r.height + fm.getAscent()) / 2 - 3);
+        }
     }
 
     private void paintWorldBands(Graphics2D g2) {

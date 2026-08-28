@@ -4,6 +4,9 @@ target/
 # Student coding-exercise workspace (created at runtime)
 workspace/
 
+# Generated reports and cards
+data/reports/
+
 # Compiled class file
 *.class
 

@@ -295,10 +295,20 @@ public class CLI {
                     AttemptLog.readAllInDirectory(storage.directory()));
             List<String> flagged = calibration.flaggedForReview(
                     bank.getQuestionsForTopics(List.of(Topic.values())));
+            List<AttemptRecord> myAttempts = attemptLog.readAll();
             Path written = new HtmlReportGenerator()
-                    .generate(currentProfile, attemptLog.readAll(), flagged, out);
+                    .generate(currentProfile, myAttempts, flagged, out);
             System.out.println("  Report written to: " + Display.CYAN
                     + written.toAbsolutePath() + Display.RESET);
+
+            // Compact text card for lab submissions / participation credit
+            String card = com.studyprogram.report.ProgressCard.render(currentProfile, myAttempts);
+            Path cardFile = out.resolveSibling(safe + "-card.txt");
+            java.nio.file.Files.writeString(cardFile, card);
+            System.out.println();
+            for (String line : card.split("\n")) System.out.println("  " + line);
+            System.out.println("  Card saved to: " + Display.DIM + cardFile.toAbsolutePath()
+                    + Display.RESET);
             try {
                 if (java.awt.Desktop.isDesktopSupported()
                         && java.awt.Desktop.getDesktop().isSupported(java.awt.Desktop.Action.BROWSE)) {
@@ -450,10 +460,12 @@ public class CLI {
         }
 
         // Calibrate question difficulty from every profile's attempt history on this
-        // machine — real student data gradually corrects the authored difficulty labels
+        // machine — real student data gradually corrects the authored difficulty labels.
+        // The review scheduler is per-student: it spaces THIS student's repetitions.
         QuestionCalibration calibration = QuestionCalibration.fromRecords(
                 AttemptLog.readAllInDirectory(storage.directory()));
-        AdaptiveEngine engine  = new AdaptiveEngine(bank, new Random(), llm, calibration);
+        ReviewScheduler scheduler = ReviewScheduler.fromRecords(attemptLog.readAll());
+        AdaptiveEngine engine  = new AdaptiveEngine(bank, new Random(), llm, calibration, scheduler);
         StudySession   session = new StudySession(currentProfile, active, engine, sessionLen);
 
         Display.header("Study Session — " + Display.topicSummary(active));

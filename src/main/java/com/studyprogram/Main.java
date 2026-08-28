@@ -25,6 +25,16 @@ import java.nio.file.Path;
 public class Main {
 
     public static void main(String[] args) throws IOException {
+        // Instructor mode: aggregate every profile into one HTML class report and exit
+        if (args.length > 0 && "--class-report".equals(args[0])) {
+            Path dir = resolveProfileDir();
+            Path out = new com.studyprogram.report.ClassReportGenerator().generate(
+                    new JsonProfileStorage(dir), new QuestionBank(),
+                    dir.resolveSibling("reports").resolve("class-report.html"));
+            System.out.println("Class report written to: " + out.toAbsolutePath());
+            return;
+        }
+
         AnsiConsole.systemInstall();
         try {
             Path profileDir = resolveProfileDir();
