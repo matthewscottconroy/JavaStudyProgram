@@ -28,6 +28,8 @@ public class AdaptiveEngine {
 
     // LLM-generated questions cached for the lifetime of this engine instance
     private final Map<Topic, List<Question>> generated = new EnumMap<>(Topic.class);
+    private final com.studyprogram.llm.GeneratedQuestionQueue reviewQueue =
+            new com.studyprogram.llm.GeneratedQuestionQueue();
 
     public AdaptiveEngine(QuestionBank bank) {
         this(bank, new Random(), null);
@@ -178,8 +180,12 @@ public class AdaptiveEngine {
                 int difficulty = (perf == null) ? 2 : perf.suggestedDifficulty();
                 QuestionType type = (staticCount % 2 == 0)
                         ? QuestionType.MULTIPLE_CHOICE : QuestionType.TRACING;
-                llm.generateQuestion(topic, type, difficulty).ifPresent(q ->
-                        generated.computeIfAbsent(topic, k -> new ArrayList<>()).add(q));
+                llm.generateQuestion(topic, type, difficulty).ifPresent(q -> {
+                    generated.computeIfAbsent(topic, k -> new ArrayList<>()).add(q);
+                    // Generated questions have not passed the content gate, so they are also
+                    // written to a review queue for a human to vet before they can ship.
+                    reviewQueue.offer(q);
+                });
             }
         }
     }

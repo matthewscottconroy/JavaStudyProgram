@@ -1,0 +1,15 @@
+{
+  "_comment": [
+    "Copy this file to data/topic-graph.json to reshape the concept map for your course.",
+    "Keys and prerequisite entries are topic slugs: the lower-cased Topic enum name,",
+    "which is also the directory name under data/questions/.",
+    "An override REPLACES that topic's built-in prerequisite list everywhere:",
+    "unlocking, the auto feed, and the map. Unknown slugs are warned about and ignored;",
+    "a set of overrides that would create a cycle is rejected wholesale."
+  ],
+  "overrides": {
+    "regex": { "prerequisites": [] },
+    "generics": { "prerequisites": ["collections"] },
+    "gui_swing": { "prerequisites": ["classes", "interfaces"] }
+  }
+}

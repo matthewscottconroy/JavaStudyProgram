@@ -46,9 +46,14 @@ public class CLI {
     public void run() {
         Display.header("Java Study Program");
         System.out.printf("  Questions in bank: %d%n", bank.totalQuestions());
-        System.out.printf("  LLM support:       %s%n",
-                          llm.isAvailable() ? Display.green() + "enabled" + Display.reset()
-                                            : Display.dim()   + "disabled (set ANTHROPIC_API_KEY)" + Display.reset());
+        System.out.printf("  AI help:           %s%n",
+                          llm.isAvailable()
+                                  ? Display.green() + com.studyprogram.llm.LLMServiceFactory
+                                        .describe(com.studyprogram.llm.LLMConfig.load()) + Display.reset()
+                                  : Display.dim() + com.studyprogram.llm.LLMServiceFactory
+                                        .describe(com.studyprogram.llm.LLMConfig.load()) + Display.reset());
+        System.out.printf("  Exercise sandbox:  %s%n",
+                          Display.dim() + com.studyprogram.coding.Sandbox.describe() + Display.reset());
         System.out.printf("  Coding exercises:  %s%n",
                           CodingExerciseRunner.compilerAvailable()
                                   ? Display.green() + "enabled" + Display.reset()
@@ -100,9 +105,11 @@ public class CLI {
                 for (int i = 0; i < profiles.size(); i++) {
                     System.out.printf("    [%d] %s%n", i + 1, profiles.get(i));
                 }
-                System.out.println("    [N] New profile");
-                System.out.print("\n  Choose or 'N': ");
+                System.out.println("    [N] New profile   [D] Delete a profile   [R] Rename a profile");
+                System.out.print("\n  Choose, or N/D/R: ");
                 String pick = in.nextLine().trim();
+                if (pick.equalsIgnoreCase("D")) { deleteProfile(profiles); profileMenu(); return; }
+                if (pick.equalsIgnoreCase("R")) { renameProfile(profiles); profileMenu(); return; }
                 if (!pick.equalsIgnoreCase("N")) {
                     try {
                         int idx = Integer.parseInt(pick) - 1;
@@ -124,6 +131,87 @@ public class CLI {
         } catch (IOException e) {
             System.out.println("  Error loading profiles: " + e.getMessage());
             createProfile();
+        }
+    }
+
+    /** Deletes a profile and its attempt log, with an explicit confirmation. */
+    private void deleteProfile(List<String> profiles) {
+        System.out.print("  Number to delete (Enter to cancel): ");
+        String pick = in.nextLine().trim();
+        int idx;
+        try {
+            idx = Integer.parseInt(pick) - 1;
+        } catch (NumberFormatException e) {
+            return;
+        }
+        if (idx < 0 || idx >= profiles.size()) return;
+        String name = profiles.get(idx);
+        System.out.printf("  Delete '%s' and its whole attempt history? Type the name to confirm: ", name);
+        if (!in.nextLine().trim().equals(name)) {
+            System.out.println("  Not deleted.");
+            return;
+        }
+        try {
+            storage.delete(name);
+            java.nio.file.Files.deleteIfExists(
+                    AttemptLog.forProfile(storage.directory(), name).getFile());
+            System.out.println("  Deleted " + name + ".");
+        } catch (IOException e) {
+            System.out.println("  Could not delete: " + e.getMessage());
+        }
+    }
+
+    /** Renames a profile, carrying its attempt log across. */
+    private void renameProfile(List<String> profiles) {
+        System.out.print("  Number to rename (Enter to cancel): ");
+        String pick = in.nextLine().trim();
+        int idx;
+        try {
+            idx = Integer.parseInt(pick) - 1;
+        } catch (NumberFormatException e) {
+            return;
+        }
+        if (idx < 0 || idx >= profiles.size()) return;
+        String oldName = profiles.get(idx);
+        System.out.print("  New name: ");
+        String newName = in.nextLine().trim();
+        if (newName.isBlank() || newName.equals(oldName)) return;
+        try {
+            Optional<StudentProfile> loaded = storage.load(oldName);
+            if (loaded.isEmpty()) return;
+            StudentProfile profile = loaded.get();
+            java.nio.file.Path oldLog = AttemptLog.forProfile(storage.directory(), oldName).getFile();
+            profile.setName(newName);
+            storage.save(profile);
+            java.nio.file.Path newLog = AttemptLog.forProfile(storage.directory(), newName).getFile();
+            if (java.nio.file.Files.exists(oldLog)) java.nio.file.Files.move(oldLog, newLog);
+            storage.delete(oldName);
+            System.out.println("  Renamed to " + newName + ".");
+        } catch (IOException e) {
+            System.out.println("  Could not rename: " + e.getMessage());
+        }
+    }
+
+    /** Records a student's report that a question is wrong or unclear. */
+    private void flagQuestion(Question q) {
+        System.out.print("  What is wrong with it? (Enter to skip): ");
+        String note = in.nextLine().trim();
+        try {
+            java.nio.file.Path file = storage.directory().resolveSibling("flags.jsonl");
+            String line = new com.fasterxml.jackson.databind.ObjectMapper().writeValueAsString(
+                    java.util.Map.of(
+                            "ts", LocalDateTime.now().toString(),
+                            "questionId", q.getId(),
+                            "topic", q.getTopic().name(),
+                            "student", currentProfile.getName(),
+                            "note", note));
+            java.nio.file.Files.writeString(file, line + System.lineSeparator(),
+                    java.nio.charset.StandardCharsets.UTF_8,
+                    java.nio.file.StandardOpenOption.CREATE,
+                    java.nio.file.StandardOpenOption.APPEND);
+            System.out.println("  Thanks — flagged for review. It stays in your session.");
+        } catch (Exception e) {
+            System.out.println("  Could not record the flag: " + e.getMessage());
         }
     }
 
@@ -220,6 +308,15 @@ public class CLI {
             return;
         }
         if (level < 1 || level > 5) return;
+        fightBoss(level);
+    }
+
+    /**
+     * Runs one world's boss quiz. Reachable from the Boss Challenge menu and from the
+     * concept map, which is why the unlock check lives here rather than at the menu.
+     */
+    private void fightBoss(int level) {
+        String[] worldNames = {"", "Foundations", "Elementary", "Intermediate", "Advanced", "Expert"};
         if (!BossChallenge.unlocked(currentProfile, level)) {
             System.out.println("  That boss is still locked — keep practicing its world first.");
             return;
@@ -274,16 +371,32 @@ public class CLI {
         saveProfile();
     }
 
-    /** Opens the Swing overworld map (non-blocking; selections there update the profile). */
+    /**
+     * Opens the Swing overworld map and acts on whatever the student asked for there —
+     * studying a topic or challenging a world boss — so the map is a way to navigate the
+     * program, not just a picture of it.
+     */
     private void conceptMap() {
-        boolean opened = com.studyprogram.ui.map.OverworldFrame.open(currentProfile, this::saveProfile);
-        if (opened) {
-            System.out.println("  Map window opened. Click topics to add or remove them from "
-                    + "your session topic list — changes save automatically.");
-        } else {
+        if (java.awt.GraphicsEnvironment.isHeadless()) {
             System.out.println("  No display available (headless environment) — "
-                    + "use [5] Select Topics instead.");
+                    + "use [6] Select Topics instead.");
+            return;
         }
+        System.out.println("  Map window opened. Double-click a topic to study it, click a boss to "
+                + "fight it, or just close the window.");
+        var action = com.studyprogram.ui.map.OverworldFrame.showModal(currentProfile, this::saveProfile);
+        action.ifPresent(a -> {
+            switch (a.kind()) {
+                case STUDY_TOPIC -> {
+                    currentProfile.getSelectedTopics().add(a.topic());
+                    saveProfile();
+                    System.out.println("  Starting a session on " + a.topic().displayName + ".");
+                    runSession(List.of(a.topic()), DEFAULT_SESSION_LENGTH, false);
+                }
+                case FIGHT_BOSS -> fightBoss(a.world());
+                case NONE -> { }
+            }
+        });
     }
 
     /** Generates the self-contained HTML progress report and tries to open it. */
@@ -459,6 +572,14 @@ public class CLI {
             catch (NumberFormatException ignored) {}
         }
 
+        runSession(active, sessionLen, masteryMode);
+    }
+
+    /**
+     * Runs a study session over an explicit topic list. Separate from the feed-selection
+     * prompt so the concept map can start a session on one topic directly.
+     */
+    private void runSession(List<Topic> active, int sessionLen, boolean masteryMode) {
         // Calibrate question difficulty from every profile's attempt history on this
         // machine — real student data gradually corrects the authored difficulty labels.
         // The review scheduler is per-student: it spaces THIS student's repetitions.
@@ -537,6 +658,11 @@ public class CLI {
                     System.out.println("  Skipped.");
                     answer = null;
                     break;
+                }
+                if (input.equalsIgnoreCase("f")) {
+                    flagQuestion(q);
+                    System.out.print("  Your answer: ");
+                    continue;
                 }
                 if (input.equalsIgnoreCase("h")) {
                     hintsUsed++;
@@ -631,6 +757,10 @@ public class CLI {
                     Display.referenceSolution(q);
                     return CodingOutcome.GAVE_UP;
                 }
+                case "w" -> {
+                    watchAndRetest(q);
+                    Display.codingMenu();
+                }
                 case "r" -> {
                     try {
                         codingRunner.resetToStarter(q);
@@ -666,6 +796,62 @@ public class CLI {
                     Display.codingMenu();
                 }
             }
+        }
+    }
+
+    /**
+     * Watch mode: recompiles and retests whenever the student saves, so the loop is
+     * "save in your editor, glance at the terminal" instead of alt-tabbing to press Enter.
+     * Stops when the tests pass or the student presses Enter.
+     */
+    private void watchAndRetest(Question q) {
+        System.out.println("  Watching " + codingRunner.workspaceDir(q).toAbsolutePath()
+                + " — save to re-run. Press Enter to stop.");
+        long lastRun = 0;
+        try {
+            while (true) {
+                if (System.in.available() > 0) {
+                    in.nextLine();
+                    System.out.println("  Stopped watching.");
+                    return;
+                }
+                long newest = newestModification(codingRunner.workspaceDir(q));
+                if (newest > lastRun) {
+                    lastRun = newest;
+                    if (lastRun > 0) {
+                        System.out.println("  Change detected — compiling…");
+                        CodingResult result = codingRunner.run(q);
+                        Display.codingResult(result);
+                        if (result.passed()) {
+                            System.out.println("  " + Display.green()
+                                    + "Tests pass — press Enter to continue." + Display.reset());
+                            return;
+                        }
+                    }
+                }
+                Thread.sleep(300);
+            }
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        } catch (IOException e) {
+            System.out.println("  Watch mode unavailable: " + e.getMessage());
+        }
+    }
+
+    /** Most recent modification time across the exercise's .java files, or 0 when unreadable. */
+    private static long newestModification(java.nio.file.Path dir) {
+        try (var files = java.nio.file.Files.list(dir)) {
+            return files.filter(f -> f.toString().endsWith(".java"))
+                    .mapToLong(f -> {
+                        try {
+                            return java.nio.file.Files.getLastModifiedTime(f).toMillis();
+                        } catch (IOException e) {
+                            return 0L;
+                        }
+                    })
+                    .max().orElse(0L);
+        } catch (IOException e) {
+            return 0L;
         }
     }
 

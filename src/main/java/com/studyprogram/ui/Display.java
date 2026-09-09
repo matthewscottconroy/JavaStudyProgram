@@ -119,10 +119,10 @@ public class Display {
             }
             System.out.println(dim() + "  " + cornerBL() + hLine().repeat(WIDTH - 3) + reset());
             System.out.println();
-            System.out.print("  Line numbers in order (e.g. 3 1 4 2) or [h]int [e]xplain [s]kip [q]uit: ");
+            System.out.print("  Line numbers in order (e.g. 3 1 4 2) or [h]int [e]xplain [s]kip [f]lag [q]uit: ");
         } else if (q.getType() == QuestionType.CLOZE) {
             System.out.println();
-            System.out.print("  Type the missing code (the ____ part) or [h]int [e]xplain [s]kip [q]uit: ");
+            System.out.print("  Type the missing code (the ____ part) or [h]int [e]xplain [s]kip [f]lag [q]uit: ");
         } else if (q.isMultipleChoice()) {
             System.out.println();
             List<String> choices = q.getChoices();
@@ -131,10 +131,10 @@ public class Display {
                 System.out.printf("  %s) %s%n", letters[i], choices.get(i));
             }
             System.out.println();
-            System.out.print("  Answer (A/B/C/D) or [h]int [e]xplain [s]kip [q]uit: ");
+            System.out.print("  Answer (A/B/C/D) or [h]int [e]xplain [s]kip [f]lag [q]uit: ");
         } else {
             System.out.println();
-            System.out.print("  Answer or [h]int [e]xplain [s]kip [q]uit: ");
+            System.out.print("  Answer or [h]int [e]xplain [s]kip [f]lag [q]uit: ");
         }
     }
 
@@ -173,8 +173,8 @@ public class Display {
 
     public static void codingMenu() {
         System.out.println();
-        System.out.print("  [Enter] compile & test   [h]int  [e]xplain  [r]eset file  "
-                + "[g]ive up  [s]kip  [q]uit\n  > ");
+        System.out.print("  [Enter] compile & test   [w]atch for saves   [h]int  [e]xplain  "
+                + "[r]eset file  [g]ive up  [s]kip  [q]uit\n  > ");
     }
 
     /** Renders the outcome of one compile-and-test run. */
@@ -281,13 +281,15 @@ public class Display {
             int pct = (int)(mastery * 100);
             String marker = selected ? cyan() + bullet() + reset() : " ";
             String color  = pct >= 80 ? green() : pct >= 40 ? yellow() : dim();
-            System.out.printf("  %s %-44s %s%s%s  %s%n",
+            System.out.printf("  %s %-40s %s%s%s  %s%n",
                     marker,
                     t.displayName,
                     color,
                     bar(pct),
-                    RESET,
-                    p == null ? "" : String.format("(%d/%d)", p.getCorrect(), p.getAttempts()));
+                    reset(),
+                    p == null ? "" : String.format("(%d/%d) %s",
+                            p.getCorrect(), p.getAttempts(),
+                            com.studyprogram.stats.Confidence.label(p.getCorrect(), p.getAttempts())));
             anyShown = true;
         }
         if (!anyShown) {

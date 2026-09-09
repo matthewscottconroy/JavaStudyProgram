@@ -51,6 +51,7 @@ public class ClassReportGenerator {
 
         studentTable(h, profiles, storage);
         weakestTopics(h, profiles);
+        flaggedByStudents(h, storage.directory().resolveSibling("flags.jsonl"));
         calibrationSection(h, attemptsByProfile, bank);
 
         h.append("</div></body></html>");
@@ -115,6 +116,31 @@ public class ClassReportGenerator {
              .append("</td><td>").append(a.students()).append("</td></tr>");
         }
         h.append("</table>");
+    }
+
+    /** Questions students reported as wrong or unclear — the human counterpart to calibration. */
+    private void flaggedByStudents(StringBuilder h, Path flagsFile) {
+        if (!Files.isRegularFile(flagsFile)) return;
+        try {
+            List<String> lines = Files.readAllLines(flagsFile);
+            if (lines.isEmpty()) return;
+            var mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+            h.append("<h2>Reported by students</h2><table>")
+             .append("<tr><th>Question</th><th>Topic</th><th>Student</th><th>Comment</th></tr>");
+            for (String line : lines) {
+                if (line.isBlank()) continue;
+                var node = mapper.readTree(line);
+                h.append("<tr><td>").append(esc(node.path("questionId").asText()))
+                 .append("</td><td>").append(esc(node.path("topic").asText()))
+                 .append("</td><td>").append(esc(node.path("student").asText()))
+                 .append("</td><td>").append(esc(node.path("note").asText()))
+                 .append("</td></tr>");
+            }
+            h.append("</table>");
+        } catch (IOException e) {
+            h.append("<p class='dim'>Could not read student flags: ").append(esc(e.getMessage()))
+             .append("</p>");
+        }
     }
 
     private void calibrationSection(StringBuilder h,

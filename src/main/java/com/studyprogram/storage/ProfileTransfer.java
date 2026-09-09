@@ -31,8 +31,13 @@ public final class ProfileTransfer {
     /** Writes {profile, attempts} for one student to a single file. */
     public static Path export(ProfileStorage storage, String profileName, Path outFile)
             throws IOException {
-        StudentProfile profile = storage.load(profileName)
-                .orElseThrow(() -> new IOException("No profile named '" + profileName + "'"));
+        var found = storage.load(profileName);
+        if (found.isEmpty()) {
+            throw new IOException("No profile named '" + profileName + "' in "
+                    + storage.directory().toAbsolutePath()
+                    + " (available: " + String.join(", ", storage.listProfileNames()) + ")");
+        }
+        StudentProfile profile = found.get();
         List<AttemptRecord> attempts = AttemptLog
                 .forProfile(storage.directory(), profileName).readAll();
 

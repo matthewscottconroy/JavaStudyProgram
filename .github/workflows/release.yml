@@ -1,0 +1,65 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+jobs:
+  installers:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            type: deb
+          - os: macos-latest
+            type: dmg
+          - os: windows-latest
+            type: msi
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Build jar
+        run: mvn -B package -DskipTests
+      - name: Build installer (Unix)
+        if: runner.os != 'Windows'
+        run: TYPE=${{ matrix.type }} ./packaging/build-app-image.sh
+      - name: Build installer (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $jar = Get-ChildItem target/java-study-program-*.jar |
+                 Where-Object { $_.Name -notlike 'original-*' } | Select-Object -First 1
+          New-Item -ItemType Directory -Force -Path target/pkg-input | Out-Null
+          Copy-Item $jar.FullName target/pkg-input/
+          jpackage --type ${{ matrix.type }} --name JavaStudyProgram --app-version 1.0 `
+                   --input target/pkg-input --main-jar $jar.Name `
+                   --add-modules java.se,jdk.compiler,jdk.zipfs `
+                   --jlink-options "--strip-debug --no-man-pages --no-header-files" `
+                   --dest target/dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: installer-${{ matrix.os }}
+          path: target/dist/*
+
+  release:
+    needs: installers
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with: { path: artifacts }
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/**/*
+          body: |
+            Self-contained installers. The bundled runtime includes the Java compiler,
+            so coding exercises work without installing a JDK.

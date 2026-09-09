@@ -57,8 +57,10 @@ public class MapPanel extends JPanel {
 
     private final StudentProfile profile;
     private final Runnable onSelectionChanged;
+    private final java.util.function.Consumer<MapAction> onAction;
     private List<Node> nodes;
     private Topic hovered;
+    private int focusIndex = 0;          // keyboard cursor into the node list
 
     private final javax.swing.Timer animTimer;
     private long openedAt;
@@ -66,8 +68,14 @@ public class MapPanel extends JPanel {
     private final Set<Topic> newlyRevealed = EnumSet.noneOf(Topic.class);
 
     public MapPanel(StudentProfile profile, Runnable onSelectionChanged) {
+        this(profile, onSelectionChanged, action -> {});
+    }
+
+    public MapPanel(StudentProfile profile, Runnable onSelectionChanged,
+                    java.util.function.Consumer<MapAction> onAction) {
         this.profile = profile;
         this.onSelectionChanged = onSelectionChanged;
+        this.onAction = onAction;
         this.nodes = MapModel.build(profile);
         setBackground(BG);
         ToolTipManager.sharedInstance().registerComponent(this);
@@ -89,7 +97,22 @@ public class MapPanel extends JPanel {
         MouseAdapter mouse = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                nodeAt(e.getPoint()).ifPresent(MapPanel.this::toggle);
+                for (int col = 0; col < 5; col++) {
+                    if (bossBounds(col).contains(e.getPoint())) {
+                        if (BossChallenge.unlocked(profile, col + 1)) onAction.accept(MapAction.boss(col + 1));
+                        return;
+                    }
+                }
+                nodeAt(e.getPoint()).ifPresent(n -> {
+                    if (e.getClickCount() >= 2) {
+                        if (n.state() != NodeState.LOCKED && n.state() != NodeState.SECRET) {
+                            onAction.accept(MapAction.study(n.topic()));
+                        }
+                    } else {
+                        focusIndex = nodes.indexOf(n);
+                        toggle(n);
+                    }
+                });
             }
 
             @Override
@@ -104,6 +127,86 @@ public class MapPanel extends JPanel {
         };
         addMouseListener(mouse);
         addMouseMotionListener(mouse);
+        installKeyboardNavigation();
+
+        setFocusable(true);
+        getAccessibleContext().setAccessibleName("Concept map");
+        getAccessibleContext().setAccessibleDescription(
+                "Topics arranged in five worlds. Arrow keys move between topics, Enter adds or "
+                + "removes the focused topic from your session, S studies it now, B fights the "
+                + "world boss, Escape closes the map.");
+    }
+
+    /**
+     * Full keyboard control — the map must not be mouse-only. Arrow keys move a visible focus
+     * ring, Enter toggles selection, S starts a session on the focused topic, B challenges that
+     * world's boss.
+     */
+    private void installKeyboardNavigation() {
+        var input = getInputMap(WHEN_FOCUSED);
+        var actions = getActionMap();
+        input.put(javax.swing.KeyStroke.getKeyStroke("DOWN"), "next");
+        input.put(javax.swing.KeyStroke.getKeyStroke("UP"), "prev");
+        input.put(javax.swing.KeyStroke.getKeyStroke("RIGHT"), "nextCol");
+        input.put(javax.swing.KeyStroke.getKeyStroke("LEFT"), "prevCol");
+        input.put(javax.swing.KeyStroke.getKeyStroke("ENTER"), "toggle");
+        input.put(javax.swing.KeyStroke.getKeyStroke("S"), "study");
+        input.put(javax.swing.KeyStroke.getKeyStroke("B"), "boss");
+
+        actions.put("next", action(e -> moveFocus(1)));
+        actions.put("prev", action(e -> moveFocus(-1)));
+        actions.put("nextCol", action(e -> moveFocusColumn(1)));
+        actions.put("prevCol", action(e -> moveFocusColumn(-1)));
+        actions.put("toggle", action(e -> {
+            if (focusIndex >= 0 && focusIndex < nodes.size()) toggle(nodes.get(focusIndex));
+        }));
+        actions.put("study", action(e -> {
+            Node n = focused();
+            if (n != null && n.state() != NodeState.LOCKED && n.state() != NodeState.SECRET) {
+                onAction.accept(MapAction.study(n.topic()));
+            }
+        }));
+        actions.put("boss", action(e -> {
+            Node n = focused();
+            if (n != null && BossChallenge.unlocked(profile, n.topic().baseLevel)) {
+                onAction.accept(MapAction.boss(n.topic().baseLevel));
+            }
+        }));
+    }
+
+    private javax.swing.Action action(java.util.function.Consumer<java.awt.event.ActionEvent> body) {
+        return new javax.swing.AbstractAction() {
+            @Override public void actionPerformed(java.awt.event.ActionEvent e) {
+                body.accept(e);
+                repaint();
+            }
+        };
+    }
+
+    private Node focused() {
+        return focusIndex >= 0 && focusIndex < nodes.size() ? nodes.get(focusIndex) : null;
+    }
+
+    private void moveFocus(int delta) {
+        if (nodes.isEmpty()) return;
+        focusIndex = Math.floorMod(focusIndex + delta, nodes.size());
+        scrollToFocus();
+    }
+
+    private void moveFocusColumn(int delta) {
+        Node current = focused();
+        if (current == null) return;
+        int targetCol = Math.max(0, Math.min(4, current.col() + delta));
+        for (int i = 0; i < nodes.size(); i++) {
+            Node n = nodes.get(i);
+            if (n.col() == targetCol && n.row() >= current.row()) { focusIndex = i; break; }
+        }
+        scrollToFocus();
+    }
+
+    private void scrollToFocus() {
+        Node n = focused();
+        if (n != null) scrollRectToVisible(bounds(n));
     }
 
     // ── Animation plumbing ───────────────────────────────────────────────────
@@ -317,11 +420,20 @@ public class MapPanel extends JPanel {
         g2.setColor(n.selected() ? SELECTED : new Color(255, 255, 255, 70));
         g2.draw(shape);
 
+        // Keyboard focus ring
+        if (nodes.indexOf(n) == focusIndex) {
+            g2.setStroke(new BasicStroke(2f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND,
+                    1f, new float[] {4f, 4f}, 0f));
+            g2.setColor(Color.WHITE);
+            g2.draw(new RoundRectangle2D.Float(r.x - 4, r.y - 4, r.width + 8, r.height + 8, 16, 16));
+        }
+
         g2.setFont(getFont().deriveFont(
                 n.state() == NodeState.MASTERED ? Font.BOLD : Font.PLAIN, 12f));
         g2.setColor(n.state() == NodeState.LOCKED
                 ? new Color(255, 255, 255, 110) : Color.WHITE);
-        String label = n.label();
+        // A shape marker per state, so the map is readable without colour vision
+        String label = stateMarker(n.state()) + " " + n.label();
         FontMetrics fm = g2.getFontMetrics();
         if (fm.stringWidth(label) > r.width - 16) {
             while (fm.stringWidth(label + "…") > r.width - 16 && label.length() > 3) {
@@ -351,6 +463,17 @@ public class MapPanel extends JPanel {
         }
 
         g2.setComposite(old);
+    }
+
+    /** Colour-independent state marker: shape carries the same information as hue. */
+    private static String stateMarker(NodeState state) {
+        return switch (state) {
+            case LOCKED -> "\u2716";        // heavy X
+            case SECRET -> "?";
+            case AVAILABLE -> "\u25b6";     // play triangle: open, not started
+            case IN_PROGRESS -> "\u25d0";   // half-filled circle
+            case MASTERED -> "\u2605";      // star
+        };
     }
 
     private void paintBosses(Graphics2D g2) {

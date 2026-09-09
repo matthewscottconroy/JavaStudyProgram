@@ -38,7 +38,7 @@ import java.util.List;
  */
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         List<String> argv = new java.util.ArrayList<>(List.of(args));
 
         // Presentation flags apply to every mode
@@ -48,18 +48,24 @@ public class Main {
         String command = argv.isEmpty() ? "" : argv.get(0);
         String value = argv.size() > 1 ? argv.get(1) : null;
 
-        switch (command) {
-            case "--help", "-h" -> System.out.println(usage());
-            case "--class-report" -> classReport(value);
-            case "--export-profile" -> exportProfile(value, argv.size() > 2 ? argv.get(2) : null);
-            case "--import-profile" -> importProfile(value);
-            case "--verify-card" -> verifyCard(value);
-            case "" -> interactive();
-            default -> {
-                System.out.println("Unknown option: " + command);
-                System.out.println();
-                System.out.println(usage());
+        try {
+            switch (command) {
+                case "--help", "-h" -> System.out.println(usage());
+                case "--class-report" -> classReport(value);
+                case "--export-profile" -> exportProfile(value, argv.size() > 2 ? argv.get(2) : null);
+                case "--import-profile" -> importProfile(value);
+                case "--verify-card" -> verifyCard(value);
+                case "" -> interactive();
+                default -> {
+                    System.out.println("Unknown option: " + command);
+                    System.out.println();
+                    System.out.println(usage());
+                }
             }
+        } catch (IOException e) {
+            // A command-line tool should explain what went wrong, not print a stack trace
+            System.err.println("Error: " + e.getMessage());
+            System.exit(1);
         }
     }
 

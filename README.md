@@ -13,7 +13,8 @@ advanced material until its foundations are in place.
 ## Quick start
 
 Requires a **JDK 17 or newer** (a plain JRE runs the app, but coding exercises need
-the compiler — get a JDK at [adoptium.net](https://adoptium.net)).
+the compiler — get a JDK at [adoptium.net](https://adoptium.net)). On Linux, installing
+`bubblewrap` additionally sandboxes every exercise run — see [docs/SECURITY.md](docs/SECURITY.md).
 
 ```bash
 # From a release jar
@@ -42,9 +43,11 @@ next" list derived from the prerequisite graph.
 The **Concept Map** menu option opens a Swing overworld: topics as nodes in
 five level-band "worlds", prerequisite paths between them, colors showing your
 progress, and advanced optional topics hidden as `? ? ?` until their
-prerequisites are mastered. Click nodes to add or remove them from your session
-topics. (The map is itself a custom-painted `Graphics2D` component — once you
-reach the GUI world, you can read its source as course material.)
+prerequisites are mastered. Click a node to add or remove it from your session topics,
+**double-click to start studying it immediately**, or click a lit boss to fight it — the map is a
+way to navigate the program, not just a picture of it. (It is itself a custom-painted
+`Graphics2D` component with Swing Timers driving its animations — once you reach the GUI world,
+you can read its source as course material.)
 
 **Boss Challenges** gate each world: once a world's average mastery reaches
 50%, its boss appears — a 10-question, no-hints quiz across the whole world.
@@ -66,26 +69,72 @@ Some coding exercises are **multi-file projects**: the workspace gets several
 the folder — including extra helper classes you add yourself — is compiled and
 tested together.
 
-**Spaced repetition:** each question is individually scheduled from your
-attempt history — a correct answer doubles its review interval (1.5 days → 3 →
-6 → … capped at 60), a miss resets it. Sessions surface questions that are
-*due* and avoid re-asking ones that aren't, so review time goes where memory
-research says it matters.
+**Spaced repetition:** each question is individually scheduled from your attempt history. A correct
+answer multiplies its interval by an ease factor (starting ~1.5 days and growing, capped at 60);
+a miss resets the streak *and* lowers that question's ease, so material you keep forgetting comes
+back more often than material you got right first time. Due dates carry a deterministic ±15%
+jitter so a big study day doesn't become a big review day weeks later.
 
-**Progress card:** the Progress Report menu option also prints and saves a
-compact text card (totals, streak, bosses, per-world mastery, and a
-verification code tied to the numbers) — ready to paste into a lab submission.
+**Progress card:** the Progress Report menu option also prints and saves a compact text card
+(totals, streak, bosses, per-world mastery) ready to paste into a lab submission. The code at the
+bottom is a checksum of the card's own numbers, or an HMAC when `STUDY_SIGNING_KEY` is set;
+`--verify-card` checks it. Be clear-eyed about what that proves: it catches an edited card, but on
+a machine the student controls it is a tamper-check, not an attestation of proctored work.
 
 **Instructor class report:** `java -jar java-study-program.jar --class-report`
 aggregates every profile on the machine into one HTML page: per-student
 summary, class-wide weakest topics, and calibration-flagged questions.
 
-**Question calibration:** authored difficulty labels are self-correcting. The
-engine blends each question's label with its measured pass rate across every
-profile's attempt log on the machine, matches students against that *effective*
-difficulty, and the progress report lists questions whose measurement has
-drifted far from their label — instructor-ready content review, powered by
-ordinary use.
+**Question calibration:** authored difficulty labels are self-correcting. Each student carries an
+ability rating and each question a difficulty rating, both updated on every attempt (an Elo-style
+latent-trait model), so a hard question that only strong students attempted no longer measures as
+easy. The engine matches students against that *measured* difficulty, and reports list questions
+whose measurement has drifted far from their label — instructor-ready content review powered by
+ordinary use. Percentages come with Wilson confidence intervals, so 3-for-3 never reads the same
+as 40-for-40.
+
+## Command line
+
+```
+java -jar java-study-program.jar                      # interactive
+java -jar java-study-program.jar --help               # all options
+
+--class-report [dir]           HTML report over every profile (optionally a collected folder)
+--export-profile <name> [out]  bundle one profile + its attempt log into a file
+--import-profile <file|dir>    import one bundle, or a whole folder of them
+--verify-card <card.txt>       check a progress card against its local profile
+--no-color / --ascii          accessibility fallbacks (NO_COLOR is honoured too)
+```
+
+Students on their own laptops can `--export-profile` and hand in the bundle; the instructor
+imports the folder and runs `--class-report` over it.
+
+## Accessibility
+
+Colour is never the only signal: every state also carries a symbol, in the terminal and on the
+map (`▶` available, `◐` in progress, `★` mastered, `✖` locked, `?` secret). `NO_COLOR` or
+`--no-color` disables ANSI; `JAVASTUDY_ASCII=1` or `--ascii` swaps box-drawing and emoji for plain
+ASCII on limited terminals. The concept map is fully keyboard-driven — arrows move, Enter selects,
+`S` studies the focused topic, `B` fights its world boss, Escape closes — and carries accessible
+names for screen readers.
+
+## Optional AI, configured by file
+
+AI help is optional and off by default. Point it wherever you like with `data/llm.json`:
+
+```json
+{ "provider": "openai",
+  "baseUrl": "http://localhost:11434/v1/chat/completions",
+  "model": "llama3.1",
+  "apiKeyEnv": "OLLAMA_API_KEY",
+  "maxCallsPerSession": 100 }
+```
+
+`provider` is `anthropic` (Claude Messages API, the default) or `openai` (any OpenAI-compatible
+endpoint — **including a local Ollama or LM Studio server, so students without an API budget still
+get AI help**). Every configuration carries a per-session call cap. AI-generated questions are
+never used as shipped content: they go to `data/generated/` for a human to review, because they
+have not passed the content gate.
 
 ## Instructor customization
 
@@ -96,7 +145,12 @@ ordinary use.
 - **Prerequisite overrides** (`data/topic-graph.json`): reshape the concept
   map's prerequisite edges without rebuilding —
   `{ "overrides": { "generics": { "prerequisites": ["collections"] } } }`.
-  Unknown slugs are warned about and cyclic overrides are rejected.
+  Unknown slugs are warned about and cyclic overrides are rejected. Copy
+  [data/topic-graph.example.json](data/topic-graph.example.json) to get started.
+- **Collecting work**: `--import-profile <folder>` then `--class-report <dir>`.
+- **Student-reported problems**: pressing `f` on any question records it to
+  `data/flags.jsonl`, which the class report lists alongside the questions whose
+  measured difficulty has drifted from their label.
 
 ## Question types
 
@@ -180,8 +234,12 @@ mvn test      # full suite, including compile-and-run verification of every codi
 mvn package   # executable fat jar in target/
 ```
 
-CI (GitHub Actions) runs the same suite on every push, including the content
-gate that compiles and tests all coding exercises.
+CI (GitHub Actions) runs the same suite on every push, including the content gate that compiles
+and tests all coding exercises. Tagging `v*` builds installers for Linux, macOS and Windows and
+attaches them to a GitHub release.
+
+Security model — what running third-party question files does and does not risk, and how exercise
+execution is contained: [docs/SECURITY.md](docs/SECURITY.md).
 
 ### Native installer (no JDK needed by students)
 
