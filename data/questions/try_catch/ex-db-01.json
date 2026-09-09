@@ -1,0 +1,10 @@
+{
+  "id" : "ex-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "Why won't this code compile?",
+  "code" : "try {\n    System.out.println(\"ok\");\n} catch (Exception e) {\n} catch (IOException e) {\n}",
+  "choices" : [ "IOException cannot be caught", "catch blocks cannot be empty", "IOException is a subclass of Exception — it is unreachable after Exception is caught", "try block must throw an exception" ],
+  "answer" : "c",
+  "explanation" : "Catch blocks are evaluated top-to-bottom. Since Exception catches everything, the IOException catch can never be reached. Put more specific exception types before more general ones."
+}

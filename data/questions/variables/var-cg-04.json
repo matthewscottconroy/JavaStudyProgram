@@ -1,0 +1,9 @@
+{
+  "id" : "var-cg-04",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which correctly computes the average of three integers as a decimal?",
+  "choices" : [ "int avg = (a + b + c) / 3;", "double avg = (double)(a + b + c) / 3;", "double avg = a + b + c / 3;", "double avg = (a + b + c) / 3;" ],
+  "answer" : "b",
+  "explanation" : "Cast the sum to double before dividing. (double)(a+b+c) promotes the result to double, so the division gives a decimal. Option A does integer division. Option C has wrong precedence: divides c by 3 first. Option D is still integer division."
+}

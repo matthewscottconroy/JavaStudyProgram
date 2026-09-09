@@ -1,0 +1,9 @@
+{
+  "id" : "clh-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does 'final' mean on a class?",
+  "choices" : [ "The class cannot have fields", "The class cannot be subclassed (extended)", "The class must implement all methods", "The class is loaded first by the JVM" ],
+  "answer" : "b",
+  "explanation" : "A final class cannot be extended. Example: String is final. This prevents inheritance-based attacks and ensures behavior is locked. Methods can also be final (prevents overriding); fields can be final (assigned once)."
+}

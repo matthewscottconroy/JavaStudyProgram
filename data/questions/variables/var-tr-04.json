@@ -1,0 +1,10 @@
+{
+  "id" : "var-tr-04",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is the value of x after this code?",
+  "code" : "double x = 9 / 2;",
+  "answer" : "4.0",
+  "alternatives" : [ "4" ],
+  "explanation" : "9 and 2 are both integer literals, so Java performs integer division: 9/2 = 4. The result 4 is then widened to double 4.0 and stored in x."
+}

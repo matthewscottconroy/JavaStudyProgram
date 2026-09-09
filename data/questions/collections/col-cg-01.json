@@ -1,0 +1,9 @@
+{
+  "id" : "col-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which code counts word frequencies in a String[] array?",
+  "choices" : [ "Map<String,Integer> freq = new HashMap<>();\nfor (String w : words) freq.put(w, freq.getOrDefault(w,0) + 1);", "Set<String> freq = new HashSet<>();\nfor (String w : words) freq.add(w);", "Map<String,Integer> freq = new TreeMap<>();\nfor (String w : words) freq.put(w, 1);", "Map<String,Integer> freq = new HashMap<>();\nfor (String w : words) freq.get(w)++;" ],
+  "answer" : "a",
+  "explanation" : "getOrDefault(w, 0) + 1 correctly increments or initialises the count. Option B only tracks presence, not count. Option C always sets count to 1 (overwrites). Option D: get() returns an Integer (immutable), incrementing it doesn't update the map."
+}

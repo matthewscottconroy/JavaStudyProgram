@@ -1,0 +1,9 @@
+{
+  "id" : "ifc-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is a static method in an interface?",
+  "choices" : [ "A method that belongs to all implementing classes", "A utility method that belongs to the interface itself and is called via the interface name", "A method that cannot be overridden", "A method that is automatically inherited by all implementing classes" ],
+  "answer" : "b",
+  "explanation" : "Interface static methods (Java 8+) are called via the interface: Validator.isValidEmail(str). They are NOT inherited by implementing classes. They are useful for factory methods or utilities related to the interface."
+}

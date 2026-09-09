@@ -1,0 +1,9 @@
+{
+  "id" : "jch-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the contract between equals() and hashCode()?",
+  "choices" : [ "If hashCode() is the same, equals() must return true", "If equals() returns true, hashCode() must return the same value", "They are independent and need not be consistent", "hashCode() must always return a unique value" ],
+  "answer" : "b",
+  "explanation" : "The contract: if a.equals(b) then a.hashCode() == b.hashCode(). The reverse is NOT required — collisions (same hash, not equal) are allowed. Violating this breaks HashMap and HashSet — objects can get lost in a bucket."
+}

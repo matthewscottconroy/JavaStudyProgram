@@ -1,0 +1,9 @@
+{
+  "id" : "pnt-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "Where is the rectangle drawn?",
+  "code" : "@Override\nprotected void paintComponent(Graphics g) {\n    super.paintComponent(g);\n    g.fillRect(10, 20, 50, 30);\n}",
+  "answer" : "Top-left at (10,20), width 50, height 30",
+  "explanation" : "g.fillRect(x, y, width, height): top-left corner at (10, 20), extending 50 pixels right and 30 pixels down."
+}

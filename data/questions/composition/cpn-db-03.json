@@ -1,0 +1,10 @@
+{
+  "id" : "cpn-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "This produces 'null' instead of the expected sound. Why?",
+  "code" : "class Engine { String sound; }\nclass Car {\n    private Engine engine;\n    String drive() { return engine.sound; }\n}\nCar c = new Car();\nSystem.out.println(c.drive());",
+  "choices" : [ "Engine.sound is private", "Car's engine field is never initialized — it is null, and engine.sound throws NullPointerException", "String fields default to empty string, not null", "drive() must be static" ],
+  "answer" : "b",
+  "explanation" : "Car declares 'private Engine engine' but never assigns it. engine is null. engine.sound throws NullPointerException (not null output). Fix: private Engine engine = new Engine(); or accept one via the constructor."
+}

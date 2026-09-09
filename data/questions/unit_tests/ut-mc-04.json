@@ -1,0 +1,9 @@
+{
+  "id" : "ut-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which assertion verifies that a specific exception is thrown?",
+  "choices" : [ "assertException(MyEx.class, () -> code())", "try { code(); } catch (MyEx e) { assertTrue(true); }", "assertThrows(MyEx.class, () -> code())", "assertEquals(MyEx.class, code())" ],
+  "answer" : "c",
+  "explanation" : "assertThrows(ExpectedException.class, executable) verifies the executable throws exactly that exception type. It also returns the exception so you can inspect its message. Option B is fragile — if no exception is thrown, the test passes silently."
+}

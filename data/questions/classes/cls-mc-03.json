@@ -1,0 +1,9 @@
+{
+  "id" : "cls-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the output?\n\n    class Dog {\n        String name;\n        Dog(String name) { this.name = name; }\n    }\n    // in main:\n    Dog d = new Dog(\"Rex\");\n    System.out.println(d.name);",
+  "choices" : [ "name", "this.name", "Rex", "null" ],
+  "answer" : "c",
+  "explanation" : "The constructor assigns the parameter 'name' to the field this.name. d.name accesses the field, which holds \"Rex\"."
+}

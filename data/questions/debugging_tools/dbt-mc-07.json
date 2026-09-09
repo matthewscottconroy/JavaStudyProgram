@@ -1,0 +1,9 @@
+{
+  "id" : "dbt-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is an exception breakpoint?",
+  "choices" : [ "A breakpoint placed inside a catch block", "A debugger feature that automatically pauses whenever a specific exception type is thrown", "A breakpoint that is triggered only when an uncaught exception reaches main()", "A breakpoint that logs the exception and continues" ],
+  "answer" : "b",
+  "explanation" : "Exception breakpoints (IntelliJ: Run → View Breakpoints → add Java Exception Breakpoints) pause the debugger the instant an exception is thrown — even if it's caught and swallowed. This is invaluable for finding where exceptions originate before they are suppressed."
+}

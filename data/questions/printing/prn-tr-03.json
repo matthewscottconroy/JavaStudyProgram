@@ -1,0 +1,9 @@
+{
+  "id" : "prn-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is the output?",
+  "code" : "String name = \"Alice\";\nSystem.out.println(\"Hello, \" + name + \"!\");",
+  "answer" : "Hello, Alice!",
+  "explanation" : "The + operator between strings performs concatenation. \"Hello, \" + \"Alice\" + \"!\" → \"Hello, Alice!\""
+}

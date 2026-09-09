@@ -1,0 +1,9 @@
+{
+  "id" : "if-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "A switch expression uses 'yield' to return a value. What does the following print?\n\n    int day = 2;\n    String name = switch (day) {\n        case 1 -> \"Monday\";\n        case 2 -> \"Tuesday\";\n        default -> \"Other\";\n    };\n    System.out.println(name);",
+  "choices" : [ "Monday", "Tuesday", "Other", "2" ],
+  "answer" : "b",
+  "explanation" : "The switch expression matches day=2, returns \"Tuesday\", and assigns it to name. Arrow syntax (->) does not fall through."
+}

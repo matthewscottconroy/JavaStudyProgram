@@ -1,0 +1,9 @@
+{
+  "id" : "net-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "Which class makes HTTP requests using Java's built-in client (Java 11+)?",
+  "choices" : [ "java.net.URL", "java.net.http.HttpClient", "java.net.HttpConnection", "javax.servlet.HttpRequest" ],
+  "answer" : "b",
+  "explanation" : "java.net.http.HttpClient (Java 11) provides a fluent API: HttpClient.newHttpClient().send(request, BodyHandlers.ofString()). Supports both synchronous (send) and asynchronous (sendAsync) requests, HTTP/2, and WebSockets. java.net.URL is the older approach."
+}

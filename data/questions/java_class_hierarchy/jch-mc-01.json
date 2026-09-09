@@ -1,0 +1,9 @@
+{
+  "id" : "jch-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Every class in Java implicitly extends which class?",
+  "choices" : [ "Class", "Serializable", "Object", "Base" ],
+  "answer" : "c",
+  "explanation" : "java.lang.Object is the root of the Java class hierarchy. Every class that doesn't explicitly extend another class implicitly extends Object. This provides default implementations of toString(), equals(), hashCode(), and others."
+}

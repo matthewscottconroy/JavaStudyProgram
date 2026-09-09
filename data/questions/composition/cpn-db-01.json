@@ -1,0 +1,10 @@
+{
+  "id" : "cpn-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "Why is this design fragile?",
+  "code" : "class Logger {\n    void log(String msg) { System.out.println(msg); }\n}\nclass Service extends Logger {\n    void process(String data) { log(\"Processing: \" + data); }\n}",
+  "choices" : [ "Service cannot call log() because it is package-private", "Service inherits Logger, tightly coupling them — any change to Logger affects Service", "extends creates a circular dependency", "Logger must be abstract to be extended" ],
+  "answer" : "b",
+  "explanation" : "Service doesn't need to BE a Logger — it only needs to USE one. The inheritance creates a tight coupling. Prefer: 'class Service { private Logger logger; }' and inject it."
+}

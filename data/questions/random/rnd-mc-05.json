@@ -1,0 +1,9 @@
+{
+  "id" : "rnd-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does Random.nextBoolean() return?",
+  "choices" : [ "Always true", "A random boolean value (true or false with 50% probability each)", "A random int that is either 0 or 1", "The result of nextInt(2) == 1" ],
+  "answer" : "b",
+  "explanation" : "nextBoolean() returns a random boolean — true or false with equal probability. Useful for coin flips, random branching in simulations, etc."
+}

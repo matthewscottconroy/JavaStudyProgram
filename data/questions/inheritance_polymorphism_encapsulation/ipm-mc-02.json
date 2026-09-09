@@ -1,0 +1,9 @@
+{
+  "id" : "ipm-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "The Liskov Substitution Principle (LSP) states that…",
+  "choices" : [ "Every subclass must override all parent methods", "Subtypes must be substitutable for their base types without breaking program correctness", "A class should have only one reason to change", "Interfaces should be small and focused" ],
+  "answer" : "b",
+  "explanation" : "LSP: wherever you use a base type, a subtype should work correctly in its place. A Square that extends Rectangle violates LSP if setting width independently breaks the area contract. LSP violations cause surprising bugs when polymorphism is used."
+}

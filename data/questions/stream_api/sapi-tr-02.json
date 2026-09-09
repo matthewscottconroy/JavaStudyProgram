@@ -1,0 +1,9 @@
+{
+  "id" : "sapi-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "import java.util.*;\nimport java.util.stream.*;\nList<String> words = List.of(\"the\", \"quick\", \"brown\", \"fox\");\nlong count = words.stream()\n    .filter(w -> w.length() > 3)\n    .count();\nSystem.out.println(count);",
+  "answer" : "2",
+  "explanation" : "Words with length > 3: \"quick\" (5), \"brown\" (5). \"the\" (3) and \"fox\" (3) are excluded. count() returns 2."
+}

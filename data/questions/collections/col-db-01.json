@@ -1,0 +1,10 @@
+{
+  "id" : "col-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This code throws NullPointerException. Why?",
+  "code" : "TreeMap<String, Integer> map = new TreeMap<>();\nmap.put(null, 1);",
+  "choices" : [ "TreeMap does not allow integer values", "TreeMap does not allow null keys because it must compare/sort them", "put() is not a valid method on TreeMap", "Integer must be unboxed before storing" ],
+  "answer" : "b",
+  "explanation" : "TreeMap sorts keys using Comparable or a Comparator. Comparing null to another key throws NullPointerException. Use HashMap if you need null key support (allows one null key)."
+}

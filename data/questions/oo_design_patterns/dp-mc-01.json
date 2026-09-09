@@ -1,0 +1,9 @@
+{
+  "id" : "dp-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "The Singleton pattern ensures…",
+  "choices" : [ "A class has at most one subclass", "Only one instance of a class exists in the JVM", "All methods in a class are static", "A class cannot be instantiated at all" ],
+  "answer" : "b",
+  "explanation" : "Singleton restricts instantiation so only one object of the class exists. It provides a global access point via a static method (e.g. getInstance()). Overuse of Singleton makes testing difficult."
+}

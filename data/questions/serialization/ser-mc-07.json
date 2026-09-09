@@ -1,0 +1,9 @@
+{
+  "id" : "ser-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What exception is thrown when deserializing an object whose class is not found on the classpath?",
+  "choices" : [ "NotSerializableException", "ClassCastException", "ClassNotFoundException", "InvalidClassException" ],
+  "answer" : "c",
+  "explanation" : "ObjectInputStream.readObject() throws ClassNotFoundException if the class definition is not available in the current JVM's classpath. InvalidClassException is thrown when the serialVersionUID doesn't match. NotSerializableException is thrown during serialization (write side)."
+}

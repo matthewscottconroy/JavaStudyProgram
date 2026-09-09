@@ -1,0 +1,10 @@
+{
+  "id" : "clh-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "This code does not compile. Why?",
+  "code" : "abstract class Shape {\n    abstract double area();\n}\nShape s = new Shape();",
+  "choices" : [ "Shape has no constructor", "abstract classes cannot have abstract methods", "Abstract classes cannot be instantiated with 'new'", "area() must return int, not double" ],
+  "answer" : "c",
+  "explanation" : "Abstract classes cannot be instantiated directly. You must create a concrete subclass that implements all abstract methods: class Circle extends Shape { double area() { return Math.PI * r * r; } }"
+}

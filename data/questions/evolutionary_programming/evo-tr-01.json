@@ -1,0 +1,9 @@
+{
+  "id" : "evo-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 4,
+  "prompt" : "After one generation with elitism, what is the guaranteed minimum best fitness?",
+  "code" : "// Generation 0 best fitness: 0.87\n// Elitism copies best individual unchanged to generation 1\n// After crossover and mutation, generation 1 is evaluated\n// New best candidate in generation 1 has fitness 0.79",
+  "answer" : "0.87",
+  "explanation" : "Elitism carries the generation 0 best (0.87) unchanged to generation 1. Even though the new best candidate scored 0.79, the elite individual ensures the overall best fitness in generation 1 is at least 0.87."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "var-mc-10",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which of these is a valid way to write 1,000,000 as an int literal in Java 7+?",
+  "choices" : [ "1,000,000", "1_000_000", "1.000.000", "1E6" ],
+  "answer" : "b",
+  "explanation" : "Java 7 introduced underscores in numeric literals for readability: 1_000_000, 0xFF_FF, 0b1010_0101. Commas are not valid. 1E6 is a double literal, not an int."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "dbt-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What information does the Variables panel in a debugger show?",
+  "choices" : [ "All static fields across all loaded classes", "The names and current values of local variables and parameters in the current stack frame", "The source code of the currently executing method", "The heap memory usage histogram" ],
+  "answer" : "b",
+  "explanation" : "The Variables panel updates every time you step, showing the current value of each local variable, parameter, and 'this'. You can expand object references to see their fields. This is the primary way to inspect state without adding print statements."
+}

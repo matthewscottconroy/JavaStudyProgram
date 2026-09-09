@@ -1,0 +1,10 @@
+{
+  "id" : "pkg-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "This code fails to compile. Why?",
+  "code" : "// File: src/com/example/Helper.java\npackage com.example;\n\n// File: src/Main.java\npublic class Main {\n    public static void main(String[] args) {\n        Helper h = new Helper();\n    }\n}",
+  "choices" : [ "Main.java must also be in package com.example", "Helper is in package com.example but Main has no import — it can't see Helper", "Helper must be public to be used from Main", "Both files must be in the same directory" ],
+  "answer" : "b",
+  "explanation" : "Main.java (in the default package) uses Helper from com.example. Without 'import com.example.Helper;', the compiler can't resolve 'Helper'. Add the import statement, or reference it by fully qualified name: com.example.Helper h = new com.example.Helper();"
+}

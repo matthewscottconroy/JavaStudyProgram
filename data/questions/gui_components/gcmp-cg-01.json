@@ -1,0 +1,9 @@
+{
+  "id" : "gcmp-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which creates a JButton labeled 'Submit' and adds an action listener?",
+  "choices" : [ "JButton btn = new JButton(); btn.setLabel(\"Submit\"); btn.onClick(() -> save());", "JButton btn = new JButton(\"Submit\"); btn.addActionListener(e -> save());", "Button btn = new Button(\"Submit\"); btn.addActionListener(e -> save());", "JButton btn = new JButton(\"Submit\"); btn.setAction(() -> save());" ],
+  "answer" : "b",
+  "explanation" : "JButton(String) sets the label. addActionListener(ActionListener) wires up the event handler. A lambda (e -> save()) works because ActionListener is a functional interface. Option C uses AWT Button, not Swing. Option D — setAction takes an Action object, not a lambda directly."
+}

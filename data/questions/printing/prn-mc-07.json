@@ -1,0 +1,9 @@
+{
+  "id" : "prn-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does the escape sequence \\t do in a String?",
+  "choices" : [ "Ends the string", "Inserts a tab character", "Inserts a newline", "Escapes the next character" ],
+  "answer" : "b",
+  "explanation" : "Escape sequences in Java strings: \\n = newline, \\t = tab, \\\\ = backslash, \\\" = double-quote. System.out.println(\"A\\tB\") prints: A    B (with a tab between A and B)."
+}

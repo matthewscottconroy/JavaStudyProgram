@@ -1,0 +1,9 @@
+{
+  "id" : "acm-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "class Counter {\n    private int count = 0;\n    public void increment() { count++; }\n    public int getCount() { return count; }\n}\n// in main:\nCounter c = new Counter();\nc.increment();\nc.increment();\nSystem.out.println(c.getCount());",
+  "answer" : "2",
+  "explanation" : "count is private but accessible via the public methods. Two increment() calls raise count to 2, which getCount() returns."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "gen-tr-04",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "Map<String, List<Integer>> map = new HashMap<>();\nmap.put(\"scores\", new ArrayList<>(List.of(10, 20, 30)));\nmap.get(\"scores\").add(40);\nSystem.out.println(map.get(\"scores\").size());",
+  "answer" : "4",
+  "explanation" : "The list stored under \"scores\" is the same object referenced by get(). add(40) modifies it in-place. size() = 4."
+}

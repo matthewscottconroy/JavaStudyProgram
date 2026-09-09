@@ -1,0 +1,9 @@
+{
+  "id" : "thr-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does Thread.join() do?",
+  "choices" : [ "Merges two threads into one", "Blocks the calling thread until the target thread finishes", "Pauses the current thread for a fixed time", "Interrupts the target thread" ],
+  "answer" : "b",
+  "explanation" : "t.join() blocks the calling thread until thread t terminates. Used to wait for background work to complete before proceeding. Thread.sleep(ms) pauses for a fixed duration. t.interrupt() sets the interrupted flag to signal a thread to stop."
+}

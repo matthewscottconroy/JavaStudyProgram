@@ -1,0 +1,10 @@
+{
+  "id" : "ifc-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "A class implements two interfaces that both provide conflicting default methods. What must the class do?",
+  "code" : "interface A { default String name() { return \"A\"; } }\ninterface B { default String name() { return \"B\"; } }\nclass C implements A, B { }  // compile error",
+  "choices" : [ "C must extend A to resolve the conflict", "C must override name() to resolve the ambiguity", "C can remove one interface to compile", "The last interface listed takes precedence" ],
+  "answer" : "b",
+  "explanation" : "When two implemented interfaces provide conflicting default methods, the class must override the method. Inside the override it can delegate to a specific interface: A.super.name() or B.super.name(). class C implements A, B { public String name() { return A.super.name(); } }"
+}

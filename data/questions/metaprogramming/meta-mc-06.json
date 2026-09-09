@@ -1,0 +1,9 @@
+{
+  "id" : "meta-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is a repeatable annotation in Java 8+?",
+  "choices" : [ "An annotation that can be applied multiple times to the same element", "An annotation that repeats its processing at runtime", "An annotation that loops over all class members", "An annotation that inherits from another annotation" ],
+  "answer" : "a",
+  "explanation" : "Mark the annotation with @Repeatable(Container.class) and define a container annotation that holds an array of the repeatable annotation. Then you can write: @Tag(\"a\") @Tag(\"b\") class Foo {} instead of the old workaround."
+}

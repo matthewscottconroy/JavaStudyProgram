@@ -1,0 +1,9 @@
+{
+  "id" : "inh-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "class Person {\n    String name;\n    Person(String n) { name = n; }\n    String describe() { return \"Person: \" + name; }\n}\nclass Student extends Person {\n    int grade;\n    Student(String n, int g) { super(n); grade = g; }\n    @Override String describe() { return super.describe() + \", Grade: \" + grade; }\n}\nSystem.out.println(new Student(\"Ana\", 10).describe());",
+  "answer" : "Person: Ana, Grade: 10",
+  "explanation" : "super(n) calls Person(String). super.describe() returns \"Person: Ana\". Student appends \", Grade: 10\"."
+}

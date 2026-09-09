@@ -1,0 +1,9 @@
+{
+  "id" : "dbt-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is a 'conditional breakpoint'?",
+  "choices" : [ "A breakpoint that only triggers when a specified condition is true", "A breakpoint on an if statement", "A breakpoint that pauses for a fixed number of milliseconds", "A breakpoint in a catch block" ],
+  "answer" : "a",
+  "explanation" : "Most IDEs let you right-click a breakpoint and add a condition (e.g., i == 500). The debugger only pauses when that condition evaluates to true at that point. This is invaluable in loops — you don't have to press Resume 499 times to reach the interesting iteration."
+}

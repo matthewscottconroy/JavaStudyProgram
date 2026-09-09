@@ -1,0 +1,10 @@
+{
+  "id" : "var-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "Which of the following is a valid Java variable declaration?",
+  "choices" : [ "int myAge = 25;", "integer myAge = 25;", "Int myAge = 25;", "int my age = 25;" ],
+  "answer" : "a",
+  "explanation" : "Java primitive types are lowercase: int, double, boolean, char, etc. 'integer' and 'Int' are not valid types (Integer is a class). Variable names cannot contain spaces.",
+  "hints" : [ "Java type names for primitives are all lowercase." ]
+}

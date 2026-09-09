@@ -1,0 +1,9 @@
+{
+  "id" : "ut-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does assertNotNull(obj) check?",
+  "choices" : [ "That obj is not a primitive", "That obj is not an empty collection", "That obj is not null", "That obj.hashCode() is not zero" ],
+  "answer" : "c",
+  "explanation" : "assertNotNull(obj) fails the test if obj == null. Use it when you expect an object to be created or returned but want to guard against a null result before calling methods on it."
+}

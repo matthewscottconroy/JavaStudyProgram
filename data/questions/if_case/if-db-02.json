@@ -1,0 +1,10 @@
+{
+  "id" : "if-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "A student wants to check if x equals 5. What is the bug?",
+  "code" : "int x = 5;\nif (x = 5) {\n    System.out.println(\"five\");\n}",
+  "choices" : [ "Should use == not =", "Should use .equals() for integers", "Missing else branch", "5 needs quotes because it's a number" ],
+  "answer" : "a",
+  "explanation" : "x = 5 is an assignment, not a comparison. The condition would always be truthy (non-zero int), and it also modifies x as a side effect. Use == for equality: if (x == 5)."
+}

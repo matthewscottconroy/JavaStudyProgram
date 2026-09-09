@@ -1,0 +1,9 @@
+{
+  "id" : "prn-tr-04",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is the output?",
+  "code" : "int x = 5;\nSystem.out.println(\"x = \" + x);",
+  "answer" : "x = 5",
+  "explanation" : "When a String is concatenated with an int using +, Java automatically converts the int to its String representation. \"x = \" + 5 → \"x = 5\"."
+}

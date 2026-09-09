@@ -1,0 +1,9 @@
+{
+  "id" : "col-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "Which collection does NOT allow duplicate elements?",
+  "choices" : [ "ArrayList", "LinkedList", "Set", "ArrayDeque" ],
+  "answer" : "c",
+  "explanation" : "Set (e.g. HashSet, TreeSet) enforces uniqueness — adding a duplicate is silently ignored. ArrayList, LinkedList, and ArrayDeque all allow duplicates."
+}

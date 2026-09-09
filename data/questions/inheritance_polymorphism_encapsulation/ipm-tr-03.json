@@ -1,0 +1,9 @@
+{
+  "id" : "ipm-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "class Animal { String type = \"animal\"; String describe() { return type; } }\nclass Cat extends Animal {\n    String type = \"cat\";  // hides Animal.type\n    @Override String describe() { return type; }\n}\nAnimal a = new Cat();\nSystem.out.println(a.type);\nSystem.out.println(a.describe());",
+  "answer" : "animal\ncat",
+  "explanation" : "Fields are not polymorphic: a.type uses Animal.type = \"animal\" (declared reference type). Methods are polymorphic: a.describe() calls Cat's override, returning Cat.type = \"cat\"."
+}

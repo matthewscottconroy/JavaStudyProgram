@@ -1,0 +1,10 @@
+{
+  "id" : "inh-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "This code has a compile error. Why?",
+  "code" : "class Vehicle {\n    private int speed;\n    Vehicle(int speed) { this.speed = speed; }\n}\nclass Car extends Vehicle {\n    Car(int speed) { }\n}",
+  "choices" : [ "Car cannot extend Vehicle because speed is private", "Car() must explicitly call super(speed) since Vehicle has no no-arg constructor", "Constructors are not inherited, so Car() cannot exist", "speed must be protected, not private" ],
+  "answer" : "b",
+  "explanation" : "Vehicle only defines a one-arg constructor. Java inserts super() into Car() if no super call is explicit, but there is no no-arg Vehicle(). Fix: Car(int speed) { super(speed); }"
+}

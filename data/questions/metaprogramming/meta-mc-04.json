@@ -1,0 +1,9 @@
+{
+  "id" : "meta-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 4,
+  "prompt" : "What does an annotation processor do?",
+  "choices" : [ "Runs annotations at runtime to inject behavior", "Processes annotations at compile time to generate source code, validate constraints, or produce reports", "Converts annotations to XML configuration", "Replaces reflection with faster code" ],
+  "answer" : "b",
+  "explanation" : "Annotation processors (javax.annotation.processing) hook into javac. Frameworks like Lombok, Dagger, and AutoValue use them to generate boilerplate code at compile time. Processors implement Processor and are registered via META-INF/services."
+}

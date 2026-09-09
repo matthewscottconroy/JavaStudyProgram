@@ -1,0 +1,10 @@
+{
+  "id" : "swng-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "The JTable shows no column headers. Why?",
+  "code" : "JFrame frame = new JFrame();\nString[][] data = {{\"Alice\", \"90\"}, {\"Bob\", \"85\"}};\nString[] cols = {\"Name\", \"Score\"};\nJTable table = new JTable(data, cols);\nframe.add(table);  // added directly, not in JScrollPane\nframe.setVisible(true);",
+  "choices" : [ "JTable doesn't support column headers", "Column headers require JScrollPane — the JTableHeader is part of the JScrollPane's column header viewport", "The column names array must use uppercase strings", "frame.add() strips the column header automatically" ],
+  "answer" : "b",
+  "explanation" : "JTable headers are a JTableHeader that JScrollPane places in its column header viewport. When you add the JTable directly to the frame, the header has no place to appear. Fix: frame.add(new JScrollPane(table));"
+}

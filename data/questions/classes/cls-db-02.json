@@ -1,0 +1,10 @@
+{
+  "id" : "cls-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "The code fails to compile with 'non-static variable count cannot be referenced from a static context'. Why?",
+  "code" : "class Counter {\n    int count = 0;\n    public static void main(String[] args) {\n        count++;  // error\n    }\n}",
+  "choices" : [ "count must be declared public", "main() is static and cannot directly access instance field 'count' — an instance of Counter is needed", "count++ is not valid for int fields", "main() cannot be in the same class as count" ],
+  "answer" : "b",
+  "explanation" : "Static context (main) has no 'this'. count is an instance field that belongs to an object. Fix: either make count static, or create Counter c = new Counter(); c.count++;"
+}

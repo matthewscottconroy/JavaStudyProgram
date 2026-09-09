@@ -1,0 +1,10 @@
+{
+  "id" : "aal-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "This throws IndexOutOfBoundsException. Why?",
+  "code" : "ArrayList<String> list = new ArrayList<>();\nlist.add(0, \"hello\");  // insert at index 0\nlist.add(5, \"world\");  // insert at index 5 — bug",
+  "choices" : [ "add(index, element) requires the index to be 0", "list is empty so no index is valid", "The index 5 is out of range — the list has only 1 element (valid indices: 0 and 1)", "String elements cannot be inserted at specific indices" ],
+  "answer" : "c",
+  "explanation" : "After adding \"hello\" the list has size 1. Valid indices for add() are 0..size (0 or 1). Index 5 is out of bounds. list.add(element) (without index) always adds at the end safely."
+}

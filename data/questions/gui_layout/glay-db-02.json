@@ -1,0 +1,10 @@
+{
+  "id" : "glay-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "After resizing the window, the buttons look stretched and distorted. Why?",
+  "code" : "JPanel panel = new JPanel(new GridLayout(1, 3));\npanel.add(new JButton(\"A\"));\npanel.add(new JButton(\"B\"));\npanel.add(new JButton(\"C\"));\nframe.add(panel);",
+  "choices" : [ "GridLayout has a bug when resizing", "GridLayout makes all cells equal-sized — as the window grows, all buttons stretch equally", "JButtons cannot resize", "There must be exactly 3 rows and 3 columns for GridLayout to work" ],
+  "answer" : "b",
+  "explanation" : "GridLayout divides the container space equally among cells, so all buttons grow/shrink as the window resizes. If you want buttons at their preferred size in a row, use FlowLayout or BoxLayout instead. GridLayout is appropriate for calculator-style UIs where equal sizing is desired."
+}

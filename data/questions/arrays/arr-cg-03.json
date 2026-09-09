@@ -1,0 +1,9 @@
+{
+  "id" : "arr-cg-03",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which creates a 3×3 int grid and sets grid[1][1] to 5?",
+  "choices" : [ "int[] grid = new int[3][3]; grid[1][1] = 5;", "int[][] grid = new int[3][3]; grid[1][1] = 5;", "int[][] grid = {{0,0,0},{0,5,0},{0,0,0}};", "Both b and c result in grid[1][1] == 5" ],
+  "answer" : "d",
+  "explanation" : "Option B: dynamically creates the grid then assigns the value. Option C: initializes with an array literal that already has 5 at [1][1]. Both are valid approaches. Option A incorrectly declares a 1D array."
+}

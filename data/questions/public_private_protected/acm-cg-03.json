@@ -1,0 +1,9 @@
+{
+  "id" : "acm-cg-03",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which correctly implements the Singleton pattern?",
+  "choices" : [ "class Config { public Config() { } static Config instance = new Config(); }", "class Config { private static Config instance; private Config() { } public static Config getInstance() { if (instance == null) instance = new Config(); return instance; } }", "class Config { protected Config() { } public static Config getInstance() { return new Config(); } }", "class Config { private Config instance = new Config(); public Config get() { return instance; } }" ],
+  "answer" : "b",
+  "explanation" : "Singleton: private constructor (prevents external instantiation), private static field (holds the single instance), public static factory method (returns or creates the instance). Option A: public constructor allows bypassing. Option C: protected constructor still leaks. Option D: instance is not static — each Config would have its own."
+}

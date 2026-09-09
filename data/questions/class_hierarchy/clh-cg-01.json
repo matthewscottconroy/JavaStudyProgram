@@ -1,0 +1,9 @@
+{
+  "id" : "clh-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which code safely casts 'a' to Dog only if it actually is one?",
+  "choices" : [ "Dog d = (Dog) a;", "if (a.getClass() == Dog.class) { Dog d = (Dog) a; d.bark(); }", "if (a instanceof Dog d) { d.bark(); }", "Dog d = a.cast(Dog.class);" ],
+  "answer" : "c",
+  "explanation" : "Pattern matching instanceof (Java 16+) tests the type and binds in one step, eliminating a redundant cast. Option A throws ClassCastException if a is not a Dog. Option B works but is more verbose. Option D: cast() does not exist on Object."
+}

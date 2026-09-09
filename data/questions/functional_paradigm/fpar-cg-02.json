@@ -1,0 +1,9 @@
+{
+  "id" : "fpar-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which correctly uses Function.compose() to apply subtractOne BEFORE double?",
+  "choices" : [ "Function<Integer,Integer> result = doubleIt.andThen(subtractOne);", "Function<Integer,Integer> result = doubleIt.compose(subtractOne);", "Function<Integer,Integer> result = subtractOne.andThen(doubleIt);", "Both b and c produce the same result" ],
+  "answer" : "b",
+  "explanation" : "compose(g) applies g first, then the outer function. So doubleIt.compose(subtractOne) = doubleIt(subtractOne(x)). andThen(g) applies g after: subtractOne.andThen(doubleIt) = doubleIt(subtractOne(x)). Options B and C are equivalent — but the question asks specifically about compose()."
+}

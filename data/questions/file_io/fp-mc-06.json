@@ -1,0 +1,9 @@
+{
+  "id" : "fp-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which class is used to write text to a file, creating it if it doesn't exist?",
+  "choices" : [ "FileReader", "BufferedReader", "FileWriter", "FileInputStream" ],
+  "answer" : "c",
+  "explanation" : "FileWriter writes characters to a file. new FileWriter(\"f.txt\") creates/overwrites. new FileWriter(\"f.txt\", true) appends. Wrap in BufferedWriter for efficiency: new BufferedWriter(new FileWriter(\"f.txt\"))."
+}

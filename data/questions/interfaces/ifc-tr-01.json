@@ -1,0 +1,9 @@
+{
+  "id" : "ifc-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "interface Greeter {\n    String greet(String name);\n    default String farewell(String name) { return \"Bye, \" + name; }\n}\nclass FormalGreeter implements Greeter {\n    public String greet(String name) { return \"Good day, \" + name; }\n}\n// in main:\nGreeter g = new FormalGreeter();\nSystem.out.println(g.greet(\"Alice\"));\nSystem.out.println(g.farewell(\"Alice\"));",
+  "answer" : "Good day, Alice\nBye, Alice",
+  "explanation" : "FormalGreeter provides greet(). farewell() is inherited from the interface default. Both are available on the Greeter reference."
+}

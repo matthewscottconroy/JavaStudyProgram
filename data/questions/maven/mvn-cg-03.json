@@ -1,0 +1,9 @@
+{
+  "id" : "mvn-cg-03",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which pom.xml snippet configures the Java compiler to use Java 17?",
+  "choices" : [ "<java.version>17</java.version>", "<properties><maven.compiler.source>17</maven.compiler.source><maven.compiler.target>17</maven.compiler.target></properties>", "<build><compiler>17</compiler></build>", "<dependency><groupId>java</groupId><artifactId>compiler</artifactId><version>17</version></dependency>" ],
+  "answer" : "b",
+  "explanation" : "maven.compiler.source and target control the Java version for compilation. Both must be set. For Java 9+, you can also use maven.compiler.release=17. Option A: spring-boot-starter-parent reads java.version but standalone Maven projects do not. Options C and D are invalid."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "inh-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does super.methodName() do inside a subclass method?",
+  "choices" : [ "Calls the method on a newly created parent object", "Calls the parent class's version of that method", "Makes the method private in the subclass", "Prevents the method from being overridden further" ],
+  "answer" : "b",
+  "explanation" : "super.methodName() explicitly invokes the parent's implementation. Useful when overriding: you can call super.draw() to run the parent drawing logic and then add subclass-specific drawing on top."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "ifc-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "Can an interface have instance fields (non-static, non-final)?",
+  "choices" : [ "Yes, interfaces can have any kind of field", "Yes, but only private fields", "No — interface fields are implicitly public static final (constants)", "No, interfaces cannot have fields at all" ],
+  "answer" : "c",
+  "explanation" : "All fields declared in an interface are implicitly 'public static final'. They are constants, not instance variables. To share state, you need a class."
+}

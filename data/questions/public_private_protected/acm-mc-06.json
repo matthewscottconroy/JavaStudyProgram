@@ -1,0 +1,9 @@
+{
+  "id" : "acm-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "A subclass in a different package can access which members of its parent?",
+  "choices" : [ "public and private members", "public members only", "public and protected members", "public, protected, and package-private members" ],
+  "answer" : "c",
+  "explanation" : "Protected members are accessible to subclasses regardless of package. Package-private members are NOT accessible from a different package — even to subclasses. Private members are never accessible outside their declaring class."
+}

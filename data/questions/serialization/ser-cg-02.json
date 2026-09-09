@@ -1,0 +1,9 @@
+{
+  "id" : "ser-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which snippet correctly reads a serialized object from a file?",
+  "choices" : [ "FileReader fr = new FileReader(\"data.ser\"); Object o = fr.read();", "try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(\"data.ser\"))) { MyClass obj = (MyClass) ois.readObject(); }", "MyClass obj = Serializable.read(\"data.ser\", MyClass.class);", "byte[] bytes = Files.readAllBytes(Path.of(\"data.ser\")); MyClass obj = (MyClass) bytes;" ],
+  "answer" : "b",
+  "explanation" : "ObjectInputStream wraps a FileInputStream and readObject() returns Object — cast to the expected type. Try-with-resources closes the stream. readObject() throws both IOException and ClassNotFoundException, so both must be handled."
+}

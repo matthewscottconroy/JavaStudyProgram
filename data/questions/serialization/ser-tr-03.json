@@ -1,0 +1,9 @@
+{
+  "id" : "ser-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "class Box implements Serializable {\n    private static final long serialVersionUID = 1L;\n    int size;\n    Box(int size) { this.size = size; }\n}\n// serialize Box(42) then deserialize into Box b\nSystem.out.println(b.size);",
+  "answer" : "42",
+  "explanation" : "The non-transient field 'size' is serialized and restored. The explicit serialVersionUID ensures compatibility if the class is recompiled without structural changes."
+}

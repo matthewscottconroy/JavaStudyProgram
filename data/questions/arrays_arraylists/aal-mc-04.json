@@ -1,0 +1,9 @@
+{
+  "id" : "aal-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which call removes the element at index 1 from an ArrayList?",
+  "choices" : [ "list.delete(1)", "list.remove(1)", "list.pop(1)", "list.erase(1)" ],
+  "answer" : "b",
+  "explanation" : "ArrayList.remove(int index) removes the element at that position and shifts later elements left. delete(), pop(), and erase() are not ArrayList methods."
+}

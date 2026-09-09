@@ -1,0 +1,9 @@
+{
+  "id" : "kbd-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which uses Key Bindings to handle Ctrl+S without needing focus?",
+  "choices" : [ "frame.addKeyListener(new KeyAdapter() { public void keyPressed(KeyEvent e) { if (e.isControlDown() && e.getKeyCode() == VK_S) save(); } });", "panel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK), \"save\"); panel.getActionMap().put(\"save\", new AbstractAction() { public void actionPerformed(ActionEvent e) { save(); } });", "panel.addKeyListener(e -> { if (e.isControlDown()) save(); });", "JMenuBar.setAccelerator(KeyStroke.getKeyStroke(\"control S\"));" ],
+  "answer" : "b",
+  "explanation" : "WHEN_IN_FOCUSED_WINDOW scope fires the binding even when a different component has focus. InputMap maps a KeyStroke to a string key; ActionMap maps that key to an AbstractAction. This is the recommended approach for application shortcuts in Swing."
+}

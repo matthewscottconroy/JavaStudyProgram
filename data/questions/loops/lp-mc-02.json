@@ -1,0 +1,9 @@
+{
+  "id" : "lp-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What keyword immediately exits a loop?",
+  "choices" : [ "exit", "return", "break", "stop" ],
+  "answer" : "c",
+  "explanation" : "'break' terminates the nearest enclosing loop or switch. 'return' exits the entire method. 'exit' and 'stop' are not loop-control keywords."
+}

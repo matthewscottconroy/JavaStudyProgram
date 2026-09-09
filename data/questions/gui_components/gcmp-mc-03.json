@@ -1,0 +1,9 @@
+{
+  "id" : "gcmp-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which component shows a dropdown list of choices?",
+  "choices" : [ "JList", "JComboBox", "JMenu", "JSpinner" ],
+  "answer" : "b",
+  "explanation" : "JComboBox<T> shows a dropdown of options. Add items with comboBox.addItem(). Get the selected item: comboBox.getSelectedItem(). JList shows a scrollable list where multiple items can be selected simultaneously. JSpinner lets the user increment/decrement a value."
+}

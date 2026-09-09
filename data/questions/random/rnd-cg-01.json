@@ -1,0 +1,9 @@
+{
+  "id" : "rnd-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which code correctly simulates a dice roll (1–6)?",
+  "choices" : [ "new Random().nextInt(6);", "new Random().nextInt(6) + 1;", "new Random().nextInt(7);", "Math.random() * 6;" ],
+  "answer" : "b",
+  "explanation" : "nextInt(6) gives 0–5. Adding 1 shifts to 1–6. Option A gives 0–5 (wrong range). Option C gives 0–6 (7 values, not 6). Option D gives a double in [0.0, 6.0), not an integer."
+}

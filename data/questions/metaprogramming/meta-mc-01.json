@@ -1,0 +1,9 @@
+{
+  "id" : "meta-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is a Java annotation?",
+  "choices" : [ "A comment that is visible in the compiled bytecode", "A metadata marker applied to code elements that can be read at compile time or runtime", "A runtime error message attached to a method", "A special import for framework classes" ],
+  "answer" : "b",
+  "explanation" : "Annotations (introduced in Java 5) attach metadata to classes, methods, fields, etc. Examples: @Override (compile-time check), @Deprecated (warning), @SuppressWarnings, @Test (JUnit runtime processing). Frameworks use annotations extensively for configuration."
+}

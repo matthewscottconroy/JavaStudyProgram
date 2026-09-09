@@ -1,0 +1,10 @@
+{
+  "id" : "var-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "A student writes this code and gets a compile error. Why?",
+  "code" : "public void example() {\n    int x;\n    System.out.println(x);\n}",
+  "choices" : [ "int is not valid inside a method", "println cannot print int values", "Local variable x may not have been initialized", "x needs to be declared as a class field" ],
+  "answer" : "c",
+  "explanation" : "Local variables do not get a default value in Java. You must assign a value before reading one. Class-level fields do get defaults (int → 0), but local variables do not."
+}

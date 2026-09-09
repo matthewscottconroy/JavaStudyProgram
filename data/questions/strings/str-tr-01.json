@@ -1,0 +1,9 @@
+{
+  "id" : "str-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is the output?",
+  "code" : "String s = \"Java\";\nSystem.out.println(s.toUpperCase() + s.length());",
+  "answer" : "JAVA4",
+  "explanation" : "toUpperCase() returns \"JAVA\". length() returns 4. String concatenation: \"JAVA\" + 4 = \"JAVA4\"."
+}

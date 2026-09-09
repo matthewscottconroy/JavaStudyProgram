@@ -1,0 +1,10 @@
+{
+  "id" : "aal-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "The loop skips some elements. Why?",
+  "code" : "ArrayList<Integer> list = new ArrayList<>(List.of(1, 2, 3, 4));\nfor (int i = 0; i < list.size(); i++) {\n    if (list.get(i) % 2 == 0) list.remove(i);\n}",
+  "choices" : [ "get() and remove() cannot be used in the same loop", "After removing at index i, the element that was at i+1 shifts to i and is never checked", "list.size() must be stored before the loop", "Integers cannot be removed by index from ArrayList" ],
+  "answer" : "b",
+  "explanation" : "When list.remove(1) removes the element at index 1 (value 2), value 3 shifts from index 2 to index 1. i increments to 2 — skipping 3. Fix: use removeIf(n -> n % 2 == 0) or decrement i after each removal."
+}

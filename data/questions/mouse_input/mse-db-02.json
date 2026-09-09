@@ -1,0 +1,10 @@
+{
+  "id" : "mse-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "The mouse coordinates are always (0,0) when the user clicks anywhere. Why?",
+  "code" : "JPanel panel = new JPanel();\nJFrame frame = new JFrame();\nframe.add(panel);\nframe.addMouseListener(new MouseAdapter() {\n    public void mouseClicked(MouseEvent e) {\n        System.out.println(e.getX() + \",\" + e.getY());\n    }\n});",
+  "choices" : [ "MouseAdapter does not support getX() and getY()", "The listener is on the frame, not the panel — e.getX()/getY() are relative to the frame's top-left, but the content pane offsets may make it appear off", "getX() always returns 0 in debug mode", "The listener is on the frame; clicks inside the panel are consumed by the panel, not propagated to the frame's listener" ],
+  "answer" : "d",
+  "explanation" : "Mouse events are delivered to the component where the click occurred. The panel absorbs clicks; the frame's listener only fires if the click lands on the frame decorations (title bar, border). Fix: add the listener to the panel, not the frame."
+}

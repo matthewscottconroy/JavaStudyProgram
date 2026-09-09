@@ -1,0 +1,9 @@
+{
+  "id" : "gem-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is a ChangeListener used for?",
+  "choices" : [ "Listening for changes in a JTextField", "Listening for changes in a component's model state (e.g., JSlider value, JTabbedPane selected tab)", "Listening for window resize events", "Listening for property changes on any object" ],
+  "answer" : "b",
+  "explanation" : "ChangeListener (javax.swing.event) has one method: stateChanged(ChangeEvent e). JSlider fires it when the value changes. JTabbedPane fires it when the selected tab changes. Use slider.addChangeListener(e -> updateDisplay(slider.getValue()))."
+}

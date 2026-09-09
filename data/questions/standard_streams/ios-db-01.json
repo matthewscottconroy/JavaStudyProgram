@@ -1,0 +1,10 @@
+{
+  "id" : "ios-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "After reading an int, nextLine() returns an empty string. Why?",
+  "code" : "Scanner sc = new Scanner(System.in);\nint age = sc.nextInt();\nString name = sc.nextLine(); // always empty\nSystem.out.println(name);",
+  "choices" : [ "nextLine() is not compatible with Scanner", "nextInt() consumes the integer but leaves the newline in the buffer — nextLine() reads that leftover newline", "name must be declared before age", "System.in is closed after nextInt()" ],
+  "answer" : "b",
+  "explanation" : "nextInt() reads the token '25' but stops before the newline character. The subsequent nextLine() reads up to the leftover newline, returning an empty string. Fix: add an extra sc.nextLine() after nextInt() to consume the newline before reading the name."
+}

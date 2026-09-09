@@ -1,0 +1,10 @@
+{
+  "id" : "fn-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which method signature correctly defines a static method named 'max' that takes two ints and returns an int?",
+  "choices" : [ "void max(int a, int b) { }", "static int max(int a, int b) { }", "int static max(a, b) { }", "static max(int a, int b) -> int { }" ],
+  "answer" : "b",
+  "explanation" : "Order: modifiers (static) then return type (int) then name (max) then parameters. Option A returns void. Option C has wrong order and missing types. Option D uses arrow syntax which is not valid Java method syntax.",
+  "hints" : [ "Pattern: [modifiers] returnType methodName(paramType param, ...)" ]
+}

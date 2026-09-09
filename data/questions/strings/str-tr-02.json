@@ -1,0 +1,9 @@
+{
+  "id" : "str-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is the output?",
+  "code" : "String s = \"  Hello  \";\nSystem.out.println(s.trim().length());",
+  "answer" : "5",
+  "explanation" : "trim() removes leading and trailing whitespace: \"  Hello  \" → \"Hello\". \"Hello\".length() = 5."
+}

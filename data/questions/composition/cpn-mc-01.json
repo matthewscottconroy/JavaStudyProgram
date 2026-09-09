@@ -1,0 +1,9 @@
+{
+  "id" : "cpn-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "Which phrase describes a composition (has-a) relationship?",
+  "choices" : [ "A Car IS-A Vehicle", "A Car HAS-A Engine", "A SportsCar IS-A Car", "A Dog IS-A Animal" ],
+  "answer" : "b",
+  "explanation" : "Composition models a HAS-A relationship: a Car has-an Engine. IS-A relationships (Car is-a Vehicle) are modelled with inheritance (extends)."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "gui-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which code correctly creates and displays a minimal JFrame?",
+  "choices" : [ "JFrame f = new JFrame(); f.show();", "JFrame f = new JFrame(\"App\"); f.setSize(400,300); f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); f.setVisible(true);", "new JFrame(\"App\").open(400, 300);", "JFrame.create(\"App\", 400, 300).setVisible(true);" ],
+  "answer" : "b",
+  "explanation" : "A minimal working JFrame needs: a title, a size (or pack()), a close operation, and setVisible(true). Option A uses deprecated show(). Options C and D use non-existent methods."
+}

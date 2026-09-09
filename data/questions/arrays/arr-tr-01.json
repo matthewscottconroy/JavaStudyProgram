@@ -1,0 +1,9 @@
+{
+  "id" : "arr-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "int[] a = {5, 10, 15};\nSystem.out.println(a[0] + a[2]);",
+  "answer" : "20",
+  "explanation" : "a[0] = 5, a[2] = 15. 5 + 15 = 20."
+}

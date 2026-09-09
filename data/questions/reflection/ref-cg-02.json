@@ -1,0 +1,9 @@
+{
+  "id" : "ref-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 4,
+  "prompt" : "Which snippet invokes a static method 'double square(double n)' on class Calc reflectively?",
+  "choices" : [ "Calc.class.getMethod(\"square\", double.class).invoke(null, 5.0);", "Calc.class.getDeclaredMethod(\"square\").invoke(new Calc(), 5.0);", "Method m = Calc.class.invoke(\"square\", 5.0);", "Calc.class.getMethod(\"square\").invoke(5.0);" ],
+  "answer" : "a",
+  "explanation" : "For a static method, the first argument to invoke() is null (no instance needed). getMethod(\"square\", double.class) specifies the parameter type to disambiguate overloads. Option B uses getDeclaredMethod with no parameter type and passes a new Calc() (wrong for static). Options C and D have incorrect API usage."
+}

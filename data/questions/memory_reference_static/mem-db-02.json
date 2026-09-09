@@ -1,0 +1,10 @@
+{
+  "id" : "mem-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "Why does this code print the same value for both variables?",
+  "code" : "int[] a = {1, 2, 3};\nint[] b = a;\nb[0] = 99;\nSystem.out.println(a[0]);  // 99 (not 1!)",
+  "choices" : [ "Arrays copy automatically when assigned", "b = a copies the reference — both a and b point to the same array in memory", "int[] uses value semantics like primitives", "b[0] = 99 is a compile error" ],
+  "answer" : "b",
+  "explanation" : "Array assignment copies the reference, not the array. a and b point to the same int[]. Modifying b[0] modifies the shared array, so a[0] == 99. To get an independent copy: int[] b = Arrays.copyOf(a, a.length);"
+}

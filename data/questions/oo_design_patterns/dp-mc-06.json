@@ -1,0 +1,9 @@
+{
+  "id" : "dp-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "Which pattern wraps an object to add behavior without modifying its class?",
+  "choices" : [ "Singleton", "Factory", "Decorator", "Builder" ],
+  "answer" : "c",
+  "explanation" : "Decorator wraps an object implementing the same interface and adds behavior. Example: BufferedReader wraps a FileReader to add buffering. Java I/O streams use Decorator extensively. It's a flexible alternative to subclassing for extending behavior."
+}

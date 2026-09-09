@@ -1,0 +1,9 @@
+{
+  "id" : "swng-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What integer does showConfirmDialog return when the user clicks 'No'?",
+  "code" : "int result = JOptionPane.showConfirmDialog(null, \"Are you sure?\");",
+  "answer" : "JOptionPane.NO_OPTION (value 1)",
+  "explanation" : "showConfirmDialog returns: YES_OPTION=0, NO_OPTION=1, CANCEL_OPTION=2, CLOSED_OPTION=-1. Check: if (result == JOptionPane.YES_OPTION) to branch on confirmation."
+}

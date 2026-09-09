@@ -1,0 +1,9 @@
+{
+  "id" : "inh-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which class correctly extends Shape and overrides area()?",
+  "choices" : [ "class Circle implements Shape { double area() { return 3.14 * r * r; } }", "class Circle extends Shape { @Override double area() { return 3.14 * r * r; } }", "class Circle extends Shape { double area; }", "class Circle : Shape { double area() { return 3.14 * r * r; } }" ],
+  "answer" : "b",
+  "explanation" : "extends is the keyword for inheritance, and @Override confirms the method overrides area(). Option A uses implements (for interfaces). Option C declares a field instead of overriding the method. Option D uses C# syntax (colon), not valid in Java."
+}

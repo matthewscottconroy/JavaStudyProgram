@@ -1,0 +1,9 @@
+{
+  "id" : "mse-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which implements drag-to-move: tracking press position and updating on drag?",
+  "choices" : [ "panel.addMouseMotionListener(new MouseAdapter() { public void mouseDragged(MouseEvent e) { x = e.getX(); y = e.getY(); repaint(); } });", "panel.addMouseListener(new MouseAdapter() { public void mouseClicked(MouseEvent e) { x = e.getX(); y = e.getY(); repaint(); } });", "panel.addMouseListener(new MouseAdapter() { public void mouseDragged(MouseEvent e) { x = e.getX(); repaint(); } });", "panel.addMouseMotionListener(e -> { x = e.getX(); y = e.getY(); });" ],
+  "answer" : "a",
+  "explanation" : "mouseDragged (from MouseMotionListener) fires continuously while the button is held and the mouse moves. Updating x,y and calling repaint() moves the drawn object. Option B uses mouseClicked (only fires on click, not drag). Option C adds mouseDragged to a MouseListener, which doesn't have that method."
+}

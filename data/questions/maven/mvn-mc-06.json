@@ -1,0 +1,9 @@
+{
+  "id" : "mvn-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the Maven local repository?",
+  "choices" : [ "The src/main directory of your project", "A local cache (~/.m2/repository) where downloaded dependencies are stored", "The GitHub repository where Maven plugins are hosted", "A directory inside target/ where JARs are staged" ],
+  "answer" : "b",
+  "explanation" : "When Maven downloads a dependency, it caches it in ~/.m2/repository. Subsequent builds use the cached version without re-downloading. You can force re-download with: mvn dependency:resolve -U"
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "lam-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "import java.util.*;\nimport java.util.function.*;\nList<String> names = List.of(\"Charlie\", \"Alice\", \"Bob\");\nnames.stream()\n     .sorted()\n     .forEach(System.out::println);",
+  "answer" : "Alice\nBob\nCharlie",
+  "explanation" : "sorted() uses natural (alphabetical) order. forEach with a method reference prints each name on its own line."
+}

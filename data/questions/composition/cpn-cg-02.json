@@ -1,0 +1,9 @@
+{
+  "id" : "cpn-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Given: class Animal { void breathe(){} } / class Dog extends Animal { void bark(){} }\nWhich refactors Dog to use composition instead of inheritance?",
+  "choices" : [ "class Dog extends Animal, Breathing { }", "class Dog { private Animal animal = new Animal(); void bark() { System.out.println(\"woof\"); } void breathe() { animal.breathe(); } }", "class Dog implements Animal { void breathe() { } }", "abstract class Dog { abstract void bark(); }" ],
+  "answer" : "b",
+  "explanation" : "Instead of extending Animal, Dog holds an Animal reference and delegates breathe() to it. This is composition + delegation. Dog no longer IS-A Animal — it uses Animal's behavior. Option A: Java doesn't support multiple class inheritance. Option C: implements requires an interface, not a class."
+}

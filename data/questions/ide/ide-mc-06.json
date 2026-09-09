@@ -1,0 +1,9 @@
+{
+  "id" : "ide-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is 'code completion' in an IDE?",
+  "choices" : [ "A feature that automatically fixes compile errors", "A suggestion popup that offers valid completions for the code you are typing", "A tool that formats your code according to a style guide", "A shortcut that runs all unit tests" ],
+  "answer" : "b",
+  "explanation" : "Code completion (IntelliJ: Ctrl+Space) shows possible method names, field names, types, and keywords based on the current context. It reduces typos and helps you discover API methods without leaving the editor."
+}

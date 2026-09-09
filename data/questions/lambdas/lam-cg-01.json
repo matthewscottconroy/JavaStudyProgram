@@ -1,0 +1,9 @@
+{
+  "id" : "lam-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which code correctly sorts a list of strings by length using a lambda?",
+  "choices" : [ "list.sort(String::length);", "list.sort((a, b) -> a.length() - b.length());", "list.sort(() -> String.compareLength());", "list.sort(Comparator.length());" ],
+  "answer" : "b",
+  "explanation" : "(a, b) -> a.length() - b.length() is a valid Comparator<String> lambda. Option A passes a Function reference, not a Comparator. Options C and D use non-existent API. Also valid: list.sort(Comparator.comparingInt(String::length));"
+}

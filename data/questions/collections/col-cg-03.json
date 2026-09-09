@@ -1,0 +1,9 @@
+{
+  "id" : "col-cg-03",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which creates a Map from names to ages and looks up 'Bob' with a default of -1 if absent?",
+  "choices" : [ "Map<String,Integer> m = new HashMap<>(); m.put(\"Alice\",30); int age = m[\"Bob\"];", "Map<String,Integer> m = new HashMap<>(); m.put(\"Alice\",30); int age = m.getOrDefault(\"Bob\",-1);", "Map<String,Integer> m = new HashMap<>(); m.put(\"Alice\",30); int age = m.get(\"Bob\",-1);", "Map<String,Integer> m = new HashMap<>(); m.put(\"Alice\",30); int age = m.getOrDefault(\"Bob\", null);" ],
+  "answer" : "b",
+  "explanation" : "getOrDefault(key, default) returns the value if present, or the default otherwise. Option A uses array syntax (invalid for Map). Option C: get() takes only one argument. Option D: null as the default would cause NullPointerException when unboxing to int."
+}

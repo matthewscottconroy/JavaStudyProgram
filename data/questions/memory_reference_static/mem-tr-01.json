@@ -1,0 +1,9 @@
+{
+  "id" : "mem-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "class Counter {\n    static int count = 0;\n    Counter() { count++; }\n}\n// in main:\nnew Counter();\nnew Counter();\nnew Counter();\nSystem.out.println(Counter.count);",
+  "answer" : "3",
+  "explanation" : "count is static — shared across all Counter instances. Each constructor call increments the same field. After 3 new Counter() calls, count == 3."
+}

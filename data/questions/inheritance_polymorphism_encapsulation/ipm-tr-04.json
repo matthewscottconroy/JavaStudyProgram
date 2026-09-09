@@ -1,0 +1,9 @@
+{
+  "id" : "ipm-tr-04",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "class Beverage {\n    private double price;\n    Beverage(double p) { price = p; }\n    public double getPrice() { return price; }\n    public void setPrice(double p) {\n        if (p > 0) price = p;\n    }\n}\nBeverage b = new Beverage(2.5);\nb.setPrice(-1);\nSystem.out.println(b.getPrice());",
+  "answer" : "2.5",
+  "explanation" : "setPrice(-1) is rejected by the validation guard (p > 0). price remains 2.5. getPrice() returns 2.5."
+}

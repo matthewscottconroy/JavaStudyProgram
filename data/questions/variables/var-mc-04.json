@@ -1,0 +1,10 @@
+{
+  "id" : "var-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "What type would you use to store the value 3.14?",
+  "choices" : [ "int", "boolean", "double", "String" ],
+  "answer" : "c",
+  "explanation" : "double (and float) hold decimal numbers. int holds whole numbers only. boolean holds true/false. String holds text.",
+  "hints" : [ "Think: 3.14 has a decimal point—which type handles that?" ]
+}

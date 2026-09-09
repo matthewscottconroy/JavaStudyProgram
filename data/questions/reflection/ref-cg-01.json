@@ -1,0 +1,9 @@
+{
+  "id" : "ref-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 4,
+  "prompt" : "Which snippet correctly reads the value of a private field 'name' on object 'obj'?",
+  "choices" : [ "obj.name;", "Field f = obj.getClass().getDeclaredField(\"name\"); f.setAccessible(true); String name = (String) f.get(obj);", "Field f = obj.getClass().getField(\"name\"); String name = (String) f.get(obj);", "String name = obj.reflect().get(\"name\");" ],
+  "answer" : "b",
+  "explanation" : "getDeclaredField gets the private field, setAccessible(true) bypasses the access check, and f.get(obj) retrieves the value (cast needed). Option A: direct access to private field won't compile. Option C: getField() only returns public fields. Option D: reflect() does not exist on Object."
+}

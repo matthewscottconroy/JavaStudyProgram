@@ -1,0 +1,9 @@
+{
+  "id" : "mvn-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What directory does Maven place compiled .class files in?",
+  "code" : "// pom.xml with default settings, sources in src/main/java\n// After running: mvn compile",
+  "answer" : "target/classes",
+  "explanation" : "Maven's default output directory for compiled main sources is target/classes. Test class files go to target/test-classes."
+}

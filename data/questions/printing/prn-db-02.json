@@ -1,0 +1,10 @@
+{
+  "id" : "prn-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 1,
+  "prompt" : "What is wrong?",
+  "code" : "System.out.println(\"Hello\")",
+  "choices" : [ "Quotes are wrong type", "println is misspelled", "Missing semicolon at end of statement", "System should be lowercase" ],
+  "answer" : "c",
+  "explanation" : "Every Java statement must end with a semicolon. Missing the ; will cause a compile error."
+}

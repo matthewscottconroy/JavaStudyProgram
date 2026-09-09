@@ -1,0 +1,9 @@
+{
+  "id" : "ex-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which code correctly opens a file and uses try-with-resources to ensure it closes?",
+  "choices" : [ "try (BufferedReader br = new BufferedReader(new FileReader(\"f.txt\"))) { /* read */ }", "try { BufferedReader br = new BufferedReader(new FileReader(\"f.txt\")); } finally { br.close(); }", "using (BufferedReader br = new BufferedReader(new FileReader(\"f.txt\"))) { /* read */ }", "open (BufferedReader br = new FileReader(\"f.txt\")) { /* read */ }" ],
+  "answer" : "a",
+  "explanation" : "try-with-resources (Java 7+) automatically calls close() on the resource when the block exits. Option B doesn't compile (br is out of scope in finally). Options C and D use non-Java syntax."
+}

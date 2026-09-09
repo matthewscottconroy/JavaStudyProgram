@@ -1,0 +1,9 @@
+{
+  "id" : "var-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 1,
+  "prompt" : "What is the value of x after this code runs?",
+  "code" : "int x = 10;\nx = x + 2;\nx = x - 1;",
+  "answer" : "11",
+  "explanation" : "Step 1: x = 10. Step 2: x = 10 + 2 = 12. Step 3: x = 12 - 1 = 11."
+}

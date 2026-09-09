@@ -1,0 +1,9 @@
+{
+  "id" : "lam-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does Consumer<T> represent?",
+  "choices" : [ "A function that takes no arguments and returns T", "A function that takes T and returns a result", "A function that takes T, performs some action, and returns nothing", "A function that takes two arguments and returns a boolean" ],
+  "answer" : "c",
+  "explanation" : "Consumer<T> has: void accept(T t). Examples: Consumer<String> print = System.out::println; list.forEach(print). BiConsumer<K,V> takes two arguments. Supplier<T> is the inverse: takes nothing and returns T."
+}

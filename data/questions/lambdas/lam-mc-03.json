@@ -1,0 +1,9 @@
+{
+  "id" : "lam-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is a method reference, e.g. System.out::println?",
+  "choices" : [ "A shorthand for a lambda that calls an existing method", "A reference to the method's memory address", "A way to declare a method inside another method", "A deprecated form of anonymous inner class" ],
+  "answer" : "a",
+  "explanation" : "System.out::println is equivalent to the lambda 's -> System.out.println(s)'. Method references are more concise when the lambda body is just a single method call."
+}

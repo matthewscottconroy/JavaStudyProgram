@@ -1,0 +1,9 @@
+{
+  "id" : "ios-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "What are the three standard streams in Java?",
+  "choices" : [ "stdin, stdout, stderr", "System.in, System.out, System.err", "input, output, error", "FileInputStream, FileOutputStream, ErrorStream" ],
+  "answer" : "b",
+  "explanation" : "Java exposes: System.in (InputStream for keyboard/pipe input), System.out (PrintStream for normal output), and System.err (PrintStream for error messages). These map to the OS standard streams (stdin/stdout/stderr) by default."
+}

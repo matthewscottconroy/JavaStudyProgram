@@ -1,0 +1,9 @@
+{
+  "id" : "net-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is a port number in networking?",
+  "choices" : [ "The physical network port on the computer's motherboard", "A 16-bit number that identifies a specific service/process on a host", "The IP address suffix after the dot", "The maximum packet size for a connection" ],
+  "answer" : "b",
+  "explanation" : "Port numbers (0-65535) distinguish different services on the same IP address. Well-known ports: HTTP=80, HTTPS=443, SSH=22, SMTP=25. When running a server, choose a port > 1024 (ports < 1024 require root/admin on most OSes)."
+}

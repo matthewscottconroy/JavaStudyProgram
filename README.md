@@ -182,7 +182,9 @@ it** — AI support is a layer on top, never a requirement.
 
 ## Adding questions
 
-Drop a JSON file into `data/questions/<topic>/` — no code changes needed. The
+Drop a JSON file into `data/questions/<topic>/` — no code changes needed. **Every** question in
+the bank is a JSON file of exactly this shape, including the ones that ship with the program, so
+anything you can read you can also edit or replace. The
 directory name must match a topic slug (the lower-cased `Topic` enum name, e.g.
 `arrays_arraylists`); the app warns at startup about directories that match no
 topic, and files in `data/questions/` override bundled questions with the same id.
@@ -216,13 +218,14 @@ must compile but fail its tests, and the reference solution must pass.
 
 ```
 src/main/java/com/studyprogram/
-  core/      question bank, adaptive engine, curriculum (auto feed), study session
+  core/      question bank, adaptive engine, curriculum, calibration, scheduling, bosses
+  stats/     confidence intervals
   coding/    JDK-compiler harness for coding exercises
   report/    self-contained HTML progress report generator
   grading/   graders for each question type
   llm/       optional Anthropic-backed hints/explanations (null-object without a key)
   model/     Topic graph (with prerequisites), Question, StudentProfile
-  questions/ hardcoded question loaders + JSON parsing
+  questions/ JSON parsing, directory loading, Parsons derivation
   storage/   JSON profile persistence
   ui/        terminal CLI and rendering
 data/questions/   JSON question bank (bundled into the jar at build time)

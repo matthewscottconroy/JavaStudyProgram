@@ -1,0 +1,9 @@
+{
+  "id" : "dp-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which is the simplest thread-safe Singleton in Java?",
+  "choices" : [ "class S { public static S instance = new S(); }", "enum S { INSTANCE; }", "class S { private static S i; public static synchronized S get() { if(i==null)i=new S(); return i; } }", "class S { private S(){} public static S get() { return new S(); } }" ],
+  "answer" : "b",
+  "explanation" : "An enum Singleton (Joshua Bloch's recommendation) is thread-safe by JVM guarantees, serialisation-safe, and immune to reflection attacks. Option A uses a public field (accessible without a method but not lazy). Option C is correct but verbose. Option D creates a new instance each call — not a Singleton."
+}

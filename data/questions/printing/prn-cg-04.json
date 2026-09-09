@@ -1,0 +1,9 @@
+{
+  "id" : "prn-cg-04",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which prints a table row with name left-aligned in a 15-char field and score right-aligned in 5 chars?",
+  "choices" : [ "System.out.printf(\"%s %d%n\", name, score);", "System.out.printf(\"%-15s%5d%n\", name, score);", "System.out.printf(\"%15s%5d%n\", name, score);", "System.out.printf(\"%s%d%n\", name, score);" ],
+  "answer" : "b",
+  "explanation" : "%-15s: left-align (-) in 15-character field. %5d: right-align integer in 5-char field. Option C uses %15s which right-aligns the name. For table formatting, left-align text and right-align numbers."
+}

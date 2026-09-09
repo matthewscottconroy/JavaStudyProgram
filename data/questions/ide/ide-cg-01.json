@@ -1,0 +1,9 @@
+{
+  "id" : "ide-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which IntelliJ shortcut renames a variable across all its usages in the file?",
+  "choices" : [ "Ctrl+R", "Shift+F6", "Alt+Enter", "Ctrl+Shift+F" ],
+  "answer" : "b",
+  "explanation" : "Shift+F6 triggers 'Rename' refactoring in IntelliJ, updating all references to the symbol across the project. Alt+Enter shows context actions (quick-fixes). Ctrl+R is Find/Replace. Always prefer IDE refactoring over manual find-replace to avoid missed usages."
+}

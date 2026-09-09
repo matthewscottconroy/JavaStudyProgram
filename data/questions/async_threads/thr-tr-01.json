@@ -1,0 +1,9 @@
+{
+  "id" : "thr-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is the range of possible outputs?",
+  "code" : "class Counter {\n    int count = 0;\n}\nCounter c = new Counter();\nThread t1 = new Thread(() -> { for (int i=0;i<1000;i++) c.count++; });\nThread t2 = new Thread(() -> { for (int i=0;i<1000;i++) c.count++; });\nt1.start(); t2.start(); t1.join(); t2.join();\nSystem.out.println(c.count);",
+  "answer" : "any value from 1000 to 2000",
+  "explanation" : "count++ is not atomic — it reads, increments, then writes. Two threads can read the same value simultaneously, losing an increment. Result is anywhere from 1000 (maximum loss) to 2000 (no interleaving). Fix: use AtomicInteger or synchronize."
+}

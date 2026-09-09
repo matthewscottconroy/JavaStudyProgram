@@ -1,0 +1,9 @@
+{
+  "id" : "img-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which correctly loops background music from a classpath WAV file?",
+  "choices" : [ "new Thread(() -> { while(true) Sound.play(\"/music.wav\"); }).start();", "try { AudioInputStream ais = AudioSystem.getAudioInputStream(getClass().getResource(\"/music.wav\")); Clip clip = AudioSystem.getClip(); clip.open(ais); clip.loop(Clip.LOOP_CONTINUOUSLY); } catch (Exception e) { e.printStackTrace(); }", "SoundPlayer.loop(\"/music.wav\");", "MediaPlayer player = new MediaPlayer(\"/music.wav\"); player.setLoop(true); player.play();" ],
+  "answer" : "b",
+  "explanation" : "AudioSystem.getAudioInputStream(URL) loads from classpath resource. clip.open(ais) prepares it; clip.loop(LOOP_CONTINUOUSLY) starts looping. Option A blocks a thread and creates many resources. Options C and D use APIs that don't exist in standard Java SE."
+}

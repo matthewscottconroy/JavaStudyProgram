@@ -1,0 +1,9 @@
+{
+  "id" : "hb-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What bitwise operator performs AND on two integers?",
+  "choices" : [ "|", "&", "^", "~" ],
+  "answer" : "b",
+  "explanation" : "& (bitwise AND): 1 & 1 = 1; 1 & 0 = 0. | (OR): 1 | 0 = 1. ^ (XOR): 1 ^ 1 = 0; 1 ^ 0 = 1. ~ (NOT/complement): ~0 = -1 (flips all bits)."
+}

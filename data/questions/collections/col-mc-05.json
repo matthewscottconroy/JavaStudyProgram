@@ -1,0 +1,9 @@
+{
+  "id" : "col-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does List.of() return?",
+  "choices" : [ "A mutable ArrayList", "An immutable list that throws UnsupportedOperationException on add/remove", "null", "An empty LinkedList" ],
+  "answer" : "b",
+  "explanation" : "List.of() (Java 9+) returns a compact, immutable list. Calling add(), remove(), or set() throws UnsupportedOperationException. To get a mutable list from it: new ArrayList<>(List.of(1, 2, 3))."
+}

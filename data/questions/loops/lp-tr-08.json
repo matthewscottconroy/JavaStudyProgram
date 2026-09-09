@@ -1,0 +1,9 @@
+{
+  "id" : "lp-tr-08",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "How many times does the loop body execute?",
+  "code" : "for (int i = 10; i > 0; i -= 3) {\n    System.out.println(i);\n}",
+  "answer" : "4",
+  "explanation" : "i starts at 10, decrements by 3: 10, 7, 4, 1. When i becomes -2, 10>0 was false at that check, but actually: i=10 (>0 ✓), i=7 (>0 ✓), i=4 (>0 ✓), i=1 (>0 ✓), i=-2 (>0 ✗). 4 iterations."
+}

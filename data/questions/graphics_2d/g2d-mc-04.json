@@ -1,0 +1,9 @@
+{
+  "id" : "g2d-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the difference between fill*() and draw*() methods in Graphics2D?",
+  "choices" : [ "fill() uses the current color; draw() always uses black", "fill() fills the interior of a shape; draw() draws only the outline", "draw() is faster than fill()", "fill() requires a Brush object; draw() does not" ],
+  "answer" : "b",
+  "explanation" : "drawRect/drawOval/drawLine draw outlines (edges only). fillRect/fillOval fill the interior with the current color. To draw a filled shape with an outline: call fillRect first, set a different color, then drawRect."
+}

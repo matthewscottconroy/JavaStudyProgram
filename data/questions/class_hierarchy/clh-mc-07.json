@@ -1,0 +1,9 @@
+{
+  "id" : "clh-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the root of the Java class hierarchy?",
+  "choices" : [ "Serializable", "Comparable", "Object", "Base" ],
+  "answer" : "c",
+  "explanation" : "Every class in Java (except Object itself) implicitly extends java.lang.Object. Object provides: equals(), hashCode(), toString(), getClass(), clone(), wait(), notify()."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "ref-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does Java reflection allow you to do?",
+  "choices" : [ "Compile Java code at runtime", "Inspect and manipulate classes, fields, and methods at runtime", "Create faster bytecode than the compiler can", "Share objects between JVM instances" ],
+  "answer" : "b",
+  "explanation" : "Reflection (java.lang.reflect) lets code examine its own structure at runtime: discover fields, methods, constructors; read/write field values; invoke methods. Used by frameworks (Spring, Jackson, JUnit) for dependency injection and serialisation."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "fn-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the output?\n\n    public static int add(int a, int b) { return a + b; }\n    // in main:\n    int result = add(add(2, 3), 4);\n    System.out.println(result);",
+  "choices" : [ "234", "9", "14", "Won't compile" ],
+  "answer" : "b",
+  "explanation" : "add(2,3) = 5. add(5, 4) = 9. The inner call resolves first."
+}

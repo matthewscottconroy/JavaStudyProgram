@@ -1,0 +1,9 @@
+{
+  "id" : "jch-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does Object.toString() return by default?",
+  "choices" : [ "The object's field values formatted as JSON", "null", "The class name followed by '@' and the hex hash code", "An empty string" ],
+  "answer" : "c",
+  "explanation" : "Default toString() returns something like 'com.example.Dog@1a2b3c'. Override toString() to return a human-readable representation of your object's state, which also improves debugging since System.out.println(obj) calls toString() automatically."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "sapi-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does Stream.limit(n) do?",
+  "choices" : [ "Throws an exception if the stream has fewer than n elements", "Returns a stream with at most n elements", "Repeats the stream n times", "Skips the first n elements" ],
+  "answer" : "b",
+  "explanation" : "limit(n) is an intermediate operation that truncates the stream to n elements. Useful for pagination or taking a sample. skip(n) discards the first n elements. Stream.generate(supplier).limit(5) creates a finite stream from an infinite one."
+}

@@ -1,0 +1,10 @@
+{
+  "id" : "str-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "A NullPointerException is thrown on the contains() call. Why?",
+  "code" : "String input = null;\nif (input.contains(\"hello\")) {\n    System.out.println(\"found\");\n}",
+  "choices" : [ "contains() does not accept String arguments", "input is null — calling any method on null throws NullPointerException", "null cannot be compared with Strings", "contains() requires the argument to be non-null" ],
+  "answer" : "b",
+  "explanation" : "Calling any method on a null reference throws NullPointerException. Guard: if (input != null && input.contains(\"hello\")) { ... } Or use Objects.toString(input, \"\").contains(\"hello\") for a null-safe version."
+}

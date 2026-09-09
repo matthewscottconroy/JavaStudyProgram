@@ -1,0 +1,9 @@
+{
+  "id" : "str-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does String.split(\",\") return for \"a,b,c\"?",
+  "choices" : [ "A String with commas removed", "An array: {\"a\", \"b\", \"c\"}", "A List<String> containing a, b, c", "The index of the first comma" ],
+  "answer" : "b",
+  "explanation" : "split(regex) splits the string around the pattern and returns a String[]. \"a,b,c\".split(\",\") → {\"a\", \"b\", \"c\"} with length 3. To split on a dot: split(\"\\\\.\") — the dot is a regex metacharacter and must be escaped."
+}

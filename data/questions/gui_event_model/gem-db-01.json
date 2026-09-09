@@ -1,0 +1,10 @@
+{
+  "id" : "gem-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "Why might this listener cause GUI freezing?",
+  "code" : "button.addActionListener(e -> {\n    try { Thread.sleep(3000); } catch (Exception ex) {}\n    label.setText(\"Done\");\n});",
+  "choices" : [ "Thread.sleep() is not allowed inside a lambda", "label.setText() must be called before Thread.sleep()", "Thread.sleep() blocks the EDT for 3 seconds, preventing all GUI updates", "addActionListener accepts only anonymous classes, not lambdas" ],
+  "answer" : "c",
+  "explanation" : "actionPerformed runs on the EDT. Sleeping there blocks all event processing for 3 seconds — the window becomes unresponsive. Use SwingWorker to run the wait in the background, then update the label on the EDT."
+}

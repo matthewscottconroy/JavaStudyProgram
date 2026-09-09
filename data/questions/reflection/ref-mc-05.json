@@ -1,0 +1,9 @@
+{
+  "id" : "ref-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does Class.getMethods() return compared to getDeclaredMethods()?",
+  "choices" : [ "getMethods() returns private methods; getDeclaredMethods() returns public ones", "getMethods() returns all public methods including inherited ones; getDeclaredMethods() returns all methods declared in the class itself", "They return the same set of methods", "getMethods() requires setAccessible(true); getDeclaredMethods() does not" ],
+  "answer" : "b",
+  "explanation" : "getMethods(): all public methods including those inherited from parent classes. getDeclaredMethods(): all methods (public, protected, private) declared directly in this class, excluding inherited ones. Similar pattern: getFields() vs getDeclaredFields()."
+}

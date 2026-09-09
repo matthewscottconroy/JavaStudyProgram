@@ -1,0 +1,9 @@
+{
+  "id" : "ex-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "try {\n    String s = null;\n    System.out.println(s.length());\n} catch (NullPointerException e) {\n    System.out.println(\"NPE\");\n}",
+  "answer" : "NPE",
+  "explanation" : "null.length() throws NullPointerException. The catch block prints \"NPE\"."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "prn-tr-08",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "int x = 5;\nSystem.out.println(\"Value: \" + x * 2);",
+  "answer" : "Value: 10",
+  "explanation" : "x * 2 is evaluated first (multiplication before string concatenation). x * 2 = 10. \"Value: \" + 10 = \"Value: 10\"."
+}

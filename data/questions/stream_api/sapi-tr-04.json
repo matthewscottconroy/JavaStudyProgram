@@ -1,0 +1,9 @@
+{
+  "id" : "sapi-tr-04",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "import java.util.stream.*;\nlong count = Stream.of(\"a\", \"bb\", \"ccc\", \"dd\")\n    .filter(s -> s.length() >= 2)\n    .count();\nSystem.out.println(count);",
+  "answer" : "3",
+  "explanation" : "Elements with length >= 2: \"bb\", \"ccc\", \"dd\". Count = 3."
+}

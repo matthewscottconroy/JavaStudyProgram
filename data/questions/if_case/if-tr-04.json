@@ -1,0 +1,9 @@
+{
+  "id" : "if-tr-04",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "boolean a = true, b = false;\nif (a && !b) {\n    System.out.println(\"yes\");\n} else {\n    System.out.println(\"no\");\n}",
+  "answer" : "yes",
+  "explanation" : "a = true, !b = !false = true. true && true = true. So \"yes\" is printed."
+}

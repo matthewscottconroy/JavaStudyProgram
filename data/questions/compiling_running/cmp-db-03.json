@@ -1,0 +1,10 @@
+{
+  "id" : "cmp-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "The compilation succeeds but the program crashes with StackOverflowError. Why?",
+  "code" : "public class Fib {\n    static int fib(int n) { return fib(n - 1) + fib(n - 2); }\n    public static void main(String[] args) { System.out.println(fib(10)); }\n}",
+  "choices" : [ "The compiler didn't detect infinite recursion", "fib(n) has no base case — it recurses infinitely, filling the call stack", "Integer arithmetic overflows in the recursion", "The JVM cannot handle recursive methods" ],
+  "answer" : "b",
+  "explanation" : "Syntax is valid so it compiles. At runtime, fib(10) calls fib(9) and fib(8), which call fib(8) and fib(7) and fib(7) and fib(6)... with no base case to stop. Fix: add if (n <= 1) return n; as the base case."
+}

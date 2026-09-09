@@ -1,0 +1,9 @@
+{
+  "id" : "lp-tr-05",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "int count = 0;\nfor (int i = 1; i <= 10; i++) {\n    if (i % 3 == 0) count++;\n}\nSystem.out.println(count);",
+  "answer" : "3",
+  "explanation" : "Multiples of 3 in 1..10: 3, 6, 9. count = 3."
+}

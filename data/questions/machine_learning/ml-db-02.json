@@ -1,0 +1,10 @@
+{
+  "id" : "ml-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 4,
+  "prompt" : "A model achieves 95% accuracy on a dataset where 95% of samples are class 'A'. What is the problem?",
+  "code" : "double accuracy = 0.95;",
+  "choices" : [ "95% accuracy is always excellent — deploy the model immediately", "The model might predict class 'A' for everything (majority class baseline) and have no real predictive power", "Accuracy above 90% always indicates overfitting", "The dataset is too small at 95% to be useful" ],
+  "answer" : "b",
+  "explanation" : "On imbalanced datasets, a naive model that always predicts the majority class matches the base rate. 95% accuracy here might mean zero recall for class 'B'. Use: precision, recall, F1-score, or AUC-ROC instead of raw accuracy for imbalanced data."
+}

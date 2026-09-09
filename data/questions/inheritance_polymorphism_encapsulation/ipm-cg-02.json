@@ -1,0 +1,9 @@
+{
+  "id" : "ipm-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which array holds mixed Animal subclasses and calls speak() on each?",
+  "choices" : [ "Dog[] animals = {new Dog(), new Cat()}; for (Dog a : animals) a.speak();", "Animal[] animals = {new Dog(), new Cat()}; for (Animal a : animals) a.speak();", "Object[] animals = {new Dog(), new Cat()}; for (Object a : animals) ((Animal)a).speak();", "List<Object> animals = List.of(new Dog(), new Cat()); animals.forEach(a -> a.speak());" ],
+  "answer" : "b",
+  "explanation" : "Declare the array as Animal[] — the common supertype. The for-each uses Animal reference, and polymorphism dispatches speak() to the right implementation. Option A: can't put a Cat in Dog[]. Option C works but requires a cast. Option D: Object has no speak() method."
+}

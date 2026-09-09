@@ -1,0 +1,9 @@
+{
+  "id" : "cls-cg-03",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which creates a class Temperature with a double 'celsius' field, a constructor, and a method toCelsius()?",
+  "choices" : [ "class Temperature { celsius; Temperature(celsius) { this.celsius = celsius; } double toCelsius() { return celsius; } }", "class Temperature { double celsius; Temperature(double c) { this.celsius = c; } double toCelsius() { return celsius; } }", "class Temperature { double celsius; } Temperature(double c) { celsius = c; }", "Temperature class { double celsius; init(double c) { celsius = c; } }" ],
+  "answer" : "b",
+  "explanation" : "Option B: field with type, constructor assigning to the field, method returning the field. Option A: fields without types are not valid Java. Option C: constructor is outside the class body."
+}

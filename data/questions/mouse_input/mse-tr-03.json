@@ -1,0 +1,9 @@
+{
+  "id" : "mse-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed for a triple-click on the panel?",
+  "code" : "panel.addMouseListener(new MouseAdapter() {\n    public void mouseClicked(MouseEvent e) {\n        System.out.println(e.getClickCount());\n    }\n});",
+  "answer" : "1\n2\n3",
+  "explanation" : "Each click triggers mouseClicked. getClickCount() returns the running click count for rapid clicks: 1, 2, 3. Your code should check for == 2 (double-click) or == 3 (triple-click) as needed."
+}

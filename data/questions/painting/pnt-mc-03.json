@@ -1,0 +1,9 @@
+{
+  "id" : "pnt-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "How do you trigger a repaint of a component in response to a state change?",
+  "choices" : [ "component.paint()", "component.draw()", "component.repaint()", "component.update()" ],
+  "answer" : "c",
+  "explanation" : "repaint() schedules a call to paintComponent() on the Event Dispatch Thread. Never call paintComponent() directly from your code. repaint() is thread-safe and batches multiple repaint requests efficiently."
+}

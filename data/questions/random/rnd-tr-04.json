@@ -1,0 +1,9 @@
+{
+  "id" : "rnd-tr-04",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "Random r = new Random(42);\nint a = r.nextInt(10);\nint b = r.nextInt(10);\nSystem.out.println(a == b);",
+  "answer" : "false",
+  "explanation" : "With seed 42, the first two calls to nextInt(10) typically produce different values (the exact values depend on the PRNG algorithm but sequential calls generally differ). The output is deterministic for the same seed but a == b is false for seed 42."
+}

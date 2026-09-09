@@ -1,0 +1,9 @@
+{
+  "id" : "dbt-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the advantage of using a debugger over adding System.out.println() statements?",
+  "choices" : [ "println() can only print Strings", "A debugger lets you inspect all variables and step through code interactively without modifying source files", "Debuggers are faster than println()", "println() doesn't work inside loops" ],
+  "answer" : "b",
+  "explanation" : "Print debugging works but requires recompiling after each addition and you must guess what to print ahead of time. A debugger lets you pause at any line, inspect any variable, evaluate expressions, and step through logic without changing the code. It's more powerful for complex bugs."
+}

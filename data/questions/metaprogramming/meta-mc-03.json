@@ -1,0 +1,9 @@
+{
+  "id" : "meta-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does @Target(ElementType.METHOD) restrict?",
+  "choices" : [ "The annotation can only be applied to methods", "The annotation can only be processed by methods", "The annotation generates code for all methods in the class", "The annotation runs at method invocation time" ],
+  "answer" : "a",
+  "explanation" : "@Target specifies where an annotation may be placed. ElementType.METHOD → methods only. ElementType.FIELD → fields. ElementType.TYPE → classes/interfaces. Multiple targets: @Target({ElementType.METHOD, ElementType.FIELD})."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "lam-mc-09",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which is a valid four-types lambda for BiFunction<String, Integer, String>?",
+  "choices" : [ "(s, n) -> s.repeat(n)", "s -> s.length()", "() -> \"hello\"", "(s, n, extra) -> s" ],
+  "answer" : "a",
+  "explanation" : "BiFunction<A, B, R> has method R apply(A a, B b). BiFunction<String, Integer, String>: takes String and Integer, returns String. s.repeat(n) repeats the string n times — valid. Option B: only one parameter. Option C: no parameters. Option D: three parameters."
+}

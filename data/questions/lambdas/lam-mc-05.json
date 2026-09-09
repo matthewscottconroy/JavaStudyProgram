@@ -1,0 +1,9 @@
+{
+  "id" : "lam-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is a method reference like String::toUpperCase equivalent to?",
+  "choices" : [ "A constructor call: new String()", "A lambda: s -> s.toUpperCase()", "A static import of toUpperCase", "A cast to a String interface" ],
+  "answer" : "b",
+  "explanation" : "String::toUpperCase is an instance method reference. It represents: (String s) -> s.toUpperCase(). Method references are more readable than lambdas when the lambda simply delegates to an existing method."
+}

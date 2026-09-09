@@ -1,0 +1,9 @@
+{
+  "id" : "acm-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "A field is declared 'protected'. Which code CAN access it?",
+  "choices" : [ "Any class in any package", "Only the declaring class", "A subclass in a different package", "Only classes in the same file" ],
+  "answer" : "c",
+  "explanation" : "'protected' grants access to: the same class, same package, AND subclasses (even in other packages). It does NOT allow arbitrary classes in different packages."
+}

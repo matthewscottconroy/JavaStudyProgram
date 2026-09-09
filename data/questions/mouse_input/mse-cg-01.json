@@ -1,0 +1,9 @@
+{
+  "id" : "mse-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which correctly adds a mouse listener that prints coordinates on right-click only?",
+  "choices" : [ "panel.addMouseListener(new MouseAdapter() { public void mouseClicked(MouseEvent e) { System.out.println(e.getX()); } });", "panel.addMouseListener(new MouseAdapter() { public void mouseClicked(MouseEvent e) { if (e.getButton() == MouseEvent.BUTTON3) System.out.println(e.getX() + \",\" + e.getY()); } });", "panel.addRightClickListener(e -> System.out.println(e.getX()));", "panel.addMouseListener(e -> System.out.println(e.getX()));" ],
+  "answer" : "b",
+  "explanation" : "MouseEvent.BUTTON3 is the right mouse button. Checking e.getButton() == BUTTON3 filters right-clicks only. Option A fires on any click. Option C — addRightClickListener doesn't exist. Option D — MouseListener is not a functional interface so a lambda doesn't work directly."
+}

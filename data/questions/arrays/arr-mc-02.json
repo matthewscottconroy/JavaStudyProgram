@@ -1,0 +1,9 @@
+{
+  "id" : "arr-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the value of arr[2] after: int[] arr = {10, 20, 30, 40};",
+  "choices" : [ "10", "20", "30", "40" ],
+  "answer" : "c",
+  "explanation" : "Index 0→10, 1→20, 2→30, 3→40. arr[2] is 30."
+}

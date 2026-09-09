@@ -1,0 +1,9 @@
+{
+  "id" : "str-tr-06",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "StringBuilder sb = new StringBuilder(\"abc\");\nsb.reverse();\nSystem.out.println(sb);",
+  "answer" : "cba",
+  "explanation" : "StringBuilder.reverse() reverses the character sequence in place. \"abc\" becomes \"cba\". StringBuilder also has append(), insert(), delete(), and replace() methods."
+}

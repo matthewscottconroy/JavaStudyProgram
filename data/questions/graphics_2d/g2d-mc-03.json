@@ -1,0 +1,9 @@
+{
+  "id" : "g2d-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does g2d.setStroke(new BasicStroke(3f)) do?",
+  "choices" : [ "Sets the font size to 3", "Sets the line drawing width to 3 pixels", "Sets the opacity of drawn shapes to 30%", "Sets the color to a shade of gray" ],
+  "answer" : "b",
+  "explanation" : "BasicStroke controls the width and style of lines drawn by draw() calls (drawLine, drawRect, etc.). new BasicStroke(3f) makes lines 3 pixels wide. You can also control end caps and line joins: new BasicStroke(3f, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND)."
+}

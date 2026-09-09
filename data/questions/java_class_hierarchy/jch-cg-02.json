@@ -1,0 +1,9 @@
+{
+  "id" : "jch-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which snippet correctly implements equals() for a class with a single int field 'id'?",
+  "choices" : [ "@Override public boolean equals(Object o) { return this.id == o.id; }", "@Override public boolean equals(Object o) { if (!(o instanceof MyClass c)) return false; return this.id == c.id; }", "@Override public boolean equals(MyClass o) { return this.id == o.id; }", "public static boolean equals(MyClass a, MyClass b) { return a.id == b.id; }" ],
+  "answer" : "b",
+  "explanation" : "equals() takes Object, not the concrete type. You must check instanceof before casting. Option A: o.id won't compile — o is Object. Option C: overloads but doesn't override equals(Object). Option D: static equals doesn't override Object.equals()."
+}

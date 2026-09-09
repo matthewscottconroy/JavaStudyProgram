@@ -1,0 +1,9 @@
+{
+  "id" : "db-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does ResultSet.getString(\"column\") do?",
+  "choices" : [ "Returns the column's value as a Java String for the current row", "Returns all values in the named column as a List<String>", "Sets the current row's column value to the given string", "Returns the SQL column definition" ],
+  "answer" : "a",
+  "explanation" : "After rs.next(), getString(\"column\") retrieves the current row's value in the named column as a String. For other types: getInt(\"age\"), getDouble(\"price\"), getBoolean(\"active\"). Columns can also be accessed by 1-based index: getString(1)."
+}

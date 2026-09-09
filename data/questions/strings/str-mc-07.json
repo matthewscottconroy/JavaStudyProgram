@@ -1,0 +1,9 @@
+{
+  "id" : "str-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does String.join(\"-\", \"a\", \"b\", \"c\") return?",
+  "choices" : [ "\"a b c\"", "\"abc\"", "\"a-b-c\"", "\"a, b, c\"" ],
+  "answer" : "c",
+  "explanation" : "String.join(delimiter, elements...) joins the elements with the delimiter between them. String.join(\"-\", \"a\", \"b\", \"c\") → \"a-b-c\". Also works with a List: String.join(\", \", list)."
+}

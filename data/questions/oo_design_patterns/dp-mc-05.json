@@ -1,0 +1,9 @@
+{
+  "id" : "dp-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What problem does the Builder pattern solve?",
+  "choices" : [ "Creating only one instance of a class", "Telescoping constructor problem — classes with many optional fields require many constructor overloads", "Decoupling the interface from its implementation", "Notifying observers of state changes" ],
+  "answer" : "b",
+  "explanation" : "Builder lets you construct an object step-by-step: Person.builder().name(\"Alice\").age(30).email(\"a@b.com\").build(). This avoids constructors with many nullable parameters and makes the construction readable. Lombok's @Builder generates this automatically."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "glay-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which creates a JFrame with a toolbar at the top and a main content area in the center?",
+  "choices" : [ "JFrame f = new JFrame(); f.add(toolbar); f.add(content);", "JFrame f = new JFrame(); f.setLayout(new BorderLayout()); f.add(toolbar, BorderLayout.NORTH); f.add(new JScrollPane(content), BorderLayout.CENTER);", "JFrame f = new JFrame(); f.setLayout(new GridLayout(2, 1)); f.add(toolbar); f.add(content);", "JFrame f = new JFrame(); f.add(toolbar, 0); f.add(content, 1);" ],
+  "answer" : "b",
+  "explanation" : "BorderLayout is the right choice: NORTH for fixed-height toolbars, CENTER for the main resizable content. JFrame's default layout is BorderLayout, so the setLayout call is optional here. Option C uses GridLayout which makes toolbar and content equal height."
+}

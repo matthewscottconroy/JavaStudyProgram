@@ -1,0 +1,9 @@
+{
+  "id" : "clh-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "An Animal reference points to a Dog object. You can call which methods on it?",
+  "choices" : [ "Only methods defined in Dog", "Only methods defined in Animal", "Methods from both Dog and Animal, but the compiler only sees Animal's interface", "No methods — you must cast first" ],
+  "answer" : "c",
+  "explanation" : "The reference type (Animal) determines what the compiler allows you to call. You can only call methods declared in Animal. At runtime, if Dog overrides a method, the Dog version runs (dynamic dispatch). Cast to Dog to access Dog-specific methods."
+}

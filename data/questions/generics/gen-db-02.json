@@ -1,0 +1,10 @@
+{
+  "id" : "gen-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This causes a compile error. Why?",
+  "code" : "List<Integer> ints = new ArrayList<>();\nList<Number> nums = ints;  // error",
+  "choices" : [ "ArrayList cannot be assigned to List", "List<Integer> is not a subtype of List<Number> — generics are invariant", "Number must be imported before use", "Integer cannot be widened to Number in generics" ],
+  "answer" : "b",
+  "explanation" : "Java generics are invariant: List<Integer> is not a List<Number>, even though Integer extends Number. Allowing this would break type safety (you could add a Double to what the code thinks is a List<Integer>). Use wildcards: List<? extends Number> nums = ints; — read-only, no add."
+}

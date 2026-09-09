@@ -1,0 +1,9 @@
+{
+  "id" : "g2d-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which draws an anti-aliased blue rectangle outline with a 2-pixel border?",
+  "choices" : [ "g.setColor(Color.BLUE); g.drawRect(10,10,80,50);", "Graphics2D g2d = (Graphics2D) g; g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON); g2d.setStroke(new BasicStroke(2f)); g2d.setColor(Color.BLUE); g2d.drawRect(10,10,80,50);", "g.setStroke(2); g.drawRect(10,10,80,50);", "Graphics2D g2d = (Graphics2D) g; g2d.setColor(Color.BLUE); g2d.fillRect(10,10,80,50);" ],
+  "answer" : "b",
+  "explanation" : "Enable anti-aliasing via RenderingHints, set stroke width with BasicStroke(2f), set color, then drawRect for the outline. Option A lacks stroke width control. Option C: Graphics has no setStroke method. Option D draws a filled rectangle, not an outline."
+}

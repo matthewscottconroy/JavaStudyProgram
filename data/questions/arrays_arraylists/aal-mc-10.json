@@ -1,0 +1,9 @@
+{
+  "id" : "aal-mc-10",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the correct way to remove elements while iterating an ArrayList?",
+  "choices" : [ "Use a regular for-each loop and call list.remove() inside", "Use an Iterator and call iterator.remove()", "Use a regular for loop with index and call list.remove(i)", "Both b and c are safe approaches" ],
+  "answer" : "d",
+  "explanation" : "Iterator.remove() safely removes during traversal. A backward index loop (i-- after remove) also works. A forward index loop without adjustment skips elements. For-each with list.remove() throws ConcurrentModificationException. removeIf() is the cleanest modern approach."
+}

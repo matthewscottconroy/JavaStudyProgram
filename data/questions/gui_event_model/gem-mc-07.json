@@ -1,0 +1,9 @@
+{
+  "id" : "gem-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does SwingWorker provide?",
+  "choices" : [ "A way to create multiple JFrames from different threads", "A background thread that can safely update Swing components when done", "A faster alternative to the Event Dispatch Thread", "A thread pool for handling multiple button clicks simultaneously" ],
+  "answer" : "b",
+  "explanation" : "SwingWorker<T,V> executes work in background via doInBackground(), then updates the UI in done() which runs on the EDT. process(List<V> chunks) is called on the EDT for intermediate results. Ideal for long-running tasks like network calls triggered by a button."
+}

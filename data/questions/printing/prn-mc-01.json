@@ -1,0 +1,9 @@
+{
+  "id" : "prn-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "Which method prints output and moves the cursor to the next line?",
+  "choices" : [ "System.out.print()", "System.out.println()", "System.out.write()", "Console.print()" ],
+  "answer" : "b",
+  "explanation" : "println (print-line) appends a newline after the output. print() leaves the cursor on the same line. System.out.write() works with byte streams. Console.print() is not a standard Java method."
+}

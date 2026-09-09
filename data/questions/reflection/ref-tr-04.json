@@ -1,0 +1,9 @@
+{
+  "id" : "ref-tr-04",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "class Animal { public int legs = 4; }\nAnimal a = new Animal();\nField f = a.getClass().getField(\"legs\");\nf.set(a, 6);\nSystem.out.println(a.legs);",
+  "answer" : "6",
+  "explanation" : "f.set(a, 6) reflectively sets the public field 'legs' to 6. a.legs is then 6. Public fields don't require setAccessible(true)."
+}

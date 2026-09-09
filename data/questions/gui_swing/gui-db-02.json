@@ -1,0 +1,10 @@
+{
+  "id" : "gui-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "A student creates a JFrame but nothing appears on screen. What is missing?",
+  "code" : "JFrame frame = new JFrame(\"Test\");\nframe.setSize(400, 300);\nframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);\n// missing: frame.setVisible(true);",
+  "choices" : [ "The frame needs components before it can be shown", "setSize must be called after setDefaultCloseOperation", "frame.setVisible(true) is missing — the frame exists but is hidden", "JFrame requires pack() before being visible" ],
+  "answer" : "c",
+  "explanation" : "A JFrame starts invisible. setVisible(true) must be called to display it on screen. Without it, the program runs but no window appears. setVisible should be called last, after all components and settings are configured."
+}

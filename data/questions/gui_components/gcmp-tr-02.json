@@ -1,0 +1,9 @@
+{
+  "id" : "gcmp-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is the selected item after this code?",
+  "code" : "JComboBox<String> box = new JComboBox<>();\nbox.addItem(\"Red\");\nbox.addItem(\"Green\");\nbox.addItem(\"Blue\");\nbox.setSelectedIndex(2);\nSystem.out.println(box.getSelectedItem());",
+  "answer" : "Blue",
+  "explanation" : "Items are indexed from 0. Index 2 is the third item: 'Blue'. getSelectedItem() returns it as Object — println calls toString() on it."
+}

@@ -1,0 +1,10 @@
+{
+  "id" : "lam-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This code has a compile error. Why?",
+  "code" : "int count = 0;\nRunnable r = () -> {\n    count++;   // error here\n    System.out.println(count);\n};",
+  "choices" : [ "Runnable does not support lambdas with bodies", "count++ modifies count, violating the effectively-final requirement for captured variables", "Runnable's run() method cannot print", "int cannot be captured by a lambda" ],
+  "answer" : "b",
+  "explanation" : "Lambdas can only capture effectively final variables. count++ modifies count, making it not effectively final. Fix: use AtomicInteger or an int[] wrapper, both of which are themselves effectively final references."
+}

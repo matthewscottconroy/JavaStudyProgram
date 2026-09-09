@@ -1,0 +1,9 @@
+{
+  "id" : "sapi-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which operation is a terminal operation?",
+  "choices" : [ "filter()", "map()", "sorted()", "collect()" ],
+  "answer" : "d",
+  "explanation" : "Terminal operations trigger stream evaluation and produce a result or side effect. collect(), forEach(), reduce(), count(), findFirst() are terminal. filter(), map(), sorted(), limit() are intermediate — they return a new Stream and are lazy."
+}

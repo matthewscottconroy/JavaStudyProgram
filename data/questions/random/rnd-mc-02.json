@@ -1,0 +1,9 @@
+{
+  "id" : "rnd-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does seeding a Random with the same value guarantee?",
+  "choices" : [ "The sequence will be truly random", "The same sequence of random numbers will be produced every run", "The numbers will be cryptographically secure", "The numbers will all be positive" ],
+  "answer" : "b",
+  "explanation" : "Pseudorandom number generators are deterministic given the same seed. new Random(42) always produces the same sequence. This is useful for reproducible tests or simulations. For security, use SecureRandom instead."
+}

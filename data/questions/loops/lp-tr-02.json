@@ -1,0 +1,9 @@
+{
+  "id" : "lp-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "int x = 1;\nwhile (x < 20) {\n    x *= 2;\n}\nSystem.out.println(x);",
+  "answer" : "32",
+  "explanation" : "x doubles each iteration: 1→2→4→8→16→32. When x=32, 32 < 20 is false. 32 is printed after the loop."
+}

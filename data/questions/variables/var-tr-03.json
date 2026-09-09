@@ -1,0 +1,10 @@
+{
+  "id" : "var-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is the value of result after this code runs?",
+  "code" : "int a = 7;\nint b = 3;\nint result = a % b;",
+  "answer" : "1",
+  "alternatives" : [ "1" ],
+  "explanation" : "% is the modulo (remainder) operator. 7 divided by 3 is 2 remainder 1. So 7 % 3 = 1."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "img-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "How do you draw an image in paintComponent()?",
+  "choices" : [ "g.render(image, x, y)", "g.drawImage(image, x, y, this)", "image.draw(g, x, y)", "ImagePainter.draw(g, image, x, y)" ],
+  "answer" : "b",
+  "explanation" : "Graphics.drawImage(Image img, int x, int y, ImageObserver observer) draws the image with its top-left at (x, y). Pass 'this' as the observer (the JPanel implements ImageObserver). You can also scale: drawImage(img, x, y, width, height, this)."
+}

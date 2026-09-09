@@ -1,0 +1,9 @@
+{
+  "id" : "col-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "import java.util.*;\nSet<String> s = new TreeSet<>();\ns.add(\"banana\");\ns.add(\"apple\");\ns.add(\"cherry\");\ns.add(\"apple\");\nSystem.out.println(s.size() + \" \" + s.first());",
+  "answer" : "3 apple",
+  "explanation" : "TreeSet sorts alphabetically and rejects duplicates. After 4 adds: {apple, banana, cherry}. size()=3. first()=apple (smallest)."
+}

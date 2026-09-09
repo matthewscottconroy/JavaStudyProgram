@@ -1,0 +1,9 @@
+{
+  "id" : "thr-tr-04",
+  "type" : "TRACING",
+  "difficulty" : 4,
+  "prompt" : "What does this code guarantee about output ordering?",
+  "code" : "CompletableFuture<String> cf = CompletableFuture.supplyAsync(() -> \"Hello\")\n    .thenApply(s -> s + \" World\");\nSystem.out.println(cf.get());",
+  "answer" : "Hello World",
+  "explanation" : "supplyAsync runs the supplier on a background thread returning \"Hello\". thenApply appends \" World\". cf.get() blocks until the future completes and returns the result. Output: \"Hello World\"."
+}

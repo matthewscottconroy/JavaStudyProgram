@@ -1,0 +1,9 @@
+{
+  "id" : "lam-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "Which functional interface represents a function that takes no arguments and returns a value?",
+  "choices" : [ "Runnable", "Consumer<T>", "Supplier<T>", "Function<Void, T>" ],
+  "answer" : "c",
+  "explanation" : "Supplier<T> has one method: T get(). Runnable takes nothing and returns void. Consumer<T> takes T and returns void. Function<A,B> takes A and returns B. Example: Supplier<String> now = () -> LocalDateTime.now().toString();"
+}

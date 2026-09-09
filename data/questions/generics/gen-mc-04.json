@@ -1,0 +1,9 @@
+{
+  "id" : "gen-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does type erasure mean in Java generics?",
+  "choices" : [ "Generic types are checked at runtime", "Generic type information is removed at compile time and unavailable at runtime", "Only primitive types are erased", "The compiler inserts extra memory for generic types" ],
+  "answer" : "b",
+  "explanation" : "Java generics are implemented via type erasure: the compiler uses generic info for type checking, then removes it. At runtime, List<String> and List<Integer> are both just List. This means you cannot use instanceof with a generic type parameter."
+}

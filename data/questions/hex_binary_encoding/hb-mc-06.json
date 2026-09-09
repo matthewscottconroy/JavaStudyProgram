@@ -1,0 +1,9 @@
+{
+  "id" : "hb-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does Integer.parseInt(\"1A\", 16) return?",
+  "choices" : [ "1", "10", "26", "Throws NumberFormatException" ],
+  "answer" : "c",
+  "explanation" : "parseInt(String, radix) parses in the given base. Radix 16: 1A = 1*16 + 10 = 26. Similarly: parseInt(\"1010\", 2) = 10 (binary), parseInt(\"17\", 8) = 15 (octal)."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "fpar-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is a side effect in a function?",
+  "choices" : [ "An exception thrown by the function", "Any observable action beyond returning a value — I/O, mutation of external state, logging", "A return value that is ignored by the caller", "A parameter that has a default value" ],
+  "answer" : "b",
+  "explanation" : "Side effects include: writing to a file, printing, modifying a field or argument, calling a network API. Functions with side effects are harder to test and reason about because their behavior depends on and changes the world outside the function."
+}

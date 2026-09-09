@@ -1,0 +1,9 @@
+{
+  "id" : "sapi-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "import java.util.*;\nimport java.util.stream.*;\nList<Integer> nums = List.of(1, 2, 3, 4, 5, 6);\nint result = nums.stream()\n    .filter(n -> n % 2 == 0)\n    .mapToInt(Integer::intValue)\n    .sum();\nSystem.out.println(result);",
+  "answer" : "12",
+  "explanation" : "filter keeps even numbers: 2, 4, 6. sum() adds them: 2+4+6 = 12."
+}

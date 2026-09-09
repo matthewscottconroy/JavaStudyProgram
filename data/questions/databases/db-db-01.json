@@ -1,0 +1,10 @@
+{
+  "id" : "db-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This code is vulnerable to SQL injection. Why?",
+  "code" : "String user = request.getParameter(\"username\");\nStatement stmt = conn.createStatement();\nResultSet rs = stmt.executeQuery(\n    \"SELECT * FROM users WHERE name = '\" + user + \"'\"\n);",
+  "choices" : [ "createStatement() is deprecated", "User input is concatenated directly into the SQL string — a malicious user can inject arbitrary SQL", "executeQuery() returns the wrong type", "The WHERE clause syntax is invalid" ],
+  "answer" : "b",
+  "explanation" : "If user = \"' OR '1'='1\", the query becomes: SELECT * FROM users WHERE name='' OR '1'='1' — returning all rows. Fix: use PreparedStatement with ? placeholder: ps.setString(1, user) — the driver escapes special characters."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "ex-tr-04",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "try {\n    Object o = \"hello\";\n    Integer n = (Integer) o;\n} catch (ClassCastException | NullPointerException e) {\n    System.out.println(e.getClass().getSimpleName());\n}",
+  "answer" : "ClassCastException",
+  "explanation" : "Casting a String to Integer throws ClassCastException. The multi-catch catches it. getSimpleName() returns just the class name, not the full package path."
+}

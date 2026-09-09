@@ -1,0 +1,9 @@
+{
+  "id" : "jch-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does the Comparable interface require a class to implement?",
+  "choices" : [ "equals(Object o)", "compareTo(T other) returning a negative, zero, or positive int", "hashCode()", "clone()" ],
+  "answer" : "b",
+  "explanation" : "Comparable<T> defines natural ordering via compareTo(). Return negative if this < other, 0 if equal, positive if this > other. Collections.sort() and TreeSet use compareTo() when no explicit Comparator is given."
+}

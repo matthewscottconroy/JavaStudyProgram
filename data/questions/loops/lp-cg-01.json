@@ -1,0 +1,10 @@
+{
+  "id" : "lp-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 1,
+  "prompt" : "Which code prints the numbers 1 through 5, each on its own line?",
+  "choices" : [ "for (int i = 1; i < 5; i++) { System.out.println(i); }", "for (int i = 1; i <= 5; i++) { System.out.println(i); }", "for (int i = 0; i < 5; i++) { System.out.println(i); }", "for (int i = 1; i < 6; i++) { System.out.print(i); }" ],
+  "answer" : "b",
+  "explanation" : "i <= 5 includes 5. Option A stops at 4 (i < 5). Option C starts at 0. Option D uses print instead of println.",
+  "hints" : [ "To include n in the range, use i <= n or i < n+1." ]
+}

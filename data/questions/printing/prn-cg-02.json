@@ -1,0 +1,9 @@
+{
+  "id" : "prn-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which prints a person's name and age on one line, formatted as 'Alice is 30 years old.'?",
+  "choices" : [ "System.out.println(name + \"is\" + age + \"years old.\");", "System.out.printf(\"%s is %d years old.%n\", name, age);", "System.out.print(name, age);", "System.out.format(name + age);" ],
+  "answer" : "b",
+  "explanation" : "%s substitutes the String (name), %d substitutes the int (age), %n adds a newline. Option A is missing spaces around 'is'. Option C: println/print take one argument. Option D: format needs a format string with specifiers."
+}

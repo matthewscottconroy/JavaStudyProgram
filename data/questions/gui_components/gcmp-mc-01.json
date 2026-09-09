@@ -1,0 +1,9 @@
+{
+  "id" : "gcmp-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which Swing component displays a single line of editable text?",
+  "choices" : [ "JLabel", "JTextField", "JTextArea", "JButton" ],
+  "answer" : "b",
+  "explanation" : "JTextField is a single-line text input component. JTextArea is multi-line. JLabel displays read-only text. JButton triggers an action. To retrieve the entered text: String text = textField.getText();"
+}

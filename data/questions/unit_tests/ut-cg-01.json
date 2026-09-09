@@ -1,0 +1,9 @@
+{
+  "id" : "ut-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which JUnit 5 test correctly checks that a Calculator.add(2, 3) returns 5?",
+  "choices" : [ "@Test void testAdd() { Calculator.add(2, 3); }", "@Test void testAdd() { assertEquals(5, new Calculator().add(2, 3)); }", "@Test void testAdd() { assertTrue(new Calculator().add(2, 3)); }", "@Check void testAdd() { verify(new Calculator().add(2, 3) == 5); }" ],
+  "answer" : "b",
+  "explanation" : "assertEquals(5, ...) verifies the correct result. Option A calls add but asserts nothing. Option C uses assertTrue on an int, which won't compile (need a boolean). Option D uses fictional @Check and verify()."
+}

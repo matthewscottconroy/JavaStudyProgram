@@ -1,0 +1,9 @@
+{
+  "id" : "gui-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is JFrame in Swing?",
+  "choices" : [ "A dialog box for user input", "The top-level window that holds the application's GUI", "A layout manager", "A thread for GUI operations" ],
+  "answer" : "b",
+  "explanation" : "JFrame is the main application window. It has a title bar, borders, and contains a content pane where you add panels and components."
+}

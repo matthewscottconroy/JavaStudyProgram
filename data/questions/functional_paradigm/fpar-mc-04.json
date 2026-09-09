@@ -1,0 +1,9 @@
+{
+  "id" : "fpar-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is referential transparency?",
+  "choices" : [ "An expression that refers to a variable in an outer scope", "An expression that can be replaced by its value without changing program behavior", "A transparent (see-through) reference type", "A method that returns 'this'" ],
+  "answer" : "b",
+  "explanation" : "Referential transparency means calling f(x) is equivalent to substituting its result everywhere it appears. This holds for pure functions: 2 + 2 is transparently replaceable with 4. Non-referentially-transparent: Math.random(), new Date() — same call, different result each time."
+}

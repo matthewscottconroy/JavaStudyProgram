@@ -1,0 +1,9 @@
+{
+  "id" : "lp-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the difference between a while loop and a do-while loop?",
+  "choices" : [ "While loops use a counter; do-while loops use a boolean", "A while loop checks the condition before each iteration; a do-while always executes at least once", "Do-while loops are faster", "While loops require break; do-while loops use continue" ],
+  "answer" : "b",
+  "explanation" : "while: check condition → maybe execute body → check again. do-while: execute body → check condition → maybe repeat. do-while guarantees at least one execution. Useful for menus: 'show menu, then loop while user doesn't quit'."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "sapi-mc-09",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does Collectors.joining(\", \") do?",
+  "choices" : [ "Concatenates all stream elements into a single String separated by ', '", "Joins all streams into one", "Groups elements by their delimiter", "Splits a String into a Stream" ],
+  "answer" : "a",
+  "explanation" : "Collectors.joining(delimiter) concatenates String stream elements with the delimiter between them. Stream.of(\"a\",\"b\",\"c\").collect(Collectors.joining(\", \")) → \"a, b, c\". Can also take prefix and suffix: joining(\", \", \"[\", \"]\") → \"[a, b, c]\"."
+}

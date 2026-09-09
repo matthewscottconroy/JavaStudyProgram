@@ -1,0 +1,9 @@
+{
+  "id" : "inh-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "class Animal {\n    String speak() { return \"...\"; }\n}\nclass Dog extends Animal {\n    @Override\n    String speak() { return \"Woof\"; }\n}\n// in main:\nAnimal a = new Dog();\nSystem.out.println(a.speak());",
+  "answer" : "Woof",
+  "explanation" : "a is declared as Animal but holds a Dog object. Dynamic dispatch calls Dog's overriding speak(), printing \"Woof\"."
+}

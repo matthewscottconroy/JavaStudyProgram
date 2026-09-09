@@ -1,0 +1,9 @@
+{
+  "id" : "img-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does clip.loop(Clip.LOOP_CONTINUOUSLY) do for an audio Clip?",
+  "choices" : [ "Plays the clip once at double speed", "Repeats the audio clip indefinitely until clip.stop() is called", "Loops the clip exactly 10 times", "Creates a loopback test for the audio hardware" ],
+  "answer" : "b",
+  "explanation" : "Clip.LOOP_CONTINUOUSLY = -1, meaning loop forever. clip.loop(3) would loop 3 additional times (plays 4 total). Use clip.stop() to end playback and clip.setFramePosition(0) to reset to the start."
+}

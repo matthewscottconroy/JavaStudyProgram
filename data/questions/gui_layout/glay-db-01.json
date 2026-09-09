@@ -1,0 +1,10 @@
+{
+  "id" : "glay-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "Only the last button is visible. Why?",
+  "code" : "JFrame frame = new JFrame();\n// Default layout is BorderLayout\nframe.add(new JButton(\"A\"));\nframe.add(new JButton(\"B\"));\nframe.add(new JButton(\"C\"));\nframe.setVisible(true);",
+  "choices" : [ "BorderLayout can only show one component and defaults to CENTER", "add() requires a position argument in BorderLayout — without it all go to CENTER, each replacing the last", "JFrame cannot hold JButtons directly", "Three buttons exceed BorderLayout's component limit" ],
+  "answer" : "b",
+  "explanation" : "BorderLayout.add(component) without a constraint defaults to CENTER. Each subsequent add() to the same region replaces the previous one. Only button 'C' is visible. Fix: use a JPanel with FlowLayout for multiple buttons, or specify distinct regions for each."
+}

@@ -1,0 +1,10 @@
+{
+  "id" : "thr-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This code has a potential visibility problem. What is it?",
+  "code" : "class Worker {\n    boolean running = true;\n    void stop() { running = false; }\n    void run() { while (running) { /* work */ } }\n}",
+  "choices" : [ "running must be static to be shared between threads", "Without volatile, the JVM may cache 'running' in a CPU register — the worker thread may never see the updated false value", "boolean fields cannot be assigned false", "stop() must be synchronized to change running" ],
+  "answer" : "b",
+  "explanation" : "The JVM can cache field values in CPU registers for performance. A thread calling stop() writes false, but the worker thread may still read the stale cached true. Fix: declare 'volatile boolean running = true;' to force reads/writes through main memory."
+}

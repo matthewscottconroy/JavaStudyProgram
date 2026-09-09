@@ -1,0 +1,9 @@
+{
+  "id" : "arg-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is printed by 'java App hello world' if main does: System.out.println(String.join(\"-\", args))?",
+  "choices" : [ "hello world", "hello-world", "args[0]-args[1]", "Throws exception" ],
+  "answer" : "b",
+  "explanation" : "String.join(\"-\", args) joins all elements of the String[] with \"-\" as delimiter. args = [\"hello\", \"world\"] → \"hello-world\"."
+}

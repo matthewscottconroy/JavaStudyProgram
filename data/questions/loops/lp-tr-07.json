@@ -1,0 +1,9 @@
+{
+  "id" : "lp-tr-07",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "int[] nums = {5, 3, 8, 1};\nint max = nums[0];\nfor (int n : nums) {\n    if (n > max) max = n;\n}\nSystem.out.println(max);",
+  "answer" : "8",
+  "explanation" : "max starts at 5. Loop: 5 not > 5; 3 not > 5; 8 > 5 → max=8; 1 not > 8. Final max = 8."
+}

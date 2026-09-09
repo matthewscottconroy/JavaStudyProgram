@@ -1,0 +1,9 @@
+{
+  "id" : "aal-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which code correctly creates a typed ArrayList and adds one element?",
+  "choices" : [ "ArrayList list = new ArrayList(); list.add(\"hello\");", "ArrayList<String> list = new ArrayList<>(); list.add(\"hello\");", "String[] list = new ArrayList<>(); list.add(\"hello\");", "List list = ArrayList.create(); list.add(\"hello\");" ],
+  "answer" : "b",
+  "explanation" : "ArrayList<String> is the properly typed form — the compiler checks element types. Option A uses a raw type (no generic — works but generates warnings). Option C declares list as String[] (an array, not a list). Option D: ArrayList.create() does not exist."
+}

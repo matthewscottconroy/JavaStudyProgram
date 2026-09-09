@@ -1,0 +1,9 @@
+{
+  "id" : "hb-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the binary representation of the decimal number 13?",
+  "choices" : [ "1101", "1011", "1110", "1100" ],
+  "answer" : "a",
+  "explanation" : "13 = 8 + 4 + 1 = 2³ + 2² + 2⁰ = 1101 in binary. 1011 = 11, 1110 = 14, 1100 = 12."
+}

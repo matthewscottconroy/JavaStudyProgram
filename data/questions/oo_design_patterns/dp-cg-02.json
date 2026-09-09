@@ -1,0 +1,9 @@
+{
+  "id" : "dp-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which implements the Observer pattern to notify listeners of a price change?",
+  "choices" : [ "class Stock { double price; void setPrice(double p) { price = p; } }", "class Stock { List<PriceListener> listeners = new ArrayList<>(); void addListener(PriceListener l) { listeners.add(l); } void setPrice(double p) { this.price = p; listeners.forEach(l -> l.onPriceChange(p)); } double price; }", "class Stock { static PriceListener listener; void setPrice(double p) { listener.onPriceChange(p); } }", "interface Stock { void setPrice(double p); }" ],
+  "answer" : "b",
+  "explanation" : "Observer: the Subject (Stock) maintains a list of observers (PriceListener). When state changes, it notifies all registered observers. Option A changes state without notifying anyone. Option C uses a static single observer (not a list, not extensible)."
+}

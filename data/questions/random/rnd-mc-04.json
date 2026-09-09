@@ -1,0 +1,9 @@
+{
+  "id" : "rnd-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does Math.random() return?",
+  "choices" : [ "A random int from 0 to Integer.MAX_VALUE", "A random double in [0.0, 1.0)", "A random double in [0.0, 1.0]", "A random boolean" ],
+  "answer" : "b",
+  "explanation" : "Math.random() returns a double d where 0.0 <= d < 1.0. The upper bound (1.0) is exclusive. It is internally backed by a shared Random instance."
+}

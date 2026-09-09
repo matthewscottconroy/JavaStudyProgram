@@ -1,0 +1,9 @@
+{
+  "id" : "evo-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 4,
+  "prompt" : "Which best represents a simple binary chromosome mutation (flip one bit)?",
+  "choices" : [ "chromosome[0] = 1;", "int idx = rng.nextInt(chromosome.length); chromosome[idx] = 1 - chromosome[idx];", "Arrays.fill(chromosome, 0);", "chromosome = new int[chromosome.length];" ],
+  "answer" : "b",
+  "explanation" : "Randomly pick one position (rng.nextInt(length)) and flip the bit: 0→1 or 1→0 using (1 - bit). Option A always sets position 0 to 1 (not random). Option C zeroes all genes (destroys the individual). Option D resets to default values (all 0s), losing all information."
+}

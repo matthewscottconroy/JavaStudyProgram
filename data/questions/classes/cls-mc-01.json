@@ -1,0 +1,9 @@
+{
+  "id" : "cls-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "What is a constructor?",
+  "choices" : [ "A method that destroys an object", "A special method called automatically when an object is created", "A keyword that defines a class", "A method that always returns void" ],
+  "answer" : "b",
+  "explanation" : "A constructor initializes a new object. It has the same name as the class and no return type (not even void). It is called via the 'new' keyword."
+}

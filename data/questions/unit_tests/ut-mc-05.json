@@ -1,0 +1,9 @@
+{
+  "id" : "ut-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the purpose of @AfterEach?",
+  "choices" : [ "Runs once after all tests in the class", "Runs after each individual test method — used for cleanup", "Skips the next test if the current one passed", "Marks a test as expected to fail" ],
+  "answer" : "b",
+  "explanation" : "@AfterEach (like @BeforeEach's inverse) runs after every @Test. Use it to tear down shared state: close files, clear caches, reset mocks. @AfterAll runs once after all tests (must be static in standard config)."
+}

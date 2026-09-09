@@ -1,0 +1,9 @@
+{
+  "id" : "lam-cg-03",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which uses a Supplier to lazily create a default message?",
+  "choices" : [ "String msg = getMessage();", "Supplier<String> msg = () -> \"Hello, World!\"; System.out.println(msg.get());", "Function<String> msg = () -> \"Hello, World!\";", "Supplier<String> msg = \"Hello, World!\";" ],
+  "answer" : "b",
+  "explanation" : "Supplier<T> wraps a no-arg function returning T. .get() triggers evaluation. This enables lazy initialization — msg isn't evaluated until .get() is called. Option C: Function<String> needs two type parameters. Option D: you can't assign a String literal to a Supplier."
+}

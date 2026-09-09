@@ -1,0 +1,9 @@
+{
+  "id" : "str-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Why should you use .equals() instead of == to compare String content?",
+  "choices" : [ "== is slower for Strings", "== compares object references, not character content", "equals() is case-insensitive", ".equals() works on any type, == only works on int" ],
+  "answer" : "b",
+  "explanation" : "== checks if two references point to the same object in memory. Two separate String objects with the same characters will fail ==. Use .equals() for content comparison; .equalsIgnoreCase() to ignore case."
+}

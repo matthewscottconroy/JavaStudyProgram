@@ -1,0 +1,9 @@
+{
+  "id" : "fp-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which class reads a text file line by line efficiently?",
+  "choices" : [ "FileReader", "BufferedReader", "FileInputStream", "Scanner" ],
+  "answer" : "b",
+  "explanation" : "BufferedReader wraps a FileReader and buffers input, making readLine() efficient. FileReader reads character by character. FileInputStream reads bytes. Scanner works but is slower for large files."
+}

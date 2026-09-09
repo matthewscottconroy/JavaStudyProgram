@@ -1,0 +1,10 @@
+{
+  "id" : "ide-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "After renaming method 'calculate' to 'compute' using Find-Replace, the project fails to compile. Why?",
+  "code" : "// Used Find/Replace to rename 'calculate' → 'compute'\n// Error: cannot find symbol: method calculate()\n// in ExternalLib.java which calls: obj.calculate()",
+  "choices" : [ "Find-Replace renames in all files automatically", "Find-Replace missed a call site in another file — IDE Rename refactoring updates all usages", "Renaming methods requires restarting the IDE", "Method names cannot be changed after compilation" ],
+  "answer" : "b",
+  "explanation" : "Find-Replace is text-based and may miss call sites in other files, skip overrides in subclasses, or incorrectly rename unrelated strings that contain the same word. IDE refactoring (Shift+F6) performs a semantic rename aware of the class hierarchy and all usages."
+}

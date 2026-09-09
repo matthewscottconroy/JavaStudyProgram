@@ -1,0 +1,10 @@
+{
+  "id" : "fp-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "The file is written but appears empty. Why?",
+  "code" : "FileWriter fw = new FileWriter(\"output.txt\");\nfw.write(\"Hello\");\n// fw.close() is never called",
+  "choices" : [ "FileWriter cannot write Strings", "FileWriter buffers output and flushes only when close() (or flush()) is called", "write() requires a byte array, not a String", "output.txt must exist before writing" ],
+  "answer" : "b",
+  "explanation" : "FileWriter (and most Writers) buffer writes for efficiency. The buffer is flushed to disk only when flush() or close() is called. If close() is never called, the buffered data is lost when the program exits. Use try-with-resources to guarantee close(): try (FileWriter fw = new FileWriter(...)) { ... }"
+}

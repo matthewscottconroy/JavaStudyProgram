@@ -1,0 +1,9 @@
+{
+  "id" : "cls-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "How many times is the constructor called in this code?\n\n    Dog a = new Dog(\"Rex\");\n    Dog b = a;\n    Dog c = new Dog(\"Fido\");",
+  "choices" : [ "3", "2", "1", "0" ],
+  "answer" : "b",
+  "explanation" : "new Dog(...) calls the constructor. 'Dog b = a;' copies the reference, not the object. So the constructor is called exactly twice (for 'a' and 'c')."
+}

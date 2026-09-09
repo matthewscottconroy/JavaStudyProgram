@@ -1,0 +1,9 @@
+{
+  "id" : "rnd-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which produces a random int in the range [5, 15]?",
+  "choices" : [ "new Random().nextInt(10)", "new Random().nextInt(10) + 5", "new Random().nextInt(11) + 5", "new Random().nextInt(15) + 5" ],
+  "answer" : "c",
+  "explanation" : "nextInt(11) gives 0–10. Adding 5 shifts the range to 5–15 (inclusive). nextInt(10) + 5 gives 5–14. nextInt(15) + 5 gives 5–19. Formula: nextInt(max - min + 1) + min."
+}

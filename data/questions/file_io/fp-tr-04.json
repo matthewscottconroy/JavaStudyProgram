@@ -1,0 +1,9 @@
+{
+  "id" : "fp-tr-04",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed if notes.txt contains: line1\\nline2\\nline3?",
+  "code" : "long count = Files.lines(Path.of(\"notes.txt\")).count();\nSystem.out.println(count);",
+  "answer" : "3",
+  "explanation" : "Files.lines() returns a Stream of each line. count() terminal operation returns the number of elements: 3."
+}

@@ -1,0 +1,10 @@
+{
+  "id" : "swng-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "The JDialog blocks the main window even though it should be non-modal. Why?",
+  "code" : "JDialog dialog = new JDialog(frame, \"Info\", true);  // true = modal\ndialog.add(new JLabel(\"Processing...\"));\ndialog.pack();\ndialog.setVisible(true);",
+  "choices" : [ "JDialog is always modal by default", "The third constructor parameter is 'true' for modal — change to 'false' for non-modal", "setVisible(true) always blocks on JDialog", "Only JFrame can be non-modal" ],
+  "answer" : "b",
+  "explanation" : "new JDialog(parentFrame, title, modal) — the boolean controls modality. true = modal (blocks the parent). false = modeless (parent remains interactive). Change to: new JDialog(frame, \"Info\", false);"
+}

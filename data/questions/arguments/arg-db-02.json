@@ -1,0 +1,10 @@
+{
+  "id" : "arg-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "Running 'java App hello' throws NumberFormatException. Why?",
+  "code" : "public static void main(String[] args) {\n    int n = Integer.parseInt(args[0]);\n    System.out.println(n * 2);\n}",
+  "choices" : [ "args[0] is null when a word is passed", "Integer.parseInt throws NumberFormatException when the string is not a valid integer", "hello is a reserved keyword in Java", "parseInt can only be called on numbers, not variables" ],
+  "answer" : "b",
+  "explanation" : "parseInt(\"hello\") throws NumberFormatException because \"hello\" cannot be parsed as an integer. Always validate: try { int n = Integer.parseInt(args[0]); } catch (NumberFormatException e) { ... }"
+}

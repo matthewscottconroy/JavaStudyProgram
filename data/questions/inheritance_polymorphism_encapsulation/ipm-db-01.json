@@ -1,0 +1,10 @@
+{
+  "id" : "ipm-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "Why does this Rectangle/Square design violate LSP?",
+  "code" : "class Rectangle {\n    int width, height;\n    void setWidth(int w) { width = w; }\n    void setHeight(int h) { height = h; }\n    int area() { return width * height; }\n}\nclass Square extends Rectangle {\n    void setWidth(int w) { width = height = w; }\n    void setHeight(int h) { width = height = h; }\n}",
+  "choices" : [ "Square cannot extend Rectangle in Java", "Square overrides setWidth/setHeight, breaking code that expects them to be independent", "area() returns wrong values for Square", "Square must also override area()" ],
+  "answer" : "b",
+  "explanation" : "Code written for Rectangle assumes setting width doesn't change height. Square violates that contract. A method expecting a Rectangle may compute the wrong area when a Square is substituted. LSP requires subtypes to honour the contracts of their supertypes."
+}

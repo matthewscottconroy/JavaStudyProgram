@@ -1,0 +1,10 @@
+{
+  "id" : "meta-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "The compiler rejects this annotation usage. Why?",
+  "code" : "@Target(java.lang.annotation.ElementType.METHOD)\n@interface Log {}\n\n@Log  // applied to a field\nprivate int count;",
+  "choices" : [ "@Log requires parentheses: @Log()", "Field names cannot start with 'count'", "@Log has @Target(METHOD) — it can only be applied to methods, not fields", "@interface declarations must be public" ],
+  "answer" : "c",
+  "explanation" : "@Target(ElementType.METHOD) restricts @Log to methods only. Applying it to a field causes a compile error: 'annotation type not applicable to this kind of declaration'. To allow both, use @Target({ElementType.METHOD, ElementType.FIELD})."
+}

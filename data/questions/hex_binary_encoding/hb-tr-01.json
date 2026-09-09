@@ -1,0 +1,9 @@
+{
+  "id" : "hb-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "int x = 0b1010;\nint y = 0xFF;\nSystem.out.println(x);\nSystem.out.println(y);\nSystem.out.println((int)'A');",
+  "answer" : "10\n255\n65",
+  "explanation" : "0b1010 = 10 (binary). 0xFF = 255 (hex). (int)'A' is the ASCII value 65."
+}

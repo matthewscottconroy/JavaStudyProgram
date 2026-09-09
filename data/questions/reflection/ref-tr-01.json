@@ -1,0 +1,9 @@
+{
+  "id" : "ref-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "import java.lang.reflect.*;\nclass Point { public int x = 10; public int y = 20; }\n// in main:\nPoint p = new Point();\nField[] fields = p.getClass().getFields();\nSystem.out.println(fields.length);",
+  "answer" : "2",
+  "explanation" : "getFields() returns all public fields. Point has two: x and y. getDeclaredFields() would also include private ones."
+}

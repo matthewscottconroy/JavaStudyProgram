@@ -1,0 +1,9 @@
+{
+  "id" : "jch-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the difference between Comparable and Comparator in Java?",
+  "choices" : [ "Comparable is for primitives; Comparator is for objects", "Comparable defines the class's own natural ordering; Comparator defines an external/alternate ordering", "Comparable can only compare Strings; Comparator can compare any type", "They are identical — Comparator extends Comparable" ],
+  "answer" : "b",
+  "explanation" : "Comparable is implemented by the class itself (intrinsic ordering). Comparator is a separate object defining an alternate sort order — useful when you need multiple orderings (e.g., sort by name, then by age) or when you can't modify the class."
+}

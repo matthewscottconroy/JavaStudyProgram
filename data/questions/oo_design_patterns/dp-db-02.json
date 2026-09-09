@@ -1,0 +1,10 @@
+{
+  "id" : "dp-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This violates the Single Responsibility Principle. Why?",
+  "code" : "class Report {\n    void generateContent() { /* business logic */ }\n    void saveToFile(String path) { /* file I/O */ }\n    void sendByEmail(String addr) { /* networking */ }\n}",
+  "choices" : [ "Report has too many methods", "Report has three separate responsibilities (content, persistence, delivery) — three reasons to change", "generateContent() and saveToFile() should be static", "The class mixes public and private methods" ],
+  "answer" : "b",
+  "explanation" : "SRP: Report changes if the content format changes, if the file system changes, or if the email system changes. Fix: split into Report (content), ReportWriter (file I/O), and ReportMailer (email). Each class has one reason to change."
+}

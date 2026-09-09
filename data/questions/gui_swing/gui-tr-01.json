@@ -1,0 +1,9 @@
+{
+  "id" : "gui-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "Which method should wrap Swing startup code for thread safety?",
+  "code" : "// Swing startup snippet:\npublic static void main(String[] args) {\n    // ??? — place the JFrame creation here safely\n    JFrame f = new JFrame(\"Hello\");\n    f.setSize(300, 200);\n    f.setVisible(true);\n}",
+  "answer" : "SwingUtilities.invokeLater(() -> { JFrame f = ...; })",
+  "explanation" : "The startup code should be wrapped in SwingUtilities.invokeLater() to ensure it runs on the Event Dispatch Thread."
+}

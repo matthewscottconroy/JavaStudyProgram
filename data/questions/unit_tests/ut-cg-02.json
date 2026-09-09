@@ -1,0 +1,9 @@
+{
+  "id" : "ut-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which test verifies that a method throws IllegalArgumentException for negative input?",
+  "choices" : [ "@Test void test() { calculator.sqrt(-1); }", "@Test void test() { try { calculator.sqrt(-1); } catch (Exception e) { assertTrue(true); } }", "@Test void test() { assertThrows(IllegalArgumentException.class, () -> calculator.sqrt(-1)); }", "@Test void test() { assertEquals(IllegalArgumentException.class, calculator.sqrt(-1)); }" ],
+  "answer" : "c",
+  "explanation" : "assertThrows(ExType.class, executable) verifies the executable throws exactly that exception type. It also returns the exception for further inspection. Option A: if no exception is thrown, test passes silently. Option B: fragile — passes even if no exception is thrown."
+}

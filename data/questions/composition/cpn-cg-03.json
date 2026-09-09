@@ -1,0 +1,9 @@
+{
+  "id" : "cpn-cg-03",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which correctly applies the Decorator pattern to add logging to a DataService?",
+  "choices" : [ "class LoggingService extends DataService { @Override void save(String d) { log(d); super.save(d); } }", "interface DataService { void save(String d); }\nclass LoggingService implements DataService {\n    private DataService delegate;\n    LoggingService(DataService ds) { this.delegate = ds; }\n    public void save(String d) { System.out.println(\"Saving: \" + d); delegate.save(d); }\n}", "class DataService { static void log(String d) { System.out.println(d); } }", "class DataService { void save(String d) { } void logAndSave(String d) { log(); save(d); } }" ],
+  "answer" : "b",
+  "explanation" : "Decorator: implements the same interface as the wrapped object, holds a reference to it, and adds behavior before/after delegation. Option A uses inheritance (extends) — valid but breaks if DataService is final or has many methods. Option C adds a static method, not a decorator. Option D modifies the original class instead of decorating it."
+}

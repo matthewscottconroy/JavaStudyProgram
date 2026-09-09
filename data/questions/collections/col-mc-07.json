@@ -1,0 +1,9 @@
+{
+  "id" : "col-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which collection maintains elements in sorted (natural) order automatically?",
+  "choices" : [ "HashSet", "ArrayList", "TreeSet", "LinkedHashSet" ],
+  "answer" : "c",
+  "explanation" : "TreeSet stores elements in sorted order (natural ordering or Comparator). HashSet: no order guarantee. LinkedHashSet: insertion order. ArrayList: insertion order, allows duplicates."
+}

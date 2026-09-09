@@ -1,0 +1,9 @@
+{
+  "id" : "meta-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does @Inherited mean on an annotation declaration?",
+  "choices" : [ "The annotation is shared between all instances of a class", "If a class has this annotation, its subclasses automatically inherit it", "The annotation can be used on interfaces", "The annotation is visible to sub-packages" ],
+  "answer" : "b",
+  "explanation" : "@Inherited (java.lang.annotation) makes a class-level annotation automatically inherited by subclasses. Example: @Retention(RUNTIME) @Inherited @interface Audited {} — if Dog has @Audited, Poodle extends Dog also has it accessible via getAnnotation(Audited.class). @Inherited only works on class annotations, not methods or fields."
+}

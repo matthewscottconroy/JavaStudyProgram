@@ -1,0 +1,9 @@
+{
+  "id" : "kbd-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which interface handles keyboard events in Swing?",
+  "choices" : [ "KeyHandler", "KeyAdapter", "KeyListener", "InputListener" ],
+  "answer" : "c",
+  "explanation" : "java.awt.event.KeyListener has 3 methods: keyPressed (key goes down), keyReleased (key comes up), keyTyped (a character is generated). Like MouseListener, use KeyAdapter to override only what you need."
+}

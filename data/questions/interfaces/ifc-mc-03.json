@@ -1,0 +1,9 @@
+{
+  "id" : "ifc-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "How many interfaces can a Java class implement?",
+  "choices" : [ "Only 1", "At most 2", "At most 3", "As many as needed" ],
+  "answer" : "d",
+  "explanation" : "A class can implement multiple interfaces, separated by commas: 'class MyClass implements Runnable, Comparable<MyClass>, AutoCloseable { ... }'. This is how Java achieves a form of multiple inheritance."
+}

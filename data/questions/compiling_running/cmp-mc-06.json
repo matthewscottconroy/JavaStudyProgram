@@ -1,0 +1,9 @@
+{
+  "id" : "cmp-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does the JVM (Java Virtual Machine) do?",
+  "choices" : [ "Compiles .java files into .class files", "Executes Java bytecode (.class files) on any platform", "Links C libraries with Java code", "Manages the pom.xml dependencies" ],
+  "answer" : "b",
+  "explanation" : "javac compiles .java → .class (bytecode). The JVM executes the bytecode on the specific platform. This is why Java is 'write once, run anywhere' — the same .class runs on any JVM. The JVM also manages memory (garbage collection) and provides the standard library."
+}

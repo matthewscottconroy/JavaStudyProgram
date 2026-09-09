@@ -1,0 +1,9 @@
+{
+  "id" : "g2d-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "Which rendering hint enables anti-aliasing for smoother shapes?",
+  "choices" : [ "g2d.setSmooth(true)", "g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)", "g2d.setStroke(new BasicStroke(2, BasicStroke.SMOOTH, BasicStroke.ROUND))", "g2d.setQuality(HIGH)" ],
+  "answer" : "b",
+  "explanation" : "RenderingHints.KEY_ANTIALIASING with VALUE_ANTIALIAS_ON enables anti-aliased rendering for shapes and text, producing smoother edges. This is especially visible for diagonal lines and curves at low resolutions."
+}

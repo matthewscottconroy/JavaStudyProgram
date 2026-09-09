@@ -1,0 +1,9 @@
+{
+  "id" : "ml-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 4,
+  "prompt" : "Which Java library is commonly used for machine learning tasks?",
+  "choices" : [ "java.ml (built-in ML package)", "Weka or Deeplearning4j (DL4J)", "java.ai.learn", "javax.neuralnet" ],
+  "answer" : "b",
+  "explanation" : "Weka provides classic ML algorithms (decision trees, SVM, clustering) in Java. Deeplearning4j (DL4J) provides deep learning. Many practitioners call Python libraries (scikit-learn, TensorFlow, PyTorch) via subprocess or use REST APIs rather than pure Java ML libraries."
+}

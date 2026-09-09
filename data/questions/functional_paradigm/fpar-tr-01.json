@@ -1,0 +1,10 @@
+{
+  "id" : "fpar-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed? (Assume add is a pure function: int add(int a, int b) { return a + b; })",
+  "code" : "int x = add(2, 3);\nint y = add(2, 3);\nSystem.out.println(x == y);\nSystem.out.println(x + y);",
+  "answer" : "true\n10",
+  "alternatives" : [ "add(2,3) always returns 5 (pure, deterministic). x and y are both 5. x == y → true. x + y = 10." ],
+  "explanation" : "true\n10"
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "gem-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "Which method fires when a JSlider value changes?",
+  "code" : "JSlider slider = new JSlider(0, 100, 50);\nslider.addChangeListener(e -> System.out.println(slider.getValue()));\n// User drags slider to 75",
+  "answer" : "75",
+  "explanation" : "ChangeListener.stateChanged() fires every time the slider moves. slider.getValue() returns the current integer value. Output: 75."
+}

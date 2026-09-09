@@ -1,0 +1,10 @@
+{
+  "id" : "var-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 1,
+  "prompt" : "What is wrong with this code?",
+  "code" : "Int count = 0;",
+  "choices" : [ "Int should be lowercase: int", "count is a reserved word", "The value 0 cannot be assigned to a variable", "Nothing is wrong" ],
+  "answer" : "a",
+  "explanation" : "Java primitive type names are all lowercase: int, double, boolean, char, etc. 'Int' with a capital I does not exist as a type."
+}

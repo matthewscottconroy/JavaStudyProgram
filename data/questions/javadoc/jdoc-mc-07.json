@@ -1,0 +1,9 @@
+{
+  "id" : "jdoc-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "Which command generates HTML Javadoc documentation from source files?",
+  "choices" : [ "javac -doc MyClass.java", "javadoc MyClass.java", "java --docs MyClass", "mvn generate" ],
+  "answer" : "b",
+  "explanation" : "The 'javadoc' tool (part of the JDK) processes /** */ comments and produces HTML. For Maven projects: 'mvn javadoc:javadoc' generates docs in target/site/apidocs/. Good Javadoc on public APIs lets IDEs show documentation on hover."
+}

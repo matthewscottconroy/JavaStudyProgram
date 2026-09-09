@@ -1,0 +1,9 @@
+{
+  "id" : "kbd-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does e.getKeyChar() return for the Enter key?",
+  "choices" : [ "13", "\"Enter\"", "KeyEvent.CHAR_UNDEFINED", "0" ],
+  "answer" : "c",
+  "explanation" : "KeyEvent.CHAR_UNDEFINED is returned by getKeyChar() for keys that don't produce a printable character, such as Enter, Backspace, arrow keys, function keys. Use getKeyCode() for these: getKeyCode() == KeyEvent.VK_ENTER."
+}

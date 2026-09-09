@@ -1,0 +1,10 @@
+{
+  "id" : "lp-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "This loop is supposed to print 1 through 5 but produces an infinite loop. Why?",
+  "code" : "int i = 1;\nwhile (i <= 5) {\n    System.out.println(i);\n}",
+  "choices" : [ "The condition should use < not <=", "i is never incremented inside the loop body", "println doesn't work inside loops", "i should be declared outside the while" ],
+  "answer" : "b",
+  "explanation" : "i is never changed, so i <= 5 is always true. Add i++; inside the loop body to fix the infinite loop."
+}

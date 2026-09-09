@@ -1,0 +1,9 @@
+{
+  "id" : "cls-mc-10",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does the 'static' keyword mean in: public static void main(String[] args)?",
+  "choices" : [ "main() can be called without instantiating the class", "main() is automatically called when any class is compiled", "main() can access private fields", "main() runs on a separate thread" ],
+  "answer" : "a",
+  "explanation" : "static means the JVM can call main() on the class itself, without creating an instance first. That's necessary because no object exists yet when the program starts. args contains the command-line arguments passed to the program."
+}

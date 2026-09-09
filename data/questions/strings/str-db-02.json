@@ -1,0 +1,10 @@
+{
+  "id" : "str-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "The contains check always returns false. Why?",
+  "code" : "String haystack = \"Hello World\";\nString needle = \"world\";  // lowercase w\nSystem.out.println(haystack.contains(needle));",
+  "choices" : [ "contains() only works on single characters", "String comparison in Java is case-sensitive — 'World' and 'world' do not match", "needle must be a char, not a String", "contains() requires the exact index" ],
+  "answer" : "b",
+  "explanation" : "contains() (and all String searches) are case-sensitive. 'World' != 'world'. Fix: haystack.toLowerCase().contains(needle.toLowerCase()) for a case-insensitive check."
+}

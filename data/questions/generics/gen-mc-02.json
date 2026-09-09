@@ -1,0 +1,9 @@
+{
+  "id" : "gen-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does the type parameter <T> mean in 'public <T> T first(List<T> list)'?",
+  "choices" : [ "T must extend Throwable", "T is a placeholder for any type, resolved when the method is called", "T can only be a primitive type", "T stands for 'Type-safe'" ],
+  "answer" : "b",
+  "explanation" : "Type parameters like <T> are placeholders resolved at compile time by the caller's argument. If you call first(List<Integer> list), T becomes Integer. T can be any reference type."
+}

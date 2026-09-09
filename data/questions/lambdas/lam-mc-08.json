@@ -1,0 +1,9 @@
+{
+  "id" : "lam-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does Function.compose() do vs Function.andThen()?",
+  "choices" : [ "compose() runs the function before the other; andThen() runs after — they produce the same result", "compose(g) = g runs first, then this function; andThen(g) = this function runs first, then g", "compose() is synchronous; andThen() is asynchronous", "They are identical methods — one is just an alias for the other" ],
+  "answer" : "b",
+  "explanation" : "f.andThen(g).apply(x) = g(f(x)) — f first, then g. f.compose(g).apply(x) = f(g(x)) — g first, then f. Think: andThen = pipeline order, compose = math function composition order."
+}

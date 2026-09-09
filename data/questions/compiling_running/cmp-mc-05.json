@@ -1,0 +1,9 @@
+{
+  "id" : "cmp-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is a compile-time error vs a runtime error?",
+  "choices" : [ "Compile-time errors occur only on Windows; runtime errors only on Mac", "Compile-time errors are caught by javac before the program runs; runtime errors occur while the program is executing", "Compile-time errors crash the JVM; runtime errors are silent", "They are the same thing — both prevent the program from running" ],
+  "answer" : "b",
+  "explanation" : "Compile-time errors (syntax errors, type mismatches) are caught by javac. The program cannot run until they are fixed. Runtime errors (NullPointerException, ArrayIndexOutOfBoundsException) occur during execution — they may only appear under certain conditions."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "dbt-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which approach best helps you understand a complex method's behavior before adding a bugfix?",
+  "choices" : [ "Delete the method and rewrite it", "Add a breakpoint at the method entry, run in debug mode, and step through line by line", "Add @SuppressWarnings at the top of the class", "Rename all variables to shorter names" ],
+  "answer" : "b",
+  "explanation" : "Setting a breakpoint at the method entry and stepping through in debug mode lets you see exactly which path is taken, what each variable holds at each step, and where the logic diverges from expectations — without changing any code yet."
+}

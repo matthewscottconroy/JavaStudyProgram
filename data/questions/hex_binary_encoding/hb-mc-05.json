@@ -1,0 +1,9 @@
+{
+  "id" : "hb-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the decimal value of the hexadecimal number 0x1F?",
+  "choices" : [ "15", "16", "31", "256" ],
+  "answer" : "c",
+  "explanation" : "0x1F = 1*16 + 15 = 31. Hex digits: 0-9 are 0-9; A-F are 10-15. F = 15. 1*16 + F(15) = 31."
+}

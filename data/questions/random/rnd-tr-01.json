@@ -1,0 +1,9 @@
+{
+  "id" : "rnd-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "If rng is seeded with 0, what does nextInt(4) return?",
+  "code" : "Random rng = new Random(0);\nSystem.out.println(rng.nextInt(4));",
+  "answer" : "0",
+  "explanation" : "With seed 0, Java's Random.nextInt(4) returns 0 on the first call. The exact sequence is deterministic and depends on the algorithm implementation."
+}

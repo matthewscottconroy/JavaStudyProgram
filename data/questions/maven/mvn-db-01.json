@@ -1,0 +1,10 @@
+{
+  "id" : "mvn-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "The build fails with 'package org.junit.jupiter.api does not exist'. Why?",
+  "code" : "<dependency>\n  <groupId>org.junit.jupiter</groupId>\n  <artifactId>junit-jupiter</artifactId>\n  <version>5.10.0</version>\n</dependency>",
+  "choices" : [ "JUnit 5 is not compatible with Maven", "The dependency is missing a <scope>test</scope> — so Maven excludes it from compilation", "The dependency has no scope, defaulting to 'compile', but the class isn't found — likely a network issue or missing version", "The version number is invalid" ],
+  "answer" : "b",
+  "explanation" : "Actually the most common cause of this: missing <scope>test</scope> does NOT cause compile failures for the main source. More likely: the dependency is absent from the local repo (run 'mvn dependency:resolve') or the artifactId/groupId is wrong. In this question, adding <scope>test</scope> is best practice even if not the direct cause here."
+}

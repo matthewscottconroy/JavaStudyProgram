@@ -1,0 +1,9 @@
+{
+  "id" : "cls-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is a static field?",
+  "choices" : [ "A field declared with the 'final' keyword", "A field shared by all instances of the class — only one copy exists in memory", "A field that cannot be modified", "A field that is not visible outside the class" ],
+  "answer" : "b",
+  "explanation" : "Static fields (class variables) belong to the class, not any specific instance. All objects share the same static field. Example: static int instanceCount = 0; — a common pattern to count created objects."
+}

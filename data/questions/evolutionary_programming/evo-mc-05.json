@@ -1,0 +1,9 @@
+{
+  "id" : "evo-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 4,
+  "prompt" : "What is tournament selection in genetic algorithms?",
+  "choices" : [ "Selecting the single best individual from the entire population", "Randomly picking a small subset of individuals and selecting the best one among them", "Selecting individuals in the order they were created", "Removing the worst individuals from the population" ],
+  "answer" : "b",
+  "explanation" : "Tournament selection picks k random individuals, then selects the fittest. k=2 is common (binary tournament). Larger k = stronger selection pressure. It maintains some diversity while favoring better individuals, unlike pure rank selection."
+}

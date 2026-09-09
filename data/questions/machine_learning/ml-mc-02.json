@@ -1,0 +1,9 @@
+{
+  "id" : "ml-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 4,
+  "prompt" : "What is overfitting?",
+  "choices" : [ "A model that is too slow to train", "A model that performs well on training data but poorly on new, unseen data", "Training a model with too little data", "A model with too few parameters to capture patterns" ],
+  "answer" : "b",
+  "explanation" : "Overfitting occurs when a model memorizes training data noise rather than learning generalizable patterns. Signs: very high training accuracy, low test accuracy. Mitigations: more training data, regularization (dropout, L2), cross-validation, simpler models."
+}

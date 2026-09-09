@@ -1,0 +1,9 @@
+{
+  "id" : "dbt-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does 'watch' (or 'evaluate expression') do in a debugger?",
+  "choices" : [ "Records all method calls to a log file", "Lets you evaluate an arbitrary expression in the current scope while paused", "Monitors CPU usage during the debug session", "Replaces a variable's value at runtime" ],
+  "answer" : "b",
+  "explanation" : "While paused, 'evaluate expression' lets you type any valid Java expression (e.g., list.size(), obj.getField()) and see the result immediately. Watches pin expressions so they update every time you step, helping you track values through logic."
+}

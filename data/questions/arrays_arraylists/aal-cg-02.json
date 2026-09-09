@@ -1,0 +1,9 @@
+{
+  "id" : "aal-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which removes all elements from an ArrayList that are less than 5?",
+  "choices" : [ "list.removeIf(n -> n < 5);", "for (int i = 0; i < list.size(); i++) if (list.get(i) < 5) list.remove(i);", "list.stream().filter(n -> n >= 5);", "Collections.remove(list, n -> n < 5);" ],
+  "answer" : "a",
+  "explanation" : "removeIf(Predicate) is the cleanest way — removes all matching elements atomically. Option B has an index bug: removing at i shifts elements left, so the next element is skipped. Option C returns a Stream but doesn't modify the original list. Option D: Collections.remove() doesn't accept a predicate."
+}

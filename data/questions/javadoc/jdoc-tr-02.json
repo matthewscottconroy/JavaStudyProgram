@@ -1,0 +1,9 @@
+{
+  "id" : "jdoc-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What will the generated Javadoc show for the summary sentence of this method?",
+  "code" : "/**\n * Returns the maximum of two integers.\n * This method does not handle NaN.\n * @param a first value\n * @param b second value\n * @return the larger of a and b\n */\npublic int max(int a, int b) { return Math.max(a, b); }",
+  "answer" : "Returns the maximum of two integers.",
+  "explanation" : "Javadoc uses the first sentence (up to the first period) as the method summary shown in tables. The full first sentence is: 'Returns the maximum of two integers.'"
+}

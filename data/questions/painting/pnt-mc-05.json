@@ -1,0 +1,9 @@
+{
+  "id" : "pnt-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does g.drawString(\"Hello\", 50, 100) do?",
+  "choices" : [ "Draws the text 'Hello' with its top-left corner at (50,100)", "Draws the text 'Hello' with its baseline at y=100 and leftmost character at x=50", "Draws a rectangle containing the text 'Hello' at (50,100)", "Draws the text 'Hello' centered at the point (50,100)" ],
+  "answer" : "b",
+  "explanation" : "drawString uses the font baseline (not top-left) for the y coordinate. The baseline is the line letters 'sit on' — descenders like g and y go below it. To position by top-left, use FontMetrics to measure ascent: y = topY + fm.getAscent()."
+}

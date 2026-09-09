@@ -1,0 +1,9 @@
+{
+  "id" : "ios-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which method reads a single character from System.in?",
+  "choices" : [ "System.in.readChar()", "System.in.read() — returns the byte value as an int, or -1 at end of stream", "Scanner.readChar()", "Console.readChar()" ],
+  "answer" : "b",
+  "explanation" : "InputStream.read() returns the next byte as an int (0–255) or -1 at EOF. For text, you must cast: char c = (char) System.in.read(). Scanner.next().charAt(0) is more convenient for token-based single-character reading."
+}

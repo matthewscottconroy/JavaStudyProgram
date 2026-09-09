@@ -1,0 +1,9 @@
+{
+  "id" : "cmp-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What type of error will the compiler report for this code?",
+  "code" : "public class Test {\n    public static void main(String[] args) {\n        int x = 5\n        System.out.println(x);\n    }\n}",
+  "answer" : "Compile-time syntax error (missing semicolon)",
+  "explanation" : "Missing semicolons are caught by javac before the program runs. The program cannot be compiled or run until the syntax error is fixed."
+}

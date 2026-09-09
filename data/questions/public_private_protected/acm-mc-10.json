@@ -1,0 +1,9 @@
+{
+  "id" : "acm-mc-10",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "Which members does a subclass in the SAME package inherit and can access?",
+  "choices" : [ "Only public members", "Public and protected members", "Public, protected, and package-private members", "Public, protected, package-private, and private members" ],
+  "answer" : "c",
+  "explanation" : "Within the same package: public, protected, and package-private (no-modifier) members are accessible. In a different package: only public and protected are accessible to subclasses. Private members are never inherited."
+}

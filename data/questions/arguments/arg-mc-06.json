@@ -1,0 +1,9 @@
+{
+  "id" : "arg-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Running 'java MyApp a b c d' — what is args[3]?",
+  "choices" : [ "a", "b", "c", "d" ],
+  "answer" : "d",
+  "explanation" : "args: [0]=\"a\", [1]=\"b\", [2]=\"c\", [3]=\"d\". args[3] is \"d\". The program name is not included."
+}

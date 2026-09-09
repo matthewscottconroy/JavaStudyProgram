@@ -1,0 +1,9 @@
+{
+  "id" : "gem-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which uses a single listener for multiple buttons, distinguishing them by action command?",
+  "choices" : [ "button1.addActionListener(e -> {}); button2.addActionListener(e -> {});", "ActionListener listener = e -> { if (\"save\".equals(e.getActionCommand())) save(); else load(); }; button1.setActionCommand(\"save\"); button2.setActionCommand(\"load\"); button1.addActionListener(listener); button2.addActionListener(listener);", "ActionListener.setShared(button1, button2, e -> {});", "button1.addSharedListener(button2, e -> {});" ],
+  "answer" : "b",
+  "explanation" : "Set distinct action commands on each button, register the same listener on both. Inside the listener, switch on e.getActionCommand() to dispatch behavior. This avoids duplicating listener code for each button."
+}

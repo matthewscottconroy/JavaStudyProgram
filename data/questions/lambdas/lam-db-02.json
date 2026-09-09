@@ -1,0 +1,10 @@
+{
+  "id" : "lam-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This code has a compile error. Why?",
+  "code" : "Comparator<String> comp = (String a, String b, String c) -> a.compareTo(b);",
+  "choices" : [ "Comparator cannot be used with lambdas", "Comparator<String>.compare() takes exactly two parameters, not three", "compareTo() is not a valid method on String for this use", "Lambdas cannot have type annotations on parameters" ],
+  "answer" : "b",
+  "explanation" : "Comparator<T> has method int compare(T o1, T o2) — exactly two parameters. Providing three parameters doesn't match any method in Comparator's functional interface. Fix: (a, b) -> a.compareTo(b)"
+}

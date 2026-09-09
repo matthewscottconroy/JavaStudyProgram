@@ -1,0 +1,9 @@
+{
+  "id" : "ifc-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What does this print?",
+  "code" : "interface Loud { default String sound() { return \"LOUD\"; } }\ninterface Soft { default String sound() { return \"soft\"; } }\nclass Voice implements Loud, Soft {\n    @Override public String sound() { return Loud.super.sound(); }\n}\nSystem.out.println(new Voice().sound());",
+  "answer" : "LOUD",
+  "explanation" : "When two interfaces both provide a default method with the same signature, the class must override it to resolve the conflict. Loud.super.sound() explicitly picks the Loud interface's default, returning \"LOUD\"."
+}

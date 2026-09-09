@@ -1,0 +1,9 @@
+{
+  "id" : "sapi-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which collects only names longer than 3 characters into a new List?",
+  "choices" : [ "names.stream().filter(n -> n.length() > 3);", "names.stream().filter(n -> n.length() > 3).collect(Collectors.toList());", "names.filter(n -> n.length() > 3).toList();", "names.stream().where(n -> n.length() > 3).collect();" ],
+  "answer" : "b",
+  "explanation" : "filter() is intermediate — it must be followed by a terminal operation. collect(Collectors.toList()) (or .toList() in Java 16+) materialises the result. Option A returns a Stream, not a List. Option C: filter() is not a method on List directly. Option D: where() does not exist in Java streams."
+}

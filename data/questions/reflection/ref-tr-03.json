@@ -1,0 +1,9 @@
+{
+  "id" : "ref-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "import java.lang.reflect.*;\nclass Greeter {\n    private String greet(String name) { return \"Hi \" + name; }\n}\nGreeter g = new Greeter();\nMethod m = Greeter.class.getDeclaredMethod(\"greet\", String.class);\nm.setAccessible(true);\nSystem.out.println(m.invoke(g, \"Alice\"));",
+  "answer" : "Hi Alice",
+  "explanation" : "getDeclaredMethod finds the private greet method. setAccessible(true) bypasses the access check. invoke(g, \"Alice\") calls greet(\"Alice\") on g, returning \"Hi Alice\"."
+}

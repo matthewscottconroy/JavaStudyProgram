@@ -1,0 +1,9 @@
+{
+  "id" : "col-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "import java.util.*;\nMap<String, Integer> scores = new HashMap<>();\nscores.put(\"Alice\", 90);\nscores.put(\"Bob\", 80);\nscores.put(\"Alice\", 95);\nSystem.out.println(scores.get(\"Alice\"));\nSystem.out.println(scores.size());",
+  "answer" : "95\n2",
+  "explanation" : "The second put(\"Alice\", 95) replaces the first value 90. The map has 2 entries: Alice=95, Bob=80."
+}

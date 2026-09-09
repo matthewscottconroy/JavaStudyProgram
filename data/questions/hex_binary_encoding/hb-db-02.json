@@ -1,0 +1,10 @@
+{
+  "id" : "hb-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This function to check if a bit is set gives wrong results. Why?",
+  "code" : "static boolean isBitSet(int value, int bit) {\n    return (value && (1 << bit)) != 0;\n}",
+  "choices" : [ "1 << bit is invalid for large bit positions", "Java uses && for logical AND, not bitwise AND — use & instead", "The return type should be int, not boolean", "1 << bit overflows for bit >= 32" ],
+  "answer" : "b",
+  "explanation" : "&& is the logical AND operator for boolean expressions — it cannot be used on ints. Use the bitwise & for integer bit manipulation: return (value & (1 << bit)) != 0;"
+}

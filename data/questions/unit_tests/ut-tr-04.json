@@ -1,0 +1,9 @@
+{
+  "id" : "ut-tr-04",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is the test result?",
+  "code" : "@Test\nvoid testContains() {\n    List<String> list = new ArrayList<>(List.of(\"a\", \"b\", \"c\"));\n    list.remove(\"b\");\n    assertFalse(list.contains(\"b\"));\n    assertEquals(2, list.size());\n}",
+  "answer" : "Test passes",
+  "explanation" : "After remove(\"b\"), the list is [\"a\", \"c\"]. assertFalse(false) passes. assertEquals(2, 2) passes. Both assertions pass."
+}

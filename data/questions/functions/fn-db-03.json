@@ -1,0 +1,10 @@
+{
+  "id" : "fn-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This recursive method causes a StackOverflowError. Why?",
+  "code" : "static int count(int n) {\n    return 1 + count(n - 1);\n}",
+  "choices" : [ "n - 1 is an invalid expression inside recursion", "The method has no base case — it recurses infinitely without stopping", "return type should be void for recursive methods", "int cannot hold recursive counts" ],
+  "answer" : "b",
+  "explanation" : "There is no base case. count(0) calls count(-1) calls count(-2) forever. Fix: add if (n <= 0) return 0; before the recursive call. Without a base case, the call stack fills and StackOverflowError is thrown."
+}

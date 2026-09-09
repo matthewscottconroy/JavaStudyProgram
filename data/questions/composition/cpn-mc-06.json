@@ -1,0 +1,9 @@
+{
+  "id" : "cpn-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the Decorator pattern?",
+  "choices" : [ "A pattern for creating class hierarchies", "A pattern that adds responsibilities to an object dynamically by wrapping it", "A pattern that ensures only one instance exists", "A pattern for cloning objects" ],
+  "answer" : "b",
+  "explanation" : "Decorator wraps an object in another object with the same interface, adding behavior. Example: BufferedReader wraps FileReader — same Reader interface, but adds buffering. You can stack decorators: logging + caching + compression all wrapping the same base object."
+}

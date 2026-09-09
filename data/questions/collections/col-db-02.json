@@ -1,0 +1,10 @@
+{
+  "id" : "col-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "This code may throw NullPointerException. Why?",
+  "code" : "Map<String,Integer> map = new HashMap<>();\nmap.put(\"score\", null);\nint n = map.get(\"score\");",
+  "choices" : [ "HashMap does not allow null values", "Auto-unboxing null Integer to int throws NullPointerException", "get() requires a cast to Integer", "The key \"score\" must be set before calling get()" ],
+  "answer" : "b",
+  "explanation" : "HashMap allows null values. map.get(\"score\") returns null (an Integer). Auto-unboxing null to int throws NullPointerException. Fix: Integer n = map.get(\"score\"); — keep it boxed, or use getOrDefault(\"score\", 0)."
+}

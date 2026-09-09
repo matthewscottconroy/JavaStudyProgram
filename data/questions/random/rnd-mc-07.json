@@ -1,0 +1,9 @@
+{
+  "id" : "rnd-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does Random.nextDouble() return?",
+  "choices" : [ "A random int from 0 to Integer.MAX_VALUE", "A random double in [0.0, 1.0)", "A random double in [0.0, 100.0)", "A random double that can be negative" ],
+  "answer" : "b",
+  "explanation" : "nextDouble() returns a double d where 0.0 <= d < 1.0. Scale it: nextDouble() * max gives [0.0, max). For a range: nextDouble() * (max - min) + min."
+}

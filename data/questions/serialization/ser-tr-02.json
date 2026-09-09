@@ -1,0 +1,9 @@
+{
+  "id" : "ser-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is the value of 'count' after deserialization?",
+  "code" : "class Counter implements Serializable {\n    int count = 5;\n    static int instances = 10;\n    transient int cache = 99;\n}\n// Counter c serialized then deserialized in fresh JVM where instances=0\n// What is c.count after deserialization?",
+  "answer" : "5",
+  "explanation" : "count is a non-transient instance field — it is serialized and restored to 5. cache (transient) would be 0. instances (static) stays at whatever the class has in the new JVM."
+}

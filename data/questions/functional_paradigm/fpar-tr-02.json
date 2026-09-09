@@ -1,0 +1,9 @@
+{
+  "id" : "fpar-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "import java.util.function.*;\nFunction<Integer, Integer> triple = x -> x * 3;\nFunction<Integer, Integer> addTen = x -> x + 10;\nFunction<Integer, Integer> combined = triple.andThen(addTen);\nSystem.out.println(combined.apply(4));",
+  "answer" : "22",
+  "explanation" : "triple.apply(4) = 12. addTen.apply(12) = 22. andThen chains: first triple, then addTen."
+}

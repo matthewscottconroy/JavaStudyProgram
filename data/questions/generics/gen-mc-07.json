@@ -1,0 +1,9 @@
+{
+  "id" : "gen-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "Which is a valid generic method declaration?",
+  "choices" : [ "public T swap(T a, T b)", "public <T> void swap(T[] arr, int i, int j)", "public generic void swap(Object a, Object b)", "public void <T> swap(T a, T b)" ],
+  "answer" : "b",
+  "explanation" : "The type parameter <T> must be declared between the modifiers and the return type: 'public <T> void swap(...)'. Option A: T is not declared. Option C: 'generic' is not a keyword. Option D: <T> is after the return type (invalid)."
+}

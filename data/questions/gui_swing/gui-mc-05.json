@@ -1,0 +1,9 @@
+{
+  "id" : "gui-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does frame.pack() do?",
+  "choices" : [ "Compresses the frame into the system tray", "Resizes the frame to fit the preferred sizes of its components", "Packs all components into a single row", "Saves the frame's layout to a file" ],
+  "answer" : "b",
+  "explanation" : "pack() calculates the minimum size needed to display all components at their preferred sizes and resizes the frame accordingly. Call it after adding all components and before setVisible(true). It's better than setSize() because it adapts to different screen DPIs."
+}

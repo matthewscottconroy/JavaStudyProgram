@@ -1,0 +1,9 @@
+{
+  "id" : "pnt-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Why must you call super.paintComponent(g) at the start of a custom paintComponent()?",
+  "choices" : [ "To load the graphics driver", "To clear the panel and allow Swing to perform background painting before your custom drawing", "To set the coordinate origin to (0,0)", "To initialise the graphics context's color to black" ],
+  "answer" : "b",
+  "explanation" : "super.paintComponent(g) clears the background (fills with the background color) and lets Swing handle opaque/transparent background logic. Skipping it causes artifacts — previous frames accumulate on screen."
+}

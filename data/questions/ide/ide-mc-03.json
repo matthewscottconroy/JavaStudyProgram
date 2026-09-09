@@ -1,0 +1,9 @@
+{
+  "id" : "ide-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does 'Step Into' do differently from 'Step Over'?",
+  "choices" : [ "It skips the current method and goes to the next class", "It enters the body of the method being called on the current line", "It runs until the next breakpoint", "It steps backwards to the previous line" ],
+  "answer" : "b",
+  "explanation" : "Step Into (F7 in IntelliJ) descends into the method call on the current line. This lets you trace execution inside helper methods or library code. Step Over is preferred when you trust a called method and don't want to trace inside it."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "thr-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which creates a thread that prints 'Hello' and starts it correctly?",
+  "choices" : [ "Thread t = new Thread(); t.run(); // prints Hello", "Thread t = new Thread(() -> System.out.println(\"Hello\")); t.start();", "Thread.run(() -> System.out.println(\"Hello\"));", "new Runnable(() -> System.out.println(\"Hello\")).start();" ],
+  "answer" : "b",
+  "explanation" : "Pass a Runnable lambda to the Thread constructor and call start() (not run()). Calling run() directly executes on the current thread — no new thread is created. Option C: Thread.run() is not a static method. Option D: Runnable has no start() method."
+}

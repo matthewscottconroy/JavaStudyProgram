@@ -1,0 +1,9 @@
+{
+  "id" : "ex-mc-09",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is printed if no exception is thrown in a try-catch-finally block?",
+  "choices" : [ "Only the try block output", "Only the finally block output", "Both the try block output and the finally block output", "Nothing — a try must always throw to be useful" ],
+  "answer" : "c",
+  "explanation" : "If the try block completes normally (no exception), the catch block is skipped and the finally block still executes. Both produce output."
+}

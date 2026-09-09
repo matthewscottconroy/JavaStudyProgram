@@ -1,0 +1,9 @@
+{
+  "id" : "ml-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 4,
+  "prompt" : "What is the difference between classification and regression in machine learning?",
+  "choices" : [ "Classification predicts numbers; regression predicts categories", "Classification predicts a discrete category; regression predicts a continuous numeric value", "They are the same — just different names for prediction tasks", "Classification works only on images; regression works only on text" ],
+  "answer" : "b",
+  "explanation" : "Classification: predicting which class an input belongs to (spam/not-spam, digit 0-9). Regression: predicting a continuous output (house price, temperature). Common classification algorithms: logistic regression, decision trees, SVM. Common regression algorithms: linear regression, random forest regression."
+}

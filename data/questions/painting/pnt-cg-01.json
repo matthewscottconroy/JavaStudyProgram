@@ -1,0 +1,9 @@
+{
+  "id" : "pnt-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which correctly defines a JPanel that draws a blue filled circle at (50,50) with diameter 40?",
+  "choices" : [ "class CirclePanel extends JPanel { void draw() { graphics.fillOval(50,50,40,40); } }", "class CirclePanel extends JPanel { @Override protected void paintComponent(Graphics g) { super.paintComponent(g); g.setColor(Color.BLUE); g.fillOval(50,50,40,40); } }", "class CirclePanel extends JPanel { @Override public void paint(Graphics g) { g.fillOval(50,50,40,40); } }", "class CirclePanel implements Paintable { void paintComponent(Graphics g) { g.fillOval(50,50,40,40); } }" ],
+  "answer" : "b",
+  "explanation" : "Override paintComponent (not paint), call super first, then set color and draw. Option A doesn't override paintComponent — draw() is never called by Swing. Option C overrides paint() which skips double-buffering benefits. Option D: Paintable does not exist in Swing."
+}

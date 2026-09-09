@@ -1,0 +1,9 @@
+{
+  "id" : "evo-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 4,
+  "prompt" : "What is 'fitness sharing' used for in genetic algorithms?",
+  "choices" : [ "Distributing the fitness computation across multiple threads", "Penalizing individuals in overcrowded regions of the search space to promote diversity", "Sharing the best fitness across all individuals equally", "Averaging the fitness of parent and offspring" ],
+  "answer" : "b",
+  "explanation" : "Fitness sharing reduces the effective fitness of individuals that are similar to many others. This maintains population diversity and helps GAs explore multiple niches (local optima) simultaneously. It prevents the GA from converging entirely on one region of the search space."
+}

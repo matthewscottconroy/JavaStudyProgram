@@ -1,0 +1,10 @@
+{
+  "id" : "sapi-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This code throws IllegalStateException. Why?",
+  "code" : "Stream<String> s = List.of(\"a\", \"b\").stream();\ns.forEach(System.out::println);\ns.forEach(System.out::println);",
+  "choices" : [ "forEach is not a valid Stream method", "A stream cannot be reused after a terminal operation has been called on it", "List.of() returns an immutable list that cannot be streamed", "System.out::println requires a Consumer, not a method reference" ],
+  "answer" : "b",
+  "explanation" : "Streams are single-use. Once a terminal operation (forEach) is called, the stream is consumed. Calling any operation on it again throws IllegalStateException. Create a new stream from the collection each time."
+}

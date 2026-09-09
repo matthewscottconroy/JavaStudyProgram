@@ -1,0 +1,10 @@
+{
+  "id" : "acm-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This code is in a different package from Animal. Why won't it compile?",
+  "code" : "// package com.other;\nimport com.example.Animal;\nclass Test {\n    void check() {\n        Animal a = new Animal();\n        System.out.println(a.legs);  // legs is protected in Animal\n    }\n}",
+  "choices" : [ "Animal must be public to be imported", "protected members can only be accessed from a different package via a subclass, not from an unrelated class", "legs must be declared static to be accessed by Test", "System.out.println cannot print int from another package" ],
+  "answer" : "b",
+  "explanation" : "Protected access from a different package is only allowed within a subclass context. Test is unrelated to Animal — it is not a subclass. Fix: either make legs public, or have Test extend Animal."
+}

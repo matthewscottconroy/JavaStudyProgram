@@ -1,0 +1,10 @@
+{
+  "id" : "ios-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "This program hangs waiting for input even after all data is supposedly passed. Why?",
+  "code" : "Scanner sc = new Scanner(System.in);\nwhile (sc.hasNextLine()) {\n    System.out.println(sc.nextLine());\n}\n// Run interactively from terminal — program never exits",
+  "choices" : [ "hasNextLine() does not work in a loop", "In a terminal, System.in has no EOF until the user signals it with Ctrl+D (Unix) or Ctrl+Z (Windows)", "println() blocks waiting for confirmation", "sc.nextLine() must be called inside a try-catch" ],
+  "answer" : "b",
+  "explanation" : "hasNextLine() blocks until there is more input or EOF. In an interactive terminal, EOF is only sent when the user presses Ctrl+D (Unix) or Ctrl+Z+Enter (Windows). When reading from a file ('java App < data.txt'), EOF is detected at end of file and the loop terminates."
+}

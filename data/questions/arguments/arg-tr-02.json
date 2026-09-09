@@ -1,0 +1,9 @@
+{
+  "id" : "arg-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "Run as 'java Adder 5 8'. What is printed?",
+  "code" : "public static void main(String[] args) {\n    int a = Integer.parseInt(args[0]);\n    int b = Integer.parseInt(args[1]);\n    System.out.println(a + b);\n}",
+  "answer" : "13",
+  "explanation" : "args[0]=\"5\" → parseInt → 5. args[1]=\"8\" → parseInt → 8. 5+8=13."
+}

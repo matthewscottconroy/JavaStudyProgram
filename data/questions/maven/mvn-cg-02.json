@@ -1,0 +1,9 @@
+{
+  "id" : "mvn-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which Maven command compiles, runs all tests, and creates the JAR?",
+  "choices" : [ "mvn compile", "mvn test", "mvn package", "mvn install" ],
+  "answer" : "c",
+  "explanation" : "mvn package runs the full lifecycle through package: compile → test → package (creates the JAR). mvn compile stops at compile. mvn test stops at test. mvn install goes further: also installs the JAR to the local repository."
+}

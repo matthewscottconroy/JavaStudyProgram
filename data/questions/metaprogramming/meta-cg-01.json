@@ -1,0 +1,9 @@
+{
+  "id" : "meta-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 4,
+  "prompt" : "Which defines a runtime-visible annotation that can only be applied to fields?",
+  "choices" : [ "@interface FieldTag { }", "@Retention(RetentionPolicy.RUNTIME) @Target(ElementType.FIELD) @interface FieldTag { String description() default \"\"; }", "@Runtime @FieldOnly @interface FieldTag { }", "@Retention(RUNTIME) @interface FieldTag { @Target(FIELD) String desc; }" ],
+  "answer" : "b",
+  "explanation" : "@Retention(RUNTIME) makes it readable via reflection. @Target(FIELD) restricts application to fields. Adding a description() element with a default makes the annotation optional to configure. Option C: @Runtime and @FieldOnly don't exist. Option D: @Target belongs on the annotation type, not inside it."
+}

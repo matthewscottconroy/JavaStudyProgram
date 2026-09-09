@@ -1,0 +1,9 @@
+{
+  "id" : "glay-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does setLayout(null) on a container do?",
+  "choices" : [ "Removes all components from the container", "Enables absolute positioning — you must set each component's bounds manually", "Applies the system default layout manager", "Makes the container invisible" ],
+  "answer" : "b",
+  "explanation" : "setLayout(null) disables the layout manager. You must then call setBounds(x, y, width, height) on each component. This gives pixel-perfect control but breaks resizability and accessibility. Avoid null layouts in real applications; use a proper layout manager instead."
+}

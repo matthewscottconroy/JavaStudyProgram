@@ -1,0 +1,9 @@
+{
+  "id" : "ipm-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Encapsulation means…",
+  "choices" : [ "A class can only have private fields", "All methods must be static", "Hiding internal state and requiring interaction through a public interface", "Only one class is allowed per file" ],
+  "answer" : "c",
+  "explanation" : "Encapsulation bundles data and the methods that operate on it, hiding implementation details. Private fields + public getters/setters is the classic Java pattern. It protects invariants and lets you change the implementation without affecting callers."
+}

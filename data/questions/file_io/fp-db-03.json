@@ -1,0 +1,10 @@
+{
+  "id" : "fp-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "This throws FileNotFoundException. Why?",
+  "code" : "BufferedReader br = new BufferedReader(new FileReader(\"missing.txt\"));\nSystem.out.println(br.readLine());",
+  "choices" : [ "BufferedReader cannot wrap FileReader", "FileReader throws FileNotFoundException if the file doesn't exist", "readLine() requires the file to be opened in read mode first", "missing.txt must be on the classpath" ],
+  "answer" : "b",
+  "explanation" : "FileReader(String filename) throws FileNotFoundException (a checked exception) if the file doesn't exist or can't be opened. This is a checked exception — it must be caught or declared in the method signature."
+}

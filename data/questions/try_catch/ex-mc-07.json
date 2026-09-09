@@ -1,0 +1,9 @@
+{
+  "id" : "ex-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "Which exception is thrown by Integer.parseInt(\"hello\")?",
+  "choices" : [ "ClassCastException", "NumberFormatException", "IllegalArgumentException", "ArithmeticException" ],
+  "answer" : "b",
+  "explanation" : "NumberFormatException is a subclass of IllegalArgumentException, thrown when a string cannot be parsed as a number. Always wrap parseInt calls in try-catch when reading untrusted input."
+}

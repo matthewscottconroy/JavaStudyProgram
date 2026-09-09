@@ -1,0 +1,9 @@
+{
+  "id" : "mse-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "Which interface handles mouse movement and dragging?",
+  "choices" : [ "MouseListener", "MouseMotionListener", "MouseDragListener", "MouseMoveHandler" ],
+  "answer" : "b",
+  "explanation" : "MouseMotionListener has two methods: mouseMoved (no button held) and mouseDragged (button held while moving). Add it with component.addMouseMotionListener(). MouseAdapter implements both MouseListener and MouseMotionListener, so you can extend it and override only the methods you need."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "fpar-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is a higher-order function?",
+  "choices" : [ "A function defined in a subclass", "A function that takes functions as arguments or returns a function", "A function with more than 3 parameters", "A recursive function" ],
+  "answer" : "b",
+  "explanation" : "Higher-order functions treat functions as first-class values. In Java, methods that accept Function<T,R>, Predicate<T>, or Consumer<T> are higher-order. Stream methods like map(Function) and filter(Predicate) are examples. This enables composable, reusable pipelines without imperative loops."
+}

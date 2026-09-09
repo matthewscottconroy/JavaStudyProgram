@@ -1,0 +1,9 @@
+{
+  "id" : "img-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which correctly loads an image from the classpath and draws it at (0,0)?",
+  "choices" : [ "Image img = new File(\"/logo.png\"); g.drawImage(img, 0, 0, this);", "BufferedImage img = ImageIO.read(getClass().getResource(\"/logo.png\")); g.drawImage(img, 0, 0, this);", "ImageIcon icon = new ImageIcon(\"/logo.png\"); g.drawImage(icon, 0, 0, this);", "g.drawImage(\"/logo.png\", 0, 0, this);" ],
+  "answer" : "b",
+  "explanation" : "getClass().getResource(\"/logo.png\") loads from the classpath (works inside JARs). ImageIO.read returns a BufferedImage. drawImage paints it. Option A: File is not an Image. Option C: ImageIcon can't be passed to drawImage directly. Option D: drawImage doesn't accept a String path."
+}

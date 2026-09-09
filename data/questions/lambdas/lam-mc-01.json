@@ -1,0 +1,9 @@
+{
+  "id" : "lam-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does the lambda expression '(x, y) -> x + y' represent?",
+  "choices" : [ "A method that declares two variables", "An anonymous function that takes two parameters and returns their sum", "A block that prints two values", "A constructor for a class with two fields" ],
+  "answer" : "b",
+  "explanation" : "A lambda '(params) -> body' is an anonymous function. (x, y) -> x + y takes two inputs and returns their sum. It can be assigned to a functional interface like BiFunction<Integer, Integer, Integer>."
+}

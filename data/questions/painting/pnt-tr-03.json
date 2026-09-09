@@ -1,0 +1,9 @@
+{
+  "id" : "pnt-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is the width and height of the drawing area in paintComponent()?",
+  "code" : "@Override\nprotected void paintComponent(Graphics g) {\n    super.paintComponent(g);\n    System.out.println(getWidth() + \"x\" + getHeight());\n}",
+  "answer" : "The current width and height of the JPanel component",
+  "explanation" : "getWidth() and getHeight() return the panel's current pixel dimensions, which change as the window is resized. Always use these (not hardcoded values) to draw backgrounds and centered content."
+}

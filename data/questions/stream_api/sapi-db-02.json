@@ -1,0 +1,10 @@
+{
+  "id" : "sapi-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "The stream produces no output. Why?",
+  "code" : "Stream<Integer> s = Stream.of(1, 2, 3);\ns.filter(n -> n > 1);  // no terminal operation",
+  "choices" : [ "filter() is not a valid stream operation", "Streams are lazy — without a terminal operation, no elements are processed", "Stream.of() requires at least 4 elements", "filter() returns null instead of a stream" ],
+  "answer" : "b",
+  "explanation" : "Stream operations are lazy. filter() creates a new stream description but doesn't execute until a terminal operation (collect, forEach, count, etc.) is called. Fix: s.filter(n -> n > 1).forEach(System.out::println);"
+}

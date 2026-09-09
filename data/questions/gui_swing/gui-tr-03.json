@@ -1,0 +1,9 @@
+{
+  "id" : "gui-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "After this code, what is the close operation?",
+  "code" : "JFrame frame = new JFrame();\nframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);\nSystem.out.println(frame.getDefaultCloseOperation() == JFrame.DISPOSE_ON_CLOSE);",
+  "answer" : "true",
+  "explanation" : "getDefaultCloseOperation() returns the integer constant set. DISPOSE_ON_CLOSE = 2 in JFrame constants. The comparison to DISPOSE_ON_CLOSE is true."
+}

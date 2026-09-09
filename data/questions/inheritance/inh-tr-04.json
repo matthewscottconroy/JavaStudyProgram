@@ -1,0 +1,9 @@
+{
+  "id" : "inh-tr-04",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "class A { int x = 1; }\nclass B extends A { int x = 2; }\nB obj = new B();\nA ref = obj;\nSystem.out.println(obj.x + \" \" + ref.x);",
+  "answer" : "2 1",
+  "explanation" : "Fields are NOT polymorphic — they use the declared reference type. obj.x uses B's x = 2. ref.x uses A's x = 1 (ref is declared as A). This is field hiding, distinct from method overriding."
+}

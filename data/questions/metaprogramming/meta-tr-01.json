@@ -1,0 +1,9 @@
+{
+  "id" : "meta-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "How many annotations are on the method?",
+  "code" : "@Override\n@Deprecated\n@SuppressWarnings(\"unchecked\")\npublic List getData() {\n    return new ArrayList();\n}",
+  "answer" : "3",
+  "explanation" : "Three annotations appear before the method signature: @Override, @Deprecated, @SuppressWarnings. Multiple annotations on a single element are allowed in Java."
+}

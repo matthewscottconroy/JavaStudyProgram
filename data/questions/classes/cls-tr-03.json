@@ -1,0 +1,9 @@
+{
+  "id" : "cls-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "class Counter {\n    static int count = 0;\n    Counter() { count++; }\n}\nnew Counter(); new Counter(); new Counter();\nSystem.out.println(Counter.count);",
+  "answer" : "3",
+  "explanation" : "Each new Counter() increments the static field count. Static fields are shared — after 3 objects created, count = 3. Access via the class name: Counter.count."
+}

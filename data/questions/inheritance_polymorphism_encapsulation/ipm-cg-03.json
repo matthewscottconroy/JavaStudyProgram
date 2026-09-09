@@ -1,0 +1,9 @@
+{
+  "id" : "ipm-cg-03",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which factory method uses polymorphism to return the right Animal subtype?",
+  "choices" : [ "Animal make(String type) { return new Animal(); }", "Animal make(String type) { if (type.equals(\"dog\")) return new Dog(); if (type.equals(\"cat\")) return new Cat(); throw new IllegalArgumentException(type); }", "Dog make(String type) { return new Dog(); }", "Animal make(String type) { return (Animal) Class.forName(type).newInstance(); }" ],
+  "answer" : "b",
+  "explanation" : "The factory returns an Animal reference pointing to the appropriate subtype. The caller uses the Animal interface without knowing the concrete type. Option A always returns base Animal. Option C always returns Dog. Option D uses reflection (works but is fragile and exception-prone)."
+}

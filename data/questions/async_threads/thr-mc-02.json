@@ -1,0 +1,9 @@
+{
+  "id" : "thr-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does 'synchronized' do on a method?",
+  "choices" : [ "Makes the method run on a separate thread", "Ensures only one thread can execute the method on a given object at a time", "Makes the method faster by removing thread overhead", "Prevents the method from accessing shared state" ],
+  "answer" : "b",
+  "explanation" : "synchronized acquires the object's intrinsic lock before executing the method body. Other threads trying to call any synchronized method on the same object block until the lock is released. This prevents data races on shared mutable state."
+}

@@ -1,0 +1,10 @@
+{
+  "id" : "pkg-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "This code causes a compile error. What is wrong?",
+  "code" : "// File: com/example/Printer.java\npackage com.example;\nclass Printer {\n    public void print(String s) { System.out.println(s); }\n}\n\n// File: com/other/App.java\npackage com.other;\nimport com.example.Printer;\npublic class App {\n    public static void main(String[] args) {\n        new Printer().print(\"hi\");\n    }\n}",
+  "choices" : [ "import com.example.Printer is invalid syntax", "Printer is package-private (no modifier) — it cannot be imported from another package", "print() must be static to be called from main()", "App must be in the same package as Printer" ],
+  "answer" : "b",
+  "explanation" : "Printer has no access modifier — it's package-private. Only classes in com.example can use it. Fix: declare 'public class Printer' so it's accessible from com.other."
+}

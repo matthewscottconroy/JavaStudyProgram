@@ -1,0 +1,9 @@
+{
+  "id" : "gem-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What method attaches an ActionListener to a JButton?",
+  "choices" : [ "button.setListener(listener)", "button.addActionListener(listener)", "button.onClick(listener)", "button.registerEvent(listener)" ],
+  "answer" : "b",
+  "explanation" : "addActionListener(ActionListener) registers a listener on the button. When clicked, the button calls actionPerformed() on all registered listeners."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "arr-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "How do you copy an array so that changes to the copy don't affect the original?",
+  "choices" : [ "int[] copy = original;", "int[] copy = Arrays.copyOf(original, original.length);", "int[] copy = original.clone(); // not recommended", "Both b and c create an independent copy" ],
+  "answer" : "d",
+  "explanation" : "Assigning (option A) copies only the reference — both variables point to the same array. Arrays.copyOf() and .clone() create a new array with the same values. For primitive arrays, both produce independent copies."
+}

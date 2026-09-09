@@ -1,0 +1,9 @@
+{
+  "id" : "mem-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the heap?",
+  "choices" : [ "The area of memory where local variables and method call frames are stored", "A sorted tree data structure", "The area of memory where objects created with 'new' are stored", "The region of memory reserved for static variables" ],
+  "answer" : "c",
+  "explanation" : "Heap memory stores objects (created with new). It is managed by the garbage collector. Stack memory holds method frames: local variables and parameters. When a method returns, its stack frame is popped. Heap objects persist until no references to them remain."
+}

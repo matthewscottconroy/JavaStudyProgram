@@ -1,0 +1,10 @@
+{
+  "id" : "net-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This client code throws ConnectException. What is the most likely cause?",
+  "code" : "Socket socket = new Socket(\"localhost\", 9090);\n// Throws java.net.ConnectException: Connection refused",
+  "choices" : [ "localhost resolves to the wrong IP address", "No server is listening on port 9090 on localhost", "Socket requires an import from java.net.client", "The port 9090 is reserved and cannot be used" ],
+  "answer" : "b",
+  "explanation" : "ConnectException: Connection refused means the OS rejected the connection — typically because nothing is listening on that port. Start a ServerSocket on port 9090 first, then connect the client. Also check firewall rules if connecting to a remote host."
+}

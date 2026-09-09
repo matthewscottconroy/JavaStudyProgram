@@ -1,0 +1,9 @@
+{
+  "id" : "evo-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 4,
+  "prompt" : "Which correctly performs roulette-wheel (fitness-proportionate) selection from a population?",
+  "choices" : [ "Individual best = population.stream().max(Comparator.comparingDouble(Individual::getFitness)).orElseThrow();", "double totalFitness = population.stream().mapToDouble(Individual::getFitness).sum(); double pick = rng.nextDouble() * totalFitness; double running = 0; for (Individual ind : population) { running += ind.getFitness(); if (running >= pick) return ind; }", "Individual random = population.get(rng.nextInt(population.size())); return random;", "return population.get(0);" ],
+  "answer" : "b",
+  "explanation" : "Roulette-wheel selection: spin a virtual wheel where each slot's size is proportional to fitness. Sum all fitnesses (totalFitness), pick a random threshold, walk through the population accumulating fitness until you exceed the threshold. Option A: selects the always best (not probabilistic). Option C: uniform random (ignores fitness)."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "ex-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "try {\n    int[] arr = new int[3];\n    arr[5] = 1;\n} catch (ArrayIndexOutOfBoundsException e) {\n    System.out.println(\"caught: \" + e.getMessage());\n}",
+  "answer" : "caught: Index 5 out of bounds for length 3",
+  "explanation" : "arr[5] throws ArrayIndexOutOfBoundsException. e.getMessage() returns the JVM's description of the error."
+}

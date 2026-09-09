@@ -1,0 +1,9 @@
+{
+  "id" : "str-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "Which method returns the number of characters in a String?",
+  "choices" : [ "size()", "count()", "length()", "len()" ],
+  "answer" : "c",
+  "explanation" : "String.length() returns the number of characters. Arrays use .length (no parentheses). ArrayList uses .size(). len() is Python syntax."
+}

@@ -1,0 +1,10 @@
+{
+  "id" : "evo-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 4,
+  "prompt" : "The best fitness stays at exactly 0.50 for all 100 generations. What is most likely wrong?",
+  "code" : "// Mutation rate: 0.0\n// Crossover rate: 0.8\n// Elitism: yes (top 1 preserved)",
+  "choices" : [ "Elitism is causing the algorithm to freeze", "The crossover rate is too high", "Mutation rate of 0.0 means no new genetic material is ever introduced — crossover shuffles existing genes but cannot escape local optima", "100 generations is too few" ],
+  "answer" : "c",
+  "explanation" : "With zero mutation, the GA can only recombine genes already present in the population. Once the population converges, crossover produces identical individuals and no improvement is possible. Mutation is essential for escaping local optima. Even a small rate (0.01) can help significantly."
+}

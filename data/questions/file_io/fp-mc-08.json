@@ -1,0 +1,9 @@
+{
+  "id" : "fp-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the difference between FileInputStream and FileReader?",
+  "choices" : [ "FileInputStream reads bytes; FileReader reads characters (handles encoding)", "FileInputStream is faster; FileReader is safer", "FileReader reads binary data; FileInputStream reads text", "They are identical — just different names for the same class" ],
+  "answer" : "a",
+  "explanation" : "FileInputStream reads raw bytes — best for binary data (images, serialized objects). FileReader reads characters — best for text files (handles charset encoding). Wrap both in buffered variants for efficiency."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "fpar-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is a pure function?",
+  "choices" : [ "A function declared with the 'pure' keyword", "A function that always returns the same output for the same input and has no side effects", "A function with no parameters", "A function that only operates on primitive types" ],
+  "answer" : "b",
+  "explanation" : "A pure function is deterministic (same inputs → same output) and free of side effects (no I/O, no mutation of external state, no random, no time). Pure functions are easy to test, compose, and reason about. Java doesn't enforce purity in the language, but you can write functions that follow the discipline."
+}

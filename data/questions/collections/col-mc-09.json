@@ -1,0 +1,9 @@
+{
+  "id" : "col-mc-09",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "Which interface does HashMap implement?",
+  "choices" : [ "List", "Map", "Set", "Queue" ],
+  "answer" : "b",
+  "explanation" : "HashMap implements Map<K,V>. The Map interface has: put(), get(), remove(), containsKey(), entrySet(), keySet(), values(). HashMap is the most common implementation; TreeMap is sorted; LinkedHashMap is insertion-ordered."
+}

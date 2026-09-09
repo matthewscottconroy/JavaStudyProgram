@@ -1,0 +1,9 @@
+{
+  "id" : "aal-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "ArrayList<Integer> list = new ArrayList<>(List.of(10, 20, 30));\nlist.remove(Integer.valueOf(20));\nSystem.out.println(list.size() + \" \" + list.get(1));",
+  "answer" : "2 30",
+  "explanation" : "remove(Integer.valueOf(20)) removes by value (not index). List becomes [10, 30]. size()=2. get(1)=30."
+}

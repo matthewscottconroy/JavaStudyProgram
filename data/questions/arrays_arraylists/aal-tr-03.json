@@ -1,0 +1,9 @@
+{
+  "id" : "aal-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "import java.util.*;\nArrayList<String> list = new ArrayList<>(List.of(\"banana\", \"apple\", \"cherry\"));\nCollections.sort(list);\nSystem.out.println(list.get(0) + \" \" + list.get(2));",
+  "answer" : "apple cherry",
+  "explanation" : "Collections.sort() sorts alphabetically: [apple, banana, cherry]. get(0)=apple, get(2)=cherry."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "arg-cg-03",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which safely sums all numeric command-line arguments, skipping non-numeric ones?",
+  "choices" : [ "int sum = 0; for (String a : args) sum += Integer.parseInt(a);", "int sum = 0; for (String a : args) { try { sum += Integer.parseInt(a); } catch (NumberFormatException e) {} }", "int sum = Arrays.stream(args).sum();", "int sum = Integer.parseInt(String.join(\"\", args));" ],
+  "answer" : "b",
+  "explanation" : "Wrapping parseInt in try-catch skips non-numeric tokens gracefully. Option A crashes on any non-numeric argument. Option C: arrays don't have a sum() method on String[]. Option D: joining all args into one string produces a concat, not a sum."
+}

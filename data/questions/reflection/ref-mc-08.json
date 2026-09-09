@@ -1,0 +1,9 @@
+{
+  "id" : "ref-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does Class.newInstance() do?",
+  "choices" : [ "Creates a new array of the class type", "Creates a new instance of the class by calling the no-arg constructor", "Clones an existing instance", "Loads the class for the first time" ],
+  "answer" : "b",
+  "explanation" : "Class.newInstance() invokes the no-arg constructor reflectively. It is deprecated in Java 9+ because it silently propagates checked exceptions. Prefer: clazz.getDeclaredConstructor().newInstance() which gives better control."
+}

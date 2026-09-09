@@ -1,0 +1,9 @@
+{
+  "id" : "thr-mc-09",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 4,
+  "prompt" : "What does AtomicInteger provide that int does not?",
+  "choices" : [ "Larger range of values", "Thread-safe atomic operations (compare-and-set, incrementAndGet) without locking", "Automatic garbage collection", "Support for negative values" ],
+  "answer" : "b",
+  "explanation" : "int operations like i++ are NOT atomic — they involve read, modify, write. AtomicInteger.incrementAndGet() is atomic by design (CAS — compare-and-swap). No synchronized block needed for simple counters shared across threads."
+}

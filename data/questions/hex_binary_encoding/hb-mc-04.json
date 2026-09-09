@@ -1,0 +1,9 @@
+{
+  "id" : "hb-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What ASCII value (decimal) corresponds to the character 'A'?",
+  "choices" : [ "41", "65", "97", "48" ],
+  "answer" : "b",
+  "explanation" : "'A' is ASCII 65. 'a' is 97 (lowercase letters are 32 higher). '0' is 48. In Java: (int)'A' == 65 and (char)65 == 'A'."
+}

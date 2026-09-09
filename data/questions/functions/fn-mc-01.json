@@ -1,0 +1,9 @@
+{
+  "id" : "fn-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "What return type do you use for a method that returns nothing?",
+  "choices" : [ "null", "empty", "void", "None" ],
+  "answer" : "c",
+  "explanation" : "void indicates a method does not return a value. null is a value, not a type. 'empty' and 'None' are not Java types."
+}

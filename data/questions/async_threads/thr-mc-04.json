@@ -1,0 +1,9 @@
+{
+  "id" : "thr-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 4,
+  "prompt" : "What does CompletableFuture.supplyAsync(supplier) do?",
+  "choices" : [ "Runs the supplier synchronously and blocks until done", "Runs the supplier on the common ForkJoinPool and returns a Future for the result", "Schedules the supplier to run once per second", "Compiles the supplier to native code" ],
+  "answer" : "b",
+  "explanation" : "supplyAsync runs the supplier asynchronously (typically on the common ForkJoinPool or a specified Executor) and returns a CompletableFuture<T> you can chain with .thenApply(), .thenAccept(), etc., without blocking the calling thread."
+}

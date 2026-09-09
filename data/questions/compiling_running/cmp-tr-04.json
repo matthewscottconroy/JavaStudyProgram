@@ -1,0 +1,9 @@
+{
+  "id" : "cmp-tr-04",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What does 'java -cp lib/mylib.jar Main' do?",
+  "code" : "// No code — command-line question.\n// Command: java -cp lib/mylib.jar Main",
+  "answer" : "Runs the Main class with lib/mylib.jar added to the classpath",
+  "explanation" : "-cp (classpath) tells the JVM where to look for classes. lib/mylib.jar is added to the search path so Main and any classes it imports from mylib.jar can be found."
+}

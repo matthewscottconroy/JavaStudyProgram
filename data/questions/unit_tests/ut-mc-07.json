@@ -1,0 +1,9 @@
+{
+  "id" : "ut-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is a test fixture?",
+  "choices" : [ "A tool for running tests in parallel", "The set of objects and state prepared before each test (set up in @BeforeEach)", "A mock object that simulates a dependency", "A test that has no assertions" ],
+  "answer" : "b",
+  "explanation" : "A test fixture is the consistent, known state in which a test runs. @BeforeEach methods build the fixture — creating objects, setting up databases, etc. @AfterEach methods tear it down. Consistent fixtures make tests reproducible."
+}

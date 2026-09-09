@@ -1,0 +1,10 @@
+{
+  "id" : "lam-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "This throws a compile error about effectively final variables. What is the fix?",
+  "code" : "int count = 0;\nList<String> names = List.of(\"a\", \"b\", \"c\");\nnames.forEach(name -> {\n    count++;  // error\n    System.out.println(count + \": \" + name);\n});",
+  "choices" : [ "Declare count as static", "Use an AtomicInteger instead: AtomicInteger count = new AtomicInteger(0); then count.incrementAndGet()", "Use a traditional for loop instead of forEach", "Declare count as final" ],
+  "answer" : "b",
+  "explanation" : "Lambdas require captured local variables to be effectively final. count++ modifies count. AtomicInteger is itself final (the reference doesn't change), and its incrementAndGet() mutates the object without reassigning the variable."
+}

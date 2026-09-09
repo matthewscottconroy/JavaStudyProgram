@@ -1,0 +1,9 @@
+{
+  "id" : "clh-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What exception is thrown by an invalid cast, e.g. '(Cat) new Dog()'?",
+  "choices" : [ "NullPointerException", "IllegalArgumentException", "ClassCastException", "ArrayIndexOutOfBoundsException" ],
+  "answer" : "c",
+  "explanation" : "Casting an object to an incompatible type throws ClassCastException at runtime. Use 'instanceof' before casting to check compatibility: if (animal instanceof Dog d) { ... }"
+}

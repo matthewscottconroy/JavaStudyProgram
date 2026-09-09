@@ -1,0 +1,9 @@
+{
+  "id" : "mem-mc-09",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does 'String s = \"hello\";' store on the stack vs heap?",
+  "choices" : [ "The entire String object is on the stack", "The reference s is on the stack; the String object is on the heap", "Both the reference and the object are on the heap", "Strings are primitives and stored on the stack" ],
+  "answer" : "b",
+  "explanation" : "All local variables (including references) live on the stack. The String object itself lives on the heap. s is a reference (pointer) stored on the stack, pointing to the object on the heap."
+}

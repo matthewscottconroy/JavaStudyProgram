@@ -1,0 +1,9 @@
+{
+  "id" : "str-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "String s = \"Hello World\";\nSystem.out.println(s.replace(\"World\", \"Java\").toLowerCase());",
+  "answer" : "hello java",
+  "explanation" : "replace(\"World\",\"Java\") → \"Hello Java\". toLowerCase() → \"hello java\"."
+}

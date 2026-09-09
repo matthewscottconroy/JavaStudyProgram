@@ -1,0 +1,9 @@
+{
+  "id" : "cpn-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the Adapter pattern?",
+  "choices" : [ "A pattern that adds new methods to a class without modifying it", "A wrapper class that translates one interface into another so incompatible classes can work together", "A class that creates objects for you", "A pattern that restricts instantiation to one object" ],
+  "answer" : "b",
+  "explanation" : "Adapter wraps an existing class to match a required interface. Example: wrapping a legacy Logger with a new LoggingService interface so new code can use either. The adapter translates calls from the new interface to the old one."
+}

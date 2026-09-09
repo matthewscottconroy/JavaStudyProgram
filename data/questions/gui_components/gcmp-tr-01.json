@@ -1,0 +1,9 @@
+{
+  "id" : "gcmp-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What text appears in the window after this code runs?",
+  "code" : "JFrame frame = new JFrame();\nJLabel label = new JLabel(\"Hello, GUI!\");\nframe.add(label);\nframe.pack();\nframe.setVisible(true);",
+  "answer" : "Hello, GUI!",
+  "explanation" : "JLabel is created with 'Hello, GUI!' text and added to the frame. pack() sizes the frame to fit its contents. setVisible(true) shows it. The label text 'Hello, GUI!' is displayed in the window."
+}

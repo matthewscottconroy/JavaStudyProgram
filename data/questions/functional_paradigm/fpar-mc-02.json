@@ -1,0 +1,9 @@
+{
+  "id" : "fpar-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does 'immutability' mean in the functional paradigm?",
+  "choices" : [ "Variables cannot be reassigned once created", "Methods cannot call other methods", "Objects cannot be garbage-collected", "Classes cannot be extended" ],
+  "answer" : "a",
+  "explanation" : "Immutability means state is never modified after creation. Instead of changing a list, you produce a new list with the modification. In Java: prefer final fields, use List.of() / Map.of() for immutable collections, return new objects rather than mutating arguments."
+}

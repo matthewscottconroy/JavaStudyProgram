@@ -1,0 +1,9 @@
+{
+  "id" : "jch-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which correctly overrides toString() for a class with fields 'name' and 'age'?",
+  "choices" : [ "public String toString() { return name + age; }", "@Override public String toString() { return \"Person{name='\" + name + \"', age=\" + age + \"}\"; }", "public static String toString(Person p) { return p.name; }", "@Override public void toString() { System.out.println(name); }" ],
+  "answer" : "b",
+  "explanation" : "toString() must be public, non-static, return String, and use @Override. A readable format like 'ClassName{field=value}' helps debugging. Option A omits @Override and separator. Option C is static. Option D returns void."
+}

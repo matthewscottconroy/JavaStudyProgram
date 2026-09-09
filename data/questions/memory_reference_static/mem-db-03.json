@@ -1,0 +1,10 @@
+{
+  "id" : "mem-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This static utility class can be instantiated. What is the fix?",
+  "code" : "class MathUtils {\n    static int square(int n) { return n * n; }\n    static int cube(int n) { return n * n * n; }\n}",
+  "choices" : [ "Make all methods private", "Add a private no-arg constructor to prevent instantiation", "Make the class abstract", "Declare the class as final" ],
+  "answer" : "b",
+  "explanation" : "A utility class with only static methods should not be instantiated. Without a constructor, Java provides a default public no-arg constructor. Fix: add 'private MathUtils() { }' to block instantiation. This pattern matches java.lang.Math and similar classes."
+}

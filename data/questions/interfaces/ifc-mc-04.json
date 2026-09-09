@@ -1,0 +1,9 @@
+{
+  "id" : "ifc-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is a functional interface?",
+  "choices" : [ "An interface with no methods", "An interface with exactly one abstract method", "An interface whose methods return functions", "An interface that extends Function" ],
+  "answer" : "b",
+  "explanation" : "A functional interface has exactly one abstract method (SAM — Single Abstract Method). This allows lambda expressions to implement it. Examples: Runnable, Comparator, Predicate, Function. @FunctionalInterface annotation enforces the constraint."
+}

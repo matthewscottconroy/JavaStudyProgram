@@ -1,0 +1,9 @@
+{
+  "id" : "fpar-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is partial application (or currying) in functional programming?",
+  "choices" : [ "Applying a function to only some of its arguments, producing a new function that takes the remaining arguments", "Applying a function to all its arguments at once", "Splitting a function into two overloaded versions", "Using default parameters in a method" ],
+  "answer" : "a",
+  "explanation" : "Currying transforms f(a, b) into f(a)(b). Partial application binds some arguments early. In Java, you can simulate this with lambdas: Function<Integer,Integer> add5 = x -> add(5, x); — 'add' is partially applied with a=5."
+}

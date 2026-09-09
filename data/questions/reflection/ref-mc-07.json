@@ -1,0 +1,9 @@
+{
+  "id" : "ref-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is a downside of using reflection compared to direct code?",
+  "choices" : [ "Reflection only works with public classes", "Reflection bypasses compile-time type checking, is slower, and makes code harder to understand and refactor", "Reflection requires a special license", "Reflected method calls cannot throw exceptions" ],
+  "answer" : "b",
+  "explanation" : "Reflection loses type safety (errors become runtime, not compile-time), has performance overhead (method lookup each time), and makes code harder to follow in IDEs. Use it as a last resort when direct code or generics won't work."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "fp-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "Which modern API reads all lines of a text file into a List<String>?",
+  "choices" : [ "File.readLines(path)", "Files.readAllLines(path)", "BufferedReader.readAllLines(path)", "FileReader.lines(path)" ],
+  "answer" : "b",
+  "explanation" : "java.nio.file.Files.readAllLines(Path) returns all lines as List<String>. The other options are either non-existent or incorrect. For large files, prefer Files.lines(path) which returns a Stream and doesn't load everything at once."
+}

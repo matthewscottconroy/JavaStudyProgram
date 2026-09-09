@@ -1,0 +1,9 @@
+{
+  "id" : "arr-tr-06",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "String[] words = {\"banana\", \"apple\", \"cherry\"};\nArrays.sort(words);\nSystem.out.println(words[0]);",
+  "answer" : "apple",
+  "explanation" : "Arrays.sort(String[]) sorts in lexicographic (alphabetical) order. apple < banana < cherry. words[0] = \"apple\"."
+}

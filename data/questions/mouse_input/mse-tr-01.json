@@ -1,0 +1,9 @@
+{
+  "id" : "mse-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "When the user clicks at coordinates (100, 200), what is printed?",
+  "code" : "panel.addMouseListener(new MouseAdapter() {\n    @Override\n    public void mouseClicked(MouseEvent e) {\n        System.out.println(e.getX() + \",\" + e.getY());\n    }\n});",
+  "answer" : "100,200",
+  "explanation" : "e.getX() returns 100 and e.getY() returns 200 (the click coordinates relative to the panel). String concatenation: 100 + \",\" + 200 = \"100,200\"."
+}

@@ -1,0 +1,10 @@
+{
+  "id" : "kbd-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "keyTyped() never prints anything for arrow keys. Why?",
+  "code" : "component.addKeyListener(new KeyAdapter() {\n    @Override\n    public void keyTyped(KeyEvent e) {\n        System.out.println(\"Key: \" + e.getKeyChar());\n    }\n});",
+  "choices" : [ "getKeyChar() is only valid in keyPressed()", "Arrow keys do not produce a Unicode character, so keyTyped() is never fired for them", "KeyAdapter overrides block keyTyped()", "Arrow keys require a separate ArrowKeyListener" ],
+  "answer" : "b",
+  "explanation" : "keyTyped() only fires when a printable Unicode character is produced. Arrow keys, Shift, Ctrl, function keys do not produce characters, so keyTyped is never called for them. Use keyPressed() with e.getKeyCode() == KeyEvent.VK_LEFT / VK_RIGHT / VK_UP / VK_DOWN instead."
+}

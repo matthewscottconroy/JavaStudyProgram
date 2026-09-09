@@ -1,0 +1,9 @@
+{
+  "id" : "ipm-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "class Payment {\n    String process() { return \"base\"; }\n}\nclass CreditCard extends Payment {\n    String process() { return \"credit\"; }\n}\nclass PayPal extends Payment {\n    String process() { return \"paypal\"; }\n}\n// in main:\nPayment[] payments = { new CreditCard(), new PayPal(), new CreditCard() };\nfor (Payment p : payments) System.out.println(p.process());",
+  "answer" : "credit\npaypal\ncredit",
+  "explanation" : "Each element's actual type (CreditCard or PayPal) determines which process() is called. This is polymorphism: the same call produces different behaviour based on the real object."
+}

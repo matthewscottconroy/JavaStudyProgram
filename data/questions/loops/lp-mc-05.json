@@ -1,0 +1,9 @@
+{
+  "id" : "lp-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is a for-each (enhanced for) loop used for?",
+  "choices" : [ "Iterating over a range of integers with a step other than 1", "Iterating over all elements of an array or Iterable without using an index", "Executing a loop a fixed number of times", "Creating a loop that can run backwards" ],
+  "answer" : "b",
+  "explanation" : "for (String s : list) { ... } iterates over each element. The loop variable gets the value of each element in order. You cannot access the index or modify the array/list position using a for-each loop."
+}

@@ -1,0 +1,10 @@
+{
+  "id" : "g2d-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "After rotating and drawing, all subsequent shapes are also rotated unexpectedly. Why?",
+  "code" : "Graphics2D g2d = (Graphics2D) g;\ng2d.rotate(Math.PI / 6);  // 30 degrees\ng2d.fillRect(50, 50, 80, 40);\n// later: draw unrotated background — still rotated!",
+  "choices" : [ "rotate() permanently changes the canvas orientation", "The transform was not saved and restored — rotate() modifies the Graphics2D state permanently for this paint cycle", "fillRect ignores transforms", "rotate() applies to shapes, not the coordinate system" ],
+  "answer" : "b",
+  "explanation" : "Graphics2D transforms accumulate. To rotate only one shape: AffineTransform saved = g2d.getTransform(); g2d.rotate(angle); g2d.fillRect(...); g2d.setTransform(saved); Or use: g2d.rotate(angle, cx, cy) to rotate around a specific center point."
+}

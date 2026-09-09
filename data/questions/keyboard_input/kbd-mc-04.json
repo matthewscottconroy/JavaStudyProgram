@@ -1,0 +1,9 @@
+{
+  "id" : "kbd-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "Why might a component not receive KeyEvents even after adding a KeyListener?",
+  "choices" : [ "KeyListener requires a special constructor parameter", "The component must have keyboard focus — call component.requestFocusInWindow()", "KeyEvents are only sent to JFrame, not JPanel", "KeyListener only works on text fields" ],
+  "answer" : "b",
+  "explanation" : "KeyEvents are delivered only to the focused component. Call component.setFocusable(true) and component.requestFocusInWindow() to ensure the component can receive keyboard focus. JPanel is focusable but often doesn't have focus by default."
+}

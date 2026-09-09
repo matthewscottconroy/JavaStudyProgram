@@ -1,0 +1,9 @@
+{
+  "id" : "fn-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "static int factorial(int n) {\n    if (n <= 1) return 1;\n    return n * factorial(n - 1);\n}\n// in main:\nSystem.out.println(factorial(4));",
+  "answer" : "24",
+  "explanation" : "factorial(4) = 4 * factorial(3) = 4 * 3 * factorial(2) = 4*3*2*factorial(1) = 4*3*2*1 = 24. This is recursion."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "arr-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which finds the maximum value in an int array 'nums'?",
+  "choices" : [ "int max = Arrays.max(nums);", "int max = nums[0]; for (int x : nums) if (x > max) max = x;", "int max = Collections.max(nums);", "int max = nums.sort()[nums.length - 1];" ],
+  "answer" : "b",
+  "explanation" : "Initialize max to the first element, then loop updating max when a larger value is found. Arrays.max() doesn't exist. Collections.max() works on List, not int[]. Option D: sort() doesn't return an array and modifying the array has side effects."
+}

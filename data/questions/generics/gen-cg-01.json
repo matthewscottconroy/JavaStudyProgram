@@ -1,0 +1,9 @@
+{
+  "id" : "gen-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which generic class correctly stores a pair of values of any two types?",
+  "choices" : [ "class Pair { Object first; Object second; }", "class Pair<A, B> { A first; B second; Pair(A a, B b) { first=a; second=b; } }", "class Pair<T> { T first; T second; }", "class Pair extends Object<A, B> { A first; B second; }" ],
+  "answer" : "b",
+  "explanation" : "Two separate type parameters <A, B> allow the two fields to have independent types. Option A uses Object (no type safety). Option C uses one type parameter (both fields must be the same type). Option D: 'extends Object<A, B>' is not valid Java syntax."
+}

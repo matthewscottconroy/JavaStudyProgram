@@ -1,0 +1,10 @@
+{
+  "id" : "cmp-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "Running 'java Hello.class' produces an error. Why?",
+  "code" : "javac Hello.class",
+  "choices" : [ "Hello is not a valid class name", "The .class extension should not be included when running with 'java'", "'java' requires a .jar argument", "Hello needs a package declaration" ],
+  "answer" : "b",
+  "explanation" : "'java' takes the class name, not the filename. Use 'java Hello' (without .class). Including .class makes Java look for a class named 'Hello.class'."
+}

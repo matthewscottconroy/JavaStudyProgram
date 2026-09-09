@@ -1,0 +1,9 @@
+{
+  "id" : "fn-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Two methods with the same name but different parameter lists is called:",
+  "choices" : [ "Overriding", "Overloading", "Shadowing", "Polymorphism" ],
+  "answer" : "b",
+  "explanation" : "Overloading = same method name, different parameter lists (type/count) in the same class. Overriding = redefining an inherited method in a subclass."
+}

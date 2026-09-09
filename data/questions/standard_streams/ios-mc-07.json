@@ -1,0 +1,9 @@
+{
+  "id" : "ios-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "How can you redirect System.out to write to a file programmatically?",
+  "choices" : [ "System.out = new FileOutputStream(\"log.txt\");", "System.setOut(new PrintStream(new FileOutputStream(\"log.txt\")));", "System.out.redirect(\"log.txt\");", "PrintStream.setDefault(new FileOutputStream(\"log.txt\"));" ],
+  "answer" : "b",
+  "explanation" : "System.setOut(PrintStream) replaces the standard output stream. Similarly System.setErr() replaces stderr and System.setIn() replaces stdin. This is used in test frameworks and logging setups. Remember to flush and close the stream when done."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "mem-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "class Box {\n    int value;\n    Box(int v) { value = v; }\n}\nBox x = new Box(10);\nBox y = x;\ny.value = 99;\nSystem.out.println(x.value);",
+  "answer" : "99",
+  "explanation" : "x and y point to the same Box object. Changing y.value also changes x.value because they reference the same heap object."
+}

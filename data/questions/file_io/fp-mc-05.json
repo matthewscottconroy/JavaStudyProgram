@@ -1,0 +1,9 @@
+{
+  "id" : "fp-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does Files.readAllLines(Path.of(\"data.txt\")) return?",
+  "choices" : [ "A single String with all file content", "A List<String> where each element is one line", "A byte[] of the raw file bytes", "A Scanner ready to read the file" ],
+  "answer" : "b",
+  "explanation" : "Files.readAllLines() reads the entire file and returns each line as a String in a List. Convenient for small files. For large files, use Files.lines() which returns a lazy Stream<String> that reads line by line without loading everything into memory at once."
+}

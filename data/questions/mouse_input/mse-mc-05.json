@@ -1,0 +1,9 @@
+{
+  "id" : "mse-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What method returns the number of times the mouse button was clicked (for detecting double-clicks)?",
+  "choices" : [ "e.getClickCount()", "e.getDoubleClick()", "e.getRepeatCount()", "MouseInfo.getClickCount()" ],
+  "answer" : "a",
+  "explanation" : "MouseEvent.getClickCount() returns 1 for a single click, 2 for a double-click, etc. Check: if (e.getClickCount() == 2) to handle double-clicks in mouseClicked()."
+}

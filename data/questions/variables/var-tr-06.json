@@ -1,0 +1,9 @@
+{
+  "id" : "var-tr-06",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is the output?",
+  "code" : "int a = 5;\nint b = a;\nb = 10;\nSystem.out.println(a);",
+  "answer" : "5",
+  "explanation" : "Primitive assignment copies the value. b = a copies the value 5 into b. Changing b to 10 does not affect a. a remains 5."
+}

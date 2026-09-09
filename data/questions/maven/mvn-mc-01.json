@@ -1,0 +1,9 @@
+{
+  "id" : "mvn-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "What file defines a Maven project's configuration and dependencies?",
+  "choices" : [ "build.gradle", "pom.xml", "settings.json", "manifest.mf" ],
+  "answer" : "b",
+  "explanation" : "pom.xml (Project Object Model) is Maven's build descriptor. It declares the project's groupId, artifactId, version, dependencies, and plugins. build.gradle belongs to Gradle."
+}

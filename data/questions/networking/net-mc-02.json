@@ -1,0 +1,9 @@
+{
+  "id" : "net-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does ServerSocket.accept() do?",
+  "choices" : [ "Sends an HTTP accept header", "Blocks until a client connects and returns a Socket for that connection", "Accepts all pending packets at once", "Validates the server's SSL certificate" ],
+  "answer" : "b",
+  "explanation" : "ServerSocket.accept() is a blocking call. When a client connects, it returns a Socket object for communicating with that specific client. To handle multiple clients, call accept() in a loop and handle each returned Socket on a separate thread."
+}

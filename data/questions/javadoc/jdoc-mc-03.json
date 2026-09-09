@@ -1,0 +1,9 @@
+{
+  "id" : "jdoc-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which Javadoc tag documents the value a method returns?",
+  "choices" : [ "@result", "@return", "@output", "@yields" ],
+  "answer" : "b",
+  "explanation" : "@return description documents what the method returns. Omit it for void methods. Example: @return the number of elements in the list, or -1 if empty"
+}

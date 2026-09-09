@@ -1,0 +1,10 @@
+{
+  "id" : "arg-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "Running 'java MyApp' (no args) crashes. Why?",
+  "code" : "public static void main(String[] args) {\n    System.out.println(args[0]);\n}",
+  "choices" : [ "args is null when no arguments are given", "args[0] throws ArrayIndexOutOfBoundsException when args is empty", "main requires at least one argument to compile", "println cannot print strings from arrays" ],
+  "answer" : "b",
+  "explanation" : "With no arguments args is an empty array (length 0), not null. Accessing args[0] throws ArrayIndexOutOfBoundsException. Guard with: if (args.length > 0) before reading args[0]."
+}

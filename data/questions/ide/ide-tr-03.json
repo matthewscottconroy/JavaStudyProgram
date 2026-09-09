@@ -1,0 +1,9 @@
+{
+  "id" : "ide-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 1,
+  "prompt" : "You run a program in IntelliJ with the Debug button. A red dot appears next to line 7. What does that dot mean?",
+  "code" : "// line 7 of Main.java:\nSystem.out.println(\"Hello\");  // <-- red filled circle in gutter",
+  "answer" : "An active breakpoint is set at line 7",
+  "explanation" : "A filled red circle in the gutter is a breakpoint marker. The program will pause before executing that line when run in debug mode."
+}

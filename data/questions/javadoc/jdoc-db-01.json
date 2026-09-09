@@ -1,0 +1,10 @@
+{
+  "id" : "jdoc-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "The Javadoc tool warns 'no @return'. What is wrong?",
+  "code" : "/**\n * Computes the square of n.\n * @param n the input value\n */\npublic int square(int n) {\n    return n * n;\n}",
+  "choices" : [ "The comment should use /* */ not /** */", "@return tag is missing for a non-void method", "@param n should be @param int n", "The method body must be in the comment" ],
+  "answer" : "b",
+  "explanation" : "Non-void methods should have a @return tag describing what is returned. Add: @return the square of n. Javadoc will warn or produce incomplete HTML documentation without it."
+}

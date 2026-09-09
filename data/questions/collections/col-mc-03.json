@@ -1,0 +1,9 @@
+{
+  "id" : "col-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does Map.getOrDefault(key, defaultValue) return?",
+  "choices" : [ "null if the key is absent", "The value for the key, or defaultValue if the key is absent", "A new entry with defaultValue if the key is absent", "It throws NoSuchElementException if the key is absent" ],
+  "answer" : "b",
+  "explanation" : "getOrDefault returns the associated value if the key exists, otherwise defaultValue. It does NOT add the default to the map. Use computeIfAbsent() to add."
+}

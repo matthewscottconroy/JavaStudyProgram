@@ -1,0 +1,9 @@
+{
+  "id" : "net-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What does this URL parse into?",
+  "code" : "URL url = new URL(\"https://example.com:8443/api/data?id=5\");\nSystem.out.println(url.getHost() + \" \" + url.getPort());",
+  "answer" : "example.com 8443",
+  "explanation" : "getHost() returns the hostname: 'example.com'. getPort() returns the explicit port: 8443. If no port is in the URL, getPort() returns -1 (the protocol's default port is implied)."
+}

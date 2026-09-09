@@ -1,0 +1,9 @@
+{
+  "id" : "arr-tr-05",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "int[] arr = {10, 20, 30};\nSystem.out.println(Arrays.toString(arr));",
+  "answer" : "[10, 20, 30]",
+  "explanation" : "Arrays.toString() formats the array as a bracketed, comma-separated string."
+}

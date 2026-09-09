@@ -1,0 +1,9 @@
+{
+  "id" : "thr-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does 'volatile' do on a field?",
+  "choices" : [ "Makes reads/writes atomic for all types", "Ensures all threads see the most up-to-date value by reading/writing directly to main memory", "Prevents the field from being garbage collected", "Makes the field thread-local (each thread has its own copy)" ],
+  "answer" : "b",
+  "explanation" : "volatile guarantees visibility: a write by one thread is immediately visible to all others. It does NOT guarantee atomicity for compound operations like i++ (read-modify-write). For atomicity, use AtomicInteger or synchronized. Use volatile for simple flags like 'boolean running = true;'."
+}

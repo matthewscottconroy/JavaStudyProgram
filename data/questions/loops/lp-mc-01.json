@@ -1,0 +1,9 @@
+{
+  "id" : "lp-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "In a for loop 'for (int i = 0; i < 5; i++)', how many times does the body execute?",
+  "choices" : [ "4", "5", "6", "0" ],
+  "answer" : "b",
+  "explanation" : "i starts at 0 and increments while i < 5: values 0,1,2,3,4 — that's 5 iterations."
+}

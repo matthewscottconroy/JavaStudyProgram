@@ -1,0 +1,9 @@
+{
+  "id" : "hb-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "int a = 0b1100;  // 12\nint b = 0b1010;  // 10\nSystem.out.println(a & b);\nSystem.out.println(a | b);\nSystem.out.println(a ^ b);",
+  "answer" : "8\n14\n6",
+  "explanation" : "1100 & 1010 = 1000 = 8. 1100 | 1010 = 1110 = 14. 1100 ^ 1010 = 0110 = 6."
+}

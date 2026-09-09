@@ -1,0 +1,10 @@
+{
+  "id" : "prn-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 1,
+  "prompt" : "Which line prints exactly: Hello, World!",
+  "choices" : [ "System.out.println(Hello, World!);", "System.out.print(\"Hello, World!\");", "System.out.println(\"Hello, World!\");", "console.log(\"Hello, World!\");" ],
+  "answer" : "c",
+  "explanation" : "String literals must be enclosed in double quotes. println adds a newline at the end. console.log is JavaScript syntax, not Java.",
+  "hints" : [ "String values always go in double quotes in Java." ]
+}

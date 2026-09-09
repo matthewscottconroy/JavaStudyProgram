@@ -1,0 +1,9 @@
+{
+  "id" : "fp-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does try-with-resources ensure?",
+  "choices" : [ "The resource is created lazily", "The resource is automatically closed when the try block exits", "Exceptions inside the block are suppressed", "The resource is shared across threads" ],
+  "answer" : "b",
+  "explanation" : "try-with-resources (Java 7+) calls close() on any AutoCloseable resource when the block ends, even if an exception is thrown. This prevents resource leaks without a finally block."
+}

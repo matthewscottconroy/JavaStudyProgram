@@ -1,0 +1,9 @@
+{
+  "id" : "dbt-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the purpose of 'Run to Cursor' in a debugger?",
+  "choices" : [ "Moves the cursor to the currently executing line", "Runs the program until it reaches the line where the cursor is placed, then pauses", "Restarts execution from the cursor position", "Sets a permanent breakpoint at the cursor line" ],
+  "answer" : "b",
+  "explanation" : "'Run to Cursor' (Alt+F9 in IntelliJ) temporarily sets a one-shot breakpoint at the cursor line and resumes execution. It's convenient for skipping over a block of code you don't want to step through without permanently adding a breakpoint."
+}

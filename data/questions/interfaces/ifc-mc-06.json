@@ -1,0 +1,9 @@
+{
+  "id" : "ifc-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does the @FunctionalInterface annotation enforce?",
+  "choices" : [ "The interface must have at least one method", "The interface must have exactly one abstract method — a compile error if violated", "All methods in the interface must be default", "The interface can only be implemented by lambda expressions" ],
+  "answer" : "b",
+  "explanation" : "@FunctionalInterface is a marker that causes the compiler to verify the interface has exactly one SAM. If you accidentally add a second abstract method, the compiler reports an error. Without the annotation, the interface is still functional — it just isn't protected against accidental expansion."
+}

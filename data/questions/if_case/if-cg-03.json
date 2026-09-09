@@ -1,0 +1,9 @@
+{
+  "id" : "if-cg-03",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which correctly checks that a number is between 1 and 100 inclusive?",
+  "choices" : [ "if (1 < n < 100)", "if (n > 1 && n < 100)", "if (n >= 1 && n <= 100)", "if (n.between(1, 100))" ],
+  "answer" : "c",
+  "explanation" : "Option A is invalid Java syntax (chained comparisons don't work like that). Option B excludes both 1 and 100 (uses > and <). Option C correctly uses >= and <= to include the boundaries. Option D: int has no between() method."
+}

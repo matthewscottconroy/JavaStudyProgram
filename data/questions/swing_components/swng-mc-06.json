@@ -1,0 +1,9 @@
+{
+  "id" : "swng-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which static JOptionPane method shows a simple message dialog?",
+  "choices" : [ "JOptionPane.showDialog(parent, message)", "JOptionPane.showMessageDialog(parent, message)", "JOptionPane.alert(parent, message)", "JOptionPane.display(message)" ],
+  "answer" : "b",
+  "explanation" : "JOptionPane.showMessageDialog(parentComponent, message) shows an informational popup. showConfirmDialog returns YES/NO/CANCEL. showInputDialog lets the user type text. These are convenience wrappers around JDialog."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "gui-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which correctly creates a JFrame on the EDT with proper close behavior and centered placement?",
+  "choices" : [ "new JFrame(\"App\").setVisible(true);", "SwingUtilities.invokeLater(() -> { JFrame f = new JFrame(\"App\"); f.setSize(400,300); f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); f.setLocationRelativeTo(null); f.setVisible(true); });", "JFrame f = new JFrame(); f.setVisible(true); f.setSize(400,300);", "Thread.EDT.run(() -> new JFrame(\"App\").show());" ],
+  "answer" : "b",
+  "explanation" : "invokeLater ensures the JFrame is created on the EDT. The sequence: create frame, set size, set close operation, center, make visible. Option C sets size after visible (may not render correctly). Option D: Thread.EDT is not real Java API."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "mse-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the purpose of MouseWheelListener?",
+  "choices" : [ "To detect when the mouse enters or leaves a component", "To respond to mouse wheel scroll events", "To detect mouse button clicks", "To track mouse drag distance" ],
+  "answer" : "b",
+  "explanation" : "MouseWheelListener has one method: mouseWheelMoved(MouseWheelEvent e). e.getWheelRotation() returns positive (scroll down) or negative (scroll up) values. e.getUnitsToScroll() gives the amount to scroll in 'units'. Add with: component.addMouseWheelListener(listener)."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "ipm-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the difference between method overloading and method overriding?",
+  "choices" : [ "Overloading is faster; overriding is type-safe", "Overloading = same name, different parameters in the same class; overriding = redefining a parent method in a subclass", "Overriding is resolved at compile time; overloading at runtime", "Overloading requires @Override; overriding does not" ],
+  "answer" : "b",
+  "explanation" : "Overloading: print(int), print(String), print(double) — resolved at compile time (static dispatch). Overriding: a subclass provides its own version of an inherited method — resolved at runtime (dynamic dispatch). @Override annotation is used with overriding, not overloading."
+}

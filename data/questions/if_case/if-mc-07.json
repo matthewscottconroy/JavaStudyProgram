@@ -1,0 +1,9 @@
+{
+  "id" : "if-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the output?\n\n    int n = 15;\n    if (n > 10 && n < 20) System.out.println(\"in range\");",
+  "choices" : [ "in range", "nothing is printed", "compile error", "false" ],
+  "answer" : "a",
+  "explanation" : "n=15 is > 10 AND < 20, so the combined condition is true. \"in range\" is printed. No braces needed for a single-statement body."
+}

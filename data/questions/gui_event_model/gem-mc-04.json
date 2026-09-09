@@ -1,0 +1,9 @@
+{
+  "id" : "gem-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "How do you safely update a Swing component from a background thread?",
+  "choices" : [ "label.setText(value) directly", "synchronized(label) { label.setText(value); }", "SwingUtilities.invokeLater(() -> label.setText(value))", "label.post(value)" ],
+  "answer" : "c",
+  "explanation" : "SwingUtilities.invokeLater() schedules the Runnable to run on the EDT. Direct calls from non-EDT threads are unsafe and can cause visual corruption or deadlock."
+}

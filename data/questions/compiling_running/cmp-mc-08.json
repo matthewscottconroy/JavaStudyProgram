@@ -1,0 +1,9 @@
+{
+  "id" : "cmp-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does a JAR file contain?",
+  "choices" : [ "Java source (.java) files", "Compiled Java bytecode (.class files) and metadata, packaged in a ZIP-format archive", "JVM configuration settings", "Only the main class, not dependencies" ],
+  "answer" : "b",
+  "explanation" : "JAR (Java ARchive) bundles .class files, resources, and a META-INF/MANIFEST.MF. It's a ZIP archive. Fat/uber JARs also include all dependencies. Run with: java -jar myapp.jar"
+}

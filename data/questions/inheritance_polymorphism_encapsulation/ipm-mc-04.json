@@ -1,0 +1,9 @@
+{
+  "id" : "ipm-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "Which scenario violates encapsulation?",
+  "choices" : [ "A class with private fields and public getters/setters", "A class that returns a reference to its internal mutable list from a getter", "A class that validates input in its setter", "A class with a package-private helper method" ],
+  "answer" : "b",
+  "explanation" : "Returning a reference to an internal mutable list lets callers modify it directly, bypassing any validation in the class. Fix: return a defensive copy — Collections.unmodifiableList(internalList) or new ArrayList<>(internalList)."
+}

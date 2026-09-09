@@ -1,0 +1,9 @@
+{
+  "id" : "ut-mc-10",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the AAA pattern in unit testing?",
+  "choices" : [ "Annotation, Assertion, Argument", "Arrange, Act, Assert — a structure for writing clear tests", "Async, Await, Assert", "Authentication, Authorization, Auditing" ],
+  "answer" : "b",
+  "explanation" : "AAA: Arrange (set up inputs and mocks), Act (call the method under test), Assert (verify the result). Example: Arrange: Calculator c = new Calculator(); Act: int result = c.add(2, 3); Assert: assertEquals(5, result);"
+}

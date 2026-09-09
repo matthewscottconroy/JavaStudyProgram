@@ -1,0 +1,10 @@
+{
+  "id" : "ide-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "A student sets a breakpoint but the program never pauses. What is the most likely cause?",
+  "code" : "int x = 5;\n// Breakpoint set here\nSystem.out.println(x);\n// Student runs via 'Run' button, not 'Debug' button",
+  "choices" : [ "The breakpoint is on a comment line", "The program was launched with 'Run' instead of 'Debug' — breakpoints only trigger in debug mode", "Local variables cannot have breakpoints", "println() clears all breakpoints" ],
+  "answer" : "b",
+  "explanation" : "Breakpoints only activate when the program is started via the Debug action (Shift+F9 / green bug icon). Running normally ignores breakpoints entirely. Also check: the breakpoint icon should be solid red; a hollow icon means the class hasn't been loaded."
+}

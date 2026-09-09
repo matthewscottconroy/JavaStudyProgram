@@ -1,0 +1,9 @@
+{
+  "id" : "arg-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does 'java MyApp' print if main is: System.out.println(args.length)?",
+  "choices" : [ "1", "0", "null", "Throws NullPointerException" ],
+  "answer" : "b",
+  "explanation" : "When no arguments are passed, args is an empty String[] with length 0. It is never null. args.length == 0."
+}

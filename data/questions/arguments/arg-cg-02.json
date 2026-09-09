@@ -1,0 +1,9 @@
+{
+  "id" : "arg-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which iterates over all command-line arguments and prints each one?",
+  "choices" : [ "for (int i = 0; i <= args.length; i++) System.out.println(args[i]);", "for (String arg : args) System.out.println(arg);", "System.out.println(args);", "args.forEach(System.out::println);" ],
+  "answer" : "b",
+  "explanation" : "Enhanced for loop over args iterates each String element cleanly. Option A uses <= which causes ArrayIndexOutOfBoundsException on the last iteration. Option C prints the array reference (e.g., [Ljava.lang.String;@...). Option D: arrays don't have a forEach method (ArrayList does)."
+}

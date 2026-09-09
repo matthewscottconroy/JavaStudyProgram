@@ -1,0 +1,9 @@
+{
+  "id" : "swng-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "How many tabs does this JTabbedPane have?",
+  "code" : "JTabbedPane tabs = new JTabbedPane();\ntabs.addTab(\"Home\", new JPanel());\ntabs.addTab(\"Settings\", new JPanel());\ntabs.addTab(\"Help\", new JPanel());",
+  "answer" : "3",
+  "explanation" : "Three calls to addTab create three tabs: Home, Settings, and Help."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "thr-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is a deadlock?",
+  "choices" : [ "A thread that runs forever without stopping", "Two or more threads each holding a resource the other needs, blocking indefinitely", "A thread that uses too much memory", "A thread that throws an uncaught exception" ],
+  "answer" : "b",
+  "explanation" : "Deadlock: Thread A holds lock1 and waits for lock2. Thread B holds lock2 and waits for lock1. Neither can proceed. JVM doesn't automatically resolve deadlocks. Prevention: always acquire locks in a consistent global order."
+}

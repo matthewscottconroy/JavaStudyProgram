@@ -1,0 +1,10 @@
+{
+  "id" : "acm-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "Why does this Singleton compile but allow multiple instances?",
+  "code" : "class Singleton {\n    static Singleton instance;\n    public Singleton() { }  // bug here\n    static Singleton getInstance() {\n        if (instance == null) instance = new Singleton();\n        return instance;\n    }\n}",
+  "choices" : [ "getInstance() is not declared public", "The instance field is not volatile", "The constructor is public — external code can call new Singleton() to create extra instances", "Static fields cannot store object references" ],
+  "answer" : "c",
+  "explanation" : "A Singleton should have a private constructor so external code cannot use 'new'. With a public constructor, the factory method is bypassed. Fix: change 'public Singleton()' to 'private Singleton()'."
+}

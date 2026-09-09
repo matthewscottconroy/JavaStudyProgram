@@ -1,0 +1,9 @@
+{
+  "id" : "mem-cg-03",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which code creates an independent copy of an array (not a shared reference)?",
+  "choices" : [ "int[] copy = original;", "int[] copy = Arrays.copyOf(original, original.length);", "int[] copy = (int[]) original.clone(); // also valid", "Both b and c create independent copies" ],
+  "answer" : "d",
+  "explanation" : "Arrays.copyOf() and .clone() both create new arrays with the same element values. Modifying copy does not affect original (and vice versa). Option A copies only the reference — both variables point to the same array."
+}

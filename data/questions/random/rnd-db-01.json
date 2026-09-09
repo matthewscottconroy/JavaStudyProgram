@@ -1,0 +1,10 @@
+{
+  "id" : "rnd-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "This code always produces the same number during a run. Why?",
+  "code" : "for (int i = 0; i < 5; i++) {\n    Random r = new Random();\n    System.out.println(r.nextInt(100));\n}",
+  "choices" : [ "new Random() is not allowed inside loops", "nextInt(100) returns the same value for the same object", "A new Random() created quickly may receive the same time-based seed, producing the same first value", "Random numbers repeat after 5 calls" ],
+  "answer" : "c",
+  "explanation" : "Creating a new Random() each iteration may seed from the same millisecond clock, giving the same first number repeatedly. Fix: create ONE Random instance outside the loop and call nextInt() on it repeatedly."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "ml-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 4,
+  "prompt" : "What is the accuracy of this model?",
+  "code" : "// 100 test cases: 70 correct predictions, 30 wrong\nint correct = 70;\nint total = 100;\ndouble accuracy = (double) correct / total;\nSystem.out.printf(\"%.0f%%%n\", accuracy * 100);",
+  "answer" : "70%",
+  "explanation" : "accuracy = 70 / 100 = 0.70. Multiplied by 100 and formatted as %.0f%% gives 70%."
+}

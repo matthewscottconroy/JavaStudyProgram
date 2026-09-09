@@ -1,0 +1,9 @@
+{
+  "id" : "kbd-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed when the user presses F1?",
+  "code" : "component.addKeyListener(new KeyAdapter() {\n    public void keyPressed(KeyEvent e) {\n        System.out.println(KeyEvent.getKeyText(e.getKeyCode()));\n    }\n});",
+  "answer" : "F1",
+  "explanation" : "KeyEvent.getKeyText(keyCode) returns a human-readable name for the key. For F1, it returns the string 'F1'. Useful for displaying key names in help screens."
+}

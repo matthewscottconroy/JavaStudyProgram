@@ -1,0 +1,9 @@
+{
+  "id" : "glay-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "How many columns will this GridLayout have?",
+  "code" : "JPanel panel = new JPanel(new GridLayout(0, 3));\nfor (int i = 0; i < 9; i++) panel.add(new JButton(String.valueOf(i)));",
+  "answer" : "3",
+  "explanation" : "GridLayout(0, 3) means: any number of rows, exactly 3 columns. Adding 9 buttons creates 3 rows of 3. The 0 for rows means rows are added automatically."
+}

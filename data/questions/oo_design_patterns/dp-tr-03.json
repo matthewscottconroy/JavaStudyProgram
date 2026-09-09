@@ -1,0 +1,9 @@
+{
+  "id" : "dp-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What pattern does this demonstrate?",
+  "code" : "abstract class Game {\n    final void play() { setup(); turns(); teardown(); }\n    abstract void setup();\n    abstract void turns();\n    void teardown() { System.out.println(\"Game over\"); }\n}",
+  "answer" : "Template Method",
+  "explanation" : "play() defines the algorithm skeleton (setup → turns → teardown) and is declared final to prevent override. Subclasses implement setup() and turns() — the variable steps — without changing the flow."
+}

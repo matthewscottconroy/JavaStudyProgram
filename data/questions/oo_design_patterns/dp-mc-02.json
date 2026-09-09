@@ -1,0 +1,9 @@
+{
+  "id" : "dp-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "The Factory pattern is used to…",
+  "choices" : [ "Ensure only one object is created", "Decouple object creation from the code that uses the object", "Add behaviour to objects without modifying their class", "Notify observers when an object changes state" ],
+  "answer" : "b",
+  "explanation" : "Factory methods or Factory classes create objects, hiding the exact class instantiated from the caller. This allows swapping implementations without changing client code."
+}

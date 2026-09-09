@@ -1,0 +1,9 @@
+{
+  "id" : "ipm-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which design correctly encapsulates a list of items?",
+  "choices" : [ "class Inventory { public List<String> items = new ArrayList<>(); }", "class Inventory { private List<String> items = new ArrayList<>(); public List<String> getItems() { return items; } }", "class Inventory { private List<String> items = new ArrayList<>(); public List<String> getItems() { return Collections.unmodifiableList(items); } public void addItem(String s) { items.add(s); } }", "class Inventory { protected List<String> items; }" ],
+  "answer" : "c",
+  "explanation" : "Option C encapsulates: the list is private, callers get an unmodifiable view (no backdoor), and modification goes through addItem() which can enforce invariants. Options A and D expose the list directly. Option B lets callers mutate the internal list via the returned reference."
+}

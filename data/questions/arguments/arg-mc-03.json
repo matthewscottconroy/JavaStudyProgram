@@ -1,0 +1,9 @@
+{
+  "id" : "arg-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "How do you convert args[0] to an int?",
+  "choices" : [ "int n = args[0];", "int n = (int) args[0];", "int n = Integer.parseInt(args[0]);", "int n = args[0].toInt();" ],
+  "answer" : "c",
+  "explanation" : "Integer.parseInt(String) converts a numeric string to int. There is no cast from String to int, and Java has no toInt() method on String."
+}

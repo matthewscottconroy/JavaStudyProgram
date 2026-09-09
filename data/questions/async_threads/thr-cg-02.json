@@ -1,0 +1,9 @@
+{
+  "id" : "thr-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which correctly runs a task on a thread pool and waits for completion?",
+  "choices" : [ "Thread t = new Thread(() -> task()); t.run(); t.join();", "ExecutorService pool = Executors.newFixedThreadPool(4); pool.submit(() -> task()); pool.shutdown(); pool.awaitTermination(1, TimeUnit.MINUTES);", "new Thread(() -> task()).start(); Thread.sleep(1000);", "CompletableFuture.runAsync(() -> task()).wait();" ],
+  "answer" : "b",
+  "explanation" : "Submit to the pool, call shutdown() to stop accepting new tasks, then awaitTermination() to block until all submitted tasks finish. Option A calls run() (not start()) so no new thread is created. Option C uses sleep() — a fixed wait that may be too short or too long. Option D: wait() is an Object monitor method, not CompletableFuture.get()."
+}

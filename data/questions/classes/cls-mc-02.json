@@ -1,0 +1,9 @@
+{
+  "id" : "cls-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does 'this' refer to inside an instance method?",
+  "choices" : [ "The class itself", "The current object instance", "The parent class", "The method's return value" ],
+  "answer" : "b",
+  "explanation" : "'this' is a reference to the current object—the instance on which the method is called. It is commonly used to distinguish instance fields from parameters with the same name."
+}

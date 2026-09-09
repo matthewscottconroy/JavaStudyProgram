@@ -1,0 +1,9 @@
+{
+  "id" : "ide-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does the call stack panel show while paused at a breakpoint?",
+  "choices" : [ "A list of all classes in the project", "The sequence of method calls that led to the current execution point", "All variables declared in the program", "The compile errors in the current file" ],
+  "answer" : "b",
+  "explanation" : "The call stack (stack trace) shows the chain of method invocations — innermost frame at the top, outermost (main) at the bottom. Clicking a frame lets you see local variables at that level. Unhandled exceptions print this stack to stderr."
+}

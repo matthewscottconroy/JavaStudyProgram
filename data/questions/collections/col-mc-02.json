@@ -1,0 +1,9 @@
+{
+  "id" : "col-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which Map implementation maintains insertion order?",
+  "choices" : [ "HashMap", "TreeMap", "LinkedHashMap", "EnumMap" ],
+  "answer" : "c",
+  "explanation" : "LinkedHashMap maintains the order in which keys were inserted. HashMap makes no ordering guarantee. TreeMap sorts by key (natural or Comparator). EnumMap maintains enum declaration order."
+}

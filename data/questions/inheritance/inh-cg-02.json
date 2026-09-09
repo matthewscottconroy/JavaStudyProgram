@@ -1,0 +1,9 @@
+{
+  "id" : "inh-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which correctly calls the parent constructor from a subclass?",
+  "choices" : [ "class Truck extends Vehicle { Truck(int axles) { Vehicle(axles); } }", "class Truck extends Vehicle { Truck(int axles) { super(axles); } }", "class Truck extends Vehicle { Truck(int axles) { this.Vehicle(axles); } }", "class Truck extends Vehicle { Truck(int axles) { new Vehicle(axles); } }" ],
+  "answer" : "b",
+  "explanation" : "super(args) invokes the parent constructor and must be the first statement. Option A tries to call Vehicle() as a method (invalid). Option C uses this.Vehicle() (invalid syntax). Option D creates a new Vehicle object but doesn't initialize the Truck properly."
+}

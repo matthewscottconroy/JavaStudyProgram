@@ -1,0 +1,10 @@
+{
+  "id" : "prn-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "A student wants to print the value of x on its own line. What is wrong?",
+  "code" : "int x = 42;\nSystem.out.println(\"x\");",
+  "choices" : [ "int cannot be printed", "\"x\" prints the letter x, not the value of the variable x", "println needs two arguments", "Nothing is wrong" ],
+  "answer" : "b",
+  "explanation" : "Putting x in quotes makes it a String literal. To print the variable's value, write: System.out.println(x); (no quotes)."
+}

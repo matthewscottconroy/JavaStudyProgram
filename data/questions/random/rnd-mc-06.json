@@ -1,0 +1,9 @@
+{
+  "id" : "rnd-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "Which Java 17+ method generates a random int in a range [min, max) without manual math?",
+  "choices" : [ "new Random().nextInt(min, max)", "Random.between(min, max)", "ThreadLocalRandom.current().ints(min, max).findFirst()", "Math.random(min, max)" ],
+  "answer" : "a",
+  "explanation" : "Java 17 added Random.nextInt(int origin, int bound) that generates [origin, bound). ThreadLocalRandom (Java 7+) also has nextInt(origin, bound). Before this: rng.nextInt(max - min) + min was the standard idiom."
+}

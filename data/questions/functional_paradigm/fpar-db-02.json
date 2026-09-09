@@ -1,0 +1,10 @@
+{
+  "id" : "fpar-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This code intends to filter even numbers but always returns an empty list. Why?",
+  "code" : "List<Integer> nums = List.of(1, 2, 3, 4, 5);\nList<Integer> evens = nums.stream()\n    .filter(n -> n % 2 == 1)  // intention: keep evens\n    .collect(Collectors.toList());",
+  "choices" : [ "filter() removes elements matching the predicate", "Collectors.toList() is deprecated", "The predicate n % 2 == 1 keeps odd numbers, not even ones — use n % 2 == 0", "stream() is not available on List.of()" ],
+  "answer" : "c",
+  "explanation" : "n % 2 == 1 is true for odd numbers. To keep evens, the predicate should be n % 2 == 0. filter() keeps elements for which the predicate returns true. This is a logic error, not a Java error — the code compiles and runs but produces the wrong result."
+}

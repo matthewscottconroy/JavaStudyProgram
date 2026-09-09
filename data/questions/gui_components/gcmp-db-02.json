@@ -1,0 +1,10 @@
+{
+  "id" : "gcmp-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "The JLabel shows 'null' instead of the user's name. Why?",
+  "code" : "String name = null;\nJLabel label = new JLabel(name);\nframe.add(label);",
+  "choices" : [ "JLabel cannot display variables, only string literals", "name is null — JLabel displays 'null' when given a null String", "JLabel requires HTML format for text", "frame.add() only accepts JPanel" ],
+  "answer" : "b",
+  "explanation" : "JLabel(String) calls String.valueOf(null) which is the string \"null\". Fix: check if name is null before creating the label, or provide a default: new JLabel(name != null ? name : \"Unknown\")."
+}

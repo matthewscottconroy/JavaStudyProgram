@@ -1,0 +1,10 @@
+{
+  "id" : "ifc-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This class has a compile error. Why?",
+  "code" : "interface Animal { void speak(); }\ninterface Pet { void speak(); }\nclass Dog implements Animal, Pet { }",
+  "choices" : [ "A class cannot implement two interfaces with the same method", "Dog must provide one speak() implementation — and that single method satisfies both interfaces", "speak() has different return types in Animal and Pet", "Dog must declare which speak() it implements" ],
+  "answer" : "b",
+  "explanation" : "When two interfaces declare the same abstract method signature, the implementing class provides one method that satisfies both. There is no conflict because the signatures are identical. The compile error is the missing implementation: add 'public void speak() { ... }'"
+}

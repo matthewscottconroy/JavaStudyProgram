@@ -1,0 +1,9 @@
+{
+  "id" : "mem-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What happens to an object with no remaining references?",
+  "choices" : [ "It immediately disappears from memory", "It becomes eligible for garbage collection", "It is moved to a special 'dead objects' area", "It is stored in a global weak reference table" ],
+  "answer" : "b",
+  "explanation" : "When no references point to an object, it is eligible for garbage collection. The JVM's garbage collector may reclaim its memory at some future point. You cannot predict exactly when — and you should never rely on finalize() (deprecated)."
+}

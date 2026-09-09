@@ -1,0 +1,10 @@
+{
+  "id" : "net-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "The server handles only one client and then exits. What is wrong?",
+  "code" : "ServerSocket server = new ServerSocket(8080);\nSocket client = server.accept();\nhandleClient(client);\n// Server stops after one client",
+  "choices" : [ "ServerSocket can only handle one connection total", "accept() is only called once — after one client, the loop ends (there is no loop)", "handleClient() must run on a separate thread", "ServerSocket must be recreated for each client" ],
+  "answer" : "b",
+  "explanation" : "To accept multiple clients, wrap accept() in a loop: while (true) { Socket client = server.accept(); new Thread(() -> handleClient(client)).start(); } The loop blocks on accept() until the next client connects."
+}

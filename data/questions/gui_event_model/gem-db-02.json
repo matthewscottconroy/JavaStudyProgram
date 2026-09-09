@@ -1,0 +1,10 @@
+{
+  "id" : "gem-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "The listener fires but e.getSource() is always null. Why?",
+  "code" : "button.addActionListener(e -> {\n    JButton source = (JButton) e.getSource();\n    System.out.println(source.getText());\n});",
+  "choices" : [ "getSource() returns null for JButton events", "getSource() never returns null for ActionEvents from a JButton — source is the button that fired the event", "getSource() returns an ActionEvent, not a JButton", "Only named listeners can access getSource()" ],
+  "answer" : "b",
+  "explanation" : "ActionEvent.getSource() returns the Object that fired the event — in this case the JButton. It is never null for normally fired events. The cast to JButton is valid. getText() returns the button's label. This code is correct."
+}

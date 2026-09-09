@@ -1,0 +1,9 @@
+{
+  "id" : "ide-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "What does 'Step Over' do in an IDE debugger?",
+  "choices" : [ "Skips the current line entirely", "Executes the current line and moves to the next, without entering called methods", "Enters the method call on the current line", "Restarts execution from the beginning" ],
+  "answer" : "b",
+  "explanation" : "Step Over (F8 in IntelliJ, F6 in Eclipse) executes the current statement and advances to the next. If the line calls a method, it runs that method completely without pausing inside it. Use 'Step Into' (F7) if you want to enter the method."
+}

@@ -1,0 +1,10 @@
+{
+  "id" : "prn-db-05",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "The printf format string produces wrong output. Why?",
+  "code" : "double price = 9.99;\nSystem.out.printf(\"Price: %d%n\", price);",
+  "choices" : [ "price is too large for %d", "%d is for integers — using it with a double throws IllegalFormatConversionException", "printf does not support double values", "The %n specifier conflicts with %d" ],
+  "answer" : "b",
+  "explanation" : "%d expects an integer (int, long, etc.). Passing a double causes IllegalFormatConversionException. Use %f for doubles: System.out.printf(\"Price: %.2f%n\", price); → Price: 9.99"
+}

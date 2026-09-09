@@ -1,0 +1,9 @@
+{
+  "id" : "db-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does JDBC stand for and what does it do?",
+  "choices" : [ "Java Data Bridge Connection — creates copies of databases", "Java Database Connectivity — a standard API for connecting Java programs to relational databases", "Java Default Binary Cache — stores query results", "Java Document Builder Core — parses XML database configs" ],
+  "answer" : "b",
+  "explanation" : "JDBC (java.sql) provides interfaces: DriverManager, Connection, Statement, PreparedStatement, ResultSet. It abstracts over different database vendors — the same code works with MySQL, PostgreSQL, SQLite, etc., just swap the JDBC driver JAR and connection URL."
+}

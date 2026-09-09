@@ -1,0 +1,9 @@
+{
+  "id" : "evo-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 4,
+  "prompt" : "What is mutation in a genetic algorithm?",
+  "choices" : [ "Selecting the top 10% of the population for the next generation", "A small random change applied to an individual to maintain diversity", "Copying the best individual into the next generation unchanged", "Removing all individuals below a fitness threshold" ],
+  "answer" : "b",
+  "explanation" : "Mutation randomly alters one or more genes with a small probability. It prevents the population from converging prematurely on a local optimum by introducing new genetic material. Mutation rate is typically low (0.1%–1%) — too high destroys good solutions; too low risks stagnation."
+}

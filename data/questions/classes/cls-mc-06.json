@@ -1,0 +1,9 @@
+{
+  "id" : "cls-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is a getter method?",
+  "choices" : [ "A method that deletes a field value", "A public method that returns the value of a private field", "A constructor with no parameters", "A static method that creates new instances" ],
+  "answer" : "b",
+  "explanation" : "Getters (e.g., getName()) provide controlled read access to private fields. Setters (e.g., setName(String n)) provide controlled write access. Together they enforce encapsulation — external code cannot directly access or mutate the field."
+}

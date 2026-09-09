@@ -1,0 +1,9 @@
+{
+  "id" : "var-mc-11",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the difference between '==' and 'equals()' for comparing variables?",
+  "choices" : [ "They are identical for all types", "== compares primitive values or object references; equals() compares object content", "equals() only works on String; == works on all types", "== compares by content; equals() compares by reference" ],
+  "answer" : "b",
+  "explanation" : "For primitives (int, double, etc.): == compares values correctly. For objects (String, Integer, etc.): == checks if both variables point to the SAME object. equals() checks if the content is the same (if overridden). Always use equals() (or Objects.equals()) to compare String and object values."
+}

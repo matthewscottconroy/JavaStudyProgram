@@ -1,0 +1,9 @@
+{
+  "id" : "mvn-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "Which Maven command compiles, tests, and packages the project into a JAR?",
+  "choices" : [ "mvn build", "mvn compile", "mvn package", "mvn install-jar" ],
+  "answer" : "c",
+  "explanation" : "'mvn package' runs the full lifecycle through the package phase: validate → compile → test → package. 'mvn compile' only compiles. 'mvn build' does not exist. 'mvn install' also copies the JAR to the local repository."
+}

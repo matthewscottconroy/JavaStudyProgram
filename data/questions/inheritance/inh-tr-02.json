@@ -1,0 +1,9 @@
+{
+  "id" : "inh-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "class A {\n    String msg() { return \"A\"; }\n}\nclass B extends A {\n    @Override\n    String msg() { return super.msg() + \"B\"; }\n}\nclass C extends B {\n    @Override\n    String msg() { return super.msg() + \"C\"; }\n}\nSystem.out.println(new C().msg());",
+  "answer" : "ABC",
+  "explanation" : "C.msg() calls super.msg() (B.msg()) which calls super.msg() (A.msg()) = \"A\". B appends \"B\" → \"AB\". C appends \"C\" → \"ABC\"."
+}

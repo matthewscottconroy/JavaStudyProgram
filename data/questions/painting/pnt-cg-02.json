@@ -1,0 +1,9 @@
+{
+  "id" : "pnt-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which creates a simple animation: a red ball moving right across the panel?",
+  "choices" : [ "class BallPanel extends JPanel { int x = 0; public BallPanel() { new Timer(16, e -> { x += 3; }).start(); } @Override protected void paintComponent(Graphics g) { super.paintComponent(g); g.setColor(Color.RED); g.fillOval(x,100,30,30); } }", "class BallPanel extends JPanel { int x = 0; public BallPanel() { new Timer(16, e -> { x += 3; repaint(); }).start(); } @Override protected void paintComponent(Graphics g) { super.paintComponent(g); g.setColor(Color.RED); g.fillOval(x,100,30,30); } }", "class BallPanel extends JPanel { public void animate() { for(;;) { repaint(); } } }", "class BallPanel extends JPanel { @Override protected void paintComponent(Graphics g) { g.fillOval(x++,100,30,30); } }" ],
+  "answer" : "b",
+  "explanation" : "Option B correctly: updates x in a Timer callback on the EDT, calls repaint() to trigger redraw, and draws the ball at the current x in paintComponent with super first. Option A misses repaint(). Option C blocks the EDT. Option D increments x inside paintComponent (side effects in paint methods cause unpredictable behavior)."
+}

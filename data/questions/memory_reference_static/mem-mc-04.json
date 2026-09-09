@@ -1,0 +1,9 @@
+{
+  "id" : "mem-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Two variables point to the same object: 'Dog a = new Dog(); Dog b = a;'. What happens when you call 'a.setName(\"Rex\")'?",
+  "choices" : [ "Only a.name is changed", "Both a.name and b.name reflect 'Rex' because a and b point to the same object", "A copy of the Dog is created for b", "A NullPointerException is thrown" ],
+  "answer" : "b",
+  "explanation" : "Java uses pass-by-reference-value. a and b hold the same reference (memory address). Mutating the object through a also affects the state seen through b."
+}

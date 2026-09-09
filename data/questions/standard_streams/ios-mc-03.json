@@ -1,0 +1,9 @@
+{
+  "id" : "ios-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the difference between System.out and System.err?",
+  "choices" : [ "System.err automatically formats error messages; System.out does not", "System.out is buffered while System.err is typically unbuffered and used for error/diagnostic messages", "System.err writes to a separate log file by default", "They are identical — just two names for the same stream" ],
+  "answer" : "b",
+  "explanation" : "System.err is intended for error/diagnostic output. It is often unbuffered, so messages appear immediately even if the program crashes. In a terminal both usually go to the same display, but they can be redirected independently: 'java App 2>errors.log' sends stderr to a file while stdout still shows on screen."
+}

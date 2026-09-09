@@ -1,0 +1,9 @@
+{
+  "id" : "var-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 1,
+  "prompt" : "What is the value of z after this code runs?",
+  "code" : "int x = 5;\nint y = 3;\nint z = x + y;",
+  "answer" : "8",
+  "explanation" : "z = 5 + 3 = 8. The + operator adds the values stored in x and y."
+}

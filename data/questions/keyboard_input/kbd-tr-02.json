@@ -1,0 +1,9 @@
+{
+  "id" : "kbd-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed when the user types the lowercase letter 'a'?",
+  "code" : "component.addKeyListener(new KeyAdapter() {\n    public void keyTyped(KeyEvent e) {\n        System.out.println((int) e.getKeyChar());\n    }\n});",
+  "answer" : "97",
+  "explanation" : "keyTyped fires for printable characters. 'a' has Unicode (ASCII) value 97. Casting char to int gives 97. (int)'A' would be 65."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "fp-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What exception must you handle (or declare) when working with File I/O?",
+  "choices" : [ "RuntimeException", "NullPointerException", "IOException", "FileException" ],
+  "answer" : "c",
+  "explanation" : "IOException is a checked exception thrown by most File I/O operations. You must either catch it with try-catch or declare it in the method signature with 'throws IOException'. FileException does not exist in Java."
+}

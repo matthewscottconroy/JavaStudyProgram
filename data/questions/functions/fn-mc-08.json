@@ -1,0 +1,9 @@
+{
+  "id" : "fn-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does 'pass by value' mean for method parameters in Java?",
+  "choices" : [ "Methods can modify variables passed to them", "Java copies the value (or reference) — the caller's variable is never directly modified", "Primitive values are passed by reference; objects are passed by value", "Parameters are passed in stack order, last-in first-out" ],
+  "answer" : "b",
+  "explanation" : "Java is always pass-by-value. For primitives: the method gets a copy of the number. For objects: the method gets a copy of the reference (both point to the same object, so field mutations are visible — but reassigning the parameter variable doesn't affect the caller)."
+}

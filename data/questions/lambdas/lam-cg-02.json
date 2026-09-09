@@ -1,0 +1,9 @@
+{
+  "id" : "lam-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which uses Predicate.and() to filter strings that are long AND start with 'A'?",
+  "choices" : [ "Predicate<String> p = s -> s.length() > 5 && s.startsWith(\"A\");", "Predicate<String> long_ = s -> s.length() > 5; Predicate<String> aStart = s -> s.startsWith(\"A\"); Predicate<String> both = long_.and(aStart);", "Predicate<String> p = s -> s.length() > 5; p.and(s -> s.startsWith(\"A\"));", "Predicate<String> p = Predicate.of(s -> s.length() > 5, s -> s.startsWith(\"A\"));" ],
+  "answer" : "b",
+  "explanation" : "Both A and B are logically correct for combining predicates. B demonstrates composing named predicates with .and() — more readable and reusable. Option C discards the result of .and() (Predicate is immutable — and() returns a new Predicate). Option D: Predicate.of() doesn't exist."
+}

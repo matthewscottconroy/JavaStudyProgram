@@ -1,0 +1,9 @@
+{
+  "id" : "ide-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does 'Step Out' (also called 'Step Return') do in a debugger?",
+  "choices" : [ "Terminates the current debug session", "Finishes the current method and pauses at the line that called it", "Moves back one line in execution", "Skips all remaining breakpoints" ],
+  "answer" : "b",
+  "explanation" : "Step Out runs the rest of the current method without pausing, then pauses at the call site. Useful when you accidentally stepped into a method you didn't need to examine. In IntelliJ: Shift+F8; in Eclipse: F7."
+}

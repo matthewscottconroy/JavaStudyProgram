@@ -1,0 +1,9 @@
+{
+  "id" : "acm-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "Does this compile? If not, why?",
+  "code" : "class Animal {\n    protected String sound = \"...\";\n}\nclass Dog extends Animal {\n    void bark() { System.out.println(sound); }\n}",
+  "answer" : "Yes — compiles and prints the inherited protected field value",
+  "explanation" : "Dog is a subclass of Animal, so it inherits the protected 'sound' field. Accessing 'sound' inside Dog is valid. bark() prints whatever sound holds."
+}

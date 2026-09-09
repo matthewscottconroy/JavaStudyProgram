@@ -1,0 +1,10 @@
+{
+  "id" : "img-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "The audio clip plays once but then throws IllegalStateException when called again. Why?",
+  "code" : "Clip clip = AudioSystem.getClip();\nclip.open(audioStream);\nclip.start();\n// later:\nclip.start(); // throws IllegalStateException",
+  "choices" : [ "Clip can only play once per JVM session", "The AudioInputStream was already consumed — you must call clip.setFramePosition(0) before replaying", "start() must be called from the main thread only", "AudioSystem.getClip() returns a read-only clip" ],
+  "answer" : "b",
+  "explanation" : "After a clip finishes playing, its frame position is at the end. Call clip.setFramePosition(0); before clip.start(); to rewind. Or use clip.loop(0) which resets position automatically. IllegalStateException can also occur if the clip is in the wrong state — check clip.isOpen()."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "db-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed by this code (assuming the row exists)?",
+  "code" : "PreparedStatement ps = conn.prepareStatement(\"SELECT grade FROM students WHERE name=?\");\nps.setString(1, \"Alice\");\nResultSet rs = ps.executeQuery();\nif (rs.next()) System.out.println(rs.getInt(\"grade\"));",
+  "answer" : "Alice's grade as an integer",
+  "explanation" : "setString(1, \"Alice\") binds the parameter. executeQuery() runs the query. rs.next() advances to the first row. getInt(\"grade\") retrieves Alice's numeric grade."
+}

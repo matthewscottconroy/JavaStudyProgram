@@ -1,0 +1,9 @@
+{
+  "id" : "ex-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which defines a custom checked exception called 'InsufficientFundsException'?",
+  "choices" : [ "class InsufficientFundsException { double amount; }", "class InsufficientFundsException extends RuntimeException { public InsufficientFundsException(String msg) { super(msg); } }", "class InsufficientFundsException extends Exception { public InsufficientFundsException(String msg) { super(msg); } }", "interface InsufficientFundsException extends Throwable { }" ],
+  "answer" : "c",
+  "explanation" : "Extending Exception (not RuntimeException) makes it checked — callers must handle or declare it. Calling super(msg) passes the message to Exception for use in getMessage() and stack traces. Option B creates an unchecked exception. Option D uses interface syntax."
+}

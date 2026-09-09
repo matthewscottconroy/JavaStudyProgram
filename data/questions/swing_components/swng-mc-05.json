@@ -1,0 +1,9 @@
+{
+  "id" : "swng-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is a JDialog used for?",
+  "choices" : [ "An alternative to JFrame as the main application window", "A secondary window for input or notifications that belongs to a parent window", "A floating panel that cannot have menus", "A popup that appears inside the JFrame's content pane" ],
+  "answer" : "b",
+  "explanation" : "JDialog creates modal or modeless secondary windows. Modal: blocks interaction with the parent until closed (new JDialog(parent, \"Title\", true)). Use for confirmations, forms, and alerts. JOptionPane.showMessageDialog() uses JDialog internally."
+}

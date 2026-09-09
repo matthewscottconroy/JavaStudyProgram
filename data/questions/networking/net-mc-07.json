@@ -1,0 +1,9 @@
+{
+  "id" : "net-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the purpose of a URL in Java networking?",
+  "choices" : [ "A special type of Socket for secure connections", "A class that represents a Uniform Resource Locator and provides methods to open connections to it", "A wrapper around a file path for network files", "A class that validates IP addresses" ],
+  "answer" : "b",
+  "explanation" : "java.net.URL represents a URL (http, https, ftp, file, etc.). url.openStream() returns an InputStream to read the resource. url.openConnection() returns a URLConnection for more control (headers, timeouts). getClass().getResource('/path') returns a URL to a classpath resource."
+}

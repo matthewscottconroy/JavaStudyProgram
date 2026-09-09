@@ -1,0 +1,9 @@
+{
+  "id" : "cls-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "class Counter {\n    int count = 0;\n    void increment() { count++; }\n}\n// in main:\nCounter c = new Counter();\nc.increment();\nc.increment();\nSystem.out.println(c.count);",
+  "answer" : "2",
+  "explanation" : "count starts at 0. Each increment() call increases it by 1. After two calls, count = 2."
+}

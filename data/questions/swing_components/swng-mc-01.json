@@ -1,0 +1,9 @@
+{
+  "id" : "swng-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "Which component provides a tabbed interface where each tab shows a different panel?",
+  "choices" : [ "JTabPanel", "JCardLayout", "JTabbedPane", "JTabContainer" ],
+  "answer" : "c",
+  "explanation" : "JTabbedPane lets you add multiple panels, each accessible via a clickable tab. Add tabs with: tabbedPane.addTab(\"Title\", panel); addTab(String, Icon, Component, String tooltip) adds an icon and tooltip too."
+}

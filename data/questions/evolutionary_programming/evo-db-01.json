@@ -1,0 +1,10 @@
+{
+  "id" : "evo-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 4,
+  "prompt" : "The GA converges too quickly to a poor solution. What is the most likely cause?",
+  "code" : "// Population size: 10\n// Mutation rate: 0.0001 (very low)\n// Generations: 500\n// Result: stuck at fitness 0.60, optimal is ~0.95",
+  "choices" : [ "The population size is too large", "500 generations is too many", "Premature convergence due to very low mutation rate and small population — diversity lost early", "Fitness values above 0.5 cannot be improved by genetic algorithms" ],
+  "answer" : "c",
+  "explanation" : "Premature convergence: the small population quickly becomes genetically similar, and the near-zero mutation rate cannot reintroduce diversity. The GA gets trapped in a local optimum. Fixes: increase population size (50-200+), raise mutation rate (0.01-0.05), or use diversity preservation techniques like niching or island models."
+}

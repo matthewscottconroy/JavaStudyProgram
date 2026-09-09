@@ -1,0 +1,9 @@
+{
+  "id" : "glay-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "Where does the text area appear in the final window?",
+  "code" : "JFrame frame = new JFrame();\nJButton top = new JButton(\"Toolbar\");\nJTextArea center = new JTextArea();\nframe.add(top, BorderLayout.NORTH);\nframe.add(new JScrollPane(center), BorderLayout.CENTER);",
+  "answer" : "CENTER (the large middle area)",
+  "explanation" : "center is wrapped in JScrollPane and added to BorderLayout.CENTER — it fills the main area. top appears as a narrow strip at the top (NORTH)."
+}

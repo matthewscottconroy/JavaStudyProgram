@@ -1,0 +1,9 @@
+{
+  "id" : "cmp-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "A missing semicolon causes a…",
+  "choices" : [ "Runtime exception", "Compile-time error", "Logic error", "Stack overflow" ],
+  "answer" : "b",
+  "explanation" : "A missing semicolon is a syntax error caught by the compiler (javac) before the program runs. Runtime exceptions happen during execution. Logic errors produce wrong output but compile."
+}

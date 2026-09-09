@@ -1,0 +1,9 @@
+{
+  "id" : "pkg-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which import statement lets you use both HashMap and ArrayList without qualifying them?",
+  "choices" : [ "import java.util.HashMap; import java.util.ArrayList;", "import java.util.*;", "import java.util.HashMap, java.util.ArrayList;", "import java.*;" ],
+  "answer" : "b",
+  "explanation" : "The wildcard import java.util.* imports all public types from java.util in a single statement. Option A requires two lines (also correct but more verbose). Option C is invalid syntax — Java doesn't support comma-separated imports. Option D is invalid — wildcards work at the package level, not across sub-packages."
+}

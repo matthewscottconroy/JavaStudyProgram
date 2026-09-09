@@ -1,0 +1,9 @@
+{
+  "id" : "ex-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the difference between checked and unchecked exceptions?",
+  "choices" : [ "Checked exceptions are faster at runtime", "Checked exceptions must be declared or caught; unchecked need not be", "Unchecked exceptions can only occur in catch blocks", "Checked exceptions extend RuntimeException" ],
+  "answer" : "b",
+  "explanation" : "Checked exceptions (e.g., IOException) are checked at compile time — you must either catch them or declare them with 'throws'. Unchecked exceptions (RuntimeException and its subclasses) can be left unhandled."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "ide-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "What is a breakpoint?",
+  "choices" : [ "A syntax error the compiler found", "A marker that pauses program execution at a specific line so you can inspect state", "A point where the program automatically saves its output", "A comment that documents a known bug" ],
+  "answer" : "b",
+  "explanation" : "A breakpoint tells the debugger to suspend execution when it reaches that line. Once paused, you can inspect local variables, the call stack, evaluate expressions, and step through code line by line. Set one by clicking the gutter next to the line number."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "if-tr-05",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "int score = 85;\nString grade;\nif (score >= 90) grade = \"A\";\nelse if (score >= 80) grade = \"B\";\nelse if (score >= 70) grade = \"C\";\nelse grade = \"F\";\nSystem.out.println(grade);",
+  "answer" : "B",
+  "explanation" : "score=85 fails the first check (85 < 90) but passes the second (85 >= 80). grade = \"B\"."
+}

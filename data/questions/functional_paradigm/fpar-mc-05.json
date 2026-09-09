@@ -1,0 +1,9 @@
+{
+  "id" : "fpar-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is function composition?",
+  "choices" : [ "Calling the same function recursively", "Combining two functions so the output of one becomes the input of the next", "Declaring multiple functions with the same name (overloading)", "Writing a function inside another function" ],
+  "answer" : "b",
+  "explanation" : "Composition chains functions: g ∘ f means apply f first, then g. In Java: Function<A,C> composed = f.andThen(g); — applies f, then passes the result to g. This builds complex transformations from simple, reusable pieces."
+}

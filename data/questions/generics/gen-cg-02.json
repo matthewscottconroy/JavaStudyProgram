@@ -1,0 +1,9 @@
+{
+  "id" : "gen-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which method compiles and returns the first element of any List?",
+  "choices" : [ "public Object first(List list) { return list.get(0); }", "public <T> T first(List<T> list) { return list.get(0); }", "public T first(List<T> list) { return list.get(0); }", "public <T> List<T> first(List<T> list) { return list.get(0); }" ],
+  "answer" : "b",
+  "explanation" : "Declare the type parameter <T> before the return type. The return type T and parameter List<T> are consistent. Option A uses raw type (compiles but loses type safety). Option C: T is not declared as a type parameter. Option D: return type List<T> doesn't match list.get(0) which is T."
+}

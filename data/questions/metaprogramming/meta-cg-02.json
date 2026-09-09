@@ -1,0 +1,9 @@
+{
+  "id" : "meta-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 4,
+  "prompt" : "Which reads all runtime-visible annotations from a class called 'Service'?",
+  "choices" : [ "Service.annotations();", "Annotation[] annotations = Service.class.getAnnotations(); for (Annotation a : annotations) System.out.println(a);", "Class.getAnnotations(Service);", "Service.class.getDeclaredAnnotations(RetentionPolicy.RUNTIME);" ],
+  "answer" : "b",
+  "explanation" : "Class.getAnnotations() returns all RUNTIME-retained annotations on the class (including inherited). getDeclaredAnnotations() returns only annotations directly on the class, not inherited ones. Use instanceof or annotation.annotationType() to distinguish specific annotation types."
+}

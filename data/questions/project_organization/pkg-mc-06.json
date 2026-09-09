@@ -1,0 +1,9 @@
+{
+  "id" : "pkg-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the default (package-private) access modifier?",
+  "choices" : [ "The class is accessible to all classes everywhere", "The class is accessible only within its own package", "The class is accessible only to subclasses", "The class is accessible only within its own file" ],
+  "answer" : "b",
+  "explanation" : "If no access modifier is given (class Foo {} or void method() {}), the element has package-private access: visible to all classes in the same package, but not to classes in other packages. This is less restrictive than private but more restrictive than protected or public."
+}

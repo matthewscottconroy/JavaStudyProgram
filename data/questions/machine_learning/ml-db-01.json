@@ -1,0 +1,10 @@
+{
+  "id" : "ml-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 4,
+  "prompt" : "A model achieves 99% accuracy on training data but 55% on test data. What is wrong?",
+  "code" : "double trainAcc = 0.99;\ndouble testAcc  = 0.55;\n// Model deployed to production",
+  "choices" : [ "The training and test accuracy should be averaged", "The model is overfitting — it memorized training data and fails to generalize", "99% training accuracy proves the model is correct", "The test set is too small to be reliable" ],
+  "answer" : "b",
+  "explanation" : "A 44-point gap between training and test accuracy is a classic overfitting sign. The model learned noise specific to the training set. Solutions: increase training data, reduce model complexity, apply regularization (dropout, L2), use cross-validation to detect this earlier."
+}

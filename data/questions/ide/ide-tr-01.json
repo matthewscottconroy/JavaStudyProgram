@@ -1,0 +1,9 @@
+{
+  "id" : "ide-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "The debugger is paused at the marked line. What is the value of 'sum'?",
+  "code" : "int sum = 0;\nfor (int i = 1; i <= 3; i++) {\n    sum += i;  // <-- breakpoint, AFTER this executes on i=3\n}\n// paused just before the loop exits",
+  "answer" : "6",
+  "explanation" : "Each iteration adds i to sum: 0+1=1, 1+2=3, 3+3=6. After the third iteration completes, sum is 6."
+}

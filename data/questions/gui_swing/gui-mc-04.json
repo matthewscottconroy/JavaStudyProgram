@@ -1,0 +1,9 @@
+{
+  "id" : "gui-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "Why should Swing components be created on the Event Dispatch Thread (EDT)?",
+  "choices" : [ "Swing is thread-safe and requires multiple threads", "Swing is NOT thread-safe — updating components from other threads can cause corruption", "The EDT is faster than regular threads for drawing", "Only the EDT can make network calls in Swing apps" ],
+  "answer" : "b",
+  "explanation" : "Swing components are not thread-safe. All GUI updates must happen on the EDT. Use SwingUtilities.invokeLater(() -> { ... }) to schedule work on the EDT from a background thread."
+}

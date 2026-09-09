@@ -1,0 +1,9 @@
+{
+  "id" : "sapi-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does Stream.filter() do?",
+  "choices" : [ "Modifies each element in the stream", "Returns a new stream containing only elements that match a Predicate", "Removes all elements from the original collection", "Converts the stream to a List" ],
+  "answer" : "b",
+  "explanation" : "filter(Predicate) is an intermediate operation that passes through only elements where the predicate returns true. It does not modify the source collection."
+}

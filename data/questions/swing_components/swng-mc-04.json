@@ -1,0 +1,9 @@
+{
+  "id" : "swng-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does JScrollPane do when added around a JTable?",
+  "choices" : [ "Makes the table sortable", "Provides scroll bars AND shows the column header row", "Adds borders around each cell", "Enables cell editing" ],
+  "answer" : "b",
+  "explanation" : "Without JScrollPane, the JTable's column header (JTableHeader) is not visible. Wrapping in JScrollPane makes headers visible and adds scroll bars when the table overflows. Always use new JScrollPane(table) when adding a JTable to a container."
+}

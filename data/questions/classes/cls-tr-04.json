@@ -1,0 +1,9 @@
+{
+  "id" : "cls-tr-04",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is the output?",
+  "code" : "class Point {\n    int x, y;\n    Point(int x, int y) { this.x = x; this.y = y; }\n}\nPoint p = new Point(3, 7);\nSystem.out.println(p.x + \",\" + p.y);",
+  "answer" : "3,7",
+  "explanation" : "Constructor sets x=3, y=7 using 'this' to distinguish fields from parameters. p.x + \",\" + p.y → \"3,7\"."
+}

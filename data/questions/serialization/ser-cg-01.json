@@ -1,0 +1,9 @@
+{
+  "id" : "ser-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which snippet correctly serializes an object 'dog' to a file?",
+  "choices" : [ "FileWriter fw = new FileWriter(\"dog.dat\"); fw.write(dog.toString());", "try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(\"dog.dat\"))) { oos.writeObject(dog); }", "Files.writeString(Path.of(\"dog.dat\"), dog.toString());", "ObjectOutputStream.serialize(dog, \"dog.dat\");" ],
+  "answer" : "b",
+  "explanation" : "ObjectOutputStream.writeObject() serializes the object graph to binary format. Wrapping in try-with-resources ensures the stream is closed (and the object header flushed) even if an exception occurs. Option A writes a String representation, not binary serialization."
+}

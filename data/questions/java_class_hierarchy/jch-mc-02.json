@@ -1,0 +1,9 @@
+{
+  "id" : "jch-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does the default Object.equals() method compare?",
+  "choices" : [ "The fields of both objects using reflection", "Reference identity — whether both variables point to the same object", "The result of toString() on both objects", "The hash codes of both objects" ],
+  "answer" : "b",
+  "explanation" : "The default equals() uses == (reference equality). Override it (together with hashCode()) to compare by field values. If equals() returns true, hashCode() MUST return the same value for both objects."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "str-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which code builds the string \"Hello, Alice\" using a variable?",
+  "choices" : [ "String name = \"Alice\"; String msg = \"Hello, \" + name;", "String name = \"Alice\"; String msg = \"Hello, Alice\";", "String name = Alice; String msg = \"Hello, \" + name;", "String name = \"Alice\"; String msg = concat(\"Hello, \", name);" ],
+  "answer" : "a",
+  "explanation" : "Option A correctly uses string concatenation with +. Option B hardcodes the result. Option C is missing quotes around Alice. Option D invents a concat() function that doesn't exist in the same form."
+}

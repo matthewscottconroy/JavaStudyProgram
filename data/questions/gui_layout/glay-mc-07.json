@@ -1,0 +1,9 @@
+{
+  "id" : "glay-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "How do you add horizontal space between two components in a BoxLayout panel?",
+  "choices" : [ "panel.addSpacer(10)", "panel.add(Box.createHorizontalStrut(10))", "panel.setGap(10)", "panel.add(new JSeparator(10))" ],
+  "answer" : "b",
+  "explanation" : "Box.createHorizontalStrut(pixels) creates an invisible rigid spacer of fixed width. For flexible space that grows: Box.createHorizontalGlue(). Vertical equivalents: Box.createVerticalStrut(pixels) and Box.createVerticalGlue()."
+}

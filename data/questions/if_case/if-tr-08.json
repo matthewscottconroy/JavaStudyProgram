@@ -1,0 +1,9 @@
+{
+  "id" : "if-tr-08",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "boolean flag = false;\nif (!flag) {\n    System.out.println(\"flag is false\");\n} else {\n    System.out.println(\"flag is true\");\n}",
+  "answer" : "flag is false",
+  "explanation" : "!flag = !false = true. The if-block runs and prints \"flag is false\"."
+}

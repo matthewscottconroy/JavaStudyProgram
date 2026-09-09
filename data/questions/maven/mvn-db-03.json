@@ -1,0 +1,10 @@
+{
+  "id" : "mvn-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "The project fails with 'Plugin org.apache.maven.plugins:maven-compiler-plugin not found'. Why?",
+  "code" : "// pom.xml with no network connection to Maven Central",
+  "choices" : [ "The compiler plugin must be declared in <dependencies>", "Maven cannot download the compiler plugin — check the repository URL and network connection", "The plugin is not available for this Java version", "The plugin should be in <build> not <plugins>" ],
+  "answer" : "b",
+  "explanation" : "Maven plugins are downloaded from Maven Central by default. A network issue or incorrect repository configuration prevents the download. Fix: check network, check <repositories> and <pluginRepositories> in pom.xml, or run offline with a pre-populated local repo."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "ut-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "This test fails. What message does JUnit show?",
+  "code" : "@Test\nvoid testAdd() {\n    int result = 2 + 2;\n    assertEquals(5, result);\n}",
+  "answer" : "expected: <5> but was: <4>",
+  "explanation" : "assertEquals(5, result) fails because result is 4, not 5. JUnit reports the expected value (first arg) vs actual (second arg)."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "fp-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which code correctly writes a String to a file using modern Java?",
+  "choices" : [ "new File(\"out.txt\").write(\"hello\");", "Files.writeString(Path.of(\"out.txt\"), \"hello\");", "FileWriter fw = new FileWriter(\"out.txt\"); fw.write(\"hello\");", "PrintStream.out.write(\"out.txt\", \"hello\");" ],
+  "answer" : "b",
+  "explanation" : "Files.writeString(Path, String) (Java 11+) writes a string to a file in one call, handling close automatically. Option A: File has no write() method. Option C works but forgets to close the FileWriter. Option D is not valid API."
+}

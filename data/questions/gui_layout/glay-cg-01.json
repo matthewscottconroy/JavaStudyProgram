@@ -1,0 +1,9 @@
+{
+  "id" : "glay-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which sets up a JPanel with GridLayout and adds 4 equal-sized buttons?",
+  "choices" : [ "JPanel p = new JPanel(); p.setLayout(new GridLayout()); p.add(b1); p.add(b2); p.add(b3); p.add(b4);", "JPanel p = new JPanel(new GridLayout(2, 2)); p.add(b1); p.add(b2); p.add(b3); p.add(b4);", "JPanel p = new JPanel(new BorderLayout(2, 2)); p.add(b1); p.add(b2);", "JPanel p = new JPanel(); p.setBounds(0,0,200,200); p.add(b1);" ],
+  "answer" : "b",
+  "explanation" : "GridLayout(2, 2) creates a 2x2 grid. Adding 4 buttons fills all 4 cells with equal sizes. Option A: GridLayout() with no args defaults to 1 row — not a 2x2 grid. Option C uses BorderLayout which only allows 5 fixed regions."
+}

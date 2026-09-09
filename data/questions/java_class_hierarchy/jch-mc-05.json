@@ -1,0 +1,9 @@
+{
+  "id" : "jch-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which Object method should always be overridden together with equals()?",
+  "choices" : [ "toString()", "compareTo()", "hashCode()", "clone()" ],
+  "answer" : "c",
+  "explanation" : "The equals-hashCode contract: if two objects are equal (equals() returns true), they must have the same hashCode(). HashMap and HashSet rely on this. If you override equals() without hashCode(), equal objects may end up in different hash buckets, breaking collections."
+}

@@ -1,0 +1,10 @@
+{
+  "id" : "cls-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "What is wrong with this class?",
+  "code" : "class Cat {\n    String name;\n    void Cat(String name) {\n        this.name = name;\n    }\n}",
+  "choices" : [ "Constructors cannot have parameters", "Constructors cannot use 'this'", "Constructors must not have a return type — 'void' makes it a regular method, not a constructor", "String fields must be initialized to \"\"" ],
+  "answer" : "c",
+  "explanation" : "Adding 'void' makes Cat(String name) a regular method, not a constructor. Constructors have no return type at all. As written, there is no constructor, so the compiler provides a default no-arg one."
+}

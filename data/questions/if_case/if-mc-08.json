@@ -1,0 +1,9 @@
+{
+  "id" : "if-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "In a traditional switch statement (not switch expression), what happens if break is omitted?",
+  "choices" : [ "The switch exits after the first matching case", "A compile error occurs", "Execution falls through to the next case", "The default case always runs" ],
+  "answer" : "c",
+  "explanation" : "Traditional switch statements fall through from one case to the next if break is missing. This is intentional in some patterns (e.g., cases sharing behavior) but usually a bug. Switch expressions with -> arrows do not fall through."
+}

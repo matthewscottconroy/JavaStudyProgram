@@ -1,0 +1,9 @@
+{
+  "id" : "sapi-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does Collectors.groupingBy(classifier) produce?",
+  "choices" : [ "A sorted List grouped by the classifier result", "A Map<K, List<T>> grouping elements by the key returned by classifier", "A Set of distinct classifier results", "A Stream partitioned into two parts" ],
+  "answer" : "b",
+  "explanation" : "groupingBy groups stream elements into a Map where the key is the classifier result. Example: .collect(Collectors.groupingBy(String::length)) → Map<Integer, List<String>> grouping words by their length."
+}

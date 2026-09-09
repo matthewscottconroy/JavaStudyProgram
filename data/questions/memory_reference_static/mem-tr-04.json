@@ -1,0 +1,9 @@
+{
+  "id" : "mem-tr-04",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "class Config {\n    static String mode = \"debug\";\n}\nConfig a = new Config();\nConfig b = new Config();\na.mode = \"release\";\nSystem.out.println(b.mode);",
+  "answer" : "release",
+  "explanation" : "mode is static — shared across all Config instances. Changing mode via 'a' (or directly via Config.mode) changes the single shared field. b.mode is also 'release'."
+}

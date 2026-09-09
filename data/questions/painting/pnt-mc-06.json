@@ -1,0 +1,9 @@
+{
+  "id" : "pnt-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "How do you change the font for drawing text in paintComponent()?",
+  "choices" : [ "g.setTextFont(new Font(\"Arial\", Font.BOLD, 20))", "g.setFont(new Font(\"Arial\", Font.BOLD, 20))", "Font.setDefault(new Font(\"Arial\", Font.BOLD, 20))", "g.drawFont(\"Arial\", Font.BOLD, 20)" ],
+  "answer" : "b",
+  "explanation" : "g.setFont(font) sets the font for subsequent drawString calls. Font constructors: new Font(name, style, size). Styles: Font.PLAIN, Font.BOLD, Font.ITALIC, or combined. Use g.getFontMetrics() after setting the font to measure text dimensions."
+}

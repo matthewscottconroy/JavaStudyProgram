@@ -1,0 +1,9 @@
+{
+  "id" : "ex-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is exception chaining?",
+  "choices" : [ "Catching multiple exceptions in one catch block with |", "Wrapping a caught exception inside a new exception to preserve the original cause", "A chain of catch blocks from most specific to most general", "Automatically rethrowing exceptions from a finally block" ],
+  "answer" : "b",
+  "explanation" : "Exception chaining: catch (IOException e) { throw new ServiceException(\"failed\", e); } The original IOException is stored as the cause. new ServiceException(\"failed\", e) — the second arg is the cause, accessible via getCause()."
+}

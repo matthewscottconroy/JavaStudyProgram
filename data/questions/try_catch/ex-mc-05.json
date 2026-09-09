@@ -1,0 +1,9 @@
+{
+  "id" : "ex-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is a multi-catch block?",
+  "choices" : [ "Multiple try blocks in sequence", "A catch clause that catches two or more exception types using |", "A finally block that handles multiple exceptions", "Catching the same exception in two separate catch blocks" ],
+  "answer" : "b",
+  "explanation" : "Multi-catch (Java 7+) allows: catch (IOException | SQLException e) { ... } to handle multiple unrelated exception types with one handler. The caught exception variable is implicitly final in a multi-catch."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "gen-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "public static <T extends Comparable<T>> T max(T a, T b) {\n    return a.compareTo(b) >= 0 ? a : b;\n}\n// in main:\nSystem.out.println(max(3, 7));\nSystem.out.println(max(\"apple\", \"banana\"));",
+  "answer" : "7\nbanana",
+  "explanation" : "T is bound to Comparable<T>. For Integer, compareTo uses numeric order: 7 > 3, returns 7. For String, compareTo uses lexicographic order: 'b' > 'a', returns \"banana\"."
+}

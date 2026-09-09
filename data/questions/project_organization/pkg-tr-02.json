@@ -1,0 +1,9 @@
+{
+  "id" : "pkg-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "Which import is needed for 'List' in this code?",
+  "code" : "package com.example;\n// import ???\npublic class Demo {\n    List<String> names = new ArrayList<>();\n}",
+  "answer" : "import java.util.List; and import java.util.ArrayList;",
+  "explanation" : "Both List and ArrayList are in java.util. They must be imported explicitly (or via wildcard import java.util.*). java.lang classes (String, Integer, etc.) are auto-imported."
+}

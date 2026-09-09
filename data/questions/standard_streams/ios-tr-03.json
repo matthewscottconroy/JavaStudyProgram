@@ -1,0 +1,9 @@
+{
+  "id" : "ios-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "Scanner sc = new Scanner(System.in);\n// User input: \"  hello world  \"\nString token = sc.next();\nSystem.out.println(token);",
+  "answer" : "hello",
+  "explanation" : "sc.next() skips leading whitespace and reads up to the next whitespace delimiter. It returns 'hello', not the full line. sc.nextLine() would return '  hello world  '."
+}

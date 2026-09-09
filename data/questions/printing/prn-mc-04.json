@@ -1,0 +1,9 @@
+{
+  "id" : "prn-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does this print?\n\n    System.out.printf(\"%.2f%n\", 3.14159);",
+  "choices" : [ "3.14159", "3.14", "3.1", "%.2f" ],
+  "answer" : "b",
+  "explanation" : "%.2f formats a floating-point number to 2 decimal places. %n is a platform-neutral newline. So 3.14159 is rounded to 3.14."
+}

@@ -1,0 +1,10 @@
+{
+  "id" : "jdoc-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "The generated Javadoc shows 'unknown tag: @returns'. What is wrong?",
+  "code" : "/**\n * Computes the area.\n * @param radius the radius of the circle\n * @returns the area in square units\n */\npublic double area(double radius) { return Math.PI * radius * radius; }",
+  "choices" : [ "The method must be static to have Javadoc", "@returns is not a valid tag — the correct tag is @return (no 's')", "Javadoc doesn't support double types", "@param must come after @return" ],
+  "answer" : "b",
+  "explanation" : "The Javadoc tag is @return (singular), not @returns. Typos in tag names cause the javadoc tool to emit 'unknown tag' warnings and the tag is ignored in the output."
+}

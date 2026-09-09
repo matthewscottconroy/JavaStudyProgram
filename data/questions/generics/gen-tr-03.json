@@ -1,0 +1,9 @@
+{
+  "id" : "gen-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "List<String> list = new ArrayList<>(List.of(\"b\", \"a\", \"c\"));\nlist.sort(Comparator.naturalOrder());\nSystem.out.println(list);",
+  "answer" : "[a, b, c]",
+  "explanation" : "list.sort() with Comparator.naturalOrder() sorts Strings lexicographically. [b, a, c] → [a, b, c]. ArrayList.toString() → [a, b, c]."
+}

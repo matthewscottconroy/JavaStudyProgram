@@ -1,0 +1,9 @@
+{
+  "id" : "if-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the output?\n\n    int x = 0;\n    System.out.println(x == 0 ? \"zero\" : x > 0 ? \"positive\" : \"negative\");",
+  "choices" : [ "zero", "positive", "negative", "0" ],
+  "answer" : "a",
+  "explanation" : "x == 0 is true, so the outer ternary short-circuits and returns \"zero\". Nested ternaries are evaluated left to right."
+}

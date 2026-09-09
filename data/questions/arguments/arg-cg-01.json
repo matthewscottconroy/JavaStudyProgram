@@ -1,0 +1,9 @@
+{
+  "id" : "arg-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which snippet safely prints the first argument or 'default' if none is given?",
+  "choices" : [ "System.out.println(args[0]);", "System.out.println(args.length > 0 ? args[0] : \"default\");", "System.out.println(args != null ? args[0] : \"default\");", "System.out.println(Integer.parseInt(args[0]));" ],
+  "answer" : "b",
+  "explanation" : "args is never null — check args.length > 0 instead. Option A crashes with no args. Option C checks null unnecessarily. Option D also parses as int, which breaks for non-numeric input."
+}

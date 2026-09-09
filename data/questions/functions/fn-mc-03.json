@@ -1,0 +1,9 @@
+{
+  "id" : "fn-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does this method return when called as double(4)?\n\n    static int double(int n) { return n * 2; }",
+  "choices" : [ "4", "8", "2", "Won't compile — 'double' is a keyword" ],
+  "answer" : "d",
+  "explanation" : "'double' is a reserved keyword in Java and cannot be used as a method name. The code will not compile."
+}

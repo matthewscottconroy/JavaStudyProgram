@@ -1,0 +1,10 @@
+{
+  "id" : "prn-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 1,
+  "prompt" : "What is wrong with this code?",
+  "code" : "system.out.println(\"Hello\");",
+  "choices" : [ "Missing semicolon", "system should be System (capital S)", "println should be PrintLn", "\"Hello\" needs to be a char not a String" ],
+  "answer" : "b",
+  "explanation" : "Java is case-sensitive. The class is System (capital S) in java.lang. system (lowercase) is not a valid identifier here."
+}

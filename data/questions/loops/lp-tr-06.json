@@ -1,0 +1,9 @@
+{
+  "id" : "lp-tr-06",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "int n = 1;\ndo {\n    System.out.print(n + \" \");\n    n++;\n} while (n <= 3);",
+  "answer" : "1 2 3",
+  "explanation" : "do-while: print 1, n=2 (2<=3 true). Print 2, n=3 (3<=3 true). Print 3, n=4 (4<=3 false). Output: 1 2 3."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "pkg-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What does the compiler infer about class 'Helper' if it has no access modifier?",
+  "code" : "package com.example;\nclass Helper {\n    void assist() {}\n}",
+  "answer" : "Helper is package-private — visible only within com.example",
+  "explanation" : "No modifier means package-private access. Helper can be used by other classes in com.example but not by classes in other packages, even if they try to import it."
+}

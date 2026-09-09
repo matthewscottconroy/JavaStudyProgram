@@ -1,0 +1,9 @@
+{
+  "id" : "gen-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does Collections.unmodifiableList(list) return?",
+  "choices" : [ "A new copy of the list that cannot be changed", "A view of the list that throws UnsupportedOperationException on mutating operations", "A null-safe wrapper around the list", "A synchronized version of the list" ],
+  "answer" : "b",
+  "explanation" : "unmodifiableList() returns a view backed by the original list. Reads work; any mutating call (add, remove, set) throws UnsupportedOperationException. Changes to the underlying list ARE reflected in the view. For a true immutable copy: List.copyOf(list) (Java 10+)."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "jdoc-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "Which comment syntax starts a Javadoc comment?",
+  "choices" : [ "// Javadoc", "/* comment */", "/** comment */", "# comment" ],
+  "answer" : "c",
+  "explanation" : "Javadoc comments use /** ... */ (note the double asterisk after the slash). The javadoc tool processes these to generate HTML documentation. Regular /* */ block comments are ignored by javadoc. Javadoc comments must appear immediately before the class, method, or field they document."
+}

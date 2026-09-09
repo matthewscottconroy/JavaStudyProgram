@@ -1,0 +1,9 @@
+{
+  "id" : "kbd-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the advantage of using Key Bindings (InputMap/ActionMap) over KeyListener?",
+  "choices" : [ "Key bindings are faster than KeyListener", "Key bindings work regardless of which component has focus; KeyListener only works on the focused component", "Key bindings support more keys than KeyListener", "Key bindings don't require event classes" ],
+  "answer" : "b",
+  "explanation" : "Key Bindings (component.getInputMap() and getActionMap()) can be scoped to: WHEN_FOCUSED (default), WHEN_IN_FOCUSED_WINDOW (fires even if sibling has focus), or WHEN_ANCESTOR_OF_FOCUSED_COMPONENT. This solves the focus problem that often plagues KeyListeners in complex UIs."
+}

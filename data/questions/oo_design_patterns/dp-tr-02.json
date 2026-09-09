@@ -1,0 +1,9 @@
+{
+  "id" : "dp-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "Which pattern is demonstrated here?",
+  "code" : "interface Sorter { void sort(int[] arr); }\nclass BubbleSorter implements Sorter { public void sort(int[] arr) { /* bubble sort */ } }\nclass QuickSorter implements Sorter { public void sort(int[] arr) { /* quick sort */ } }\nclass Context {\n    private Sorter sorter;\n    Context(Sorter s) { sorter = s; }\n    void doSort(int[] arr) { sorter.sort(arr); }\n}",
+  "answer" : "Strategy",
+  "explanation" : "Strategy pattern: defines a family of algorithms (BubbleSorter, QuickSorter) behind a common interface, and lets the client switch algorithms at runtime via the Context. The algorithm is encapsulated and interchangeable."
+}

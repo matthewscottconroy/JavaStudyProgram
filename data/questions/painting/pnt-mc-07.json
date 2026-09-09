@@ -1,0 +1,9 @@
+{
+  "id" : "pnt-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the purpose of a Swing Timer in animation?",
+  "choices" : [ "It measures how long paintComponent takes to run", "It fires ActionEvents at a fixed interval, allowing state updates and repaint() calls for smooth animation", "It delays the initial window display", "It prevents more than one repaint per second" ],
+  "answer" : "b",
+  "explanation" : "javax.swing.Timer fires on the Event Dispatch Thread at fixed intervals. new Timer(16, e -> { updateState(); repaint(); }).start() creates ~60 fps animation. Using a Thread.sleep loop instead is dangerous — it may not run on the EDT."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "ex-cg-03",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which correctly reads a file and handles the potential IOException?",
+  "choices" : [ "FileReader fr = new FileReader(\"f.txt\");", "try { FileReader fr = new FileReader(\"f.txt\"); } catch (Exception e) {}", "try (FileReader fr = new FileReader(\"f.txt\")) { /* use fr */ } catch (IOException e) { e.printStackTrace(); }", "FileReader fr = (FileReader) new File(\"f.txt\");" ],
+  "answer" : "c",
+  "explanation" : "try-with-resources closes fr automatically. Catching IOException (not bare Exception) is more specific and best practice. Option A doesn't compile (uncaught checked exception). Option B silently swallows the error. Option D is an invalid cast."
+}

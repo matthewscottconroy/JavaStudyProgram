@@ -1,0 +1,9 @@
+{
+  "id" : "mvn-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What are the three required coordinates to identify a Maven artifact?",
+  "choices" : [ "name, version, classifier", "groupId, artifactId, version", "namespace, module, build", "project, component, edition" ],
+  "answer" : "b",
+  "explanation" : "Maven coordinates: groupId (org/company), artifactId (project name), version (1.0.0). Together they uniquely identify a dependency in any repository. Example: groupId=com.google.guava, artifactId=guava, version=32.0.0-jre."
+}

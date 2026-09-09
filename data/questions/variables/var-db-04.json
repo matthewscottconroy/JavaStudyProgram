@@ -1,0 +1,10 @@
+{
+  "id" : "var-db-04",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "The result is 0.0 instead of the expected decimal. Why?",
+  "code" : "int a = 7;\nint b = 2;\ndouble result = a / b;\nSystem.out.println(result);",
+  "choices" : [ "result was not initialized before division", "double cannot store the result of int division", "a / b performs integer division (3) before widening to double; result is 3.0 not 3.5", "The variable name 'result' is reserved" ],
+  "answer" : "c",
+  "explanation" : "a and b are both int, so a / b = 3 (integer division, truncated). The int 3 is then widened to 3.0. Fix: (double) a / b or a / (double) b forces floating-point division."
+}

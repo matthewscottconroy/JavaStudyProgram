@@ -1,0 +1,9 @@
+{
+  "id" : "inh-cg-03",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which abstract class requires subclasses to implement calculatePay()?",
+  "choices" : [ "class Employee { void calculatePay() { } }", "abstract class Employee { abstract double calculatePay(); }", "interface Employee { double calculatePay(); }", "final class Employee { double calculatePay() { return 0; } }" ],
+  "answer" : "b",
+  "explanation" : "abstract class with abstract method: subclasses must implement calculatePay() or be abstract themselves. Option A is a concrete class — subclasses can but don't have to override. Option C is an interface (valid but not a class). Option D is final — cannot be extended."
+}

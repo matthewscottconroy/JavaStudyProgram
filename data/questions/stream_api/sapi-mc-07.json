@@ -1,0 +1,9 @@
+{
+  "id" : "sapi-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does Stream.distinct() do?",
+  "choices" : [ "Sorts the stream in alphabetical order", "Removes consecutive duplicate elements", "Returns a stream with no duplicate elements", "Returns only the first element" ],
+  "answer" : "c",
+  "explanation" : "distinct() returns a stream of unique elements (no duplicates), using .equals() for comparison. List.of(1,2,2,3,3,3).stream().distinct() → 1, 2, 3. It is stateful — it must track all seen elements."
+}

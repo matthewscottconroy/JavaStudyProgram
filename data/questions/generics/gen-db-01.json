@@ -1,0 +1,10 @@
+{
+  "id" : "gen-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This code produces an unchecked cast warning. Why?",
+  "code" : "List list = new ArrayList();\nlist.add(\"hello\");\nString s = (String) list.get(0);",
+  "choices" : [ "ArrayList cannot hold String objects", "list is a raw type; the compiler cannot verify the cast is safe at compile time", "get() returns Object and cannot be cast", "The assignment to String is not allowed without generics" ],
+  "answer" : "b",
+  "explanation" : "Using a raw type (List without <>) bypasses compile-time type checking. The cast to String might fail at runtime if the list contains non-Strings. Fix: use List<String> list = new ArrayList<>()  to eliminate the cast and warning."
+}

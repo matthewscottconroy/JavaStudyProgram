@@ -1,0 +1,9 @@
+{
+  "id" : "jdoc-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which is a correctly formatted Javadoc comment for a method that divides a by b?",
+  "choices" : [ "// divides a by b, returns quotient", "/** Divides a by b. @param a dividend @param b divisor @return a / b @throws ArithmeticException if b is zero */", "/**\n * Divides a by b.\n * @param a the dividend\n * @param b the divisor\n * @return the quotient a / b\n * @throws ArithmeticException if b is zero\n */", "/* param: a, b; returns: double */" ],
+  "answer" : "c",
+  "explanation" : "Option C uses proper /** */ syntax with each tag on its own line — the standard Javadoc style. Option A is a plain line comment. Option B has no newlines (technically valid but unreadable). Option D uses /* */ which javadoc ignores."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "img-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is a BufferedImage.TYPE_INT_ARGB used for?",
+  "choices" : [ "Images that only support grayscale colors", "Images with a 32-bit pixel format including an alpha (transparency) channel", "Images that only use 8 colors", "Audio buffers stored as image data" ],
+  "answer" : "b",
+  "explanation" : "TYPE_INT_ARGB stores each pixel as a 32-bit int: 8 bits each for alpha, red, green, blue. Use it when you need transparency. new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB) creates a transparent canvas you can draw on before compositing."
+}

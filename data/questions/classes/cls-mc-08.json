@@ -1,0 +1,9 @@
+{
+  "id" : "cls-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the difference between a static method and an instance method?",
+  "choices" : [ "Static methods are faster; instance methods are thread-safe", "Static methods belong to the class and can be called without an object; instance methods require an object", "Instance methods can access static fields; static methods cannot", "Static methods must return void" ],
+  "answer" : "b",
+  "explanation" : "Math.sqrt(4) — Math.sqrt is static, called on the class. list.size() — size() is an instance method called on a specific ArrayList object. Static methods cannot use 'this' or access non-static fields directly."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "dbt-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What does this stack trace tell you about where the bug is?",
+  "code" : "Exception in thread \"main\" java.lang.NullPointerException\n    at com.example.App.getName(App.java:15)\n    at com.example.App.printUser(App.java:9)\n    at com.example.App.main(App.java:4)",
+  "answer" : "App.java line 15, inside getName()",
+  "explanation" : "The NPE was thrown at App.java line 15 in getName(). main() called printUser() at line 4, which called getName() at line 9, and getName() crashed at line 15. Start debugging at line 15."
+}

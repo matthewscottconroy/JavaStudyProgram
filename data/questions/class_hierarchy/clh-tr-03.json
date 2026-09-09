@@ -1,0 +1,9 @@
+{
+  "id" : "clh-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "class A { String id() { return \"A\"; } }\nclass B extends A { @Override String id() { return \"B\"; } }\nclass C extends B { }\n// in main:\nA obj = new C();\nSystem.out.println(obj.id());",
+  "answer" : "B",
+  "explanation" : "C doesn't override id() — it inherits B's version. Dynamic dispatch uses the actual type C, which resolves to B's id(). Output: B."
+}

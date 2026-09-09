@@ -1,0 +1,10 @@
+{
+  "id" : "var-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "You want to store the result of 22 divided by 7 as a decimal number. Which declaration is best?",
+  "choices" : [ "int result = 22 / 7;", "double result = 22.0 / 7;", "double result = 22 / 7;", "float result = \"22/7\";" ],
+  "answer" : "b",
+  "explanation" : "To get decimal division, at least one operand must be a floating-point number. 22.0 / 7 forces floating-point division. 22 / 7 performs integer division (result: 3), then widens to 3.0.",
+  "hints" : [ "If both operands are ints, Java does integer division even into a double." ]
+}

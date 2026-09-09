@@ -18,12 +18,12 @@ import java.util.stream.Stream;
 /**
  * Central registry of all questions.
  *
- * Questions come from three sources, loaded in order:
- *   1. Hardcoded {@link QuestionLoader} implementations.
- *   2. JSON files bundled inside the jar under the {@code questions/} classpath root.
- *   3. JSON files in an external {@code data/questions/<topic-slug>/} directory next to
- *      the working directory. External files override bundled questions with the same ID,
- *      so users can fix or replace shipped questions without rebuilding.
+ * Every question is JSON, from one of two places:
+ *   1. Files bundled inside the jar under the {@code questions/} classpath root.
+ *   2. Files in an external {@code data/questions/<topic-slug>/} directory next to the working
+ *      directory. External files override bundled questions with the same ID, so anyone can fix
+ *      or replace shipped questions without rebuilding — and every shipped question is editable
+ *      the same way the ones you write are.
  *
  * Problems found while loading (duplicate IDs, directories that match no topic) are
  * collected as warnings via {@link #getWarnings()} rather than failing the whole load.
@@ -44,7 +44,6 @@ public class QuestionBank {
     }
 
     public QuestionBank(Path externalQuestionsDir) {
-        loadHardcoded();
         loadFromClasspath();
         loadExternal(externalQuestionsDir);
         screenUntrusted();
@@ -97,91 +96,6 @@ public class QuestionBank {
     }
 
     // ── Loading ──────────────────────────────────────────────────────────────
-
-    private void loadHardcoded() {
-        List<QuestionLoader> loaders = List.of(
-                // ── Fundamentals ──────────────────────────────────────────
-                new VariablesQuestionLoader(),
-                new PrintingQuestionLoader(),
-                new ArgumentsQuestionLoader(),
-                new HexBinaryQuestionLoader(),
-                new CompilingRunningQuestionLoader(),
-
-                // ── Control Flow ──────────────────────────────────────────
-                new IfCaseQuestionLoader(),
-                new LoopsQuestionLoader(),
-                new FunctionsQuestionLoader(),
-
-                // ── Strings & Collections ─────────────────────────────────
-                new StringsQuestionLoader(),
-                new ArraysQuestionLoader(),
-                new ArraysArrayListsQuestionLoader(),
-                new CollectionsQuestionLoader(),
-
-                // ── OOP ───────────────────────────────────────────────────
-                new ClassesQuestionLoader(),
-                new AccessModifiersQuestionLoader(),
-                new MemoryReferenceStaticQuestionLoader(),
-                new InterfacesQuestionLoader(),
-                new InheritanceQuestionLoader(),
-                new CompositionQuestionLoader(),
-                new ClassHierarchyQuestionLoader(),
-                new InheritancePolymorphismQuestionLoader(),
-
-                // ── Error Handling & I/O ──────────────────────────────────
-                new ExceptionHandlingQuestionLoader(),
-                new FileProcessingQuestionLoader(),
-
-                // ── Advanced & Tooling ────────────────────────────────────
-                new GenericsQuestionLoader(),
-                new LambdasQuestionLoader(),
-                new StreamApiQuestionLoader(),
-                new UnitTestsQuestionLoader(),
-                new MavenQuestionLoader(),
-
-                // ── GUI ───────────────────────────────────────────────────
-                new GuiSwingQuestionLoader(),
-                new GuiEventModelQuestionLoader(),
-                new GuiComponentsQuestionLoader(),
-                new GuiLayoutQuestionLoader(),
-                new MouseInputQuestionLoader(),
-                new KeyboardInputQuestionLoader(),
-                new PaintingQuestionLoader(),
-                new Graphics2DQuestionLoader(),
-                new ImagesSoundQuestionLoader(),
-                new SwingComponentsQuestionLoader(),
-
-                // ── Advanced Topics ───────────────────────────────────────
-                new RandomQuestionLoader(),
-                new ThreadsQuestionLoader(),
-                new ReflectionQuestionLoader(),
-                new DesignPatternsQuestionLoader(),
-                new NetworkingQuestionLoader(),
-                new DatabasesQuestionLoader(),
-                new MetaprogrammingQuestionLoader(),
-                new MachineLearningQuestionLoader(),
-                new EvolutionaryProgrammingQuestionLoader(),
-
-                // ── Tooling & Best Practices ──────────────────────────────
-                new IdeQuestionLoader(),
-                new DebuggingToolsQuestionLoader(),
-                new JavadocQuestionLoader(),
-                new ProjectOrganizationQuestionLoader(),
-
-                // ── Java Platform ─────────────────────────────────────────
-                new JavaClassHierarchyQuestionLoader(),
-                new SerializationQuestionLoader(),
-                new StandardStreamsQuestionLoader(),
-                new FunctionalParadigmQuestionLoader()
-        );
-
-        Set<String> seen = new HashSet<>();
-        for (QuestionLoader loader : loaders) {
-            for (Question q : loader.load()) {
-                putQuestion(q, seen, "loader " + loader.getClass().getSimpleName());
-            }
-        }
-    }
 
     /**
      * Loads JSON questions bundled inside the jar (or target/classes) under

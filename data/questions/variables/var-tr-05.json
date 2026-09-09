@@ -1,0 +1,9 @@
+{
+  "id" : "var-tr-05",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is the value of c?",
+  "code" : "char c = 'A';\nc++;",
+  "answer" : "B",
+  "explanation" : "char is an integer type. Incrementing 'A' (Unicode 65) gives 66, which is 'B'. char arithmetic moves through the Unicode table."
+}

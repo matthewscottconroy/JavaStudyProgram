@@ -1,0 +1,9 @@
+{
+  "id" : "jdoc-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "Which Javadoc tag documents a method parameter?",
+  "choices" : [ "@arg", "@parameter", "@param", "@input" ],
+  "answer" : "c",
+  "explanation" : "@param name description documents a single method parameter. Use one @param tag per parameter. The name must match the actual parameter name. Example: @param size the initial capacity of the list"
+}

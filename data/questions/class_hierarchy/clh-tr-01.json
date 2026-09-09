@@ -1,0 +1,9 @@
+{
+  "id" : "clh-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "class Shape { String name() { return \"Shape\"; } }\nclass Circle extends Shape { String name() { return \"Circle\"; } }\n// in main:\nShape s = new Circle();\nSystem.out.println(s.name());\nSystem.out.println(s instanceof Circle);",
+  "answer" : "Circle\ntrue",
+  "explanation" : "Dynamic dispatch calls Circle's name() even though s is declared as Shape. instanceof returns true because the actual object is a Circle."
+}

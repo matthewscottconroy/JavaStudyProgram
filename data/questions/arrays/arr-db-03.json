@@ -1,0 +1,10 @@
+{
+  "id" : "arr-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "The Arrays.equals() check returns false for two arrays with the same values. Why?",
+  "code" : "int[] a = {1, 2, 3};\nint[] b = {1, 2, 3};\nSystem.out.println(a == b);  // false (expected)",
+  "choices" : [ "Arrays.equals() should be used instead of ==", "== compares array references, not content — this is actually correct behavior", "int arrays cannot be compared", "Both a and b must be sorted first" ],
+  "answer" : "b",
+  "explanation" : "a == b checks if both variables point to the same array object — they don't, so false is correct. To compare content: Arrays.equals(a, b) → true. The code is using == correctly for reference identity; the comment says 'false (expected)'."
+}

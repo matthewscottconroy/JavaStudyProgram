@@ -1,0 +1,9 @@
+{
+  "id" : "mem-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is a static field?",
+  "choices" : [ "A field that cannot be changed", "A field shared by all instances of the class, belonging to the class itself", "A field only accessible within the same method", "A field that is automatically null" ],
+  "answer" : "b",
+  "explanation" : "Static fields belong to the class, not to any instance. All instances share the same static field. Change it in one place and all instances see the change."
+}

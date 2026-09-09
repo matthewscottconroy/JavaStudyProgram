@@ -1,0 +1,9 @@
+{
+  "id" : "ml-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 4,
+  "prompt" : "What does 'normalization' (feature scaling) do to input data?",
+  "choices" : [ "Removes duplicate rows from the dataset", "Scales feature values to a common range (e.g., 0–1 or mean=0, std=1) to prevent large-scale features from dominating", "Converts categorical features to numeric codes", "Adds noise to prevent overfitting" ],
+  "answer" : "b",
+  "explanation" : "Features with very different scales (age: 0-100, income: 0-1,000,000) can bias gradient-based models. Min-max scaling: x' = (x - min) / (max - min) → range [0,1]. Standardization (Z-score): x' = (x - mean) / std → mean=0, std=1. Tree-based models don't require scaling; linear and neural models typically do."
+}

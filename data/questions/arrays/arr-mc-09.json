@@ -1,0 +1,9 @@
+{
+  "id" : "arr-mc-09",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does Arrays.toString(arr) return for int[] arr = {1, 2, 3}?",
+  "choices" : [ "\"123\"", "\"1 2 3\"", "\"[1, 2, 3]\"", "1 + 2 + 3" ],
+  "answer" : "c",
+  "explanation" : "Arrays.toString() returns a formatted string like \"[1, 2, 3]\". This is useful for debugging since array's default toString() gives an unhelpful reference. For 2D arrays: Arrays.deepToString(arr2D)."
+}

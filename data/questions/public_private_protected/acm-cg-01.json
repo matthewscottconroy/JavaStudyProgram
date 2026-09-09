@@ -1,0 +1,9 @@
+{
+  "id" : "acm-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which class correctly encapsulates the 'name' field with a getter?",
+  "choices" : [ "class Person { public String name; public String getName() { return name; } }", "class Person { private String name; public String getName() { return name; } }", "class Person { private String name; private String getName() { return name; } }", "class Person { protected String name; }" ],
+  "answer" : "b",
+  "explanation" : "Encapsulation: the field is private (hidden), access is provided via a public getter. Option A exposes the field directly. Option C makes the getter private (inaccessible from outside). Option D leaves the field visible to subclasses without a controlled accessor."
+}

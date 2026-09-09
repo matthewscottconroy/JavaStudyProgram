@@ -1,0 +1,9 @@
+{
+  "id" : "cmp-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "Which command runs a compiled Java class named 'Hello'?",
+  "choices" : [ "javac Hello", "javac Hello.class", "java Hello", "java Hello.java" ],
+  "answer" : "c",
+  "explanation" : "'java Hello' launches the JVM and runs the bytecode in Hello.class. 'javac' compiles, 'java' runs. Don't include .class when running."
+}

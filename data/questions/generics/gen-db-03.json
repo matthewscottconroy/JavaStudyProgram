@@ -1,0 +1,10 @@
+{
+  "id" : "gen-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This compiles but may throw ClassCastException at runtime. Why?",
+  "code" : "List rawList = new ArrayList();\nrawList.add(42);\nList<String> strings = rawList;\nString s = strings.get(0);",
+  "choices" : [ "ArrayList cannot hold Integer and String", "Assigning a raw list to a typed list bypasses compile-time checks — the cast to String fails at get(0)", "rawList must be cast to List<String> explicitly", "String and Integer cannot both be in a List" ],
+  "answer" : "b",
+  "explanation" : "Using a raw type and assigning it to List<String> generates an unchecked cast warning. At runtime, strings.get(0) returns an Integer (boxed 42) and the implicit cast to String fails. Always use properly typed generics: List<Integer> = new ArrayList<>()"
+}

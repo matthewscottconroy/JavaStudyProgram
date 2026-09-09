@@ -1,0 +1,9 @@
+{
+  "id" : "swng-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "Which Swing component displays tabular data in rows and columns?",
+  "choices" : [ "JGrid", "JTable", "JSpreadsheet", "JDataGrid" ],
+  "answer" : "b",
+  "explanation" : "JTable displays data in a grid using a TableModel. Simple usage: new JTable(Object[][] data, Object[] columnNames). Wrap in JScrollPane so column headers and scroll bars appear: new JScrollPane(table)."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "evo-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 4,
+  "prompt" : "What is 'elitism' in the context of genetic algorithms?",
+  "choices" : [ "Giving the fittest individuals extra mutation chances", "Automatically carrying the best individual(s) unchanged into the next generation", "Initializing the population with only high-quality individuals", "Running the GA only on high-performance hardware" ],
+  "answer" : "b",
+  "explanation" : "Elitism guarantees that the best solution found so far is never lost due to crossover/mutation. Typically the top 1-2 individuals are copied directly to the next generation. This ensures monotonic improvement in best-so-far fitness across generations."
+}

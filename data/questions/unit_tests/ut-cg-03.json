@@ -1,0 +1,9 @@
+{
+  "id" : "ut-cg-03",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which JUnit 5 test uses @ParameterizedTest to check that a method returns true for 'a', 'b', 'c'?",
+  "choices" : [ "@Test void testIn() { assertTrue(contains('a')); assertTrue(contains('b')); assertTrue(contains('c')); }", "@ParameterizedTest @ValueSource(strings={\"a\",\"b\",\"c\"}) void testIn(String s) { assertTrue(isVowelOrConsonant(s)); }", "@ParameterizedTest void testIn(char c) { assertTrue(contains(c)); }", "@Test @Values({\"a\",\"b\",\"c\"}) void testIn(String s) { assertTrue(isLetter(s)); }" ],
+  "answer" : "b",
+  "explanation" : "@ParameterizedTest + @ValueSource runs the test method once per value. Option A manually duplicates — doesn't scale. Option C: @ParameterizedTest needs a source annotation like @ValueSource. Option D: @Values doesn't exist in JUnit 5 — it's @ValueSource."
+}

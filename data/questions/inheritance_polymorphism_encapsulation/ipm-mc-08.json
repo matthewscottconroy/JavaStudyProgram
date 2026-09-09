@@ -1,0 +1,9 @@
+{
+  "id" : "ipm-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "Which scenario best demonstrates polymorphism?",
+  "choices" : [ "A class with two constructors", "An array of Shape objects where each element responds to draw() based on its actual type", "A class that extends both Animal and Vehicle", "A method that prints a String" ],
+  "answer" : "b",
+  "explanation" : "Polymorphism: same message (draw()), different behavior per actual type. Shape[] shapes = {new Circle(), new Rect()}; for (Shape s : shapes) s.draw(); Each element draws itself without the caller needing to know the specific type."
+}

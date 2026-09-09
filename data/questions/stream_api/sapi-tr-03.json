@@ -1,0 +1,9 @@
+{
+  "id" : "sapi-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "import java.util.*;\nimport java.util.stream.*;\nList<String> words = List.of(\"apple\", \"banana\", \"avocado\", \"blueberry\");\nMap<Character, List<String>> byFirst = words.stream()\n    .collect(Collectors.groupingBy(w -> w.charAt(0)));\nSystem.out.println(byFirst.get('a').size());",
+  "answer" : "2",
+  "explanation" : "Groups by first character. 'a' group: [\"apple\", \"avocado\"]. size() = 2."
+}

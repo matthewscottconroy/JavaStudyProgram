@@ -1,0 +1,9 @@
+{
+  "id" : "img-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What are the dimensions of the image drawn on screen?",
+  "code" : "BufferedImage img = ImageIO.read(new File(\"sprite.png\"));\n// sprite.png is 64x64 pixels\n// In paintComponent:\ng.drawImage(img, 10, 10, 128, 128, this);",
+  "answer" : "128x128 pixels on screen",
+  "explanation" : "drawImage with explicit width=128, height=128 scales the 64x64 source to 128x128 on screen. The display size is determined by the 4th and 5th arguments, not the image's natural size."
+}

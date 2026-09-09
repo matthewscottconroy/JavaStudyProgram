@@ -1,0 +1,10 @@
+{
+  "id" : "cpn-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "Why is this design problematic?",
+  "code" : "class Report {\n    void generate() {\n        Database db = new Database(\"prod-server\");\n        List<Row> data = db.fetchAll();\n        // format and print data\n    }\n}",
+  "choices" : [ "Database is not a standard Java class", "Report creates its own Database dependency internally — makes it untestable and hard to configure", "generate() should be static", "The method is too long" ],
+  "answer" : "b",
+  "explanation" : "Hardcoding the Database inside generate() means you can't swap it for a test database or mock. Fix: inject the Database: class Report { Report(Database db) { ... } void generate() { db.fetchAll(); } } Now tests can pass a mock Database without touching a real server."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "cmp-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the classpath?",
+  "choices" : [ "The directory where the JDK is installed", "A list of locations the JVM searches for .class files and JARs", "The path to the Java source file being compiled", "The runtime memory layout of a Java program" ],
+  "answer" : "b",
+  "explanation" : "The classpath tells the JVM and compiler where to find compiled classes and libraries. It can be set with the -cp flag, the CLASSPATH variable, or implicitly from the current directory."
+}

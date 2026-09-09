@@ -1,0 +1,9 @@
+{
+  "id" : "pkg-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does 'import static' allow you to do?",
+  "choices" : [ "Import a class from a static library", "Use static methods and fields without qualifying them with the class name", "Import a package of static classes", "Declare a class as static at the package level" ],
+  "answer" : "b",
+  "explanation" : "import static java.lang.Math.sqrt; allows writing sqrt(x) instead of Math.sqrt(x). import static java.lang.Math.*; imports all static members. Overuse can make code harder to read — the source of methods becomes unclear."
+}

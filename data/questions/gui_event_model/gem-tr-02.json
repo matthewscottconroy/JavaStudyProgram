@@ -1,0 +1,9 @@
+{
+  "id" : "gem-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is the ActionCommand of this button?",
+  "code" : "JButton btn = new JButton(\"Save\");\nSystem.out.println(btn.getActionCommand());",
+  "answer" : "Save",
+  "explanation" : "By default, a JButton's action command is its label text. You can change it with btn.setActionCommand(\"save-action\"). ActionEvent.getActionCommand() returns this string inside a listener."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "lam-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "import java.util.function.*;\nUnaryOperator<Integer> triple = n -> n * 3;\nUnaryOperator<Integer> addTen = n -> n + 10;\nSystem.out.println(triple.andThen(addTen).apply(4));\nSystem.out.println(triple.compose(addTen).apply(4));",
+  "answer" : "22\n42",
+  "explanation" : "andThen: triple(4)=12, addTen(12)=22. compose: addTen(4)=14, triple(14)=42."
+}

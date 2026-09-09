@@ -1,0 +1,9 @@
+{
+  "id" : "sapi-mc-10",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does Stream.peek() do?",
+  "choices" : [ "Returns the first element and ends the stream", "Performs an action on each element as they pass through, without consuming the stream", "Checks if the stream is empty", "Sorts the stream by comparing adjacent elements" ],
+  "answer" : "b",
+  "explanation" : "peek(Consumer) is an intermediate operation for debugging: .peek(System.out::println) prints each element as it flows through the pipeline. It does not consume the stream — a terminal operation is still needed."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "str-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does this print?\n\n    String s = \"Hello\";\n    System.out.println(s.substring(1, 3));",
+  "choices" : [ "Hel", "el", "ell", "He" ],
+  "answer" : "b",
+  "explanation" : "substring(start, end) returns characters from index 'start' up to but not including 'end'. Index 1 = 'e', index 2 = 'l'. Result: \"el\"."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "if-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which uses a switch expression to convert a month number (1–12) to its name for January and February?",
+  "choices" : [ "switch (month) { case 1: return \"January\"; case 2: return \"February\"; }", "String name = switch (month) { case 1 -> \"January\"; case 2 -> \"February\"; default -> \"Other\"; };", "if (month == 1 || month == 2) return month == 1 ? \"January\" : \"February\";", "name = month.equals(1) ? \"January\" : \"February\";" ],
+  "answer" : "b",
+  "explanation" : "Switch expression with arrow syntax. Each case returns a value directly. default is required. Option A uses return inside a switch (only valid inside a method returning String). Option D: month is int, not an object, so .equals() won't compile."
+}

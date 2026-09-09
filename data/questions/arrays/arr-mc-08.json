@@ -1,0 +1,9 @@
+{
+  "id" : "arr-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is a 2D array in Java?",
+  "choices" : [ "A special array type with a fixed 2-column width", "An array of arrays — each element is itself an array", "A LinkedList with two dimensions", "A hash map using two keys" ],
+  "answer" : "b",
+  "explanation" : "int[][] grid = new int[3][4] creates a 3×4 grid (3 rows, 4 columns). Access with grid[row][col]. Rows can have different lengths (jagged arrays): int[][] jagged = new int[3][]; jagged[0] = new int[2]; jagged[1] = new int[5];"
+}

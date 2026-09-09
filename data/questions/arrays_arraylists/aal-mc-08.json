@@ -1,0 +1,9 @@
+{
+  "id" : "aal-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "When is LinkedList faster than ArrayList?",
+  "choices" : [ "Random access by index (e.g., get(500))", "Frequent insertions/deletions at the beginning or middle of the list", "Sorting", "Memory usage" ],
+  "answer" : "b",
+  "explanation" : "ArrayList: O(1) random access, O(n) insertion at the middle (shifts elements). LinkedList: O(n) random access (traversal), O(1) insertions at known positions (pointer update). In practice, ArrayList outperforms LinkedList for most use cases due to cache locality."
+}

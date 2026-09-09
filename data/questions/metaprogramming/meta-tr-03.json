@@ -1,0 +1,9 @@
+{
+  "id" : "meta-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "@Retention(java.lang.annotation.RetentionPolicy.RUNTIME)\n@interface Priority { int level() default 1; }\n\n@Priority\nclass Task {}\n\nPriority p = Task.class.getAnnotation(Priority.class);\nSystem.out.println(p.level());",
+  "answer" : "1",
+  "explanation" : "@Priority is used without specifying level(), so the default value 1 is used. p.level() returns 1."
+}

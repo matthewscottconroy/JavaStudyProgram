@@ -1,0 +1,9 @@
+{
+  "id" : "swng-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which correctly shows a file chooser and prints the selected file path?",
+  "choices" : [ "File f = JFileChooser.getFile(); System.out.println(f.getPath());", "JFileChooser chooser = new JFileChooser(); if (chooser.showOpenDialog(frame) == JFileChooser.APPROVE_OPTION) System.out.println(chooser.getSelectedFile().getAbsolutePath());", "JFileChooser.open(frame, f -> System.out.println(f));", "File f = new FileDialog(frame).getFile(); System.out.println(f);" ],
+  "answer" : "b",
+  "explanation" : "showOpenDialog returns an int; compare to APPROVE_OPTION to check if the user confirmed. getSelectedFile() returns the chosen File. getAbsolutePath() gives the full path. Option D uses AWT FileDialog, not Swing JFileChooser."
+}

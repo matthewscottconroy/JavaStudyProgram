@@ -1,0 +1,10 @@
+{
+  "id" : "str-db-04",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "The string replacement doesn't work as expected. Why?",
+  "code" : "String s = \"Hello\";\ns.replace('l', 'L');\nSystem.out.println(s);",
+  "choices" : [ "replace() uses the wrong method overload", "Strings are immutable — replace() returns a new String; the original s is unchanged", "char literals cannot be used with replace()", "s must be declared as StringBuilder" ],
+  "answer" : "b",
+  "explanation" : "Strings are immutable. replace() returns a NEW String with the replacements. Fix: s = s.replace('l', 'L'); — reassign s to the new value."
+}

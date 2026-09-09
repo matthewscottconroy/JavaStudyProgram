@@ -1,0 +1,9 @@
+{
+  "id" : "fp-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is the result of running this code on a file containing exactly two lines: 'hello' and 'world'?",
+  "code" : "List<String> lines = Files.readAllLines(Path.of(\"file.txt\"));\nSystem.out.println(lines.size() + \": \" + lines.get(1));",
+  "answer" : "2: world",
+  "explanation" : "The file has 2 lines. lines.size()=2. lines.get(1) = \"world\" (0-indexed, second line)."
+}

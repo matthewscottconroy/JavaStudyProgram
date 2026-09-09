@@ -1,0 +1,9 @@
+{
+  "id" : "arr-mc-10",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the output?\n\n    int[] a = {1, 2, 3};\n    int[] b = a;\n    b[0] = 99;\n    System.out.println(a[0]);",
+  "choices" : [ "1", "99", "3", "ArrayIndexOutOfBoundsException" ],
+  "answer" : "b",
+  "explanation" : "int[] b = a; copies the reference — a and b point to the same array in memory. Modifying b[0] also modifies a[0]. a[0] is now 99."
+}

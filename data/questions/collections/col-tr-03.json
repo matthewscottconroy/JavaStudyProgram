@@ -1,0 +1,9 @@
+{
+  "id" : "col-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "import java.util.*;\nMap<String,Integer> map = new HashMap<>();\nString[] words = {\"a\",\"b\",\"a\",\"c\",\"b\",\"a\"};\nfor (String w : words) map.put(w, map.getOrDefault(w, 0) + 1);\nSystem.out.println(map.get(\"a\"));",
+  "answer" : "3",
+  "explanation" : "Counting frequencies: a appears 3 times, b appears 2, c appears 1. map.get(\"a\") = 3."
+}

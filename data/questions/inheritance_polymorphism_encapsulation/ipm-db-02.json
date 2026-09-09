@@ -1,0 +1,10 @@
+{
+  "id" : "ipm-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This code is supposed to use polymorphism but always prints 'Animal'. Why?",
+  "code" : "class Animal { static String name() { return \"Animal\"; } }\nclass Dog extends Animal { static String name() { return \"Dog\"; } }\n// in main:\nAnimal a = new Dog();\nSystem.out.println(a.name());",
+  "choices" : [ "Dog must implement name() from Animal", "Static methods are class-level and not polymorphic — the declared reference type (Animal) determines which name() runs", "name() must be overridden with @Override", "a must be cast to Dog to use polymorphism" ],
+  "answer" : "b",
+  "explanation" : "Static methods use static dispatch (method hiding, not overriding). a.name() resolves to Animal.name() because a is declared as Animal. To use polymorphism, make name() an instance method (non-static) and override it."
+}

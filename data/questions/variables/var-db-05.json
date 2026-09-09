@@ -1,0 +1,10 @@
+{
+  "id" : "var-db-05",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "The compiler reports 'cannot assign a value to final variable x'. Why?",
+  "code" : "final int x = 5;\nx = 10;  // error here",
+  "choices" : [ "x must be declared static to be reassigned", "final prevents reassignment — once assigned, x cannot be changed", "int literals cannot be assigned to final variables", "x should be declared as constant" ],
+  "answer" : "b",
+  "explanation" : "The final keyword makes a variable a constant: assigned once, never changed. To make x changeable, remove 'final'. By convention, final constants use UPPER_CASE names: final int MAX_SIZE = 10;"
+}

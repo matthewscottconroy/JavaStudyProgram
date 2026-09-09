@@ -1,0 +1,9 @@
+{
+  "id" : "jch-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "Object x = \"hello\";\nObject y = \"hello\";\nSystem.out.println(x.equals(y));\nSystem.out.println(x == y);",
+  "answer" : "true\ntrue",
+  "explanation" : "String overrides equals() for content comparison (true). String literals are interned — both x and y reference the same object in the string pool, so == is also true. With 'new String(\"hello\")' the == would be false."
+}

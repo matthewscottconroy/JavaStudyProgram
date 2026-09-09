@@ -1,0 +1,9 @@
+{
+  "id" : "hb-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "System.out.println(Integer.toBinaryString(12));\nSystem.out.println(Integer.toHexString(255));",
+  "answer" : "1100\nff",
+  "explanation" : "12 in binary: 8+4 = 1100. 255 in hex: 0xFF = ff (lowercase by default)."
+}

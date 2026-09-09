@@ -1,0 +1,9 @@
+{
+  "id" : "ut-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is a mock object in unit testing?",
+  "choices" : [ "A real object with additional logging", "A fake implementation of a dependency that records calls and returns configured values", "A test class that extends the production class", "An object created by @BeforeEach" ],
+  "answer" : "b",
+  "explanation" : "Mocks (e.g., via Mockito) replace real dependencies with controllable fakes. You can verify that a method was called, how many times, and with what arguments. This isolates the unit under test from external systems like databases or services."
+}

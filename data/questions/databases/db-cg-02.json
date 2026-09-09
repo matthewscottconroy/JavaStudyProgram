@@ -1,0 +1,9 @@
+{
+  "id" : "db-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 4,
+  "prompt" : "Which correctly inserts a row and handles the transaction safely?",
+  "choices" : [ "stmt.executeUpdate(\"INSERT INTO log VALUES (\" + msg + \")\");", "try (Connection conn = DriverManager.getConnection(url,u,p)) { conn.setAutoCommit(false); PreparedStatement ps = conn.prepareStatement(\"INSERT INTO log (msg) VALUES (?)\"); ps.setString(1, msg); ps.executeUpdate(); conn.commit(); } catch (SQLException e) { conn.rollback(); }", "conn.execute(\"INSERT INTO log VALUES (?)\", msg);", "PreparedStatement.insert(conn, \"log\", msg);" ],
+  "answer" : "b",
+  "explanation" : "Use try-with-resources, disable autoCommit, prepare a statement with ? placeholder, execute, commit. Catch SQLException and rollback to maintain consistency. Option A is vulnerable to SQL injection (string concatenation)."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "dbt-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "A stack trace shows three frames. Which method is currently executing?",
+  "code" : "Exception in thread \"main\" java.lang.ArithmeticException: / by zero\n    at Calc.divide(Calc.java:8)\n    at Calc.run(Calc.java:4)\n    at Calc.main(Calc.java:1)",
+  "answer" : "Calc.divide at line 8",
+  "explanation" : "The top frame is the innermost (currently active) method. Calc.divide threw the exception at line 8. run() called divide(), main() called run()."
+}

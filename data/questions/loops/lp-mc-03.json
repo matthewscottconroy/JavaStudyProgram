@@ -1,0 +1,9 @@
+{
+  "id" : "lp-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What keyword skips the rest of the current iteration and starts the next one?",
+  "choices" : [ "skip", "next", "continue", "pass" ],
+  "answer" : "c",
+  "explanation" : "'continue' jumps to the loop's update step (for-loop) or condition check (while-loop). The other options are not Java keywords used for this purpose."
+}

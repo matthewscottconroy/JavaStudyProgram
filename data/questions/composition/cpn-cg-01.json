@@ -1,0 +1,9 @@
+{
+  "id" : "cpn-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which design correctly uses composition to give a Robot a Speaker?",
+  "choices" : [ "class Robot extends Speaker { void speak() { say(\"Hi\"); } }", "class Robot { private Speaker speaker; Robot(Speaker s) { speaker = s; } void speak() { speaker.say(\"Hi\"); } }", "class Robot { static Speaker speaker = new Speaker(); }", "class Robot implements Speaker { void say(String s) {} }" ],
+  "answer" : "b",
+  "explanation" : "Option B injects a Speaker via the constructor (dependency injection) and delegates say() to it. Option A uses inheritance (is-a, not has-a). Option C uses a static field (global state, not composition). Option D implements Speaker (makes Robot a Speaker, not a has-a relationship)."
+}

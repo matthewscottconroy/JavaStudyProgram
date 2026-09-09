@@ -1,0 +1,10 @@
+{
+  "id" : "hb-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This code should extract the lower 8 bits but gives a wrong result. Why?",
+  "code" : "int value = -1;\nint lower8 = value & 0xFF;\n// Expected: 255, but developer expected -1",
+  "choices" : [ "The & operator is not valid for negative numbers", "0xFF is the wrong mask — use 0xF instead", "The result is 255 (correct) — the developer misunderstood; & 0xFF always gives 0–255", "int cannot hold negative values" ],
+  "answer" : "c",
+  "explanation" : "-1 in two's complement is all 1s (0xFFFFFFFF). Masking with 0xFF keeps only the lowest 8 bits, giving 0xFF = 255. This is correct behaviour — & 0xFF is the standard way to convert a byte to unsigned 0-255."
+}

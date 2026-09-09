@@ -1,0 +1,10 @@
+{
+  "id" : "jch-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "Why does this compareTo() violate the Comparable contract?",
+  "code" : "class Score implements Comparable<Score> {\n    int value;\n    @Override public int compareTo(Score other) {\n        return this.value - other.value; // integer subtraction\n    }\n}",
+  "choices" : [ "compareTo() must return only -1, 0, or 1", "compareTo() is not allowed in classes that also implement Serializable", "Integer subtraction can overflow, producing wrong sign for large negative values", "The method must be static" ],
+  "answer" : "c",
+  "explanation" : "Subtracting integers overflows when values are far apart (e.g., Integer.MIN_VALUE - 1 wraps to a positive). Use Integer.compare(this.value, other.value) instead — it handles all cases safely."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "gen-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "List<Integer> ints = new ArrayList<>(List.of(3, 1, 4, 1, 5));\nCollections.sort(ints);\nSystem.out.println(ints.get(0) + \" \" + ints.get(ints.size()-1));",
+  "answer" : "1 5",
+  "explanation" : "Collections.sort() sorts in ascending order: [1, 1, 3, 4, 5]. get(0) = 1 (smallest), get(4) = 5 (largest)."
+}

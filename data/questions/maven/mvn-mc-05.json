@@ -1,0 +1,9 @@
+{
+  "id" : "mvn-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does 'mvn clean' do?",
+  "choices" : [ "Deletes all .java source files", "Removes the 'target' directory containing compiled classes and JARs", "Uninstalls all dependencies from the local repository", "Runs all unit tests and generates a report" ],
+  "answer" : "b",
+  "explanation" : "mvn clean deletes the target/ directory, removing compiled .class files and built JARs. Use it before a fresh build to avoid stale artifacts. mvn clean package is a common combined command: clean, then compile and package."
+}

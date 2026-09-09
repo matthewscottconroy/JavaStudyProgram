@@ -1,0 +1,9 @@
+{
+  "id" : "clh-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is an abstract class?",
+  "choices" : [ "A class with no fields", "A class that cannot be instantiated and may have abstract methods", "A class whose constructor is private", "A class that implements all interface methods" ],
+  "answer" : "b",
+  "explanation" : "An abstract class cannot be instantiated directly. It may declare abstract methods (no body) that subclasses must implement. It can also have concrete methods and fields."
+}

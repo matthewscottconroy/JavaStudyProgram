@@ -1,0 +1,10 @@
+{
+  "id" : "pnt-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "The timer starts but nothing moves on screen. What is missing?",
+  "code" : "int x = 0;\nTimer timer = new Timer(16, e -> {\n    x += 2;\n    // missing: repaint()\n});\ntimer.start();",
+  "choices" : [ "Timer fires too slowly at 16ms", "x++ should be used instead of x += 2", "repaint() is not called — state changes but the component is never redrawn", "Timer must be declared as a field, not a local variable" ],
+  "answer" : "c",
+  "explanation" : "Updating state (x += 2) without calling repaint() means paintComponent() is never invoked again. The screen shows the initial state forever. Add repaint(); inside the timer's action listener to request a redraw."
+}

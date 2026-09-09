@@ -1,0 +1,10 @@
+{
+  "id" : "gcmp-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "The JTextArea in this code is not scrollable. Why?",
+  "code" : "JFrame frame = new JFrame();\nJTextArea area = new JTextArea(10, 30);\nframe.add(area);  // added directly, not wrapped\nframe.pack();\nframe.setVisible(true);",
+  "choices" : [ "JTextArea does not support scrolling", "JTextArea must be wrapped in a JScrollPane to gain scroll bars", "frame.add() only accepts JPanel", "The rows and columns constructor is not valid" ],
+  "answer" : "b",
+  "explanation" : "JTextArea itself has no scroll bars — you must wrap it: frame.add(new JScrollPane(area)). JScrollPane adds scroll bars when the text content exceeds the visible rows/columns."
+}

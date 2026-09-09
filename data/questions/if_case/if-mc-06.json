@@ -1,0 +1,9 @@
+{
+  "id" : "if-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the difference between && and & for boolean expressions?",
+  "choices" : [ "They are identical", "&& short-circuits (stops evaluation if the first operand determines the result); & always evaluates both operands", "& is for bitwise AND on integers; && can only be used with booleans in conditions", "&&  evaluates right to left; & evaluates left to right" ],
+  "answer" : "b",
+  "explanation" : "&& is the short-circuit AND: if the left side is false, the right side is not evaluated. & always evaluates both sides (useful if the right side has a side effect, rare in practice). Similarly: || is short-circuit OR; | always evaluates both."
+}

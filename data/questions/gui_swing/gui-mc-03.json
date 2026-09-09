@@ -1,0 +1,9 @@
+{
+  "id" : "gui-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) do?",
+  "choices" : [ "Hides the window but keeps the JVM running", "Exits the JVM when the window's close button is clicked", "Asks the user to confirm before closing", "Disposes of the window but continues running" ],
+  "answer" : "b",
+  "explanation" : "EXIT_ON_CLOSE calls System.exit(0) when the close button is clicked, stopping the JVM. DISPOSE_ON_CLOSE just disposes the window. HIDE_ON_CLOSE hides it. If you omit this, clicking close only hides the window and the JVM keeps running."
+}

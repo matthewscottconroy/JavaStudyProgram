@@ -1,0 +1,9 @@
+{
+  "id" : "var-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "After the following code runs, what is the type and value of x?\n\n    var x = 42;",
+  "choices" : [ "String, \"42\"", "int, 42", "double, 42.0", "var, 42" ],
+  "answer" : "b",
+  "explanation" : "Java's 'var' keyword (Java 10+) uses type inference. The literal 42 is an int literal, so x is inferred as int with value 42. 'var' is not itself a type."
+}

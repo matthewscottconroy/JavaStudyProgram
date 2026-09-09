@@ -1,0 +1,9 @@
+{
+  "id" : "pkg-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What directory structure should the file 'com/example/app/Main.java' be in for 'package com.example.app'?",
+  "choices" : [ "Any directory — the package statement overrides the filesystem", "The file must be in a directory named 'com/example/app/' relative to the source root", "The file must be in a directory named 'app/'", "The file must be named after the package: 'com.example.app.java'" ],
+  "answer" : "b",
+  "explanation" : "Java requires the directory structure to mirror the package hierarchy. The javac compiler and class loader use the directory path to locate files. If the package is com.example.app, the file must be at src/main/java/com/example/app/Main.java in a Maven project."
+}

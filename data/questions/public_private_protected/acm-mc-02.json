@@ -1,0 +1,9 @@
+{
+  "id" : "acm-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "Which modifier restricts access to the declaring class only?",
+  "choices" : [ "protected", "private", "public", "final" ],
+  "answer" : "b",
+  "explanation" : "'private' is the most restrictive modifier — only code inside the same class can access it. Not even subclasses can access private members."
+}

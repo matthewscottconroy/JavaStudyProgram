@@ -1,0 +1,9 @@
+{
+  "id" : "sapi-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does Optional<T> represent?",
+  "choices" : [ "A container for exactly two values", "A container that may or may not hold a non-null value", "A generic list with optional elements", "A nullable primitive wrapper" ],
+  "answer" : "b",
+  "explanation" : "Optional<T> wraps a value that might be absent, providing a safer alternative to null. Methods: isPresent(), get(), orElse(default), orElseGet(Supplier), ifPresent(Consumer). stream operations like findFirst() return Optional."
+}

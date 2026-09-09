@@ -1,0 +1,9 @@
+{
+  "id" : "dp-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does the Proxy pattern do?",
+  "choices" : [ "Creates objects for the client", "Provides a surrogate or placeholder for another object to control access to it", "Converts one interface to another", "Shares objects to reduce memory" ],
+  "answer" : "b",
+  "explanation" : "Proxy controls access to the real object. Common uses: lazy loading (create real object only when first used), access control, logging, caching. Dynamic proxies in Java (java.lang.reflect.Proxy) create proxies at runtime."
+}

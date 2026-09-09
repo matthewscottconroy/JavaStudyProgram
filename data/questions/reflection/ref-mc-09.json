@@ -1,0 +1,9 @@
+{
+  "id" : "ref-mc-09",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 4,
+  "prompt" : "What is the module system (JPMS) restriction on reflection?",
+  "choices" : [ "Reflection is completely disabled inside modules", "Modules can limit reflective access to their packages; frameworks may need '--add-opens' to work", "Only private fields can be accessed reflectively in a module", "Reflection only works across module boundaries" ],
+  "answer" : "b",
+  "explanation" : "Java modules (Java 9+) can use 'opens package to framework' to allow reflective access. Without it, setAccessible(true) on a class in a non-opened module throws InaccessibleObjectException. The --add-opens JVM flag is a common workaround when using older frameworks."
+}

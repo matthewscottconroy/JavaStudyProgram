@@ -1,0 +1,9 @@
+{
+  "id" : "mvn-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the purpose of 'mvn clean'?",
+  "choices" : [ "Removes all source files", "Deletes the target/ directory (compiled classes, JARs, reports)", "Resets the local Maven repository", "Removes all test failures from the build log" ],
+  "answer" : "b",
+  "explanation" : "'mvn clean' deletes the target/ directory, ensuring the next build starts fresh. It's often combined: 'mvn clean package' to avoid stale compiled files."
+}

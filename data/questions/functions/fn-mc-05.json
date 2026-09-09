@@ -1,0 +1,9 @@
+{
+  "id" : "fn-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is a varargs parameter?",
+  "choices" : [ "A parameter that has a default value", "A parameter that accepts zero or more arguments of the same type", "A parameter that is passed by reference", "A parameter list that can hold any number of different types" ],
+  "answer" : "b",
+  "explanation" : "void log(String... messages) — the caller can pass zero, one, or many Strings. Inside the method, messages is treated as a String[]. Varargs must be the last parameter: void log(int level, String... messages)."
+}

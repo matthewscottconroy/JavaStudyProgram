@@ -1,0 +1,9 @@
+{
+  "id" : "g2d-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "After g2d.scale(2.0, 2.0), where does g2d.drawRect(10, 10, 50, 30) actually appear?",
+  "code" : "Graphics2D g2d = (Graphics2D) g;\ng2d.scale(2.0, 2.0);\ng2d.drawRect(10, 10, 50, 30);",
+  "answer" : "At (20,20) with size 100x60 in screen pixels",
+  "explanation" : "scale(2.0, 2.0) doubles all coordinates. The logical (10,10,50,30) maps to screen (20,20,100,60). All subsequent drawing operations are scaled by the same factor."
+}

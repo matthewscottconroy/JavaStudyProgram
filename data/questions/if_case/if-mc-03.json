@@ -1,0 +1,9 @@
+{
+  "id" : "if-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which comparison operator tests for equality in Java?",
+  "choices" : [ "=", "==", "equals", "!=" ],
+  "answer" : "b",
+  "explanation" : "== tests equality for primitives and object references. = is assignment. != tests inequality. For String content comparison use .equals(), not ==."
+}

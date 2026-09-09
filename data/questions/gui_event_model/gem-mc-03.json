@@ -1,0 +1,9 @@
+{
+  "id" : "gem-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "Which thread dispatches Swing events?",
+  "choices" : [ "The main thread", "A daemon thread", "The Event Dispatch Thread (EDT)", "A thread pool" ],
+  "answer" : "c",
+  "explanation" : "All Swing event callbacks (actionPerformed, mouseClicked, etc.) are invoked on the EDT. Never perform long operations in these callbacks — they will freeze the GUI."
+}

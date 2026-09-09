@@ -1,0 +1,9 @@
+{
+  "id" : "acm-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the access level when no modifier keyword is written?",
+  "choices" : [ "public", "private", "protected", "package-private" ],
+  "answer" : "d",
+  "explanation" : "Omitting an access modifier gives 'package-private' (also called default) access. Only classes in the same package can access it."
+}

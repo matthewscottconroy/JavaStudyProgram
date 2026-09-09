@@ -1,0 +1,9 @@
+{
+  "id" : "hb-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which expression converts the char 'Z' to its ASCII integer value?",
+  "choices" : [ "ASCII.value('Z')", "(int) 'Z'", "Character.toInt('Z')", "'Z'.toAscii()" ],
+  "answer" : "b",
+  "explanation" : "Casting a char to int returns its Unicode/ASCII code point. (int)'Z' == 90. Character.toInt() does not exist. The other options are fictional API."
+}

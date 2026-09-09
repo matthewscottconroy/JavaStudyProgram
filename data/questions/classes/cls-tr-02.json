@@ -1,0 +1,9 @@
+{
+  "id" : "cls-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "class Box {\n    int width, height;\n    Box(int w, int h) { width = w; height = h; }\n    int area() { return width * height; }\n}\nBox b = new Box(4, 5);\nSystem.out.println(b.area());",
+  "answer" : "20",
+  "explanation" : "Constructor sets width=4, height=5. area() returns 4*5 = 20."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "pkg-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which correctly declares a class in package 'edu.university.lab1' and imports ArrayList?",
+  "choices" : [ "import java.util.ArrayList;\npackage edu.university.lab1;\npublic class Lab1 {}", "package edu.university.lab1;\nimport java.util.ArrayList;\npublic class Lab1 {}", "namespace edu.university.lab1;\nimport java.util.ArrayList;\npublic class Lab1 {}", "package edu.university.lab1; public class Lab1 { import ArrayList; }" ],
+  "answer" : "b",
+  "explanation" : "The correct order is: package statement first, then imports, then the class declaration. Option A puts import before package (compile error). Option C uses 'namespace' which is C#, not Java. Option D puts import inside the class body (invalid)."
+}

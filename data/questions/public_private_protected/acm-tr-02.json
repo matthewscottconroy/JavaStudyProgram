@@ -1,0 +1,9 @@
+{
+  "id" : "acm-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "Which lines (if any) cause compile errors?",
+  "code" : "// Package: com.example\nclass Animal {\n    private String dna = \"ATCG\";\n    protected int legs = 4;\n    public String name = \"generic\";\n}\n// Same package:\nclass Zoo {\n    Animal a = new Animal();\n    void test() {\n        System.out.println(a.name);   // line A\n        System.out.println(a.legs);   // line B\n        System.out.println(a.dna);    // line C\n    }\n}",
+  "answer" : "Line C only",
+  "explanation" : "dna is private — only accessible within Animal itself. name (public) and legs (protected, same package) are both accessible from Zoo."
+}

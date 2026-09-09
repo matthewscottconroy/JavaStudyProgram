@@ -1,0 +1,9 @@
+{
+  "id" : "ex-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does 'throws' do in a method signature?",
+  "choices" : [ "Immediately throws the named exception", "Declares that this method may propagate the named checked exception to its caller", "Catches the named exception inside the method", "Converts a runtime exception to a checked exception" ],
+  "answer" : "b",
+  "explanation" : "'throws' in the signature is a compile-time declaration: public void readFile(String path) throws IOException means the caller must handle IOException. It does not throw anything by itself — the actual throw happens with the 'throw' keyword."
+}

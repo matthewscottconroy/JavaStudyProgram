@@ -1,0 +1,9 @@
+{
+  "id" : "ml-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 4,
+  "prompt" : "What is cross-validation used for?",
+  "choices" : [ "Validating that two models produce the same predictions", "Estimating model performance on unseen data without needing a separate test set", "Comparing the source code of two ML libraries", "Ensuring the training and test sets have the same size" ],
+  "answer" : "b",
+  "explanation" : "K-fold cross-validation: split data into K subsets (folds). Train on K-1 folds, test on the remaining fold. Repeat K times with a different test fold. Average the K scores for a reliable performance estimate. This makes better use of limited data than a single train/test split."
+}

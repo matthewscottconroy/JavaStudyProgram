@@ -1,0 +1,9 @@
+{
+  "id" : "img-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "Which API plays a short sound clip from a resource file?",
+  "choices" : [ "Sound.play(\"beep.wav\")", "AudioSystem.getClip() loaded with an AudioInputStream, then clip.start()", "MediaPlayer.open(\"beep.wav\").play()", "System.audio.play(\"beep.wav\")" ],
+  "answer" : "b",
+  "explanation" : "javax.sound.sampled: AudioInputStream ais = AudioSystem.getAudioInputStream(file); Clip clip = AudioSystem.getClip(); clip.open(ais); clip.start(); For simple sound in games/apps this is the standard Java API. clip.loop(Clip.LOOP_CONTINUOUSLY) repeats it."
+}

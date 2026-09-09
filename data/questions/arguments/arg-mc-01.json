@@ -1,0 +1,9 @@
+{
+  "id" : "arg-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "What is the type of 'args' in 'public static void main(String[] args)'?",
+  "choices" : [ "String", "int[]", "String[]", "List<String>" ],
+  "answer" : "c",
+  "explanation" : "args is a String array (String[]). Each command-line token becomes one element. Running 'java MyApp hello world' gives args = {\"hello\", \"world\"}."
+}

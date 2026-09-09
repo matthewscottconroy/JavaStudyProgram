@@ -1,0 +1,10 @@
+{
+  "id" : "fp-db-04",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "Using Files.readAllLines() crashes on a large log file. Why?",
+  "code" : "List<String> lines = Files.readAllLines(Path.of(\"/var/log/system.log\"));",
+  "choices" : [ "Files.readAllLines() does not support large files", "Files.readAllLines() loads the entire file into memory as a List — large files cause OutOfMemoryError", "readAllLines() requires the file to be UTF-8 encoded", "The method is deprecated for files > 1MB" ],
+  "answer" : "b",
+  "explanation" : "readAllLines() reads the entire file into a List<String> in memory. A 10 GB log file would require 10+ GB of heap. Fix: use Files.lines(path) which returns a lazy Stream<String>, processing one line at a time."
+}

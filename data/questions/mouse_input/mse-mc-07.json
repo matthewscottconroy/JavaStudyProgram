@@ -1,0 +1,9 @@
+{
+  "id" : "mse-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the difference between mouseEntered() and mouseMoved()?",
+  "choices" : [ "mouseEntered fires when the mouse moves inside the component; mouseMoved fires when the mouse enters", "mouseEntered fires once when the cursor enters the component boundary; mouseMoved fires continuously as the cursor moves inside", "They fire simultaneously", "mouseEntered is from MouseMotionListener; mouseMoved is from MouseListener" ],
+  "answer" : "b",
+  "explanation" : "mouseEntered (MouseListener) fires once when the cursor crosses into the component boundary. mouseMoved (MouseMotionListener) fires repeatedly as the cursor moves within the component. Use mouseEntered for hover effects and mouseMoved for drag-to-draw or cursor tracking."
+}

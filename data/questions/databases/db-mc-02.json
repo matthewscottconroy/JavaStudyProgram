@@ -1,0 +1,9 @@
+{
+  "id" : "db-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the advantage of PreparedStatement over Statement?",
+  "choices" : [ "PreparedStatement is faster to type", "PreparedStatement prevents SQL injection and can be reused with different parameters", "Statement supports more SQL keywords", "PreparedStatement auto-commits transactions" ],
+  "answer" : "b",
+  "explanation" : "PreparedStatement pre-compiles the SQL and uses placeholders (?). User input is passed as parameters (setString, setInt), never concatenated into the SQL — this prevents SQL injection. The compiled plan can also be reused efficiently."
+}

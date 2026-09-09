@@ -1,0 +1,9 @@
+{
+  "id" : "ipm-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the principle 'program to an interface, not an implementation'?",
+  "choices" : [ "Always use abstract classes instead of interfaces", "Declare variables and parameters using interface or abstract types rather than concrete types", "Only write code that uses Java standard library classes", "Avoid using classes with more than one method" ],
+  "answer" : "b",
+  "explanation" : "List<String> list = new ArrayList<>(); — not ArrayList<String> list = new ArrayList<>(). This allows swapping ArrayList for LinkedList without touching the rest of the code. The caller only knows about the List interface contract."
+}

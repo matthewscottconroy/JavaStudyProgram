@@ -1,0 +1,10 @@
+{
+  "id" : "cls-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "Two Dog objects that seem equal fail equals() check. Why?",
+  "code" : "class Dog {\n    String name;\n    Dog(String name) { this.name = name; }\n}\nDog a = new Dog(\"Rex\");\nDog b = new Dog(\"Rex\");\nSystem.out.println(a.equals(b));  // false",
+  "choices" : [ "String comparison fails inside Dog", "Dog does not override equals() — the default Object.equals() checks reference identity, not field values", "name must be static to be comparable", "new Dog() creates cached objects that are different" ],
+  "answer" : "b",
+  "explanation" : "Without overriding equals(), Dog inherits Object.equals() which uses ==. a and b are different objects, so == is false. Fix: override equals() to compare name fields: return other instanceof Dog d && this.name.equals(d.name);"
+}

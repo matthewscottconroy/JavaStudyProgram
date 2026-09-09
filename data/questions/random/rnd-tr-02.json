@@ -1,0 +1,9 @@
+{
+  "id" : "rnd-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is the range of values this produces?",
+  "code" : "Random r = new Random();\nint n = r.nextInt(10) + 5;",
+  "answer" : "5 to 14",
+  "explanation" : "nextInt(10) produces 0–9. Adding 5 shifts to 5–14 inclusive."
+}

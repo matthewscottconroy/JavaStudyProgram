@@ -1,0 +1,9 @@
+{
+  "id" : "ser-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What happens to static fields during Java serialization?",
+  "choices" : [ "Static fields are serialized before instance fields", "Static fields are not serialized — they belong to the class, not the instance", "Static fields are serialized only if they are final", "Static fields cause a NotSerializableException" ],
+  "answer" : "b",
+  "explanation" : "Serialization saves the state of a specific object instance. Static fields are part of the class, not an instance, so they are not written to the stream. After deserialization, static fields retain whatever value the class has in the running JVM."
+}

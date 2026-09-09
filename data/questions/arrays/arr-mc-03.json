@@ -1,0 +1,9 @@
+{
+  "id" : "arr-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "How do you get the number of elements in an array named 'nums'?",
+  "choices" : [ "nums.size()", "nums.length()", "nums.length", "length(nums)" ],
+  "answer" : "c",
+  "explanation" : "Arrays use the 'length' field (no parentheses). ArrayList uses .size(). Python uses len(). nums.length() with parentheses would be a method call — arrays don't have that."
+}

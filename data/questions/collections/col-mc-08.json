@@ -1,0 +1,9 @@
+{
+  "id" : "col-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does HashMap.put(key, value) return if the key already exists?",
+  "choices" : [ "null", "The new value", "The old (previous) value", "Throws DuplicateKeyException" ],
+  "answer" : "c",
+  "explanation" : "put() returns the previous value associated with the key, or null if the key was not present. This lets you detect overwrites: String old = map.put(\"x\", newVal); if (old != null) { ... }"
+}

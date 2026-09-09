@@ -1,0 +1,9 @@
+{
+  "id" : "var-tr-07",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is the output?",
+  "code" : "int x = Integer.MAX_VALUE;\nSystem.out.println(x + 1);",
+  "answer" : "-2147483648",
+  "explanation" : "Integer.MAX_VALUE is 2,147,483,647. Adding 1 overflows and wraps to Integer.MIN_VALUE: -2,147,483,648. Java int arithmetic wraps silently."
+}

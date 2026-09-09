@@ -1,0 +1,9 @@
+{
+  "id" : "ifc-cg-03",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which lambda correctly implements the Comparator<String> interface to sort by string length?",
+  "choices" : [ "Comparator<String> c = (a, b) -> a.length() - b.length();", "Comparator<String> c = String::compareTo;", "Comparator<String> c = () -> String.length();", "Comparator<String> c = (a, b) -> a > b;" ],
+  "answer" : "a",
+  "explanation" : "Comparator.compare(a, b) returns negative if a < b, 0 if equal, positive if a > b. a.length() - b.length() achieves this for length ordering. Option B sorts lexicographically by content (String::compareTo is a method reference to compareTo). Option C has wrong parameter count. Option D: > on String is a compile error."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "g2d-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What shape is drawn and where?",
+  "code" : "Graphics2D g2d = (Graphics2D) g;\ng2d.setColor(Color.GREEN);\ng2d.fillOval(30, 40, 60, 60);",
+  "answer" : "A filled green circle, top-left at (30,40), 60x60 pixels",
+  "explanation" : "fillOval(x, y, width, height) draws an ellipse. With equal width and height it is a circle. Color is green. The bounding box starts at (30,40)."
+}

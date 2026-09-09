@@ -1,0 +1,9 @@
+{
+  "id" : "mse-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "The user presses the mouse button, moves it, then releases. Which methods fire in order?",
+  "code" : "panel.addMouseListener(mouseListener);\npanel.addMouseMotionListener(motionListener);\n// user action: press → move → release",
+  "answer" : "mousePressed, mouseDragged (repeatedly), mouseReleased",
+  "explanation" : "mousePressed fires on button down, mouseDragged fires for each movement while button is held, mouseReleased fires on button up. mouseClicked fires only if press and release were at same position."
+}

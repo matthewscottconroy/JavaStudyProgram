@@ -1,0 +1,9 @@
+{
+  "id" : "clh-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Animal a = new Dog(); — assuming Dog extends Animal, which method is called?",
+  "choices" : [ "Animal's version always, because the variable type is Animal", "Dog's version, because the actual object is a Dog", "It won't compile because the variable type doesn't match the object", "An exception is thrown at runtime" ],
+  "answer" : "b",
+  "explanation" : "Java uses dynamic dispatch: the method called is determined by the actual runtime type (Dog), not the declared variable type (Animal). This is the foundation of polymorphism."
+}

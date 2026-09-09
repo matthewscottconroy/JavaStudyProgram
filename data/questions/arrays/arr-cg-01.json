@@ -1,0 +1,9 @@
+{
+  "id" : "arr-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which code creates an int array containing the values 1, 2, 3?",
+  "choices" : [ "int[] arr = new int[1, 2, 3];", "int arr[] = {1, 2, 3};", "int[] arr = (1, 2, 3);", "array<int> arr = {1, 2, 3};" ],
+  "answer" : "b",
+  "explanation" : "int arr[] = {1, 2, 3}; is equivalent to int[] arr = {1, 2, 3}; (both are valid Java syntax). The initializer list {} creates and fills the array. Option A, C, and D are not valid Java syntax."
+}

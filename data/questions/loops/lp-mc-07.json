@@ -1,0 +1,9 @@
+{
+  "id" : "lp-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does a labeled break do?",
+  "choices" : [ "Breaks out of all loops in the method", "Breaks out of the specifically labeled outer loop", "Creates a named loop that can be called like a method", "Breaks and re-enters the loop from the top" ],
+  "answer" : "b",
+  "explanation" : "outer: for (...) { inner: for (...) { break outer; } } — 'break outer' exits the outer loop, not just the inner one. Useful for early exit from nested loops without a boolean flag."
+}

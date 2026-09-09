@@ -1,0 +1,9 @@
+{
+  "id" : "ml-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 4,
+  "prompt" : "What is the accuracy given this confusion matrix result?",
+  "code" : "// Binary classification on 200 samples:\n// True Positives (TP) = 80\n// True Negatives (TN) = 90\n// False Positives (FP) = 15\n// False Negatives (FN) = 15\n// Accuracy = (TP + TN) / total",
+  "answer" : "85%",
+  "explanation" : "Accuracy = (80 + 90) / 200 = 170 / 200 = 0.85 = 85%."
+}

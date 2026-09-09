@@ -1,0 +1,10 @@
+{
+  "id" : "dp-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 4,
+  "prompt" : "What is wrong with this Singleton in a multi-threaded environment?",
+  "code" : "class Singleton {\n    private static Singleton instance;\n    private Singleton() {}\n    public static Singleton getInstance() {\n        if (instance == null) instance = new Singleton();\n        return instance;\n    }\n}",
+  "choices" : [ "The constructor is wrongly private", "Two threads can both see instance == null and create two separate instances", "static fields cannot hold object references", "getInstance must be non-static" ],
+  "answer" : "b",
+  "explanation" : "Without synchronisation, two threads can simultaneously pass the null check and both create an instance. Fix: synchronise the method, use double-checked locking with volatile, or use an enum singleton."
+}

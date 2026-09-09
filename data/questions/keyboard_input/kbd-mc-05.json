@@ -1,0 +1,9 @@
+{
+  "id" : "kbd-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "How do you check if the Shift key was held during a key event?",
+  "choices" : [ "e.getShift()", "e.isShiftDown()", "KeyEvent.VK_SHIFT == e.getKeyCode()", "e.getModifiers() == SHIFT" ],
+  "answer" : "b",
+  "explanation" : "InputEvent (parent of KeyEvent) provides isShiftDown(), isControlDown(), isAltDown(), isMetaDown(). These check the modifier state at the time of the event. Useful for: Shift+click, Ctrl+Z, Alt+F4 detection."
+}

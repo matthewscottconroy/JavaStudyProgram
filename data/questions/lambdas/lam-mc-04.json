@@ -1,0 +1,9 @@
+{
+  "id" : "lam-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "A lambda captures a local variable from its enclosing scope. What constraint applies?",
+  "choices" : [ "The local variable must be declared public", "The local variable must be effectively final (not changed after the lambda is created)", "The local variable must be static", "The local variable must be a primitive type" ],
+  "answer" : "b",
+  "explanation" : "Lambdas can capture variables from the surrounding scope, but those variables must be effectively final (never reassigned after initialisation). This ensures the lambda has a stable view of the value."
+}

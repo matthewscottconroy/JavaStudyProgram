@@ -1,0 +1,9 @@
+{
+  "id" : "pnt-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which method do you override in a JPanel subclass to do custom drawing?",
+  "choices" : [ "draw()", "paint()", "paintComponent(Graphics g)", "render()" ],
+  "answer" : "c",
+  "explanation" : "Override paintComponent(Graphics g) in a JPanel subclass. Always call super.paintComponent(g) first to clear the background and perform Swing's bookkeeping. Use the Graphics parameter to draw shapes, text, and images."
+}

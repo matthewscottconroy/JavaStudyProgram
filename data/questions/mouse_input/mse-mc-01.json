@@ -1,0 +1,9 @@
+{
+  "id" : "mse-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which interface do you implement to handle mouse clicks?",
+  "choices" : [ "MouseHandler", "MouseAdapter", "MouseListener", "ClickListener" ],
+  "answer" : "c",
+  "explanation" : "java.awt.event.MouseListener has 5 methods: mouseClicked, mousePressed, mouseReleased, mouseEntered, mouseExited. All 5 must be implemented. Use MouseAdapter instead to override only the methods you need (it provides empty default implementations)."
+}

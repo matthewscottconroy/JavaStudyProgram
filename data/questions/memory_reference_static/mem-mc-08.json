@@ -1,0 +1,9 @@
+{
+  "id" : "mem-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is garbage collection?",
+  "choices" : [ "The programmer must free memory with free() or delete()", "The JVM automatically reclaims memory occupied by unreachable objects", "Java deletes objects immediately when they go out of scope", "Garbage collection only works for primitive types" ],
+  "answer" : "b",
+  "explanation" : "Java uses automatic memory management. The garbage collector (GC) identifies objects with no live references and reclaims their heap space. Programmers don't need to free memory manually — preventing most memory leaks."
+}

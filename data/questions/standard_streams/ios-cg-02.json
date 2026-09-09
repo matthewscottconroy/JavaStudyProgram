@@ -1,0 +1,9 @@
+{
+  "id" : "ios-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which snippet safely reads an integer from stdin, recovering from non-integer input?",
+  "choices" : [ "int n = Integer.parseInt(System.in.read() + \"\");", "Scanner sc = new Scanner(System.in); int n = sc.nextInt();", "Scanner sc = new Scanner(System.in); while (!sc.hasNextInt()) sc.next(); int n = sc.nextInt();", "int n = (int) System.in.read();" ],
+  "answer" : "c",
+  "explanation" : "Discarding non-integer tokens with sc.next() in a loop until sc.hasNextInt() is true prevents InputMismatchException. Option B crashes on bad input. Option A reads a raw byte (not a full number). Option D reads a single byte, not an int."
+}

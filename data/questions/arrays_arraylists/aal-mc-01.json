@@ -1,0 +1,9 @@
+{
+  "id" : "aal-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "Which method adds an element to the end of an ArrayList?",
+  "choices" : [ "push()", "append()", "add()", "insert()" ],
+  "answer" : "c",
+  "explanation" : "ArrayList.add(element) appends to the end. push() is for Stack/Deque. append() is for StringBuilder. insert() does not exist on ArrayList."
+}

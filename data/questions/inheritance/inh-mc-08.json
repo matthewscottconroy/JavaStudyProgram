@@ -1,0 +1,9 @@
+{
+  "id" : "inh-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which is NOT inherited by a subclass?",
+  "choices" : [ "Public methods", "Protected fields", "Private constructors and private fields", "Default (package-private) methods in the same package" ],
+  "answer" : "c",
+  "explanation" : "Private members exist in the parent class's objects but are not directly accessible from the subclass. Constructors are never inherited (though super() calls the parent's). Public, protected, and same-package members are inherited."
+}

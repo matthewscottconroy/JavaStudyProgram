@@ -1,0 +1,9 @@
+{
+  "id" : "pkg-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is the fully qualified class name of this class?",
+  "code" : "// File: src/main/java/com/university/cs210/Student.java\npackage com.university.cs210;\n\npublic class Student { }",
+  "answer" : "com.university.cs210.Student",
+  "explanation" : "The fully qualified name combines the package name and the simple class name with a dot. It uniquely identifies the class across all packages in the JVM."
+}

@@ -1,0 +1,10 @@
+{
+  "id" : "ut-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "This test has no assertions. Why is that a problem?",
+  "code" : "@Test\nvoid testSomething() {\n    Calculator c = new Calculator();\n    c.add(2, 3);\n}",
+  "choices" : [ "The test will always pass even if add() is broken", "Tests with no assertions cause compilation errors", "JUnit requires at least one assertTrue", "The method name must start with 'assert'" ],
+  "answer" : "a",
+  "explanation" : "A test with no assertions always passes unless an exception is thrown. Even if add() returns the wrong answer or infinite loop, the test 'passes'. Fix: assertEquals(5, c.add(2, 3));"
+}

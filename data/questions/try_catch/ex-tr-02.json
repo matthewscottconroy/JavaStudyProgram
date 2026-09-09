@@ -1,0 +1,10 @@
+{
+  "id" : "ex-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "try {\n    System.out.println(\"try\");\n    return;\n} finally {\n    System.out.println(\"finally\");\n}",
+  "answer" : "try\nfinally",
+  "alternatives" : [ "The finally block runs even when the try block executes a return statement. Output order: 'try' first, then 'finally' before the method actually returns." ],
+  "explanation" : "try\nfinally"
+}

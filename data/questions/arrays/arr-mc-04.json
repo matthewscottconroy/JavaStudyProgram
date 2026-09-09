@@ -1,0 +1,9 @@
+{
+  "id" : "arr-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the default value of elements in a newly created int[] array?",
+  "choices" : [ "1", "null", "undefined", "0" ],
+  "answer" : "d",
+  "explanation" : "Numeric array elements default to 0. boolean[] defaults to false. Object array elements (e.g., String[]) default to null. This applies to instance/class fields and local array elements alike."
+}

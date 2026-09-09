@@ -1,0 +1,9 @@
+{
+  "id" : "cls-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is method overloading?",
+  "choices" : [ "A subclass overriding a parent method", "Defining multiple methods with the same name but different parameter lists in the same class", "A method that calls itself recursively", "Making a method private to prevent external access" ],
+  "answer" : "b",
+  "explanation" : "Overloading allows multiple methods with the same name as long as their parameter types or counts differ. Example: print(int n) and print(String s) in the same class. The compiler selects the right version based on the argument types at the call site."
+}

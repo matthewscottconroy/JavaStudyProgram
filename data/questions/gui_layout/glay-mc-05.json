@@ -1,0 +1,9 @@
+{
+  "id" : "glay-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which layout manager arranges components in a single row or column using Box-model?",
+  "choices" : [ "FlowLayout", "BorderLayout", "BoxLayout", "GridBagLayout" ],
+  "answer" : "c",
+  "explanation" : "BoxLayout arranges components either horizontally (BoxLayout.X_AXIS) or vertically (BoxLayout.Y_AXIS). Unlike FlowLayout, it doesn't wrap. Box.createHorizontalStrut(n) and Box.createVerticalStrut(n) add fixed spacing between components."
+}

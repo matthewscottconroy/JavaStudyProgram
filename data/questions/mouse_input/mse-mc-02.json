@@ -1,0 +1,9 @@
+{
+  "id" : "mse-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the difference between mousePressed() and mouseClicked()?",
+  "choices" : [ "mouseClicked fires when the button is held; mousePressed fires when released", "mousePressed fires when the button goes down; mouseClicked fires after both press and release on the same component", "They are identical — you only need to implement one", "mouseClicked fires for left button; mousePressed fires for right button" ],
+  "answer" : "b",
+  "explanation" : "mousePressed fires as soon as the mouse button is depressed. mouseClicked fires only if the button is pressed AND released on the same component without moving. For drag operations, mouseClicked may never fire — prefer mousePressed for most interactive use."
+}

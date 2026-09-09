@@ -1,0 +1,9 @@
+{
+  "id" : "pkg-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "Where must the 'package' statement appear in a Java source file?",
+  "choices" : [ "After the import statements", "Before the class declaration, and before any import statements", "Inside the class body", "At the end of the file" ],
+  "answer" : "b",
+  "explanation" : "The package statement must be the very first non-comment statement in the file. Order: package → imports → class declaration. Having it in the wrong position causes a compile error."
+}

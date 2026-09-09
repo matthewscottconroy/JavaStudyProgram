@@ -1,0 +1,9 @@
+{
+  "id" : "net-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "Which class makes a simple HTTP GET request in Java 11+?",
+  "choices" : [ "URLConnection", "HttpURLConnection", "HttpClient (java.net.http)", "Socket" ],
+  "answer" : "c",
+  "explanation" : "java.net.http.HttpClient (Java 11+) provides a modern API: HttpClient.newHttpClient().send(HttpRequest.newBuilder(URI.create(url)).build(), HttpResponse.BodyHandlers.ofString()). HttpURLConnection is the older API. HttpClient supports both sync and async requests."
+}

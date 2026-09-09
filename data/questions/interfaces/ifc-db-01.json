@@ -1,0 +1,10 @@
+{
+  "id" : "ifc-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "This class has a compile error. Why?",
+  "code" : "interface Shape {\n    double area();\n    double perimeter();\n}\nclass Square implements Shape {\n    double side;\n    Square(double s) { side = s; }\n    public double area() { return side * side; }\n}",
+  "choices" : [ "Square cannot implement Shape because Square is not abstract", "Square is missing an implementation of perimeter()", "interface methods must be called differently in implementing classes", "double is not a valid return type for interface methods" ],
+  "answer" : "b",
+  "explanation" : "Square implements Shape but only provides area(). perimeter() is abstract and unimplemented. Fix: add 'public double perimeter() { return 4 * side; }' or declare Square abstract."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "g2d-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does a GradientPaint do in Graphics2D?",
+  "choices" : [ "Renders shapes with a transparent (see-through) fill", "Fills a shape with a color that gradually transitions between two colors", "Adds a drop shadow to drawn shapes", "Paints only the outline of shapes in a gradient" ],
+  "answer" : "b",
+  "explanation" : "GradientPaint(x1,y1,color1, x2,y2,color2) creates a linear gradient from color1 to color2. g2d.setPaint(new GradientPaint(0,0,Color.RED, 100,0,Color.BLUE)); g2d.fillRect(0,0,100,50); draws a rectangle that fades from red (left) to blue (right)."
+}

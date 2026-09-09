@@ -1,0 +1,9 @@
+{
+  "id" : "gcmp-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "Is the checkbox checked after this code?",
+  "code" : "JCheckBox cb = new JCheckBox(\"Accept terms\");\ncb.setSelected(true);\nSystem.out.println(cb.isSelected());",
+  "answer" : "true",
+  "explanation" : "setSelected(true) checks the checkbox. isSelected() returns true. JCheckBox.setSelected() can be used to initialize the UI state programmatically."
+}

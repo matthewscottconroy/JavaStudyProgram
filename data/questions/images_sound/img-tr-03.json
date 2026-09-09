@@ -1,0 +1,9 @@
+{
+  "id" : "img-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is img.getWidth() after this code?",
+  "code" : "BufferedImage img = new BufferedImage(320, 240, BufferedImage.TYPE_INT_RGB);",
+  "answer" : "320",
+  "explanation" : "The constructor BufferedImage(width, height, type) creates an image with the given pixel dimensions. getWidth() returns 320; getHeight() returns 240. The image starts with all pixels set to black (0x000000)."
+}

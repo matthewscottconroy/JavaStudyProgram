@@ -1,0 +1,9 @@
+{
+  "id" : "hb-tr-04",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "int flags = 0;\nflags |= 1;  // set bit 0\nflags |= 4;  // set bit 2\nSystem.out.println(Integer.toBinaryString(flags));",
+  "answer" : "101",
+  "explanation" : "flags starts at 0. |= 1 sets bit 0: 001. |= 4 sets bit 2: 101. toBinaryString(5) = \"101\" (no leading zeros)."
+}

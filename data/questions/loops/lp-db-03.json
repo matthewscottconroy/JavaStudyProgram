@@ -1,0 +1,10 @@
+{
+  "id" : "lp-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This loop modifies the list while iterating it. What exception will be thrown?",
+  "code" : "List<String> items = new ArrayList<>(Arrays.asList(\"a\", \"b\", \"c\"));\nfor (String item : items) {\n    if (item.equals(\"b\")) items.remove(item);\n}",
+  "choices" : [ "NullPointerException", "IndexOutOfBoundsException", "ConcurrentModificationException", "UnsupportedOperationException" ],
+  "answer" : "c",
+  "explanation" : "Modifying a collection while iterating it with a for-each loop throws ConcurrentModificationException. Fix: use Iterator.remove(), or collect items to delete and remove after the loop, or use removeIf()."
+}

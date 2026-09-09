@@ -1,0 +1,9 @@
+{
+  "id" : "gen-cg-03",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which generic method correctly sums a List of any Number subtype?",
+  "choices" : [ "public <T> double sum(List<T> list) { double s=0; for(T n : list) s += n; return s; }", "public <T extends Number> double sum(List<T> list) { double s=0; for(T n : list) s += n.doubleValue(); return s; }", "public double sum(List<Number> list) { double s=0; for(Number n : list) s += n.doubleValue(); return s; }", "public double sum(List<?> list) { double s=0; for(Object n : list) s += (Number)n; return s; }" ],
+  "answer" : "b",
+  "explanation" : "Bounding T to Number (<T extends Number>) allows calling doubleValue(). Option A: T has no arithmetic methods. Option C: only accepts List<Number>, not List<Integer>. Option D: casts are unsafe and '(Number)n' gives a Number, not a double for +=."
+}

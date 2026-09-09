@@ -1,0 +1,9 @@
+{
+  "id" : "ios-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which reads a full line of text from the user, handling the Scanner newline issue correctly?",
+  "choices" : [ "int ignored = sc.nextInt(); String line = sc.nextLine();", "String line = sc.nextLine();", "String line = sc.next();", "char line = (char) System.in.read();" ],
+  "answer" : "b",
+  "explanation" : "When reading only Strings (not mixing nextInt()/nextDouble() first), sc.nextLine() works correctly. It reads the entire line including spaces, stopping at the newline. sc.next() only reads a single whitespace-delimited token, so it misses the rest of the line."
+}

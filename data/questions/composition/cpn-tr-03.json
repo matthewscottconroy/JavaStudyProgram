@@ -1,0 +1,9 @@
+{
+  "id" : "cpn-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "class Greeter {\n    String greet(String name) { return \"Hello, \" + name; }\n}\nclass PoliteGreeter {\n    private Greeter greeter = new Greeter();\n    String greet(String name) { return greeter.greet(name) + \"!\"; }\n}\nSystem.out.println(new PoliteGreeter().greet(\"Alice\"));",
+  "answer" : "Hello, Alice!",
+  "explanation" : "PoliteGreeter decorates Greeter's output by appending '!'. greeter.greet(\"Alice\") returns \"Hello, Alice\"; + \"!\" gives \"Hello, Alice!\"."
+}

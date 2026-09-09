@@ -1,0 +1,10 @@
+{
+  "id" : "clh-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This cast doesn't fail at compile time but causes ClassCastException at runtime. Why?",
+  "code" : "class Animal {}\nclass Cat extends Animal {}\nAnimal a = new Animal();\nCat c = (Cat) a;  // runtime error",
+  "choices" : [ "Animal is not a subclass of Cat", "The compiler can't always verify that a runtime cast is safe — it only checks that the types are related", "Cat must override equals() for the cast to work", "Animal must implement Serializable to be cast" ],
+  "answer" : "b",
+  "explanation" : "The compiler sees Animal→Cat: these are related (Cat extends Animal), so the cast is syntactically valid. At runtime, the actual object is an Animal (not a Cat), so ClassCastException is thrown. Use instanceof before casting to guard: if (a instanceof Cat c) { c.purr(); }"
+}

@@ -1,0 +1,10 @@
+{
+  "id" : "ut-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "This test always passes even when it should fail. Why?",
+  "code" : "@Test\nvoid testDivide() {\n    try {\n        int result = 10 / 0;\n        assertEquals(2, result);\n    } catch (ArithmeticException e) {\n        // ignored\n    }\n}",
+  "choices" : [ "assertEquals passes when result is 0", "The catch block swallows the exception — the test passes without asserting anything", "JUnit ignores tests that throw exceptions", "10 / 0 returns Infinity in Java" ],
+  "answer" : "b",
+  "explanation" : "The ArithmeticException is caught and silently ignored. No assertion is ever reached. JUnit sees no failure and marks the test as passed. Fix: use assertThrows(ArithmeticException.class, () -> 10 / 0) or let the exception propagate."
+}

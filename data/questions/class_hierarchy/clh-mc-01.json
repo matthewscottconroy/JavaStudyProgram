@@ -1,0 +1,9 @@
+{
+  "id" : "clh-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "What does 'instanceof' check?",
+  "choices" : [ "Whether two objects are equal in value", "Whether an object's reference is null", "Whether an object is an instance of a given class or interface", "Whether a class has a specific method" ],
+  "answer" : "c",
+  "explanation" : "'instanceof' returns true if the object is an instance of the specified class or any of its subclasses. It also works with interfaces."
+}

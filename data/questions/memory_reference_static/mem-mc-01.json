@@ -1,0 +1,9 @@
+{
+  "id" : "mem-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "Where are objects created with 'new' stored in Java?",
+  "choices" : [ "Stack", "Heap", "Static memory", "Method area" ],
+  "answer" : "b",
+  "explanation" : "Objects are allocated on the heap and managed by the garbage collector. Local variables and method call frames are on the stack. The stack stores references (pointers) to objects, not the objects themselves."
+}

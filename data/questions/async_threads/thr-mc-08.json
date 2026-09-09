@@ -1,0 +1,9 @@
+{
+  "id" : "thr-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the difference between Runnable and Callable?",
+  "choices" : [ "Runnable can be scheduled; Callable cannot", "Callable can return a value and throw checked exceptions; Runnable cannot", "Runnable runs asynchronously; Callable runs synchronously", "Callable is used with threads; Runnable is used with lambdas" ],
+  "answer" : "b",
+  "explanation" : "Runnable: void run() — no return, no checked exception. Callable<V>: V call() throws Exception — returns a value and can throw. Use Callable when you need to get a result back from a background thread via Future<V>."
+}

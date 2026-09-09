@@ -1,0 +1,9 @@
+{
+  "id" : "aal-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "import java.util.*;\nArrayList<String> words = new ArrayList<>(List.of(\"cat\", \"dog\", \"bird\"));\nwords.remove(1);\nSystem.out.println(words.get(1));",
+  "answer" : "bird",
+  "explanation" : "remove(1) deletes \"dog\" (index 1) and shifts \"bird\" from index 2 to index 1. get(1) returns \"bird\"."
+}

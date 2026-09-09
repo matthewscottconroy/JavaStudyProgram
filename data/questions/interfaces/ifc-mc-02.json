@@ -1,0 +1,9 @@
+{
+  "id" : "ifc-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is a default method in an interface?",
+  "choices" : [ "A method that must be overridden", "A method with a body provided in the interface, used when a class doesn't override it", "A method with package-private access", "A method the JVM calls automatically on startup" ],
+  "answer" : "b",
+  "explanation" : "Default methods (Java 8+) let you add methods with implementations to interfaces without breaking existing implementors. Classes can override them but don't have to."
+}

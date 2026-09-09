@@ -1,0 +1,9 @@
+{
+  "id" : "fp-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What does this code do if output.txt already exists?",
+  "code" : "Files.writeString(Path.of(\"output.txt\"), \"Hello\");",
+  "answer" : "Overwrites the file with 'Hello'",
+  "explanation" : "Files.writeString with no options uses TRUNCATE_EXISTING and CREATE by default. The existing file is replaced. To append: Files.writeString(path, text, StandardOpenOption.APPEND)."
+}

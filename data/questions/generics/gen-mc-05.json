@@ -1,0 +1,9 @@
+{
+  "id" : "gen-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does 'List<? super Integer>' accept?",
+  "choices" : [ "A List of Integer only", "A List of Integer or any subtype of Integer", "A List of Integer or any supertype of Integer (Number, Object, etc.)", "A List of any type" ],
+  "answer" : "c",
+  "explanation" : "'? super Integer' is a lower-bounded wildcard — accepts List<Integer>, List<Number>, List<Object>. You can safely add Integer elements (they satisfy the lower bound). Reading gives Object (the only guaranteed common type). Mnemonic: PECS — Producer Extends, Consumer Super."
+}

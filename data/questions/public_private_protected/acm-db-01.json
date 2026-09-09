@@ -1,0 +1,10 @@
+{
+  "id" : "acm-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "This code has a compile error. Why?",
+  "code" : "class Box {\n    private int width = 10;\n}\n\nclass Main {\n    public static void main(String[] args) {\n        Box b = new Box();\n        System.out.println(b.width);\n    }\n}",
+  "choices" : [ "Box must be public to be usable from Main", "width is private — it cannot be accessed from outside Box", "println cannot print int values", "Box has no constructor" ],
+  "answer" : "b",
+  "explanation" : "'width' is private, so only code inside Box can read it. Main is a separate class and cannot access private members of Box. Add a public getter like 'public int getWidth() { return width; }' to fix this."
+}

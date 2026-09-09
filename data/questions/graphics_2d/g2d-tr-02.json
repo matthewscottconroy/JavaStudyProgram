@@ -1,0 +1,9 @@
+{
+  "id" : "g2d-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is drawn?",
+  "code" : "Graphics2D g2d = (Graphics2D) g;\ng2d.setColor(Color.ORANGE);\ng2d.fillRoundRect(20, 20, 100, 60, 15, 15);",
+  "answer" : "An orange rounded rectangle at (20,20), 100x60 pixels, with 15-pixel arc corners",
+  "explanation" : "fillRoundRect(x, y, width, height, arcWidth, arcHeight) draws a rectangle with rounded corners. arcWidth and arcHeight control the curve radius of the corners."
+}

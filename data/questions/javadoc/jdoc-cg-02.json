@@ -1,0 +1,9 @@
+{
+  "id" : "jdoc-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which is the best Javadoc comment for a public class named 'BankAccount'?",
+  "choices" : [ "// BankAccount class", "/** */", "/**\n * Represents a bank account with a balance and transaction history.\n * Instances are not thread-safe.\n */", "/** This is the BankAccount class. It is a class. */" ],
+  "answer" : "c",
+  "explanation" : "Good class Javadoc summarizes the class's purpose, its key invariants or constraints (thread-safety), and any design notes that help users. Option A is a line comment (ignored by javadoc). Option B is empty. Option D is redundant — it says nothing meaningful."
+}

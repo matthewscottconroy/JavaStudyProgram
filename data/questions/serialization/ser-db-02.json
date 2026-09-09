@@ -1,0 +1,10 @@
+{
+  "id" : "ser-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "Deserialization throws InvalidClassException. What is the most likely cause?",
+  "code" : "// Original class had: private static final long serialVersionUID = 1L;\n// New version of the class has: private static final long serialVersionUID = 2L;\n// Trying to deserialize a stream written with the original class",
+  "choices" : [ "The class must be final to be deserializable", "The stream was written with serialVersionUID=1 but the current class has serialVersionUID=2 — version mismatch", "The class name changed", "ObjectInputStream cannot read files larger than 1 MB" ],
+  "answer" : "b",
+  "explanation" : "Java checks serialVersionUID during deserialization. If the stored value differs from the class's current value, it throws InvalidClassException. If you add a field and keep the same serialVersionUID, Java tolerates it; the new field gets its default value. Changing the UID intentionally breaks backward compatibility."
+}

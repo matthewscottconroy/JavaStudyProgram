@@ -1,0 +1,10 @@
+{
+  "id" : "dp-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This violates the Open/Closed Principle. Why?",
+  "code" : "class AreaCalculator {\n    double area(Object shape) {\n        if (shape instanceof Circle c) return Math.PI * c.r * c.r;\n        if (shape instanceof Rect r) return r.w * r.h;\n        return 0;\n    }\n}",
+  "choices" : [ "instanceof is not allowed with generics", "Adding a new shape requires modifying AreaCalculator — the class must be changed for extension", "The method should be static", "Circle and Rect must extend AreaCalculator" ],
+  "answer" : "b",
+  "explanation" : "Every new shape type requires modifying AreaCalculator's if-chain. Fix: use polymorphism — define an interface 'interface Shape { double area(); }'. Each shape implements area(). AreaCalculator just calls shape.area() — no changes needed for new shapes."
+}

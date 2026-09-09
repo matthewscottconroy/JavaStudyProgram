@@ -1,0 +1,10 @@
+{
+  "id" : "ex-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "This method is supposed to rethrow the exception but it doesn't. Why?",
+  "code" : "static void process() throws Exception {\n    try {\n        riskyOp();\n    } catch (Exception e) {\n        System.out.println(\"Error: \" + e.getMessage());\n    }\n}",
+  "choices" : [ "The method must use 'throws RuntimeException' instead", "The catch block swallows the exception — it logs but never rethrows, so callers never see it", "finally block is missing", "System.out.println is not allowed inside catch" ],
+  "answer" : "b",
+  "explanation" : "Catching an exception and not rethrowing it is called 'swallowing'. The method declares 'throws Exception' but the catch prevents it from propagating. Fix: add 'throw e;' or 'throw new RuntimeException(\"failed\", e);' after logging."
+}

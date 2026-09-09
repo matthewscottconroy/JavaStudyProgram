@@ -1,0 +1,9 @@
+{
+  "id" : "glay-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which layout divides a container into five named regions: NORTH, SOUTH, EAST, WEST, CENTER?",
+  "choices" : [ "GridLayout", "FlowLayout", "BorderLayout", "BoxLayout" ],
+  "answer" : "c",
+  "explanation" : "BorderLayout (the default for JFrame's content pane) has five regions. CENTER grows to fill remaining space. NORTH/SOUTH take full width at fixed height. EAST/WEST take full height at fixed width. Add with: frame.add(component, BorderLayout.NORTH);"
+}

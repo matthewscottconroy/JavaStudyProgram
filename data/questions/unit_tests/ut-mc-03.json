@@ -1,0 +1,9 @@
+{
+  "id" : "ut-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the purpose of @BeforeEach?",
+  "choices" : [ "Runs the annotated method once before all tests in the class", "Runs the annotated method before each individual test method", "Marks a method that must not fail", "Skips the next test if it fails" ],
+  "answer" : "b",
+  "explanation" : "@BeforeEach runs the setup method before every @Test in the class. Use it to initialise fresh state for each test. @BeforeAll runs once before all tests and must be static (in standard JUnit 5 config)."
+}

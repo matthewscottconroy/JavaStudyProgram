@@ -1,0 +1,9 @@
+{
+  "id" : "mem-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the difference between == and .equals() for object references?",
+  "choices" : [ "== is faster; equals() is more accurate", "== checks if two references point to the same object; .equals() checks logical equality", "== checks value equality; .equals() checks reference equality", "They behave identically for all types" ],
+  "answer" : "b",
+  "explanation" : "String a = new String(\"hi\"); String b = new String(\"hi\"); a == b is false (different objects). a.equals(b) is true (same content). For primitives, == compares values directly."
+}

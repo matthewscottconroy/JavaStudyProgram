@@ -1,0 +1,9 @@
+{
+  "id" : "col-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which iterates over a Map's entries printing each key=value pair?",
+  "choices" : [ "for (String k : map) System.out.println(k + \"=\" + map.get(k));", "for (Map.Entry<String,Integer> e : map.entrySet()) System.out.println(e.getKey() + \"=\" + e.getValue());", "map.forEach((k,v) -> System.out.println(k + \"=\" + map.get(k)));", "for (int i = 0; i < map.size(); i++) System.out.println(map.get(i));" ],
+  "answer" : "b",
+  "explanation" : "entrySet() gives a Set of Map.Entry pairs — the standard way to iterate keys and values together. Option A iterates the map directly (not valid — Map doesn't implement Iterable). Option C forEach is correct but uses map.get(k) unnecessarily (use v instead). Option D: Map has no integer index access."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "ex-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is printed?\n\n    try {\n        int x = 1 / 0;\n        System.out.println(\"A\");\n    } catch (ArithmeticException e) {\n        System.out.println(\"B\");\n    } finally {\n        System.out.println(\"C\");\n    }",
+  "choices" : [ "A C", "B", "B C", "A B C" ],
+  "answer" : "c",
+  "explanation" : "1/0 throws ArithmeticException. \"A\" is never reached. The catch block prints \"B\". finally always runs, printing \"C\"."
+}

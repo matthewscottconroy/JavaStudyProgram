@@ -1,0 +1,10 @@
+{
+  "id" : "var-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "What is the default value of an int variable declared as a class field?",
+  "choices" : [ "null", "0", "1", "undefined" ],
+  "answer" : "b",
+  "explanation" : "Class-level (instance and static) int fields default to 0. Local variables inside a method have no default—using them before assignment causes a compile error.",
+  "hints" : [ "Think about what 'nothing' looks like for a number." ]
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "kbd-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which correctly moves a game character left when the left arrow key is pressed?",
+  "choices" : [ "panel.addKeyListener(new KeyAdapter() { public void keyTyped(KeyEvent e) { if (e.getKeyCode() == KeyEvent.VK_LEFT) x -= 5; } });", "panel.addKeyListener(new KeyAdapter() { public void keyPressed(KeyEvent e) { if (e.getKeyCode() == KeyEvent.VK_LEFT) { x -= 5; panel.repaint(); } } });", "panel.addKeyListener(e -> { if (e == KeyEvent.VK_LEFT) x -= 5; });", "panel.onKeyPress(KeyEvent.VK_LEFT, () -> x -= 5);" ],
+  "answer" : "b",
+  "explanation" : "keyPressed() fires for arrow keys (no Unicode char generated, so keyTyped won't work). Compare getKeyCode() to VK_LEFT. Call repaint() to refresh the display after moving. Option A uses keyTyped, which won't fire for arrow keys. Option C: KeyListener is not a functional interface."
+}

@@ -1,0 +1,10 @@
+{
+  "id" : "ser-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This code throws NotSerializableException. Why?",
+  "code" : "class Engine {  // does NOT implement Serializable\n    int horsepower = 300;\n}\nclass Car implements Serializable {\n    Engine engine = new Engine();\n}\n// ObjectOutputStream.writeObject(new Car()) throws",
+  "choices" : [ "Car must have a no-arg constructor to be serializable", "All non-transient fields must also be serializable — Engine is not", "Engine must be a static nested class", "writeObject() can only serialize primitive fields" ],
+  "answer" : "b",
+  "explanation" : "Java's serialization recursively serializes every non-transient field. Engine doesn't implement Serializable, so the runtime throws NotSerializableException. Fix: make Engine implement Serializable, or declare engine as transient."
+}

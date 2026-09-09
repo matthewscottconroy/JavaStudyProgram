@@ -1,0 +1,9 @@
+{
+  "id" : "rnd-mc-09",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is ThreadLocalRandom?",
+  "choices" : [ "A random number generator that is thread-safe by locking", "A per-thread random number generator that avoids contention in concurrent code", "A random generator that produces the same values on every thread", "A deprecated version of Random" ],
+  "answer" : "b",
+  "explanation" : "ThreadLocalRandom.current().nextInt(n) is preferred in multi-threaded code. A single shared Random requires synchronization under contention. ThreadLocalRandom gives each thread its own generator — no contention, better performance."
+}

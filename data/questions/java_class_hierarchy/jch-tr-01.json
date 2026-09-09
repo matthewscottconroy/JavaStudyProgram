@@ -1,0 +1,10 @@
+{
+  "id" : "jch-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "Object a = new Object();\nObject b = a;\nSystem.out.println(a.equals(b));\nSystem.out.println(a == b);",
+  "answer" : "true\ntrue",
+  "alternatives" : [ "a and b reference the same object, so both == and equals() (default: reference equality) return true." ],
+  "explanation" : "true\ntrue"
+}

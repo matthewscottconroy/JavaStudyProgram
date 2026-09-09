@@ -1,0 +1,9 @@
+{
+  "id" : "dp-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "The Observer pattern is best described as…",
+  "choices" : [ "An object wrapping another to add behaviour", "A one-to-many dependency where all dependents are notified of state changes", "A class that controls access to another object", "An algorithm family where each variant is encapsulated" ],
+  "answer" : "b",
+  "explanation" : "Observer (also called publish-subscribe) lets multiple observers register on a subject. When the subject changes, it notifies all observers automatically. Used in event systems, GUI listeners, and reactive programming."
+}

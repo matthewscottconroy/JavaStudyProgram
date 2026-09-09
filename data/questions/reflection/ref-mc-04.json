@@ -1,0 +1,9 @@
+{
+  "id" : "ref-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 4,
+  "prompt" : "Which method invokes a method dynamically via reflection?",
+  "choices" : [ "method.call(obj, args)", "method.invoke(obj, args)", "method.run(obj, args)", "method.execute(obj)" ],
+  "answer" : "b",
+  "explanation" : "Method.invoke(Object obj, Object... args) calls the method on obj with the given args. If obj is null the method is static. Checked exceptions are wrapped in InvocationTargetException."
+}

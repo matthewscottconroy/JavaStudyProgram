@@ -1,0 +1,9 @@
+{
+  "id" : "pnt-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What color is used for the circle?",
+  "code" : "@Override\nprotected void paintComponent(Graphics g) {\n    super.paintComponent(g);\n    g.setColor(Color.RED);\n    g.fillRect(0, 0, 50, 50);\n    g.setColor(Color.BLUE);\n    g.fillOval(60, 60, 40, 40);\n}",
+  "answer" : "Blue",
+  "explanation" : "setColor changes the current color for all subsequent draw calls. The rectangle is red, then the color is changed to blue before drawing the oval. The circle (oval) is drawn in blue."
+}

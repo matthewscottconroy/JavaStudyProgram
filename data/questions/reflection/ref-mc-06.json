@@ -1,0 +1,9 @@
+{
+  "id" : "ref-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 4,
+  "prompt" : "What is a common practical use of Java reflection in frameworks?",
+  "choices" : [ "To make code run faster by bypassing the JIT compiler", "To discover and wire together classes (dependency injection, ORM mapping, JSON serialization) without compile-time coupling", "To prevent other classes from accessing private fields", "To replace the JVM's class loader" ],
+  "answer" : "b",
+  "explanation" : "Spring uses reflection for dependency injection. Jackson uses it to map JSON to Java fields. JUnit uses it to find and call @Test methods. Reflection allows frameworks to work with user classes without knowing them at compile time, but at the cost of compile-time safety and some performance overhead."
+}

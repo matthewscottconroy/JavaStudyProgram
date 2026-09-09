@@ -1,0 +1,9 @@
+{
+  "id" : "col-mc-10",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the time complexity of HashMap.get() on average?",
+  "choices" : [ "O(n)", "O(log n)", "O(1)", "O(n log n)" ],
+  "answer" : "c",
+  "explanation" : "HashMap provides O(1) average-case get/put/remove using hash buckets. Worst case is O(n) if all keys hash to the same bucket (very unlikely with good hashCode). TreeMap is O(log n) for these operations but maintains sorted order."
+}

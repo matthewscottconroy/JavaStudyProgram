@@ -1,0 +1,9 @@
+{
+  "id" : "gcmp-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does JScrollPane do?",
+  "choices" : [ "Adds scrollbars to the JFrame automatically", "Wraps a component and provides scroll bars when content exceeds the visible area", "Creates a scrolling animation effect", "Manages multiple panels that slide horizontally" ],
+  "answer" : "b",
+  "explanation" : "JScrollPane wraps any component (usually JTextArea or JList) and adds vertical and/or horizontal scroll bars as needed. Example: new JScrollPane(textArea) — place the JScrollPane in the layout, not the textArea directly."
+}

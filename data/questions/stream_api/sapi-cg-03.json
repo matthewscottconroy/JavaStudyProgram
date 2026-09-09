@@ -1,0 +1,9 @@
+{
+  "id" : "sapi-cg-03",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which converts a List<String> to a Map where keys are strings and values are their lengths?",
+  "choices" : [ "list.stream().collect(Collectors.toMap(s -> s, s -> s.length()));", "list.stream().map(s -> s.length()).collect(Collectors.toMap());", "list.stream().collect(Collectors.groupingBy(String::length));", "list.stream().toMap(String::length);" ],
+  "answer" : "a",
+  "explanation" : "Collectors.toMap(keyMapper, valueMapper) builds a Map<K,V>. Here: key = the string itself, value = its length. Option C groups by length (producing Map<Integer, List<String>>), not Map<String, Integer>. Option D: toMap is not a stream instance method."
+}

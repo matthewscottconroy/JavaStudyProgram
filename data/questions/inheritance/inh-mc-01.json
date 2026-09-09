@@ -1,0 +1,9 @@
+{
+  "id" : "inh-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "Which keyword makes class Dog inherit from class Animal?",
+  "choices" : [ "implements", "inherits", "extends", "derives" ],
+  "answer" : "c",
+  "explanation" : "'extends' establishes an inheritance (is-a) relationship. 'implements' is used for interfaces. 'inherits' and 'derives' are not Java keywords."
+}

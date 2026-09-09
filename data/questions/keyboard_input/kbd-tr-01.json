@@ -1,0 +1,9 @@
+{
+  "id" : "kbd-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed when the user presses the Enter key?",
+  "code" : "component.addKeyListener(new KeyAdapter() {\n    @Override\n    public void keyPressed(KeyEvent e) {\n        if (e.getKeyCode() == KeyEvent.VK_ENTER) {\n            System.out.println(\"Enter pressed\");\n        }\n    }\n});",
+  "answer" : "Enter pressed",
+  "explanation" : "VK_ENTER matches the Enter key's key code. The condition is true, so 'Enter pressed' is printed."
+}

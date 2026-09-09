@@ -1,0 +1,9 @@
+{
+  "id" : "thr-cg-03",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which correctly creates a fixed thread pool, submits 10 tasks, and shuts down gracefully?",
+  "choices" : [ "ExecutorService ex = Executors.newFixedThreadPool(4); for (int i=0;i<10;i++) ex.execute(() -> doWork()); ex.shutdown();", "new Thread(() -> { for(int i=0;i<10;i++) doWork(); }).start();", "ExecutorService ex = Executors.newFixedThreadPool(10); ex.submit(this::doWork); ex.stop();", "ThreadPool.run(10, () -> doWork());" ],
+  "answer" : "a",
+  "explanation" : "newFixedThreadPool(4) creates 4 threads. execute() submits each task. shutdown() stops accepting new tasks after all 10 are submitted and waits for them to complete. Option B runs all work on one thread serially. Option C: stop() is not a valid ExecutorService method. Option D: ThreadPool doesn't exist in standard Java."
+}

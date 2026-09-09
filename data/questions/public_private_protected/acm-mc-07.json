@@ -1,0 +1,9 @@
+{
+  "id" : "acm-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which statement about 'private' constructors is true?",
+  "choices" : [ "A class with a private constructor cannot be instantiated from outside the class", "A private constructor means the class is abstract", "Private constructors prevent subclassing only", "A class may have at most one private constructor" ],
+  "answer" : "a",
+  "explanation" : "Private constructors are used in patterns like Singleton (only one instance ever created) and utility classes (e.g., Math — all static, never instantiated). Calling 'new' from outside throws a compile error."
+}

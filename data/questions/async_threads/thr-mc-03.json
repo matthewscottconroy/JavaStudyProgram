@@ -1,0 +1,9 @@
+{
+  "id" : "thr-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is a data race?",
+  "choices" : [ "Two threads competing to start first", "Two or more threads accessing shared mutable data without synchronisation", "A thread that runs faster than expected", "A deadlock between exactly two threads" ],
+  "answer" : "b",
+  "explanation" : "A data race occurs when multiple threads read/write shared state without synchronisation. The result is undefined (the interleaving is non-deterministic). Fix with synchronized, volatile, java.util.concurrent types, or immutable data."
+}

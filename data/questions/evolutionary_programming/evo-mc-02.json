@@ -1,0 +1,9 @@
+{
+  "id" : "evo-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 4,
+  "prompt" : "What is crossover in genetic algorithms?",
+  "choices" : [ "Replacing low-fitness individuals with random new ones", "Combining parts of two parent solutions to produce offspring", "Flipping random bits in a single individual", "Evaluating the fitness of the entire population" ],
+  "answer" : "b",
+  "explanation" : "Crossover (recombination) takes two parent solutions and swaps portions to create children. Example (single-point): parents [1,0,1,1,0] and [0,1,0,0,1] → child [1,0,0,0,1]. This mimics biological reproduction and allows beneficial traits from both parents to combine."
+}

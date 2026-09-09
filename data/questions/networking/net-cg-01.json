@@ -1,0 +1,9 @@
+{
+  "id" : "net-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which correctly sends the text 'hello' to a server and reads its response?",
+  "choices" : [ "Socket s = new Socket(\"localhost\", 8080); s.write(\"hello\"); String r = s.read();", "try (Socket s = new Socket(\"localhost\", 8080)) { PrintWriter out = new PrintWriter(s.getOutputStream(), true); BufferedReader in = new BufferedReader(new InputStreamReader(s.getInputStream())); out.println(\"hello\"); String r = in.readLine(); }", "new Socket(\"hello\", 8080);", "Socket s = new Socket(); s.send(\"localhost:8080\", \"hello\");" ],
+  "answer" : "b",
+  "explanation" : "Wrap getOutputStream() in PrintWriter for text sending and getInputStream() in BufferedReader for line reading. PrintWriter(stream, true) auto-flushes on println. Use try-with-resources to close the socket. Option A: Socket has no write()/read() methods directly."
+}

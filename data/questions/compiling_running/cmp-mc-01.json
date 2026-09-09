@@ -1,0 +1,9 @@
+{
+  "id" : "cmp-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "What does the 'javac' command do?",
+  "choices" : [ "Runs a compiled Java program", "Compiles Java source (.java) files into bytecode (.class) files", "Packages Java classes into a JAR file", "Starts the Java Virtual Machine" ],
+  "answer" : "b",
+  "explanation" : "'javac' is the Java compiler. It converts human-readable .java source files into .class bytecode files that the JVM can execute."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "cpn-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "In delegation, when class A delegates to class B…",
+  "choices" : [ "A extends B", "A contains a reference to B and calls B's methods to handle requests", "B calls A's methods internally", "A and B implement the same interface" ],
+  "answer" : "b",
+  "explanation" : "Delegation: the delegating class (A) holds a reference to the delegate (B) and forwards method calls to it. A doesn't inherit from B — it uses B as a helper."
+}

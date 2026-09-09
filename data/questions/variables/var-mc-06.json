@@ -1,0 +1,9 @@
+{
+  "id" : "var-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which statement correctly swaps the values of two int variables a and b?",
+  "choices" : [ "a = b; b = a;", "int temp = a; a = b; b = temp;", "a <-> b;", "swap(a, b);" ],
+  "answer" : "b",
+  "explanation" : "You need a temporary variable. 'a = b; b = a;' overwrites a's original value before it's saved, so b ends up with b's original value again."
+}

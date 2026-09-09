@@ -1,0 +1,9 @@
+{
+  "id" : "gen-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does List<String> guarantee compared to a raw List?",
+  "choices" : [ "The list is immutable", "Only String elements can be added — enforced at compile time", "The list is thread-safe", "Elements are stored in sorted order" ],
+  "answer" : "b",
+  "explanation" : "Generics provide compile-time type safety. List<String> only accepts String elements; the compiler rejects any attempt to add a non-String. A raw List accepts Object and may produce ClassCastException at runtime."
+}

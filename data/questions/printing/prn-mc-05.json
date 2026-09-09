@@ -1,0 +1,9 @@
+{
+  "id" : "prn-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does System.out.printf(\"%d items at $%.2f each\", 3, 1.5) print?",
+  "choices" : [ "3 items at $1.50 each", "%d items at $%.2f each", "3 items at $1.5 each", "3 items at $%.2f each" ],
+  "answer" : "a",
+  "explanation" : "%d formats an integer argument (3). %.2f formats a float to 2 decimal places (1.50). Arguments are substituted left to right for each format specifier."
+}

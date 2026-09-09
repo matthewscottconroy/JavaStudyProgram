@@ -1,0 +1,9 @@
+{
+  "id" : "rnd-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which code picks a random element from a List<String> named 'words'?",
+  "choices" : [ "words[new Random().nextInt(words.size())]", "words.get(new Random().nextInt(words.size()))", "Collections.random(words)", "words.getRandomElement()" ],
+  "answer" : "b",
+  "explanation" : "words.get(index) retrieves by index. nextInt(words.size()) gives a valid random index (0 to size-1). Option A uses array syntax — List doesn't support []. Options C and D don't exist in Java's standard API."
+}

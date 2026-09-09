@@ -1,0 +1,10 @@
+{
+  "id" : "img-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "The image loads as null. Why?",
+  "code" : "BufferedImage img;\ntry {\n    img = ImageIO.read(new File(\"images/logo.png\"));\n} catch (IOException e) {\n    e.printStackTrace();\n}\n// img is null at runtime",
+  "choices" : [ "ImageIO.read() always returns null for PNG files", "The file path 'images/logo.png' is relative to the working directory, which may not be the project root", "BufferedImage must be initialised to new BufferedImage() before reading", "IOException cannot be caught for image loading" ],
+  "answer" : "b",
+  "explanation" : "Relative paths resolve relative to the JVM's working directory, which in an IDE is often the project root, but when running the JAR it may differ. Fix: use getClass().getResource(\"/images/logo.png\") to load from the classpath (inside the JAR), or use an absolute path, or print the working directory to debug."
+}

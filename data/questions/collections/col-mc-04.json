@@ -1,0 +1,9 @@
+{
+  "id" : "col-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "Which collection is best for a LIFO (last-in, first-out) stack?",
+  "choices" : [ "ArrayList", "LinkedList used as Deque", "PriorityQueue", "TreeSet" ],
+  "answer" : "b",
+  "explanation" : "Deque (e.g. ArrayDeque) supports push/pop for LIFO semantics efficiently. The legacy java.util.Stack class exists but is discouraged. PriorityQueue is a min-heap (ordering by priority). TreeSet is sorted, not stack-like."
+}

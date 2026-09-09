@@ -1,0 +1,9 @@
+{
+  "id" : "if-tr-06",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "int x = 5;\nswitch (x) {\n    case 1: System.out.println(\"one\"); break;\n    case 5: System.out.println(\"five\"); break;\n    default: System.out.println(\"other\");\n}",
+  "answer" : "five",
+  "explanation" : "x=5 matches case 5. \"five\" is printed. break prevents fall-through. default is not reached."
+}

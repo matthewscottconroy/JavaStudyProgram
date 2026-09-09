@@ -1,0 +1,9 @@
+{
+  "id" : "gem-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What happens when the button is clicked?",
+  "code" : "JButton btn = new JButton(\"Click Me\");\nbtn.addActionListener(e -> System.out.println(\"Clicked!\"));\n// (button is added to a visible frame)",
+  "answer" : "Clicked!",
+  "explanation" : "The lambda is the actionPerformed implementation. When the button is clicked, the EDT calls actionPerformed(e), executing System.out.println(\"Clicked!\")."
+}

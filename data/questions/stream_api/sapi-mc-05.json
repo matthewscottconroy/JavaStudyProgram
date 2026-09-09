@@ -1,0 +1,9 @@
+{
+  "id" : "sapi-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does Stream.reduce(0, (a, b) -> a + b) compute?",
+  "choices" : [ "The product of all elements", "The sum of all elements", "The first element only", "The number of elements" ],
+  "answer" : "b",
+  "explanation" : "reduce(identity, accumulator) combines elements. Starting from identity (0), (a, b) -> a + b adds each element: 0+e1+e2+...+en. For [1,2,3,4]: 0+1=1, 1+2=3, 3+3=6, 6+4=10. Equivalent to: .mapToInt(Integer::intValue).sum()"
+}

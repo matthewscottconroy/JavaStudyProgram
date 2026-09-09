@@ -1,0 +1,9 @@
+{
+  "id" : "ser-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed after serializing and deserializing?",
+  "code" : "import java.io.*;\nclass Box implements Serializable {\n    int size = 10;\n    transient String label = \"fragile\";\n}\n// serialize Box to bytes, then deserialize\nBox b = /* deserialized Box */;\nSystem.out.println(b.size + \" \" + b.label);",
+  "answer" : "10 null",
+  "explanation" : "size (non-transient) is preserved. label (transient) is not serialized, so after deserialization it reverts to the default value for String: null."
+}

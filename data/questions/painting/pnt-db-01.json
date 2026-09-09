@@ -1,0 +1,10 @@
+{
+  "id" : "pnt-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "The animation flickers badly. What is the most likely cause?",
+  "code" : "@Override\nprotected void paintComponent(Graphics g) {\n    // super.paintComponent(g) is NOT called\n    g.setColor(Color.WHITE);\n    g.fillRect(0, 0, getWidth(), getHeight());\n    g.setColor(Color.RED);\n    g.fillOval(x, y, 20, 20);\n}",
+  "choices" : [ "The oval is too small to animate smoothly", "Manually clearing with fillRect instead of super.paintComponent() bypasses double-buffering", "setColor must be called before super.paintComponent()", "repaint() cannot animate ovals" ],
+  "answer" : "b",
+  "explanation" : "Swing's paintComponent provides double-buffering when super.paintComponent(g) is called. Bypassing it by manually filling with white breaks this optimization, causing visible flicker. Always call super.paintComponent(g) first — let Swing clear the background."
+}

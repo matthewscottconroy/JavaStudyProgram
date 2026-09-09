@@ -1,0 +1,10 @@
+{
+  "id" : "g2d-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "After calling setColor(Color.RED), drawn shapes still appear black. Why?",
+  "code" : "@Override\nprotected void paintComponent(Graphics g) {\n    super.paintComponent(g);\n    Graphics2D g2d = (Graphics2D) g;\n    g2d.setColor(Color.RED);\n    g.fillRect(10, 10, 50, 50);  // using 'g', not 'g2d'\n}",
+  "choices" : [ "setColor does not affect fillRect", "The color is set on g2d but fillRect is called on the original g reference — they share state, so this actually works fine", "g2d.setColor only applies to draw() calls, not fill() calls", "The super.paintComponent() resets the color after setColor" ],
+  "answer" : "b",
+  "explanation" : "g and g2d are the same underlying object (g2d is just a cast of g). Setting color on g2d and drawing with g actually works — this is not the bug. The real subtle issue: super.paintComponent(g) may reset the color to the component's foreground. Always set color AFTER super.paintComponent(). In this code the order is correct, so shapes should be red."
+}

@@ -1,0 +1,10 @@
+{
+  "id" : "lp-tr-04",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is the output?",
+  "code" : "for (int i = 0; i < 5; i++) {\n    if (i % 2 == 0) continue;\n    System.out.print(i + \" \");\n}",
+  "answer" : "1 3",
+  "alternatives" : [ "1 3" ],
+  "explanation" : "continue skips even numbers (0,2,4). Odd numbers 1 and 3 are printed."
+}

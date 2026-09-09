@@ -1,0 +1,9 @@
+{
+  "id" : "mvn-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What directory does 'mvn test' create for test reports?",
+  "code" : "// After: mvn test\n// Project has passing and failing JUnit tests.",
+  "answer" : "target/surefire-reports",
+  "explanation" : "The Maven Surefire plugin runs tests and writes XML and TXT reports to target/surefire-reports. Check this directory for test failure details when running in CI."
+}

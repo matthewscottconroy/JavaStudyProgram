@@ -1,0 +1,9 @@
+{
+  "id" : "gem-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is an ActionListener?",
+  "choices" : [ "A class that creates buttons", "An interface with one method (actionPerformed) called when a user action occurs", "A thread that listens for keyboard input", "A layout manager that responds to window resize events" ],
+  "answer" : "b",
+  "explanation" : "ActionListener is a functional interface with 'void actionPerformed(ActionEvent e)'. It is notified when the user clicks a button or triggers a menu item."
+}

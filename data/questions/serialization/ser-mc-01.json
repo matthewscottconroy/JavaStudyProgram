@@ -1,0 +1,9 @@
+{
+  "id" : "ser-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What interface must a class implement to be serializable using ObjectOutputStream?",
+  "choices" : [ "Storable", "Cloneable", "Serializable", "Encodable" ],
+  "answer" : "c",
+  "explanation" : "java.io.Serializable is a marker interface (no methods) that opts a class into Java's built-in serialization mechanism. ObjectOutputStream can then write an instance to a byte stream, and ObjectInputStream can reconstruct it. All non-transient, non-static fields must also be serializable."
+}

@@ -1,0 +1,10 @@
+{
+  "id" : "arr-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "What exception will this throw at runtime?",
+  "code" : "int[] arr = {1, 2, 3};\nSystem.out.println(arr[3]);",
+  "choices" : [ "NullPointerException", "ArrayIndexOutOfBoundsException", "ClassCastException", "IllegalArgumentException" ],
+  "answer" : "b",
+  "explanation" : "The array has indices 0, 1, 2. Accessing index 3 is out of bounds. Java throws ArrayIndexOutOfBoundsException at runtime."
+}

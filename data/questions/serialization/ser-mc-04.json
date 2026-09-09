@@ -1,0 +1,9 @@
+{
+  "id" : "ser-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "Which class writes a serializable object to a file?",
+  "choices" : [ "FileWriter", "ObjectOutputStream", "DataOutputStream", "PrintWriter" ],
+  "answer" : "b",
+  "explanation" : "ObjectOutputStream wraps another OutputStream (typically FileOutputStream) and provides writeObject(). To read back: ObjectInputStream wraps FileInputStream and provides readObject(). The file is binary — do not try to open it in a text editor."
+}

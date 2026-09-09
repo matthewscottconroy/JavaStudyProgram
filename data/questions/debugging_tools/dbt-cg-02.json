@@ -1,0 +1,9 @@
+{
+  "id" : "dbt-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which is the best first step when a unit test fails with an unexpected value?",
+  "choices" : [ "Delete the test and rewrite it", "Set a breakpoint at the assertion line, run the test in debug mode, and inspect the actual value", "Add @Ignore to skip the failing test", "Increase the test timeout" ],
+  "answer" : "b",
+  "explanation" : "Running the failing test in debug mode and pausing at the assertion lets you inspect the actual computed value and trace back through the logic to find where it diverged from expectation. This is faster than adding print statements and recompiling repeatedly."
+}

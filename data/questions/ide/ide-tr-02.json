@@ -1,0 +1,9 @@
+{
+  "id" : "ide-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "The debugger shows variables panel: x=5, y=null. The next line is 'int z = x + y.length();'. What happens?",
+  "code" : "int x = 5;\nString y = null;\nint z = x + y.length();  // <-- about to execute",
+  "answer" : "NullPointerException",
+  "explanation" : "y is null, so calling y.length() throws NullPointerException. The debugger will highlight the exception; inspect the variables panel to confirm y is null before executing."
+}

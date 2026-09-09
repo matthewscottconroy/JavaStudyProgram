@@ -1,0 +1,10 @@
+{
+  "id" : "db-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which correctly queries for a student by name using a PreparedStatement?",
+  "choices" : [ "Statement s = conn.createStatement(\"SELECT * FROM students WHERE name=?\"); s.setString(1, name);", "PreparedStatement ps = conn.prepareStatement(\"SELECT * FROM students WHERE name=?\"); ps.setString(1, name); ResultSet rs = ps.executeQuery();", "conn.query(\"SELECT * FROM students WHERE name=\" + name);", "PreparedStatement ps = new PreparedStatement(\"SELECT * FROM students WHERE name=?\", conn);" ],
+  "answer" : "b",
+  "explanation" : "conn.prepareStatement(sql) compiles the SQL. setString(1, name) binds the parameter. executeQuery() executes it and returns a ResultSet. Option A: createStatement() takes no arguments. Option D: PreparedStatement has no public constructor — get it from conn.prepareStatement().",
+  "hints" : [ "Use executeQuery() for SELECT; executeUpdate() for INSERT/UPDATE/DELETE." ]
+}

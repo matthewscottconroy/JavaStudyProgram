@@ -1,0 +1,9 @@
+{
+  "id" : "evo-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 4,
+  "prompt" : "What is the main difference between a genetic algorithm (GA) and a genetic programming (GP) approach?",
+  "choices" : [ "GA uses floating-point genes; GP uses binary genes", "GA evolves fixed-length solutions (e.g., parameter vectors); GP evolves variable-length programs (e.g., expression trees)", "GP can only optimize text; GA can only optimize numbers", "They are identical — just different names for the same algorithm" ],
+  "answer" : "b",
+  "explanation" : "GA: typically evolves fixed-length chromosomes representing solutions. GP: evolves programs represented as trees (e.g., parse trees or LISP expressions). GP is used when you want to discover the structure of a program, not just its parameters."
+}

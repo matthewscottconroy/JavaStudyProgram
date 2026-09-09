@@ -1,0 +1,9 @@
+{
+  "id" : "mem-mc-10",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is a memory leak in Java?",
+  "choices" : [ "When new fails to allocate memory", "When objects that are no longer needed are still referenced, preventing GC from reclaiming them", "When too many local variables are on the stack", "When static fields are declared with the wrong type" ],
+  "answer" : "b",
+  "explanation" : "Java GC only collects unreachable objects. If you keep references to objects you no longer need (e.g., in a static collection), the objects cannot be collected. Example: adding to a static List without ever removing entries causes a memory leak."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "swng-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What does the user see when this code runs?",
+  "code" : "JOptionPane.showMessageDialog(null, \"File saved!\", \"Success\", JOptionPane.INFORMATION_MESSAGE);",
+  "answer" : "A dialog box titled 'Success' with the message 'File saved!' and an information icon",
+  "explanation" : "showMessageDialog with INFORMATION_MESSAGE shows the standard blue 'i' icon. The null parent centers it on screen. The user must click OK to dismiss it."
+}

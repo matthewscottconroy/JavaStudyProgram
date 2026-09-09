@@ -1,0 +1,9 @@
+{
+  "id" : "cmp-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 1,
+  "prompt" : "Does this produce a compile error or a runtime error?",
+  "code" : "public class Main {\n    public static void main(String[] args) {\n        int x = \"hello\";  // assigning String to int\n    }\n}",
+  "answer" : "Compile error",
+  "explanation" : "Assigning a String to an int is a type mismatch caught by the compiler at compile time. javac reports: incompatible types: String cannot be converted to int. The program never runs."
+}

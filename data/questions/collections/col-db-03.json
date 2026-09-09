@@ -1,0 +1,10 @@
+{
+  "id" : "col-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "The HashSet contains duplicates. Why?",
+  "code" : "class Point { int x, y; Point(int x, int y) { this.x=x; this.y=y; } }\nSet<Point> pts = new HashSet<>();\npts.add(new Point(1, 2));\npts.add(new Point(1, 2));\nSystem.out.println(pts.size());  // prints 2, not 1",
+  "choices" : [ "HashSet allows two elements that are equal", "Point does not override hashCode() and equals() — so the two objects are treated as different by the Set", "int fields must be boxed before use in HashSet", "HashSet requires a Comparator to detect duplicates" ],
+  "answer" : "b",
+  "explanation" : "HashSet uses hashCode() for bucketing and equals() for equality checks. Without overriding both, two Point(1,2) objects have different hash codes (from Object) and are treated as different. Override both: @Override int hashCode() { return Objects.hash(x,y); } and @Override boolean equals(Object o) { ... }"
+}

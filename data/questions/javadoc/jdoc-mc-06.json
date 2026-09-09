@@ -1,0 +1,9 @@
+{
+  "id" : "jdoc-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the purpose of the @deprecated Javadoc tag (in addition to the @Deprecated annotation)?",
+  "choices" : [ "To delete the method from the compiled output", "To explain WHY the element is deprecated and what to use instead", "To prevent the method from being called at runtime", "To generate a compile error when the method is used" ],
+  "answer" : "b",
+  "explanation" : "@Deprecated annotation triggers compiler warnings. The @deprecated Javadoc tag (lowercase) provides the explanation: @deprecated Use {@link #newMethod()} instead. Both should be used together so tools and developers know about and understand the deprecation."
+}

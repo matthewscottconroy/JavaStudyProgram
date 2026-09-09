@@ -1,0 +1,9 @@
+{
+  "id" : "fpar-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which approach best follows functional style to double all numbers in a list?",
+  "choices" : [ "for (int i = 0; i < list.size(); i++) list.set(i, list.get(i) * 2);", "list.stream().map(n -> n * 2).collect(Collectors.toList());", "list.forEach(n -> n = n * 2);", "Collections.sort(list); list.replaceAll(n -> n * 2);" ],
+  "answer" : "b",
+  "explanation" : "stream().map().collect() is functional: it produces a new list of doubled values without modifying 'list'. Option A mutates in place. Option C does nothing useful (n is a local variable). Option D sorts first (unnecessary) and mutates in place with replaceAll."
+}

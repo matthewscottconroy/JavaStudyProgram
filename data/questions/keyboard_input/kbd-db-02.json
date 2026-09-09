@@ -1,0 +1,10 @@
+{
+  "id" : "kbd-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "The component's KeyListener never fires. What is missing?",
+  "code" : "JPanel panel = new JPanel();\npanel.addKeyListener(new KeyAdapter() {\n    public void keyPressed(KeyEvent e) {\n        System.out.println(\"key: \" + e.getKeyChar());\n    }\n});\nframe.add(panel);\nframe.setVisible(true);",
+  "choices" : [ "KeyAdapter is abstract and cannot be instantiated", "panel must be focusable and have focus — add setFocusable(true) and requestFocusInWindow()", "KeyListener only works on JFrame, not JPanel", "addKeyListener requires a second parameter" ],
+  "answer" : "b",
+  "explanation" : "JPanel is not focusable by default and doesn't receive keyboard focus unless explicitly configured. Fix: panel.setFocusable(true); and then panel.requestFocusInWindow(); after the frame is shown. Without focus, KeyEvents go to whatever component has focus (often nothing)."
+}

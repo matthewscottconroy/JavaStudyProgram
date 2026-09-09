@@ -1,0 +1,9 @@
+{
+  "id" : "img-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "How do you scale a BufferedImage when drawing it?",
+  "choices" : [ "img.scale(0.5)", "g.drawImage(img, x, y, newWidth, newHeight, this)", "BufferedImage.resize(img, newWidth, newHeight)", "g.setImageScale(0.5); g.drawImage(img, x, y, this);" ],
+  "answer" : "b",
+  "explanation" : "drawImage(img, x, y, width, height, observer) scales the image to the specified width and height. To scale proportionally: compute the ratio from img.getWidth() and img.getHeight(). For higher quality scaling, use Graphics2D with RenderingHints.VALUE_INTERPOLATION_BILINEAR."
+}

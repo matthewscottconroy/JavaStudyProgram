@@ -1,0 +1,9 @@
+{
+  "id" : "fp-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What does this code print if data.txt contains exactly the line 'Hello'?",
+  "code" : "try (BufferedReader br = new BufferedReader(new FileReader(\"data.txt\"))) {\n    String line = br.readLine();\n    System.out.println(line);\n} catch (IOException e) {\n    System.out.println(\"error\");\n}",
+  "answer" : "Hello",
+  "explanation" : "readLine() reads the first line without the line terminator. The try-with-resources block closes the reader automatically when done."
+}

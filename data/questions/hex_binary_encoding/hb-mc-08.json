@@ -1,0 +1,9 @@
+{
+  "id" : "hb-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is 5 | 3 in decimal?",
+  "choices" : [ "2", "7", "15", "8" ],
+  "answer" : "b",
+  "explanation" : "5 = 0101, 3 = 0011. OR: 0101 | 0011 = 0111 = 7. Each bit is 1 if either input bit is 1."
+}

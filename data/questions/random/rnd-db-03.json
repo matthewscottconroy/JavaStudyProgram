@@ -1,0 +1,10 @@
+{
+  "id" : "rnd-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "The shuffled list is the same every time the program runs. Why?",
+  "code" : "List<Integer> nums = new ArrayList<>(List.of(1,2,3,4,5));\nCollections.shuffle(nums, new Random(99));\nSystem.out.println(nums);",
+  "choices" : [ "Collections.shuffle() doesn't actually shuffle lists", "The fixed seed 99 causes the same shuffle permutation every run", "The list must be sorted before shuffling", "new Random(99) and new Random() are equivalent" ],
+  "answer" : "b",
+  "explanation" : "Collections.shuffle(list, random) uses the provided Random instance. A fixed seed produces the same shuffle each time. Fix: Collections.shuffle(nums) — uses an internally seeded Random."
+}

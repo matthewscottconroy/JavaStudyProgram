@@ -1,0 +1,9 @@
+{
+  "id" : "cpn-tr-04",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "class Wheel { String type; Wheel(String t) { type = t; } }\nclass Bicycle {\n    private Wheel front, rear;\n    Bicycle(String f, String r) {\n        front = new Wheel(f);\n        rear = new Wheel(r);\n    }\n    String describe() { return front.type + \"+\" + rear.type; }\n}\nSystem.out.println(new Bicycle(\"road\", \"road\").describe());",
+  "answer" : "road+road",
+  "explanation" : "Bicycle is composed of two Wheel objects. describe() concatenates both wheel types."
+}

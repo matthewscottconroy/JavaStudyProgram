@@ -1,0 +1,10 @@
+{
+  "id" : "ref-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This code throws NoSuchMethodException. Why?",
+  "code" : "class Calculator { private int add(int a, int b) { return a + b; } }\nMethod m = Calculator.class.getMethod(\"add\", int.class, int.class);",
+  "choices" : [ "getMethod returns an array, not a single method", "getMethod() only finds public methods — 'add' is private; use getDeclaredMethod()", "int.class is not a valid type token for int parameters", "Calculator must be public to use reflection" ],
+  "answer" : "b",
+  "explanation" : "getMethod() searches public methods only (including inherited). getDeclaredMethod() searches all methods in the class (public, protected, package, private). Fix: Calculator.class.getDeclaredMethod(\"add\", int.class, int.class)"
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "cmp-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "What is the correct sequence to compile and run 'Greeting.java' from the terminal?",
+  "choices" : [ "java Greeting.java && javac Greeting", "javac Greeting.java && java Greeting", "compile Greeting.java && run Greeting", "javac Greeting && java Greeting.class" ],
+  "answer" : "b",
+  "explanation" : "Compile first with javac (producing Greeting.class), then run with java. Option A has the order reversed. Option C uses fictional commands. Option D omits .java for javac and incorrectly adds .class for java."
+}

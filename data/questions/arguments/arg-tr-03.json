@@ -1,0 +1,9 @@
+{
+  "id" : "arg-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "Run as 'java App 3 7 2'. What is printed?",
+  "code" : "public static void main(String[] args) {\n    int max = Integer.MIN_VALUE;\n    for (String a : args) {\n        int n = Integer.parseInt(a);\n        if (n > max) max = n;\n    }\n    System.out.println(max);\n}",
+  "answer" : "7",
+  "explanation" : "Parses each arg: 3, 7, 2. Tracks maximum. 7 > 3 → max=7. 2 not > 7. Prints 7."
+}

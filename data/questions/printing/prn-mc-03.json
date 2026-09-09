@@ -1,0 +1,9 @@
+{
+  "id" : "prn-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does this line print?\n\n    System.out.println(\"2 + 3\");",
+  "choices" : [ "5", "2 + 3", "\"2 + 3\"", "2+3" ],
+  "answer" : "b",
+  "explanation" : "The argument is a String literal (in quotes). Java prints the string exactly as written. To evaluate the expression, omit the quotes: System.out.println(2 + 3);"
+}

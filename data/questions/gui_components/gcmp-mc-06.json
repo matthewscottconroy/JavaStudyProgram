@@ -1,0 +1,9 @@
+{
+  "id" : "gcmp-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "How do you disable a JButton so the user cannot click it?",
+  "choices" : [ "btn.setClickable(false)", "btn.setEnabled(false)", "btn.setActive(false)", "btn.hide()" ],
+  "answer" : "b",
+  "explanation" : "setEnabled(false) on any JComponent grays it out and makes it non-interactive. setEnabled(true) re-enables it. Useful for form validation: disable Submit until all required fields are filled."
+}

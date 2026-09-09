@@ -1,0 +1,9 @@
+{
+  "id" : "cmp-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 1,
+  "prompt" : "What file does 'javac Hello.java' produce if compilation succeeds?",
+  "code" : "// No code — this is a conceptual question.\n// Command: javac Hello.java",
+  "answer" : "Hello.class",
+  "explanation" : "The Java compiler produces a .class file containing JVM bytecode with the same base name."
+}

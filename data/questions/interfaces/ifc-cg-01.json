@@ -1,0 +1,9 @@
+{
+  "id" : "ifc-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which is a valid lambda implementation of the Runnable interface?",
+  "choices" : [ "Runnable r = new Runnable(System.out.println(\"run\"));", "Runnable r = () -> System.out.println(\"run\");", "Runnable r = run -> System.out.println(\"run\");", "Runnable r = { System.out.println(\"run\"); };" ],
+  "answer" : "b",
+  "explanation" : "Runnable has one abstract method: void run(). A no-parameter lambda '() -> ...' implements it directly. Option A misuses the constructor syntax. Option C has an erroneous parameter. Option D is not valid Java lambda syntax."
+}

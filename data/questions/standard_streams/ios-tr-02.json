@@ -1,0 +1,9 @@
+{
+  "id" : "ios-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed to System.out vs System.err?",
+  "code" : "System.out.println(\"Result: 42\");\nSystem.err.println(\"Warning: value is high\");",
+  "answer" : "Result: 42 (stdout)\nWarning: value is high (stderr)",
+  "explanation" : "Both lines print to the terminal by default, but to separate streams. In a shell: 'java App > out.txt' would only capture 'Result: 42'; the warning still appears on screen. 'java App > out.txt 2>&1' redirects both."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "ifc-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the 'marker interface' pattern?",
+  "choices" : [ "An interface that marks methods as deprecated", "An empty interface used to tag a class as having some property", "An interface with only default methods", "An interface that extends multiple other interfaces" ],
+  "answer" : "b",
+  "explanation" : "Marker interfaces have no methods — they exist purely to tag a class. Examples: java.io.Serializable (marks a class as serializable), java.lang.Cloneable (marks a class as cloneable). Modern Java often uses annotations instead of marker interfaces."
+}

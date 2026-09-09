@@ -1,0 +1,10 @@
+{
+  "id" : "db-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 4,
+  "prompt" : "The transaction changes are not saved even after commit(). Why?",
+  "code" : "Connection conn = DriverManager.getConnection(url, user, pass);\n// autoCommit is true (default)\nconn.setAutoCommit(false);\nstmt.executeUpdate(\"UPDATE accounts SET balance=balance-100 WHERE id=1\");\nstmt.executeUpdate(\"UPDATE accounts SET balance=balance+100 WHERE id=2\");\n// forgot to call conn.commit()\nconn.close();",
+  "choices" : [ "setAutoCommit(false) prevents any saves permanently", "close() automatically commits open transactions", "Without conn.commit(), the transaction is rolled back when the connection closes", "executeUpdate() commits immediately regardless of autoCommit setting" ],
+  "answer" : "c",
+  "explanation" : "When autoCommit is false, uncommitted changes are rolled back when the connection closes. You must explicitly call conn.commit() to persist changes. Always use: try { ...; conn.commit(); } catch (Exception e) { conn.rollback(); }"
+}

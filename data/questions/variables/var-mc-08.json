@@ -1,0 +1,9 @@
+{
+  "id" : "var-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does the 'final' keyword do when applied to a variable?",
+  "choices" : [ "Makes the variable automatically thread-safe", "Prevents the variable from being reassigned after initialization", "Makes the variable visible to all classes", "Causes the variable to be stored in the heap" ],
+  "answer" : "b",
+  "explanation" : "final variables must be assigned exactly once and cannot be changed afterward. final int MAX = 100; — MAX can never be reassigned. For objects, final prevents reassigning the reference, but the object's fields can still change."
+}

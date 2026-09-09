@@ -1,0 +1,9 @@
+{
+  "id" : "prn-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the output of: System.out.println(\"10\" + 5 + 3)?",
+  "choices" : [ "18", "1053", "105 3", "1053" ],
+  "answer" : "b",
+  "explanation" : "String concatenation is left-to-right: \"10\" + 5 = \"105\", then \"105\" + 3 = \"1053\". Once one operand is a String, all subsequent + become concatenation, not addition."
+}

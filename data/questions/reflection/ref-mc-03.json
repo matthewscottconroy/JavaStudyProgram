@@ -1,0 +1,9 @@
+{
+  "id" : "ref-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 4,
+  "prompt" : "What is required to access a private field via reflection?",
+  "choices" : [ "The field must be made non-private first", "Call field.setAccessible(true) to bypass the access check", "Use a special ReflectionPermission object", "Private fields cannot be accessed via reflection" ],
+  "answer" : "b",
+  "explanation" : "field.setAccessible(true) suppresses the JVM's access control check. After this, you can get/set private fields. In newer JVM versions with the module system, this may throw InaccessibleObjectException for strongly encapsulated modules."
+}

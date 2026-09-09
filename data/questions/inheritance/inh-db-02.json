@@ -1,0 +1,10 @@
+{
+  "id" : "inh-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This code throws NullPointerException. Why?",
+  "code" : "class Animal {\n    Animal() { speak(); }  // calls overridable method in constructor\n}\nclass Dog extends Animal {\n    String sound = \"Woof\";\n    void speak() { System.out.println(sound); }  // sound is null here!\n}\nnew Dog();",
+  "choices" : [ "speak() is not accessible from Animal's constructor", "Animal's constructor calls speak() before Dog's field 'sound' is initialized — sound is still null", "Dog must call super() explicitly to fix this", "speak() throws NullPointerException because it returns void" ],
+  "answer" : "b",
+  "explanation" : "Object construction order: 1) parent constructor runs (Animal()); 2) parent constructor calls speak(). At this point, Dog's field 'sound' hasn't been set yet — it's null. Never call overridable methods from constructors; the subclass fields may not be ready."
+}

@@ -1,0 +1,10 @@
+{
+  "id" : "if-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 1,
+  "prompt" : "What is wrong with this code?",
+  "code" : "int x = 5;\nif x > 3 {\n    System.out.println(\"big\");\n}",
+  "choices" : [ "Missing braces around the body", "x > 3 is not a valid condition", "The condition must be in parentheses: if (x > 3)", "int cannot be compared with >" ],
+  "answer" : "c",
+  "explanation" : "In Java, the condition of an if statement must be enclosed in parentheses. The correct syntax is: if (x > 3) { ... }"
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "ifc-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Can a class inherit from two parent classes in Java?",
+  "choices" : [ "Yes, using 'extends ClassA, ClassB'", "Yes, using 'extends ClassA implements ClassB'", "No — Java does not support multiple class inheritance; use multiple interface implementation instead", "Yes, but only if both parent classes are abstract" ],
+  "answer" : "c",
+  "explanation" : "Java intentionally disallows extending multiple classes to avoid the diamond problem. A class can extend one class but implement many interfaces. Interfaces support multiple inheritance for types (without state conflicts)."
+}

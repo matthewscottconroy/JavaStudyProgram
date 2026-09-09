@@ -1,0 +1,9 @@
+{
+  "id" : "gui-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "How do you make a JFrame visible?",
+  "choices" : [ "frame.open()", "frame.display(true)", "frame.setVisible(true)", "frame.show()" ],
+  "answer" : "c",
+  "explanation" : "setVisible(true) makes the frame appear on screen. show() is deprecated. open() and display() are not Swing methods."
+}

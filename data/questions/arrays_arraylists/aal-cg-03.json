@@ -1,0 +1,9 @@
+{
+  "id" : "aal-cg-03",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which converts an ArrayList<String> to a String[]?",
+  "choices" : [ "String[] arr = list.toArray();", "String[] arr = list.toArray(new String[0]);", "String[] arr = (String[]) list.toArray();", "String[] arr = Arrays.asList(list);" ],
+  "answer" : "b",
+  "explanation" : "toArray(new String[0]) is the idiomatic way — the runtime uses the type of the argument to infer the component type of the returned array. Option A returns Object[]. Option C casts Object[] to String[] — throws ClassCastException at runtime. Option D: Arrays.asList returns a List, not an array."
+}

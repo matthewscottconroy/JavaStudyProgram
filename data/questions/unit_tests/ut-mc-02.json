@@ -1,0 +1,9 @@
+{
+  "id" : "ut-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "What does assertEquals(expected, actual) do?",
+  "choices" : [ "Checks that expected and actual refer to the same object", "Checks that expected equals actual using .equals(), failing the test if they differ", "Assigns expected to actual", "Prints both values for comparison" ],
+  "answer" : "b",
+  "explanation" : "assertEquals calls .equals() to compare values. If they differ, the test fails with a message. assertSame checks reference identity (==). Always put the expected (known) value first, then the actual (computed) value."
+}

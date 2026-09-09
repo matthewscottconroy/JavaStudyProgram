@@ -1,0 +1,9 @@
+{
+  "id" : "if-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 1,
+  "prompt" : "What is printed?",
+  "code" : "int n = 4;\nif (n % 2 == 0) {\n    System.out.println(\"even\");\n} else {\n    System.out.println(\"odd\");\n}",
+  "answer" : "even",
+  "explanation" : "4 % 2 = 0, so the condition is true and \"even\" is printed."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "glay-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "In which region does 'Save' appear?",
+  "code" : "JFrame frame = new JFrame();\nframe.setLayout(new BorderLayout());\nframe.add(new JButton(\"File\"), BorderLayout.NORTH);\nframe.add(new JButton(\"Save\"), BorderLayout.SOUTH);\nframe.add(new JTextArea(), BorderLayout.CENTER);",
+  "answer" : "SOUTH (bottom)",
+  "explanation" : "The Save button is added to BorderLayout.SOUTH, which appears at the bottom of the frame. File is at the top (NORTH), the text area fills the center."
+}

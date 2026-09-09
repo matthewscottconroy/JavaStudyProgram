@@ -1,0 +1,9 @@
+{
+  "id" : "sapi-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the difference between map() and flatMap() in streams?",
+  "choices" : [ "map() works on lists; flatMap() works on arrays", "map() transforms each element to one result; flatMap() transforms each element to a stream and flattens them", "flatMap() is faster than map()", "map() is terminal; flatMap() is intermediate" ],
+  "answer" : "b",
+  "explanation" : "map(f) produces a Stream<R> where each element is transformed by f. flatMap(f) expects f to return a Stream for each element, then merges all those streams into one. Use flatMap to flatten a stream of lists."
+}

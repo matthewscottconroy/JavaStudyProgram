@@ -1,0 +1,9 @@
+{
+  "id" : "ser-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does the 'transient' keyword do to a field during serialization?",
+  "choices" : [ "Makes the field serialize first", "Prevents the field from being serialized", "Makes the field read-only after deserialization", "Encrypts the field during serialization" ],
+  "answer" : "b",
+  "explanation" : "A transient field is skipped during serialization — its value is not written to the stream. After deserialization it receives the default value (null for objects, 0 for numbers, false for boolean). Use transient for passwords, cached computed values, or non-serializable references."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "cpn-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "class Printer { void print(String s) { System.out.println(\"[\" + s + \"]\"); } }\nclass Report {\n    private Printer printer;\n    Report(Printer p) { this.printer = p; }\n    void generate() { printer.print(\"Annual Report\"); }\n}\nnew Report(new Printer()).generate();",
+  "answer" : "[Annual Report]",
+  "explanation" : "Report delegates printing to its Printer. printer.print(\"Annual Report\") → System.out.println(\"[Annual Report]\")."
+}

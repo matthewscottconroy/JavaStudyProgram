@@ -1,0 +1,9 @@
+{
+  "id" : "net-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "Which class represents a TCP client connection to a server?",
+  "choices" : [ "URL", "ServerSocket", "Socket", "DatagramSocket" ],
+  "answer" : "c",
+  "explanation" : "Socket(host, port) opens a TCP connection to a server. Use getInputStream() and getOutputStream() to exchange data. ServerSocket listens for incoming connections. DatagramSocket is for connectionless UDP, not TCP."
+}

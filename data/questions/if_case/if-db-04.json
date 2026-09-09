@@ -1,0 +1,10 @@
+{
+  "id" : "if-db-04",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "This code prints 'big' even when n=3. Why?",
+  "code" : "int n = 3;\nif (n > 5)\n    System.out.println(\"big\");\n    System.out.println(\"and something else\");",
+  "choices" : [ "The condition n > 5 evaluates incorrectly", "Without braces, only the first statement belongs to the if — the second always executes", "Two println calls cannot appear after an if without else", "n > 5 should be n >= 5" ],
+  "answer" : "b",
+  "explanation" : "Without curly braces, only the immediately following statement is the if-body. \"and something else\" always prints regardless of the condition. Always use braces to avoid this common pitfall."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "var-cg-03",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which correctly declares a constant for the number of days in a week?",
+  "choices" : [ "int DAYS_IN_WEEK = 7;", "const int DAYS_IN_WEEK = 7;", "final int DAYS_IN_WEEK = 7;", "static DAYS_IN_WEEK = 7;" ],
+  "answer" : "c",
+  "explanation" : "Java uses 'final' not 'const' (C++ syntax). final int prevents reassignment. By convention, constants use UPPER_CASE_SNAKE_CASE. Class-level constants are usually: private static final int DAYS_IN_WEEK = 7;"
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "aal-mc-09",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does ArrayList.contains(\"hello\") return if \"hello\" is in the list?",
+  "choices" : [ "The index of \"hello\"", "true", "A new list with only \"hello\"", "1" ],
+  "answer" : "b",
+  "explanation" : "contains(Object) returns true if the list contains the element (uses .equals()). indexOf(Object) returns the index. For null: contains(null) works if the list contains a null element."
+}

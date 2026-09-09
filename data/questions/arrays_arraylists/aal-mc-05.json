@@ -1,0 +1,9 @@
+{
+  "id" : "aal-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which method converts an array to an ArrayList?",
+  "choices" : [ "ArrayList.of(array)", "Arrays.asList(array)", "array.toList()", "Collections.list(array)" ],
+  "answer" : "b",
+  "explanation" : "Arrays.asList(T... a) returns a fixed-size List backed by the array. To get a resizable ArrayList: new ArrayList<>(Arrays.asList(array)). Java 9+: List.of(elements) creates an immutable list. Note: Arrays.asList returns a fixed-size list — add/remove throw UnsupportedOperationException."
+}

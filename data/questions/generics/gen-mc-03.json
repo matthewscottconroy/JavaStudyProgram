@@ -1,0 +1,9 @@
+{
+  "id" : "gen-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does 'List<? extends Number>' accept?",
+  "choices" : [ "Only List<Number>", "A List of Number or any subclass of Number (Integer, Double, etc.)", "A List of any type", "A List of Number or any superclass of Number" ],
+  "answer" : "b",
+  "explanation" : "'? extends Number' is an upper-bounded wildcard. It accepts List<Number>, List<Integer>, List<Double>, etc. You can read elements as Number, but you cannot add elements (except null) because the exact subtype is unknown."
+}

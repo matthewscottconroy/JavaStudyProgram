@@ -1,0 +1,9 @@
+{
+  "id" : "glay-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is GridBagLayout used for?",
+  "choices" : [ "A simplified alternative to GridLayout for beginners", "The most flexible layout manager — lets each component span multiple rows/columns with custom weights", "A layout that automatically adjusts the grid to fit the screen", "A layout that always uses a 10x10 grid" ],
+  "answer" : "b",
+  "explanation" : "GridBagLayout is the most powerful (and complex) layout manager. Each component gets a GridBagConstraints object specifying: grid position, span (gridwidth/gridheight), fill, weights, insets. It's verbose but handles complex forms and dialogs."
+}

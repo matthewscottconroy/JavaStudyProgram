@@ -1,0 +1,10 @@
+{
+  "id" : "str-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "A student checks if two strings are equal but the result is always false. What's wrong?",
+  "code" : "String a = \"hello\";\nString b = \"hello\";\nif (a == b) System.out.println(\"equal\");",
+  "choices" : [ "Strings cannot be compared with if", "Should use a.equals(b) instead of a == b", "\"hello\" is not a valid String literal", "The condition needs parentheses around a == b" ],
+  "answer" : "b",
+  "explanation" : "== on String objects checks reference equality (same object in memory), not content. a and b are different objects even though they contain the same text. Use a.equals(b) or a.equalsIgnoreCase(b)."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "ut-mc-09",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does @Disabled do in JUnit 5?",
+  "choices" : [ "Deletes the test permanently", "Marks the test to be skipped during the current test run", "Makes the test run last", "Causes the test to be expected to fail" ],
+  "answer" : "b",
+  "explanation" : "@Disabled(\"reason\") skips the test — it appears in the report as ignored. Use when a test is known broken and fixing it is deferred. Leave a reason string so future developers know why it was disabled."
+}

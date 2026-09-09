@@ -1,0 +1,9 @@
+{
+  "id" : "swng-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which correctly creates a menu bar with a 'File' menu containing an 'Exit' item?",
+  "choices" : [ "JMenuBar mb = new JMenuBar(\"File\"); mb.add(new JMenuItem(\"Exit\"));", "JMenuBar mb = new JMenuBar(); JMenu file = new JMenu(\"File\"); JMenuItem exit = new JMenuItem(\"Exit\"); exit.addActionListener(e -> System.exit(0)); file.add(exit); mb.add(file); frame.setJMenuBar(mb);", "JMenu mb = new JMenu(); mb.add(\"File\"); mb.add(\"Exit\"); frame.add(mb);", "MenuBar mb = new MenuBar(); mb.add(new Menu(\"File\")); frame.setMenuBar(mb);" ],
+  "answer" : "b",
+  "explanation" : "Correct hierarchy: JMenuBar > JMenu > JMenuItem. Add action listener to the item, add item to menu, add menu to bar, set bar on frame. Option D uses AWT (not Swing) MenuBar. Option A tries to pass a title String to JMenuBar, which doesn't accept one."
+}

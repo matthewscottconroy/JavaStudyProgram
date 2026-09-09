@@ -1,0 +1,9 @@
+{
+  "id" : "ml-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 4,
+  "prompt" : "Which computes the mean squared error between predictions and actual values?",
+  "choices" : [ "double mse = predictions.sum() / actuals.sum();", "double mse = 0; for (int i = 0; i < n; i++) { double diff = predictions[i] - actuals[i]; mse += diff * diff; } mse /= n;", "double mse = Math.abs(predictions[0] - actuals[0]);", "double mse = Arrays.stream(predictions).average().orElse(0);" ],
+  "answer" : "b",
+  "explanation" : "MSE = (1/n) * Σ(predicted - actual)². Loop over all n samples, accumulate squared differences, divide by n. Option A divides sums (not MSE). Option C only checks one element. Option D computes mean of predictions, not mean error."
+}

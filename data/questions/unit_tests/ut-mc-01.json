@@ -1,0 +1,9 @@
+{
+  "id" : "ut-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "Which annotation marks a method as a JUnit 5 test?",
+  "choices" : [ "@Test", "@Run", "@UnitTest", "@Check" ],
+  "answer" : "a",
+  "explanation" : "@Test (from org.junit.jupiter.api) marks a method as a test case. JUnit 5 discovers and runs all such methods when the test suite executes."
+}

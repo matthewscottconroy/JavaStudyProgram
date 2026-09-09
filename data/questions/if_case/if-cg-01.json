@@ -1,0 +1,10 @@
+{
+  "id" : "if-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 1,
+  "prompt" : "Which code prints \"pass\" if score >= 60, otherwise \"fail\"?",
+  "choices" : [ "if score >= 60 { println(\"pass\"); } else { println(\"fail\"); }", "if (score >= 60) { System.out.println(\"pass\"); } else { System.out.println(\"fail\"); }", "if (score >= 60) System.out.println(\"pass\"); System.out.println(\"fail\");", "if (score > 60) { System.out.println(\"pass\"); } else { System.out.println(\"fail\"); }" ],
+  "answer" : "b",
+  "explanation" : "Option A is missing parentheses and uses wrong print syntax. Option C always prints \"fail\" because the else is missing. Option D uses > instead of >= so score == 60 would print \"fail\".",
+  "hints" : [ "Condition must be in ( ), and >= includes the boundary." ]
+}

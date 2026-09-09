@@ -1,0 +1,10 @@
+{
+  "id" : "fp-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "This code compiles but leaks the file handle. Why?",
+  "code" : "FileReader fr = new FileReader(\"notes.txt\");\nBufferedReader br = new BufferedReader(fr);\nSystem.out.println(br.readLine());",
+  "choices" : [ "FileReader cannot be wrapped in BufferedReader", "readLine() throws IOException which must be caught", "The reader is never closed — the file handle leaks if an exception occurs", "BufferedReader requires an explicit buffer size" ],
+  "answer" : "c",
+  "explanation" : "If readLine() throws, the reader is never closed. Fix: use try-with-resources: 'try (BufferedReader br = new BufferedReader(new FileReader(...))) { ... }'"
+}

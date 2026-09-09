@@ -1,0 +1,10 @@
+{
+  "id" : "mem-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "This code throws NullPointerException. Why?",
+  "code" : "String s = null;\nSystem.out.println(s.length());",
+  "choices" : [ "String has no length() method", "null is not a valid String value", "s is null — calling any method on null throws NullPointerException", "length() is a static method and cannot be called on instances" ],
+  "answer" : "c",
+  "explanation" : "s holds null (no object). Calling a method on null throws NullPointerException. Fix: check for null first: 'if (s != null) { ... }' or use 'Objects.requireNonNullElse(s, \"\")'."
+}

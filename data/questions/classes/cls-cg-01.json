@@ -1,0 +1,9 @@
+{
+  "id" : "cls-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which code correctly defines a class Person with a String field 'name' and a constructor that sets it?",
+  "choices" : [ "class Person { String name; Person(String n) { name = n; } }", "class Person { String name; void Person(String n) { name = n; } }", "class Person { constructor(String n) { name = n; } }", "Person class { String name; Person(name) { this.name = name; } }" ],
+  "answer" : "a",
+  "explanation" : "Option A is correct. Option B has 'void' on the constructor. Option C uses JavaScript syntax. Option D has 'Person class' and untyped parameter."
+}

@@ -1,0 +1,10 @@
+{
+  "id" : "aal-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "This code throws ConcurrentModificationException. Why?",
+  "code" : "ArrayList<Integer> nums = new ArrayList<>(List.of(1, 2, 3, 4));\nfor (Integer n : nums) {\n    if (n % 2 == 0) nums.remove(n);\n}",
+  "choices" : [ "ArrayList does not support the enhanced for loop", "You cannot store Integer in ArrayList", "Modifying a list while iterating it with for-each corrupts the iterator", "remove() requires the index, not the value" ],
+  "answer" : "c",
+  "explanation" : "Structural modification during a for-each loop invalidates the iterator, causing ConcurrentModificationException. Fix: use removeIf(n -> n % 2 == 0) or iterate with an explicit Iterator and call iterator.remove()."
+}

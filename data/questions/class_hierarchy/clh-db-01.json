@@ -1,0 +1,10 @@
+{
+  "id" : "clh-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This code throws ClassCastException at runtime. Why?",
+  "code" : "class Animal {}\nclass Dog extends Animal {}\nclass Cat extends Animal {}\n// in main:\nAnimal a = new Dog();\nCat c = (Cat) a;",
+  "choices" : [ "Dog and Cat are not in the same package", "Animal must be abstract to be cast", "a holds a Dog object, which cannot be cast to Cat", "The cast requires an import statement" ],
+  "answer" : "c",
+  "explanation" : "The actual object is a Dog. Casting it to Cat is invalid because Dog and Cat are sibling classes — neither extends the other. Check with 'a instanceof Cat' before casting."
+}

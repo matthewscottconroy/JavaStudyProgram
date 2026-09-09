@@ -1,0 +1,9 @@
+{
+  "id" : "acm-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the default access level when no modifier is specified?",
+  "choices" : [ "public", "private", "protected", "package-private (accessible within the same package only)" ],
+  "answer" : "d",
+  "explanation" : "No modifier = package-private (also called default access). The member is accessible to all classes in the same package, but not to classes in other packages (even subclasses in other packages)."
+}

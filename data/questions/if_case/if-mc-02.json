@@ -1,0 +1,9 @@
+{
+  "id" : "if-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the output?\n\n    int x = 5;\n    System.out.println(x > 3 ? \"big\" : \"small\");",
+  "choices" : [ "big", "small", "true", "x > 3" ],
+  "answer" : "a",
+  "explanation" : "The ternary operator: condition ? valueIfTrue : valueIfFalse. 5 > 3 is true, so \"big\" is returned and printed."
+}

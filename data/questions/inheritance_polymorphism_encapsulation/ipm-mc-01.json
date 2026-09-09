@@ -1,0 +1,9 @@
+{
+  "id" : "ipm-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is dynamic dispatch (runtime polymorphism)?",
+  "choices" : [ "The compiler chooses which method to call based on the variable's declared type", "The JVM chooses which method to call based on the actual object type at runtime", "Methods are dispatched to multiple threads simultaneously", "Only abstract methods can be dispatched at runtime" ],
+  "answer" : "b",
+  "explanation" : "In Java, method calls on an object are resolved at runtime based on the actual type, not the declared type of the variable. This lets you write code against base-type variables and have the right subclass behaviour execute automatically."
+}

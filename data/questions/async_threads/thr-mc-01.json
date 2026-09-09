@@ -1,0 +1,9 @@
+{
+  "id" : "thr-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "Which is the preferred way to run code on a background thread in modern Java?",
+  "choices" : [ "Extend Thread and override run()", "Implement Runnable and pass to new Thread()", "Submit a Runnable or Callable to an ExecutorService", "Call Thread.start() directly" ],
+  "answer" : "c",
+  "explanation" : "ExecutorService (from Executors.newFixedThreadPool() etc.) manages a thread pool, reusing threads to avoid overhead. Extending Thread or creating Thread per task is fine for simple use but doesn't scale. CompletableFuture builds on this for async composition."
+}

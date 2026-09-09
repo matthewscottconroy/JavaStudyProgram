@@ -1,0 +1,9 @@
+{
+  "id" : "dbt-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "The debugger pauses here. What is the value of 'result' at this point?",
+  "code" : "int[] nums = {3, 1, 4, 1, 5};\nint result = 0;\nfor (int n : nums) {\n    if (n > 3) result += n;  // paused AFTER processing all elements\n}",
+  "answer" : "9",
+  "explanation" : "Only values > 3 are added: 4 and 5. result = 4 + 5 = 9."
+}

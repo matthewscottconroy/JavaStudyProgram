@@ -1,0 +1,9 @@
+{
+  "id" : "prn-tr-06",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "System.out.printf(\"%05d%n\", 42);",
+  "answer" : "00042",
+  "explanation" : "%05d: format as integer with width 5, padded with zeros on the left. 42 takes 2 digits, so 3 zeros are prepended: 00042."
+}

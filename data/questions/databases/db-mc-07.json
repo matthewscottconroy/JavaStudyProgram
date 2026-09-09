@@ -1,0 +1,9 @@
+{
+  "id" : "db-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 4,
+  "prompt" : "What is the role of a JDBC driver?",
+  "choices" : [ "A compiled SQL schema for the target database", "A library that implements the JDBC API for a specific database (e.g., MySQL Connector/J for MySQL)", "The JVM component that executes SQL", "A Java class that generates SQL from Java objects" ],
+  "answer" : "b",
+  "explanation" : "The JDBC API (java.sql.*) defines interfaces. The driver implements them for a specific database. You add the driver JAR to the classpath and load it via DriverManager.getConnection(url, user, pass). Drivers follow the URL format: jdbc:mysql://host:port/db, jdbc:postgresql://..., etc."
+}

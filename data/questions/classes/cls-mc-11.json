@@ -1,0 +1,9 @@
+{
+  "id" : "cls-mc-11",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is encapsulation?",
+  "choices" : [ "Inheriting behavior from a parent class", "Hiding the internal state of an object and exposing it only through public methods", "Writing methods with multiple overloads", "Making all fields public for easy access" ],
+  "answer" : "b",
+  "explanation" : "Encapsulation bundles data (fields) and behavior (methods) together and controls access. Private fields with public getters/setters enforce: the class controls how its state is read and changed. This prevents external code from putting the object into an invalid state."
+}

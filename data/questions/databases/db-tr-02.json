@@ -1,0 +1,9 @@
+{
+  "id" : "db-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "How many columns does this ResultSet have?",
+  "code" : "ResultSet rs = stmt.executeQuery(\"SELECT name, age, grade FROM students WHERE id=1\");\n// rs.next() returns true (one row found)\nResultSetMetaData meta = rs.getMetaData();\nSystem.out.println(meta.getColumnCount());",
+  "answer" : "3",
+  "explanation" : "The SELECT lists 3 columns: name, age, grade. getColumnCount() returns 3. ResultSetMetaData also provides getColumnName(i) and getColumnType(i) for each column."
+}

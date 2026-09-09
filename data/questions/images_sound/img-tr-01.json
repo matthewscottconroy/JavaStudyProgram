@@ -1,0 +1,9 @@
+{
+  "id" : "img-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is drawn at (10, 20) if img is 100x50 pixels?",
+  "code" : "BufferedImage img = ImageIO.read(new File(\"sprite.png\"));\n// In paintComponent:\ng.drawImage(img, 10, 20, this);",
+  "answer" : "The image at (10,20), occupying (10,20) to (110,70)",
+  "explanation" : "drawImage with no width/height uses the image's natural size: 100x50. Top-left at (10,20), bottom-right at (10+100-1, 20+50-1) = (109, 69)."
+}

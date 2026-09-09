@@ -1,0 +1,9 @@
+{
+  "id" : "fpar-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "import java.util.function.*;\nPredicate<String> isLong = s -> s.length() > 5;\nPredicate<String> startsWithA = s -> s.startsWith(\"A\");\nPredicate<String> both = isLong.and(startsWithA);\nSystem.out.println(both.test(\"Algorithm\"));\nSystem.out.println(both.test(\"Ant\"));",
+  "answer" : "true\nfalse",
+  "explanation" : "\"Algorithm\" has length 9 > 5 and starts with 'A' → true. \"Ant\" has length 3, not > 5 → false. Predicate.and() requires both conditions."
+}

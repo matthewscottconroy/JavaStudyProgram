@@ -1,0 +1,9 @@
+{
+  "id" : "ref-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "class Foo {\n    public void alpha() {}\n    public void beta() {}\n    private void gamma() {}\n}\nSystem.out.println(Foo.class.getDeclaredMethods().length);",
+  "answer" : "3",
+  "explanation" : "getDeclaredMethods() returns all methods declared in Foo: alpha, beta, gamma (including private). Length = 3. getMethods() would return more, including inherited methods from Object."
+}

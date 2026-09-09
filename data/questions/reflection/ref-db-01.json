@@ -1,0 +1,10 @@
+{
+  "id" : "ref-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 4,
+  "prompt" : "This reflection code throws IllegalAccessException. Why?",
+  "code" : "class Secret { private int pin = 1234; }\n// in main:\nSecret s = new Secret();\nField f = s.getClass().getDeclaredField(\"pin\");\nSystem.out.println(f.get(s));",
+  "choices" : [ "getDeclaredField only works on public fields", "f.get(s) is missing setAccessible(true) before accessing the private field", "Secret needs to implement Serializable", "int fields cannot be retrieved via reflection" ],
+  "answer" : "b",
+  "explanation" : "Accessing a private field via reflection requires f.setAccessible(true) before calling f.get(). Without it, the JVM enforces the private access modifier and throws IllegalAccessException."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "acm-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "Which access modifier makes a member visible everywhere?",
+  "choices" : [ "private", "protected", "public", "package-private" ],
+  "answer" : "c",
+  "explanation" : "'public' means any class in any package can access it. 'private' restricts to the declaring class. 'protected' allows subclasses and same-package access. Package-private (no modifier) allows same-package access only."
+}

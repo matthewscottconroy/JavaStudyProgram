@@ -1,0 +1,9 @@
+{
+  "id" : "cpn-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Why is composition often preferred over inheritance?",
+  "choices" : [ "Composition is faster at runtime", "Composition avoids the fragile base-class problem and allows behaviour to change at runtime", "Composition uses less memory", "Composition is required by the Java specification" ],
+  "answer" : "b",
+  "explanation" : "Inheritance tightly couples a subclass to its parent — changes to the base class can break subclasses. Composition lets you swap implementations (e.g. different Engine types) without changing the Car class, and avoids deep inheritance hierarchies."
+}

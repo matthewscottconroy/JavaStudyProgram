@@ -1,0 +1,9 @@
+{
+  "id" : "acm-mc-09",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Can a subclass access a private field of its parent class?",
+  "choices" : [ "Yes, subclasses always inherit private fields", "Yes, but only via super.field", "No, private fields are invisible to subclasses", "Yes, but only if the subclass is in the same package" ],
+  "answer" : "c",
+  "explanation" : "private is strictly class-scoped. Subclasses cannot directly see or modify private fields. They can access them indirectly through public/protected getters and setters defined in the parent."
+}

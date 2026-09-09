@@ -1,0 +1,9 @@
+{
+  "id" : "arr-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does Arrays.sort(arr) do?",
+  "choices" : [ "Returns a new sorted array without modifying arr", "Sorts arr in-place in ascending order", "Returns the index of the smallest element", "Sorts arr in descending order" ],
+  "answer" : "b",
+  "explanation" : "Arrays.sort(arr) sorts the array in-place (modifies arr directly) in ascending order. It uses a dual-pivot quicksort for primitives and mergesort for objects. To sort descending: for objects use Arrays.sort(arr, Collections.reverseOrder())."
+}

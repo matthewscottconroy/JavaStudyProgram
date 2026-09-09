@@ -1,0 +1,9 @@
+{
+  "id" : "ios-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "Which class is typically used to read user input from System.in?",
+  "choices" : [ "InputReader", "BufferedInputStream", "Scanner", "Console" ],
+  "answer" : "c",
+  "explanation" : "Scanner wraps System.in and provides nextLine(), nextInt(), nextDouble() etc. for convenient token-based reading. BufferedReader(new InputStreamReader(System.in)) is also common and more efficient for large input. Console is useful for password reading (masks characters) but isn't available in all environments."
+}

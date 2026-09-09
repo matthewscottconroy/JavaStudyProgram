@@ -1,0 +1,10 @@
+{
+  "id" : "lp-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "for (int i = 0; i < 5; i++) {\n    if (i == 3) break;\n    System.out.print(i + \" \");\n}",
+  "answer" : "0 1 2",
+  "alternatives" : [ "0 1 2" ],
+  "explanation" : "i=0,1,2 print normally. When i=3, break exits the loop before printing."
+}

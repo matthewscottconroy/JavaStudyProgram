@@ -1,0 +1,9 @@
+{
+  "id" : "g2d-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which draws a red-to-blue horizontal gradient across a 200x100 rectangle?",
+  "choices" : [ "g.setColor(Color.RED); g.fillRect(0,0,200,100);", "Graphics2D g2d = (Graphics2D) g; g2d.setPaint(new GradientPaint(0,0,Color.RED,200,0,Color.BLUE)); g2d.fillRect(0,0,200,100);", "Graphics2D g2d = (Graphics2D) g; g2d.setGradient(Color.RED, Color.BLUE); g2d.fillRect(0,0,200,100);", "g.drawGradient(0,0,200,100,Color.RED,Color.BLUE);" ],
+  "answer" : "b",
+  "explanation" : "GradientPaint(x1,y1,startColor, x2,y2,endColor) defines a linear gradient from left to right. setPaint sets it as the current paint; fillRect uses it. Options C and D use methods that don't exist in the Graphics/Graphics2D API."
+}

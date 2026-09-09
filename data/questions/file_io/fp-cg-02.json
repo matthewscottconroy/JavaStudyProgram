@@ -1,0 +1,9 @@
+{
+  "id" : "fp-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which reads all lines from 'data.csv' and prints each one?",
+  "choices" : [ "File f = new File(\"data.csv\"); System.out.println(f.read());", "try (Stream<String> lines = Files.lines(Path.of(\"data.csv\"))) { lines.forEach(System.out::println); }", "Files.readAllLines(\"data.csv\").print();", "Scanner sc = new Scanner(\"data.csv\"); while (sc.hasNext()) System.out.println(sc.next());" ],
+  "answer" : "b",
+  "explanation" : "Files.lines() returns a lazy Stream<String>. forEach prints each line. Wrapping in try-with-resources closes the underlying file stream. Option C: readAllLines requires a Path, not a String; and List has no print() method. Option D: new Scanner(String) treats the string as data, not a file path."
+}

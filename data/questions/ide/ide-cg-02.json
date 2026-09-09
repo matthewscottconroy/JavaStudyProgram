@@ -1,0 +1,9 @@
+{
+  "id" : "ide-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which action in IntelliJ generates getters and setters for a class's private fields?",
+  "choices" : [ "Right-click → Refactor → Extract Field", "Alt+Insert → Getter and Setter", "Ctrl+Shift+G", "Edit → Generate → Implements" ],
+  "answer" : "b",
+  "explanation" : "Alt+Insert (Generate menu) lets you choose Getter, Setter, or Getter and Setter. IntelliJ generates correct boilerplate based on the field names and types. This avoids typos and is faster than writing them manually."
+}

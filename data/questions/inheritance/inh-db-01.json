@@ -1,0 +1,10 @@
+{
+  "id" : "inh-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "This code has a compile error. Why?",
+  "code" : "class Vehicle {\n    Vehicle(String type) { System.out.println(type); }\n}\nclass Car extends Vehicle {\n    Car() { }\n}",
+  "choices" : [ "Car cannot extend Vehicle because Vehicle has no interface", "Car() implicitly calls super() but Vehicle has no no-arg constructor", "Vehicle's constructor must be private", "Car needs @Override on its constructor" ],
+  "answer" : "b",
+  "explanation" : "When Car() runs, Java implicitly inserts 'super()' as the first call. But Vehicle has only a one-arg constructor — there is no no-arg version. Fix: explicitly call super(\"sometype\") as the first line of Car()."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "if-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "Which keyword introduces the alternative branch in an if statement?",
+  "choices" : [ "otherwise", "else", "or", "default" ],
+  "answer" : "b",
+  "explanation" : "Java uses 'else' for the alternative branch. 'default' is used in switch statements. 'otherwise' and 'or' are not Java keywords."
+}

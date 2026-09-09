@@ -1,0 +1,10 @@
+{
+  "id" : "var-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "Which of the following is a valid Java variable name?",
+  "choices" : [ "2ndValue", "_myVar", "my-var", "class" ],
+  "answer" : "b",
+  "explanation" : "_myVar is valid. Variable names must start with a letter, underscore, or dollar sign. They cannot start with a digit (2ndValue), contain hyphens (my-var), or use reserved keywords (class).",
+  "hints" : [ "Reserved words and operators cannot be used as identifiers." ]
+}

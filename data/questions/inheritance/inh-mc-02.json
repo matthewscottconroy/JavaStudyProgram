@@ -1,0 +1,9 @@
+{
+  "id" : "inh-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does 'super()' do inside a subclass constructor?",
+  "choices" : [ "Calls the subclass's own constructor recursively", "Calls the parent class's constructor", "Creates a new instance of the parent class", "Prevents the parent constructor from running" ],
+  "answer" : "b",
+  "explanation" : "super() must be the first statement in a subclass constructor (if used). It invokes the parent class constructor to initialise inherited state. If you omit it and the parent has no no-arg constructor, a compile error results."
+}

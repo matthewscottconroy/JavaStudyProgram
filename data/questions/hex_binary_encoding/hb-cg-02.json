@@ -1,0 +1,9 @@
+{
+  "id" : "hb-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which code checks if the 3rd bit (bit index 2) of variable 'x' is set?",
+  "choices" : [ "if (x & 2) { }", "if ((x & (1 << 2)) != 0) { }", "if (x.bit(2)) { }", "if (x | (1 << 2)) { }" ],
+  "answer" : "b",
+  "explanation" : "1 << 2 = 4 (bit 2 set). x & 4 is nonzero only if bit 2 is set. Option A checks bit 1 (1 << 1 = 2), not bit 2. Option C: int has no bit() method. Option D: | always sets the bit rather than checking it."
+}

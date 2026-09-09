@@ -1,0 +1,10 @@
+{
+  "id" : "ref-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 4,
+  "prompt" : "Invocation via reflection throws InvocationTargetException. What does this mean?",
+  "code" : "Method m = String.class.getMethod(\"charAt\", int.class);\nm.invoke(\"hello\", 10);  // throws InvocationTargetException",
+  "choices" : [ "The method does not exist", "The invoked method itself threw an exception — it is wrapped in InvocationTargetException", "The object is null", "The method signature doesn't match" ],
+  "answer" : "b",
+  "explanation" : "InvocationTargetException wraps any exception thrown by the reflectively invoked method. To get the actual cause: e.getCause(). Contrast with IllegalAccessException (access denied) and NoSuchMethodException (method not found)."
+}

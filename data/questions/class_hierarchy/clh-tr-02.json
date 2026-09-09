@@ -1,0 +1,9 @@
+{
+  "id" : "clh-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "class Shape { String name() { return \"Shape\"; } }\nclass Circle extends Shape { @Override String name() { return \"Circle\"; } }\nShape[] arr = { new Shape(), new Circle(), new Circle() };\nfor (Shape s : arr) System.out.print(s.name() + \" \");",
+  "answer" : "Shape Circle Circle",
+  "explanation" : "Dynamic dispatch: the actual runtime type determines which name() runs. new Shape() → \"Shape\". new Circle() → \"Circle\" (overridden). Output: Shape Circle Circle (with trailing space)."
+}

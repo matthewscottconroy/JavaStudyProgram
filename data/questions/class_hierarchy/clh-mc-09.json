@@ -1,0 +1,9 @@
+{
+  "id" : "clh-mc-09",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the output of: System.out.println(new Dog() instanceof Animal); — given Dog extends Animal?",
+  "choices" : [ "false", "true", "Depends on whether Dog overrides any method", "Compile error" ],
+  "answer" : "b",
+  "explanation" : "instanceof checks the full type hierarchy. A Dog IS-AN Animal (by inheritance), so instanceof returns true. Also true for all implemented interfaces."
+}

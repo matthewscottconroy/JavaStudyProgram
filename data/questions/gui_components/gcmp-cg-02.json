@@ -1,0 +1,9 @@
+{
+  "id" : "gcmp-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which creates a JTextField that shows placeholder-style prompt and retrieves the typed text?",
+  "choices" : [ "JTextField field = new JTextField(\"Enter name here\"); String text = field.getValue();", "JTextField field = new JTextField(20); field.setToolTipText(\"Enter name\"); String text = field.getText();", "JTextField field = new JTextField(); field.setPlaceholder(\"Enter name\"); String text = field.getText();", "JTextField field = new JTextField(\"Enter name\", 20); String text = field.getText();" ],
+  "answer" : "d",
+  "explanation" : "JTextField(String text, int columns) sets initial text and visible width. getText() retrieves the current content. Option B uses a tooltip (not the same as initial text). Option C — setPlaceholder() doesn't exist in standard Swing. For real placeholder text, use a custom DocumentListener or FocusListener approach."
+}

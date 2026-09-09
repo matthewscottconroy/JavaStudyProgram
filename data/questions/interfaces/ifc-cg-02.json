@@ -1,0 +1,9 @@
+{
+  "id" : "ifc-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which correctly defines an interface Printable with a default print() and abstract format()?",
+  "choices" : [ "abstract interface Printable { void format(); default void print() { System.out.println(format()); } }", "interface Printable { String format(); default void print() { System.out.println(format()); } }", "interface Printable { default String format() { return \"\"; } void print(); }", "class Printable { abstract String format(); void print() { System.out.println(format()); } }" ],
+  "answer" : "b",
+  "explanation" : "format() is abstract (no body) so implementing classes must provide it. print() is default — it provides a reusable implementation calling format(). Option A: 'abstract interface' is redundant and format() returns void (can't use in println). Option D uses class, not interface."
+}

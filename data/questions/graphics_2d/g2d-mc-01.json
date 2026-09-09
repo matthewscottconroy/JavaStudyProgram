@@ -1,0 +1,9 @@
+{
+  "id" : "g2d-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "How do you get a Graphics2D object inside paintComponent()?",
+  "choices" : [ "Graphics2D g2d = new Graphics2D();", "Graphics2D g2d = (Graphics2D) g;", "Graphics2D g2d = Graphics2D.create();", "Graphics2D g2d = getGraphics2D();" ],
+  "answer" : "b",
+  "explanation" : "The Graphics parameter passed to paintComponent is actually a Graphics2D instance at runtime. Cast it: Graphics2D g2d = (Graphics2D) g; Graphics2D adds anti-aliasing, strokes, transforms, and gradient fills not available in Graphics."
+}

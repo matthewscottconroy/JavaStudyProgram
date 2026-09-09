@@ -1,0 +1,9 @@
+{
+  "id" : "ser-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is serialVersionUID used for?",
+  "choices" : [ "To set the version of Java used to compile the class", "To uniquely identify the class version so deserialization can detect incompatible changes", "To control the order in which fields are serialized", "To specify how many instances can be deserialized" ],
+  "answer" : "b",
+  "explanation" : "serialVersionUID is a version stamp. If you deserialize a stream with a different serialVersionUID than the current class definition, an InvalidClassException is thrown. Declare it as 'private static final long serialVersionUID = 1L;' to control compatibility explicitly."
+}

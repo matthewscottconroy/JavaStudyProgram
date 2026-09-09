@@ -1,0 +1,9 @@
+{
+  "id" : "thr-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "Thread t = new Thread(() -> System.out.println(\"background\"));\nt.start();\nt.join();\nSystem.out.println(\"main\");",
+  "answer" : "background\nmain",
+  "explanation" : "t.start() launches the background thread. t.join() blocks main until t finishes. So 'background' prints before 'main'. Output order is guaranteed."
+}

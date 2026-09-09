@@ -1,0 +1,9 @@
+{
+  "id" : "arg-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "Running 'java MyApp hello world' — what is args[0]?",
+  "choices" : [ "MyApp", "java", "hello", "world" ],
+  "answer" : "c",
+  "explanation" : "The program name and 'java' are not included in args. args[0] = \"hello\", args[1] = \"world\"."
+}

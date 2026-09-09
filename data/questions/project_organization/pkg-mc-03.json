@@ -1,0 +1,9 @@
+{
+  "id" : "pkg-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does 'import java.util.*;' do?",
+  "choices" : [ "Imports every class from every java.* package", "Imports all public classes from the java.util package", "Imports static methods from java.util", "Creates an alias for java.util.ArrayList" ],
+  "answer" : "b",
+  "explanation" : "The wildcard import imports all public classes from java.util (ArrayList, HashMap, List, etc.) without importing sub-packages. It does not affect performance — the compiler resolves which classes are used. Explicit imports (import java.util.ArrayList;) are preferred for clarity."
+}

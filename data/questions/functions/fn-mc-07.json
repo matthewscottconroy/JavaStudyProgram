@@ -1,0 +1,9 @@
+{
+  "id" : "fn-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is a stack overflow in the context of recursive methods?",
+  "choices" : [ "Running out of memory in the heap", "Too many recursive calls filling the call stack, causing a StackOverflowError", "A method calling itself with the correct base case missing from compilation", "An arithmetic overflow in a recursive formula" ],
+  "answer" : "b",
+  "explanation" : "Each method call adds a frame to the call stack. Deep or infinite recursion fills the stack, causing java.lang.StackOverflowError. The fix: ensure a correct base case is reached, or convert deep recursion to iteration."
+}

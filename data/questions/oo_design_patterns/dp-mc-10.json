@@ -1,0 +1,9 @@
+{
+  "id" : "dp-mc-10",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "The Open/Closed Principle states that software entities should be…",
+  "choices" : [ "Open for modification, closed for extension", "Open for extension, closed for modification", "Open to all packages, closed to reflection", "Closed at compile time, open at runtime" ],
+  "answer" : "b",
+  "explanation" : "OCP: you should be able to add new behavior by adding new code (extension), not by changing existing code (modification). Example: use Strategy pattern so new algorithms can be added without touching the Context class."
+}

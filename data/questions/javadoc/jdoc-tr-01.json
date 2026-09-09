@@ -1,0 +1,9 @@
+{
+  "id" : "jdoc-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "How many Javadoc tags are in this comment?",
+  "code" : "/**\n * Adds two integers.\n * @param a the first addend\n * @param b the second addend\n * @return the sum of a and b\n */\npublic int add(int a, int b) { return a + b; }",
+  "answer" : "3",
+  "explanation" : "There are three Javadoc block tags: @param a, @param b, and @return. The opening sentence is a summary (not a tag). Tags start with @."
+}

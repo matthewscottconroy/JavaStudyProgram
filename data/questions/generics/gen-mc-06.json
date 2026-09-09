@@ -1,0 +1,9 @@
+{
+  "id" : "gen-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Why can't you write 'new T()' inside a generic class?",
+  "choices" : [ "T might be abstract", "Due to type erasure, T is replaced by Object at runtime — the JVM doesn't know which constructor to call", "Generic types cannot have constructors", "You must use 'new T<>()' instead" ],
+  "answer" : "b",
+  "explanation" : "Type erasure removes T at runtime. The JVM sees Object, not the actual type. Workaround: pass a Class<T> or a Supplier<T> to the constructor and use it to create instances."
+}

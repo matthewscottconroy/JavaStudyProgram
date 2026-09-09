@@ -1,0 +1,9 @@
+{
+  "id" : "inh-mc-09",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the correct way to prevent a class from being subclassed?",
+  "choices" : [ "Declare all methods private", "Use the 'sealed' or 'final' keyword on the class", "Make the class abstract", "Remove the default constructor" ],
+  "answer" : "b",
+  "explanation" : "'final class MyClass { }' prevents any class from extending it. Java 15+ 'sealed class' restricts which specific classes may extend it. Abstract classes actively want to be extended. Making methods private doesn't prevent subclassing."
+}

@@ -1,0 +1,10 @@
+{
+  "id" : "thr-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 4,
+  "prompt" : "This code causes a race condition. Why?",
+  "code" : "class BankAccount {\n    private int balance = 1000;\n    void withdraw(int amount) {\n        if (balance >= amount) {\n            balance -= amount;\n        }\n    }\n}",
+  "choices" : [ "balance must be static", "The if-check and subtraction are two separate operations — another thread can withdraw between them", "int cannot hold negative values after subtraction", "balance must be volatile to be thread-safe" ],
+  "answer" : "b",
+  "explanation" : "Thread A checks balance >= 500, then Thread B also passes the check (balance is still 1000). Both subtract 500 — balance ends at 0 when only one withdrawal should succeed. Fix: declare withdraw() synchronized, or use AtomicInteger with compareAndSet()."
+}

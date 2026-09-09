@@ -1,0 +1,10 @@
+{
+  "id" : "fn-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "The method should work for any number of values but only accepts 3. What should change?",
+  "code" : "static int sum(int a, int b, int c) {\n    return a + b + c;\n}",
+  "choices" : [ "Change return type to double", "Change parameters to (int[] values) or (int... values) to accept variable number of ints", "Rename the method to sumAll", "Add more overloads: sum(int a, int b) and sum(int a, int b, int c, int d)" ],
+  "answer" : "b",
+  "explanation" : "Using int... values (varargs) allows calling sum(1), sum(1,2,3), sum(1,2,3,4,5). Inside the method: for (int v : values) total += v; Adding overloads (option D) doesn't scale — you'd need overloads for every count."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "dbt-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "A NullPointerException stack trace says 'at MyClass.process(MyClass.java:42)'. What does this tell you?",
+  "choices" : [ "Line 42 has a syntax error", "The NPE was thrown at line 42 of MyClass.java", "MyClass has 42 fields", "The JVM ran out of memory at line 42" ],
+  "answer" : "b",
+  "explanation" : "Each 'at' line in a stack trace shows a stack frame: class, method, file, and line number. The topmost frame is where the exception was thrown. Read from top to bottom to trace the call path that led to the error."
+}

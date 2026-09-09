@@ -1,0 +1,10 @@
+{
+  "id" : "var-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 1,
+  "prompt" : "Which line correctly declares an integer variable named 'score' with the value 100?",
+  "choices" : [ "int score = 100;", "integer score = 100;", "int score == 100;", "var int score = 100;" ],
+  "answer" : "a",
+  "explanation" : "The correct syntax is: type name = value; Java uses = for assignment, not ==. 'integer' is not a type; 'Integer' is a class. 'var int' is not valid syntax.",
+  "hints" : [ "Type comes first, then name, then = then value." ]
+}

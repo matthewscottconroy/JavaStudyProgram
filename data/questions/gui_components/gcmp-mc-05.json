@@ -1,0 +1,9 @@
+{
+  "id" : "gcmp-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which Swing component displays multi-line text that the user can edit?",
+  "choices" : [ "JTextField", "JTextPane", "JTextArea", "JLabel" ],
+  "answer" : "c",
+  "explanation" : "JTextArea is a multi-line plain-text editor. Set size with rows/cols constructor: new JTextArea(10, 40). Wrap in JScrollPane for scroll bars. JTextPane supports styled text (fonts, colors) but is more complex."
+}

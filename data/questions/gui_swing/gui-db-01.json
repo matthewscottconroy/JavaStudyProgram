@@ -1,0 +1,10 @@
+{
+  "id" : "gui-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "The button click handler performs a 5-second network call. What is the problem?",
+  "code" : "button.addActionListener(e -> {\n    String data = fetchFromServer(); // takes 5 seconds\n    label.setText(data);\n});",
+  "choices" : [ "ActionListener cannot be a lambda", "label.setText() requires the text to be a number", "The 5-second call blocks the EDT, freezing the entire GUI", "fetchFromServer() must be declared static" ],
+  "answer" : "c",
+  "explanation" : "ActionListeners run on the EDT. A long-running call blocks all GUI events, making the window unresponsive. Fix: run the network call in a background thread (SwingWorker or Thread), then update the label on the EDT with SwingUtilities.invokeLater()."
+}

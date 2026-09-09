@@ -1,0 +1,9 @@
+{
+  "id" : "mvn-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which Maven lifecycle phase runs unit tests?",
+  "choices" : [ "compile", "validate", "test", "verify" ],
+  "answer" : "c",
+  "explanation" : "Maven's default lifecycle: validate → compile → test → package → verify → install → deploy. Running 'mvn test' executes all phases up to and including test. To skip tests: mvn package -DskipTests (not recommended for production builds)."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "mvn-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does the 'test' dependency scope mean?",
+  "choices" : [ "The dependency is only available at compile time", "The dependency is available everywhere including production", "The dependency is only on the classpath during testing and is not packaged", "The dependency is downloaded only when tests fail" ],
+  "answer" : "c",
+  "explanation" : "Scope 'test' restricts the dependency to the test compile and test runtime classpaths. JUnit and Mockito are typical test-scoped dependencies — they must not ship in the production JAR."
+}

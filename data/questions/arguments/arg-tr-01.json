@@ -1,0 +1,10 @@
+{
+  "id" : "arg-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "If run as 'java Counter 3', what is printed?",
+  "code" : "public static void main(String[] args) {\n    int n = Integer.parseInt(args[0]);\n    for (int i = 0; i < n; i++) System.out.print(i + \" \");\n}",
+  "answer" : "0 1 2",
+  "alternatives" : [ "0 1 2" ],
+  "explanation" : "parseInt(\"3\") gives 3. The loop prints 0, 1, 2, each with a trailing space."
+}

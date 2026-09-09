@@ -1,0 +1,9 @@
+{
+  "id" : "ref-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "How do you get the Class object for a class named 'Dog' at runtime?",
+  "choices" : [ "Dog.classOf()", "Class.get(Dog.class)", "Dog.class", "Class.forName(\"Dog\")" ],
+  "answer" : "d",
+  "explanation" : "Class.forName(\"com.example.Dog\") loads the class by its fully qualified name at runtime. Dog.class is a compile-time class literal (not runtime-dynamic). Both are valid depending on the use case, but Class.forName() is the runtime-reflection approach."
+}

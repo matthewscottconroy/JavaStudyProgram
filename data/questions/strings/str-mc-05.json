@@ -1,0 +1,9 @@
+{
+  "id" : "str-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does s.indexOf('z') return if 'z' is not in the string?",
+  "choices" : [ "0", "-1", "null", "Throws StringIndexOutOfBoundsException" ],
+  "answer" : "b",
+  "explanation" : "indexOf() returns -1 when the character or substring is not found. This is a sentinel value — always check for -1 before using the result: int i = s.indexOf('z'); if (i != -1) { ... }"
+}

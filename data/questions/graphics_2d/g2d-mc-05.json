@@ -1,0 +1,9 @@
+{
+  "id" : "g2d-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does g2d.rotate(Math.PI / 4) do?",
+  "choices" : [ "Rotates the entire JPanel 45 degrees", "Rotates the Graphics2D coordinate system 45 degrees clockwise around the origin", "Rotates an image 45 degrees without affecting other drawing", "Rotates text only" ],
+  "answer" : "b",
+  "explanation" : "Graphics2D transforms affect the coordinate system, not just a single shape. After rotate(Math.PI/4), all subsequent draw calls are rotated. Save/restore the transform: AffineTransform old = g2d.getTransform(); ... g2d.setTransform(old); to limit rotation to specific shapes."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "glay-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does FlowLayout do?",
+  "choices" : [ "Stacks components vertically, one per row", "Places components in a row left-to-right, wrapping to the next row when full", "Divides the container into a fixed grid", "Places components at absolute pixel coordinates" ],
+  "answer" : "b",
+  "explanation" : "FlowLayout (the default for JPanel) arranges components in a row, left to right. When the row is full it wraps to the next line. Components keep their preferred size. Use it for toolbars or simple rows of buttons."
+}

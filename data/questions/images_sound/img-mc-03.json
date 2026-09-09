@@ -1,0 +1,9 @@
+{
+  "id" : "img-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which class wraps an image for use as a JLabel or JButton icon?",
+  "choices" : [ "ImageLabel", "ImageIcon", "IconImage", "SpriteImage" ],
+  "answer" : "b",
+  "explanation" : "ImageIcon wraps an Image and implements the Icon interface used by JLabel and JButton. Example: JLabel label = new JLabel(new ImageIcon(\"logo.png\")); Or from a BufferedImage: new ImageIcon(bufferedImage)."
+}

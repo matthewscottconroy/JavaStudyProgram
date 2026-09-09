@@ -1,0 +1,9 @@
+{
+  "id" : "ml-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 4,
+  "prompt" : "What does a feature represent in machine learning?",
+  "choices" : [ "A trained neural network node", "An input variable used to make predictions", "A measure of model accuracy", "A type of loss function" ],
+  "answer" : "b",
+  "explanation" : "Features are the measurable properties of the data used as model inputs. Example: predicting house prices — features might be square footage, number of rooms, location. Feature engineering (selecting and transforming features) often has more impact than model choice."
+}

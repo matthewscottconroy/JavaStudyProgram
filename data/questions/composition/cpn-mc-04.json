@@ -1,0 +1,9 @@
+{
+  "id" : "cpn-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is dependency injection?",
+  "choices" : [ "A compiler feature that automatically creates object fields", "Providing an object's dependencies from outside rather than having the object create them itself", "A way to inject code at runtime using reflection", "A pattern where one class inherits from multiple parents" ],
+  "answer" : "b",
+  "explanation" : "DI: instead of 'class Car { Engine e = new Engine(); }', write 'class Car { Engine e; Car(Engine e) { this.e = e; } }'. The caller decides which Engine to use. This makes Car testable (pass a mock Engine), configurable (pass a diesel or electric Engine), and loosely coupled."
+}

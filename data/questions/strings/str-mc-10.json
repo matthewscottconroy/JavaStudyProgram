@@ -1,0 +1,9 @@
+{
+  "id" : "str-mc-10",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does Integer.parseInt(\"42\") return?",
+  "choices" : [ "The String \"42\"", "The int 42", "A Character array", "null" ],
+  "answer" : "b",
+  "explanation" : "Integer.parseInt(String) converts a numeric string to an int. Throws NumberFormatException if the string is not a valid integer. Integer.valueOf(\"42\") returns an Integer object instead of a primitive int."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "hb-mc-09",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does the left-shift operator << do?",
+  "choices" : [ "Moves bits to the right, filling with 0", "Moves bits to the left, filling with 0 on the right — equivalent to multiplying by 2^n", "Rotates bits circularly", "Performs signed division by 2" ],
+  "answer" : "b",
+  "explanation" : "x << n shifts all bits of x left by n positions. 1 << 3 = 8 (1 shifted left 3 = 2³). Useful for fast powers-of-2 multiplication and bit flags."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "g2d-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the Shape interface in Java2D?",
+  "choices" : [ "An interface that all Swing components implement for custom bounds", "An interface representing a geometric shape that can be drawn, filled, or used for hit testing", "An interface that Graphics2D uses instead of Graphics", "An interface for 3D shapes in JavaFX" ],
+  "answer" : "b",
+  "explanation" : "Shape is implemented by Rectangle2D, Ellipse2D, Path2D, Arc2D, etc. g2d.draw(shape) draws the outline; g2d.fill(shape) fills it. shape.contains(x, y) checks if a point is inside — useful for click hit testing."
+}

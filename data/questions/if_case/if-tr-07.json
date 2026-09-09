@@ -1,0 +1,9 @@
+{
+  "id" : "if-tr-07",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed? (fall-through in switch)",
+  "code" : "int x = 2;\nswitch (x) {\n    case 1:\n    case 2:\n    case 3: System.out.println(\"low\"); break;\n    default: System.out.println(\"high\");\n}",
+  "answer" : "low",
+  "explanation" : "x=2 matches case 2. There is no break, so it falls through to case 3 which prints \"low\" and breaks."
+}

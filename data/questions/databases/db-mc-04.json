@@ -1,0 +1,9 @@
+{
+  "id" : "db-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 4,
+  "prompt" : "What does connection.setAutoCommit(false) enable?",
+  "choices" : [ "Faster queries by skipping disk writes", "Manual transaction control — changes are not saved until connection.commit() is called", "Read-only mode for the connection", "Automatic retry on connection failure" ],
+  "answer" : "b",
+  "explanation" : "By default, each SQL statement is committed immediately (autoCommit=true). Disabling it lets you group multiple statements into one atomic transaction. If any statement fails, call connection.rollback() to undo all changes in the transaction. Always use try/catch to rollback on exception."
+}

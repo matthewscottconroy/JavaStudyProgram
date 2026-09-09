@@ -1,0 +1,9 @@
+{
+  "id" : "inh-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is method hiding (not overriding) in Java?",
+  "choices" : [ "A subclass declares a static method with the same name as a parent static method", "A subclass makes a parent method private", "A subclass renames an inherited method", "A final method in the parent class" ],
+  "answer" : "a",
+  "explanation" : "Static methods are class-level, not virtual. A subclass declaring a static method with the same signature 'hides' the parent's version rather than overriding it. The version called depends on the reference type, not the object type (no dynamic dispatch)."
+}

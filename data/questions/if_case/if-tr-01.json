@@ -1,0 +1,9 @@
+{
+  "id" : "if-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 1,
+  "prompt" : "What is printed?",
+  "code" : "int x = 10;\nif (x > 5) {\n    System.out.println(\"big\");\n} else {\n    System.out.println(\"small\");\n}",
+  "answer" : "big",
+  "explanation" : "x = 10 > 5 is true, so the if-block runs and prints \"big\"."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "img-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which class is used to load an image from a file in Swing?",
+  "choices" : [ "Image.load()", "BufferedImage", "ImageIO.read()", "Picture" ],
+  "answer" : "c",
+  "explanation" : "ImageIO.read(File) loads an image file (PNG, JPEG, GIF, BMP) and returns a BufferedImage. Example: BufferedImage img = ImageIO.read(new File(\"photo.png\")); Wrap in try-catch for IOException. To load from a classpath resource: ImageIO.read(getClass().getResource(\"/images/sprite.png\"));"
+}

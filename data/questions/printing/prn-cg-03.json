@@ -1,0 +1,9 @@
+{
+  "id" : "prn-cg-03",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which builds a formatted string (not printing) from a name and score?",
+  "choices" : [ "System.out.printf(\"%s: %d\", name, score);", "String result = String.format(\"%s: %d\", name, score);", "String result = name + \": \" + score;", "String result = printf(\"%s: %d\", name, score);" ],
+  "answer" : "b",
+  "explanation" : "String.format() returns the formatted String without printing. Option A prints to stdout (doesn't return). Option C works but loses the type-safe formatting benefits. Option D: printf is not a standalone method."
+}

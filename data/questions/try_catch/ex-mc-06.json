@@ -1,0 +1,9 @@
+{
+  "id" : "ex-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does the 'throw' keyword do?",
+  "choices" : [ "Declares that a method may throw an exception", "Catches an exception from inside a catch block", "Explicitly throws an exception object", "Rethrows the last caught exception automatically" ],
+  "answer" : "c",
+  "explanation" : "'throw new IllegalArgumentException(\"bad input\")' creates and immediately throws the exception. 'throws' in the method signature only declares; 'throw' actually fires the exception."
+}

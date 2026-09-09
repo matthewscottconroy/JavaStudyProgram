@@ -1,0 +1,9 @@
+{
+  "id" : "ios-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What happens if you call scanner.nextInt() but the user types a word?",
+  "choices" : [ "It returns 0", "It throws InputMismatchException", "It blocks and waits for an integer", "It skips the input and returns -1" ],
+  "answer" : "b",
+  "explanation" : "nextInt() expects an integer token. If the next token can't be parsed as int, InputMismatchException is thrown and the bad token remains in the Scanner's buffer. Wrap in try/catch and call scanner.next() to discard the bad token before retrying."
+}

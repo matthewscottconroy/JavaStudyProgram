@@ -1,0 +1,9 @@
+{
+  "id" : "fn-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "static void doubleIt(int x) { x = x * 2; }\n// in main:\nint n = 5;\ndoubleIt(n);\nSystem.out.println(n);",
+  "answer" : "5",
+  "explanation" : "Java passes ints by value. doubleIt() doubles its local copy of x, but n in main is unchanged. n is still 5."
+}

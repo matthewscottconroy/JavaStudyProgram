@@ -1,0 +1,10 @@
+{
+  "id" : "sapi-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This produces a ClassCastException. Why?",
+  "code" : "List mixed = List.of(\"hello\", 42, 3.14);\nmixed.stream()\n    .map(o -> (String) o)\n    .forEach(System.out::println);",
+  "choices" : [ "List.of() doesn't support mixed types", "The raw List contains Integer and Double which cannot be cast to String", "stream() doesn't work on untyped lists", "map() requires a typed stream" ],
+  "answer" : "b",
+  "explanation" : "The raw List contains non-String elements. Casting an Integer or Double to String throws ClassCastException. Fix: filter by type first: .filter(o -> o instanceof String).map(o -> (String) o)"
+}

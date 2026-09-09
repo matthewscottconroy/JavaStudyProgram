@@ -1,0 +1,10 @@
+{
+  "id" : "thr-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 4,
+  "prompt" : "This code can deadlock. Why?",
+  "code" : "Object lock1 = new Object(), lock2 = new Object();\nThread t1 = new Thread(() -> { synchronized(lock1) { synchronized(lock2) {} } });\nThread t2 = new Thread(() -> { synchronized(lock2) { synchronized(lock1) {} } });",
+  "choices" : [ "synchronized cannot be used inside lambdas", "Thread t1 and t2 may each acquire one lock and wait for the other, causing deadlock", "lock1 and lock2 must be the same object", "Thread.start() is missing" ],
+  "answer" : "b",
+  "explanation" : "t1 acquires lock1 then waits for lock2. t2 acquires lock2 then waits for lock1. Each holds what the other needs — circular wait = deadlock. Fix: always acquire locks in the same order in all threads."
+}

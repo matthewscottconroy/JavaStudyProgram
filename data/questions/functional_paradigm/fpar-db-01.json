@@ -1,0 +1,10 @@
+{
+  "id" : "fpar-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This 'pure' function is not actually pure. Why?",
+  "code" : "import java.util.*;\nstatic List<Integer> addItem(List<Integer> list, int item) {\n    list.add(item);  // mutation!\n    return list;\n}",
+  "choices" : [ "add() is not a valid method on List", "The function modifies the caller's list (side effect) — it is not pure", "The function should be non-static", "Returning the same list is illegal" ],
+  "answer" : "b",
+  "explanation" : "list.add(item) mutates the List passed in — a side effect that is visible to the caller. A pure version would return a new list: List<Integer> newList = new ArrayList<>(list); newList.add(item); return newList. The original list remains unchanged."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "ifc-tr-04",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "interface Validator {\n    boolean isValid(String s);\n    static boolean isEmpty(String s) { return s == null || s.isEmpty(); }\n}\nSystem.out.println(Validator.isEmpty(\"\"));\nSystem.out.println(Validator.isEmpty(\"hello\"));",
+  "answer" : "true\nfalse",
+  "explanation" : "Static interface methods are called on the interface name itself. isEmpty(\"\") → true (empty string). isEmpty(\"hello\") → false."
+}

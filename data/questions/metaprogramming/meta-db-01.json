@@ -1,0 +1,10 @@
+{
+  "id" : "meta-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 4,
+  "prompt" : "Reading this annotation at runtime returns null. Why?",
+  "code" : "@interface MyTag { String value(); }\n\n@MyTag(\"hello\")\nclass Example {}\n\n// At runtime:\nMyTag tag = Example.class.getAnnotation(MyTag.class); // null!",
+  "choices" : [ "getAnnotation() only works on methods", "Custom annotations default to RetentionPolicy.CLASS — not available at runtime via reflection", "Example.class cannot be loaded at runtime", "value() must be named 'name' for runtime access" ],
+  "answer" : "b",
+  "explanation" : "The default retention policy is RetentionPolicy.CLASS — the annotation exists in the .class file but is not accessible via reflection at runtime. Fix: add @Retention(RetentionPolicy.RUNTIME) to the @interface MyTag declaration."
+}

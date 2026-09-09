@@ -1,0 +1,9 @@
+{
+  "id" : "ut-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What happens when this test runs?",
+  "code" : "@Test\nvoid testUpperCase() {\n    String result = \"hello\".toUpperCase();\n    assertEquals(\"HELLO\", result);\n    assertFalse(result.isEmpty());\n}",
+  "answer" : "The test passes",
+  "explanation" : "\"hello\".toUpperCase() = \"HELLO\". assertEquals passes. \"HELLO\".isEmpty() = false, so assertFalse(false) passes. Both assertions pass — the test passes."
+}

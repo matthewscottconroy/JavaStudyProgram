@@ -1,0 +1,9 @@
+{
+  "id" : "acm-tr-04",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "class Vehicle {\n    public String brand = \"Ford\";\n    protected int year = 2020;\n    private double price = 30000;\n}\n// in same package:\nVehicle v = new Vehicle();\nSystem.out.println(v.brand + \" \" + v.year);",
+  "answer" : "Ford 2020",
+  "explanation" : "brand (public) and year (protected, same package) are both accessible from same-package code. price (private) is not accessible. Output: Ford 2020."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "cmp-mc-09",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the difference between JDK, JRE, and JVM?",
+  "choices" : [ "They are three names for the same tool", "JVM runs bytecode; JRE = JVM + standard library; JDK = JRE + compiler (javac) + dev tools", "JDK is for Linux; JRE for Windows; JVM for Mac", "JRE is for compiling; JDK is for running; JVM handles networking" ],
+  "answer" : "b",
+  "explanation" : "JVM: the virtual machine that executes .class bytecode. JRE (Java Runtime Environment): JVM + standard class libraries — for running Java programs. JDK (Java Development Kit): JRE + javac + javadoc + jdb + other tools — for developing."
+}

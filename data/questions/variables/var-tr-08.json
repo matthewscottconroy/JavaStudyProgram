@@ -1,0 +1,9 @@
+{
+  "id" : "var-tr-08",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is the output?",
+  "code" : "double x = 1.0 / 3.0;\nSystem.out.printf(\"%.4f%n\", x);",
+  "answer" : "0.3333",
+  "explanation" : "1.0 / 3.0 is floating-point division: 0.333333... %.4f formats to 4 decimal places: 0.3333."
+}

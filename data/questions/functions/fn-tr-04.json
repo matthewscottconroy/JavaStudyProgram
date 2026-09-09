@@ -1,0 +1,9 @@
+{
+  "id" : "fn-tr-04",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "static String greet(String name) {\n    return \"Hello, \" + name + \"!\";\n}\nSystem.out.println(greet(\"Bob\"));",
+  "answer" : "Hello, Bob!",
+  "explanation" : "greet(\"Bob\") returns \"Hello, Bob!\". println prints it with a newline."
+}

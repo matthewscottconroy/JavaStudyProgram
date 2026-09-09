@@ -1,0 +1,9 @@
+{
+  "id" : "str-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the result of \"Hello\".startsWith(\"He\")?",
+  "choices" : [ "true", "false", "1", "He" ],
+  "answer" : "a",
+  "explanation" : "startsWith(prefix) returns true if the string begins with the given prefix. endsWith(suffix) checks the end. These are case-sensitive checks."
+}

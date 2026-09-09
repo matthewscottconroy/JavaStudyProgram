@@ -1,0 +1,9 @@
+{
+  "id" : "hb-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "What is the decimal value of 0xFF?",
+  "choices" : [ "15", "16", "255", "256" ],
+  "answer" : "c",
+  "explanation" : "F in hex = 15. 0xFF = (15 × 16) + 15 = 240 + 15 = 255. This is commonly used as a bitmask to extract the lowest 8 bits."
+}

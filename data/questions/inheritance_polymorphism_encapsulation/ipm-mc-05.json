@@ -1,0 +1,9 @@
+{
+  "id" : "ipm-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is polymorphism?",
+  "choices" : [ "A class that can have only one form", "The ability of different objects to respond to the same method call in different ways", "Multiple constructors in one class", "A variable that can hold only one type" ],
+  "answer" : "b",
+  "explanation" : "Polymorphism: one interface, many forms. A collection of Shape objects can each respond to draw() differently — Circle draws a circle, Rectangle draws a rectangle. Code that calls draw() on a Shape works for all subtypes without knowing the specific type."
+}

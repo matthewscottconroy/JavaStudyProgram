@@ -1,0 +1,9 @@
+{
+  "id" : "arg-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Running 'java App 10 20 30' — what is args.length?",
+  "choices" : [ "4", "3", "2", "1" ],
+  "answer" : "b",
+  "explanation" : "args contains the tokens after the class name: \"10\", \"20\", \"30\". The class name 'App' and the command 'java' are not included. args.length = 3. Indices: args[0]=\"10\", args[1]=\"20\", args[2]=\"30\"."
+}

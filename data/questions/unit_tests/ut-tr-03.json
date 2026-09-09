@@ -1,0 +1,9 @@
+{
+  "id" : "ut-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "This test uses @ParameterizedTest. What does it test?",
+  "code" : "@ParameterizedTest\n@ValueSource(ints = {2, 4, 6, 8})\nvoid testIsEven(int n) {\n    assertEquals(0, n % 2);\n}\n",
+  "answer" : "Whether 2, 4, 6, and 8 are each even (n % 2 == 0)",
+  "explanation" : "@ParameterizedTest runs the test once for each value in @ValueSource. 4 values → 4 test executions. Each asserts the input is even. If any assertion fails, that specific value is reported."
+}

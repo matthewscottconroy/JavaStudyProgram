@@ -1,0 +1,9 @@
+{
+  "id" : "rnd-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "When should you use SecureRandom instead of Random?",
+  "choices" : [ "When you need faster random numbers", "When you need cryptographically strong random numbers (e.g., password generation, tokens)", "When seeding with a specific value", "When generating random booleans" ],
+  "answer" : "b",
+  "explanation" : "Random uses a linear congruential generator — predictable if the seed is known. SecureRandom uses OS-level entropy (e.g., /dev/urandom) and is unpredictable. Use SecureRandom for security-sensitive operations: tokens, OTPs, encryption keys."
+}

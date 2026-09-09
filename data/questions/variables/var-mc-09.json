@@ -1,0 +1,9 @@
+{
+  "id" : "var-mc-09",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the result of integer overflow in Java?",
+  "choices" : [ "The program throws ArithmeticException", "The value wraps around (modular arithmetic)", "The variable is automatically promoted to long", "The result is undefined behavior" ],
+  "answer" : "b",
+  "explanation" : "Java integer arithmetic wraps silently on overflow. Integer.MAX_VALUE + 1 wraps to Integer.MIN_VALUE (-2,147,483,648). There is no overflow exception for int/long. Use Math.addExact() if you need overflow detection."
+}

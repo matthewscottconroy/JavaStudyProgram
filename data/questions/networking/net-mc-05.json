@@ -1,0 +1,9 @@
+{
+  "id" : "net-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the difference between TCP and UDP?",
+  "choices" : [ "TCP is faster; UDP is more reliable", "TCP guarantees delivery and ordering; UDP is connectionless with no delivery guarantee but lower overhead", "UDP is used for web; TCP is used only for file transfer", "They are the same protocol with different names" ],
+  "answer" : "b",
+  "explanation" : "TCP (Transmission Control Protocol): connection-oriented, reliable, ordered delivery, flow control. Use for: HTTP, email, file transfer where data integrity matters. UDP (User Datagram Protocol): no connection, no guarantee — some packets may be lost or arrive out of order. Use for: video streaming, gaming, DNS where speed matters more than perfect delivery."
+}

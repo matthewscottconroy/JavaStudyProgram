@@ -1,0 +1,9 @@
+{
+  "id" : "str-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which converts an int to String, then checks if it starts with '4'?",
+  "choices" : [ "int n = 42; if (n.startsWith(\"4\")) {}", "int n = 42; String s = String.valueOf(n); System.out.println(s.startsWith(\"4\"));", "int n = 42; if (Integer.toString(n).charAt(0) == 4) {}", "int n = 42; if (n + \"\".startsWith(\"4\")) {}" ],
+  "answer" : "b",
+  "explanation" : "String.valueOf(n) converts int to String. startsWith(\"4\") checks the prefix. Option A: int has no startsWith() method. Option C: charAt(0) returns '4' (char), not 4 (int) — should compare to '4'. Option D: operator precedence makes \"\" the receiver for startsWith, not n+\"\"."
+}

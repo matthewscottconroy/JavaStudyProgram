@@ -1,0 +1,9 @@
+{
+  "id" : "str-mc-09",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "Why is StringBuilder preferred over String concatenation in a loop?",
+  "choices" : [ "StringBuilder is type-safe; String is not", "Strings are immutable — each + creates a new object; StringBuilder mutates in place, avoiding many allocations", "StringBuilder is guaranteed to be thread-safe", "String concatenation with + is not allowed in loops" ],
+  "answer" : "b",
+  "explanation" : "String s = \"\"; for (...) s += item; — each += creates a new String object. In a large loop this is O(n²). StringBuilder sb = new StringBuilder(); for (...) sb.append(item); is O(n). Use sb.toString() when done."
+}

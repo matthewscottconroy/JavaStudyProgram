@@ -1,0 +1,10 @@
+{
+  "id" : "prn-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 1,
+  "prompt" : "What is the exact output of this code? (include newlines as separate lines)",
+  "code" : "System.out.println(\"Hello\");\nSystem.out.println(\"World\");",
+  "answer" : "hello\nworld",
+  "alternatives" : [ "Hello\nWorld" ],
+  "explanation" : "println prints the string then moves to the next line. Each call produces one line of output."
+}

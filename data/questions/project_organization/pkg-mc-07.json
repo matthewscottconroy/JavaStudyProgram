@@ -1,0 +1,9 @@
+{
+  "id" : "pkg-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "In a Maven project, where should test classes be placed?",
+  "choices" : [ "src/main/java", "src/test/java", "src/main/test", "test/java/src" ],
+  "answer" : "b",
+  "explanation" : "Maven's standard layout separates production code (src/main/java) from test code (src/test/java). Test classes in src/test/java are compiled only when running 'mvn test' or 'mvn package' and are NOT included in the production JAR. Test resources go in src/test/resources."
+}

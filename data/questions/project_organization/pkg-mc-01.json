@@ -1,0 +1,9 @@
+{
+  "id" : "pkg-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "What is a Java package?",
+  "choices" : [ "A compressed JAR file", "A namespace that organizes related classes and controls access", "A collection of methods inside a class", "An import statement" ],
+  "answer" : "b",
+  "explanation" : "A package is a namespace declared at the top of a .java file with 'package com.example;'. It organizes related classes, prevents naming collisions, and controls access (package-private visibility is the default when no modifier is specified)."
+}

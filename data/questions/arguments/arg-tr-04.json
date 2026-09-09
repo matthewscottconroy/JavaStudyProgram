@@ -1,0 +1,9 @@
+{
+  "id" : "arg-tr-04",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "Run as 'java Greeter Alice Bob'. What is printed?",
+  "code" : "public static void main(String[] args) {\n    for (String name : args) {\n        System.out.println(\"Hello, \" + name + \"!\");\n    }\n}",
+  "answer" : "Hello, Alice!\nHello, Bob!",
+  "explanation" : "Iterates over args [\"Alice\", \"Bob\"], printing a greeting for each."
+}

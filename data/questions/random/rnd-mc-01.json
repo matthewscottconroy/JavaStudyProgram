@@ -1,0 +1,9 @@
+{
+  "id" : "rnd-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "Which expression produces a random int in the range [0, 10)?",
+  "choices" : [ "Math.random()", "new Random().nextInt()", "new Random().nextInt(10)", "Random.next(10)" ],
+  "answer" : "c",
+  "explanation" : "nextInt(n) returns a random int from 0 (inclusive) to n (exclusive). nextInt(10) gives 0–9. Math.random() gives a double in [0.0, 1.0). Random.next() does not exist as a public method."
+}

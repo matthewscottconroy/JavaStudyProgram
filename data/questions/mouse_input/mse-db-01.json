@@ -1,0 +1,10 @@
+{
+  "id" : "mse-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This code throws a compile error. Why?",
+  "code" : "panel.addMouseListener(new MouseListener() {\n    @Override\n    public void mouseClicked(MouseEvent e) {\n        System.out.println(\"clicked\");\n    }\n});",
+  "choices" : [ "MouseListener cannot be instantiated as an anonymous class", "Anonymous class doesn't implement all 5 methods of MouseListener", "panel.addMouseListener() does not exist", "MouseEvent must be imported separately" ],
+  "answer" : "b",
+  "explanation" : "MouseListener is an interface with 5 abstract methods. An anonymous class must implement all of them: mouseClicked, mousePressed, mouseReleased, mouseEntered, mouseExited. Fix: extend MouseAdapter instead, which provides empty implementations of all 5."
+}

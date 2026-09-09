@@ -1,0 +1,9 @@
+{
+  "id" : "hb-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "What does the prefix '0x' mean in Java?",
+  "choices" : [ "The number is octal (base 8)", "The number is hexadecimal (base 16)", "The number is binary (base 2)", "The number is floating-point" ],
+  "answer" : "b",
+  "explanation" : "0x indicates a hexadecimal literal. 0xFF = 255 in decimal. 0b prefix indicates binary (0b1010 = 10). 0 prefix alone indicates octal (017 = 15)."
+}

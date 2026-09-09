@@ -1,0 +1,9 @@
+{
+  "id" : "aal-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does Collections.sort(list) do to an ArrayList<Integer>?",
+  "choices" : [ "Returns a new sorted list, leaving the original unchanged", "Sorts the list in-place in ascending natural order", "Sorts the list in descending order", "Throws UnsupportedOperationException" ],
+  "answer" : "b",
+  "explanation" : "Collections.sort() sorts the list in-place in natural (ascending) order. For descending: Collections.sort(list, Collections.reverseOrder()). Java 8+: list.sort(Comparator.naturalOrder()); is equivalent."
+}

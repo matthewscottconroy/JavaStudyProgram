@@ -1,0 +1,9 @@
+{
+  "id" : "fp-cg-03",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which appends a line to an existing file without overwriting it?",
+  "choices" : [ "Files.writeString(Path.of(\"log.txt\"), \"new line\");", "Files.writeString(Path.of(\"log.txt\"), \"new line\\n\", StandardOpenOption.APPEND);", "new FileWriter(\"log.txt\").write(\"new line\");", "Files.appendString(Path.of(\"log.txt\"), \"new line\");" ],
+  "answer" : "b",
+  "explanation" : "StandardOpenOption.APPEND opens the file in append mode. Option A overwrites the file. Option C also overwrites (no append flag) and leaks the FileWriter. Option D: appendString() does not exist in the standard Java API."
+}

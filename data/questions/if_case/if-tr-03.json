@@ -1,0 +1,9 @@
+{
+  "id" : "if-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "int x = 5;\nif (x > 10) {\n    System.out.println(\"A\");\n} else if (x > 3) {\n    System.out.println(\"B\");\n} else {\n    System.out.println(\"C\");\n}",
+  "answer" : "B",
+  "explanation" : "x=5 is not > 10 (skip first branch). x=5 is > 3 (enter second branch), print \"B\". Once a branch is taken, the rest are skipped."
+}

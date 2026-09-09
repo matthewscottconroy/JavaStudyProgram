@@ -1,0 +1,9 @@
+{
+  "id" : "dp-mc-09",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "Which SOLID principle says: a class should have only one reason to change?",
+  "choices" : [ "Open/Closed Principle", "Single Responsibility Principle", "Liskov Substitution Principle", "Interface Segregation Principle" ],
+  "answer" : "b",
+  "explanation" : "SRP: each class should do one thing and have one reason to change. A class mixing business logic with file I/O violates SRP. Split it into a data class and a file handler."
+}

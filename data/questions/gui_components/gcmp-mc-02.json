@@ -1,0 +1,9 @@
+{
+  "id" : "gcmp-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the difference between JCheckBox and JRadioButton?",
+  "choices" : [ "JCheckBox is for numbers; JRadioButton is for text", "JCheckBox allows multiple selections; JRadioButton in a ButtonGroup allows only one", "JRadioButton can be clicked; JCheckBox cannot", "They are identical — just different visual styles" ],
+  "answer" : "b",
+  "explanation" : "JCheckBoxes are independent — any combination can be selected. JRadioButtons are grouped using ButtonGroup so that selecting one deselects the others. Use JCheckBox for on/off flags (e.g., 'Subscribe to newsletter') and JRadioButton for mutually exclusive options (e.g., 'Small / Medium / Large')."
+}

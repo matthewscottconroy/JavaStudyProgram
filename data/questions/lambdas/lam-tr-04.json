@@ -1,0 +1,9 @@
+{
+  "id" : "lam-tr-04",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "import java.util.*;\nimport java.util.function.*;\nList<Integer> nums = new ArrayList<>(List.of(1, 2, 3, 4, 5));\nnums.removeIf(n -> n % 2 == 0);\nSystem.out.println(nums);",
+  "answer" : "[1, 3, 5]",
+  "explanation" : "removeIf(Predicate) removes all elements satisfying the predicate. Even numbers (2, 4) are removed. Remaining: [1, 3, 5]."
+}

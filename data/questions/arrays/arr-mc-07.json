@@ -1,0 +1,9 @@
+{
+  "id" : "arr-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does Arrays.fill(arr, 0) do?",
+  "choices" : [ "Returns a new array filled with zeros", "Sets all elements of arr to 0 in-place", "Counts zeros in arr", "Removes all zero elements from arr" ],
+  "answer" : "b",
+  "explanation" : "Arrays.fill(array, value) sets every element in the array to the given value. Useful to reset or initialize arrays: Arrays.fill(grid, -1); You can also fill a range: Arrays.fill(arr, start, end, value)."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "lam-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which functional interface accepts one argument and returns a boolean?",
+  "choices" : [ "Function<T, Boolean>", "Consumer<T>", "Predicate<T>", "Supplier<T>" ],
+  "answer" : "c",
+  "explanation" : "Predicate<T> has the method 'boolean test(T t)'. Function<T, R> takes one arg and returns R. Consumer<T> takes one arg but returns void. Supplier<T> takes no args but returns T."
+}

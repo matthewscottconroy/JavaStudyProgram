@@ -1,0 +1,9 @@
+{
+  "id" : "jch-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "class Animal {\n    @Override public String toString() { return \"Animal\"; }\n}\nclass Dog extends Animal {\n    @Override public String toString() { return \"Dog\"; }\n}\nAnimal a = new Dog();\nSystem.out.println(a);",
+  "answer" : "Dog",
+  "explanation" : "println calls toString() on the actual runtime type (Dog), not the declared type (Animal). This is polymorphism — the JVM dispatches to Dog.toString()."
+}

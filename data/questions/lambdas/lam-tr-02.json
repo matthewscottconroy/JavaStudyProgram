@@ -1,0 +1,9 @@
+{
+  "id" : "lam-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "import java.util.function.*;\nFunction<String, Integer> len = String::length;\nFunction<Integer, Integer> dbl = x -> x * 2;\nFunction<String, Integer> lenThenDouble = len.andThen(dbl);\nSystem.out.println(lenThenDouble.apply(\"Hello\"));",
+  "answer" : "10",
+  "explanation" : "len: \"Hello\" → 5 (length). dbl: 5 → 10 (doubled). andThen chains: apply(\"Hello\") → len(\"Hello\")=5 → dbl(5)=10."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "col-tr-04",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "import java.util.*;\nDeque<Integer> stack = new ArrayDeque<>();\nstack.push(1);\nstack.push(2);\nstack.push(3);\nSystem.out.println(stack.pop() + \" \" + stack.peek());",
+  "answer" : "3 2",
+  "explanation" : "push adds to front (LIFO). Stack: top→[3,2,1]. pop() removes and returns 3. peek() looks at 2."
+}

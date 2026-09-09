@@ -1,0 +1,9 @@
+{
+  "id" : "prn-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "What is the output of this code?\n\n    System.out.print(\"A\");\n    System.out.print(\"B\");",
+  "choices" : [ "A\nB", "AB", "A B", "A\nB\n" ],
+  "answer" : "b",
+  "explanation" : "print() does not add a newline. Both A and B are printed on the same line with no space between them."
+}

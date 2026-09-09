@@ -1,0 +1,10 @@
+{
+  "id" : "fn-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "The method should return the sum but always returns 0. Why?",
+  "code" : "static int sum(int a, int b) {\n    int result = a + b;\n}\n",
+  "choices" : [ "int cannot hold a sum", "Missing return statement — the result is computed but never returned", "a and b should be doubles", "result needs to be declared outside the method" ],
+  "answer" : "b",
+  "explanation" : "The method computes the sum into 'result' but never returns it. In Java, a non-void method must return a value. Add: return result; before the closing brace."
+}

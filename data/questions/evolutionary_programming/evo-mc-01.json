@@ -1,0 +1,9 @@
+{
+  "id" : "evo-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 4,
+  "prompt" : "What is the purpose of a fitness function in a genetic algorithm?",
+  "choices" : [ "To generate random initial solutions", "To evaluate and score how well a candidate solution solves the problem", "To mutate genes in the population", "To control the size of the population" ],
+  "answer" : "b",
+  "explanation" : "The fitness function maps a candidate solution (individual) to a numeric score. Higher fitness = better solution. The GA uses fitness scores to guide selection: fitter individuals are more likely to be selected for reproduction. Designing a good fitness function is often the hardest part of applying a GA."
+}

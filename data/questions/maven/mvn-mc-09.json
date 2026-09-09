@@ -1,0 +1,9 @@
+{
+  "id" : "mvn-mc-09",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the purpose of the <parent> element in a Maven pom.xml?",
+  "choices" : [ "It specifies the Java version to use", "It inherits configuration (version management, plugin defaults) from a parent POM", "It declares the project's main class", "It points to the remote Maven repository" ],
+  "answer" : "b",
+  "explanation" : "<parent> makes this project inherit from a parent POM. Spring Boot starter parent is the most common example: it manages all dependency versions. The Bill of Materials (BOM) pattern uses parent POMs for consistent version management."
+}

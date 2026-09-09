@@ -1,0 +1,9 @@
+{
+  "id" : "var-mc-12",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is implicit widening conversion?",
+  "choices" : [ "Casting a larger type to a smaller type", "Automatically converting a smaller numeric type to a larger one (e.g., int to double)", "Converting a String to a number", "Converting a double to an int by truncation" ],
+  "answer" : "b",
+  "explanation" : "Java automatically widens: byte → short → int → long → float → double. int x = 5; double d = x; — no cast needed, x is widened to 5.0. Narrowing (e.g., double to int) requires an explicit cast: int n = (int) 3.7;"
+}

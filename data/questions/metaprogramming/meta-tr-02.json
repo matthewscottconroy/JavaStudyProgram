@@ -1,0 +1,9 @@
+{
+  "id" : "meta-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "@Retention(java.lang.annotation.RetentionPolicy.RUNTIME)\n@interface Color { String value() default \"red\"; }\n\n@Color(\"blue\")\nclass Sky {}\n\nColor c = Sky.class.getAnnotation(Color.class);\nSystem.out.println(c.value());",
+  "answer" : "blue",
+  "explanation" : "The annotation is RUNTIME-retained. getAnnotation() retrieves it. value() returns the configured string 'blue'."
+}

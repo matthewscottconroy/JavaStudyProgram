@@ -1,0 +1,9 @@
+{
+  "id" : "db-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "How do you iterate over the results of a SELECT query with JDBC?",
+  "choices" : [ "ResultSet extends Iterable, so use a for-each loop", "Call ResultSet.next() in a while loop — it advances the cursor and returns false when exhausted", "Call ResultSet.getAll() to get a List", "Query results are returned as an array of rows" ],
+  "answer" : "b",
+  "explanation" : "while (rs.next()) { String name = rs.getString(\"name\"); int age = rs.getInt(\"age\"); } rs.next() advances to the next row and returns true, or false if there are no more rows. Columns are accessed by name or 1-based index."
+}

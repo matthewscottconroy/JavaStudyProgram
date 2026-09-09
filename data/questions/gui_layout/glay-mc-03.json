@@ -1,0 +1,9 @@
+{
+  "id" : "glay-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does GridLayout(3, 2) create?",
+  "choices" : [ "A 3-pixel by 2-pixel grid", "A grid with 3 rows and 2 columns where all cells are the same size", "A layout that allows 3 nested panels with 2 columns each", "A layout with 3 borders and 2 flow regions" ],
+  "answer" : "b",
+  "explanation" : "GridLayout(rows, cols) divides the container into a uniform grid. All cells have equal width and height. Components fill cells in order (left-to-right, top-to-bottom). Good for calculator keypads or equally-sized button grids."
+}

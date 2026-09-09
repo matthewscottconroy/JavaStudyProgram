@@ -1,0 +1,9 @@
+{
+  "id" : "cls-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which correctly adds a getter and setter for a private field 'score'?",
+  "choices" : [ "public int score; public int getScore() { return score; }", "private int score; public int getScore() { return score; } public void setScore(int s) { score = s; }", "private int score; int get() { return score; } void set(int s) { score = s; }", "private int score; public score getScore() { return this; }" ],
+  "answer" : "b",
+  "explanation" : "Private field, public getter returning the field, public setter assigning to it. Option A makes the field public (no encapsulation). Option C uses non-standard names (Java convention: getX/setX). Option D has invalid return type."
+}

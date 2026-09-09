@@ -1,0 +1,9 @@
+{
+  "id" : "aal-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "How do you get the number of elements in an ArrayList called 'list'?",
+  "choices" : [ "list.length", "list.length()", "list.size()", "list.count()" ],
+  "answer" : "c",
+  "explanation" : "ArrayList uses .size() (a method). Arrays use .length (a field without parentheses). length() and count() do not exist on ArrayList."
+}

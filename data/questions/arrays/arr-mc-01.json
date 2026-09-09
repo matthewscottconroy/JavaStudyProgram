@@ -1,0 +1,9 @@
+{
+  "id" : "arr-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "What is the index of the first element in a Java array?",
+  "choices" : [ "1", "0", "-1", "It depends on how you declare it" ],
+  "answer" : "b",
+  "explanation" : "Java (like most languages) uses zero-based indexing. The first element is at index 0."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "cpn-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "class Engine {\n    String sound() { return \"vroom\"; }\n}\nclass Car {\n    private Engine engine = new Engine();\n    String drive() { return \"Driving: \" + engine.sound(); }\n}\n// in main:\nSystem.out.println(new Car().drive());",
+  "answer" : "Driving: vroom",
+  "explanation" : "Car delegates the sound to its Engine via composition. drive() calls engine.sound() which returns \"vroom\"."
+}

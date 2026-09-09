@@ -1,0 +1,9 @@
+{
+  "id" : "var-tr-09",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is the output?",
+  "code" : "final int MAX = 10;\nint[] arr = new int[MAX];\nSystem.out.println(arr.length);",
+  "answer" : "10",
+  "explanation" : "final MAX = 10 is a compile-time constant. new int[MAX] creates an array of length 10. arr.length returns 10."
+}

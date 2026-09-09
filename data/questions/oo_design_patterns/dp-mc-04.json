@@ -1,0 +1,9 @@
+{
+  "id" : "dp-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "The Strategy pattern allows…",
+  "choices" : [ "An algorithm to be selected at runtime by encapsulating it in a class", "A class to wrap another to add extra features", "Lazy initialisation of expensive objects", "Sharing state between many fine-grained objects" ],
+  "answer" : "a",
+  "explanation" : "Strategy encapsulates a family of algorithms behind an interface. The client chooses the algorithm at runtime by injecting the desired strategy object. E.g. different sorting strategies for a Sorter class."
+}

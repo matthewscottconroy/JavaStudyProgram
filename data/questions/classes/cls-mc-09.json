@@ -1,0 +1,9 @@
+{
+  "id" : "cls-mc-09",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is a no-argument constructor?",
+  "choices" : [ "A constructor that takes no parameters", "A constructor that returns null", "The constructor the compiler always generates", "A private constructor that prevents instantiation" ],
+  "answer" : "a",
+  "explanation" : "A no-arg constructor takes no parameters: public Dog() { ... }. Java provides a default no-arg constructor only if you define no constructors at all. If you define any constructor, you must explicitly add a no-arg constructor if you need one."
+}

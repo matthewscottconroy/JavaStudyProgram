@@ -1,0 +1,9 @@
+{
+  "id" : "acm-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the effect of 'final' on a field vs 'private' on a field?",
+  "choices" : [ "Both prevent modification from outside the class", "final prevents reassignment; private prevents external access — they are orthogonal", "private implies final — if a field is private it cannot be changed", "final makes a field public; private makes it inaccessible" ],
+  "answer" : "b",
+  "explanation" : "private field: only the declaring class can access it — but code inside can still change it. final field: can only be assigned once (in declaration or constructor), by any code that can access it. private final: both restricted — common for immutable value objects."
+}

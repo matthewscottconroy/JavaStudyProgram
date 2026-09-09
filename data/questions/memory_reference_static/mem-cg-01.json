@@ -1,0 +1,9 @@
+{
+  "id" : "mem-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which is the correct way to call a static method 'add(int a, int b)' in class 'Math'?",
+  "choices" : [ "Math m = new Math(); m.add(2, 3);", "Math.add(2, 3);", "static.Math.add(2, 3);", "new Math.add(2, 3);" ],
+  "answer" : "b",
+  "explanation" : "Static methods are called on the class name, not on an instance. Math.add(2, 3) is correct. Creating an instance first (option A) works but is misleading and wasteful."
+}

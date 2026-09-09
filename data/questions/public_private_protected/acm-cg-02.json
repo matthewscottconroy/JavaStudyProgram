@@ -1,0 +1,9 @@
+{
+  "id" : "acm-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which modifier should be used for a utility method that should only be used inside its class?",
+  "choices" : [ "public static void helper() { }", "protected static void helper() { }", "private static void helper() { }", "void helper() { }" ],
+  "answer" : "c",
+  "explanation" : "private limits access to the declaring class — perfect for internal helper methods that are implementation details. This prevents callers from depending on internal behavior that might change. Option D (package-private) exposes it to the whole package unnecessarily."
+}

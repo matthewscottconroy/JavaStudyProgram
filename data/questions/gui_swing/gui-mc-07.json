@@ -1,0 +1,9 @@
+{
+  "id" : "gui-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the content pane in a JFrame?",
+  "choices" : [ "The title bar area at the top of the window", "The area below the menu bar where you add panels and components", "A panel for dialog buttons", "The glass pane used for overlays" ],
+  "answer" : "b",
+  "explanation" : "frame.getContentPane() returns the container where you add components. Since Java 5, you can call frame.add(component) directly — it delegates to the content pane. The content pane has BorderLayout by default."
+}

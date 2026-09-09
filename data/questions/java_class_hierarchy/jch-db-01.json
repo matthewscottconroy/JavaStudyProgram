@@ -1,0 +1,10 @@
+{
+  "id" : "jch-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "The HashSet behaves unexpectedly. Why?",
+  "code" : "class Point {\n    int x, y;\n    Point(int x, int y) { this.x = x; this.y = y; }\n    @Override public boolean equals(Object o) {\n        Point p = (Point) o;\n        return x == p.x && y == p.y;\n    }\n}\nSet<Point> set = new HashSet<>();\nset.add(new Point(1,2));\nSystem.out.println(set.contains(new Point(1,2)));",
+  "choices" : [ "HashSet does not support custom types", "equals() cast will throw ClassCastException", "hashCode() is not overridden — points with equal fields land in different buckets", "equals() must call super.equals()" ],
+  "answer" : "c",
+  "explanation" : "HashSet first compares hashCode() to find the bucket, then uses equals(). Without overriding hashCode(), two Point(1,2) objects have different hashes and are stored in different buckets — contains() returns false even though equals() would return true. Always override hashCode() when you override equals()."
+}

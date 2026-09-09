@@ -1,0 +1,9 @@
+{
+  "id" : "mse-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "How do you get the x and y coordinates of a mouse event?",
+  "choices" : [ "event.getLocation()", "event.x and event.y", "event.getX() and event.getY()", "MouseInfo.getPosition()" ],
+  "answer" : "c",
+  "explanation" : "MouseEvent provides getX() and getY() for the position relative to the source component, and getXOnScreen() / getYOnScreen() for absolute screen coordinates. getPoint() returns a Point object with both."
+}

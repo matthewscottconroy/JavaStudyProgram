@@ -1,0 +1,10 @@
+{
+  "id" : "prn-db-04",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "The output shows quotes around the name instead of just the name. Why?",
+  "code" : "String name = \"Alice\";\nSystem.out.println(\"\\\"\" + name + \"\\\"\");",
+  "choices" : [ "println does not support String variables", "The code is intentionally adding escaped quotes — \\\" prints a literal double-quote character", "name is being treated as a char not a String", "The + operator inserts quotes automatically" ],
+  "answer" : "b",
+  "explanation" : "\\\" is the escape sequence for a literal double-quote character inside a String. So this prints: \"Alice\" — the name surrounded by actual quote marks. The code is correct if that's the intent."
+}

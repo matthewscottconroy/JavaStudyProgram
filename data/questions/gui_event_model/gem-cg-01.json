@@ -1,0 +1,9 @@
+{
+  "id" : "gem-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which code correctly adds a click handler that prints 'Hello' when a button is pressed?",
+  "choices" : [ "button.addActionListener(new ActionListener() { void clicked() { System.out.println(\"Hello\"); } });", "button.addActionListener(e -> System.out.println(\"Hello\"));", "button.onClick(() -> System.out.println(\"Hello\"));", "ActionListener.attach(button, () -> System.out.println(\"Hello\"));" ],
+  "answer" : "b",
+  "explanation" : "ActionListener is a functional interface with actionPerformed(ActionEvent). A lambda directly implements it. Option A uses wrong method name (clicked, not actionPerformed). Options C and D use non-existent Swing API."
+}

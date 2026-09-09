@@ -1,0 +1,9 @@
+{
+  "id" : "ios-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "The user types '42' and presses Enter. What is printed?",
+  "code" : "Scanner sc = new Scanner(System.in);\nint n = sc.nextInt();\nSystem.out.println(\"Got: \" + n);",
+  "answer" : "Got: 42",
+  "explanation" : "nextInt() reads the integer 42. println concatenates \"Got: \" with 42, printing 'Got: 42'."
+}

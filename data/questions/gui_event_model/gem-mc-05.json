@@ -1,0 +1,9 @@
+{
+  "id" : "gem-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "How can you remove an ActionListener from a JButton?",
+  "choices" : [ "button.clearListeners()", "button.removeActionListener(listener)", "button.setEnabled(false)", "ActionListeners cannot be removed after being added" ],
+  "answer" : "b",
+  "explanation" : "removeActionListener(ActionListener) unregisters a specific listener. You must keep a reference to the listener object to remove it later. button.getActionListeners() returns an array of currently registered listeners."
+}

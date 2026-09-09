@@ -1,0 +1,9 @@
+{
+  "id" : "mem-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which correctly uses a static counter to track how many Widgets have been created?",
+  "choices" : [ "class Widget { int count = 0; Widget() { count++; } }", "class Widget { static int count = 0; Widget() { count++; } static int getCount() { return count; } }", "class Widget { final int count; Widget() { count = Widget.count + 1; } }", "class Widget { static int count; }" ],
+  "answer" : "b",
+  "explanation" : "Static fields are shared across all instances — ideal for a creation counter. The constructor increments the shared count. A static getter provides access. Option A uses an instance field (each Widget has its own count, always 1). Option C uses final incorrectly and doesn't persist the count."
+}

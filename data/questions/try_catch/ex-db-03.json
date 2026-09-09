@@ -1,0 +1,10 @@
+{
+  "id" : "ex-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "Why does this code not compile?",
+  "code" : "static void open() {\n    FileReader fr = new FileReader(\"data.txt\");\n}",
+  "choices" : [ "FileReader is not part of Java's standard library", "FileReader requires a try-with-resources block", "FileReader constructor throws checked IOException which must be caught or declared", "String literals cannot be passed to constructors" ],
+  "answer" : "c",
+  "explanation" : "FileReader(String) throws IOException, which is a checked exception. The compiler requires you to either surround with try-catch or declare 'throws IOException' on the method. Unchecked (Runtime) exceptions have no such requirement."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "dp-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What design pattern does this code use?",
+  "code" : "class Config {\n    private static Config instance;\n    private Config() {}\n    public static Config getInstance() {\n        if (instance == null) instance = new Config();\n        return instance;\n    }\n}",
+  "answer" : "Singleton",
+  "explanation" : "Private constructor + static getInstance() that returns (or creates) one shared instance = Singleton. Note: this basic form is not thread-safe; use double-checked locking or an enum for thread safety."
+}

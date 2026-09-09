@@ -1,0 +1,9 @@
+{
+  "id" : "kbd-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the difference between keyPressed() and keyTyped()?",
+  "choices" : [ "keyTyped fires for any key; keyPressed only fires for printable characters", "keyPressed fires for any key event; keyTyped fires only when a printable character is generated", "They fire in the same situations — just different naming conventions", "keyTyped fires when the key is released" ],
+  "answer" : "b",
+  "explanation" : "keyTyped fires when a Unicode character is produced (printable keys like A-Z, 0-9). keyPressed fires for every physical key press, including Shift, Ctrl, Delete, arrow keys. Use keyPressed for game controls and function keys; keyTyped for text input."
+}

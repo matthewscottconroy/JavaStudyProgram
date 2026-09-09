@@ -1,0 +1,9 @@
+{
+  "id" : "ios-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does 'System.out.flush()' do?",
+  "choices" : [ "Clears the console screen", "Forces any buffered output to be written to the underlying stream immediately", "Resets System.out to the default stream", "Closes System.out permanently" ],
+  "answer" : "b",
+  "explanation" : "PrintStream buffers output in some environments. flush() forces the buffer to be written. println() implicitly fllushs after each call, but print() may not. This matters when output feeds into another process or when output is piped to a file."
+}

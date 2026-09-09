@@ -1,0 +1,10 @@
+{
+  "id" : "ut-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "This test is brittle. Why?",
+  "code" : "@Test\nvoid testGetUser() {\n    UserService service = new UserService();\n    User user = service.getUser(1);\n    assertEquals(\"Alice\", user.getName());\n}",
+  "choices" : [ "The test has no @BeforeEach", "The test relies on real database state — if user ID 1 changes or doesn't exist, the test fails for external reasons", "assertEquals should use assertSame for objects", "UserService must be mocked" ],
+  "answer" : "b",
+  "explanation" : "A brittle test is fragile: it may fail for reasons unrelated to the code under test. Depending on a real database means a test failure could indicate a DB issue, not a code bug. Fix: mock the data layer so service.getUser(1) returns a controlled User."
+}

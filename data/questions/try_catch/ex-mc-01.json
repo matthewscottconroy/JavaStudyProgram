@@ -1,0 +1,9 @@
+{
+  "id" : "ex-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which block always executes, whether or not an exception occurs?",
+  "choices" : [ "catch", "try", "finally", "throws" ],
+  "answer" : "c",
+  "explanation" : "The 'finally' block runs after the try and any matching catch, regardless of whether an exception was thrown. Commonly used to close resources."
+}

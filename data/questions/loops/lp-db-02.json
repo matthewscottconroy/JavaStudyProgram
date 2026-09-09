@@ -1,0 +1,10 @@
+{
+  "id" : "lp-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "This loop runs one too few times. What is wrong?",
+  "code" : "for (int i = 1; i < 10; i++) {\n    System.out.println(i);\n}",
+  "choices" : [ "i should start at 0", "The condition i < 10 excludes 10 — use i <= 10 to include it", "i++ should be i--", "println cannot be in a loop" ],
+  "answer" : "b",
+  "explanation" : "i < 10 stops before printing 10. To print 1 through 10, use i <= 10 (or i < 11). This is a very common off-by-one error."
+}

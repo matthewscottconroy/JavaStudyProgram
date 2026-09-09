@@ -1,0 +1,9 @@
+{
+  "id" : "cls-cg-04",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which correctly defines a static factory method for a class Circle?",
+  "choices" : [ "Circle c = Circle.create(5.0);", "class Circle { double radius; private Circle(double r) { radius = r; } public static Circle withRadius(double r) { return new Circle(r); } }", "static Circle new(double r) { return Circle(r); }", "class Circle { public Circle factory(double r) { return new Circle(r); } }" ],
+  "answer" : "b",
+  "explanation" : "A static factory method: private constructor (prevents direct new), public static method that creates and returns the object. This pattern gives meaningful names (withRadius vs just 'new') and can return cached instances. Option D: factory is an instance method — needs an existing Circle to call it, defeating the purpose."
+}

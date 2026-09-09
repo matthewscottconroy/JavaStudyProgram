@@ -1,0 +1,9 @@
+{
+  "id" : "clh-cg-03",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which correctly defines an abstract class Vehicle with an abstract method fuelType()?",
+  "choices" : [ "interface Vehicle { String fuelType(); }", "abstract class Vehicle { abstract String fuelType(); }", "class Vehicle { void fuelType() { } }", "abstract class Vehicle { String fuelType() { return \"\"; } }" ],
+  "answer" : "b",
+  "explanation" : "abstract class + abstract method: the method has no body; subclasses must implement it. Option A is an interface, not an abstract class. Option C is a concrete class — its fuelType() has an empty body but CAN be overridden. Option D has a body — it's a concrete method inside an abstract class (legal but not abstract)."
+}

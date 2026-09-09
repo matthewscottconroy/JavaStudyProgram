@@ -1,0 +1,9 @@
+{
+  "id" : "prn-mc-08",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does String.format() return compared to printf()?",
+  "choices" : [ "They are identical — both print to stdout", "String.format() returns a formatted String; printf() prints to stdout", "printf() returns a String; String.format() prints", "String.format() only works with integers" ],
+  "answer" : "b",
+  "explanation" : "String.format(\"%.2f\", 3.14) returns the formatted string \"3.14\" — it doesn't print. Use it to build strings for labels, files, or messages. printf(format, args) formats and prints to stdout in one step."
+}

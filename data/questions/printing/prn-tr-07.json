@@ -1,0 +1,9 @@
+{
+  "id" : "prn-tr-07",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "System.out.print(\"Line1\\n\");\nSystem.out.print(\"Line2\");",
+  "answer" : "Line1\nLine2",
+  "explanation" : "\\n in a string literal is a newline character. print() does not add its own newline. Output: 'Line1' on one line, 'Line2' on the next (on the same line as the cursor after \\n)."
+}

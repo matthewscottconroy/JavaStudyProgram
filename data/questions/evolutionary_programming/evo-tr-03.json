@@ -1,0 +1,9 @@
+{
+  "id" : "evo-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 4,
+  "prompt" : "A population has 4 individuals with fitness [0.2, 0.5, 0.8, 0.3]. Which is selected by tournament (k=2) when the randomly chosen pair is individual 1 (0.2) and individual 3 (0.8)?",
+  "code" : "// Tournament size k=2: compare two random individuals",
+  "answer" : "Individual 3 (fitness 0.8)",
+  "explanation" : "Tournament selection picks the better individual from the randomly chosen pair. Individual 3 with fitness 0.8 beats individual 1 with fitness 0.2."
+}

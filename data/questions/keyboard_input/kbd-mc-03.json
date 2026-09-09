@@ -1,0 +1,9 @@
+{
+  "id" : "kbd-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "How do you check which key was pressed in keyPressed()?",
+  "choices" : [ "e.getCharacter()", "e.getKey()", "e.getKeyCode() compared to KeyEvent.VK_ constants", "e.getKeyName()" ],
+  "answer" : "c",
+  "explanation" : "KeyEvent provides getKeyCode() which returns an int. Compare against KeyEvent.VK_LEFT, VK_RIGHT, VK_SPACE, VK_ENTER, etc. For keyTyped, use getKeyChar() to get the Unicode char that was typed."
+}

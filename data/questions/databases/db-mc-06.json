@@ -1,0 +1,9 @@
+{
+  "id" : "db-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What happens if you forget to close a Connection in JDBC?",
+  "choices" : [ "Nothing — the JVM closes all connections on exit", "The connection stays open, consuming resources; under load this can exhaust the database's connection pool", "The next database call automatically reuses it", "The database server closes it after one query" ],
+  "answer" : "b",
+  "explanation" : "Database connections are expensive resources. Leaking them (not closing) causes the pool to exhaust under load, resulting in timeouts or errors for new requests. Use try-with-resources: try (Connection conn = DriverManager.getConnection(...)) { ... }"
+}

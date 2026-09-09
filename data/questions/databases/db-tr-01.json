@@ -1,0 +1,9 @@
+{
+  "id" : "db-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "How many '?' placeholders are in this PreparedStatement?",
+  "code" : "PreparedStatement ps = conn.prepareStatement(\n    \"INSERT INTO students (name, grade, year) VALUES (?, ?, ?)\"\n);",
+  "answer" : "3",
+  "explanation" : "Three ? placeholders: one for name, one for grade, one for year. Set them with ps.setString(1, name), ps.setInt(2, grade), ps.setInt(3, year) (JDBC uses 1-based parameter indices)."
+}

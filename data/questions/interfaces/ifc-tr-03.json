@@ -1,0 +1,9 @@
+{
+  "id" : "ifc-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "interface Drawable { void draw(); }\ninterface Resizable { void resize(int factor); }\nclass Widget implements Drawable, Resizable {\n    public void draw() { System.out.println(\"drawing\"); }\n    public void resize(int f) { System.out.println(\"resize \" + f); }\n}\nWidget w = new Widget();\nw.draw();\nw.resize(2);",
+  "answer" : "drawing\nresize 2",
+  "explanation" : "Widget implements both interfaces and provides concrete implementations for both methods."
+}

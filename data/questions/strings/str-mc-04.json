@@ -1,0 +1,9 @@
+{
+  "id" : "str-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does s.charAt(0) return for String s = \"Java\"?",
+  "choices" : [ "'J'", "'j'", "\"J\"", "0" ],
+  "answer" : "a",
+  "explanation" : "charAt(index) returns the char at that position. Index 0 is the first character. 'J' is a char literal (single quotes). \"J\" would be a one-character String, not a char."
+}

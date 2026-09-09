@@ -1,0 +1,9 @@
+{
+  "id" : "dp-cg-03",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which implements a Builder for a Pizza class with fields 'size' and 'crust'?",
+  "choices" : [ "class Pizza { String size, crust; Pizza(String size, String crust) { this.size=size; this.crust=crust; } }", "class Pizza {\n    String size, crust;\n    private Pizza() {}\n    static class Builder {\n        String size, crust;\n        Builder size(String s) { this.size=s; return this; }\n        Builder crust(String c) { this.crust=c; return this; }\n        Pizza build() { Pizza p=new Pizza(); p.size=size; p.crust=crust; return p; }\n    }\n}", "class Pizza { void setSize(String s) {} void setCrust(String c) {} }", "interface PizzaBuilder { Pizza build(String size, String crust); }" ],
+  "answer" : "b",
+  "explanation" : "Builder pattern: static inner Builder class with fluent setter methods (return this), and a build() that creates the final object. Usage: new Pizza.Builder().size(\"large\").crust(\"thin\").build(). Option A is just a constructor — no builder."
+}

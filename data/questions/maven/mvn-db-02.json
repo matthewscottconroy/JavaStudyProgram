@@ -1,0 +1,10 @@
+{
+  "id" : "mvn-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "The build succeeds but tests are not run. Why?",
+  "code" : "// pom.xml running 'mvn package -DskipTests'",
+  "choices" : [ "The Surefire plugin is not installed", "The '-DskipTests' flag explicitly skips test execution", "Tests run only with 'mvn test', not 'mvn package'", "No test source directory is configured" ],
+  "answer" : "b",
+  "explanation" : "-DskipTests skips both compiling and running tests. -Dmaven.test.skip=true also skips compilation. Remove the flag to re-enable tests. Never ship to production with skipped tests."
+}

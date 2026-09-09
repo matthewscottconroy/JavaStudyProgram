@@ -1,0 +1,9 @@
+{
+  "id" : "var-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "What is the difference between int and long?",
+  "choices" : [ "int is for decimals; long is for whole numbers", "int is 32 bits (up to ~2.1 billion); long is 64 bits (much larger range)", "long is for positive numbers only; int allows negatives", "They are identical — just different names" ],
+  "answer" : "b",
+  "explanation" : "int: -2,147,483,648 to 2,147,483,647 (32-bit). long: -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807 (64-bit). Use long for population counts, file sizes, timestamps. Long literals end with L: 100_000_000_000L."
+}

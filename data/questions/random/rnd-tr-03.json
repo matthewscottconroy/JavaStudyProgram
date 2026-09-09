@@ -1,0 +1,9 @@
+{
+  "id" : "rnd-tr-03",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What range of values can this produce?",
+  "code" : "int result = (int)(Math.random() * 100) + 1;",
+  "answer" : "1 to 100",
+  "explanation" : "Math.random() gives [0.0, 1.0). *100 gives [0.0, 100.0). (int) truncates to 0–99. +1 shifts to 1–100 inclusive."
+}

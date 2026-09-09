@@ -1,0 +1,10 @@
+{
+  "id" : "arr-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "The code prints the array address instead of its contents. Why?",
+  "code" : "int[] arr = {1, 2, 3};\nSystem.out.println(arr);",
+  "choices" : [ "int[] cannot be printed", "Arrays don't override toString() — the default prints a type prefix and hash code", "println requires a String argument", "arr must be cast to Object first" ],
+  "answer" : "b",
+  "explanation" : "int[] inherits Object's toString(): '[I@1a2b3c' (type code + hash). Fix: System.out.println(Arrays.toString(arr)); → [1, 2, 3]."
+}

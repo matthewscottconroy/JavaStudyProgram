@@ -1,0 +1,10 @@
+{
+  "id" : "dbt-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "A student's conditional breakpoint condition is 'i = 5' instead of 'i == 5'. What happens?",
+  "code" : "for (int i = 0; i < 10; i++) {\n    doWork(i);  // conditional breakpoint: condition = \"i = 5\"\n}",
+  "choices" : [ "The breakpoint triggers only on iteration 5", "The breakpoint triggers on every iteration", "The IDE rejects the condition because assignment is not allowed in expressions", "The debugger modifies i to 5 on every iteration" ],
+  "answer" : "c",
+  "explanation" : "Most debugger condition evaluators reject assignment (=) in conditions and report an error. The correct operator for equality check is ==. Some environments may accept it as an expression, setting i=5 each time — so always use == for comparisons."
+}

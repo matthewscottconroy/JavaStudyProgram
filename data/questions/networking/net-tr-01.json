@@ -1,0 +1,9 @@
+{
+  "id" : "net-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "After this server starts, what port is it listening on?",
+  "code" : "ServerSocket server = new ServerSocket(8080);\nSystem.out.println(\"Listening on port \" + server.getLocalPort());",
+  "answer" : "Listening on port 8080",
+  "explanation" : "new ServerSocket(8080) binds to port 8080. getLocalPort() returns 8080. The printed output is 'Listening on port 8080'."
+}

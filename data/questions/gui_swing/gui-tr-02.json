@@ -1,0 +1,9 @@
+{
+  "id" : "gui-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is the title of the window after this code?",
+  "code" : "JFrame frame = new JFrame(\"My App\");\nframe.setTitle(\"Updated Title\");\nSystem.out.println(frame.getTitle());",
+  "answer" : "Updated Title",
+  "explanation" : "setTitle() changes the window title. getTitle() returns the current title. The second call overwrites the constructor-set title."
+}

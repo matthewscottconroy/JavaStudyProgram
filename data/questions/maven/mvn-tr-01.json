@@ -1,0 +1,9 @@
+{
+  "id" : "mvn-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is the standard directory for Java source files in a Maven project?",
+  "code" : "// This is a conceptual question about Maven project layout.\n// Where does Maven expect main Java source files?",
+  "answer" : "src/main/java",
+  "explanation" : "Maven's standard directory layout: src/main/java for production code, src/test/java for tests, src/main/resources for resource files."
+}

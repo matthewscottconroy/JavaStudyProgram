@@ -1,0 +1,9 @@
+{
+  "id" : "ide-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does 'Extract Method' refactoring do?",
+  "choices" : [ "Copies a method to a new file", "Moves selected code into a new named method, replacing the original code with a call to it", "Generates a method signature from its call site", "Deletes unused methods" ],
+  "answer" : "b",
+  "explanation" : "Extract Method (IntelliJ: Ctrl+Alt+M) identifies the selected code block, creates a new private method with appropriate parameters and return type, and replaces the original code with a call to the new method. It reduces duplication and improves readability."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "gui-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "How do you center a JFrame on the screen?",
+  "choices" : [ "frame.setPosition(CENTER)", "frame.setLocationRelativeTo(null)", "frame.setLocation(0, 0)", "frame.center()" ],
+  "answer" : "b",
+  "explanation" : "setLocationRelativeTo(null) centers the frame on the screen. Pass another component to center relative to it. Call this after setSize() or pack() so the frame has a known size."
+}

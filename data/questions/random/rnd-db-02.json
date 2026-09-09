@@ -1,0 +1,10 @@
+{
+  "id" : "rnd-db-02",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "The program generates the same dice roll every execution. Why?",
+  "code" : "Random rng = new Random(1234);\nSystem.out.println(rng.nextInt(6) + 1);",
+  "choices" : [ "nextInt(6) always returns the same value", "The seed 1234 is fixed — the same seed always produces the same sequence", "new Random() requires the current time to work", "nextInt(6) is not the correct way to simulate a die" ],
+  "answer" : "b",
+  "explanation" : "A fixed seed gives a deterministic sequence. new Random(1234) always starts the PRNG in the same state. For random results each run, use new Random() (no seed) — it uses a time-based seed by default."
+}

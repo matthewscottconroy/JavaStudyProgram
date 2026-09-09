@@ -1,0 +1,9 @@
+{
+  "id" : "fn-tr-01",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "static int square(int n) { return n * n; }\n// in main:\nSystem.out.println(square(5));",
+  "answer" : "25",
+  "explanation" : "square(5) returns 5 * 5 = 25, which is then printed."
+}

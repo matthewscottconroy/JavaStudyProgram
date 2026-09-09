@@ -1,0 +1,9 @@
+{
+  "id" : "col-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "Which Queue method retrieves-and-removes the head, returning null if empty (vs throwing on empty)?",
+  "choices" : [ "remove()", "pop()", "poll()", "peek()" ],
+  "answer" : "c",
+  "explanation" : "poll() retrieves and removes the head, returning null if the queue is empty. remove() does the same but throws NoSuchElementException if empty. peek() retrieves without removing (returns null if empty). offer() adds an element (returns false if capacity-constrained vs add() which throws)."
+}

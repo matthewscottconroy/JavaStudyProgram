@@ -1,0 +1,9 @@
+{
+  "id" : "str-tr-04",
+  "type" : "TRACING",
+  "difficulty" : 2,
+  "prompt" : "What is printed?",
+  "code" : "String s = \"programming\";\nSystem.out.println(s.substring(0, 4).toUpperCase());",
+  "answer" : "PROG",
+  "explanation" : "substring(0,4) extracts characters at indices 0,1,2,3: \"prog\". toUpperCase() → \"PROG\"."
+}

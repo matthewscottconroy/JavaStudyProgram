@@ -1,0 +1,10 @@
+{
+  "id" : "var-db-01",
+  "type" : "DEBUGGING",
+  "difficulty" : 1,
+  "prompt" : "What is wrong with this declaration?",
+  "code" : "int x = \"hello\";",
+  "choices" : [ "Missing semicolon", "Wrong type: cannot assign a String to an int", "Variable name is invalid", "Nothing is wrong" ],
+  "answer" : "b",
+  "explanation" : "int holds numbers only. \"hello\" is a String literal. Java is strongly typed—you cannot assign a String to an int."
+}

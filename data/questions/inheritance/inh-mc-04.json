@@ -1,0 +1,9 @@
+{
+  "id" : "inh-mc-04",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does 'final' mean on a method?",
+  "choices" : [ "The method is called once then destroyed", "The method cannot be overridden in subclasses", "The method must be overridden in subclasses", "The method is thread-safe" ],
+  "answer" : "b",
+  "explanation" : "A final method cannot be overridden by any subclass. A final class cannot be extended at all. A final variable cannot be reassigned after initialisation."
+}

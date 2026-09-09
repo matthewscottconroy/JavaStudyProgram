@@ -1,0 +1,9 @@
+{
+  "id" : "aal-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What is the main advantage of ArrayList over a plain array?",
+  "choices" : [ "ArrayList is faster for index access", "ArrayList can grow and shrink dynamically", "ArrayList can hold primitive types directly", "ArrayList uses less memory" ],
+  "answer" : "b",
+  "explanation" : "ArrayList resizes automatically as elements are added or removed. Plain arrays have a fixed size. ArrayList stores boxed objects, not primitives directly, and plain array index access is slightly faster."
+}

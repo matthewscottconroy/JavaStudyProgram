@@ -1,0 +1,9 @@
+{
+  "id" : "inh-mc-03",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What does the @Override annotation do?",
+  "choices" : [ "Forces the method to be called first", "Tells the compiler to verify this method actually overrides a parent method", "Prevents subclasses from overriding this method", "Makes the method run on a separate thread" ],
+  "answer" : "b",
+  "explanation" : "@Override asks the compiler to confirm the method signature matches a parent or interface method. If you misspell the method name, the compiler reports an error instead of silently creating a new method. It's a best practice to always use @Override when overriding."
+}

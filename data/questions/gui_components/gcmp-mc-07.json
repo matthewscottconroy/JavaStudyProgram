@@ -1,0 +1,9 @@
+{
+  "id" : "gcmp-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is a JPanel used for in Swing?",
+  "choices" : [ "It is the only container that can hold components", "It is a general-purpose container used to group and lay out components within a frame", "It provides scroll functionality", "It is the top-level window that appears in the taskbar" ],
+  "answer" : "b",
+  "explanation" : "JPanel is a lightweight container you can nest inside JFrame or other JPanels. It has its own layout manager (default: FlowLayout). Use multiple JPanels to create complex UIs by composing panels with different layout managers."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "jdoc-mc-05",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "Which Javadoc tag creates a hyperlink to another class or method in the generated HTML?",
+  "choices" : [ "@link", "{@link ClassName}", "@see ClassName", "@href" ],
+  "answer" : "b",
+  "explanation" : "{@link ClassName#methodName} creates an inline hyperlink in the Javadoc HTML. @see creates a 'See Also' section (separate, not inline). Example: 'Use {@link Collections#sort(List)} to sort.' {@link} must be in curly braces."
+}

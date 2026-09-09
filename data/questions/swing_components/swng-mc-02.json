@@ -1,0 +1,9 @@
+{
+  "id" : "swng-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does JMenuBar contain in a Swing application?",
+  "choices" : [ "Toolbar buttons arranged horizontally", "JMenu objects (File, Edit, View...) which in turn contain JMenuItems", "Status messages at the top of the window", "A list of recently opened files" ],
+  "answer" : "b",
+  "explanation" : "JMenuBar → JMenu (\"File\") → JMenuItem (\"Open\", \"Save\", \"Exit\"). Add the menu bar: frame.setJMenuBar(menuBar). JMenu can also contain JSeparator and other JMenus (for submenus). Add action listeners to JMenuItems for behavior."
+}

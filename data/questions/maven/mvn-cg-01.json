@@ -1,0 +1,9 @@
+{
+  "id" : "mvn-cg-01",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which pom.xml snippet correctly adds JUnit 5 as a test dependency?",
+  "choices" : [ "<dependency><groupId>junit</groupId><artifactId>junit</artifactId><version>4.13</version></dependency>", "<dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.0</version><scope>test</scope></dependency>", "<dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.0</version></dependency>", "<testDependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId></testDependency>" ],
+  "answer" : "b",
+  "explanation" : "Option B uses the correct JUnit 5 groupId/artifactId and the test scope. Option A is JUnit 4. Option C omits <scope>test</scope> — JUnit would ship in the production JAR. Option D uses a non-existent XML element."
+}

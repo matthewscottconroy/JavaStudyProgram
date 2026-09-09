@@ -1,0 +1,9 @@
+{
+  "id" : "ml-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 4,
+  "prompt" : "A model predicts [2.0, 4.0] for two samples; actual values are [3.0, 3.0]. What is the MSE?",
+  "code" : "double[] pred = {2.0, 4.0};\ndouble[] actual = {3.0, 3.0};\n// MSE = ?",
+  "answer" : "1.0",
+  "explanation" : "MSE = ((2-3)² + (4-3)²) / 2 = (1 + 1) / 2 = 1.0."
+}

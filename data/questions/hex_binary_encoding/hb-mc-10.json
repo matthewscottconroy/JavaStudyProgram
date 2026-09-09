@@ -1,0 +1,9 @@
+{
+  "id" : "hb-mc-10",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does Integer.toHexString(255) return?",
+  "choices" : [ "\"0xFF\"", "\"255\"", "\"ff\"", "\"FF\"" ],
+  "answer" : "c",
+  "explanation" : "Integer.toHexString() returns a lowercase hex string without the '0x' prefix. 255 = 0xFF → \"ff\". For uppercase: Integer.toHexString(255).toUpperCase() → \"FF\"."
+}

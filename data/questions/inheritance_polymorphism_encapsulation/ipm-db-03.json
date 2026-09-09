@@ -1,0 +1,10 @@
+{
+  "id" : "ipm-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "A getter for a List field leaks encapsulation. What is the fix?",
+  "code" : "class Team {\n    private List<String> members = new ArrayList<>();\n    public List<String> getMembers() { return members; }\n}",
+  "choices" : [ "Make the field public instead", "Return a defensive copy or unmodifiable view: Collections.unmodifiableList(members)", "Change the return type to Object[]", "Make the getter private" ],
+  "answer" : "b",
+  "explanation" : "Returning the internal list directly lets callers call members.add(), members.clear(), etc. — bypassing Team's control. Fix: return Collections.unmodifiableList(members) or return new ArrayList<>(members). Callers can read the data but can't modify the internal state."
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "meta-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does @Retention(RetentionPolicy.RUNTIME) mean on a custom annotation?",
+  "choices" : [ "The annotation expires after the method returns", "The annotation is available at runtime via reflection, not just at compile time", "The annotation is removed after the first run", "The annotation is retained only in source files, not in .class files" ],
+  "answer" : "b",
+  "explanation" : "RetentionPolicy.RUNTIME keeps the annotation in the bytecode and makes it readable via reflection. RetentionPolicy.CLASS (default) keeps it in .class but not at runtime. RetentionPolicy.SOURCE removes it after compilation (e.g., @Override)."
+}

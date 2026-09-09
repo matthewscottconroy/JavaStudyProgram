@@ -1,0 +1,9 @@
+{
+  "id" : "arg-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "A user passes '5 10' as two separate arguments. Which code correctly adds them?",
+  "choices" : [ "int sum = Integer.parseInt(args[0] + args[1]);", "int sum = Integer.parseInt(args[0]) + Integer.parseInt(args[1]);", "int sum = args[0] + args[1];", "int sum = Integer.parseInt(args[0] + \" \" + args[1]);" ],
+  "answer" : "b",
+  "explanation" : "Each argument must be parsed independently. Option A concatenates the strings first: '510', then parses — wrong. Option C concatenates strings (gives \"510\"). Option D: parseInt(\"5 10\") throws NumberFormatException (space in string)."
+}

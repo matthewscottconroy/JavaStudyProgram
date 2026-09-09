@@ -1,0 +1,9 @@
+{
+  "id" : "ipm-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 3,
+  "prompt" : "What is printed?",
+  "code" : "abstract class Vehicle {\n    abstract String fuel();\n    String describe() { return \"Runs on \" + fuel(); }\n}\nclass Car extends Vehicle { String fuel() { return \"gasoline\"; } }\nclass Tesla extends Vehicle { String fuel() { return \"electricity\"; } }\nVehicle[] v = { new Car(), new Tesla() };\nfor (Vehicle x : v) System.out.println(x.describe());",
+  "answer" : "Runs on gasoline\nRuns on electricity",
+  "explanation" : "describe() calls fuel() which dispatches polymorphically. Car.fuel() = \"gasoline\", Tesla.fuel() = \"electricity\". The template method pattern: the abstract class defines the algorithm, subclasses fill in the steps."
+}

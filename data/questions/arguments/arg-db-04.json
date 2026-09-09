@@ -1,0 +1,10 @@
+{
+  "id" : "arg-db-04",
+  "type" : "DEBUGGING",
+  "difficulty" : 3,
+  "prompt" : "Running 'java Calc 10 add 5' throws NumberFormatException. What is wrong?",
+  "code" : "public static void main(String[] args) {\n    int a = Integer.parseInt(args[0]);\n    int b = Integer.parseInt(args[1]);  // bug\n    System.out.println(a + b);\n}",
+  "choices" : [ "parseInt does not work on args", "args[1] is \"add\", a non-numeric String — parseInt cannot parse it", "10 and 5 cannot be added with +", "parseInt requires args to have exactly 2 elements" ],
+  "answer" : "b",
+  "explanation" : "The arguments are: args[0]=\"10\", args[1]=\"add\", args[2]=\"5\". Parsing \"add\" as int throws NumberFormatException. The code should parse args[0] and args[2]: int b = Integer.parseInt(args[2]);"
+}

@@ -1,0 +1,9 @@
+{
+  "id" : "ser-mc-06",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What is the purpose of custom readObject() and writeObject() methods?",
+  "choices" : [ "To replace the Serializable interface", "To control exactly how the object's state is written and read during serialization", "To define which fields are transient", "To enable serialization of final classes" ],
+  "answer" : "b",
+  "explanation" : "Declaring private void writeObject(ObjectOutputStream oos) and readObject(ObjectInputStream ois) lets you customize serialization logic — encrypt sensitive fields, validate state on deserialization, or serialize computed values. The JVM calls these methods instead of the default mechanism."
+}

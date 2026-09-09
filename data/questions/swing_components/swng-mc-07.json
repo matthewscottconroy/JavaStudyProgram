@@ -1,0 +1,9 @@
+{
+  "id" : "swng-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "What does JFileChooser allow the user to do?",
+  "choices" : [ "Browse and select files or directories from the filesystem via a GUI dialog", "Edit files directly inside a Swing panel", "Upload files to a remote server", "Display file contents in a JTextArea" ],
+  "answer" : "a",
+  "explanation" : "JFileChooser shows a system-style file browser. int result = chooser.showOpenDialog(parent); if (result == JFileChooser.APPROVE_OPTION) File f = chooser.getSelectedFile(); Use showSaveDialog() for save dialogs."
+}

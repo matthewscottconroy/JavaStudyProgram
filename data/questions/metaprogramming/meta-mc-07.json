@@ -1,0 +1,9 @@
+{
+  "id" : "meta-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 4,
+  "prompt" : "What is a bytecode manipulation library (e.g., ASM or Javassist) used for?",
+  "choices" : [ "Compiling Java source to native machine code", "Reading, modifying, or generating .class bytecode programmatically at build time or runtime", "Decompiling .class files back to source code", "Profiling JVM memory usage" ],
+  "answer" : "b",
+  "explanation" : "Libraries like ASM, Javassist, and ByteBuddy modify or create .class bytecode directly. Used by: frameworks that instrument methods (Spring AOP, Hibernate), mocking frameworks (Mockito), and code coverage tools (JaCoCo). They work at a lower level than annotation processors."
+}

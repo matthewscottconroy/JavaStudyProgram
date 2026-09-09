@@ -1,0 +1,9 @@
+{
+  "id" : "mem-mc-02",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 1,
+  "prompt" : "What does 'null' represent in Java?",
+  "choices" : [ "Zero as an integer", "An empty string", "The absence of an object reference (pointing to nothing)", "A deleted object" ],
+  "answer" : "c",
+  "explanation" : "null is a special value meaning a reference variable points to no object. Accessing a method or field on a null reference throws NullPointerException."
+}

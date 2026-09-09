@@ -1,0 +1,10 @@
+{
+  "id" : "if-db-03",
+  "type" : "DEBUGGING",
+  "difficulty" : 2,
+  "prompt" : "The code always prints 'not equal' even when x is 5. Why?",
+  "code" : "String x = \"5\";\nif (x == \"5\") {\n    System.out.println(\"equal\");\n} else {\n    System.out.println(\"not equal\");\n}",
+  "choices" : [ "\"5\" is not a valid String in Java", "== compares object references for Strings — two String objects may not share the same reference", "The if condition needs parentheses around the String", "String comparison requires a semicolon after the condition" ],
+  "answer" : "b",
+  "explanation" : "For String content comparison, use equals(): if (x.equals(\"5\")). == checks if both variables point to the same object in memory, which may or may not be true depending on whether the JVM interns the string."
+}

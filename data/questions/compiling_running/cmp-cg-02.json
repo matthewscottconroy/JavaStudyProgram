@@ -1,0 +1,9 @@
+{
+  "id" : "cmp-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 2,
+  "prompt" : "Which command compiles all .java files in the src/ directory and outputs .class files to out/?",
+  "choices" : [ "javac src/ -o out/", "javac -d out src/*.java", "java -compile src/ out/", "javac src/*.java > out/" ],
+  "answer" : "b",
+  "explanation" : "-d specifies the output directory for .class files. src/*.java matches all .java files in src/. Option A: javac doesn't use -o. Option C: java doesn't have a -compile flag. Option D: > redirects stdout, not the compiled output."
+}

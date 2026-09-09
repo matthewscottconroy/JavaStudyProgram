@@ -1,0 +1,9 @@
+{
+  "id" : "cmp-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 2,
+  "prompt" : "What type of error is: accessing arr[10] in an array of length 5?",
+  "choices" : [ "Compile-time error", "Logic error", "Runtime exception", "Syntax error" ],
+  "answer" : "c",
+  "explanation" : "The compiler cannot know array bounds violations ahead of time. ArrayIndexOutOfBoundsException is thrown at runtime when the invalid index is accessed."
+}

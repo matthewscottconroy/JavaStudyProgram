@@ -1,0 +1,9 @@
+{
+  "id" : "dp-mc-07",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 3,
+  "prompt" : "The Template Method pattern defines…",
+  "choices" : [ "A static method used as a factory", "The skeleton of an algorithm in a base class, with steps that can be overridden by subclasses", "A method that builds objects step by step", "A method that delegates behavior to a strategy object" ],
+  "answer" : "b",
+  "explanation" : "Template Method: the abstract base class defines the algorithm steps in a final method. Subclasses override specific steps (hooks) without changing the overall structure. Example: a report generator where formatHeader() and formatBody() are overridable."
+}

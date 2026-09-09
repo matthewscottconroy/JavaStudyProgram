@@ -1,0 +1,9 @@
+{
+  "id" : "clh-cg-02",
+  "type" : "CODE_GENERATION",
+  "difficulty" : 3,
+  "prompt" : "Which correctly counts how many elements in a Shape[] are Circle instances?",
+  "choices" : [ "int count = 0; for (Shape s : shapes) if (s.name().equals(\"Circle\")) count++;", "int count = 0; for (Shape s : shapes) if (s instanceof Circle) count++;", "int count = (int) Arrays.stream(shapes).filter(Circle.class::isInstance).count();", "int count = shapes.length;" ],
+  "answer" : "b",
+  "explanation" : "Both B and C work; B is the classic idiomatic approach. instanceof checks if the object is of type Circle or a subclass. Option A relies on the name string matching exactly — fragile if the name changes. Option D counts all shapes, not just circles."
+}

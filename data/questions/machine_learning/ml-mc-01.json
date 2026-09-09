@@ -1,0 +1,9 @@
+{
+  "id" : "ml-mc-01",
+  "type" : "MULTIPLE_CHOICE",
+  "difficulty" : 4,
+  "prompt" : "What is the purpose of a training dataset in machine learning?",
+  "choices" : [ "Data used to evaluate the model's final accuracy", "Data the model learns patterns from by adjusting its parameters", "Data that is randomly generated to test edge cases", "Data that is encrypted to protect user privacy" ],
+  "answer" : "b",
+  "explanation" : "A training set contains labeled examples (input → expected output). The model adjusts its parameters (weights in a neural net, thresholds in a decision tree) to minimize prediction errors on this set. A separate test set evaluates generalization — how well it performs on unseen data."
+}

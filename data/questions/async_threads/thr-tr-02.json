@@ -1,0 +1,9 @@
+{
+  "id" : "thr-tr-02",
+  "type" : "TRACING",
+  "difficulty" : 4,
+  "prompt" : "What is the guaranteed output (ignoring thread scheduling)?",
+  "code" : "AtomicInteger counter = new AtomicInteger(0);\nThread t1 = new Thread(() -> { for (int i=0;i<1000;i++) counter.incrementAndGet(); });\nThread t2 = new Thread(() -> { for (int i=0;i<1000;i++) counter.incrementAndGet(); });\nt1.start(); t2.start(); t1.join(); t2.join();\nSystem.out.println(counter.get());",
+  "answer" : "2000",
+  "explanation" : "AtomicInteger.incrementAndGet() is atomic — thread-safe without synchronized. Both threads each increment 1000 times. The result is always exactly 2000."
+}
