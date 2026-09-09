@@ -185,10 +185,12 @@ public class CodingExerciseRunner {
 
     private CodingResult execute(Path buildDir, String testClass) throws IOException {
         // headless=true keeps GUI exercises deterministic everywhere (components work,
-        // but no exercise can open real windows during a test run)
-        Process process = new ProcessBuilder(
+        // but no exercise can open real windows during a test run). Sandbox.wrap adds
+        // OS-level containment when the host provides it.
+        List<String> command = Sandbox.wrap(List.of(
                 javaExecutable().toString(), MEMORY_CAP, "-Djava.awt.headless=true",
-                "-cp", buildDir.toString(), testClass)
+                "-cp", buildDir.toString(), testClass), buildDir);
+        Process process = new ProcessBuilder(command)
                 .redirectErrorStream(true)
                 .start();
 

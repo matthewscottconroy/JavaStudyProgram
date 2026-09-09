@@ -1,0 +1,15 @@
+{
+  "id": "lp-code-04-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class PrimeCounter {\n\n    public static int countPrimes(int n) {\n        int count = 0;\n        for (int candidate = 2; candidate < n; candidate++) {\n            boolean isPrime = true;\n            for (int d = 2; ____; d++) {\n                if (candidate % d == 0) {\n                    isPrime = false;\n                    break;\n                }\n            }\n            if (isPrime) {\n                count++;\n            }\n        }\n        return count;\n    }\n}\n",
+  "answer": "d * d <= candidate",
+  "alternatives": [
+    "d <= candidate / d"
+  ],
+  "explanation": "A composite number always has a divisor at or below its square root, so testing divisors only while d * d stays within the candidate is enough to prove primality and keeps the inner loop fast. Squaring d avoids floating-point square roots entirely.",
+  "hints": [
+    "You never have to test divisors past the square root of the candidate -- and you can express that without Math.sqrt."
+  ]
+}

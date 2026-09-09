@@ -1,0 +1,15 @@
+{
+  "id": "en-code-05-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class Compass {\n\n    public enum Direction {\n        NORTH, EAST, SOUTH, WEST;\n\n        public Direction right() {\n            return ____;\n        }\n\n        public Direction left() {\n            return values()[(ordinal() + 3) % 4];\n        }\n\n        public Direction opposite() {\n            return values()[(ordinal() + 2) % 4];\n        }\n    }\n}\n",
+  "answer": "values()[(ordinal() + 1) % 4]",
+  "alternatives": [
+    "Direction.values()[(ordinal() + 1) % 4]"
+  ],
+  "explanation": "Every enum constant knows its own position through ordinal(), and values() gives the constants in declaration order, so stepping forward one slot is a turn to the right. The % 4 wraps WEST back around to NORTH instead of running off the end of the array.",
+  "hints": [
+    "The constants are declared clockwise. How do you step one position forward in values() and still wrap around?"
+  ]
+}

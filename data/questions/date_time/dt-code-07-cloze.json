@@ -1,0 +1,13 @@
+{
+  "id": "dt-code-07-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class Quarters {\n\n    public static int quarterOf(java.time.LocalDate d) {\n        return ____;\n    }\n\n    public static java.time.LocalDate firstDayOfQuarter(java.time.LocalDate d) {\n        int firstMonth = (quarterOf(d) - 1) * 3 + 1;\n        return java.time.LocalDate.of(d.getYear(), firstMonth, 1);\n    }\n}\n",
+  "answer": "(d.getMonthValue() - 1) / 3 + 1",
+  "alternatives": [],
+  "explanation": "Months are numbered 1-12 but integer division works from 0, so subtracting 1 first, dividing by 3, then adding 1 back maps January-March to quarter 1, April-June to quarter 2, and so on. Dividing the raw month value by 3 would put March and June in the wrong quarter.",
+  "hints": [
+    "Shift the 1-based month down to 0-based before dividing, then shift the answer back up."
+  ]
+}

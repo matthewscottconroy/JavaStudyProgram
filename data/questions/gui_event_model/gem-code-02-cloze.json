@@ -1,0 +1,16 @@
+{
+  "id": "gem-code-02-cloze",
+  "type": "CLOZE",
+  "difficulty": 4,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "import javax.swing.JLabel;\nimport javax.swing.JPanel;\nimport javax.swing.JSlider;\n\npublic class VolumePanel extends JPanel {\n\n    private final JSlider volume = new JSlider(0, 100, 50);\n    private final JLabel readout = new JLabel(\"50\");\n\n    public VolumePanel() {\n        volume.setName(\"volume\");\n        readout.setName(\"readout\");\n        add(volume);\n        add(readout);\n        volume.addChangeListener(e -> readout.setText(____));\n    }\n}\n",
+  "answer": "String.valueOf(volume.getValue())",
+  "alternatives": [
+    "\"\" + volume.getValue()",
+    "Integer.toString(volume.getValue())"
+  ],
+  "explanation": "The change listener fires on every slider movement, and it must read the slider's CURRENT value at that moment rather than any value captured earlier. setText needs a String, so the int has to be converted before it is displayed.",
+  "hints": [
+    "The listener runs after the slider has already moved -- ask the slider what it holds now, and remember setText only takes a String."
+  ]
+}

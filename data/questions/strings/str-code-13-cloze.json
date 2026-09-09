@@ -1,0 +1,15 @@
+{
+  "id": "str-code-13-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class PunctuationStripper {\n\n    public static String stripPunctuation(String s) {\n        StringBuilder result = new StringBuilder();\n        for (int i = 0; i < s.length(); i++) {\n            char c = s.charAt(i);\n            if (____) {\n                result.append(c);\n            }\n        }\n        return result.toString();\n    }\n}\n",
+  "answer": "Character.isLetterOrDigit(c) || c == ' '",
+  "alternatives": [
+    "c == ' ' || Character.isLetterOrDigit(c)"
+  ],
+  "explanation": "The filter keeps a character only when it is alphanumeric or a plain space; everything else -- punctuation and symbols -- is simply never appended. Character.isLetterOrDigit does the classification so no manual range checks are needed.",
+  "hints": [
+    "Two kinds of character survive the strip. What single Character method recognises the first kind?"
+  ]
+}

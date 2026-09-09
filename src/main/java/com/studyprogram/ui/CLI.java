@@ -47,16 +47,16 @@ public class CLI {
         Display.header("Java Study Program");
         System.out.printf("  Questions in bank: %d%n", bank.totalQuestions());
         System.out.printf("  LLM support:       %s%n",
-                          llm.isAvailable() ? Display.GREEN + "enabled" + Display.RESET
-                                            : Display.DIM   + "disabled (set ANTHROPIC_API_KEY)" + Display.RESET);
+                          llm.isAvailable() ? Display.green() + "enabled" + Display.reset()
+                                            : Display.dim()   + "disabled (set ANTHROPIC_API_KEY)" + Display.reset());
         System.out.printf("  Coding exercises:  %s%n",
                           CodingExerciseRunner.compilerAvailable()
-                                  ? Display.GREEN + "enabled" + Display.RESET
-                                  : Display.YELLOW + "disabled — run with a full JDK (not a JRE) to "
-                                    + "compile and test real programs" + Display.RESET);
+                                  ? Display.green() + "enabled" + Display.reset()
+                                  : Display.yellow() + "disabled — run with a full JDK (not a JRE) to "
+                                    + "compile and test real programs" + Display.reset());
 
         for (String warning : bank.getWarnings()) {
-            System.out.println("  " + Display.YELLOW + "⚠ " + warning + Display.RESET);
+            System.out.println("  " + Display.yellow() + "⚠ " + warning + Display.reset());
         }
 
         profileMenu();
@@ -160,9 +160,9 @@ public class CLI {
             } catch (NumberFormatException ignored) {}
         }
         course.getWarnings().forEach(w ->
-                System.out.println("  " + Display.YELLOW + "⚠ " + w + Display.RESET));
+                System.out.println("  " + Display.yellow() + "⚠ " + w + Display.reset()));
 
-        System.out.println("  " + Display.BOLD + course.getName() + Display.RESET);
+        System.out.println("  " + Display.bold() + course.getName() + Display.reset());
         for (CourseOverlay.Unit u : course.getUnits()) {
             System.out.printf("    %2d  %s%n", u.number(), u.title());
         }
@@ -184,8 +184,8 @@ public class CLI {
         if (topics.isEmpty()) {
             System.out.println("  Those units cover no topics.");
         } else {
-            System.out.println("  Reviewing: " + Display.CYAN + Display.topicSummary(topics)
-                    + Display.RESET);
+            System.out.println("  Reviewing: " + Display.cyan() + Display.topicSummary(topics)
+                    + Display.reset());
         }
         return topics;
     }
@@ -200,12 +200,12 @@ public class CLI {
         for (int level = 1; level <= 5; level++) {
             String status;
             if (BossChallenge.cleared(currentProfile, level)) {
-                status = Display.GREEN + "CLEARED ★" + Display.RESET;
+                status = Display.green() + "CLEARED ★" + Display.reset();
             } else if (BossChallenge.unlocked(currentProfile, level)) {
-                status = Display.CYAN + "READY — face the boss!" + Display.RESET;
+                status = Display.cyan() + "READY — face the boss!" + Display.reset();
             } else {
-                status = Display.DIM + "locked (raise the world's average mastery to "
-                        + (int) (BossChallenge.UNLOCK_AVG_MASTERY * 100) + "%)" + Display.RESET;
+                status = Display.dim() + "locked (raise the world's average mastery to "
+                        + (int) (BossChallenge.UNLOCK_AVG_MASTERY * 100) + "%)" + Display.reset();
             }
             System.out.printf("  [%d] World %d · %-14s %s%n", level, level, worldNames[level], status);
         }
@@ -245,8 +245,8 @@ public class CLI {
                 break;
             }
             if (answer.equalsIgnoreCase("h") || answer.equalsIgnoreCase("e")) {
-                System.out.println("  " + Display.YELLOW + "No help during a boss fight!"
-                        + Display.RESET + " Your answer counts as given:");
+                System.out.println("  " + Display.yellow() + "No help during a boss fight!"
+                        + Display.reset() + " Your answer counts as given:");
                 answer = in.nextLine().trim();
             }
             GradingResult result = grader.grade(q, answer.equalsIgnoreCase("s") ? "" : answer);
@@ -264,8 +264,8 @@ public class CLI {
         System.out.printf("%n  Boss result: %d/%d%n", correct, asked);
         if (BossChallenge.passed(correct, quiz.size())) {
             currentProfile.getBossesCleared().add(level);
-            System.out.println("  " + Display.GREEN + Display.BOLD
-                    + "★ WORLD " + level + " CLEARED! ★" + Display.RESET
+            System.out.println("  " + Display.green() + Display.bold()
+                    + "★ WORLD " + level + " CLEARED! ★" + Display.reset()
                     + "  It now shows on your concept map.");
         } else if (asked == quiz.size()) {
             System.out.println("  The boss survives… study up and challenge it again "
@@ -291,15 +291,15 @@ public class CLI {
         try {
             String safe = currentProfile.getName().replaceAll("[^a-zA-Z0-9_\\-]", "_");
             Path out = storage.directory().resolveSibling("reports").resolve(safe + "-progress.html");
-            QuestionCalibration calibration = QuestionCalibration.fromRecords(
-                    AttemptLog.readAllInDirectory(storage.directory()));
+            QuestionCalibration calibration = QuestionCalibration.fromProfiles(
+                    AttemptLog.readByProfile(storage.directory()));
             List<String> flagged = calibration.flaggedForReview(
                     bank.getQuestionsForTopics(List.of(Topic.values())));
             List<AttemptRecord> myAttempts = attemptLog.readAll();
             Path written = new HtmlReportGenerator()
                     .generate(currentProfile, myAttempts, flagged, out);
-            System.out.println("  Report written to: " + Display.CYAN
-                    + written.toAbsolutePath() + Display.RESET);
+            System.out.println("  Report written to: " + Display.cyan()
+                    + written.toAbsolutePath() + Display.reset());
 
             // Compact text card for lab submissions / participation credit
             String card = com.studyprogram.report.ProgressCard.render(currentProfile, myAttempts);
@@ -307,8 +307,8 @@ public class CLI {
             java.nio.file.Files.writeString(cardFile, card);
             System.out.println();
             for (String line : card.split("\n")) System.out.println("  " + line);
-            System.out.println("  Card saved to: " + Display.DIM + cardFile.toAbsolutePath()
-                    + Display.RESET);
+            System.out.println("  Card saved to: " + Display.dim() + cardFile.toAbsolutePath()
+                    + Display.reset());
             try {
                 if (java.awt.Desktop.isDesktopSupported()
                         && java.awt.Desktop.getDesktop().isSupported(java.awt.Desktop.Action.BROWSE)) {
@@ -364,11 +364,11 @@ public class CLI {
                 TopicPerformance tp = perf.get(t);
                 int pct = tp == null ? 0 : (int)(tp.getMasteryScore() * 100);
 
-                String color  = locked ? Display.DIM : (sel ? Display.CYAN : "");
+                String color  = locked ? Display.dim() : (sel ? Display.cyan() : "");
                 String marker = sel    ? " ●" : "";
-                String lock   = locked ? Display.RED + " [LOCKED]" + Display.RESET : "";
+                String lock   = locked ? Display.red() + " [LOCKED]" + Display.reset() : "";
                 System.out.printf("  [%2d] %s%-40s%s%s  %3d%%%n",
-                        idx, color, t.displayName + marker, Display.RESET, lock, pct);
+                        idx, color, t.displayName + marker, Display.reset(), lock, pct);
                 indexMap.put(idx, t);
                 idx++;
             }
@@ -441,9 +441,9 @@ public class CLI {
             if (active.isEmpty()) return;
         } else {
             active = Curriculum.autoTopics(currentProfile, 6);
-            System.out.println("  Auto plan: " + Display.CYAN
+            System.out.println("  Auto plan: " + Display.cyan()
                     + active.stream().map(t -> t.displayName).collect(Collectors.joining(", "))
-                    + Display.RESET);
+                    + Display.reset());
         }
 
         System.out.println();
@@ -462,8 +462,8 @@ public class CLI {
         // Calibrate question difficulty from every profile's attempt history on this
         // machine — real student data gradually corrects the authored difficulty labels.
         // The review scheduler is per-student: it spaces THIS student's repetitions.
-        QuestionCalibration calibration = QuestionCalibration.fromRecords(
-                AttemptLog.readAllInDirectory(storage.directory()));
+        QuestionCalibration calibration = QuestionCalibration.fromProfiles(
+                AttemptLog.readByProfile(storage.directory()));
         ReviewScheduler scheduler = ReviewScheduler.fromRecords(attemptLog.readAll());
         AdaptiveEngine engine  = new AdaptiveEngine(bank, new Random(), llm, calibration, scheduler);
         StudySession   session = new StudySession(currentProfile, active, engine, sessionLen);
@@ -514,8 +514,8 @@ public class CLI {
                     if (in.nextLine().trim().equalsIgnoreCase("q")) break;
                 }
                 if (masteryMode && allTopicsMastered(active)) {
-                    System.out.println("\n  " + Display.GREEN + Display.BOLD
-                            + "All topics mastered! Session complete." + Display.RESET);
+                    System.out.println("\n  " + Display.green() + Display.bold()
+                            + "All topics mastered! Session complete." + Display.reset());
                     break;
                 }
                 continue;
@@ -540,13 +540,13 @@ public class CLI {
                 }
                 if (input.equalsIgnoreCase("h")) {
                     hintsUsed++;
-                    System.out.println("  Hint: " + Display.YELLOW + llm.generateHint(q) + Display.RESET);
+                    System.out.println("  Hint: " + Display.yellow() + llm.generateHint(q) + Display.reset());
                     System.out.print("  Your answer: ");
                     continue;
                 }
                 if (input.equalsIgnoreCase("e")) {
-                    System.out.println("  " + Display.DIM
-                            + llm.explainConcept(q.getTopic(), q.getPrompt()) + Display.RESET);
+                    System.out.println("  " + Display.dim()
+                            + llm.explainConcept(q.getTopic(), q.getPrompt()) + Display.reset());
                     System.out.print("  Your answer: ");
                     continue;
                 }
@@ -574,14 +574,14 @@ public class CLI {
             String nav = in.nextLine().trim();
             if (nav.equalsIgnoreCase("q")) break;
             if (nav.equalsIgnoreCase("e")) {
-                System.out.println("  " + Display.DIM
-                        + llm.explainConcept(q.getTopic(), q.getPrompt()) + Display.RESET);
+                System.out.println("  " + Display.dim()
+                        + llm.explainConcept(q.getTopic(), q.getPrompt()) + Display.reset());
             }
 
             // Mastery mode: stop when all active topics hit the target
             if (masteryMode && allTopicsMastered(active)) {
-                System.out.println("\n  " + Display.GREEN + Display.BOLD
-                        + "All topics mastered! Session complete." + Display.RESET);
+                System.out.println("\n  " + Display.green() + Display.bold()
+                        + "All topics mastered! Session complete." + Display.reset());
                 break;
             }
         }
@@ -646,12 +646,12 @@ public class CLI {
                             ? hints.get(lastCodingHints)
                             : llm.generateHint(q);
                     lastCodingHints++;
-                    System.out.println("  Hint: " + Display.YELLOW + hint + Display.RESET);
+                    System.out.println("  Hint: " + Display.yellow() + hint + Display.reset());
                     Display.codingMenu();
                 }
                 case "e" -> {
-                    System.out.println("  " + Display.DIM
-                            + llm.explainConcept(q.getTopic(), q.getPrompt()) + Display.RESET);
+                    System.out.println("  " + Display.dim()
+                            + llm.explainConcept(q.getTopic(), q.getPrompt()) + Display.reset());
                     Display.codingMenu();
                 }
                 default -> {   // Enter (or anything else) runs the tests
@@ -700,7 +700,7 @@ public class CLI {
                 if (input.equalsIgnoreCase("q")) return;
                 if (input.equalsIgnoreCase("s")) break;
                 if (input.equalsIgnoreCase("h")) {
-                    System.out.println("  Hint: " + Display.YELLOW + llm.generateHint(q) + Display.RESET);
+                    System.out.println("  Hint: " + Display.yellow() + llm.generateHint(q) + Display.reset());
                     System.out.print("  Your answer: ");
                     continue;
                 }

@@ -1,0 +1,15 @@
+{
+  "id": "opt-code-09-cloze",
+  "type": "CLOZE",
+  "difficulty": 4,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "record Config(String value) {}\n\npublic class Chained {\n\n    public static java.util.Optional<Integer> parsePort(java.util.Optional<Config> cfg) {\n        return cfg.map(Config::value)\n                .filter(v -> v.matches(\"\\\\d+\"))\n                ____\n                .filter(port -> port >= 1 && port <= 65535);\n    }\n}\n",
+  "answer": ".map(Integer::parseInt)",
+  "alternatives": [
+    ".map(s -> Integer.parseInt(s))"
+  ],
+  "explanation": "map transforms the value inside an Optional and leaves an empty Optional empty, so the digits-only String becomes an Integer without any isPresent() check. The preceding filter is what guarantees parseInt cannot throw here.",
+  "hints": [
+    "The chain is holding an Optional<String> that is known to be all digits; you need the operation that converts the value in place."
+  ]
+}

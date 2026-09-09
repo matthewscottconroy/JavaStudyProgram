@@ -1,0 +1,13 @@
+{
+  "id": "inh-code-04-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "class Greeter {\n    final String greet() {\n        return ____;\n    }\n\n    String name() {\n        return \"stranger\";\n    }\n}\n\npublic class FrenchGreeter extends Greeter {\n\n    @Override\n    String name() {\n        return \"mon ami\";\n    }\n}\n",
+  "answer": "\"Hello, \" + name() + \"!\"",
+  "alternatives": [],
+  "explanation": "greet() is final so subclasses cannot change the sentence, but the unqualified call to name() is dispatched dynamically to the subclass override -- that is the template method pattern in miniature. FrenchGreeter changes one word without touching the surrounding text.",
+  "hints": [
+    "The greeting is fixed, but the person named in it is not. What call inside greet() can a subclass still influence?"
+  ]
+}

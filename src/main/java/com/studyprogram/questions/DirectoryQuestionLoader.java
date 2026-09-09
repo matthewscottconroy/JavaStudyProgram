@@ -20,10 +20,16 @@ public class DirectoryQuestionLoader implements QuestionLoader {
 
     private final Topic topic;
     private final Path directory;
+    private final boolean trusted;
 
     public DirectoryQuestionLoader(Topic topic, Path directory) {
+        this(topic, directory, true);
+    }
+
+    public DirectoryQuestionLoader(Topic topic, Path directory, boolean trusted) {
         this.topic = topic;
         this.directory = directory;
+        this.trusted = trusted;
     }
 
     @Override
@@ -38,7 +44,7 @@ public class DirectoryQuestionLoader implements QuestionLoader {
                  .sorted()
                  .forEach(p -> {
                      try (InputStream in = Files.newInputStream(p)) {
-                         questions.add(JsonQuestionParser.parse(in, topic));
+                         questions.add(JsonQuestionParser.parse(in, topic, trusted));
                      } catch (IOException | RuntimeException e) {
                          System.err.println("Warning: skipping " + p + " — " + e.getMessage());
                      }

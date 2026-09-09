@@ -1,0 +1,13 @@
+{
+  "id": "aal-code-06-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "import java.util.ArrayList;\n\npublic class ListFlattener {\n\n    public static ArrayList<Integer> flatten(ArrayList<ArrayList<Integer>> nested) {\n        ArrayList<Integer> result = new ArrayList<>();\n        for (ArrayList<Integer> innerList : nested) {\n            for (int value : innerList) {\n                ____;\n            }\n        }\n        return result;\n    }\n}\n",
+  "answer": "result.add(value)",
+  "alternatives": [],
+  "explanation": "Flattening means every value from every inner list ends up in one shared output list, so the inner loop appends to the SAME result list built before the loops. Creating a new list inside the loop would throw away everything gathered so far.",
+  "hints": [
+    "The inner loop already has one integer in hand -- where does it need to go?"
+  ]
+}

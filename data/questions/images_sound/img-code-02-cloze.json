@@ -1,0 +1,13 @@
+{
+  "id": "img-code-02-cloze",
+  "type": "CLOZE",
+  "difficulty": 4,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "import java.awt.image.BufferedImage;\n\npublic class ImageTiler {\n\n    public static BufferedImage tile(BufferedImage src, int cols, int rows) {\n        BufferedImage out = new BufferedImage(\n                src.getWidth() * cols, src.getHeight() * rows, BufferedImage.TYPE_INT_RGB);\n        java.awt.Graphics2D g = out.createGraphics();\n        try {\n            for (int r = 0; r < rows; r++) {\n                for (int c = 0; c < cols; c++) {\n                    g.drawImage(src, ____, r * src.getHeight(), null);\n                }\n            }\n        } finally {\n            g.dispose();\n        }\n        return out;\n    }\n}\n",
+  "answer": "c * src.getWidth()",
+  "alternatives": [],
+  "explanation": "Each copy of the tile is placed at a multiple of the source width, so column 0 lands at x = 0, column 1 at one full width across, and so on with no gaps or overlaps. Using the column number alone would stack the tiles almost on top of each other.",
+  "hints": [
+    "Column c has to start where column c - 1 ended -- how wide is one tile?"
+  ]
+}

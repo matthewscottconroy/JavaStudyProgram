@@ -1,0 +1,13 @@
+{
+  "id": "dp-code-04-cloze",
+  "type": "CLOZE",
+  "difficulty": 4,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class EventBus {\n\n    private final java.util.List<java.util.function.Consumer<String>> listeners =\n            new java.util.ArrayList<>();\n\n    public void subscribe(java.util.function.Consumer<String> listener) {\n        listeners.add(listener);\n    }\n\n    public void publish(String event) {\n        for (java.util.function.Consumer<String> listener : listeners) {\n            ____;\n        }\n    }\n}\n",
+  "answer": "listener.accept(event)",
+  "alternatives": [],
+  "explanation": "Publishing means handing the event to every registered listener in turn, and a Consumer is invoked through accept. The bus never knows what any listener does, which is exactly the decoupling the observer pattern buys.",
+  "hints": [
+    "Each element of the list is a Consumer<String> -- what single method does a Consumer expose?"
+  ]
+}

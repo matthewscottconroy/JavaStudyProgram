@@ -1,0 +1,13 @@
+{
+  "id": "rec-code-06-cloze",
+  "type": "CLOZE",
+  "difficulty": 4,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public record Profile(String name, int level) {\n\n    public Profile withName(String newName) {\n        return ____;\n    }\n\n    public Profile withLevel(int newLevel) {\n        return new Profile(name, newLevel);\n    }\n\n    public String display() {\n        return name + \" [\" + level + \"]\";\n    }\n}\n",
+  "answer": "new Profile(newName, level)",
+  "alternatives": [],
+  "explanation": "A record's components are final, so a wither cannot assign to name -- it constructs a fresh Profile with the new name and the existing level copied across. Every 'change' to an immutable value is really a new value.",
+  "hints": [
+    "Record components cannot be reassigned. What has to be built instead, and which field survives unchanged?"
+  ]
+}

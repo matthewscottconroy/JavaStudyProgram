@@ -1,0 +1,13 @@
+{
+  "id": "cls-code-04-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class Point3D {\n\n    private final double x;\n    private final double y;\n    private final double z;\n\n    public Point3D(double x, double y, double z) {\n        this.x = x;\n        this.y = y;\n        this.z = z;\n    }\n\n    public double getX() { return x; }\n    public double getY() { return y; }\n    public double getZ() { return z; }\n\n    public Point3D translate(double dx, double dy, double dz) {\n        return ____;\n    }\n\n    @Override\n    public String toString() {\n        return \"(\" + x + \", \" + y + \", \" + z + \")\";\n    }\n}\n",
+  "answer": "new Point3D(x + dx, y + dy, z + dz)",
+  "alternatives": [],
+  "explanation": "The fields are final, so translate cannot move this point -- it must build and return a brand new Point3D with the shifted coordinates. Returning a new instance instead of mutating is what makes the class immutable and safe to share.",
+  "hints": [
+    "The fields are final. What can a method return if it is not allowed to change them?"
+  ]
+}

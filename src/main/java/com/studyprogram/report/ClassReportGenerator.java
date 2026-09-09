@@ -30,7 +30,8 @@ public class ClassReportGenerator {
         for (String name : storage.listProfileNames()) {
             storage.load(name).ifPresent(profiles::add);
         }
-        List<AttemptRecord> allAttempts = AttemptLog.readAllInDirectory(storage.directory());
+        java.util.Map<String, List<AttemptRecord>> attemptsByProfile =
+                AttemptLog.readByProfile(storage.directory());
 
         StringBuilder h = new StringBuilder(32_000);
         h.append("<!DOCTYPE html><html><head><meta charset='utf-8'>")
@@ -50,7 +51,7 @@ public class ClassReportGenerator {
 
         studentTable(h, profiles, storage);
         weakestTopics(h, profiles);
-        calibrationSection(h, allAttempts, bank);
+        calibrationSection(h, attemptsByProfile, bank);
 
         h.append("</div></body></html>");
         Files.createDirectories(outFile.toAbsolutePath().getParent());
@@ -116,9 +117,10 @@ public class ClassReportGenerator {
         h.append("</table>");
     }
 
-    private void calibrationSection(StringBuilder h, List<AttemptRecord> allAttempts,
+    private void calibrationSection(StringBuilder h,
+                                    java.util.Map<String, List<AttemptRecord>> attemptsByProfile,
                                     QuestionBank bank) {
-        List<String> flagged = QuestionCalibration.fromRecords(allAttempts)
+        List<String> flagged = QuestionCalibration.fromProfiles(attemptsByProfile)
                 .flaggedForReview(bank.getQuestionsForTopics(List.of(Topic.values())));
         if (flagged.isEmpty()) return;
         h.append("<h2>Questions to review</h2><ul>");

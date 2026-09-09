@@ -1,0 +1,13 @@
+{
+  "id": "lam-code-07-cloze",
+  "type": "CLOZE",
+  "difficulty": 4,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "record Event(String kind, int size) {}\n\npublic class EventFilter {\n\n    public static java.util.List<Event> keep(\n            java.util.List<Event> events, java.util.function.Predicate<Event> p) {\n        java.util.List<Event> kept = new java.util.ArrayList<>();\n        for (Event e : events) {\n            if (____) {\n                kept.add(e);\n            }\n        }\n        return kept;\n    }\n}\n",
+  "answer": "p.test(e)",
+  "alternatives": [],
+  "explanation": "A Predicate is asked its question through test, and the caller's lambda decides which events survive without EventFilter knowing the rule. Filtering is nothing more than running that test once per element and keeping the ones that answer true.",
+  "hints": [
+    "Predicate has exactly one abstract method -- what is it called?"
+  ]
+}

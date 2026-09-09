@@ -1,0 +1,13 @@
+{
+  "id": "cc-code-04-cloze",
+  "type": "CLOZE",
+  "difficulty": 4,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "record Employee(String dept, String name, int salary) { }\n\npublic class EmployeeSort {\n\n    public static void sort(java.util.List<Employee> list) {\n        list.sort(java.util.Comparator.comparing(Employee::dept)\n                .thenComparing(java.util.Comparator.comparingInt(Employee::salary)____)\n                .thenComparing(Employee::name));\n    }\n}\n",
+  "answer": ".reversed()",
+  "alternatives": [],
+  "explanation": "Only the salary tier is sorted from high to low, so reversed() must attach to that one comparator rather than to the whole chain -- reversing the chain would also flip department and name order. Comparator methods return new comparators, so each call decorates only the comparator it is invoked on.",
+  "hints": [
+    "Salary must run from highest to lowest while the other two keys stay ascending. Which comparator does the flip apply to?"
+  ]
+}

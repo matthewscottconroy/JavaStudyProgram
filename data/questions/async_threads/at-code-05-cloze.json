@@ -1,0 +1,15 @@
+{
+  "id": "at-code-05-cloze",
+  "type": "CLOZE",
+  "difficulty": 4,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "import java.util.concurrent.CompletableFuture;\n\npublic class FutureChain {\n\n    public static String fetchAndFormat(int id) {\n        return CompletableFuture\n                .supplyAsync(() -> \"item-\" + id)\n                ____\n                .join();\n    }\n}\n",
+  "answer": ".thenApply(String::toUpperCase)",
+  "alternatives": [
+    ".thenApply(s -> s.toUpperCase())"
+  ],
+  "explanation": "thenApply transforms the value a CompletableFuture will produce without blocking, keeping the work in the asynchronous pipeline until join() finally waits for it. Chaining the transformation is what distinguishes a future pipeline from calling get() and then transforming by hand.",
+  "hints": [
+    "You need the stage that maps a completed future's value to a new value, not one that returns another future."
+  ]
+}

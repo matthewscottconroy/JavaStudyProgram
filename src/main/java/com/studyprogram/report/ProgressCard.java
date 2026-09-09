@@ -5,7 +5,10 @@ import com.studyprogram.model.QuestionType;
 import com.studyprogram.model.StudentProfile;
 import com.studyprogram.model.Topic;
 import com.studyprogram.model.TopicPerformance;
+import com.studyprogram.ui.Display;
 
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.time.LocalDate;
@@ -14,12 +17,26 @@ import java.util.Map;
 import java.util.TreeSet;
 
 /**
- * A compact plain-text progress card — something a student can paste into a lab
- * submission or show for participation credit. Ends with a verification code
- * derived from the card's own numbers and the profile id, so a casually edited
- * card won't match its code (a deterrent, not cryptographic proof).
+ * A compact plain-text progress card — something a student can paste into a lab submission or
+ * hand in for participation credit.
+ *
+ * <p><b>What the code at the bottom does and does not prove.</b> Two modes:
+ * <ul>
+ *   <li><b>Checksum</b> (default): a hash of the card's own numbers. It catches a card edited
+ *       after the fact, and nothing more — anyone who can run the program can produce a card with
+ *       whatever numbers their profile contains.</li>
+ *   <li><b>Signed</b>: when {@code STUDY_SIGNING_KEY} is set, an HMAC over the same content. This
+ *       is only meaningful where the student does not hold the key — a shared lab machine the
+ *       instructor configured, for example. On a student's own laptop it is still just a checksum
+ *       with extra steps, and the card is evidence of self-reported practice, not proctored work.</li>
+ * </ul>
+ * Verify a card with {@code java -jar java-study-program.jar --verify-card <file>}.
  */
 public final class ProgressCard {
+
+    private static final String KEY_ENV = "STUDY_SIGNING_KEY";
+    private static final String CHECKSUM_LABEL = "Checksum";
+    private static final String SIGNED_LABEL = "Signature";
 
     private ProgressCard() {}
 
@@ -31,16 +48,25 @@ public final class ProgressCard {
         TreeSet<LocalDate> days = new TreeSet<>();
         attempts.forEach(a -> { if (a.getTs() != null) days.add(a.getTs().toLocalDate()); });
 
+        String h = Display.isAsciiOnly() ? "-" : "─";
+        String v = Display.isAsciiOnly() ? "|" : "│";
+        String tl = Display.isAsciiOnly() ? "+" : "┌";
+        String tr = Display.isAsciiOnly() ? "+" : "┐";
+        String bl = Display.isAsciiOnly() ? "+" : "└";
+        String br = Display.isAsciiOnly() ? "+" : "┘";
+        String ml = Display.isAsciiOnly() ? "+" : "├";
+        String mr = Display.isAsciiOnly() ? "+" : "┤";
+
         StringBuilder card = new StringBuilder();
-        card.append("┌─ JAVA STUDY PROGRESS CARD ").append("─".repeat(25)).append("┐\n");
-        row(card, "Student", profile.getName());
-        row(card, "Date", LocalDate.now().toString());
-        row(card, "Questions answered", String.valueOf(answered));
-        row(card, "Accuracy", answered == 0 ? "-" : Math.round(100.0 * correct / answered) + "%");
-        row(card, "Programs written & passed", String.valueOf(coding));
-        row(card, "Study days", String.valueOf(days.size()));
-        row(card, "Bosses cleared", profile.getBossesCleared().size() + "/5");
-        card.append("├").append("─".repeat(52)).append("┤\n");
+        card.append(tl).append(h).append(" JAVA STUDY PROGRESS CARD ").append(h.repeat(25)).append(tr).append("\n");
+        row(card, v, "Student", profile.getName());
+        row(card, v, "Date", LocalDate.now().toString());
+        row(card, v, "Questions answered", String.valueOf(answered));
+        row(card, v, "Accuracy", answered == 0 ? "-" : Math.round(100.0 * correct / answered) + "%");
+        row(card, v, "Programs written & passed", String.valueOf(coding));
+        row(card, v, "Study days", String.valueOf(days.size()));
+        row(card, v, "Bosses cleared", profile.getBossesCleared().size() + "/5");
+        card.append(ml).append(h.repeat(52)).append(mr).append("\n");
 
         String[] worlds = {"Foundations", "Elementary", "Intermediate", "Advanced", "Expert"};
         Map<Topic, TopicPerformance> perf = profile.getPerformance();
@@ -55,30 +81,73 @@ public final class ProgressCard {
             }
             int pct = n == 0 ? 0 : (int) Math.round(100.0 * sum / n);
             int filled = pct / 10;
-            row(card, "World " + level + " " + worlds[level - 1],
+            row(card, v, "World " + level + " " + worlds[level - 1],
                     "[" + "#".repeat(filled) + ".".repeat(10 - filled) + "] " + pct + "%");
         }
 
-        card.append("├").append("─".repeat(52)).append("┤\n");
-        row(card, "Verification", verificationCode(profile, card.toString()));
-        card.append("└").append("─".repeat(52)).append("┘\n");
+        card.append(ml).append(h.repeat(52)).append(mr).append("\n");
+        String body = card.toString();
+        row(card, v, signingKey() == null ? CHECKSUM_LABEL : SIGNED_LABEL, code(profile, body));
+        card.append(bl).append(h.repeat(52)).append(br).append("\n");
         return card.toString();
     }
 
-    private static void row(StringBuilder sb, String label, String value) {
-        sb.append(String.format("│ %-26s %-23s │%n", label, value));
+    /**
+     * Re-derives the code for a rendered card and compares it with the printed one.
+     *
+     * @return a human-readable verdict
+     */
+    public static String verify(String cardText, String profileId) {
+        String marker = signingKey() == null ? CHECKSUM_LABEL : SIGNED_LABEL;
+        int markerLine = cardText.indexOf(marker);
+        if (markerLine < 0) {
+            return "No " + marker.toLowerCase() + " line found — is this a progress card"
+                    + (signingKey() == null ? "" : " (and is STUDY_SIGNING_KEY the one used to make it)?");
+        }
+        int lineStart = cardText.lastIndexOf('\n', markerLine) + 1;
+        String body = cardText.substring(0, lineStart);
+        String printed = cardText.substring(markerLine + marker.length())
+                .replaceAll("[^0-9A-Fa-f]", "").trim();
+        String expected = codeFor(profileId, body);
+        if (printed.isEmpty()) return "Could not read the code from the card.";
+        return printed.equalsIgnoreCase(expected.substring(0, Math.min(expected.length(), printed.length())))
+                ? "VALID — the numbers on this card match its " + marker.toLowerCase() + "."
+                : "INVALID — this card's numbers do not match its " + marker.toLowerCase()
+                  + " (it was edited, or made with a different key or profile).";
     }
 
-    /** First 8 hex chars of SHA-256 over the card body plus the (private) profile id. */
-    static String verificationCode(StudentProfile profile, String body) {
+    private static void row(StringBuilder sb, String v, String label, String value) {
+        sb.append(String.format("%s %-26s %-23s %s%n", v, label, value, v));
+    }
+
+    /** Card code: HMAC when a signing key is configured, otherwise a plain checksum. */
+    static String code(StudentProfile profile, String body) {
+        return codeFor(profile.getId(), body);
+    }
+
+    static String codeFor(String profileId, String body) {
+        String material = body + (profileId == null ? "" : profileId);
         try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] hash = md.digest((body + profile.getId()).getBytes(StandardCharsets.UTF_8));
+            String key = signingKey();
+            byte[] digest;
+            if (key == null) {
+                digest = MessageDigest.getInstance("SHA-256")
+                        .digest(material.getBytes(StandardCharsets.UTF_8));
+            } else {
+                Mac mac = Mac.getInstance("HmacSHA256");
+                mac.init(new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "HmacSHA256"));
+                digest = mac.doFinal(material.getBytes(StandardCharsets.UTF_8));
+            }
             StringBuilder hex = new StringBuilder();
-            for (int i = 0; i < 4; i++) hex.append(String.format("%02x", hash[i]));
+            for (int i = 0; i < 4; i++) hex.append(String.format("%02x", digest[i]));
             return hex.toString().toUpperCase();
         } catch (Exception e) {
             return "N/A";
         }
+    }
+
+    private static String signingKey() {
+        String key = System.getenv(KEY_ENV);
+        return key == null || key.isBlank() ? null : key;
     }
 }

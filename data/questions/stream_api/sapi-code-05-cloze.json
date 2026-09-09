@@ -1,0 +1,13 @@
+{
+  "id": "sapi-code-05-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class IntStats {\n\n    public static int[] minMaxSum(int[] values) {\n        if (values.length == 0) {\n            return new int[] { 0, 0, 0 };\n        }\n        java.util.IntSummaryStatistics stats =\n                java.util.stream.____;\n        return new int[] { stats.getMin(), stats.getMax(), (int) stats.getSum() };\n    }\n}\n",
+  "answer": "IntStream.of(values).summaryStatistics()",
+  "alternatives": [],
+  "explanation": "summaryStatistics() walks the stream once and collects count, min, max and sum together, so three answers come out of a single pass instead of three separate reductions. IntStream.of wraps the primitive array without boxing it into Integers.",
+  "hints": [
+    "There is one terminal operation on IntStream that returns min, max, sum and count in a single object."
+  ]
+}

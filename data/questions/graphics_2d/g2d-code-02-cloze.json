@@ -1,0 +1,13 @@
+{
+  "id": "g2d-code-02-cloze",
+  "type": "CLOZE",
+  "difficulty": 4,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "import java.awt.Color;\nimport java.awt.Graphics2D;\n\npublic class DiamondDrawer {\n\n    public static void paint(Graphics2D g, int size) {\n        g.setColor(Color.WHITE);\n        g.fillRect(0, 0, size, size);\n        ____;\n        g.setColor(Color.RED);\n        int side = size / 4;\n        g.fillRect((size - side) / 2, (size - side) / 2, side, side);\n    }\n}\n",
+  "answer": "g.rotate(Math.PI / 4, size / 2.0, size / 2.0)",
+  "alternatives": [],
+  "explanation": "Rotating the coordinate system by 45 degrees about the centre of the canvas is what turns the later axis-aligned fillRect into a diamond. The three-argument rotate pins the pivot to the image centre; rotating about the default origin (0, 0) would swing the square off the canvas.",
+  "hints": [
+    "The square is drawn axis-aligned. Something has to happen to the Graphics2D coordinate system first, and it must pivot about the middle."
+  ]
+}

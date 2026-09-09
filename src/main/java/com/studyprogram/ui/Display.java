@@ -7,28 +7,72 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/** Static helpers for rendering questions, results, and stats to the terminal. */
+/**
+ * Static helpers for rendering questions, results, and stats to the terminal.
+ *
+ * <p>Presentation is accessibility-aware in two ways. Colour is never the only signal — every
+ * coloured state also carries a text or symbol marker, so the display works in monochrome and for
+ * colour-blind readers. And output degrades for terminals that cannot render ANSI or box-drawing
+ * characters:
+ *
+ * <ul>
+ *   <li>{@code NO_COLOR} (any value, the de-facto standard) or {@code --no-color} disables ANSI.</li>
+ *   <li>{@code JAVASTUDY_ASCII=1} (or a non-UTF-8 terminal encoding) swaps box-drawing and emoji
+ *       glyphs for plain ASCII, which is what old Windows consoles need.</li>
+ * </ul>
+ */
 public class Display {
 
-    // ANSI color codes (Jansi AnsiConsole.systemInstall() ensures these work on Windows too)
-    public static final String RESET  = "[0m";
-    public static final String BOLD   = "[1m";
-    public static final String GREEN  = "[32m";
-    public static final String RED    = "[31m";
-    public static final String YELLOW = "[33m";
-    public static final String CYAN   = "[36m";
-    public static final String DIM    = "[2m";
+    private static boolean colorEnabled = System.getenv("NO_COLOR") == null;
+    private static boolean asciiOnly = "1".equals(System.getenv("JAVASTUDY_ASCII"))
+            || !String.valueOf(System.getProperty("file.encoding")).toUpperCase().contains("UTF");
+
+    /** Disables ANSI colour (called for {@code --no-color}). */
+    public static void disableColor() { colorEnabled = false; }
+
+    /** Forces plain-ASCII glyphs (called for {@code --ascii}). */
+    public static void useAsciiGlyphs() { asciiOnly = true; }
+
+    public static boolean isColorEnabled() { return colorEnabled; }
+    public static boolean isAsciiOnly()    { return asciiOnly; }
+
+    // ANSI colour codes, suppressed when colour is off
+    private static String ansi(String code) { return colorEnabled ? code : ""; }
+
+    public static String reset()  { return ansi("\u001b[0m"); }
+    public static String bold()   { return ansi("\u001b[1m"); }
+    public static String green()  { return ansi("\u001b[32m"); }
+    public static String red()    { return ansi("\u001b[31m"); }
+    public static String yellow() { return ansi("\u001b[33m"); }
+    public static String cyan()   { return ansi("\u001b[36m"); }
+    public static String dim()    { return ansi("\u001b[2m"); }
+
+    // Glyphs: the ASCII forms keep every state distinguishable without colour or Unicode
+    public static String tick()      { return asciiOnly ? "[OK]"   : "\u2713"; }
+    public static String cross()     { return asciiOnly ? "[X]"    : "\u2717"; }
+    public static String star()      { return asciiOnly ? "*"      : "\u2605"; }
+    public static String bullet()    { return asciiOnly ? "*"      : "\u25cf"; }
+    public static String warnSign()  { return asciiOnly ? "!"      : "\u26a0"; }
+    public static String swords()    { return asciiOnly ? ">>"     : "\u2694"; }
+    private static String hLine()    { return asciiOnly ? "-"      : "\u2500"; }
+    private static String vLine()    { return asciiOnly ? "|"      : "\u2502"; }
+    private static String cornerTL() { return asciiOnly ? "+"      : "\u250c"; }
+    private static String cornerBL() { return asciiOnly ? "+"      : "\u2514"; }
+    private static String barFull()  { return asciiOnly ? "#"      : "\u2588"; }
+    private static String barEmpty() { return asciiOnly ? "."      : "\u2591"; }
+    private static String filledStar()  { return asciiOnly ? "*"   : "\u2605"; }
+    private static String hollowStar()  { return asciiOnly ? "."   : "\u2606"; }
 
     private static final int WIDTH = 72;
 
     public static void rule() {
-        System.out.println("─".repeat(WIDTH));
+        System.out.println(hLine().repeat(WIDTH));
     }
 
     public static void header(String text) {
         System.out.println();
         rule();
-        System.out.println(BOLD + center(text, WIDTH) + RESET);
+        System.out.println(bold() + center(text, WIDTH) + reset());
         rule();
     }
 
@@ -45,10 +89,10 @@ public class Display {
     public static void question(Question q, int number, int total) {
         System.out.println();
         rule();
-        System.out.printf(BOLD + "  Question %d/%d" + RESET
-                + "  │  Topic: " + CYAN + "%s" + RESET
-                + "  │  Type: " + YELLOW + "%s" + RESET
-                + "  │  Difficulty: %s%n",
+        System.out.printf(bold() + "  Question %d/%d" + reset()
+                + "  " + vLine() + "  Topic: " + cyan() + "%s" + reset()
+                + "  " + vLine() + "  Type: " + yellow() + "%s" + reset()
+                + "  " + vLine() + "  Difficulty: %s%n",
                 number, total,
                 q.getTopic().displayName,
                 q.getType().displayName,
@@ -59,21 +103,21 @@ public class Display {
 
         if (q.hasCode()) {
             System.out.println();
-            System.out.println(DIM + "  ┌─ Java " + "─".repeat(WIDTH - 10) + RESET);
+            System.out.println(dim() + "  " + cornerTL() + hLine() + " Java " + hLine().repeat(WIDTH - 10) + reset());
             for (String line : q.getCode().split("\n")) {
-                System.out.println(DIM + "  │" + RESET + "  " + line);
+                System.out.println(dim() + "  " + vLine() + reset() + "  " + line);
             }
-            System.out.println(DIM + "  └" + "─".repeat(WIDTH - 3) + RESET);
+            System.out.println(dim() + "  " + cornerBL() + hLine().repeat(WIDTH - 3) + reset());
         }
 
         if (q.getType() == QuestionType.PARSONS) {
             System.out.println();
             List<String> lines = q.getShuffledLines();
-            System.out.println(DIM + "  ┌─ Scrambled lines " + "─".repeat(WIDTH - 21) + RESET);
+            System.out.println(dim() + "  " + cornerTL() + hLine() + " Scrambled lines " + hLine().repeat(WIDTH - 21) + reset());
             for (int i = 0; i < lines.size(); i++) {
-                System.out.printf("%s  │%s %2d:  %s%n", DIM, RESET, i + 1, lines.get(i));
+                System.out.printf("%s  " + vLine() + "%s %2d:  %s%n", dim(), reset(), i + 1, lines.get(i));
             }
-            System.out.println(DIM + "  └" + "─".repeat(WIDTH - 3) + RESET);
+            System.out.println(dim() + "  " + cornerBL() + hLine().repeat(WIDTH - 3) + reset());
             System.out.println();
             System.out.print("  Line numbers in order (e.g. 3 1 4 2) or [h]int [e]xplain [s]kip [q]uit: ");
         } else if (q.getType() == QuestionType.CLOZE) {
@@ -98,10 +142,10 @@ public class Display {
     public static void codingQuestion(Question q, int number, int total, java.nio.file.Path file) {
         System.out.println();
         rule();
-        System.out.printf(BOLD + "  Question %d/%d" + RESET
-                + "  │  Topic: " + CYAN + "%s" + RESET
-                + "  │  Type: " + YELLOW + "%s" + RESET
-                + "  │  Difficulty: %s%n",
+        System.out.printf(bold() + "  Question %d/%d" + reset()
+                + "  " + vLine() + "  Topic: " + cyan() + "%s" + reset()
+                + "  " + vLine() + "  Type: " + yellow() + "%s" + reset()
+                + "  " + vLine() + "  Difficulty: %s%n",
                 number, total,
                 q.getTopic().displayName,
                 q.getType().displayName,
@@ -114,13 +158,13 @@ public class Display {
             System.out.println("  This is a project exercise — edit these files in your editor or IDE:");
             java.nio.file.Path dir = file.getParent();
             for (String name : q.getStarterFiles().keySet()) {
-                System.out.println("  " + BOLD + CYAN + dir.resolve(name).toAbsolutePath() + RESET);
+                System.out.println("  " + bold() + cyan() + dir.resolve(name).toAbsolutePath() + reset());
             }
             System.out.println();
             System.out.println("  You may also add extra .java files of your own to that folder.");
         } else {
             System.out.println("  Edit this file in your editor or IDE:");
-            System.out.println("  " + BOLD + CYAN + file.toAbsolutePath() + RESET);
+            System.out.println("  " + bold() + cyan() + file.toAbsolutePath() + reset());
         }
         System.out.println();
         System.out.println("  The full task description is in a comment at the top of the file.");
@@ -137,17 +181,17 @@ public class Display {
     public static void codingResult(com.studyprogram.coding.CodingResult result) {
         System.out.println();
         switch (result.status()) {
-            case PASS -> System.out.println(GREEN + BOLD + "✓ Compiled — all tests passed!" + RESET);
-            case TEST_FAILURE -> System.out.println(RED + BOLD + "✗ Compiled, but some tests failed:" + RESET);
-            case COMPILE_ERROR -> System.out.println(RED + BOLD + "✗ Compile error:" + RESET);
-            case TIMEOUT -> System.out.println(RED + BOLD + "✗ Timed out:" + RESET);
-            case ENVIRONMENT_ERROR -> System.out.println(YELLOW + BOLD + "! Environment problem:" + RESET);
+            case PASS -> System.out.println(green() + bold() + tick() + " Compiled — all tests passed!" + reset());
+            case TEST_FAILURE -> System.out.println(red() + bold() + cross() + " Compiled, but some tests failed:" + reset());
+            case COMPILE_ERROR -> System.out.println(red() + bold() + cross() + " Compile error:" + reset());
+            case TIMEOUT -> System.out.println(red() + bold() + cross() + " Timed out:" + reset());
+            case ENVIRONMENT_ERROR -> System.out.println(yellow() + bold() + warnSign() + " Environment problem:" + reset());
         }
         String body = result.output();
         if (body != null && !body.isBlank()) {
             for (String line : body.split("\n")) {
-                String color = line.startsWith("PASS") ? GREEN : line.startsWith("FAIL") ? RED : DIM;
-                System.out.println("  " + color + line + RESET);
+                String color = line.startsWith("PASS") ? green() : line.startsWith("FAIL") ? red() : dim();
+                System.out.println("  " + color + line + reset());
             }
         }
     }
@@ -155,37 +199,37 @@ public class Display {
     /** Shows the reference solution (used when the student gives up on a coding exercise). */
     public static void referenceSolution(Question q) {
         System.out.println();
-        System.out.println(YELLOW + BOLD + "  Reference solution:" + RESET);
-        System.out.println(DIM + "  ┌─ Java " + "─".repeat(WIDTH - 10) + RESET);
+        System.out.println(yellow() + bold() + "  Reference solution:" + reset());
+        System.out.println(dim() + "  " + cornerTL() + hLine() + " Java " + hLine().repeat(WIDTH - 10) + reset());
         for (String line : q.getAnswer().split("\n")) {
-            System.out.println(DIM + "  │" + RESET + "  " + line);
+            System.out.println(dim() + "  " + vLine() + reset() + "  " + line);
         }
-        System.out.println(DIM + "  └" + "─".repeat(WIDTH - 3) + RESET);
+        System.out.println(dim() + "  " + cornerBL() + hLine().repeat(WIDTH - 3) + reset());
         if (!q.getExplanation().isBlank()) {
             System.out.println();
-            System.out.println(DIM + "  " + q.getExplanation() + RESET);
+            System.out.println(dim() + "  " + q.getExplanation() + reset());
         }
     }
 
     public static void correct(GradingResult result) {
         System.out.println();
-        System.out.println(GREEN + BOLD + "✓ Correct!" + RESET);
+        System.out.println(green() + bold() + tick() + " Correct!" + reset());
         if (!result.explanation().isBlank()) {
-            System.out.println(DIM + "  " + result.explanation() + RESET);
+            System.out.println(dim() + "  " + result.explanation() + reset());
         }
     }
 
     public static void incorrect(GradingResult result) {
         System.out.println();
-        System.out.println(RED + BOLD + "✗ Incorrect" + RESET);
+        System.out.println(red() + bold() + cross() + " Incorrect" + reset());
         System.out.println("  " + result.feedback());
         if (!result.explanation().isBlank()) {
             System.out.println();
-            System.out.println(DIM + "  " + result.explanation() + RESET);
+            System.out.println(dim() + "  " + result.explanation() + reset());
         }
         if (result.hasLLMFeedback()) {
             System.out.println();
-            System.out.println(YELLOW + "  AI: " + result.llmFeedback() + RESET);
+            System.out.println(yellow() + "  AI: " + result.llmFeedback() + reset());
         }
     }
 
@@ -195,7 +239,7 @@ public class Display {
         header("Session Summary");
         System.out.printf("  Total questions : %d%n", answered);
         System.out.printf("  Correct         : %s%d%s%n",
-                          correct == answered ? GREEN : YELLOW, correct, RESET);
+                          correct == answered ? green() : yellow(), correct, reset());
         System.out.printf("  Accuracy        : %.0f%%%n",
                           answered == 0 ? 0.0 : 100.0 * correct / answered);
         if (skipped > 0) {
@@ -209,9 +253,9 @@ public class Display {
             breakdown.forEach((topic, counts) -> {
                 long total = counts[0], right = counts[1];
                 int pct = total == 0 ? 0 : (int)(100 * right / total);
-                String color = pct >= 80 ? GREEN : pct >= 50 ? YELLOW : RED;
+                String color = pct >= 80 ? green() : pct >= 50 ? yellow() : red();
                 System.out.printf("    %-40s %s%3d%%%s  (%d/%d)%n",
-                        topic.displayName, color, pct, RESET, right, total);
+                        topic.displayName, color, pct, reset(), right, total);
             });
         }
         rule();
@@ -235,8 +279,8 @@ public class Display {
 
             double mastery = (p == null) ? 0.0 : p.getMasteryScore();
             int pct = (int)(mastery * 100);
-            String marker = selected ? CYAN + "●" + RESET : " ";
-            String color  = pct >= 80 ? GREEN : pct >= 40 ? YELLOW : DIM;
+            String marker = selected ? cyan() + bullet() + reset() : " ";
+            String color  = pct >= 80 ? green() : pct >= 40 ? yellow() : dim();
             System.out.printf("  %s %-44s %s%s%s  %s%n",
                     marker,
                     t.displayName,
@@ -250,18 +294,18 @@ public class Display {
             System.out.println("  No topics selected yet. Use [3] Select Topics to get started.");
         }
         rule();
-        System.out.println("  " + CYAN + "●" + RESET + " = currently selected");
+        System.out.println("  " + cyan() + bullet() + reset() + " = currently selected");
     }
 
     // ── Private helpers ───────────────────────────────────────────────────────
 
     private static String stars(int difficulty) {
-        return "★".repeat(difficulty) + "☆".repeat(5 - difficulty);
+        return filledStar().repeat(difficulty) + hollowStar().repeat(5 - difficulty);
     }
 
     private static String bar(int pct) {
         int filled = pct / 5;   // 0–20 segments
-        return "[" + "█".repeat(filled) + "░".repeat(20 - filled) + "] " + pct + "%";
+        return "[" + barFull().repeat(filled) + barEmpty().repeat(20 - filled) + "] " + pct + "%";
     }
 
     private static String center(String s, int width) {

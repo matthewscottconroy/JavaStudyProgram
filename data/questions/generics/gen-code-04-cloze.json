@@ -1,0 +1,13 @@
+{
+  "id": "gen-code-04-cloze",
+  "type": "CLOZE",
+  "difficulty": 4,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class NumberMath {\n\n    public static double sumOf(java.util.List<? extends Number> nums) {\n        double total = 0.0;\n        for (Number n : nums) {\n            total += ____;\n        }\n        return total;\n    }\n}\n",
+  "answer": "n.doubleValue()",
+  "alternatives": [],
+  "explanation": "The list is declared with a wildcard bound of Number, so the only arithmetic available is what Number itself promises -- doubleValue() converts Integer, Double, Long and friends to a common type. A cast to a specific subtype would defeat the point of accepting any Number.",
+  "hints": [
+    "The elements are only known to be Numbers. What does the Number class itself offer for getting a double out?"
+  ]
+}

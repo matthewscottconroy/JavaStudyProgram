@@ -50,6 +50,25 @@ public class AttemptLog {
     }
 
     /**
+     * Every profile's attempt history in a directory, keyed by profile name. Calibration needs
+     * the split (not a flat list) so it can tell whose ability produced which result.
+     */
+    public static java.util.Map<String, List<AttemptRecord>> readByProfile(Path dir) {
+        java.util.Map<String, List<AttemptRecord>> byProfile = new java.util.LinkedHashMap<>();
+        if (!Files.isDirectory(dir)) return byProfile;
+        try (var files = Files.list(dir)) {
+            for (Path p : files.filter(f -> f.getFileName().toString().endsWith(".attempts.jsonl"))
+                               .sorted().toList()) {
+                String name = p.getFileName().toString().replace(".attempts.jsonl", "");
+                byProfile.put(name, new AttemptLog(p).readAll());
+            }
+        } catch (IOException e) {
+            System.err.println("Warning: could not scan attempt logs — " + e.getMessage());
+        }
+        return byProfile;
+    }
+
+    /**
      * All attempt records from every profile's log in a directory — the classroom-level
      * aggregate used for question calibration (on a shared machine, every student's
      * attempts improve the difficulty estimates).

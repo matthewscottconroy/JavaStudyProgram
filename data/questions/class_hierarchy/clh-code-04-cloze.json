@@ -1,0 +1,13 @@
+{
+  "id": "clh-code-04-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class Caster {\n\n    public static String asString(Object o) {\n        if (____) {\n            return s;\n        }\n        return null;\n    }\n\n    public static Integer doubled(Object o) {\n        if (o instanceof Integer i) {\n            return i * 2;\n        }\n        return null;\n    }\n}\n",
+  "answer": "o instanceof String s",
+  "alternatives": [],
+  "explanation": "Pattern matching for instanceof both tests the runtime type and, when the test succeeds, binds the already-cast value to s so no explicit cast is needed. Without the type test the cast could throw ClassCastException on any other object.",
+  "hints": [
+    "Java 16 lets one expression both check the type and name the narrowed value."
+  ]
+}

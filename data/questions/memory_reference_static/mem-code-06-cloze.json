@@ -1,0 +1,13 @@
+{
+  "id": "mem-code-06-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class RefCheck {\n\n    public static boolean sameObject(Object a, Object b) {\n        return ____;\n    }\n\n    public static boolean sameContent(Object a, Object b) {\n        if (a == null) {\n            return b == null;\n        }\n        return a.equals(b);\n    }\n}\n",
+  "answer": "a == b",
+  "alternatives": [],
+  "explanation": "For object references == compares the references themselves, so it is true only when both variables point at the very same object on the heap. equals(), used in the other method, compares contents instead -- that is the whole distinction this exercise is about.",
+  "hints": [
+    "One of these two methods must answer 'is this literally the same object?' rather than 'do these look alike?'"
+  ]
+}

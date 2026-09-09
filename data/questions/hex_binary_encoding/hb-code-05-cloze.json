@@ -1,0 +1,15 @@
+{
+  "id": "hb-code-05-cloze",
+  "type": "CLOZE",
+  "difficulty": 4,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class BitSetter {\n\n    public static int setBit(int value, int bit) {\n        return value | (1 << bit);\n    }\n\n    public static int clearBit(int value, int bit) {\n        return ____;\n    }\n}\n",
+  "answer": "value & ~(1 << bit)",
+  "alternatives": [
+    "value & (~(1 << bit))"
+  ],
+  "explanation": "Shifting 1 left builds a mask with a single 1 in the target position; ~ flips it to all 1s except that position, and & then zeroes exactly that bit while leaving every other bit alone. Using | instead would set the bit rather than clear it.",
+  "hints": [
+    "Build the single-bit mask the same way setBit does, then think about which operator turns that mask into a hole."
+  ]
+}

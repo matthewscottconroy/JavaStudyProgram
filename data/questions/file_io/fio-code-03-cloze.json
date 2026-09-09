@@ -1,0 +1,13 @@
+{
+  "id": "fio-code-03-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class CsvSplitter {\n\n    public static String[] parseLine(String line) {\n        String[] parts = ____;\n        for (int i = 0; i < parts.length; i++) {\n            parts[i] = parts[i].trim();\n        }\n        return parts;\n    }\n}\n",
+  "answer": "line.split(\",\", -1)",
+  "alternatives": [],
+  "explanation": "The negative limit tells split to keep trailing empty fields, so a line ending in a comma still yields an empty final column instead of silently losing it. Plain split(\",\") discards those trailing empties and would give the wrong column count.",
+  "hints": [
+    "String.split has a two-argument form whose second parameter controls what happens to trailing empty fields."
+  ]
+}

@@ -19,14 +19,23 @@ public final class JsonQuestionParser {
     private JsonQuestionParser() {}
 
     public static Question parse(InputStream in, Topic topic) throws IOException {
-        return toQuestion(MAPPER.readValue(in, JsonQuestionDto.class), topic);
+        return parse(in, topic, true);
+    }
+
+    /** @param trusted false for questions from an external overlay directory */
+    public static Question parse(InputStream in, Topic topic, boolean trusted) throws IOException {
+        return toQuestion(MAPPER.readValue(in, JsonQuestionDto.class), topic, trusted);
     }
 
     public static Question parse(byte[] json, Topic topic) throws IOException {
-        return toQuestion(MAPPER.readValue(json, JsonQuestionDto.class), topic);
+        return toQuestion(MAPPER.readValue(json, JsonQuestionDto.class), topic, true);
     }
 
     static Question toQuestion(JsonQuestionDto dto, Topic topic) {
+        return toQuestion(dto, topic, true);
+    }
+
+    static Question toQuestion(JsonQuestionDto dto, Topic topic, boolean trusted) {
         QuestionType type = dto.type != null
                 ? QuestionType.valueOf(dto.type.toUpperCase())
                 : QuestionType.MULTIPLE_CHOICE;
@@ -38,7 +47,8 @@ public final class JsonQuestionParser {
                 .difficulty(dto.difficulty)
                 .prompt(dto.prompt)
                 .answer(dto.answer)
-                .explanation(dto.explanation);
+                .explanation(dto.explanation)
+                .trusted(trusted);
 
         if (dto.code != null && !dto.code.isBlank()) b.code(dto.code);
         if (dto.choices != null) dto.choices.forEach(b::choice);

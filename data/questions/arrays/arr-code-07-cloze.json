@@ -1,0 +1,16 @@
+{
+  "id": "arr-code-07-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class ScoreHistogram {\n\n    public static int[] histogram(int[] scores) {\n        int[] counts = new int[10];\n        for (int score : scores) {\n            ____;\n        }\n        return counts;\n    }\n}\n",
+  "answer": "counts[score]++",
+  "alternatives": [
+    "counts[score] += 1",
+    "counts[score] = counts[score] + 1"
+  ],
+  "explanation": "The score itself is used as the array index, so tallying a score is just incrementing the bucket at that position. This is the counting idiom: one pass over the data, no searching and no sorting.",
+  "hints": [
+    "Each score is already a legal index into counts -- what do you do to the bucket it points at?"
+  ]
+}

@@ -27,6 +27,7 @@ public final class Question {
     private final List<Topic> relatedTopics;  // prerequisite topics this question also exercises
     private final Map<String, String> starterFiles;  // CODING multi-file: filename -> content
     private final Map<String, String> solutionFiles; // CODING multi-file: reference solution set
+    private final boolean trusted;      // false for questions loaded from an external overlay
 
     private Question(Builder b) {
         this.id                 = b.id;
@@ -46,6 +47,7 @@ public final class Question {
         this.relatedTopics      = Collections.unmodifiableList(new ArrayList<>(b.relatedTopics));
         this.starterFiles       = Collections.unmodifiableMap(new LinkedHashMap<>(b.starterFiles));
         this.solutionFiles      = Collections.unmodifiableMap(new LinkedHashMap<>(b.solutionFiles));
+        this.trusted            = b.trusted;
     }
 
     // ── Accessors ────────────────────────────────────────────────────────────
@@ -72,6 +74,20 @@ public final class Question {
     public Map<String, String> getSolutionFiles() { return solutionFiles; }
     /** True for project-style CODING exercises spanning several source files. */
     public boolean isMultiFile()              { return !starterFiles.isEmpty(); }
+    /** False for questions loaded from an external overlay directory (screened before use). */
+    public boolean isTrusted()                { return trusted; }
+
+    /** Every code string this question carries — what the safety scanner screens. */
+    public List<String> allCode() {
+        List<String> all = new ArrayList<>();
+        if (starterCode != null) all.add(starterCode);
+        if (testCode != null) all.add(testCode);
+        if (answer != null) all.add(answer);
+        if (code != null) all.add(code);
+        all.addAll(starterFiles.values());
+        all.addAll(solutionFiles.values());
+        return all;
+    }
 
     // ── Builder ──────────────────────────────────────────────────────────────
 
@@ -95,6 +111,7 @@ public final class Question {
         private final List<Topic> relatedTopics  = new ArrayList<>();
         private final Map<String, String> starterFiles  = new LinkedHashMap<>();
         private final Map<String, String> solutionFiles = new LinkedHashMap<>();
+        private boolean trusted = true;
 
         public Builder id(String id)                  { this.id = id; return this; }
         public Builder topic(Topic t)                 { this.topic = t; return this; }
@@ -122,6 +139,7 @@ public final class Question {
                                                              this.starterFiles.putAll(f); return this; }
         public Builder solutionFiles(Map<String, String> f) { this.solutionFiles.clear();
                                                               this.solutionFiles.putAll(f); return this; }
+        public Builder trusted(boolean t)             { this.trusted = t; return this; }
 
         public Question build() {
             if (topic == null)  throw new IllegalStateException("topic required");

@@ -1,0 +1,13 @@
+{
+  "id": "col-code-09-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "import java.util.Map;\nimport java.util.TreeMap;\n\npublic class MapInverter {\n\n    public static TreeMap<Integer, String> invertUnique(Map<String, Integer> m) {\n        TreeMap<Integer, String> result = new TreeMap<>();\n        for (Map.Entry<String, Integer> entry : m.entrySet()) {\n            ____;\n        }\n        return result;\n    }\n}\n",
+  "answer": "result.put(entry.getValue(), entry.getKey())",
+  "alternatives": [],
+  "explanation": "Inverting a map means the old value becomes the new key and the old key becomes the new value, so the two accessors are deliberately swapped in the put call. Because the result is a TreeMap, the new keys sort themselves as they are inserted.",
+  "hints": [
+    "Each entry gives you a key and a value -- which one has to become the key in the inverted map?"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "fn-code-04-cloze",
+  "type": "CLOZE",
+  "difficulty": 4,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class DigitSummer {\n\n    public static int sumDigits(int n) {\n        if (n < 0) {\n            return sumDigits(-n);\n        }\n        if (n < 10) {\n            return n;\n        }\n        return ____;\n    }\n}\n",
+  "answer": "n % 10 + sumDigits(n / 10)",
+  "alternatives": [
+    "sumDigits(n / 10) + n % 10"
+  ],
+  "explanation": "The recursive step peels off the last digit with % 10 and hands the remaining, shorter number back to sumDigits after dividing by 10. Because each call shrinks n by one digit it eventually reaches the n < 10 base case and unwinds.",
+  "hints": [
+    "Split the number into its last digit and everything before it, and let the method solve the smaller half."
+  ]
+}

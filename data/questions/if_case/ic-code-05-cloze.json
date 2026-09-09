@@ -1,0 +1,13 @@
+{
+  "id": "ic-code-05-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class RockPaperScissors {\n\n    public static String rpsWinner(String a, String b) {\n        if (a.equals(b)) {\n            return \"tie\";\n        }\n        boolean aWins = (a.equals(\"rock\") && b.equals(\"scissors\"))\n                || (a.equals(\"scissors\") && b.equals(\"paper\"))\n                || (a.equals(\"paper\") && b.equals(\"rock\"));\n        return ____;\n    }\n}\n",
+  "answer": "aWins ? \"a\" : \"b\"",
+  "alternatives": [],
+  "explanation": "The tie was already returned above, so once aWins has been computed there are exactly two possibilities left and a ternary picks between them in one expression. The boolean carries the whole rule set, keeping the return statement trivial.",
+  "hints": [
+    "The tie case is already handled, so only two outcomes remain -- a conditional expression can choose between them."
+  ]
+}

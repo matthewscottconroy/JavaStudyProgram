@@ -2,6 +2,7 @@ package com.studyprogram.core;
 
 import com.studyprogram.model.Question;
 import com.studyprogram.model.Topic;
+import com.studyprogram.coding.CodeSafetyScanner;
 import com.studyprogram.questions.*;
 
 import java.io.IOException;
@@ -33,6 +34,8 @@ public class QuestionBank {
     private static final String CLASSPATH_ROOT = "/questions";
 
     private final Map<String, Question> byId = new LinkedHashMap<>();
+    /** Code of questions bundled in the jar, by id — an external copy matching this is first-party. */
+    private final Map<String, List<String>> bundledCode = new HashMap<>();
     private final Map<Topic, List<Question>> byTopic = new EnumMap<>(Topic.class);
     private final List<String> warnings = new ArrayList<>();
 
@@ -44,8 +47,38 @@ public class QuestionBank {
         loadHardcoded();
         loadFromClasspath();
         loadExternal(externalQuestionsDir);
+        screenUntrusted();
         deriveParsons();
         rebuildTopicIndex();
+    }
+
+    /**
+     * Screens questions loaded from an external overlay for capabilities a practice exercise
+     * should not need. Anything flagged is refused rather than compiled and run, because loading
+     * a question file means executing the code inside it. Set {@code JAVASTUDY_TRUST_EXTERNAL=1}
+     * to load them anyway (only for question packs you wrote or reviewed yourself).
+     */
+    private void screenUntrusted() {
+        boolean optedIn = "1".equals(System.getenv("JAVASTUDY_TRUST_EXTERNAL"))
+                || Boolean.getBoolean("javastudy.trustExternal");
+        List<String> refused = new ArrayList<>();
+        for (Question q : byId.values()) {
+            if (q.isTrusted() || !q.isCoding()) continue;   // only coding exercises execute
+            if (q.allCode().equals(bundledCode.get(q.getId()))) continue;   // unmodified first-party copy
+            var findings = CodeSafetyScanner.scan(q.allCode());
+            if (findings.isEmpty()) continue;
+            String detail = findings.stream().map(Object::toString)
+                    .collect(Collectors.joining(", "));
+            if (optedIn) {
+                warnings.add("External question '" + q.getId() + "' uses " + detail
+                        + " — loaded anyway because external questions are trusted.");
+            } else {
+                refused.add(q.getId());
+                warnings.add("REFUSED external question '" + q.getId() + "': uses " + detail
+                        + ". Set JAVASTUDY_TRUST_EXTERNAL=1 only if you wrote or reviewed it.");
+            }
+        }
+        refused.forEach(byId::remove);
     }
 
     /**
@@ -164,9 +197,11 @@ public class QuestionBank {
                 try (FileSystem fs = FileSystems.newFileSystem(uri, Map.of())) {
                     loadQuestionTree(fs.getPath(CLASSPATH_ROOT), "bundled");
                 }
+                byId.values().forEach(q -> bundledCode.put(q.getId(), q.allCode()));
             } else {
                 loadQuestionTree(Path.of(uri), "bundled");
             }
+            byId.values().forEach(q -> bundledCode.put(q.getId(), q.allCode()));
         } catch (IOException | URISyntaxException e) {
             warnings.add("Could not read bundled questions: " + e.getMessage());
         }
@@ -202,7 +237,7 @@ public class QuestionBank {
                     for (Path p : files.filter(f -> f.getFileName().toString().endsWith(".json"))
                                        .sorted().toList()) {
                         try (InputStream in = Files.newInputStream(p)) {
-                            Question q = JsonQuestionParser.parse(in, topic);
+                            Question q = JsonQuestionParser.parse(in, topic, !override);
                             if (override && byId.containsKey(q.getId()) && !seen.contains(q.getId())) {
                                 byId.put(q.getId(), q);   // external file replaces bundled question
                                 seen.add(q.getId());

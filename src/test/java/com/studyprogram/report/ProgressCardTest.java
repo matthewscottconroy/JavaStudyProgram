@@ -19,34 +19,70 @@ class ProgressCardTest {
         return b.build();
     }
 
+    private AttemptRecord attempt(QuestionType type, String outcome) {
+        return new AttemptRecord(LocalDateTime.now(), q(Topic.LOOPS, type), outcome, 60, 0);
+    }
+
     @Test
     void cardContainsTheHeadlineNumbers() {
         StudentProfile p = new StudentProfile("Ada");
         p.getBossesCleared().add(1);
-        List<AttemptRecord> attempts = List.of(
-                new AttemptRecord(LocalDateTime.now(), q(Topic.LOOPS, QuestionType.CODING),
-                        AttemptRecord.OUTCOME_CORRECT, 60, 0),
-                new AttemptRecord(LocalDateTime.now(), q(Topic.LOOPS, QuestionType.TRACING),
-                        AttemptRecord.OUTCOME_INCORRECT, 30, 1));
+        String card = ProgressCard.render(p, List.of(
+                attempt(QuestionType.CODING, AttemptRecord.OUTCOME_CORRECT),
+                attempt(QuestionType.TRACING, AttemptRecord.OUTCOME_INCORRECT)));
 
-        String card = ProgressCard.render(p, attempts);
         assertTrue(card.contains("Ada"));
         assertTrue(card.contains("50%"), "1/2 correct");
         assertTrue(card.contains("Bosses cleared"));
         assertTrue(card.contains("1/5"));
         assertTrue(card.contains("World 1"));
-        assertTrue(card.contains("Verification"));
+        assertTrue(card.contains("Checksum"), "unsigned cards carry a checksum");
     }
 
     @Test
-    void verificationCodeChangesWhenNumbersChange() {
+    void codeChangesWhenTheNumbersChange() {
         StudentProfile p = new StudentProfile("Ada");
-        String card1 = ProgressCard.render(p, List.of());
-        String card2 = ProgressCard.render(p, List.of(
-                new AttemptRecord(LocalDateTime.now(), q(Topic.LOOPS, QuestionType.TRACING),
-                        AttemptRecord.OUTCOME_CORRECT, 5, 0)));
-        String code1 = card1.lines().filter(l -> l.contains("Verification")).findFirst().orElseThrow();
-        String code2 = card2.lines().filter(l -> l.contains("Verification")).findFirst().orElseThrow();
-        assertNotEquals(code1, code2, "editing the card's numbers must break the code");
+        String empty = ProgressCard.render(p, List.of());
+        String worked = ProgressCard.render(p, List.of(
+                attempt(QuestionType.TRACING, AttemptRecord.OUTCOME_CORRECT)));
+        assertNotEquals(codeLine(empty), codeLine(worked),
+                "editing the card's numbers must break its code");
+    }
+
+    @Test
+    void anUnalteredCardVerifies() {
+        StudentProfile p = new StudentProfile("Ada");
+        String card = ProgressCard.render(p, List.of(
+                attempt(QuestionType.CODING, AttemptRecord.OUTCOME_CORRECT)));
+        assertTrue(ProgressCard.verify(card, p.getId()).startsWith("VALID"));
+    }
+
+    @Test
+    void anEditedCardFailsVerification() {
+        StudentProfile p = new StudentProfile("Ada");
+        String card = ProgressCard.render(p, List.of(
+                attempt(QuestionType.CODING, AttemptRecord.OUTCOME_CORRECT)));
+        String doctored = card.replace("Programs written & passed  1",
+                                       "Programs written & passed  9");
+        assertNotEquals(card, doctored, "the test fixture must actually change a number");
+        assertTrue(ProgressCard.verify(doctored, p.getId()).startsWith("INVALID"));
+    }
+
+    @Test
+    void aCardFromADifferentProfileFailsVerification() {
+        StudentProfile ada = new StudentProfile("Ada");
+        StudentProfile bob = new StudentProfile("Bob");
+        String card = ProgressCard.render(ada, List.of());
+        assertTrue(ProgressCard.verify(card, bob.getId()).startsWith("INVALID"));
+    }
+
+    @Test
+    void nonCardTextIsReportedClearly() {
+        assertTrue(ProgressCard.verify("just some text", "id").contains("No checksum line"));
+    }
+
+    private static String codeLine(String card) {
+        return card.lines().filter(l -> l.contains("Checksum") || l.contains("Signature"))
+                .findFirst().orElseThrow();
     }
 }

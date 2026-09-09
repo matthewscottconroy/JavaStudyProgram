@@ -1,0 +1,13 @@
+{
+  "id": "ifc-code-03-cloze",
+  "type": "CLOZE",
+  "difficulty": 4,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "interface Describable {\n    String kind();\n\n    default String describe() {\n        return \"a \" + kind();\n    }\n\n    default String shout() {\n        return ____;\n    }\n}\n\npublic class Robot implements Describable {\n\n    @Override\n    public String kind() {\n        return \"robot\";\n    }\n\n    @Override\n    public String describe() {\n        return \"unit of kind \" + kind();\n    }\n}\n",
+  "answer": "describe().toUpperCase() + \"!\"",
+  "alternatives": [],
+  "explanation": "shout() calls describe() without qualification, so it runs whichever describe() the object actually has -- Robot's override, not the interface default. Default methods take part in dynamic dispatch exactly like ordinary instance methods.",
+  "hints": [
+    "shout() must end up shouting whatever the object's own describe() produces, even when the class has replaced the default."
+  ]
+}

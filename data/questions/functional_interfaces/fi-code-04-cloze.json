@@ -1,0 +1,13 @@
+{
+  "id": "fi-code-04-cloze",
+  "type": "CLOZE",
+  "difficulty": 3,
+  "prompt": "One expression is missing from this working program. Fill in the blank -- answer with just the missing code.",
+  "code": "public class Grid {\n\n    public static String render(int rows, int cols, java.util.function.BiFunction<Integer, Integer, String> cell) {\n        StringBuilder sb = new StringBuilder();\n        for (int r = 0; r < rows; r++) {\n            if (r > 0) {\n                sb.append(\"\\n\");\n            }\n            for (int c = 0; c < cols; c++) {\n                if (c > 0) {\n                    sb.append(\" \");\n                }\n                sb.append(____);\n            }\n        }\n        return sb.toString();\n    }\n}\n",
+  "answer": "cell.apply(r, c)",
+  "alternatives": [],
+  "explanation": "A BiFunction is invoked through apply, and passing the current row and column lets the caller decide what every cell contains without Grid knowing anything about the contents. This is the whole point of taking behaviour as a parameter.",
+  "hints": [
+    "A BiFunction<Integer, Integer, String> is called with a single method -- what is it named, and what does it need?"
+  ]
+}
