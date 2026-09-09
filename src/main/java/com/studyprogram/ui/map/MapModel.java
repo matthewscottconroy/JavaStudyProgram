@@ -42,7 +42,7 @@ public final class MapModel {
     public static List<Node> build(StudentProfile profile) {
         List<Node> nodes = new ArrayList<>();
         int[] rowInCol = new int[6];
-        for (Topic t : Topic.values()) {
+        for (Topic t : Topic.visibleValues()) {
             int col = t.baseLevel - 1;
             nodes.add(new Node(t, col, rowInCol[t.baseLevel]++,
                     stateOf(t, profile),

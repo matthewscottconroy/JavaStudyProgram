@@ -333,6 +333,22 @@ public class CLI {
         int correct = 0, asked = 0;
         for (Question q : quiz) {
             asked++;
+
+            // The finale is a real program: run it through the compile-and-test flow
+            if (q.isCoding()) {
+                System.out.println("\n  " + Display.bold() + "FINAL BLOW — write the program."
+                        + Display.reset());
+                long codeStart = System.nanoTime();
+                CodingOutcome outcome = codingFlow(q, asked, quiz.size());
+                if (outcome == CodingOutcome.QUIT) { asked--; break; }
+                boolean beat = outcome == CodingOutcome.CORRECT;
+                if (beat) correct++;
+                currentProfile.recordAnswer(q, beat);
+                logAttempt(q, beat ? AttemptRecord.OUTCOME_CORRECT : AttemptRecord.OUTCOME_INCORRECT,
+                        codeStart, lastCodingHints);
+                continue;
+            }
+
             Display.question(q, asked, quiz.size());
             long qStart = System.nanoTime();
             String answer = in.nextLine().trim();
@@ -455,7 +471,7 @@ public class CLI {
 
     private void selectTopics() {
         Display.header("Topic Selection");
-        Topic[] allTopics = Topic.values();
+        Topic[] allTopics = Topic.visibleValues().toArray(new Topic[0]);
         Set<Topic> selected = new HashSet<>(currentProfile.getSelectedTopics());
         Map<Topic, TopicPerformance> perf = currentProfile.getPerformance();
 

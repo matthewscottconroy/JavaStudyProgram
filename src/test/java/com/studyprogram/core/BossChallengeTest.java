@@ -32,15 +32,29 @@ class BossChallengeTest {
     }
 
     @Test
-    void quizExcludesCodingAndSpreadsTopics() {
+    void quizCoversTheWholeWorldWithoutRepeats() {
         for (int level = 1; level <= 5; level++) {
             List<Question> quiz = BossChallenge.pickQuestions(bank, level, new Random(42));
             assertEquals(BossChallenge.QUESTION_COUNT, quiz.size(),
                     "world " + level + " should fill a full quiz");
             final int lv = level;
             assertTrue(quiz.stream().allMatch(q -> q.getTopic().baseLevel == lv));
-            assertTrue(quiz.stream().noneMatch(q -> q.getType() == QuestionType.CODING));
             assertEquals(quiz.size(), quiz.stream().map(Question::getId).distinct().count());
+        }
+    }
+
+    @Test
+    void theFightEndsWithCodingSoAWorldCannotBePassedByRecognitionAlone() {
+        for (int level = 1; level <= 5; level++) {
+            List<Question> quiz = BossChallenge.pickQuestions(bank, level, new Random(7));
+            List<Question> finale = quiz.subList(
+                    quiz.size() - BossChallenge.CODING_FINALE, quiz.size());
+            assertTrue(finale.stream().allMatch(q -> q.getType() == QuestionType.CODING),
+                    "world " + level + " must end on coding exercises, got "
+                            + finale.stream().map(q -> q.getType().name()).toList());
+            // and the quick round before it holds no coding exercises
+            assertTrue(quiz.subList(0, quiz.size() - BossChallenge.CODING_FINALE).stream()
+                            .noneMatch(q -> q.getType() == QuestionType.CODING));
         }
     }
 

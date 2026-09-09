@@ -5,11 +5,27 @@
     "which is also the directory name under data/questions/.",
     "An override REPLACES that topic's built-in prerequisite list everywhere:",
     "unlocking, the auto feed, and the map. Unknown slugs are warned about and ignored;",
-    "a set of overrides that would create a cycle is rejected wholesale."
+    "a set of overrides that would create a cycle is rejected wholesale.",
+    "\"hidden\" takes topics out of scope entirely: they vanish from the auto feed, the map and topic selection."
   ],
   "overrides": {
-    "regex": { "prerequisites": [] },
-    "generics": { "prerequisites": ["collections"] },
-    "gui_swing": { "prerequisites": ["classes", "interfaces"] }
-  }
+    "regex": {
+      "prerequisites": []
+    },
+    "generics": {
+      "prerequisites": [
+        "collections"
+      ]
+    },
+    "gui_swing": {
+      "prerequisites": [
+        "classes",
+        "interfaces"
+      ]
+    }
+  },
+  "hidden": [
+    "metaprogramming",
+    "evolutionary_programming"
+  ]
 }

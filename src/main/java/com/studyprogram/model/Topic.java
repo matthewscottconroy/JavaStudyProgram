@@ -238,6 +238,23 @@ public enum Topic {
         if (overrides != null) PREREQ_OVERRIDES.putAll(overrides);
     }
 
+    // Topics an instructor has taken out of scope for their course.
+    private static final java.util.Set<Topic> HIDDEN = java.util.EnumSet.noneOf(Topic.class);
+
+    /** Replaces the set of topics hidden from the feed, the map and topic selection. */
+    public static void applyHidden(java.util.Set<Topic> hidden) {
+        HIDDEN.clear();
+        if (hidden != null) HIDDEN.addAll(hidden);
+    }
+
+    /** True when an instructor has taken this topic out of scope. */
+    public boolean isHidden() { return HIDDEN.contains(this); }
+
+    /** Every topic still in scope for this course. */
+    public static List<Topic> visibleValues() {
+        return Arrays.stream(values()).filter(t -> !t.isHidden()).toList();
+    }
+
     /** Returns the list of topics that must be mastered before this one is unlocked. */
     public List<Topic> getPrerequisites() {
         return PREREQ_OVERRIDES.getOrDefault(this, prerequisites);

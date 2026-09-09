@@ -6,18 +6,21 @@ import com.studyprogram.model.StudentProfile;
 import com.studyprogram.model.Topic;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
- * World boss challenges: a no-hints quiz drawn from every topic in one level band.
+ * World boss challenges: a no-hints test drawn from every topic in one level band.
  * Clearing a boss (>= 80% correct) is recorded on the profile and shown on the map.
  *
- * Coding exercises are excluded — a boss fight is a rapid-fire check of the whole
- * world, not a workshop session — and the question mix is seeded per (world, attempt
- * count) so retries see a different set.
+ * A fight is a rapid-fire round followed by a coding finale, so passing a world means
+ * writing working code and not only recognising it. The mix is seeded per (world,
+ * attempt count), so a retry is a different fight.
  */
 public final class BossChallenge {
 
     public static final int QUESTION_COUNT = 10;
+    /** How many of the boss's questions are hands-on coding exercises, when the world has them. */
+    public static final int CODING_FINALE = 2;
     public static final double PASS_RATIO = 0.8;
     /** Average mastery across the world's topics required before the boss appears. */
     public static final double UNLOCK_AVG_MASTERY = 0.5;
@@ -41,29 +44,40 @@ public final class BossChallenge {
     }
 
     /**
-     * Picks the boss quiz: non-coding questions across the world's topics, at most
-     * two per topic for spread, moderate difficulties first.
+     * Picks the boss quiz: a rapid-fire round across the world's topics, then a coding finale.
+     *
+     * <p>A world's final test should ask the student to write something, not just recognise it,
+     * so the last {@link #CODING_FINALE} slots go to coding exercises whenever the world has any.
+     * The quick round is spread at most two questions per topic and favours moderate difficulty.
      */
     public static List<Question> pickQuestions(QuestionBank bank, int level, Random rng) {
-        List<Question> pool = new ArrayList<>(
-                bank.getQuestionsForTopics(worldTopics(level)).stream()
-                    .filter(q -> q.getType() != QuestionType.CODING)
-                    .toList());
+        List<Question> all = bank.getQuestionsForTopics(worldTopics(level));
+
+        List<Question> coding = new ArrayList<>(all.stream()
+                .filter(q -> q.getType() == QuestionType.CODING).toList());
+        Collections.shuffle(coding, rng);
+        List<Question> finale = coding.stream().limit(CODING_FINALE).collect(Collectors.toList());
+
+        List<Question> pool = new ArrayList<>(all.stream()
+                .filter(q -> q.getType() != QuestionType.CODING).toList());
         Collections.shuffle(pool, rng);
         pool.sort(Comparator.comparingInt(q -> Math.abs(q.getDifficulty() - 3)));
 
-        List<Question> quiz = new ArrayList<>();
+        int quickSlots = QUESTION_COUNT - finale.size();
+        List<Question> quick = new ArrayList<>();
         Map<Topic, Integer> perTopic = new EnumMap<>(Topic.class);
         for (Question q : pool) {
-            if (quiz.size() >= QUESTION_COUNT) break;
-            if (perTopic.merge(q.getTopic(), 1, Integer::sum) <= 2) quiz.add(q);
+            if (quick.size() >= quickSlots) break;
+            if (perTopic.merge(q.getTopic(), 1, Integer::sum) <= 2) quick.add(q);
         }
-        // backfill if the two-per-topic spread came up short
-        for (Question q : pool) {
-            if (quiz.size() >= QUESTION_COUNT) break;
-            if (!quiz.contains(q)) quiz.add(q);
+        for (Question q : pool) {   // backfill if the per-topic spread came up short
+            if (quick.size() >= quickSlots) break;
+            if (!quick.contains(q)) quick.add(q);
         }
-        Collections.shuffle(quiz, rng);
+        Collections.shuffle(quick, rng);
+
+        List<Question> quiz = new ArrayList<>(quick);
+        quiz.addAll(finale);        // the coding finale always comes last
         return quiz;
     }
 

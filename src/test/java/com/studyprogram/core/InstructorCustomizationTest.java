@@ -1,5 +1,6 @@
 package com.studyprogram.core;
 
+import com.studyprogram.model.StudentProfile;
 import com.studyprogram.model.Topic;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -21,6 +22,7 @@ class InstructorCustomizationTest {
     @AfterEach
     void restoreDefaults() {
         Topic.applyPrerequisiteOverrides(Map.of());
+        Topic.applyHidden(java.util.Set.of());
     }
 
     @Test
@@ -62,6 +64,32 @@ class InstructorCustomizationTest {
         assertFalse(warnings.isEmpty());
         assertFalse(Topic.VARIABLES.getPrerequisites().contains(Topic.LOOPS),
                 "cyclic override must not be applied");
+    }
+
+    @Test
+    void hiddenTopicsLeaveTheFeedTheMapAndSelection() throws Exception {
+        Path file = dir.resolve("topic-graph.json");
+        Files.writeString(file, """
+                { "hidden": ["metaprogramming", "machine_learning", "not_a_topic"] }
+                """);
+        List<String> warnings = TopicGraphOverrides.loadAndApply(file);
+
+        assertTrue(Topic.METAPROGRAMMING.isHidden());
+        assertTrue(Topic.MACHINE_LEARNING.isHidden());
+        assertFalse(Topic.LOOPS.isHidden());
+
+        List<Topic> visible = Topic.visibleValues();
+        assertEquals(Topic.values().length - 2, visible.size());
+        assertFalse(visible.contains(Topic.METAPROGRAMMING));
+
+        // an out-of-scope topic never reaches the student through the auto feed
+        StudentProfile p = new StudentProfile("s");
+        assertFalse(Curriculum.frontier(p).contains(Topic.METAPROGRAMMING));
+        assertFalse(com.studyprogram.ui.map.MapModel.build(p).stream()
+                .anyMatch(n -> n.topic() == Topic.METAPROGRAMMING));
+
+        assertTrue(warnings.stream().anyMatch(w -> w.contains("unknown hidden topic")));
+        assertTrue(warnings.stream().anyMatch(w -> w.contains("2 topic(s) hidden")));
     }
 
     @Test

@@ -49,10 +49,10 @@ way to navigate the program, not just a picture of it. (It is itself a custom-pa
 `Graphics2D` component with Swing Timers driving its animations — once you reach the GUI world,
 you can read its source as course material.)
 
-**Boss Challenges** gate each world: once a world's average mastery reaches
-50%, its boss appears — a 10-question, no-hints quiz across the whole world.
-Score 80%+ to clear it (retries draw different questions), and the cleared
-star shows on the concept map.
+**Boss Challenges** gate each world: once a world's average mastery reaches 50%, its boss appears
+— a no-hints test across the whole world that ends with a **coding finale**, so a world cannot be
+passed by recognition alone. Score 80%+ to clear it (retries draw a different fight), and the
+cleared star shows on the concept map.
 
 Questions can also carry `relatedTopics` — prerequisite topics they genuinely
 exercise. Missing an arrays question whose solution hinges on reference
@@ -145,7 +145,9 @@ have not passed the content gate.
 - **Prerequisite overrides** (`data/topic-graph.json`): reshape the concept
   map's prerequisite edges without rebuilding —
   `{ "overrides": { "generics": { "prerequisites": ["collections"] } } }`.
-  Unknown slugs are warned about and cyclic overrides are rejected. Copy
+  Unknown slugs are warned about and cyclic overrides are rejected. The same file's
+  `"hidden": ["metaprogramming"]` takes topics out of scope entirely — they vanish from the auto
+  feed, the map and topic selection. Copy
   [data/topic-graph.example.json](data/topic-graph.example.json) to get started.
 - **Collecting work**: `--import-profile <folder>` then `--class-report <dir>`.
 - **Student-reported problems**: pressing `f` on any question records it to

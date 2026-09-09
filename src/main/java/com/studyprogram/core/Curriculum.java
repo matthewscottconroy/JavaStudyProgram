@@ -30,7 +30,7 @@ public final class Curriculum {
     public static List<Topic> frontier(StudentProfile profile) {
         Map<Topic, TopicPerformance> perf = profile.getPerformance();
         List<Topic> result = new ArrayList<>();
-        for (Topic t : Topic.values()) {
+        for (Topic t : Topic.visibleValues()) {
             if (!t.isUnlocked(perf) && !t.getPrerequisites().isEmpty()) continue;
             if (mastery(perf, t) < MASTERY_TARGET) result.add(t);
         }
@@ -44,7 +44,7 @@ public final class Curriculum {
     public static List<Topic> reviewCandidates(StudentProfile profile) {
         Map<Topic, TopicPerformance> perf = profile.getPerformance();
         List<Topic> result = new ArrayList<>();
-        for (Topic t : Topic.values()) {
+        for (Topic t : Topic.visibleValues()) {
             if (mastery(perf, t) >= MASTERY_TARGET) result.add(t);
         }
         result.sort(Comparator.comparing(

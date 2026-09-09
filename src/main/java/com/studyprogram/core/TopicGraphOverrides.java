@@ -36,8 +36,17 @@ public final class TopicGraphOverrides {
         if (!Files.isRegularFile(file)) return warnings;
 
         Map<Topic, List<Topic>> overrides = new EnumMap<>(Topic.class);
+        Set<Topic> hidden = EnumSet.noneOf(Topic.class);
         try {
             JsonNode root = new ObjectMapper().readTree(file.toFile());
+            for (JsonNode h : root.path("hidden")) {
+                Topic topic = Topic.fromDirSlug(h.asText());
+                if (topic == null) {
+                    warnings.add("topic-graph.json: unknown hidden topic '" + h.asText() + "' ignored.");
+                } else {
+                    hidden.add(topic);
+                }
+            }
             JsonNode entries = root.path("overrides");
             entries.properties().forEach(entry -> {
                 Topic topic = Topic.fromDirSlug(entry.getKey());
@@ -64,6 +73,9 @@ public final class TopicGraphOverrides {
             warnings.add("Could not read " + file + ": " + e.getMessage());
             return warnings;
         }
+        if (!hidden.isEmpty()) {
+            warnings.add("topic-graph.json: " + hidden.size() + " topic(s) hidden from this course.");
+        }
 
         if (createsCycle(overrides)) {
             warnings.add("topic-graph.json: overrides would create a prerequisite cycle — "
@@ -71,6 +83,7 @@ public final class TopicGraphOverrides {
             return warnings;
         }
         Topic.applyPrerequisiteOverrides(overrides);
+        Topic.applyHidden(hidden);
         return warnings;
     }
 
