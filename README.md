@@ -9,8 +9,8 @@ An adaptive engine tracks your per-topic mastery, matches question difficulty to
 repeating what you just answered, and prefers hands-on coding exercises whenever a topic has them.
 A prerequisite graph of 61 topics gates advanced material until its foundations are in place.
 
-The bank holds **4,027 questions, of which 715 are coding exercises**, plus **595 Parsons puzzles**
-and **876 faded worked examples** derived from them — every coding exercise machine-verified by
+The bank holds **4,072 questions, of which 727 are coding exercises**, plus **604 Parsons puzzles**
+and **900 faded worked examples** derived from them — every coding exercise machine-verified by
 the content gate (its starter must compile but fail its tests; its reference solution must pass),
 and every derived question verified answerable through the real grader. **All 61 topics have
 coding exercises**, from variables through Swing, reflection, sockets and design patterns.
@@ -53,6 +53,22 @@ prerequisites are mastered. Click a node to add or remove it from your session t
 way to navigate the program, not just a picture of it. (It is itself a custom-painted
 `Graphics2D` component with Swing Timers driving its animations — once you reach the GUI world,
 you can read its source as course material.)
+
+**Practice your mistakes.** The program records every question you get wrong and every compile
+error you hit; `[x]` at the session prompt turns that record into the next session. It serves the
+questions you missed and have not since got right — oldest first, because the longest-standing
+mistake is the most likely to have been forgotten — followed by the exercises where your recurring
+compile errors actually bit you, and finishes by naming those errors and what they mean. A mistake
+leaves the deck when you get it right, and comes back if you get it wrong again.
+
+**Advice on code that already works.** Tests are binary, and it is entirely possible to pass every
+one of them with a sixty-line method called `doStuff`, four levels of nesting and a variable named
+`x2`. Once your tests go green the app takes a short structural read of your source — using the
+real syntax tree, not pattern-matching on text — and points out what an instructor would circle in
+the margin: a swallowed exception, `==` on Strings (which can pass its tests and still be wrong,
+since short literals are shared), a method doing several jobs at once, logic nested past the point
+of following. At most four notes, most important first, and never a failure: the tests decide
+whether the program is correct.
 
 **Worked examples with faded scaffolding** are the rung below Parsons. Told to "write a method
 that returns the largest value in an array", a beginner has to hold the algorithm, the syntax and
@@ -206,6 +222,7 @@ have not passed the content gate.
 | Type | What you do |
 |---|---|
 | **Coding** | Edit a real `.java` file in `workspace/<exercise-id>/`, press Enter to compile and run the tests. Repeat until green. |
+| **Coding — write the test** | The roles are reversed: you are given a contract and must write the checks that accept every correct implementation and reject every broken one. Your checker is run against both, so a suite that passes everything fails. Spread across 13 topics. |
 | **Worked example (faded)** | Study a correct, commented solution with one line — then three — faded out, and supply the missing logic. Auto-derived from coding exercises. |
 | **Code ordering (Parsons)** | Reorder the scrambled lines of a working program — auto-derived from coding exercises (whole program when short, otherwise one method body), so this bank grows for free. |
 | **Fill in the blank** | Type the one missing expression in a working program. |

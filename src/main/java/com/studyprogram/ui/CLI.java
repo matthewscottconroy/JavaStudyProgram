@@ -23,6 +23,7 @@ public class CLI {
     private static final int     DEFAULT_SESSION_LENGTH = 10;
     private static final double  MASTERY_TARGET         = 0.80;
     private static final int     DEFAULT_EXAM_LENGTH    = 12;
+    private static final int     MISTAKE_DECK_LIMIT     = 12;
 
     private final QuestionBank   bank;
     private final ProfileStorage storage;
@@ -794,11 +795,23 @@ public class CLI {
 
     private void studySession() {
         boolean canResume = currentProfile.hasResumableSession();
+        MistakeDeck.Deck mistakes = mistakeDeck();
+        if (!mistakes.isEmpty()) {
+            System.out.println("\n  " + Display.yellow()
+                    + Messages.get("session.mistakesWaiting", mistakes.questions().size())
+                    + Display.reset());
+        }
         System.out.print("\n  " + Messages.get("session.feedPrompt")
+                + (mistakes.isEmpty() ? "" : "  " + Messages.get("session.mistakesOption"))
                 + (canResume ? "  " + Messages.get("session.repeatOption",
                         Display.topicSummary(currentProfile.getLastSessionTopics())) : "")
                 + "  [a]: ");
         String mode = in.nextLine().trim().toLowerCase();
+
+        if (mode.equals("x")) {
+            practiceMistakes(mistakes);
+            return;
+        }
 
         // Picking up where you left off should not mean re-answering the setup questions
         if (canResume && mode.equals("r")) {
@@ -843,6 +856,49 @@ public class CLI {
         }
 
         runSession(active, sessionLen, masteryMode);
+    }
+
+    /** The questions this student got wrong and has not since got right. */
+    private MistakeDeck.Deck mistakeDeck() {
+        if (attemptLog == null) return new MistakeDeck.Deck(List.of(), 0, List.of());
+        return MistakeDeck.build(bank, attemptLog.readAll(), MISTAKE_DECK_LIMIT);
+    }
+
+    /**
+     * Practises exactly the questions the student has got wrong, plus the exercises where the
+     * compile errors they keep hitting actually bit them.
+     */
+    private void practiceMistakes(MistakeDeck.Deck deck) {
+        if (deck.isEmpty()) {
+            System.out.println("  Nothing outstanding — every question you have missed, you have "
+                    + "since got right.");
+            return;
+        }
+
+        StringBuilder intro = new StringBuilder();
+        if (deck.unresolvedCount() > 0) {
+            intro.append(deck.unresolvedCount()).append(" question")
+                 .append(deck.unresolvedCount() == 1 ? "" : "s")
+                 .append(" you missed and have not got right since");
+        }
+        if (!deck.recurringErrors().isEmpty()) {
+            if (intro.length() > 0) intro.append(", then ");
+            intro.append("the exercises where you hit ")
+                 .append(String.join(", ", deck.recurringErrors()));
+        }
+        intro.append('.');
+
+        practiceQuestions("Practice — Your Mistakes", intro.toString(), deck.questions());
+
+        if (!deck.recurringErrors().isEmpty()) {
+            System.out.println();
+            System.out.println("  " + Display.dim() + "Errors worth watching for as you type:"
+                    + Display.reset());
+            for (String kind : deck.recurringErrors()) {
+                System.out.println("    " + Display.bold() + kind + Display.reset() + " — "
+                        + com.studyprogram.coding.CompilerErrorDecoder.explanationFor(kind));
+            }
+        }
     }
 
     /**
@@ -1074,7 +1130,10 @@ public class CLI {
                     CodingResult result = codingRunner.run(q);
                     lastCodingErrors.addAll(result.errorKinds());
                     Display.codingResult(result);
-                    if (result.passed()) return CodingOutcome.CORRECT;
+                    if (result.passed()) {
+                        showQualityReview(q);
+                        return CodingOutcome.CORRECT;
+                    }
                     if (result.status() == CodingResult.Status.ENVIRONMENT_ERROR) {
                         // not the student's fault — don't count it against them
                         return CodingOutcome.SKIPPED;
@@ -1082,6 +1141,37 @@ public class CLI {
                     Display.codingMenu();
                 }
             }
+        }
+    }
+
+    /**
+     * After the tests go green, says what an instructor would circle in the margin.
+     *
+     * <p>Deliberately placed after the pass, never before it: correctness is what the exercise is
+     * marked on, and advice offered while a student is still fighting to compile would read as one
+     * more thing they had got wrong.
+     */
+    private void showQualityReview(Question q) {
+        String source = studentSource(q);
+        if (source == null) return;
+        String review = com.studyprogram.coding.CodeQualityReview.render(source);
+        if (review.isBlank()) return;
+
+        System.out.println();
+        System.out.println("  " + Display.cyan() + "It works. Worth tightening:" + Display.reset());
+        for (String line : review.split("\n")) {
+            System.out.println("  " + Display.dim() + line + Display.reset());
+        }
+    }
+
+    /** The student's own source, or null when it cannot be read. */
+    private String studentSource(Question q) {
+        try {
+            java.nio.file.Path file = codingRunner.studentFile(q);
+            if (!java.nio.file.Files.isRegularFile(file)) return null;
+            return java.nio.file.Files.readString(file);
+        } catch (IOException e) {
+            return null;
         }
     }
 
@@ -1110,6 +1200,7 @@ public class CLI {
                         lastCodingErrors.addAll(result.errorKinds());
                         Display.codingResult(result);
                         if (result.passed()) {
+                            showQualityReview(q);
                             System.out.println("  " + Display.green()
                                     + "Tests pass — press Enter to continue." + Display.reset());
                             return;
@@ -1144,34 +1235,61 @@ public class CLI {
 
     /** Brief review pass over questions the student got wrong this session. */
     private void reviewWrongAnswers(List<Question> wrong) {
-        Display.header("Review — Wrong Answers");
-        System.out.println("  Take another shot at the questions you missed.");
+        practiceQuestions("Review — Wrong Answers",
+                "Take another shot at the questions you missed.", wrong);
+    }
 
-        int correct = 0;
-        for (int i = 0; i < wrong.size(); i++) {
-            Question q = wrong.get(i);
+    /**
+     * Works through an explicit list of questions, in order.
+     *
+     * <p>Distinct from a study session, which asks the adaptive engine what to serve next: here the
+     * caller has already decided, because these specific questions are the point. Every answer is
+     * appended to the attempt log like any other — without that, re-answering a question correctly
+     * here would never resolve the mistake that put it in front of the student.
+     */
+    private void practiceQuestions(String header, String intro, List<Question> questions) {
+        Display.header(header);
+        System.out.println("  " + intro);
+
+        int correct = 0, answered = 0;
+        for (int i = 0; i < questions.size(); i++) {
+            Question q = questions.get(i);
+            long qStart = System.nanoTime();
 
             if (q.isCoding()) {
-                CodingOutcome outcome = codingFlow(q, i + 1, wrong.size());
-                if (outcome == CodingOutcome.QUIT) return;
+                CodingOutcome outcome = codingFlow(q, i + 1, questions.size());
+                if (outcome == CodingOutcome.QUIT) break;
                 if (outcome == CodingOutcome.CORRECT) {
                     currentProfile.recordAnswer(q, true);
+                    logAttempt(q, AttemptRecord.OUTCOME_CORRECT, qStart, lastCodingHints,
+                               lastCodingErrors);
                     Display.correct(GradingResult.correct(q.getExplanation()));
                     correct++;
+                    answered++;
                 } else if (outcome == CodingOutcome.GAVE_UP) {
                     currentProfile.recordAnswer(q, false);
+                    logAttempt(q, AttemptRecord.OUTCOME_INCORRECT, qStart, lastCodingHints,
+                               lastCodingErrors);
+                    answered++;
+                } else {
+                    logAttempt(q, AttemptRecord.OUTCOME_SKIPPED, qStart, lastCodingHints,
+                               lastCodingErrors);
                 }
                 saveProfile();
                 continue;
             }
 
-            Display.question(q, i + 1, wrong.size());
+            Display.question(q, i + 1, questions.size());
 
             String answer = null;
+            boolean quit = false;
             while (answer == null) {
                 String input = in.nextLine().trim();
-                if (input.equalsIgnoreCase("q")) return;
-                if (input.equalsIgnoreCase("s")) break;
+                if (input.equalsIgnoreCase("q")) { quit = true; break; }
+                if (input.equalsIgnoreCase("s")) {
+                    logAttempt(q, AttemptRecord.OUTCOME_SKIPPED, qStart, 0);
+                    break;
+                }
                 if (input.equalsIgnoreCase("h")) {
                     System.out.println("  Hint: " + Display.yellow() + llm.generateHint(q) + Display.reset());
                     System.out.print("  Your answer: ");
@@ -1180,10 +1298,14 @@ public class CLI {
                 if (!input.isBlank()) answer = collectAnswer(q, input);
                 else System.out.print("  Your answer: ");
             }
+            if (quit) break;
             if (answer == null) continue;
 
             GradingResult result = grader.grade(q, answer);
             currentProfile.recordAnswer(q, result.correct());
+            logAttempt(q, result.correct() ? AttemptRecord.OUTCOME_CORRECT
+                                           : AttemptRecord.OUTCOME_INCORRECT, qStart, 0);
+            answered++;
             if (result.correct()) { Display.correct(result); correct++; }
             else                  Display.incorrect(result);
             System.out.print("\n  [Enter] next: ");
@@ -1191,7 +1313,8 @@ public class CLI {
         }
 
         saveProfile();
-        System.out.printf("%n  Review complete: %d/%d correct.%n", correct, wrong.size());
+        if (answered == 0) System.out.printf("%n  Nothing answered.%n");
+        else System.out.printf("%n  %d/%d correct.%n", correct, answered);
     }
 
     // ── Helpers ───────────────────────────────────────────────────────────────

@@ -103,6 +103,90 @@ class CLITest {
     }
 
     @Test
+    void passingTheTestsStillEarnsAdviceOnTheCodeItself() throws Exception {
+        // The starter already passes: isYes("yes") is true because short literals are interned,
+        // which is exactly the bug that tests do not catch and a reviewer does.
+        Question coding = Question.builder()
+                .id("style-1").topic(Topic.VARIABLES).type(QuestionType.CODING).difficulty(2)
+                .prompt("Decide whether the answer was yes.")
+                .starterCode("""
+                        public class Greeter {
+                            public static boolean isYes(String answer) {
+                                return answer == "yes";
+                            }
+                        }
+                        """)
+                .testCode("""
+                        public class GreeterTest {
+                            public static void main(String[] args) {
+                                if (!Greeter.isYes("yes")) { System.out.println("FAIL yes"); System.exit(1); }
+                                if (Greeter.isYes("no"))   { System.out.println("FAIL no");  System.exit(1); }
+                                System.out.println("ALL TESTS PASSED");
+                            }
+                        }
+                        """)
+                .answer("public class Greeter { }")
+                .explanation("Use .equals to compare text.")
+                .build();
+
+        String out = run(QuestionBank.of(List.of(coding)),
+                "Ada", "done",
+                "1", "", "1",
+                "",             // Enter: compile and run the tests
+                "",             // Enter: next
+                "9");
+
+        assertTrue(out.contains("all tests passed") || out.contains("tests passed"),
+                "the exercise should pass: " + out);
+        assertTrue(out.contains("It works. Worth tightening"),
+                "green tests are not the end of the story: " + out);
+        assertTrue(out.contains(".equals"),
+                "the advice should name the actual problem: " + out);
+    }
+
+    @Test
+    void aMissedQuestionIsOfferedBackAsAMistakeToPractise() throws Exception {
+        // First run: get a question wrong.
+        run(tinyBank(), "Ada", "done", "1", "", "1", "delta", "", "9");
+
+        // Second run: the feed should say so, and [x] should re-serve exactly that question.
+        String out = run(tinyBank(), "1", "1", "x", "a", "", "9");
+
+        assertTrue(out.contains("waiting to be re-tried"), out);
+        assertTrue(out.contains("[x] practice your mistakes"), out);
+        assertTrue(out.contains("Practice — Your Mistakes"), out);
+        assertTrue(out.contains("1/1 correct"), "the retry should be scored: " + out);
+    }
+
+    @Test
+    void fixingAMistakeClearsItFromTheDeck() throws Exception {
+        run(tinyBank(), "Ada", "done", "1", "", "1", "delta", "", "9");
+        run(tinyBank(), "1", "1", "x", "a", "", "9");
+
+        String out = run(tinyBank(), "1", "1", "x", "9");
+        assertTrue(out.contains("Nothing outstanding"),
+                "a mistake the student has since fixed must not keep coming back: " + out);
+    }
+
+    @Test
+    void reviewingWrongAnswersReachesTheAttemptLog() throws Exception {
+        run(tinyBank(),
+                "Ada", "done",
+                "1", "", "1",
+                "delta",      // wrong
+                "",           // next
+                "y",          // yes, review the wrong answers now
+                "a",          // right this time
+                "",           // [Enter] next
+                "9");
+
+        var attempts = AttemptLog.forProfile(storage.directory(), "Ada").readAll();
+        assertEquals(2, attempts.size(),
+                "the review answer must be logged too, or the mistake never resolves: " + attempts);
+        assertTrue(attempts.get(1).isCorrect());
+    }
+
+    @Test
     void examModeScoresEachSyllabusUnitSeparately() throws Exception {
         String out = run(tinyBank(),
                 "Ada", "done",
