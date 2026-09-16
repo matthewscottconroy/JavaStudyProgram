@@ -45,6 +45,34 @@ class AdaptiveEngineTest {
         assertTrue(q.isEmpty());
     }
 
+    // ── The skill ladder ──────────────────────────────────────────────────────
+
+    /** How often a type is served over many draws, for a profile at a given mastery. */
+    private double shareOfType(QuestionType type, double mastery, Topic topic) {
+        StudentProfile p = new StudentProfile("Ladder");
+        TopicPerformance perf = p.getOrCreatePerformance(topic);
+        for (int i = 0; i < 20; i++) perf.record("warmup-" + i, mastery > 0.5, 3);
+
+        AdaptiveEngine e = new AdaptiveEngine(bank);
+        int seen = 0, total = 200;
+        for (int i = 0; i < total; i++) {
+            Optional<Question> q = e.nextQuestion(p, List.of(topic), null);
+            if (q.isPresent() && q.get().getType() == type) seen++;
+        }
+        return (double) seen / total;
+    }
+
+    @Test
+    void scaffoldedExamplesAreOfferedWhileWeakAndFadeOutAsMasteryRises() {
+        double whenWeak   = shareOfType(QuestionType.FADED, 0.0, Topic.LOOPS);
+        double whenStrong = shareOfType(QuestionType.FADED, 1.0, Topic.LOOPS);
+
+        assertTrue(whenWeak > 0, "a struggling student should meet the scaffolded rung");
+        assertTrue(whenStrong < whenWeak,
+                "scaffolding should recede as mastery rises — weak " + whenWeak
+                + " vs strong " + whenStrong);
+    }
+
     // ── Last-question avoidance ───────────────────────────────────────────────
 
     @Test

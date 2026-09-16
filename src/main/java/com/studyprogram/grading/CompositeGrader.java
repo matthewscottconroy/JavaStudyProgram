@@ -14,6 +14,7 @@ public class CompositeGrader implements Grader {
     private final ExactMatchGrader     exactGrader  = new ExactMatchGrader();
     private final ParsonsGrader        parsonsGrader = new ParsonsGrader();
     private final ClozeGrader          clozeGrader  = new ClozeGrader();
+    private final FadedGrader          fadedGrader  = new FadedGrader();
     private final LLMService           llm;
 
     public CompositeGrader(LLMService llm) {
@@ -25,6 +26,7 @@ public class CompositeGrader implements Grader {
         GradingResult base = switch (question.getType()) {
             case PARSONS -> parsonsGrader.grade(question, studentAnswer);
             case CLOZE   -> clozeGrader.grade(question, studentAnswer);
+            case FADED   -> fadedGrader.grade(question, studentAnswer);
             default      -> question.isMultipleChoice()
                     ? mcGrader.grade(question, studentAnswer)
                     : exactGrader.grade(question, studentAnswer);

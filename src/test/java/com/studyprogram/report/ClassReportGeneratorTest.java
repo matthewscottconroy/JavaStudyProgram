@@ -36,6 +36,19 @@ class ClassReportGeneratorTest {
                 .append(new AttemptRecord(LocalDateTime.now(), q,
                         AttemptRecord.OUTCOME_CORRECT, 12, 0));
 
+        // Both students fought the same compile error; only Alice hit the other one.
+        Question coding = Question.builder()
+                .id("lp-code").topic(Topic.LOOPS).type(QuestionType.CODING).difficulty(3)
+                .prompt("p").answer("a").starterCode("class X {}").testCode("class XTest {}").build();
+        AttemptLog.forProfile(storage.directory(), "Alice")
+                .append(new AttemptRecord(LocalDateTime.now(), coding,
+                        AttemptRecord.OUTCOME_CORRECT, 300, 0,
+                        java.util.List.of("cannot find symbol", "missing return")));
+        AttemptLog.forProfile(storage.directory(), "Bob")
+                .append(new AttemptRecord(LocalDateTime.now(), coding,
+                        AttemptRecord.OUTCOME_INCORRECT, 300, 0,
+                        java.util.List.of("cannot find symbol")));
+
         Path out = new ClassReportGenerator()
                 .generate(storage, new QuestionBank(), dir.resolve("class-report.html"));
         String html = Files.readString(out);
@@ -45,5 +58,12 @@ class ClassReportGeneratorTest {
         assertTrue(html.contains("2 profile(s)"));
         assertTrue(html.contains("Class-wide weak spots"));
         assertTrue(html.contains("Arrays"), "Bob's weak topic should surface");
+
+        assertTrue(html.contains("Where the class gets stuck"));
+        int shared = html.indexOf("cannot find symbol");
+        int single = html.indexOf("missing return");
+        assertTrue(shared >= 0 && single >= 0, "both errors should be listed");
+        assertTrue(shared < single,
+                "the error two students hit must outrank the one only Alice hit");
     }
 }

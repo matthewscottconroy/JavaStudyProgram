@@ -164,8 +164,7 @@ public class CodingExerciseRunner {
                 boolean ok = compiler.getTask(null, fm, diagnostics,
                         List.of("-d", buildDir.toString()), null, units).call();
                 if (!ok) {
-                    return new CodingResult(CodingResult.Status.COMPILE_ERROR,
-                            formatDiagnostics(diagnostics.getDiagnostics()));
+                    return compileError(diagnostics.getDiagnostics());
                 }
             }
 
@@ -235,15 +234,54 @@ public class CodingExerciseRunner {
         return Path.of("java");
     }
 
-    private static String formatDiagnostics(List<Diagnostic<? extends JavaFileObject>> diags) {
-        List<String> lines = new ArrayList<>();
+    /**
+     * Builds the COMPILE_ERROR result: javac's own words first (the student will meet them again
+     * in any other tool), then a plain-English reading of each distinct error from
+     * {@link CompilerErrorDecoder}, and the matched categories for the attempt log.
+     */
+    private static CodingResult compileError(List<Diagnostic<? extends JavaFileObject>> diags) {
+        List<String> located = new ArrayList<>();
+        List<String> messages = new ArrayList<>();
         for (Diagnostic<? extends JavaFileObject> d : diags) {
             if (d.getKind() != Diagnostic.Kind.ERROR) continue;
             String source = d.getSource() == null ? "" : Path.of(d.getSource().getName()).getFileName() + ":";
-            lines.add(source + d.getLineNumber() + ": " + d.getMessage(null));
+            String message = d.getMessage(null);
+            located.add(source + d.getLineNumber() + ": " + message);
+            messages.add(message);
         }
-        if (lines.isEmpty()) lines.add("Compilation failed (no error details available).");
-        return truncate(String.join("\n", lines));
+        if (located.isEmpty()) {
+            return new CodingResult(CodingResult.Status.COMPILE_ERROR,
+                    "Compilation failed (no error details available).");
+        }
+
+        StringBuilder out = new StringBuilder(String.join("\n", located));
+        List<String> kinds = new ArrayList<>();
+        for (CompilerErrorDecoder.Decoded decoded
+                : CompilerErrorDecoder.decodeAll(messages)) {
+            if (!decoded.isRecognised() || kinds.contains(decoded.kind())) continue;
+            kinds.add(decoded.kind());
+            out.append("\n\n").append(WHAT_IT_MEANS).append(decoded.kind()).append("\n")
+               .append(wrap(decoded.explanation()));
+        }
+        return new CodingResult(CodingResult.Status.COMPILE_ERROR, truncate(out.toString()), kinds);
+    }
+
+    private static final String WHAT_IT_MEANS = "What that means - ";
+
+    /** Wraps decoder prose to a readable width and indents it under its heading. */
+    private static String wrap(String text) {
+        StringBuilder out = new StringBuilder("  ");
+        int column = 0;
+        for (String word : text.split(" ")) {
+            if (column > 0 && column + word.length() > 74) {
+                out.append("\n  ");
+                column = 0;
+            }
+            if (column > 0) { out.append(' '); column++; }
+            out.append(word);
+            column += word.length();
+        }
+        return out.toString();
     }
 
     private static String truncate(String s) {

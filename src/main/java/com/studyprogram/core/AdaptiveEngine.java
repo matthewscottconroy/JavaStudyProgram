@@ -113,6 +113,15 @@ public class AdaptiveEngine {
      *  - Bonus for CODING exercises: writing real programs is the core of the app,
      *    so hands-on exercises are preferred whenever the topic has them
      */
+    /** The coding exercise a derived question came from, or the question's own id. */
+    private static String sourceExerciseId(Question q) {
+        return switch (q.getType()) {
+            case PARSONS -> q.getId().replace("-parsons", "");
+            case FADED   -> q.getId().replaceAll("-faded\\d+$", "");
+            default      -> q.getId();
+        };
+    }
+
     private double score(Question q, StudentProfile profile) {
         // Read-only lookup — never create phantom performance records as a scoring side-effect
         TopicPerformance perf = profile.getPerformance().get(q.getTopic());
@@ -127,17 +136,20 @@ public class AdaptiveEngine {
 
         double recentPenalty    = (perf != null && perf.wasRecentlySeen(q.getId())) ? -0.5 : 0.0;
 
-        // A Parsons puzzle is trivial right after its source solution was just written
-        if (q.getType() == QuestionType.PARSONS && perf != null
-                && perf.wasRecentlySeen(q.getId().replace("-parsons", ""))) {
+        // A derived puzzle is trivial right after its source solution was just written
+        if (perf != null && perf.wasRecentlySeen(sourceExerciseId(q))) {
             recentPenalty -= 0.5;
         }
 
-        // Hands-on construction beats recognition: coding first, then the two
-        // intermediate rungs (reorder and fill-in-the-blank)
+        // Hands-on construction beats recognition: coding first, then the intermediate rungs
+        // (reorder and fill-in-the-blank).
         double codingBonus = switch (q.getType()) {
             case CODING          -> 0.6;
             case PARSONS, CLOZE  -> 0.3;
+            // Scaffolding is worth most to a student who cannot yet write the program unaided and
+            // becomes busywork once they can, so this rung fades out as mastery rises — the same
+            // way the blanks fade within it.
+            case FADED           -> 0.5 * (1.0 - masteryScore);
             default              -> 0.0;
         };
 

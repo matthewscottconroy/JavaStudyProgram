@@ -43,6 +43,7 @@ public class HtmlReportGenerator {
         accuracyOverTime(h, attempts);
         masteryByTopic(h, profile);
         accuracyBreakdowns(h, attempts);
+        compileErrors(h, attempts);
         workOnNext(h, profile);
 
         if (!flaggedQuestions.isEmpty()) {
@@ -248,6 +249,39 @@ public class HtmlReportGenerator {
             if (ans > 0) bar(h, t.displayName, ans, cor);
         }
         h.append("</div></div>");
+    }
+
+    /**
+     * The compile errors this student keeps hitting. A recurring error is a concrete, fixable
+     * habit — far more actionable than a topic-level accuracy number — and it is the thing a
+     * student can look up before their next session.
+     */
+    private void compileErrors(StringBuilder h, List<AttemptRecord> attempts) {
+        Map<String, Integer> counts = new LinkedHashMap<>();
+        for (AttemptRecord a : attempts) {
+            for (String kind : a.getCompileErrors()) {
+                counts.merge(kind, 1, Integer::sum);
+            }
+        }
+        if (counts.isEmpty()) return;
+
+        List<Map.Entry<String, Integer>> ranked = new ArrayList<>(counts.entrySet());
+        ranked.sort((x, y) -> y.getValue() - x.getValue());
+        int total = counts.values().stream().mapToInt(Integer::intValue).sum();
+
+        h.append("<h2>Compile errors you hit most</h2><p class='dim'>")
+         .append("Counted once per exercise, from ").append(total)
+         .append(" occurrence").append(total == 1 ? "" : "s")
+         .append(". These are habits, not topics — each one is a specific thing to watch for ")
+         .append("as you type.</p><table><tr><th scope='col'>Error</th>")
+         .append("<th scope='col'>Times</th><th scope='col'>What it means</th></tr>");
+        for (Map.Entry<String, Integer> e : ranked.subList(0, Math.min(8, ranked.size()))) {
+            h.append("<tr><th scope='row'>").append(esc(e.getKey())).append("</th><td>")
+             .append(e.getValue()).append("</td><td class='dim'>")
+             .append(esc(com.studyprogram.coding.CompilerErrorDecoder.explanationFor(e.getKey())))
+             .append("</td></tr>");
+        }
+        h.append("</table>");
     }
 
     private void workOnNext(StringBuilder h, StudentProfile profile) {

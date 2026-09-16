@@ -17,7 +17,9 @@ public enum QuestionType {
     /** Reorder shuffled lines of a working program (a Parsons problem). */
     PARSONS("Code Ordering"),
     /** Fill in the single blanked expression in a working program. */
-    CLOZE("Fill in the Blank");
+    CLOZE("Fill in the Blank"),
+    /** Study a worked solution and supply the few lines that have been faded out. */
+    FADED("Worked Example");
 
     public final String displayName;
 

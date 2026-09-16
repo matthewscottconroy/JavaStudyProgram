@@ -22,6 +22,7 @@ public class CLI {
 
     private static final int     DEFAULT_SESSION_LENGTH = 10;
     private static final double  MASTERY_TARGET         = 0.80;
+    private static final int     DEFAULT_EXAM_LENGTH    = 12;
 
     private final QuestionBank   bank;
     private final ProfileStorage storage;
@@ -33,6 +34,10 @@ public class CLI {
     private StudentProfile currentProfile;
     private AttemptLog     attemptLog;
     private int            lastCodingHints;   // hints used in the most recent codingFlow run
+    /** Compile-error categories the student hit during the most recent codingFlow run. */
+    private final Set<String> lastCodingErrors = new LinkedHashSet<>();
+    /** True while an exam is in progress: hints and explanations are refused. */
+    private boolean noHelp;
 
     public CLI(QuestionBank bank, ProfileStorage storage, LLMService llm) {
         this(bank, storage, llm, System.in, new CodingExerciseRunner());
@@ -82,10 +87,11 @@ public class CLI {
             System.out.println("  [2] " + Messages.get("menu.viewPerformance"));
             System.out.println("  [3] " + Messages.get("menu.conceptMap"));
             System.out.println("  [4] " + Messages.get("menu.bossChallenge"));
-            System.out.println("  [5] " + Messages.get("menu.progressReport"));
-            System.out.println("  [6] " + Messages.get("menu.selectTopics"));
-            System.out.println("  [7] " + Messages.get("menu.switchProfile"));
-            System.out.println("  [8] " + Messages.get("menu.exit"));
+            System.out.println("  [5] " + Messages.get("menu.examMode"));
+            System.out.println("  [6] " + Messages.get("menu.progressReport"));
+            System.out.println("  [7] " + Messages.get("menu.selectTopics"));
+            System.out.println("  [8] " + Messages.get("menu.switchProfile"));
+            System.out.println("  [9] " + Messages.get("menu.exit"));
             System.out.print("\n  " + Messages.get("menu.choice") + " ");
             String choice = in.nextLine().trim();
 
@@ -95,10 +101,11 @@ public class CLI {
                                                       currentProfile.getSelectedTopicsList());
                 case "3" -> conceptMap();
                 case "4" -> bossChallenge();
-                case "5" -> progressReport();
-                case "6" -> selectTopics();
-                case "7" -> profileMenu();
-                case "8" -> { saveProfile(); return; }
+                case "5" -> examMode();
+                case "6" -> progressReport();
+                case "7" -> selectTopics();
+                case "8" -> profileMenu();
+                case "9" -> { saveProfile(); return; }
                 default  -> System.out.println("  " + Messages.get("menu.invalidChoice"));
             }
         }
@@ -246,6 +253,214 @@ public class CLI {
                     + "for the overlay format (a sample ships with the repo).");
             return List.of();
         }
+        CourseOverlay course = pickCourse(courses);
+
+        System.out.println("  " + Display.bold() + course.getName() + Display.reset());
+        for (CourseOverlay.Unit u : course.getUnits()) {
+            System.out.printf("    %2d  %s%n", u.number(), u.title());
+        }
+        System.out.print("  Units to review (e.g. 3 or 1-4): ");
+        int[] range = parseRange(in.nextLine().trim());
+        if (range == null) return List.of();
+        List<Topic> topics = course.topicsForUnits(range[0], range[1]);
+        if (topics.isEmpty()) {
+            System.out.println("  Those units cover no topics.");
+        } else {
+            System.out.println("  Reviewing: " + Display.cyan() + Display.topicSummary(topics)
+                    + Display.reset());
+        }
+        return topics;
+    }
+
+    // ── Exam mode ─────────────────────────────────────────────────────────────
+
+    /**
+     * A timed, mixed exam scored against the course's own units.
+     *
+     * <p>Everything else in the program is designed to help the student succeed right now: the
+     * feed picks what they are ready for, hints are a keypress away, and a missed question comes
+     * back later. That is good practice and a bad prediction. This is the honest rehearsal —
+     * fixed paper, clock running, no help — and its value is entirely in the report at the end,
+     * which says which units are solid and which are not with a week still left to fix them.
+     */
+    private void examMode() {
+        Display.header("Exam Mode");
+        System.out.println("  A timed paper across several units. No hints, no explanations, "
+                + "no second attempts.");
+        System.out.println("  " + Display.dim()
+                + "Nothing here is gated on the result — it is a rehearsal, not a gate."
+                + Display.reset());
+
+        List<CourseOverlay> courses = CourseOverlay.loadAll(Path.of("data", "courses"));
+        List<ExamSession.Section> sections;
+        if (courses.isEmpty()) {
+            System.out.println();
+            System.out.println("  " + Display.dim() + "No course file in data/courses/, so the "
+                    + "exam is scored by world instead of by syllabus unit." + Display.reset());
+            System.out.print("  Worlds to cover (e.g. 2 or 1-3): ");
+            int[] range = parseRange(in.nextLine().trim());
+            if (range == null) { System.out.println("  Cancelled."); return; }
+            sections = ExamSession.worldSections(range[0], range[1]);
+        } else {
+            CourseOverlay course = pickCourse(courses);
+            System.out.println("  " + Display.bold() + course.getName() + Display.reset());
+            for (CourseOverlay.Unit u : course.getUnits()) {
+                System.out.printf("    %2d  %s%n", u.number(), u.title());
+            }
+            System.out.print("  Units to examine (e.g. 3 or 1-4): ");
+            int[] range = parseRange(in.nextLine().trim());
+            if (range == null) { System.out.println("  Cancelled."); return; }
+            sections = ExamSession.sectionsFor(course, range[0], range[1]);
+        }
+
+        if (sections.isEmpty()) {
+            System.out.println("  That range covers no topics — nothing to examine.");
+            return;
+        }
+
+        System.out.print("  How many questions [" + DEFAULT_EXAM_LENGTH + "]: ");
+        int count = DEFAULT_EXAM_LENGTH;
+        String lenInput = in.nextLine().trim();
+        if (!lenInput.isBlank()) {
+            try { count = Math.max(1, Integer.parseInt(lenInput)); }
+            catch (NumberFormatException ignored) {}
+        }
+
+        // Seeded by profile and attempt count so a retake is a different paper, while an
+        // instructor handing out a fixed seed gets the same paper for everyone.
+        Random rng = new Random(currentProfile.getId().hashCode() * 31L
+                + currentProfile.getTotalQuestionsAnswered());
+        List<ExamSession.Item> paper = ExamSession.build(bank, sections, count, rng);
+        if (paper.isEmpty()) {
+            System.out.println("  No questions available for those units.");
+            return;
+        }
+
+        int minutes = ExamSession.suggestedMinutes(paper);
+        System.out.printf("%n  %d questions · %d sections · %d minutes.%n",
+                paper.size(), sections.size(), minutes);
+        System.out.print("  Start the clock? [y/N]: ");
+        if (!in.nextLine().trim().equalsIgnoreCase("y")) {
+            System.out.println("  Cancelled — nothing was recorded.");
+            return;
+        }
+
+        sitExam(paper, minutes);
+    }
+
+    /** Runs the paper against the clock and reports the result. */
+    private void sitExam(List<ExamSession.Item> paper, int minutes) {
+        long deadline = System.nanoTime() + minutes * 60L * 1_000_000_000L;
+        Set<String> correctIds = new LinkedHashSet<>();
+        Set<String> attemptedIds = new LinkedHashSet<>();
+        String lastSection = null;
+        boolean ranOut = false;
+        noHelp = true;
+
+        try {
+            for (int i = 0; i < paper.size(); i++) {
+                ExamSession.Item item = paper.get(i);
+                Question q = item.question();
+
+                long remaining = deadline - System.nanoTime();
+                if (remaining <= 0) { ranOut = true; break; }
+
+                if (!item.section().title().equals(lastSection)) {
+                    lastSection = item.section().title();
+                    System.out.println();
+                    System.out.println("  " + Display.bold() + lastSection + Display.reset());
+                }
+                System.out.printf("  %s%d min remaining%s%n", Display.dim(),
+                        Math.max(1, remaining / 60_000_000_000L), Display.reset());
+
+                long qStart = System.nanoTime();
+                if (q.isCoding()) {
+                    CodingOutcome outcome = codingFlow(q, i + 1, paper.size());
+                    if (outcome == CodingOutcome.QUIT) break;
+                    attemptedIds.add(q.getId());
+                    boolean ok = outcome == CodingOutcome.CORRECT;
+                    if (ok) correctIds.add(q.getId());
+                    currentProfile.recordAnswer(q, ok);
+                    logAttempt(q, ok ? AttemptRecord.OUTCOME_CORRECT : AttemptRecord.OUTCOME_INCORRECT,
+                            qStart, 0, lastCodingErrors);
+                    continue;
+                }
+
+                Display.question(q, i + 1, paper.size());
+                String answer = in.nextLine().trim();
+                if (answer.equalsIgnoreCase("q")) break;
+                if (answer.equalsIgnoreCase("h") || answer.equalsIgnoreCase("e")) {
+                    System.out.println("  " + Display.yellow() + "No help during an exam."
+                            + Display.reset() + " Answer as best you can:");
+                    answer = in.nextLine().trim();
+                }
+                attemptedIds.add(q.getId());
+                GradingResult result = grader.grade(q,
+                        answer.equalsIgnoreCase("s") ? "" : collectAnswer(q, answer));
+                if (result.correct()) correctIds.add(q.getId());
+                currentProfile.recordAnswer(q, result.correct());
+                logAttempt(q, result.correct() ? AttemptRecord.OUTCOME_CORRECT
+                                               : AttemptRecord.OUTCOME_INCORRECT, qStart, 0);
+                // No feedback mid-exam: the whole point is to find out what the student knows
+                // unaided, and marking each answer as it lands would leak the pattern.
+                System.out.println("  " + Display.dim() + "Recorded." + Display.reset());
+            }
+        } finally {
+            noHelp = false;
+        }
+
+        saveProfile();
+        reportExam(paper, correctIds, attemptedIds, ranOut);
+    }
+
+    /** Prints the outcome-by-outcome result and saves it next to the student's other reports. */
+    private void reportExam(List<ExamSession.Item> paper, Set<String> correctIds,
+                            Set<String> attemptedIds, boolean ranOut) {
+        List<ExamSession.SectionScore> scores =
+                ExamSession.score(paper, correctIds, attemptedIds);
+        StringBuilder out = new StringBuilder();
+        out.append("Exam result — ").append(currentProfile.getName()).append("\n");
+        out.append(LocalDateTime.now().toLocalDate()).append("\n\n");
+
+        for (ExamSession.SectionScore s : scores) {
+            out.append(String.format("  %-34s %2d/%-2d  %3d%%  %s%n", s.title(), s.correct(),
+                    s.total(), Math.round(s.ratio() * 100), s.verdict()));
+            if (s.answered() < s.total()) {
+                out.append(String.format("  %-34s %s%n", "",
+                        (s.total() - s.answered()) + " not reached before time ran out"));
+            }
+        }
+        int correct = correctIds.size();
+        out.append(String.format("%n  %-34s %2d/%-2d  %3d%%%n", "OVERALL", correct, paper.size(),
+                Math.round(ExamSession.overall(scores) * 100)));
+        if (ranOut) out.append("\n  The clock ran out before the end of the paper.\n");
+
+        List<String> weak = ExamSession.weakestSections(scores);
+        if (weak.isEmpty()) {
+            out.append("\n  Every section is solid. This is what ready looks like.\n");
+        } else {
+            out.append("\n  Work on these before the real thing, weakest first:\n");
+            for (String w : weak) out.append("    - ").append(w).append("\n");
+        }
+
+        Display.header("Exam Result");
+        for (String line : out.toString().split("\n")) System.out.println("  " + line);
+
+        try {
+            String safe = currentProfile.getName().replaceAll("[^A-Za-z0-9._-]", "_");
+            Path file = storage.directory().resolveSibling("reports")
+                    .resolve(safe + "-exam-" + LocalDateTime.now().toLocalDate() + ".txt");
+            java.nio.file.Files.createDirectories(file.getParent());
+            java.nio.file.Files.writeString(file, out.toString());
+            System.out.println("  " + Display.dim() + "Saved to " + file.toAbsolutePath()
+                    + Display.reset());
+        } catch (IOException e) {
+            System.out.println("  Could not save the exam report: " + e.getMessage());
+        }
+    }
+
+    /** Lets the student choose among course overlays, returning the only one without asking. */
+    private CourseOverlay pickCourse(List<CourseOverlay> courses) {
         CourseOverlay course = courses.get(0);
         if (courses.size() > 1) {
             for (int i = 0; i < courses.size(); i++) {
@@ -259,33 +474,22 @@ public class CLI {
         }
         course.getWarnings().forEach(w ->
                 System.out.println("  " + Display.yellow() + "⚠ " + w + Display.reset()));
+        return course;
+    }
 
-        System.out.println("  " + Display.bold() + course.getName() + Display.reset());
-        for (CourseOverlay.Unit u : course.getUnits()) {
-            System.out.printf("    %2d  %s%n", u.number(), u.title());
-        }
-        System.out.print("  Units to review (e.g. 3 or 1-4): ");
-        String range = in.nextLine().trim();
-        int from, to;
+    /** Parses "3" or "1-4" into an inclusive range, or null when it is neither. */
+    private static int[] parseRange(String text) {
         try {
-            if (range.contains("-")) {
-                String[] parts = range.split("-", 2);
-                from = Integer.parseInt(parts[0].trim());
-                to   = Integer.parseInt(parts[1].trim());
-            } else {
-                from = to = Integer.parseInt(range);
+            if (text.contains("-")) {
+                String[] parts = text.split("-", 2);
+                return new int[] { Integer.parseInt(parts[0].trim()),
+                                   Integer.parseInt(parts[1].trim()) };
             }
-        } catch (NumberFormatException e) {
-            return List.of();
+            int one = Integer.parseInt(text.trim());
+            return new int[] { one, one };
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            return null;
         }
-        List<Topic> topics = course.topicsForUnits(from, to);
-        if (topics.isEmpty()) {
-            System.out.println("  Those units cover no topics.");
-        } else {
-            System.out.println("  Reviewing: " + Display.cyan() + Display.topicSummary(topics)
-                    + Display.reset());
-        }
-        return topics;
     }
 
     /**
@@ -372,7 +576,8 @@ public class CLI {
                         + Display.reset() + " Your answer counts as given:");
                 answer = in.nextLine().trim();
             }
-            GradingResult result = grader.grade(q, answer.equalsIgnoreCase("s") ? "" : answer);
+            GradingResult result = grader.grade(q,
+                    answer.equalsIgnoreCase("s") ? "" : collectAnswer(q, answer));
             currentProfile.recordAnswer(q, result.correct());
             logAttempt(q, result.correct() ? AttemptRecord.OUTCOME_CORRECT
                                            : AttemptRecord.OUTCOME_INCORRECT, qStart, 0);
@@ -462,11 +667,37 @@ public class CLI {
         }
     }
 
+    /**
+     * Completes a multi-blank answer. A faded worked example with three blanks is three separate
+     * lines of Java, and asking for them on one line (separated by some punctuation the student
+     * has to remember) would test the input format rather than the code. The remaining blanks are
+     * collected one prompt at a time and joined for the grader.
+     */
+    private String collectAnswer(Question q, String first) {
+        if (q.getType() != QuestionType.FADED) return first;
+        int blanks = com.studyprogram.questions.FadedExampleDeriver.blankCount(q);
+        if (blanks <= 1) return first;
+
+        StringBuilder all = new StringBuilder(first);
+        for (int b = 2; b <= blanks; b++) {
+            System.out.print("  Line for blank " + b + ": ");
+            all.append('\n').append(in.nextLine());
+        }
+        return all.toString();
+    }
+
     /** Appends one attempt to the append-only log (timings in whole seconds). */
     private void logAttempt(Question q, String outcome, long startNano, int hintsUsed) {
+        logAttempt(q, outcome, startNano, hintsUsed, List.of());
+    }
+
+    /** As above, also recording which compile errors the student hit on the way. */
+    private void logAttempt(Question q, String outcome, long startNano, int hintsUsed,
+                            Collection<String> compileErrors) {
         if (attemptLog == null) return;
         long secs = Math.max(0, (System.nanoTime() - startNano) / 1_000_000_000L);
-        attemptLog.append(new AttemptRecord(LocalDateTime.now(), q, outcome, secs, hintsUsed));
+        attemptLog.append(new AttemptRecord(LocalDateTime.now(), q, outcome, secs, hintsUsed,
+                                            new ArrayList<>(compileErrors)));
     }
 
     private void saveProfile() {
@@ -652,13 +883,13 @@ public class CLI {
                     case QUIT -> quit = true;
                     case SKIPPED -> {
                         session.skip(q);
-                        logAttempt(q, AttemptRecord.OUTCOME_SKIPPED, qStart, lastCodingHints);
+                        logAttempt(q, AttemptRecord.OUTCOME_SKIPPED, qStart, lastCodingHints, lastCodingErrors);
                         System.out.println("  " + Messages.get("session.skipped"));
                     }
                     case CORRECT -> {
                         GradingResult r = GradingResult.correct(q.getExplanation());
                         session.recordAnswer(q, r);
-                        logAttempt(q, AttemptRecord.OUTCOME_CORRECT, qStart, lastCodingHints);
+                        logAttempt(q, AttemptRecord.OUTCOME_CORRECT, qStart, lastCodingHints, lastCodingErrors);
                         saveProfile();
                         Display.correct(r);
                     }
@@ -667,7 +898,7 @@ public class CLI {
                                 "Recorded as incorrect — study the reference solution and it "
                                 + "will come around again.", q.getExplanation());
                         session.recordAnswer(q, r);
-                        logAttempt(q, AttemptRecord.OUTCOME_INCORRECT, qStart, lastCodingHints);
+                        logAttempt(q, AttemptRecord.OUTCOME_INCORRECT, qStart, lastCodingHints, lastCodingErrors);
                         saveProfile();
                     }
                 }
@@ -719,7 +950,7 @@ public class CLI {
                     continue;
                 }
                 if (!input.isBlank()) {
-                    answer = input;
+                    answer = collectAnswer(q, input);
                 } else {
                     System.out.print("  Your answer: ");
                 }
@@ -789,6 +1020,7 @@ public class CLI {
 
         Display.codingQuestion(q, qNum, total, file);
         lastCodingHints = 0;
+        lastCodingErrors.clear();
 
         while (true) {
             String input = in.nextLine().trim().toLowerCase();
@@ -813,6 +1045,12 @@ public class CLI {
                     Display.codingMenu();
                 }
                 case "h" -> {
+                    if (noHelp) {
+                        System.out.println("  " + Display.yellow()
+                                + "No hints during an exam." + Display.reset());
+                        Display.codingMenu();
+                        break;
+                    }
                     List<String> hints = q.getHints();
                     String hint = lastCodingHints < hints.size()
                             ? hints.get(lastCodingHints)
@@ -822,13 +1060,19 @@ public class CLI {
                     Display.codingMenu();
                 }
                 case "e" -> {
-                    System.out.println("  " + Display.dim()
-                            + llm.explainConcept(q.getTopic(), q.getPrompt()) + Display.reset());
+                    if (noHelp) {
+                        System.out.println("  " + Display.yellow()
+                                + "No explanations during an exam." + Display.reset());
+                    } else {
+                        System.out.println("  " + Display.dim()
+                                + llm.explainConcept(q.getTopic(), q.getPrompt()) + Display.reset());
+                    }
                     Display.codingMenu();
                 }
                 default -> {   // Enter (or anything else) runs the tests
                     System.out.println("  Compiling and running tests…");
                     CodingResult result = codingRunner.run(q);
+                    lastCodingErrors.addAll(result.errorKinds());
                     Display.codingResult(result);
                     if (result.passed()) return CodingOutcome.CORRECT;
                     if (result.status() == CodingResult.Status.ENVIRONMENT_ERROR) {
@@ -863,6 +1107,7 @@ public class CLI {
                     if (lastRun > 0) {
                         System.out.println("  Change detected — compiling…");
                         CodingResult result = codingRunner.run(q);
+                        lastCodingErrors.addAll(result.errorKinds());
                         Display.codingResult(result);
                         if (result.passed()) {
                             System.out.println("  " + Display.green()
@@ -932,7 +1177,7 @@ public class CLI {
                     System.out.print("  Your answer: ");
                     continue;
                 }
-                if (!input.isBlank()) answer = input;
+                if (!input.isBlank()) answer = collectAnswer(q, input);
                 else System.out.print("  Your answer: ");
             }
             if (answer == null) continue;

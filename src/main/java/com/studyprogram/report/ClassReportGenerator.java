@@ -52,6 +52,7 @@ public class ClassReportGenerator {
 
         studentTable(h, profiles, storage);
         weakestTopics(h, profiles);
+        cohortCompileErrors(h, attemptsByProfile);
         flaggedByStudents(h, storage.directory().resolveSibling("flags.jsonl"));
         calibrationSection(h, attemptsByProfile, bank);
 
@@ -115,6 +116,47 @@ public class ClassReportGenerator {
             h.append("<tr><th scope='row'>").append(esc(a.topic().displayName))
              .append("</th><td>").append(Math.round(a.mastery() * 100)).append("%")
              .append("</td><td>").append(a.students()).append("</td></tr>");
+        }
+        h.append("</table>");
+    }
+
+    /**
+     * Where the class is stuck at the keyboard. Topic mastery says which concepts are weak;
+     * this says which compiler errors keep stopping people, which is what a five-minute
+     * demonstration at the start of class can actually fix. Ranked by how many distinct
+     * students hit each error, so one struggling student does not dominate the list.
+     */
+    private void cohortCompileErrors(StringBuilder h,
+                                     java.util.Map<String, List<AttemptRecord>> attemptsByProfile) {
+        Map<String, Set<String>> studentsByError = new LinkedHashMap<>();
+        Map<String, Integer> occurrences = new LinkedHashMap<>();
+        for (var entry : attemptsByProfile.entrySet()) {
+            for (AttemptRecord a : entry.getValue()) {
+                for (String kind : a.getCompileErrors()) {
+                    studentsByError.computeIfAbsent(kind, k -> new HashSet<>()).add(entry.getKey());
+                    occurrences.merge(kind, 1, Integer::sum);
+                }
+            }
+        }
+        if (studentsByError.isEmpty()) return;
+
+        List<String> ranked = new ArrayList<>(studentsByError.keySet());
+        ranked.sort((x, y) -> {
+            int byStudents = studentsByError.get(y).size() - studentsByError.get(x).size();
+            return byStudents != 0 ? byStudents : occurrences.get(y) - occurrences.get(x);
+        });
+
+        h.append("<h2>Where the class gets stuck</h2><p class='dim'>")
+         .append("Compile errors students hit while writing programs, ranked by how many ")
+         .append("students ran into each one.</p><table><tr><th scope='col'>Error</th>")
+         .append("<th scope='col'>Students</th><th scope='col'>Occurrences</th>")
+         .append("<th scope='col'>What it means</th></tr>");
+        for (String kind : ranked.subList(0, Math.min(10, ranked.size()))) {
+            h.append("<tr><th scope='row'>").append(esc(kind)).append("</th><td>")
+             .append(studentsByError.get(kind).size()).append("</td><td>")
+             .append(occurrences.get(kind)).append("</td><td class='dim'>")
+             .append(esc(com.studyprogram.coding.CompilerErrorDecoder.explanationFor(kind)))
+             .append("</td></tr>");
         }
         h.append("</table>");
     }

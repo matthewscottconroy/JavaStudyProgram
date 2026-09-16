@@ -120,6 +120,17 @@ public class Display {
             System.out.println(dim() + "  " + cornerBL() + hLine().repeat(WIDTH - 3) + reset());
             System.out.println();
             System.out.print("  Line numbers in order (e.g. 3 1 4 2) or [h]int [e]xplain [s]kip [f]lag [q]uit: ");
+        } else if (q.getType() == QuestionType.FADED) {
+            int blanks = com.studyprogram.questions.FadedExampleDeriver.blankCount(q);
+            System.out.println();
+            if (blanks == 1) {
+                System.out.print("  Type the line that belongs at the blank, "
+                        + "or [h]int [e]xplain [s]kip [f]lag [q]uit: ");
+            } else {
+                System.out.println("  " + dim() + "You will be asked for each of the " + blanks
+                        + " blanks in turn." + reset());
+                System.out.print("  Line for blank 1, or [h]int [e]xplain [s]kip [f]lag [q]uit: ");
+            }
         } else if (q.getType() == QuestionType.CLOZE) {
             System.out.println();
             System.out.print("  Type the missing code (the ____ part) or [h]int [e]xplain [s]kip [f]lag [q]uit: ");
@@ -189,8 +200,17 @@ public class Display {
         }
         String body = result.output();
         if (body != null && !body.isBlank()) {
+            // The decoder's plain-English blocks are the part a stuck student should actually read,
+            // so they are the one thing here that is not dimmed.
+            boolean inExplanation = false;
             for (String line : body.split("\n")) {
-                String color = line.startsWith("PASS") ? green() : line.startsWith("FAIL") ? red() : dim();
+                if (line.startsWith("What that means")) inExplanation = true;
+                else if (line.isBlank()) inExplanation = false;
+                String color = line.startsWith("PASS") ? green()
+                        : line.startsWith("FAIL") ? red()
+                        : line.startsWith("What that means") ? cyan() + bold()
+                        : inExplanation ? cyan()
+                        : dim();
                 System.out.println("  " + color + line + reset());
             }
         }

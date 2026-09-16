@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * One row of the append-only attempt log: a single question attempt (or skip).
@@ -25,6 +27,8 @@ public class AttemptRecord {
     private String outcome;      // correct | incorrect | skipped
     private long seconds;        // time from question shown to answered
     private int hintsUsed;
+    /** Compile-error categories hit while working this question (coding exercises only). */
+    private List<String> compileErrors = new ArrayList<>();
 
     public AttemptRecord() {}
 
@@ -37,6 +41,12 @@ public class AttemptRecord {
         this.outcome    = outcome;
         this.seconds    = seconds;
         this.hintsUsed  = hintsUsed;
+    }
+
+    public AttemptRecord(LocalDateTime ts, Question q, String outcome, long seconds,
+                         int hintsUsed, List<String> compileErrors) {
+        this(ts, q, outcome, seconds, hintsUsed);
+        setCompileErrors(compileErrors);
     }
 
     @JsonIgnore public boolean isCorrect()  { return OUTCOME_CORRECT.equals(outcome); }
@@ -61,4 +71,8 @@ public class AttemptRecord {
     public void setSeconds(long s)           { this.seconds = s; }
     public int getHintsUsed()                { return hintsUsed; }
     public void setHintsUsed(int h)          { this.hintsUsed = h; }
+    public List<String> getCompileErrors()   { return compileErrors; }
+    public void setCompileErrors(List<String> e) {
+        this.compileErrors = e == null ? new ArrayList<>() : new ArrayList<>(e);
+    }
 }

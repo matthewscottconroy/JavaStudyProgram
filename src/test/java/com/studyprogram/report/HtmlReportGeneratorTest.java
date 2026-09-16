@@ -39,6 +39,10 @@ class HtmlReportGeneratorTest {
         attempts.add(new AttemptRecord(LocalDateTime.now(),
                 question(Topic.VARIABLES, 1, QuestionType.MULTIPLE_CHOICE),
                 AttemptRecord.OUTCOME_INCORRECT, 30, 0));
+        attempts.add(new AttemptRecord(LocalDateTime.now(),
+                question(Topic.LOOPS, 3, QuestionType.CODING),
+                AttemptRecord.OUTCOME_CORRECT, 400, 0,
+                List.of("missing semicolon", "cannot find symbol")));
 
         Path out = new HtmlReportGenerator()
                 .generate(profile, attempts, dir.resolve("report.html"));
@@ -62,6 +66,12 @@ class HtmlReportGeneratorTest {
                 "the accuracy chart needs a real data table, not just a label claiming one");
         assertTrue(html.contains("scope='row'") && html.contains("scope='col'"),
                 "tables need header semantics");
+        assertTrue(html.contains("Compile errors you hit most"),
+                "recurring compile errors are the most actionable thing a student can see");
+        assertTrue(html.contains("missing semicolon"), "the error category must be named");
+        assertTrue(html.contains("belongs at the end of the line"),
+                "and explained in the same words the terminal used");
+
         assertTrue(html.contains("mastered") || html.contains("in progress")
                         || html.contains("needs work"),
                 "status must be stated in words, not only encoded in bar colour");

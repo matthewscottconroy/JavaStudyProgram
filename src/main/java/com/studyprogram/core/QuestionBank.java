@@ -46,7 +46,7 @@ public class QuestionBank {
     /** Private no-load constructor backing {@link #of(Collection)}. */
     private QuestionBank(Collection<Question> questions, boolean derive) {
         for (Question q : questions) byId.put(q.getId(), q);
-        if (derive) deriveParsons();
+        if (derive) { deriveParsons(); deriveFadedExamples(); }
         rebuildTopicIndex();
     }
 
@@ -64,6 +64,7 @@ public class QuestionBank {
         loadExternal(externalQuestionsDir);
         screenUntrusted();
         deriveParsons();
+        deriveFadedExamples();
         rebuildTopicIndex();
     }
 
@@ -108,6 +109,21 @@ public class QuestionBank {
         }
         for (Question p : derived) {
             if (!byId.containsKey(p.getId())) byId.put(p.getId(), p);
+        }
+    }
+
+    /**
+     * Auto-derive the faded worked-example ladder from every coding exercise: study a correct
+     * solution with one line missing, then with three. Derived after Parsons so the ladder from
+     * reading code to writing it is complete, and at the same zero authoring cost.
+     */
+    private void deriveFadedExamples() {
+        List<Question> derived = new ArrayList<>();
+        for (Question q : byId.values()) {
+            derived.addAll(FadedExampleDeriver.derive(q));
+        }
+        for (Question f : derived) {
+            if (!byId.containsKey(f.getId())) byId.put(f.getId(), f);
         }
     }
 

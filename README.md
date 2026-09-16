@@ -9,11 +9,11 @@ An adaptive engine tracks your per-topic mastery, matches question difficulty to
 repeating what you just answered, and prefers hands-on coding exercises whenever a topic has them.
 A prerequisite graph of 61 topics gates advanced material until its foundations are in place.
 
-The bank holds **3,151 questions, of which 715 are coding exercises and 595 are Parsons puzzles**
-derived from them — every coding exercise machine-verified by the content gate (its starter must
-compile but fail its tests; its reference solution must pass), and every Parsons puzzle verified
-solvable through the real grader. **All 61 topics have coding exercises**, from variables through
-Swing, reflection, sockets and design patterns.
+The bank holds **4,027 questions, of which 715 are coding exercises**, plus **595 Parsons puzzles**
+and **876 faded worked examples** derived from them — every coding exercise machine-verified by
+the content gate (its starter must compile but fail its tests; its reference solution must pass),
+and every derived question verified answerable through the real grader. **All 61 topics have
+coding exercises**, from variables through Swing, reflection, sockets and design patterns.
 
 ## Quick start
 
@@ -54,6 +54,26 @@ way to navigate the program, not just a picture of it. (It is itself a custom-pa
 `Graphics2D` component with Swing Timers driving its animations — once you reach the GUI world,
 you can read its source as course material.)
 
+**Worked examples with faded scaffolding** are the rung below Parsons. Told to "write a method
+that returns the largest value in an array", a beginner has to hold the algorithm, the syntax and
+the structure in mind at once, and often produces nothing at all. So each coding exercise also
+generates a ladder: study a correct, commented solution with **one line faded out** and supply it;
+then the same solution with **three lines faded out**; then write the whole program from scratch
+as the original exercise. Each step adds one new demand instead of all of them at once. Blanks are
+logic lines — never braces, imports or method signatures, which would test transcription rather
+than thinking — and indentation is not counted against you.
+
+**Exam Mode** is the honest rehearsal. Everything else in the program is designed to help you
+succeed right now: the feed picks what you are ready for, hints are a keypress away, and a missed
+question comes back later. That makes for good practice and a poor prediction. An exam is fixed,
+timed, mixed across the units *you* choose, with no hints and no second attempts — and it is
+scored **per syllabus unit** (or per world, if no course overlay is installed), so the report says
+which units are solid, which are shaky and which need work while there is still a week to fix
+them. Questions you never reached count against the score but are reported separately from
+questions you got wrong, because those are different problems. Nothing is gated on the result; the
+paper is saved as text next to your other reports. Papers are reproducible from their seed, so an
+instructor can hand a whole class the same one.
+
 **Boss Challenges** gate each world: once a world's average mastery reaches 50%, its boss appears
 — a no-hints test across the whole world that ends with a **coding finale**, so a world cannot be
 passed by recognition alone. Score 80%+ to clear it (retries draw a different fight), and the
@@ -86,9 +106,19 @@ bottom is a checksum of the card's own numbers, or an HMAC when `STUDY_SIGNING_K
 `--verify-card` checks it. Be clear-eyed about what that proves: it catches an edited card, but on
 a machine the student controls it is a tamper-check, not an attestation of proctored work.
 
+**Compiler-error decoder:** javac writes for someone who already knows Java. When your program
+does not compile, the app prints javac's own words (you will meet them in every other tool) and
+then a plain-English reading of each distinct error: what it means and what to look at — never
+what to type, so the fix is still yours. Around thirty patterns are covered, each one verified
+against real javac output rather than remembered wording. Every error you hit is also recorded by
+category, so your progress report shows **the compile errors you hit most** — a recurring error is
+a concrete, fixable habit, and far more actionable than a topic-level accuracy number.
+
 **Instructor class report:** `java -jar java-study-program.jar --class-report`
 aggregates every profile on the machine into one HTML page: per-student
-summary, class-wide weakest topics, and calibration-flagged questions.
+summary, class-wide weakest topics, **where the class gets stuck** (compile errors ranked by how
+many students hit them — what a five-minute demonstration at the start of class can fix), and
+calibration-flagged questions.
 
 **Question calibration:** authored difficulty labels are self-correcting. Each student carries an
 ability rating and each question a difficulty rating, both updated on every attempt (an Elo-style
@@ -156,8 +186,9 @@ have not passed the content gate.
 
 - **Course overlays** (`data/courses/*.json`): map your syllabus units onto
   topics; students then pick `[u] course unit review` at session start and
-  enter a unit range ("1-4") for exactly-scoped quiz prep. A sample Java II
-  overlay ships in `data/courses/sample-java2.json`.
+  enter a unit range ("1-4") for exactly-scoped quiz prep. The same overlay drives
+  **Exam Mode**, which scores a timed paper unit by unit and names the units that need work.
+  A sample Java II overlay ships in `data/courses/sample-java2.json`.
 - **Prerequisite overrides** (`data/topic-graph.json`): reshape the concept
   map's prerequisite edges without rebuilding —
   `{ "overrides": { "generics": { "prerequisites": ["collections"] } } }`.
@@ -175,6 +206,7 @@ have not passed the content gate.
 | Type | What you do |
 |---|---|
 | **Coding** | Edit a real `.java` file in `workspace/<exercise-id>/`, press Enter to compile and run the tests. Repeat until green. |
+| **Worked example (faded)** | Study a correct, commented solution with one line — then three — faded out, and supply the missing logic. Auto-derived from coding exercises. |
 | **Code ordering (Parsons)** | Reorder the scrambled lines of a working program — auto-derived from coding exercises (whole program when short, otherwise one method body), so this bank grows for free. |
 | **Fill in the blank** | Type the one missing expression in a working program. |
 | Tracing | Read code, predict its output. |
@@ -182,13 +214,14 @@ have not passed the content gate.
 | Multiple choice / code generation | Classic A/B/C/D questions. |
 
 Together these form a skill ladder inside each topic: trace → debug → reorder →
-fill in → write from scratch. The adaptive engine prefers the hands-on end of
-the ladder whenever a topic has it.
+complete a worked example → fill in → write from scratch. The adaptive engine prefers the
+hands-on end of the ladder whenever a topic has it.
 
 During a coding exercise: `Enter` compiles and tests, `h` gives progressive hints,
 `r` resets the file to the starter, `g` gives up and shows the reference solution,
 `s` skips, `q` quits. Student programs run in a subprocess with a memory cap and a
-10-second timeout, so an accidental infinite loop is caught, not fatal.
+10-second timeout, so an accidental infinite loop is caught, not fatal. When compilation fails you
+get javac's message *and* a plain-English reading of it (see the compiler-error decoder above).
 
 ## Optional AI support
 
