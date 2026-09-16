@@ -1,0 +1,18 @@
+{
+  "id": "ic-code-11",
+  "type": "CODING",
+  "difficulty": 2,
+  "prompt": "Turn a day number 1-7 into its name with a switch that has a real default, and report whether that day falls on the weekend. Out-of-range numbers must not slip through.",
+  "starterCode": "/**\n * TASK: Complete nameOf and isWeekend.\n *\n * Days are numbered 1 = Monday through 7 = Sunday.\n *   nameOf(1) -> \"Monday\"\n *   nameOf(7) -> \"Sunday\"\n * Any number outside 1-7 gives \"Unknown\".\n *\n * isWeekend is true only for 6 (Saturday) and 7 (Sunday); every other\n * number, valid or not, is false.\n */\npublic class DayNameLookup {\n\n    public static String nameOf(int day) {\n        // TODO: switch on day, with a default of \"Unknown\"\n        return \"\";\n    }\n\n    public static boolean isWeekend(int day) {\n        // TODO: only Saturday and Sunday count\n        return false;\n    }\n}\n",
+  "testCode": "public class DayNameLookupTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        check(\"nameOf(1)\", \"Monday\", DayNameLookup.nameOf(1));\n        check(\"nameOf(5)\", \"Friday\", DayNameLookup.nameOf(5));\n        check(\"nameOf(7)\", \"Sunday\", DayNameLookup.nameOf(7));\n        check(\"nameOf(0)\", \"Unknown\", DayNameLookup.nameOf(0));\n        check(\"nameOf(8)\", \"Unknown\", DayNameLookup.nameOf(8));\n        check(\"nameOf(-3)\", \"Unknown\", DayNameLookup.nameOf(-3));\n        check(\"isWeekend(6)\", true, DayNameLookup.isWeekend(6));\n        check(\"isWeekend(7)\", true, DayNameLookup.isWeekend(7));\n        check(\"isWeekend(5)\", false, DayNameLookup.isWeekend(5));\n        check(\"isWeekend(99)\", false, DayNameLookup.isWeekend(99));\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class DayNameLookup {\n\n    public static String nameOf(int day) {\n        switch (day) {\n            case 1: return \"Monday\";\n            case 2: return \"Tuesday\";\n            case 3: return \"Wednesday\";\n            case 4: return \"Thursday\";\n            case 5: return \"Friday\";\n            case 6: return \"Saturday\";\n            case 7: return \"Sunday\";\n            default: return \"Unknown\";\n        }\n    }\n\n    public static boolean isWeekend(int day) {\n        return day == 6 || day == 7;\n    }\n}\n",
+  "explanation": "A switch on an int maps a small set of known values to results, and the default branch is what keeps the method total -- without it, day 8 would fall past every case and reach the end of the method. Returning straight out of each case means no break statements are needed and no case can fall through into the next. isWeekend needs no switch at all: a single boolean expression is clearer than two cases plus a default.",
+  "hints": [
+    "Each case can return its name directly, so you never need a break.",
+    "The default branch catches 0, 8, -3 and everything else in one place.",
+    "isWeekend is one line -- combine two == comparisons with ||."
+  ],
+  "relatedTopics": [
+    "STRINGS"
+  ]
+}

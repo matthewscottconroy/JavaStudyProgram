@@ -5,10 +5,14 @@ GUIs, generics, and concurrency. It is built around **writing real programs**: t
 app hands you a starter file, you edit it in your own editor or IDE, and the app
 compiles your code and runs tests against it, right there in your session.
 
-An adaptive engine tracks your per-topic mastery, matches question difficulty to
-your level, avoids repeating what you just answered, and prefers hands-on coding
-exercises whenever a topic has them. A prerequisite graph of 60+ topics gates
-advanced material until its foundations are in place.
+An adaptive engine tracks your per-topic mastery, matches question difficulty to your level, avoids
+repeating what you just answered, and prefers hands-on coding exercises whenever a topic has them.
+A prerequisite graph of 61 topics gates advanced material until its foundations are in place.
+
+The bank holds **2,738 questions, of which 715 are coding exercises** — every one machine-verified
+by the content gate (its starter must compile but fail its tests; its reference solution must pass).
+**All 61 topics have coding exercises**, from variables through Swing, reflection, sockets and
+design patterns.
 
 ## Quick start
 

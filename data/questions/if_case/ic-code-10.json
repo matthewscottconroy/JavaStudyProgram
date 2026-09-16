@@ -1,0 +1,19 @@
+{
+  "id": "ic-code-10",
+  "type": "CODING",
+  "difficulty": 3,
+  "prompt": "Classify three side lengths as equilateral, isosceles or scalene -- but only after rejecting the lengths that cannot form a triangle at all. Complete classify in TriangleClassifier.",
+  "starterCode": "/**\n * TASK: Complete classify.\n *\n * Return one of \"invalid\", \"equilateral\", \"isosceles\" or \"scalene\".\n *\n * Sides are invalid when any side is zero or negative, or when the two\n * shorter sides do not add up to MORE than the longest one. A degenerate\n * case like 1, 2, 3 (where 1 + 2 == 3) is \"invalid\", not a triangle.\n *\n * Examples: classify(3, 3, 3) -> \"equilateral\"\n *           classify(5, 5, 8) -> \"isosceles\"\n *           classify(3, 4, 5) -> \"scalene\"\n *           classify(1, 2, 3) -> \"invalid\"\n */\npublic class TriangleClassifier {\n\n    public static String classify(int a, int b, int c) {\n        // TODO: reject invalid sides first, then compare the sides\n        return \"\";\n    }\n}\n",
+  "testCode": "public class TriangleClassifierTest {\n    static int failures = 0;\n\n    static void check(String label, Object expected, Object actual) {\n        if (java.util.Objects.equals(expected, actual)) {\n            System.out.println(\"PASS  \" + label);\n        } else {\n            System.out.println(\"FAIL  \" + label + \" -- expected \" + expected + \" but got \" + actual);\n            failures++;\n        }\n    }\n\n    public static void main(String[] args) {\n        check(\"3,3,3\", \"equilateral\", TriangleClassifier.classify(3, 3, 3));\n        check(\"5,5,8\", \"isosceles\", TriangleClassifier.classify(5, 5, 8));\n        check(\"8,5,5\", \"isosceles\", TriangleClassifier.classify(8, 5, 5));\n        check(\"3,4,5\", \"scalene\", TriangleClassifier.classify(3, 4, 5));\n        check(\"1,2,3 degenerate\", \"invalid\", TriangleClassifier.classify(1, 2, 3));\n        check(\"10,2,3\", \"invalid\", TriangleClassifier.classify(10, 2, 3));\n        check(\"0,1,1\", \"invalid\", TriangleClassifier.classify(0, 1, 1));\n        check(\"-1,2,2\", \"invalid\", TriangleClassifier.classify(-1, 2, 2));\n        check(\"2,2,3\", \"isosceles\", TriangleClassifier.classify(2, 2, 3));\n        if (failures > 0) {\n            System.out.println(failures + \" test(s) failed.\");\n            System.exit(1);\n        }\n        System.out.println(\"ALL TESTS PASSED\");\n    }\n}\n",
+  "answer": "public class TriangleClassifier {\n\n    public static String classify(int a, int b, int c) {\n        if (a <= 0 || b <= 0 || c <= 0) {\n            return \"invalid\";\n        }\n        if (a + b <= c || a + c <= b || b + c <= a) {\n            return \"invalid\";\n        }\n        if (a == b && b == c) {\n            return \"equilateral\";\n        }\n        if (a == b || b == c || a == c) {\n            return \"isosceles\";\n        }\n        return \"scalene\";\n    }\n}\n",
+  "explanation": "Guard clauses put the impossible cases first: once the non-positive sides and the triangle-inequality failures have returned \"invalid\", the rest of the method can assume it really has a triangle. Checking all three inequalities (a+b>c, a+c>b, b+c>a) avoids having to sort the sides to find the longest. The shape tests then run from most specific to least: all three equal, then any two equal, and scalene as the fall-through answer.",
+  "hints": [
+    "Handle the two rejection rules with early returns before you compare sides for equality.",
+    "The triangle inequality must hold for every pairing: a + b > c, a + c > b and b + c > a. Using <= catches the degenerate 1, 2, 3 case.",
+    "Test equilateral (a == b && b == c) before isosceles, otherwise every equilateral triangle answers \"isosceles\"."
+  ],
+  "relatedTopics": [
+    "FUNCTIONS",
+    "VARIABLES"
+  ]
+}
