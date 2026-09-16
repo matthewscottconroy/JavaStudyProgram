@@ -21,6 +21,7 @@ public class StudentProfile {
     private Set<Topic> revealedOnMap;      // topics the student has already seen unlocked on the map
     private List<Topic> lastSessionTopics; // what the last study session covered
     private int lastSessionLength;         // and how long it was, so it can be repeated
+    private StudyGoal goal;                // what the student is working toward, if anything
 
     public StudentProfile() {
         this.id              = UUID.randomUUID().toString();
@@ -105,6 +106,14 @@ public class StudentProfile {
     }
     public int getLastSessionLength()        { return lastSessionLength; }
     public void setLastSessionLength(int n)  { this.lastSessionLength = n; }
+    public StudyGoal getGoal()               { return goal; }
+    public void setGoal(StudyGoal g)         { this.goal = g; }
+
+    /** True when there is a goal whose date has not passed. */
+    @JsonIgnore
+    public boolean hasActiveGoal() {
+        return goal != null && goal.getDate() != null && !goal.isPast(java.time.LocalDate.now());
+    }
 
     /** True when there is a previous session worth offering to repeat. */
     @JsonIgnore

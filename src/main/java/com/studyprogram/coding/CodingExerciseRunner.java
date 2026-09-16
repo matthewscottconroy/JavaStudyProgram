@@ -121,6 +121,35 @@ public class CodingExerciseRunner {
         }
     }
 
+    /**
+     * The content gate for one coding exercise: the starter must compile cleanly but fail its
+     * tests (otherwise there is nothing to do, or nothing to check), and the reference solution
+     * must pass them (otherwise the exercise cannot be finished). Returns a description of the
+     * problem, or empty when the exercise is healthy. This is the single definition of "healthy"
+     * used by the test suite over the shipped bank and by {@code --verify-questions} over an
+     * instructor's own pack.
+     */
+    public java.util.Optional<String> verifyExercise(Question q) {
+        if (!compilerAvailable()) {
+            return java.util.Optional.of(q.getId() + ": cannot verify without a JDK compiler");
+        }
+        CodingResult starter = q.isMultiFile()
+                ? compileAndTest(q.getStarterFiles(), q.getTestCode())
+                : compileAndTest(q.getStarterCode(), q.getTestCode());
+        if (starter.status() != CodingResult.Status.TEST_FAILURE) {
+            return java.util.Optional.of(q.getId() + ": starter should compile but fail tests — got "
+                    + starter.status() + "\n" + starter.output());
+        }
+        CodingResult solution = q.isMultiFile()
+                ? compileAndTest(q.getSolutionFiles(), q.getTestCode())
+                : compileAndTest(q.getAnswer(), q.getTestCode());
+        if (solution.status() != CodingResult.Status.PASS) {
+            return java.util.Optional.of(q.getId() + ": reference solution should pass — got "
+                    + solution.status() + "\n" + solution.output());
+        }
+        return java.util.Optional.empty();
+    }
+
     /** Single-file variant — see {@link #compileAndTest(java.util.Map, String)}. */
     CodingResult compileAndTest(String mainSource, String testSource) {
         return compileAndTest(

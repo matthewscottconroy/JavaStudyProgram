@@ -55,6 +55,7 @@ public class Main {
                 case "--export-profile" -> exportProfile(value, argv.size() > 2 ? argv.get(2) : null);
                 case "--import-profile" -> importProfile(value);
                 case "--verify-card" -> verifyCard(value);
+                case "--verify-questions" -> verifyQuestions(value);
                 case "" -> interactive();
                 default -> {
                     System.out.println("Unknown option: " + command);
@@ -154,12 +155,27 @@ public class Main {
                  --export-profile <name> [out]  bundle one profile + its attempt log to a file
                  --import-profile <file|dir>    import one bundle, or every bundle in a folder
                  --verify-card <card.txt>       check a progress card against its local profile
+                 --verify-questions [dir]       run the content gate over a question pack
+                                                (default: data/questions); exits 1 on problems
                  --help                         show this message
 
                Display:
                  --no-color                     disable ANSI colour (also honours NO_COLOR)
                  --ascii                        plain-ASCII glyphs for limited terminals
                """;
+    }
+
+    /**
+     * Verifies a question pack the way the test suite verifies the shipped bank, so an instructor
+     * writing their own exercises finds a broken one here rather than a student finding it in
+     * class. Exits non-zero on problems so it can guard a course repository's CI.
+     */
+    private static void verifyQuestions(String dir) {
+        Path root = dir == null ? QuestionBank.DEFAULT_EXTERNAL_DIR : Path.of(dir);
+        System.out.println("Verifying " + root + " …");
+        var report = com.studyprogram.questions.QuestionPackVerifier.verify(root);
+        System.out.println(com.studyprogram.questions.QuestionPackVerifier.render(root, report));
+        if (!report.ok()) System.exit(1);
     }
 
     /**

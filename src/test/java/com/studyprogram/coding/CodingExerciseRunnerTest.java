@@ -91,51 +91,20 @@ class CodingExerciseRunnerTest {
     }
 
     /**
-     * Content gate for every shipped CODING exercise: the starter must compile cleanly
-     * but fail its tests, and the reference solution must pass them. This keeps broken
-     * exercises from ever reaching students. Exercises are verified in parallel
-     * (each compiles in its own temp directory) so the gate stays fast as the bank grows.
+     * Content gate for every shipped CODING exercise: the starter must compile cleanly but fail
+     * its tests, and the reference solution must pass them. This keeps broken exercises from
+     * ever reaching students. The gate is {@link com.studyprogram.questions.QuestionPackVerifier},
+     * the same code an instructor runs as {@code --verify-questions} over their own pack — one
+     * definition of "healthy", so a pack that verifies here also loads there.
      */
     @Test
-    void everyCodingExerciseStarterFailsAndSolutionPasses() throws Exception {
-        List<Question> coding = new QuestionBank().getQuestionsForTopics(List.of(Topic.values()))
-                .stream().filter(q -> q.getType() == QuestionType.CODING).toList();
-        assertFalse(coding.isEmpty(), "expected shipped CODING exercises");
-
-        int threads = Math.max(2, Runtime.getRuntime().availableProcessors() - 1);
-        java.util.concurrent.ExecutorService pool =
-                java.util.concurrent.Executors.newFixedThreadPool(threads);
-        List<java.util.concurrent.Future<String>> futures = new java.util.ArrayList<>();
-        for (Question q : coding) {
-            futures.add(pool.submit(() -> verifyExercise(q)));
-        }
-        pool.shutdown();
-
-        List<String> failures = new java.util.ArrayList<>();
-        for (java.util.concurrent.Future<String> f : futures) {
-            String problem = f.get(10, java.util.concurrent.TimeUnit.MINUTES);
-            if (problem != null) failures.add(problem);
-        }
-        assertTrue(failures.isEmpty(),
-                failures.size() + " broken exercise(s):\n" + String.join("\n", failures));
+    void everyCodingExerciseStarterFailsAndSolutionPasses() {
+        var report = com.studyprogram.questions.QuestionPackVerifier.verify(
+                QuestionBank.DEFAULT_EXTERNAL_DIR);
+        assertTrue(report.coding() > 700, "expected shipped CODING exercises, saw " + report.coding());
+        assertTrue(report.ok(), report.problems().size() + " broken exercise(s):\n"
+                + String.join("\n", report.problems().stream().map(Object::toString).toList()));
+        assertFalse(report.notes().isEmpty(), "derivation yield should be reported");
     }
 
-    /** Returns null when the exercise is healthy, else a description of the problem. */
-    private static String verifyExercise(Question q) {
-        CodingResult starter = q.isMultiFile()
-                ? runner.compileAndTest(q.getStarterFiles(), q.getTestCode())
-                : runner.compileAndTest(q.getStarterCode(), q.getTestCode());
-        if (starter.status() != CodingResult.Status.TEST_FAILURE) {
-            return q.getId() + ": starter should compile but fail tests — got "
-                    + starter.status() + "\n" + starter.output();
-        }
-        CodingResult solution = q.isMultiFile()
-                ? runner.compileAndTest(q.getSolutionFiles(), q.getTestCode())
-                : runner.compileAndTest(q.getAnswer(), q.getTestCode());
-        if (solution.status() != CodingResult.Status.PASS) {
-            return q.getId() + ": reference solution should pass — got "
-                    + solution.status() + "\n" + solution.output();
-        }
-        return null;
-    }
 }

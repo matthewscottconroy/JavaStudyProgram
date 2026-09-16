@@ -54,6 +54,35 @@ class UntrustedQuestionScreeningTest {
         assertFalse(bank.findById("fine1").get().isTrusted(), "but they are marked untrusted");
     }
 
+    /**
+     * Regression: the screen once flagged System.exit, which is how every test harness in the
+     * bank -- and every harness written the way the README says -- reports failure. Exercise
+     * code runs in its own subprocess, so exit() there is harmless, and an instructor's pack
+     * written the documented way must load.
+     */
+    @Test
+    void anExternalExerciseWrittenTheDocumentedWayIsNotRefused() throws Exception {
+        Path dir = external.resolve("loops");
+        Files.createDirectories(dir);
+        Files.writeString(dir.resolve("mine.json"), """
+                {
+                  "id": "mine",
+                  "type": "CODING",
+                  "difficulty": 2,
+                  "prompt": "p",
+                  "starterCode": "public class Mine { public static int go() { return 0; } }",
+                  "testCode": "public class MineTest { public static void main(String[] a) { if (Mine.go() != 1) { System.out.println(\\"FAIL\\"); System.exit(1); } System.out.println(\\"ALL TESTS PASSED\\"); } }",
+                  "answer": "public class Mine { public static int go() { return 1; } }",
+                  "explanation": "e"
+                }
+                """);
+        QuestionBank bank = new QuestionBank(external);
+
+        assertTrue(bank.findById("mine").isPresent(),
+                "a harness that exits non-zero on failure is the documented pattern: "
+                + bank.getWarnings());
+    }
+
     @Test
     void bundledFirstPartyContentIsNeverRefused() {
         QuestionBank bank = new QuestionBank();   // repo's own data/questions overlay

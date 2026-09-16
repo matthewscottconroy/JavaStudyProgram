@@ -66,6 +66,13 @@ public final class ProgressCard {
         row(card, v, "Programs written & passed", String.valueOf(coding));
         row(card, v, "Study days", String.valueOf(days.size()));
         row(card, v, "Bosses cleared", profile.getBossesCleared().size() + "/5");
+        if (profile.hasActiveGoal()) {
+            var plan = com.studyprogram.core.GoalPlanner.plan(profile, LocalDate.now());
+            int total = plan.behind().size() + plan.onTarget().size();
+            row(card, v, "Goal: " + profile.getGoal().getTitle(),
+                    plan.onTarget().size() + "/" + total + " topics at target, "
+                    + plan.daysLeft() + " day" + (plan.daysLeft() == 1 ? "" : "s") + " left");
+        }
         card.append(ml).append(h.repeat(52)).append(mr).append("\n");
 
         String[] worlds = {"Foundations", "Elementary", "Intermediate", "Advanced", "Expert"};

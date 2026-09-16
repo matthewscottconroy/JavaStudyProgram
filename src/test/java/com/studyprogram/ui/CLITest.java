@@ -187,10 +187,50 @@ class CLITest {
     }
 
     @Test
+    void aGoalShowsOnTheMenuAndSteersTheFeed() throws Exception {
+        String out = run(tinyBank(),
+                "Ada", "done",
+                "5", "g",               // exam mode -> set a goal
+                "Midterm",              // title
+                "14",                   // in 14 days
+                "1",                    // unit 1
+                "1", "", "1",           // start a session on the auto feed
+                "a", "",
+                "9");
+
+        assertTrue(out.contains("Goal: Midterm in 14 days"), out);
+        assertTrue(out.contains("a day to get there"), "the menu must state the pace: " + out);
+        assertTrue(out.contains("Goal plan (Midterm)"),
+                "the auto feed should head for the goal's topics: " + out);
+
+        StudentProfile saved = storage.load("Ada").orElseThrow();
+        assertNotNull(saved.getGoal(), "the goal must be persisted");
+        assertEquals("Midterm", saved.getGoal().getTitle());
+        assertTrue(saved.getGoal().getTopics().contains(Topic.VARIABLES));
+    }
+
+    @Test
+    void aGoalCanBeClearedAndAPastDateIsRefused() throws Exception {
+        String out = run(tinyBank(),
+                "Ada", "done",
+                "5", "g", "Quiz",
+                "2020-01-01",           // in the past
+                "3",                    // fine: three days from now
+                "1",
+                "5", "c",               // exam mode -> clear it
+                "9");
+
+        assertTrue(out.contains("already passed"), out);
+        assertTrue(out.contains("Goal cleared"), out);
+        assertNull(storage.load("Ada").orElseThrow().getGoal());
+    }
+
+    @Test
     void examModeScoresEachSyllabusUnitSeparately() throws Exception {
         String out = run(tinyBank(),
                 "Ada", "done",
                 "5",            // exam mode
+                "",             // sit a paper (not set a goal)
                 "1",            // units to examine
                 "2",            // two questions
                 "y",            // start the clock
@@ -209,7 +249,7 @@ class CLITest {
     void examModeRefusesHintsAndReportsTheWeakUnit() throws Exception {
         String out = run(tinyBank(),
                 "Ada", "done",
-                "5", "1", "2", "y",
+                "5", "", "1", "2", "y",
                 "h",            // asking for help
                 "delta",        // …and then answering wrongly anyway
                 "delta",
@@ -222,7 +262,7 @@ class CLITest {
 
     @Test
     void examModeCanBeBackedOutOfWithoutRecordingAnything() throws Exception {
-        run(tinyBank(), "Ada", "done", "5", "1", "2", "n", "9");
+        run(tinyBank(), "Ada", "done", "5", "", "1", "2", "n", "9");
 
         StudentProfile saved = storage.load("Ada").orElseThrow();
         assertEquals(0, saved.getTotalQuestionsAnswered(),

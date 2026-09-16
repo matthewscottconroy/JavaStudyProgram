@@ -22,12 +22,16 @@ Questions loaded from an external overlay are screened before they can run. Flag
 | filesystem writes | `Files.delete/move/write`, `FileOutputStream`, `renameTo` |
 | network access | `Socket`, `ServerSocket`, `HttpClient`, `openConnection` |
 | reflective override | `setAccessible(true)`, `ClassLoader`, `Class.forName` |
-| exit / shutdown | `System.exit`, `Runtime.halt`, shutdown hooks |
 | environment writes | `System.setProperty`, `System.getenv` |
 | code loading | `javax.tools`, `ScriptEngine`, dynamic proxies |
 
 Comments and string literals are stripped before matching, so prose ("never call `System.exit`
 here") and sample SQL or HTTP text do not trip the scan.
+
+`System.exit` is deliberately not screened. Exercise code runs in its own subprocess, where
+`exit()` ends only that subprocess — and a non-zero exit is how every test harness reports
+failure, so screening it would refuse every exercise written the documented way. (It once did:
+`--verify-questions` found that the shipped bank itself would have been refused.)
 
 A flagged external question is **refused**, not run. Override with
 `JAVASTUDY_TRUST_EXTERNAL=1` only for packs you wrote or reviewed yourself.

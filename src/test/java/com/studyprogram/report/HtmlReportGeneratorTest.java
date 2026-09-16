@@ -30,6 +30,8 @@ class HtmlReportGeneratorTest {
     @Test
     void generatesSelfContainedReportWithAllSections() throws Exception {
         StudentProfile profile = new StudentProfile("Ada <script>");
+        profile.setGoal(new StudyGoal("Midterm", "Units 1-2", java.time.LocalDate.now().plusDays(9),
+                List.of(Topic.LOOPS, Topic.VARIABLES)));
         profile.recordAnswer(question(Topic.LOOPS, 2, QuestionType.CODING), true);
         profile.recordAnswer(question(Topic.VARIABLES, 1, QuestionType.MULTIPLE_CHOICE), false);
 
@@ -66,6 +68,10 @@ class HtmlReportGeneratorTest {
                 "the accuracy chart needs a real data table, not just a label claiming one");
         assertTrue(html.contains("scope='row'") && html.contains("scope='col'"),
                 "tables need header semantics");
+        assertTrue(html.contains("Goal: Midterm"), "the goal must be reported");
+        assertTrue(html.contains("9 days left"), html);
+        assertTrue(html.contains("points to go"), "each goal topic shows its distance from target");
+
         assertTrue(html.contains("Compile errors you hit most"),
                 "recurring compile errors are the most actionable thing a student can see");
         assertTrue(html.contains("missing semicolon"), "the error category must be named");

@@ -40,6 +40,22 @@ class ProgressCardTest {
     }
 
     @Test
+    void aGoalAppearsOnTheCardAndIsCoveredByTheChecksum() {
+        StudentProfile p = new StudentProfile("Ada");
+        p.setGoal(new StudyGoal("Final", "Worlds 1-2", java.time.LocalDate.now().plusDays(5),
+                List.of(Topic.LOOPS, Topic.VARIABLES)));
+        String card = ProgressCard.render(p, List.of());
+
+        assertTrue(card.contains("Goal: Final"), card);
+        assertTrue(card.contains("0/2 topics at target, 5 days left"), card);
+        assertTrue(ProgressCard.verify(card, p.getId()).startsWith("VALID"),
+                "the goal line is part of what is signed");
+        assertTrue(ProgressCard.verify(card.replace("0/2 topics", "2/2 topics"), p.getId())
+                        .startsWith("INVALID"),
+                "editing the goal line must break the code, like any other number on the card");
+    }
+
+    @Test
     void codeChangesWhenTheNumbersChange() {
         StudentProfile p = new StudentProfile("Ada");
         String empty = ProgressCard.render(p, List.of());

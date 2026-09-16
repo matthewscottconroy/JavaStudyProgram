@@ -79,6 +79,15 @@ as the original exercise. Each step adds one new demand instead of all of them a
 logic lines — never braces, imports or method signatures, which would test transcription rather
 than thinking — and indentation is not counted against you.
 
+**Goals.** Tell the program what you are working toward — "Midterm, October 14, units 1–5" —
+and it back-plans from there. The main menu shows one line every time you open it: how many of
+the goal's topics are at target, how many days are left, and about how many questions a day it
+will take at *your* accuracy (each answer moves a topic's mastery by a known amount, so the gap
+divided by your expected gain is a number of questions). The auto feed heads for the goal's
+topics, routing through the prerequisites of any it cannot reach yet; the progress report and
+card show the same numbers. It says plainly when the pace needed is more than a session a day.
+Set it from Exam Mode, since a goal is literally the exam you will sit.
+
 **Exam Mode** is the honest rehearsal. Everything else in the program is designed to help you
 succeed right now: the feed picks what you are ready for, hints are a keypress away, and a missed
 question comes back later. That makes for good practice and a poor prediction. An exam is fixed,
@@ -154,6 +163,7 @@ java -jar java-study-program.jar --help               # all options
 --export-profile <name> [out]  bundle one profile + its attempt log into a file
 --import-profile <file|dir>    import one bundle, or a whole folder of them
 --verify-card <card.txt>       check a progress card against its local profile
+--verify-questions [dir]       content-gate a question pack; exits 1 on problems
 --no-color / --ascii          accessibility fallbacks (NO_COLOR is honoured too)
 ```
 
@@ -212,6 +222,13 @@ have not passed the content gate.
   `"hidden": ["metaprogramming"]` takes topics out of scope entirely — they vanish from the auto
   feed, the map and topic selection. Copy
   [data/topic-graph.example.json](data/topic-graph.example.json) to get started.
+- **Verifying your own questions**: `--verify-questions data/questions` runs the same content
+  gate the test suite applies to the shipped bank — every folder must be a topic slug, every
+  file must parse, every coding exercise's starter must compile-but-fail and its solution must
+  pass — and reports what is wrong *by file*, with a "did you mean" for misnamed folders. It
+  exits non-zero on problems, so it can guard a course repository's CI. Exercises that use
+  file, network or reflection access are reported as warnings: they work, but the safety screen
+  refuses them from an external pack unless `JAVASTUDY_TRUST_EXTERNAL=1` is set.
 - **Collecting work**: `--import-profile <folder>` then `--class-report <dir>`.
 - **Student-reported problems**: pressing `f` on any question records it to
   `data/flags.jsonl`, which the class report lists alongside the questions whose
@@ -276,9 +293,11 @@ workspace; put the task description in a comment at the top, and make it compile
 as-is with placeholder returns) and `testCode` (a self-contained `<Class>Test`
 class whose `main` prints `PASS`/`FAIL` lines and exits non-zero on failure).
 `answer` holds the reference solution. See
-`data/questions/loops/lp-code-01.json` for a complete example. The test suite
-(`CodingExerciseRunnerTest`) verifies every shipped coding exercise: the starter
-must compile but fail its tests, and the reference solution must pass.
+`data/questions/loops/lp-code-01.json` for a complete example. Run
+`java -jar java-study-program.jar --verify-questions data/questions` after adding one: it
+checks that the starter compiles but fails its tests and the reference solution passes, and
+names the file when either is not so. The test suite applies the same gate to every shipped
+exercise.
 
 ## Project layout
 

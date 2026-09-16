@@ -39,6 +39,7 @@ public class HtmlReportGenerator {
          .append("<style>").append(CSS).append("</style></head><body><main class='page'>");
 
         header(h, profile, attempts);
+        goal(h, profile);
         activityCalendar(h, attempts);
         accuracyOverTime(h, attempts);
         masteryByTopic(h, profile);
@@ -249,6 +250,54 @@ public class HtmlReportGenerator {
             if (ans > 0) bar(h, t.displayName, ans, cor);
         }
         h.append("</div></div>");
+    }
+
+    /** Where the student stands against their goal, topic by topic, with the pace it implies. */
+    private void goal(StringBuilder h, StudentProfile profile) {
+        if (!profile.hasActiveGoal()) return;
+        var plan = com.studyprogram.core.GoalPlanner.plan(profile, LocalDate.now());
+        if (plan == null) return;
+        var g = profile.getGoal();
+        int total = plan.behind().size() + plan.onTarget().size();
+
+        h.append("<h2>Goal: ").append(esc(g.getTitle())).append("</h2><p>")
+         .append(esc(g.getScope())).append(" on <b>").append(g.getDate()).append("</b> — ")
+         .append(plan.daysLeft()).append(" day").append(plan.daysLeft() == 1 ? "" : "s")
+         .append(" left. <b>").append(plan.onTarget().size()).append(" of ").append(total)
+         .append("</b> topics at the ").append(Math.round(g.getTargetMastery() * 100))
+         .append("% target.");
+        if (plan.isDone()) {
+            h.append(" Every topic is there — keep them warm with review.");
+        } else {
+            h.append(" About <b>").append(plan.questionsNeeded()).append("</b> more questions, ")
+             .append("which is ~").append(plan.questionsPerDay()).append(" a day");
+            h.append(plan.onTrack() ? " — on track." : " — <b>more than a session a day</b>. Start now.");
+        }
+        h.append("</p><p class='dim'>The estimate uses your own accuracy: at ")
+         .append(Math.round(100 * (profile.getTotalQuestionsAnswered() >= 10
+                 ? profile.getOverallAccuracy() : 0.7)))
+         .append("% correct, each question moves a topic by about ")
+         .append(String.format("%.2f", plan.expectedGain())).append(".</p>");
+
+        h.append("<table class='mastery'><caption class='dim'>Goal topics, furthest from target "
+                + "first</caption><thead><tr><th scope='col'>Topic</th><th scope='col'>Mastery</th>"
+                + "<th scope='col'>Status</th></tr></thead><tbody>");
+        List<Topic> ordered = new ArrayList<>(plan.behind());
+        ordered.addAll(plan.onTarget());
+        int target = (int) Math.round(g.getTargetMastery() * 100);
+        for (Topic t : ordered) {
+            int pct = (int) Math.round(
+                    com.studyprogram.core.Curriculum.mastery(profile.getPerformance(), t) * 100);
+            boolean there = pct >= target;
+            String color = there ? "#2e7d32" : pct >= target / 2 ? "#b26a00" : "#b02a1e";
+            h.append("<tr><th scope='row'>").append(esc(t.displayName)).append("</th>")
+             .append("<td><span class='mbar'><span style='width:").append(pct)
+             .append("%;background:").append(color).append("'></span></span> ")
+             .append(pct).append("%</td><td>")
+             .append(there ? "at target" : (target - pct) + " points to go")
+             .append("</td></tr>");
+        }
+        h.append("</tbody></table>");
     }
 
     /**

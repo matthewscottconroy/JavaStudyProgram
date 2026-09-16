@@ -39,9 +39,11 @@ public class CLI {
     private final Set<String> lastCodingErrors = new LinkedHashSet<>();
     /** True while an exam is in progress: hints and explanations are refused. */
     private boolean noHelp;
+    /** Whether a generated report is opened in the system browser. Off under test. */
+    private final boolean openReportsInBrowser;
 
     public CLI(QuestionBank bank, ProfileStorage storage, LLMService llm) {
-        this(bank, storage, llm, System.in, new CodingExerciseRunner());
+        this(bank, storage, llm, System.in, new CodingExerciseRunner(), true);
     }
 
     /**
@@ -51,12 +53,20 @@ public class CLI {
      */
     public CLI(QuestionBank bank, ProfileStorage storage, LLMService llm,
                java.io.InputStream input, CodingExerciseRunner codingRunner) {
+        // Scripted input means a test: it must not open the developer's browser.
+        this(bank, storage, llm, input, codingRunner, false);
+    }
+
+    private CLI(QuestionBank bank, ProfileStorage storage, LLMService llm,
+                java.io.InputStream input, CodingExerciseRunner codingRunner,
+                boolean openReportsInBrowser) {
         this.bank         = bank;
         this.storage      = storage;
         this.llm          = llm;
         this.grader       = new CompositeGrader(llm);
         this.in           = new Scanner(input);
         this.codingRunner = codingRunner;
+        this.openReportsInBrowser = openReportsInBrowser;
     }
 
     public void run() {
@@ -84,6 +94,7 @@ public class CLI {
 
         while (true) {
             System.out.println();
+            showGoalStatus();
             System.out.println("  [1] " + Messages.get("menu.startSession"));
             System.out.println("  [2] " + Messages.get("menu.viewPerformance"));
             System.out.println("  [3] " + Messages.get("menu.conceptMap"));
@@ -292,32 +303,27 @@ public class CLI {
                 + "Nothing here is gated on the result — it is a rehearsal, not a gate."
                 + Display.reset());
 
-        List<CourseOverlay> courses = CourseOverlay.loadAll(Path.of("data", "courses"));
-        List<ExamSession.Section> sections;
-        if (courses.isEmpty()) {
-            System.out.println();
-            System.out.println("  " + Display.dim() + "No course file in data/courses/, so the "
-                    + "exam is scored by world instead of by syllabus unit." + Display.reset());
-            System.out.print("  Worlds to cover (e.g. 2 or 1-3): ");
-            int[] range = parseRange(in.nextLine().trim());
-            if (range == null) { System.out.println("  Cancelled."); return; }
-            sections = ExamSession.worldSections(range[0], range[1]);
+        System.out.println();
+        if (currentProfile.hasActiveGoal()) {
+            showGoalStatus();
+            System.out.print("  [Enter] sit a practice paper  [g] change the goal  [c] clear it: ");
         } else {
-            CourseOverlay course = pickCourse(courses);
-            System.out.println("  " + Display.bold() + course.getName() + Display.reset());
-            for (CourseOverlay.Unit u : course.getUnits()) {
-                System.out.printf("    %2d  %s%n", u.number(), u.title());
-            }
-            System.out.print("  Units to examine (e.g. 3 or 1-4): ");
-            int[] range = parseRange(in.nextLine().trim());
-            if (range == null) { System.out.println("  Cancelled."); return; }
-            sections = ExamSession.sectionsFor(course, range[0], range[1]);
+            System.out.println("  " + Display.dim() + "No goal set. A goal is an exam date and "
+                    + "the units it covers: the feed then heads for it, and the menu shows "
+                    + "whether you are on pace." + Display.reset());
+            System.out.print("  [Enter] sit a practice paper  [g] set a goal: ");
         }
-
-        if (sections.isEmpty()) {
-            System.out.println("  That range covers no topics — nothing to examine.");
+        String choice = in.nextLine().trim().toLowerCase();
+        if (choice.equals("g")) { setGoal(); return; }
+        if (choice.equals("c")) {
+            currentProfile.setGoal(null);
+            saveProfile();
+            System.out.println("  Goal cleared.");
             return;
         }
+
+        List<ExamSession.Section> sections = chooseSections("examine");
+        if (sections == null) return;
 
         System.out.print("  How many questions [" + DEFAULT_EXAM_LENGTH + "]: ");
         int count = DEFAULT_EXAM_LENGTH;
@@ -347,6 +353,93 @@ public class CLI {
         }
 
         sitExam(paper, minutes);
+    }
+
+    /** One line about the goal, when there is one. */
+    private void showGoalStatus() {
+        if (!currentProfile.hasActiveGoal()) return;
+        GoalPlanner.Plan plan = GoalPlanner.plan(currentProfile, LocalDateTime.now().toLocalDate());
+        if (plan == null) return;
+        String color = plan.isDone() ? Display.green() : plan.onTrack() ? Display.cyan() : Display.yellow();
+        System.out.println("  " + color + "Goal: " + GoalPlanner.summary(plan) + Display.reset());
+    }
+
+    /**
+     * Sets the goal: a name, a date, and the units (or worlds) it covers. The scope reuses the
+     * exam's section chooser, so a goal is literally "the exam I will sit", and the feed and the
+     * menu start working toward it immediately.
+     */
+    private void setGoal() {
+        System.out.print("  What is it? [Exam]: ");
+        String title = in.nextLine().trim();
+        if (title.isBlank()) title = "Exam";
+
+        java.time.LocalDate date = null;
+        while (date == null) {
+            System.out.print("  When? (YYYY-MM-DD, or a number of days from now; Enter to cancel): ");
+            String when = in.nextLine().trim();
+            if (when.isBlank()) { System.out.println("  Cancelled."); return; }
+            try {
+                date = when.matches("\\d{1,3}")
+                        ? LocalDateTime.now().toLocalDate().plusDays(Integer.parseInt(when))
+                        : java.time.LocalDate.parse(when);
+            } catch (java.time.format.DateTimeParseException e) {
+                System.out.println("  That is not a date I understand.");
+            }
+            if (date != null && date.isBefore(LocalDateTime.now().toLocalDate())) {
+                System.out.println("  That date has already passed.");
+                date = null;
+            }
+        }
+
+        List<ExamSession.Section> sections = chooseSections("prepare for");
+        if (sections == null) return;
+        List<Topic> topics = new ArrayList<>();
+        for (ExamSession.Section section : sections) {
+            for (Topic t : section.topics()) if (!topics.contains(t)) topics.add(t);
+        }
+        String scope = sections.size() == 1 ? sections.get(0).title()
+                : sections.get(0).title() + " to " + sections.get(sections.size() - 1).title();
+
+        currentProfile.setGoal(new StudyGoal(title, scope, date, topics));
+        saveProfile();
+        System.out.println();
+        showGoalStatus();
+        System.out.println("  " + Display.dim() + "The auto feed now heads for it. Exam Mode "
+                + "will rehearse exactly these units." + Display.reset());
+    }
+
+    /**
+     * Asks which units (or worlds, without a course overlay) to cover, returning the sections
+     * or null when the student backs out.
+     */
+    private List<ExamSession.Section> chooseSections(String verb) {
+        List<CourseOverlay> courses = CourseOverlay.loadAll(Path.of("data", "courses"));
+        List<ExamSession.Section> sections;
+        if (courses.isEmpty()) {
+            System.out.println();
+            System.out.println("  " + Display.dim() + "No course file in data/courses/, so units "
+                    + "are the map's worlds instead of syllabus units." + Display.reset());
+            System.out.print("  Worlds to " + verb + " (e.g. 2 or 1-3): ");
+            int[] range = parseRange(in.nextLine().trim());
+            if (range == null) { System.out.println("  Cancelled."); return null; }
+            sections = ExamSession.worldSections(range[0], range[1]);
+        } else {
+            CourseOverlay course = pickCourse(courses);
+            System.out.println("  " + Display.bold() + course.getName() + Display.reset());
+            for (CourseOverlay.Unit u : course.getUnits()) {
+                System.out.printf("    %2d  %s%n", u.number(), u.title());
+            }
+            System.out.print("  Units to " + verb + " (e.g. 3 or 1-4): ");
+            int[] range = parseRange(in.nextLine().trim());
+            if (range == null) { System.out.println("  Cancelled."); return null; }
+            sections = ExamSession.sectionsFor(course, range[0], range[1]);
+        }
+        if (sections.isEmpty()) {
+            System.out.println("  That range covers no topics.");
+            return null;
+        }
+        return sections;
     }
 
     /** Runs the paper against the clock and reports the result. */
@@ -655,7 +748,7 @@ public class CLI {
             System.out.println("  Card saved to: " + Display.dim() + cardFile.toAbsolutePath()
                     + Display.reset());
             try {
-                if (java.awt.Desktop.isDesktopSupported()
+                if (openReportsInBrowser && java.awt.Desktop.isDesktopSupported()
                         && java.awt.Desktop.getDesktop().isSupported(java.awt.Desktop.Action.BROWSE)) {
                     java.awt.Desktop.getDesktop().browse(written.toAbsolutePath().toUri());
                     System.out.println("  Opened in your browser.");
@@ -835,6 +928,13 @@ public class CLI {
         } else if (mode.equals("u")) {
             active = unitReviewTopics();
             if (active.isEmpty()) return;
+        } else if (currentProfile.hasActiveGoal()) {
+            // A goal overrides the ordinary frontier walk: the feed heads for the exam.
+            active = GoalPlanner.focusTopics(currentProfile, 6);
+            System.out.println("  Goal plan (" + currentProfile.getGoal().getTitle() + "): "
+                    + Display.cyan()
+                    + active.stream().map(t -> t.displayName).collect(Collectors.joining(", "))
+                    + Display.reset());
         } else {
             active = Curriculum.autoTopics(currentProfile, 6);
             System.out.println("  Auto plan: " + Display.cyan()

@@ -38,12 +38,14 @@ public final class CodeSafetyScanner {
                     + "\\bDatagramSocket\\b|\\bInetAddress\\b|\\.\\s*openConnection\\s*\\(|\\.\\s*openStream\\s*\\("),
             "reflective access override", Pattern.compile(
                     "\\.\\s*setAccessible\\s*\\(\\s*true|\\bClassLoader\\b|Class\\s*\\.\\s*forName\\s*\\("),
-            "system exit or shutdown", Pattern.compile(
-                    "System\\s*\\.\\s*exit\\s*\\(|Runtime\\s*\\.\\s*halt|addShutdownHook"),
             "environment and system property writes", Pattern.compile(
                     "System\\s*\\.\\s*setProperty\\s*\\(|System\\s*\\.\\s*getenv\\s*\\("),
             "arbitrary code loading", Pattern.compile(
                     "javax\\s*\\.\\s*tools|ScriptEngine|\\bProxy\\s*\\.\\s*newProxyInstance"));
+
+    // System.exit is deliberately NOT a rule. Exercise code runs in its own subprocess, where
+    // exit() ends only that subprocess -- and a non-zero exit is how every test harness in the
+    // bank reports failure. Screening it refused every exercise written the documented way.
 
     private static final Pattern NETWORK = RULES.get("network access");
 
