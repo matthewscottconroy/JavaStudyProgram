@@ -12,5 +12,7 @@
     "Order the remaining branches from highest cutoff to lowest: >= 90, then >= 80, and so on.",
     "Because each else-if only runs when the earlier tests failed, you never need to write ranges like score >= 80 && score < 90."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "VARIABLES"
+  ]
 }

@@ -8,7 +8,7 @@
   "answer": "public class MatVec {\n\n    public static double[] multiply(double[][] m, double[] v) {\n        double[] result = new double[m.length];\n        for (int r = 0; r < m.length; r++) {\n            double sum = 0.0;\n            for (int c = 0; c < v.length; c++) {\n                sum += m[r][c] * v[c];\n            }\n            result[r] = sum;\n        }\n        return result;\n    }\n}\n",
   "explanation": "Matrix-vector multiplication is how a neural-network layer transforms its input: each output entry is the dot product of one weight row with the input vector. The classic implementation is two nested loops -- the outer loop walks the rows, the inner loop accumulates that row's dot product with v. Note that the result length equals the number of rows, not the vector length, which matters for non-square matrices.",
   "hints": [
-    "Allocate the result first: double[] result = new double[m.length];",
+    "Allocate the result array first -- it gets one entry per matrix ROW, so its length comes from the matrix, not from the vector.",
     "Outer loop over rows r, inner loop over columns c, accumulating m[r][c] * v[c].",
     "Store each row's finished sum in result[r]; the matrix can be non-square, so use m.length for rows and v.length for columns."
   ],

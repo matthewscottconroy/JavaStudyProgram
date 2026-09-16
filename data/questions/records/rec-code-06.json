@@ -9,7 +9,7 @@
   "explanation": "A record's components are final, so \"changing\" one really means constructing a replacement: each wither passes the new value for one component and the current value of the other straight to the canonical constructor. Because every wither returns a Profile, calls chain naturally (p.withName(...).withLevel(...)), and the original record is never affected. Records also generate equals for free, which is why the copy compares equal to a freshly constructed Profile with the same values.",
   "hints": [
     "Inside a record's methods you can read the components directly as name and level.",
-    "withName(newName) is one line: return new Profile(newName, level); -- withLevel mirrors it.",
+    "withName is one line: build a new Profile from the new name and the existing level and return it -- withLevel mirrors it the other way round.",
     "display() concatenates: name + \" [\" + level + \"]\"."
   ],
   "relatedTopics": [

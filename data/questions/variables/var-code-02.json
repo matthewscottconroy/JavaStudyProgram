@@ -10,7 +10,9 @@
   "hints": [
     "cents / 25 gives the number of quarters; cents % 25 gives what is left after taking them out.",
     "Repeat the same divide-and-remainder pattern with 10, then 5; whatever remains is pennies.",
-    "Build the result with: return new int[] {quarters, dimes, nickels, pennies};"
+    "Build the result from the four counts in the order the task names them: quarters, dimes, nickels, then pennies."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "ARRAYS"
+  ]
 }

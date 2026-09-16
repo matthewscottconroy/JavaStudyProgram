@@ -8,7 +8,7 @@
   "answer": "import java.util.concurrent.CompletableFuture;\n\npublic class FutureChain {\n\n    public static String fetchAndFormat(int id) {\n        return CompletableFuture\n                .supplyAsync(() -> \"item-\" + id)\n                .thenApply(String::toUpperCase)\n                .join();\n    }\n}\n",
   "explanation": "CompletableFuture describes a pipeline of asynchronous steps: supplyAsync runs a Supplier on a background thread, and thenApply registers a transformation to run on that step's result when it arrives. Nothing in the chain blocks until join(), which waits for the whole pipeline and returns the final value (rethrowing any failure as an unchecked exception, so no throws clause is needed).",
   "hints": [
-    "Start the chain with CompletableFuture.supplyAsync(() -> \"item-\" + id).",
+    "CompletableFuture.supplyAsync starts the chain -- hand it a no-argument lambda that builds the item string from the id.",
     "thenApply takes a function from the previous result to a new value -- the method reference String::toUpperCase fits perfectly.",
     "join() blocks until the chained result is ready and returns it; unlike get(), it does not throw checked exceptions."
   ],

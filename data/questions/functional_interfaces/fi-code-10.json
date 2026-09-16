@@ -10,7 +10,7 @@
   "hints": [
     "Each combinator returns a lambda: `return value -> { ... };` -- the loop belongs inside that lambda, not in the method body.",
     "allOf returns false at the first rule that rejects and true if the loop finishes; anyOf is the mirror image.",
-    "not is one line: return value -> !rule.test(value);"
+    "not is one line: return a lambda that runs the wrapped rule and negates whatever it answers."
   ],
   "relatedTopics": [
     "COLLECTIONS",

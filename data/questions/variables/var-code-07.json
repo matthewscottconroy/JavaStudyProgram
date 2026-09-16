@@ -12,5 +12,7 @@
     "(double) (a / b) is the classic mistake -- it casts the already-truncated result.",
     "Write (double) a / b: the cast binds to a alone, so the division is done in double."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "FUNCTIONS"
+  ]
 }

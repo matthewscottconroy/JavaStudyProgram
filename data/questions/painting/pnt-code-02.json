@@ -11,5 +11,9 @@
     "Loop row from 0 to cells - 1, and inside it loop col the same way.",
     "(row + col) % 2 == 0 tells you whether the square is black.",
     "The square's pixel position is fillRect(col * cellSize, row * cellSize, cellSize, cellSize)."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE"
   ]
 }

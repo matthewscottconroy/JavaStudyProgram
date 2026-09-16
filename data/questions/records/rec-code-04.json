@@ -9,7 +9,7 @@
   "explanation": "Records can implement interfaces just like classes; Box supplies the area() implementation that Sized demands, so a Box can be used anywhere a Sized is expected. Static factory methods such as square are a common way to give records convenient alternative constructors. The tests also use the auto-generated accessors width() and height().",
   "hints": [
     "area() is just width * height -- the record components are in scope inside instance methods.",
-    "square is static, so it cannot use width or height: return new Box(side, side);"
+    "square is static, so it cannot read width or height -- it builds a new Box using the one side length for both components."
   ],
   "relatedTopics": [
     "CLASSES"

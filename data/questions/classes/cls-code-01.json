@@ -12,5 +12,8 @@
     "The getters simply return the corresponding field.",
     "area() and perimeter() compute directly from the fields: width * height and 2 * (width + height)."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "PUBLIC_PRIVATE_PROTECTED",
+    "FUNCTIONS"
+  ]
 }

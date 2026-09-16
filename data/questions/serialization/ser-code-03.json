@@ -10,7 +10,7 @@
   "hints": [
     "The whole list is one object: out.writeObject(items) serializes it and all its elements.",
     "In load, readObject() returns Object -- cast it to java.util.ArrayList<String>.",
-    "Put @SuppressWarnings(\"unchecked\") on the load method to silence the cast warning."
+    "The compiler cannot prove that cast is safe, so it reports an unchecked warning -- a SuppressWarnings annotation on the load method silences it."
   ],
   "relatedTopics": [
     "TRY_CATCH",

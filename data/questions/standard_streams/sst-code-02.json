@@ -8,7 +8,7 @@
   "answer": "public class CaseTransformer {\n\n    public static void upperCase(java.io.Reader in, java.io.Writer out)\n            throws java.io.IOException {\n        int c;\n        while ((c = in.read()) != -1) {\n            out.write(Character.toUpperCase((char) c));\n        }\n    }\n}\n",
   "explanation": "Reader and Writer are the character-stream counterparts of InputStream and OutputStream: read() hands back one char (as an int, with -1 for end of stream) and write() sends one out. Because the method only depends on these abstract types, the same code works on files, sockets, or -- as in the tests -- an in-memory StringReader and StringWriter. Character.toUpperCase leaves characters without an uppercase form untouched.",
   "hints": [
-    "Use the classic loop: int c; while ((c = in.read()) != -1) { ... }.",
+    "Use the classic read loop: declare the int holding the character outside the loop, assign it from in.read() inside the loop condition, and stop once that value is -1.",
     "Cast the int to char before calling Character.toUpperCase on it.",
     "Write each transformed character with out.write(...); no return value is needed."
   ],

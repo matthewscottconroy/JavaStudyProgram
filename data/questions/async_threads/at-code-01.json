@@ -8,7 +8,7 @@
   "answer": "public class ThreadStarter {\n\n    public static int computeInThread(int n) throws InterruptedException {\n        int[] result = new int[1];\n        Thread worker = new Thread(() -> result[0] = n * n);\n        worker.start();\n        worker.join();\n        return result[0];\n    }\n}\n",
   "explanation": "A Thread runs a Runnable in parallel with the caller; start() begins it and join() blocks until it finishes. Because a lambda cannot assign to a local variable, a shared one-element array is the classic way to carry a result out of a Runnable. join() also establishes a happens-before relationship, so the value written by the worker is guaranteed to be visible after the join.",
   "hints": [
-    "Create int[] result = new int[1]; a lambda can write into an array element even though it cannot reassign a local variable.",
+    "A lambda cannot reassign a captured local variable, but it can write into an element of an array that local points at -- so park the answer in a one-element int array.",
     "Build the thread with new Thread(() -> result[0] = n * n), then call start() on it.",
     "Call worker.join() before returning result[0] -- without the join, the thread may not have finished writing yet."
   ],

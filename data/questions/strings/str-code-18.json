@@ -12,5 +12,8 @@
     "For each first occurrence, count how many times that character appears with a second loop.",
     "Replace the champion only when count > bestCount; because candidates arrive in first-occurrence order, ties keep the earlier character."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE"
+  ]
 }

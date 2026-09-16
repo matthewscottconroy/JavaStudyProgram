@@ -8,7 +8,7 @@
   "answer": "public class NumberAverager {\n\n    public static double averageOfParseable(String[] tokens) {\n        int sum = 0;\n        int count = 0;\n        for (String t : tokens) {\n            try {\n                sum += Integer.parseInt(t);\n                count++;\n            } catch (NumberFormatException e) {\n                // not a number -- skip it\n            }\n        }\n        if (count == 0) {\n            return -1.0;\n        }\n        return (double) sum / count;\n    }\n}\n",
   "explanation": "Integer.parseInt throws NumberFormatException for non-numeric tokens, so a try/catch inside the loop cleanly separates parseable tokens from the rest while a sum and a count accumulate. Casting the sum to double before dividing avoids integer division (3 and 4 must average to 3.5, not 3). The count == 0 guard supplies the -1.0 sentinel -- the same role OptionalDouble.orElse(-1.0) plays in a stream-based solution.",
   "hints": [
-    "Loop over tokens with try { sum += Integer.parseInt(t); count++; } catch (NumberFormatException e) { /* skip */ }.",
+    "Put the parse inside a try block in the loop body, adding its result to a running sum and bumping a counter; an empty catch of NumberFormatException is how you skip a token that is not a number.",
     "After the loop, return -1.0 when count is 0.",
     "Divide as (double) sum / count so the average of 3 and 4 is 3.5, not 3."
   ],

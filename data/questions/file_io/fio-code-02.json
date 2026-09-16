@@ -12,5 +12,8 @@
     "Files.readAllLines(path) is the mirror image: it returns the file's lines as a List<String> without the newline characters.",
     "If you write manually instead, remember a newline after each word, and make sure an empty list produces an empty file so the round trip still holds."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "TRY_CATCH",
+    "COLLECTIONS"
+  ]
 }

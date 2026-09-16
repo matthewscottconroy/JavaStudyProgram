@@ -12,5 +12,7 @@
     "In sumAsLong, cast one operand: (long) a + b. That makes the + itself a long addition.",
     "(long) (a + b) does NOT work: the ints are added (and wrap) before the cast is applied."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "HEX_BINARY_ENCODING"
+  ]
 }

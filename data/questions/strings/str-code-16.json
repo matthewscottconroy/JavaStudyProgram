@@ -12,5 +12,7 @@
     "String.replace(target, value) replaces every occurrence of a LITERAL target -- no loop needed.",
     "Avoid replaceAll here: it treats its argument as a regex, and { has special meaning in regexes."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "FUNCTIONS"
+  ]
 }

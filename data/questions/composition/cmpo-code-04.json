@@ -8,7 +8,7 @@
   "answer": "import java.util.ArrayList;\n\nrecord CartItem(String name, double price, int qty) { }\n\npublic class ShoppingCart {\n\n    private final ArrayList<CartItem> items = new ArrayList<>();\n\n    public void add(String name, double price, int qty) {\n        items.add(new CartItem(name, price, qty));\n    }\n\n    public int itemCount() {\n        int count = 0;\n        for (CartItem item : items) {\n            count += item.qty();\n        }\n        return count;\n    }\n\n    public double total() {\n        double sum = 0.0;\n        for (CartItem item : items) {\n            sum += item.price() * item.qty();\n        }\n        return sum;\n    }\n}\n",
   "explanation": "The cart is composed of small immutable data carriers: a record declares its fields once and Java generates the constructor and the name(), price(), qty() accessors automatically. itemCount and total are both accumulator loops over the composed list, reading record components instead of raw fields. Because doubles like 1.99 are not exactly representable in binary, the tests round to two decimals -- a common pattern when asserting on floating-point money.",
   "hints": [
-    "add just wraps the three arguments: items.add(new CartItem(name, price, qty));",
+    "add does not store the three values separately -- it wraps them into a single new CartItem and appends that to the list.",
     "Record components are read via methods: item.qty(), not item.qty -- sum those in a loop for itemCount.",
     "For total, accumulate item.price() * item.qty() into a double starting at 0.0."
   ],

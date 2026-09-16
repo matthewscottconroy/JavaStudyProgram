@@ -9,7 +9,7 @@
   "explanation": "find() scans forward for the next match and returns false once the text runs out, so a while loop over it visits every occurrence in order. The capturing group around the tag body is what lets group(1) return the name without the '#' that anchored the match. Requiring a letter first ([A-Za-z] before the repeated class) is what makes #1bad fail, and a HashSet gives the distinct count for free because it discards repeats.",
   "hints": [
     "The pattern is \"#([A-Za-z][A-Za-z0-9_]*)\" -- the group excludes the '#' from what you collect.",
-    "Create the Matcher once, then use while (m.find()) { found.add(m.group(1).toLowerCase()); }.",
+    "Create the Matcher once and drive it with a while (m.find()) loop, adding the lower-cased group 1 of each match to the list.",
     "For countUnique, pass the list to a new HashSet<>(...) and return its size()."
   ],
   "relatedTopics": [

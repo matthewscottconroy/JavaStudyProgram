@@ -34,7 +34,8 @@ public class ClassReportGenerator {
                 AttemptLog.readByProfile(storage.directory());
 
         StringBuilder h = new StringBuilder(32_000);
-        h.append("<!DOCTYPE html><html><head><meta charset='utf-8'>")
+        h.append("<!DOCTYPE html><html lang='en'><head><meta charset='utf-8'>")
+         .append("<meta name='viewport' content='width=device-width, initial-scale=1'>")
          .append("<title>Class Report — Java Study Program</title><style>")
          .append("""
                  body { font-family: system-ui, sans-serif; background: #f5f5f2; color: #222; }
@@ -43,9 +44,9 @@ public class ClassReportGenerator {
                  table { border-collapse: collapse; width: 100%; background: #fff; }
                  th, td { border: 1px solid #ddd; padding: 6px 10px; font-size: 14px; text-align: left; }
                  th { background: #eee; }
-                 .dim { color: #777; font-size: 13px; }
+                 .dim { color: #55555f; font-size: 13px; }
                  """)
-         .append("</style></head><body><div class='page'>")
+         .append("</style></head><body><main class='page'>")
          .append("<h1>Class Report</h1><p class='dim'>").append(profiles.size())
          .append(" profile(s) · generated ").append(LocalDate.now()).append("</p>");
 
@@ -54,7 +55,7 @@ public class ClassReportGenerator {
         flaggedByStudents(h, storage.directory().resolveSibling("flags.jsonl"));
         calibrationSection(h, attemptsByProfile, bank);
 
-        h.append("</div></body></html>");
+        h.append("</main></body></html>");
         Files.createDirectories(outFile.toAbsolutePath().getParent());
         Files.writeString(outFile, h.toString(), StandardCharsets.UTF_8);
         return outFile;
@@ -62,9 +63,9 @@ public class ClassReportGenerator {
 
     private void studentTable(StringBuilder h, List<StudentProfile> profiles,
                               ProfileStorage storage) {
-        h.append("<h2>Students</h2><table><tr><th>Student</th><th>Answered</th>")
-         .append("<th>Accuracy</th><th>Programs passed</th><th>Study days</th>")
-         .append("<th>Bosses</th><th>Last active</th></tr>");
+        h.append("<h2>Students</h2><table><tr><th scope='col'>Student</th><th scope='col'>Answered</th>")
+         .append("<th scope='col'>Accuracy</th><th scope='col'>Programs passed</th><th scope='col'>Study days</th>")
+         .append("<th scope='col'>Bosses</th><th scope='col'>Last active</th></tr>");
         DateTimeFormatter fmt = DateTimeFormatter.ISO_LOCAL_DATE;
         for (StudentProfile p : profiles) {
             List<AttemptRecord> log = AttemptLog
@@ -76,7 +77,7 @@ public class ClassReportGenerator {
             Set<LocalDate> days = new HashSet<>();
             log.forEach(a -> { if (a.getTs() != null) days.add(a.getTs().toLocalDate()); });
 
-            h.append("<tr><td>").append(esc(p.getName())).append("</td><td>").append(answered)
+            h.append("<tr><th scope='row'>").append(esc(p.getName())).append("</th><td>").append(answered)
              .append("</td><td>").append(answered == 0 ? "-" : Math.round(100.0 * correct / answered) + "%")
              .append("</td><td>").append(coding)
              .append("</td><td>").append(days.size())
@@ -109,10 +110,10 @@ public class ClassReportGenerator {
             return;
         }
         averages.sort(Comparator.comparingDouble(Avg::mastery));
-        h.append("<table><tr><th>Topic</th><th>Avg mastery</th><th>Students practicing</th></tr>");
+        h.append("<table><tr><th scope='col'>Topic</th><th scope='col'>Avg mastery</th><th scope='col'>Students practicing</th></tr>");
         for (Avg a : averages.subList(0, Math.min(8, averages.size()))) {
-            h.append("<tr><td>").append(esc(a.topic().displayName))
-             .append("</td><td>").append(Math.round(a.mastery() * 100)).append("%")
+            h.append("<tr><th scope='row'>").append(esc(a.topic().displayName))
+             .append("</th><td>").append(Math.round(a.mastery() * 100)).append("%")
              .append("</td><td>").append(a.students()).append("</td></tr>");
         }
         h.append("</table>");
@@ -126,12 +127,12 @@ public class ClassReportGenerator {
             if (lines.isEmpty()) return;
             var mapper = new com.fasterxml.jackson.databind.ObjectMapper();
             h.append("<h2>Reported by students</h2><table>")
-             .append("<tr><th>Question</th><th>Topic</th><th>Student</th><th>Comment</th></tr>");
+             .append("<tr><th scope='col'>Question</th><th scope='col'>Topic</th><th scope='col'>Student</th><th scope='col'>Comment</th></tr>");
             for (String line : lines) {
                 if (line.isBlank()) continue;
                 var node = mapper.readTree(line);
-                h.append("<tr><td>").append(esc(node.path("questionId").asText()))
-                 .append("</td><td>").append(esc(node.path("topic").asText()))
+                h.append("<tr><th scope='row'>").append(esc(node.path("questionId").asText()))
+                 .append("</th><td>").append(esc(node.path("topic").asText()))
                  .append("</td><td>").append(esc(node.path("student").asText()))
                  .append("</td><td>").append(esc(node.path("note").asText()))
                  .append("</td></tr>");

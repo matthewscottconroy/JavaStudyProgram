@@ -11,5 +11,9 @@
     "Compute int stripe = h / 3 once and reuse it for every fillRect.",
     "The pattern is setColor then fillRect, three times; y grows downward from 0 at the top.",
     "The stripes start at y = 0, y = stripe, and y = 2 * stripe, each w wide and stripe tall."
+  ],
+  "relatedTopics": [
+    "VARIABLES",
+    "GRAPHICS_2D"
   ]
 }

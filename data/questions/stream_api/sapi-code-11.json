@@ -10,7 +10,7 @@
   "hints": [
     "Both methods use the same predicate: line -> line.startsWith(\"#\").",
     "takeWhile stops at the first line that does NOT start with \"#\"; dropWhile skips exactly that same leading run.",
-    "For the header, chain a .map(line -> line.substring(1).trim()) after takeWhile before collecting."
+    "For the header, chain a map after takeWhile that drops the leading '#' character and trims what is left, then collect."
   ],
   "relatedTopics": [
     "STRINGS",

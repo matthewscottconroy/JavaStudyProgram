@@ -12,5 +12,8 @@
     "Each iteration: if (random.nextBoolean()) position++; else position--;",
     "Return the position after the loop -- with 0 steps the answer is just 0."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE"
+  ]
 }

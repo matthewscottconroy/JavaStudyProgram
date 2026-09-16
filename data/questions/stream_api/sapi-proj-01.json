@@ -17,7 +17,7 @@
   "hints": [
     "averageSalaryByDept: staff.stream().collect(Collectors.groupingBy(Employee::getDept, TreeMap::new, Collectors.averagingDouble(Employee::getSalary))).",
     "For the name list, sort the Employee objects FIRST and only .map(Employee::getName) at the end -- once you map to names the salaries are gone.",
-    "highestPaidIn is .filter(e -> e.getDept().equals(dept)) followed by .max(Comparator.comparingDouble(Employee::getSalary)); max already hands you the Optional, so return it directly."
+    "highestPaidIn filters the stream down to the requested department and then asks max for the biggest by salary; max already hands you the Optional, so return it directly."
   ],
   "relatedTopics": [
     "LAMBDAS",

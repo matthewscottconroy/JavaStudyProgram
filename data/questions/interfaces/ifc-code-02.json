@@ -10,7 +10,7 @@
   "hints": [
     "Declare private final String name and private final int age, and assign them with this.name = name; this.age = age; in the constructor.",
     "The implementing methods must be public -- interface methods are always public.",
-    "summary() can just reuse your own methods: return name() + \" (\" + age() + \")\";"
+    "summary() does not need the fields at all -- call your own name() and age() methods and concatenate them, with the age in parentheses."
   ],
   "relatedTopics": [
     "CLASSES",

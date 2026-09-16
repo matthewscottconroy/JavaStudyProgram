@@ -11,5 +11,10 @@
     "setLayout(new GridLayout(4, 3)) makes a 4-row, 3-column grid.",
     "GridLayout positions components in the order you add them: left to right, top to bottom.",
     "for (String key : KEYS) { add(new JButton(key)); } adds all twelve buttons."
+  ],
+  "relatedTopics": [
+    "LOOPS",
+    "ARRAYS",
+    "GUI_COMPONENTS"
   ]
 }

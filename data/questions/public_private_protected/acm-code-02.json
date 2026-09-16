@@ -9,7 +9,7 @@
   "explanation": "Making every field private and final means the object's state is fixed the moment the constructor finishes, so no caller can ever change it -- which is why there are no setters. A private constructor plus a public static of(...) factory keeps construction under the class's control and reads nicely at the call site. The wither methods (withX, withY) give you the convenience of a setter without the danger: they build and return a new ImmutablePoint, leaving the original exactly as it was, which is what makes immutable objects safe to share.",
   "hints": [
     "The two fields need both keywords: `private final int x;`. A final field must be assigned exactly once, in the constructor.",
-    "of(x, y) is static, so it has no `this` -- it just calls the private constructor: `return new ImmutablePoint(x, y);`.",
+    "of(x, y) is static, so it has no `this` -- its whole job is to call the private constructor and hand back the point it built.",
     "withX(newX) must not touch this object. Build a new one from newX and the current y, and return it."
   ],
   "relatedTopics": [

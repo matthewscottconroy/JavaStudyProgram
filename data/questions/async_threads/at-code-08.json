@@ -9,7 +9,7 @@
   "explanation": "A BlockingQueue is the hand-off point between threads: put() waits when the queue is full and take() waits when it is empty, so neither side needs locks or sleeps. The poison pill is a sentinel value the producer sends after the real work, telling the consumer that no more items are coming -- without it the consumer would block on take() forever. Joining both threads before returning guarantees the collected list is complete and safely visible to the calling thread.",
   "hints": [
     "new ArrayBlockingQueue<>(2) gives you the queue; the producer loops over items calling queue.put(item) and then puts POISON once at the end.",
-    "The consumer needs while (true) { String next = queue.take(); if (POISON.equals(next)) return; ... } -- returning on the pill is what stops it.",
+    "The consumer loops forever on take(), and the pill is its only exit: compare each value against POISON and return the moment they match, otherwise add the upper-cased value to the list.",
     "Start both threads, then join() both BEFORE you return the list; the join is what makes the consumer's writes visible to the caller."
   ],
   "relatedTopics": [

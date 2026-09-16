@@ -19,6 +19,8 @@ public class StudentProfile {
     private Set<Integer> bossesCleared;    // level bands whose boss quiz was passed
     private int bossAttempts;              // total boss attempts (also seeds quiz variety)
     private Set<Topic> revealedOnMap;      // topics the student has already seen unlocked on the map
+    private List<Topic> lastSessionTopics; // what the last study session covered
+    private int lastSessionLength;         // and how long it was, so it can be repeated
 
     public StudentProfile() {
         this.id              = UUID.randomUUID().toString();
@@ -27,6 +29,7 @@ public class StudentProfile {
         this.performance     = new EnumMap<>(Topic.class);
         this.bossesCleared   = new TreeSet<>();
         this.revealedOnMap   = new LinkedHashSet<>();
+        this.lastSessionTopics = new ArrayList<>();
     }
 
     public StudentProfile(String name) {
@@ -96,4 +99,16 @@ public class StudentProfile {
     public void setBossAttempts(int n)       { this.bossAttempts = n; }
     public Set<Topic> getRevealedOnMap()     { return revealedOnMap; }
     public void setRevealedOnMap(Set<Topic> s) { this.revealedOnMap = s == null ? new LinkedHashSet<>() : s; }
+    public List<Topic> getLastSessionTopics() { return lastSessionTopics; }
+    public void setLastSessionTopics(List<Topic> t) {
+        this.lastSessionTopics = t == null ? new ArrayList<>() : new ArrayList<>(t);
+    }
+    public int getLastSessionLength()        { return lastSessionLength; }
+    public void setLastSessionLength(int n)  { this.lastSessionLength = n; }
+
+    /** True when there is a previous session worth offering to repeat. */
+    @JsonIgnore
+    public boolean hasResumableSession() {
+        return lastSessionTopics != null && !lastSessionTopics.isEmpty();
+    }
 }

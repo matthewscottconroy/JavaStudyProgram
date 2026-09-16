@@ -12,5 +12,8 @@
     "Loop with for (int i = 0; i < s.length(); i++) and read each character with charAt(i).",
     "Compare the character against 'a', 'e', 'i', 'o', 'u' with == and ||, incrementing a counter on a match."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE"
+  ]
 }

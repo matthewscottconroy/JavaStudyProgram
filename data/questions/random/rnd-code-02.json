@@ -12,5 +12,8 @@
     "Make a copy first: java.util.List<String> copy = new java.util.ArrayList<>(cards);",
     "Shuffle with Collections.shuffle(copy, new java.util.Random(seed)) and return copy."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "ARRAYS_ARRAYLISTS",
+    "MEMORY_REFERENCE_STATIC"
+  ]
 }

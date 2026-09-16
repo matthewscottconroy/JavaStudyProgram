@@ -10,7 +10,7 @@
   "hints": [
     "newProxyInstance needs three arguments: a class loader, `new Class<?>[] { Greeter.class }`, and your handler. It returns Object, so cast the result to Greeter.",
     "The handler can be a lambda: `(proxy, method, args) -> { ... }` -- InvocationHandler has a single method.",
-    "Inside the handler, add method.getName() to the log FIRST, then `return method.invoke(target, args);` so the caller still gets the real answer."
+    "Inside the handler, add method.getName() to the log FIRST, then invoke that same Method on the real target with the same args and return what comes back, so the caller still gets the real answer."
   ],
   "relatedTopics": [
     "REFLECTION",

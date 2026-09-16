@@ -12,5 +12,7 @@
     "System.out.println(i) prints the number and moves to the next line in one call.",
     "After the loop finishes, one more println prints \"liftoff\"."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "LOOPS"
+  ]
 }

@@ -11,5 +11,10 @@
     "Keep the running total in the value field; the label only displays it.",
     "In onMinus, only decrement when value is greater than 0, then update the label either way.",
     "count.setText(String.valueOf(value)) turns the int into label text."
+  ],
+  "relatedTopics": [
+    "IF_CASE",
+    "GUI_EVENT_MODEL",
+    "GUI_COMPONENTS"
   ]
 }

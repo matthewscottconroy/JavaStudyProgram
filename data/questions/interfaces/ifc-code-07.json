@@ -10,7 +10,7 @@
   "hints": [
     "Clamp in the constructor, not in the getter: store 0 when the requested percent is below 0 and 75 when it is above 75.",
     "Inside your override, the inherited default is reached as Discountable.super.label() -- plain super.label() would look in Object instead.",
-    "A static interface method is not inherited, so bestPrice must name the interface: return Discountable.cheapest(offers);"
+    "A static interface method is not inherited, so bestPrice has to qualify the call with the interface name rather than calling cheapest bare."
   ],
   "relatedTopics": [
     "CLASSES",

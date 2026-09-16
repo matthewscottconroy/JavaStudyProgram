@@ -12,5 +12,8 @@
     "Construct each TrackedResource with the log and its name: new TrackedResource(log, \"a\").",
     "You write no close() calls at all -- the compiler inserts them, closing b first because it was declared last."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "INTERFACES",
+    "CLASSES"
+  ]
 }

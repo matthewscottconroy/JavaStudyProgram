@@ -8,7 +8,7 @@
   "answer": "public class Fitness {\n\n    public static int score(String candidate, String target) {\n        int limit = Math.min(candidate.length(), target.length());\n        int matches = 0;\n        for (int i = 0; i < limit; i++) {\n            if (candidate.charAt(i) == target.charAt(i)) {\n                matches++;\n            }\n        }\n        return matches;\n    }\n}\n",
   "explanation": "Evolutionary algorithms need a fitness function that scores how close each candidate is to the goal; for string evolution the simplest score is the count of matching positions. Math.min of the two lengths keeps charAt inside bounds when the strings differ in length. Comparing chars with == is fine here because charAt returns a primitive char.",
   "hints": [
-    "Compute the loop bound first: int limit = Math.min(candidate.length(), target.length());",
+    "Decide the loop bound before you start: only a position that exists in BOTH strings can match, so the smaller of the two lengths is how far you may go.",
     "Compare candidate.charAt(i) == target.charAt(i) inside the loop and count the matches."
   ],
   "relatedTopics": [

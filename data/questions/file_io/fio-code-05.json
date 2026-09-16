@@ -12,5 +12,7 @@
     "Pass StandardCopyOption.REPLACE_EXISTING so a second copy to the same target does not throw.",
     "Alternative: Files.write(to, Files.readAllBytes(from)) also copies every byte exactly."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "TRY_CATCH"
+  ]
 }

@@ -17,7 +17,7 @@
   "hints": [
     "Declare the field as `private T value;`. isEmpty() is just `return value == null;`, which is what makes set(null) empty the box again.",
     "A static generic factory needs its own type parameter: `public static <T> Box<T> of(T value)`. Inside, create a new Box<T>, set the value, and return it.",
-    "In maxOf, keep the answer in a `Box<T> best = new Box<T>();` and skip any input box that isEmpty(). Replace best when it is still empty, or when box.get().compareTo(best.get()) > 0."
+    "In maxOf, keep the running answer in an empty Box<T> and skip any input box that isEmpty(). Replace the best when it is still empty, or when the candidate's value compares greater than the one it holds."
   ],
   "relatedTopics": [
     "COLLECTIONS",

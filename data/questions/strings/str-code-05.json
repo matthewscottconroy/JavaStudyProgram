@@ -12,5 +12,8 @@
     "Compare Character.toLowerCase(c) against the five vowel letters so 'A' and 'a' are treated alike.",
     "Append the characters you keep to a StringBuilder and return builder.toString() at the end."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE"
+  ]
 }

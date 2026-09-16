@@ -10,7 +10,7 @@
   "hints": [
     "String has startsWith(prefix) and substring(int fromIndex) -- together they are the whole of valueOf.",
     "Return as soon as you find a match so a later duplicate key cannot override it; return null after the loop ends.",
-    "In intValueOf, check for null first, then wrap Integer.parseInt in try { ... } catch (NumberFormatException ex) { return fallback; }."
+    "In intValueOf, rule out null first, then attempt the parse inside a try. The failure you must catch is the unchecked one Integer.parseInt throws on text that is not a number -- and the catch simply hands back the fallback."
   ],
   "relatedTopics": [
     "STRINGS",

@@ -10,7 +10,7 @@
   "hints": [
     "Declare private double bonus; in Manager and assign it in the constructor after the super(...) call.",
     "In pay(), you cannot touch the private baseSalary field directly -- use the inherited getBaseSalary() getter.",
-    "pay() should return getBaseSalary() + bonus; getBonus() just returns the field."
+    "A manager's pay is the inherited base salary plus the bonus field, and getBonus() simply hands that field back."
   ],
   "relatedTopics": [
     "CLASSES"

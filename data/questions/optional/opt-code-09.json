@@ -9,7 +9,7 @@
   "explanation": "Optional.map transforms a present value and -- crucially -- turns a null mapping result into an empty Optional, which is why a Config holding a null value flows harmlessly through the chain. filter keeps a present value only when the predicate passes, otherwise the Optional collapses to empty and every later step is skipped. Validating the digits BEFORE Integer.parseInt is what keeps the chain exception-free.",
   "hints": [
     "Start with cfg.map(Config::value) to unwrap the raw string.",
-    "Chain .filter(v -> v.matches(\"\\\\d+\")) before parsing so parseInt can never throw.",
+    "Filter the raw string against a digits-only regular expression BEFORE parsing, so parseInt can never throw.",
     "Finish with .map(Integer::parseInt).filter(port -> port >= 1 && port <= 65535)."
   ],
   "relatedTopics": [

@@ -8,8 +8,8 @@
   "answer": "import java.awt.event.ActionEvent;\nimport javax.swing.JButton;\nimport javax.swing.JLabel;\nimport javax.swing.JPanel;\nimport javax.swing.Timer;\n\npublic class StopwatchPanel extends JPanel {\n\n    private final JButton startStop = new JButton(\"Start/Stop\");\n    private final JLabel ticks = new JLabel(\"0\");\n    private Timer timer;\n    private int count = 0;\n\n    public StopwatchPanel() {\n        startStop.setName(\"startStop\");\n        ticks.setName(\"ticks\");\n        add(startStop);\n        add(ticks);\n        startStop.addActionListener(this::onStartStop);\n        timer = new Timer(50, e -> tick());\n    }\n\n    Timer getTimer() {\n        return timer;\n    }\n\n    void tick() {\n        count++;\n        ticks.setText(String.valueOf(count));\n    }\n\n    private void onStartStop(ActionEvent e) {\n        if (timer.isRunning()) {\n            timer.stop();\n        } else {\n            timer.start();\n        }\n    }\n}\n",
   "explanation": "javax.swing.Timer is the Swing-safe way to run repeated work: it fires ActionEvents on the event dispatch thread at a fixed delay, so listeners may touch components freely. Separating the work into a tick() method gives two entry points -- the timer calls it in real use, and tests call it directly so they stay deterministic without ever sleeping. The button listener toggles with isRunning()/start()/stop(); the tests also fire the timer's registered action listeners by hand to prove the timer is actually wired to tick().",
   "hints": [
-    "Create the timer at the end of the constructor: timer = new Timer(50, e -> tick()); -- and do not call start() there.",
-    "tick() is plain state-plus-view code: count++; ticks.setText(String.valueOf(count));",
+    "Build the javax.swing.Timer at the end of the constructor, giving it the 50 ms delay and an action listener that calls tick() -- and do not start it there.",
+    "tick() is plain state-plus-view code: bump the counter field, then push its new value into the ticks label as text.",
     "In onStartStop, check timer.isRunning() -- call stop() if true, start() if false."
   ],
   "relatedTopics": [

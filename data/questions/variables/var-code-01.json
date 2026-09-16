@@ -12,5 +12,7 @@
     "Use 9.0 and 5.0 (doubles), not 9 and 5 -- integer division would turn 9 / 5 into 1.",
     "You do not need any if statements or loops; one return statement is enough."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "FUNCTIONS"
+  ]
 }

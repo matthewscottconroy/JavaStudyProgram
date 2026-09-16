@@ -8,7 +8,7 @@
   "answer": "import java.util.ArrayList;\n\npublic class Playlist {\n\n    private final ArrayList<String> titles = new ArrayList<>();\n\n    public void add(String title) {\n        titles.add(title);\n    }\n\n    public int size() {\n        return titles.size();\n    }\n\n    public String get(int i) {\n        if (i < 0 || i >= titles.size()) {\n            return null;\n        }\n        return titles.get(i);\n    }\n\n    public int totalCharacters() {\n        int total = 0;\n        for (String title : titles) {\n            total += title.length();\n        }\n        return total;\n    }\n}\n",
   "explanation": "Playlist demonstrates composition: it owns an ArrayList as a private field and forwards work to it, exposing only the operations that make sense for a playlist. Extending ArrayList instead would leak dozens of unwanted methods (clear, remove, set, ...) into the Playlist API and lock the class to one implementation. The get method adds value over plain delegation by converting an out-of-range index into a friendly null instead of an IndexOutOfBoundsException.",
   "hints": [
-    "Declare the field like: private final ArrayList<String> titles = new ArrayList<>(); -- composition means Playlist HAS a list, it IS NOT a list.",
+    "Composition means Playlist HAS a list, it IS NOT a list -- so declare a private final list of titles as a field instead of extending ArrayList.",
     "add and size are one-line delegations to the field's own add and size methods.",
     "In get, test i < 0 || i >= size() before calling titles.get(i); in totalCharacters, loop over the list adding each title.length()."
   ],

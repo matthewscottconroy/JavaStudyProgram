@@ -11,5 +11,10 @@
     "getSelectedIndex() returns 0, 1, or 2 -- the same index works for the PRICES array.",
     "String.format(java.util.Locale.US, \"$%.2f\", 2.5) produces \"$2.50\".",
     "Adding a listener does not run it; call updatePrice() yourself at the end of the constructor."
+  ],
+  "relatedTopics": [
+    "GUI_EVENT_MODEL",
+    "ARRAYS",
+    "STRINGS"
   ]
 }

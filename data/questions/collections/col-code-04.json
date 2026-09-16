@@ -12,5 +12,8 @@
     "For union, addAll(b) pulls in everything from the second set; duplicates are ignored automatically.",
     "For intersection, retainAll(b) removes everything from the copy that is not also in b."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "COMPARABLE_COMPARATOR",
+    "MEMORY_REFERENCE_STATIC"
+  ]
 }

@@ -8,7 +8,7 @@
   "answer": "public class ErrorMetrics {\n\n    public static double mse(double[] predicted, double[] actual) {\n        double sum = 0.0;\n        for (int i = 0; i < predicted.length; i++) {\n            double diff = predicted[i] - actual[i];\n            sum += diff * diff;\n        }\n        return sum / predicted.length;\n    }\n}\n",
   "explanation": "Mean squared error measures how far predictions are from reality: square each difference (so under- and over-shooting both count positively), then average. Squaring also punishes large errors more than small ones, which is why MSE is the default regression loss in machine learning. Store the difference in a local variable and multiply it by itself -- no Math.pow needed.",
   "hints": [
-    "Loop over the indexes; compute double diff = predicted[i] - actual[i]; each time.",
+    "Loop over the indexes and work out the difference between the predicted and the actual value at each one, keeping it in a local before you use it.",
     "Add diff * diff to a running sum -- squaring makes negatives positive.",
     "After the loop, return sum / predicted.length (the mean)."
   ],

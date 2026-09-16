@@ -9,10 +9,11 @@ An adaptive engine tracks your per-topic mastery, matches question difficulty to
 repeating what you just answered, and prefers hands-on coding exercises whenever a topic has them.
 A prerequisite graph of 61 topics gates advanced material until its foundations are in place.
 
-The bank holds **2,738 questions, of which 715 are coding exercises** — every one machine-verified
-by the content gate (its starter must compile but fail its tests; its reference solution must pass).
-**All 61 topics have coding exercises**, from variables through Swing, reflection, sockets and
-design patterns.
+The bank holds **3,151 questions, of which 715 are coding exercises and 595 are Parsons puzzles**
+derived from them — every coding exercise machine-verified by the content gate (its starter must
+compile but fail its tests; its reference solution must pass), and every Parsons puzzle verified
+solvable through the real grader. **All 61 topics have coding exercises**, from variables through
+Swing, reflection, sockets and design patterns.
 
 ## Quick start
 
@@ -122,6 +123,17 @@ ASCII on limited terminals. The concept map is fully keyboard-driven — arrows 
 `S` studies the focused topic, `B` fights its world boss, Escape closes — and carries accessible
 names for screen readers.
 
+The HTML reports declare their language, label every chart, offer the accuracy chart's figures as a
+real data table, use proper table headers, and state each topic's status in words ("mastered", "in
+progress", "needs work") rather than only in bar colour.
+
+## Translation
+
+All primary screens read their text from `src/main/resources/messages.properties`. To add a
+language, copy it to `messages_<language>.properties`, translate the values, and run with that
+locale — no code changes. English is the fallback for anything a translation has not covered, and
+the build fails if the code asks for a key no bundle defines.
+
 ## Optional AI, configured by file
 
 AI help is optional and off by default. Point it wherever you like with `data/llm.json`:
@@ -163,7 +175,7 @@ have not passed the content gate.
 | Type | What you do |
 |---|---|
 | **Coding** | Edit a real `.java` file in `workspace/<exercise-id>/`, press Enter to compile and run the tests. Repeat until green. |
-| **Code ordering (Parsons)** | Reorder the scrambled lines of a working program — auto-derived from every coding exercise, so this bank grows for free. |
+| **Code ordering (Parsons)** | Reorder the scrambled lines of a working program — auto-derived from coding exercises (whole program when short, otherwise one method body), so this bank grows for free. |
 | **Fill in the blank** | Type the one missing expression in a working program. |
 | Tracing | Read code, predict its output. |
 | Debugging | Spot the bug in a snippet. |

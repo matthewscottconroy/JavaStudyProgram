@@ -12,5 +12,8 @@
     "Combine StandardOpenOption.CREATE and StandardOpenOption.APPEND, and remember to add \"\\n\" to the line yourself.",
     "Files.readAllLines(p) gives you a List<String>; its size() is the line count."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "TRY_CATCH",
+    "STRINGS"
+  ]
 }

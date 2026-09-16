@@ -11,5 +11,9 @@
     "The lambda you complete is a ChangeListener; it runs on every slider movement.",
     "volume.getValue() returns the slider's current int position.",
     "Convert with String.valueOf(...) and pass the result to readout.setText(...)."
+  ],
+  "relatedTopics": [
+    "GUI_COMPONENTS",
+    "LAMBDAS"
   ]
 }

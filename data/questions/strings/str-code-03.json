@@ -12,5 +12,8 @@
     "split(\"\\\\s+\") breaks the string on runs of whitespace so double spaces do not create empty words.",
     "Rebuild each word as Character.toUpperCase(word.charAt(0)) + word.substring(1).toLowerCase()."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "ARRAYS",
+    "LOOPS"
+  ]
 }

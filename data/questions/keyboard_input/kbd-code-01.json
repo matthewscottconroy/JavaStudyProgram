@@ -9,7 +9,7 @@
   "explanation": "keyTyped is the callback that reports an actual character, which is why getKeyChar() is meaningful there (keyPressed reports key CODES instead, and getKeyChar would be undefined for keys like the arrows). Character.isLetter filters out digits, punctuation, and spaces without you listing them all. KeyListener has three methods, so extending KeyAdapter and overriding just keyTyped keeps the class focused. Nothing about this needs a visible window -- the tests construct KeyEvents and invoke the registered listener directly.",
   "hints": [
     "Register with `addKeyListener(new java.awt.event.KeyAdapter() { ... })` in the constructor and override keyTyped.",
-    "Pull the character out once: `char typed = e.getKeyChar();` then test it with Character.isLetter(typed).",
+    "Pull the typed character out of the event once with getKeyChar(), then decide whether it counts with Character.isLetter.",
     "Only update the counter and the remembered character inside that if -- a non-letter must leave both untouched."
   ],
   "relatedTopics": [

@@ -12,5 +12,8 @@
     "Use one loop index i and compare a.charAt(i) with b.charAt(i).",
     "Count the positions where the characters differ and return the count."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "LOOPS",
+    "IF_CASE"
+  ]
 }

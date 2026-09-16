@@ -12,5 +12,8 @@
     "System.out.printf(\"%s: $%.2f%n\", items[i], prices[i]) prints one receipt line; %.2f forces two decimals.",
     "Keep a running double total inside the loop and print the \"total: $...\" line with the same %.2f formatting after the loop."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "LOOPS",
+    "ARRAYS"
+  ]
 }

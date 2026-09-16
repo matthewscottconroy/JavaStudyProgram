@@ -8,7 +8,7 @@
   "answer": "public class Caster {\n\n    public static String asString(Object o) {\n        if (o instanceof String s) {\n            return s;\n        }\n        return null;\n    }\n\n    public static Integer doubled(Object o) {\n        if (o instanceof Integer i) {\n            return i * 2;\n        }\n        return null;\n    }\n}\n",
   "explanation": "A variable of type Object can hold anything, but you may only use String or Integer behavior after confirming the runtime type; instanceof is the safe test that makes the cast legal. Pattern matching (o instanceof Integer i) performs the check and the cast together. Because instanceof is false for null and for other types like Double, those inputs fall through to the null result rather than throwing a ClassCastException.",
   "hints": [
-    "Use pattern instanceof: if (o instanceof String s) { return s; }",
+    "Use pattern instanceof: put a variable name after the type in the test, and inside the if-block it is already a String -- no cast required.",
     "For doubled, the matched Integer unboxes automatically, so i * 2 works; return the result directly.",
     "Anything that fails the instanceof test -- including null -- should reach return null;"
   ],

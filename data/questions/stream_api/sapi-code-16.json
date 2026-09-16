@@ -10,7 +10,7 @@
   "hints": [
     "Parse once: map each row to its trimmed fields (row.split(\"\\\\|\") then trim each piece) so the collectors downstream only deal with clean values.",
     "groupingBy has a three-argument overload: groupingBy(classifier, TreeMap::new, downstream). Put a second groupingBy in the downstream slot to get the nested map, and summingInt at the bottom.",
-    "For the course lists, Collectors.mapping extracts the course name and Collectors.collectingAndThen(toCollection(TreeSet::new), ArrayList::new) makes them distinct, sorted, and a List."
+    "For the course lists, Collectors.mapping extracts the course name, toCollection with a TreeSet makes them distinct and sorted, and collectingAndThen turns that set into a List at the very end."
   ],
   "relatedTopics": [
     "COLLECTIONS",

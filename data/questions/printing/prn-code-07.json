@@ -9,7 +9,7 @@
   "explanation": "System.out.print writes without ending the line, so a bar is built piece by piece and finished with a single println. percent * width / 100 uses integer division, which truncates -- 33 percent of 6 cells is 1 filled cell, not 1.98 -- and that truncation is exactly what you want for whole characters. Clamping the percent before both the bar and the printed number keeps the two halves of the line agreeing with each other.",
   "hints": [
     "Clamp first with two ifs: percent < 0 becomes 0, percent > 100 becomes 100. A parameter is an ordinary local variable, so you can reassign it.",
-    "int filled = percent * width / 100; multiply before dividing or you will always get 0.",
+    "Work out how many cells are filled with integer arithmetic: multiply the percent by the width BEFORE dividing by 100, or you will always get 0.",
     "Loop i from 0 to width - 1, printing \"#\" when i < filled and \"-\" otherwise; finish with System.out.println(\"] \" + percent + \"%\")."
   ],
   "relatedTopics": [

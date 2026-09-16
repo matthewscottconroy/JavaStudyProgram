@@ -11,5 +11,9 @@
     "Call setLayout(new BorderLayout()) first -- a JPanel starts with a FlowLayout.",
     "The two-argument add takes the component and a region constant, e.g. add(header, BorderLayout.NORTH).",
     "The stretchy middle region is BorderLayout.CENTER -- that is where the text area goes."
+  ],
+  "relatedTopics": [
+    "GUI_COMPONENTS",
+    "GUI_SWING"
   ]
 }

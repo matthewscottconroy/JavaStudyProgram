@@ -43,6 +43,22 @@ public class QuestionBank {
         this(DEFAULT_EXTERNAL_DIR);
     }
 
+    /** Private no-load constructor backing {@link #of(Collection)}. */
+    private QuestionBank(Collection<Question> questions, boolean derive) {
+        for (Question q : questions) byId.put(q.getId(), q);
+        if (derive) deriveParsons();
+        rebuildTopicIndex();
+    }
+
+    /**
+     * A bank containing exactly the given questions, with nothing loaded from disk or the
+     * classpath. Lets callers — tests especially — exercise the engine and the interactive flow
+     * against a small, predictable set instead of the whole shipped bank.
+     */
+    public static QuestionBank of(Collection<Question> questions) {
+        return new QuestionBank(questions, false);
+    }
+
     public QuestionBank(Path externalQuestionsDir) {
         loadFromClasspath();
         loadExternal(externalQuestionsDir);

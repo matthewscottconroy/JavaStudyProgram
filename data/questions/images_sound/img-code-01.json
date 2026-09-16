@@ -9,7 +9,11 @@
   "explanation": "A TYPE_INT_RGB BufferedImage packs each pixel into one int: red in bits 16-23, green in 8-15, blue in 0-7, so shifting and masking with 0xFF extracts a channel and shifting back with | repacks it. Writing results into a freshly constructed image keeps the operation pure -- the caller's image is never mutated. Nested x/y loops over getWidth()/getHeight() visit every pixel exactly once.",
   "hints": [
     "First create the output: new BufferedImage(src.getWidth(), src.getHeight(), BufferedImage.TYPE_INT_RGB).",
-    "For each pixel: int rgb = src.getRGB(x, y); then r = (rgb >> 16) & 0xFF, g = (rgb >> 8) & 0xFF, b = rgb & 0xFF.",
+    "Read the packed pixel once per position with src.getRGB, then pull each channel out by shifting it down (red 16 bits, green 8, blue 0) and masking with 0xFF.",
     "Compute the new channels, repack with (r << 16) | (g << 8) | b, and setRGB on the OUTPUT image, never on src."
+  ],
+  "relatedTopics": [
+    "HEX_BINARY_ENCODING",
+    "LOOPS"
   ]
 }

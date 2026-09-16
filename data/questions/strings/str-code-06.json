@@ -12,5 +12,8 @@
     "Convert each normalized string to a char[] with toCharArray() and sort it with java.util.Arrays.sort.",
     "Two strings are anagrams exactly when their sorted char arrays are equal -- java.util.Arrays.equals compares them."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "ARRAYS",
+    "FUNCTIONS"
+  ]
 }

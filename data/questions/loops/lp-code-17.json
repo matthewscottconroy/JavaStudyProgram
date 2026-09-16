@@ -9,7 +9,7 @@
   "explanation": "The depth over column i depends on the tallest column at or to its left and the tallest at or to its right -- the water can only rise to the lower of those two walls. Recomputing those maxima inside a nested loop works but is slow; instead one left-to-right pass fills a tallestLeft array and one right-to-left pass fills tallestRight, after which a third pass computes min(left, right) - height and clamps negatives to zero. The end columns always get zero because one of their two walls is the column itself.",
   "hints": [
     "Write down the formula for one column first: depth = min(tallest at or left of i, tallest at or right of i) - heights[i], clamped at 0. Everything else is just supplying those two maxima.",
-    "Precompute them. A forward loop can build tallestLeft[i] = Math.max(tallestLeft[i - 1], heights[i]); a backward loop builds tallestRight the same way from the end.",
+    "Precompute them into two arrays. A forward pass fills the tallest so far from the left -- each entry is the larger of the previous entry and the current height -- and a backward pass fills the right side the same way from the end.",
     "Handle the small cases before you allocate anything: null means an empty result, and any array shorter than 3 columns is already all zeros."
   ],
   "relatedTopics": [

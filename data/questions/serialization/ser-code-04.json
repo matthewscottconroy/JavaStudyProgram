@@ -10,7 +10,7 @@
   "hints": [
     "Write the whole list with one out.writeObject(books) call rather than looping over the books.",
     "Serialize into a ByteArrayOutputStream, then read from a ByteArrayInputStream built from its toByteArray().",
-    "Reading gives you an Object; cast it to List<Book>, which is why the method carries @SuppressWarnings(\"unchecked\")."
+    "Reading gives you an Object; cast it to List<Book>, which is why the method carries a SuppressWarnings annotation for that unchecked cast."
   ],
   "relatedTopics": [
     "MEMORY_REFERENCE_STATIC",

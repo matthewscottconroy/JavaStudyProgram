@@ -11,5 +11,9 @@
     "Start with g.fillRect(0, 0, size, size) in white for the background.",
     "Draw the biggest circle first; each smaller circle covers the middle of the previous one.",
     "For diameter d, call g.fillOval((size - d) / 2, (size - d) / 2, d, d)."
+  ],
+  "relatedTopics": [
+    "PAINTING",
+    "VARIABLES"
   ]
 }

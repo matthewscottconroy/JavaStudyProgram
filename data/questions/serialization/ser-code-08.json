@@ -10,7 +10,7 @@
   "hints": [
     "You need a ByteArrayOutputStream for the write half and a ByteArrayInputStream over its bytes for the read half.",
     "Close or flush the ObjectOutputStream before calling toByteArray, otherwise buffered bytes are missing.",
-    "readObject returns Object -- cast it to T; the method already carries @SuppressWarnings(\"unchecked\")."
+    "readObject returns Object -- cast it to T; the method already carries a SuppressWarnings annotation because the compiler cannot verify that cast."
   ],
   "relatedTopics": [
     "GENERICS",

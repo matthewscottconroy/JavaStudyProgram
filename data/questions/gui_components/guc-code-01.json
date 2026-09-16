@@ -11,5 +11,10 @@
     "Read the user name with user.getText() and the password with new String(pass.getPassword()).",
     "Use isEmpty() on both strings and combine the two conditions with &&.",
     "One if/else that calls status.setText(...) in each branch is all you need."
+  ],
+  "relatedTopics": [
+    "GUI_EVENT_MODEL",
+    "IF_CASE",
+    "STRINGS"
   ]
 }

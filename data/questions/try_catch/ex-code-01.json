@@ -8,9 +8,12 @@
   "answer": "public class SafeParser {\n\n    public static int parseOrDefault(String text, int fallback) {\n        try {\n            return Integer.parseInt(text);\n        } catch (NumberFormatException e) {\n            return fallback;\n        }\n    }\n}\n",
   "explanation": "Integer.parseInt throws a NumberFormatException for any input it cannot convert, including letters, decimals, strings with spaces, the empty string, and even null. Wrapping the call in a try block and catching that specific exception turns a crash into a controlled fallback value. Catching the narrow NumberFormatException (rather than Exception) is good practice because it only handles the failure you expect.",
   "hints": [
-    "Put the return Integer.parseInt(text); call inside a try block.",
+    "Put the parse call inside a try block and return its result from there -- the happy path lives in the try body.",
     "Add catch (NumberFormatException e) after the try block and return fallback there.",
     "You do not need a special null check: Integer.parseInt(null) also throws NumberFormatException, so the same catch handles it."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "STRINGS",
+    "VARIABLES"
+  ]
 }

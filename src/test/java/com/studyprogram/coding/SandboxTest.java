@@ -2,6 +2,7 @@ package com.studyprogram.coding;
 
 import org.junit.jupiter.api.Test;
 
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
@@ -37,6 +38,32 @@ class SandboxTest {
         int bindIndex = wrapped.indexOf("--bind");
         assertTrue(bindIndex > 0 && wrapped.get(bindIndex + 1).equals("/tmp/build"),
                 "only the build directory is writable");
+    }
+
+    /**
+     * The backend the program advertises must be one that actually runs here. A sandbox that is
+     * installed but unusable (bubblewrap inside a container that forbids user namespaces, say)
+     * must degrade to NONE rather than making every exercise fail.
+     */
+    @Test
+    void anAdvertisedBackendCanReallyRunAJvm() throws Exception {
+        if (Sandbox.backend() == Sandbox.Backend.NONE) return;
+        Path build = Files.createTempDirectory("sandbox-selfcheck-test-");
+        try {
+            List<String> command = Sandbox.wrap(List.of(
+                    Path.of(System.getProperty("java.home"), "bin", "java").toString(),
+                    "-version"), build);
+            Process p = new ProcessBuilder(command).redirectErrorStream(true).start();
+            assertTrue(p.waitFor(30, java.util.concurrent.TimeUnit.SECONDS), "sandboxed JVM hung");
+            assertEquals(0, p.exitValue(),
+                    "Sandbox.backend() claims " + Sandbox.backend() + " but a JVM will not run in it");
+        } finally {
+            try (var walk = Files.walk(build)) {
+                walk.sorted(java.util.Comparator.reverseOrder()).forEach(f -> {
+                    try { Files.delete(f); } catch (Exception ignored) { }
+                });
+            }
+        }
     }
 
     @Test

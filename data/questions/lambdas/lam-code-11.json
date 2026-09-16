@@ -9,7 +9,7 @@
   "explanation": "Passing the work as a Supplier<T> and the success test as a Predicate<T> lets one loop serve any kind of task, because the caller supplies both halves as lambdas at the call site. The try/catch lives inside the loop so a RuntimeException ends only that attempt, not the whole method -- putting it outside the loop would abandon the retries. Counting attempts with a captured int[] in the tests is the usual trick for observing a lambda's side effects, since a lambda cannot assign to a plain captured local.",
   "hints": [
     "A plain for loop from 0 to maxAttempts handles the zero and negative cases for free -- the body simply never runs.",
-    "Put try { T result = action.get(); if (accept.test(result)) return result; } catch (RuntimeException e) { } INSIDE the loop.",
+    "Inside the loop, ask the supplier for a value and return it only if the predicate accepts it. Wrap that in a try whose catch swallows unchecked failures and does nothing, so a supplier that blows up just costs you one attempt instead of ending the method.",
     "firstAccepted is the same body with a for-each over the suppliers instead of a counter."
   ],
   "relatedTopics": [

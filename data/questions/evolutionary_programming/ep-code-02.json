@@ -8,8 +8,11 @@
   "answer": "public class Crossover {\n\n    public static String cross(String a, String b, int cut) {\n        int clamped = Math.max(0, Math.min(cut, a.length()));\n        return a.substring(0, clamped) + b.substring(clamped);\n    }\n}\n",
   "explanation": "Crossover is how genetic algorithms combine two parents into a child: a cut point splits both genomes and the child inherits the prefix of one and the suffix of the other. Clamping with Math.max(0, Math.min(cut, len)) protects substring from throwing on out-of-range cut points. substring(0, cut) takes the prefix of a and substring(cut) takes the suffix of b, and string concatenation joins them.",
   "hints": [
-    "Clamp first: int clamped = Math.max(0, Math.min(cut, a.length()));",
+    "Clamp the cut point first so substring can never throw: it must not drop below 0 nor run past the length of parent a.",
     "a.substring(0, clamped) is the prefix; b.substring(clamped) is the suffix; concatenate them with +."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "STRINGS",
+    "VARIABLES"
+  ]
 }

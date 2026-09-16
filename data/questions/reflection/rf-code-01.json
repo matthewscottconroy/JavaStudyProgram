@@ -10,7 +10,7 @@
   "hints": [
     "c.getDeclaredMethods() returns a java.lang.reflect.Method[] you can loop over.",
     "Call getName() on each Method and add it to a new ArrayList<String>.",
-    "Sort before returning: java.util.Collections.sort(names); -- reflection gives no guaranteed order."
+    "Reflection gives no guaranteed order, so sort the list before you return it; Collections.sort puts Strings in alphabetical order by default."
   ],
   "relatedTopics": [
     "CLASS_HIERARCHY"

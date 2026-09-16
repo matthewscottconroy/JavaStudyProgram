@@ -12,5 +12,7 @@
     "One clean shape is a while loop over an index i with an inner while that advances i as long as s.charAt(i) equals the run's character.",
     "Append the character and its count to a StringBuilder after each run finishes -- appending an int writes its digits."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "LOOPS"
+  ]
 }

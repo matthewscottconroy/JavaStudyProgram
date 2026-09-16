@@ -9,7 +9,7 @@
   "explanation": "Map.get returns null for an absent key, and Optional.ofNullable converts that null into an empty Optional. The or(supplier) method (added in Java 9) is the chaining trick: it keeps the current Optional when it has a value and only then evaluates the supplier for the next source, so the maps are consulted lazily in priority order. A final orElse supplies the \"missing:\" fallback, replacing a three-branch if-cascade with one declarative expression.",
   "hints": [
     "Optional.ofNullable(cli.get(key)) is an Optional that is empty exactly when cli lacks the key.",
-    "Chain .or(() -> java.util.Optional.ofNullable(env.get(key))) -- note that or takes a Supplier of another Optional, not a plain value.",
+    "Chain .or(...) for the env lookup -- note that or takes a Supplier of another Optional, not a plain value, so the second lookup only runs when the first one missed.",
     "Add a second .or(...) for defaults and finish with .orElse(\"missing:\" + key)."
   ],
   "relatedTopics": [

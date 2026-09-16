@@ -8,7 +8,7 @@
   "answer": "public class Planets {\n\n    public enum Planet {\n        MERCURY(3.7),\n        EARTH(9.81),\n        MARS(3.71);\n\n        private final double surfaceGravity;\n\n        Planet(double surfaceGravity) {\n            this.surfaceGravity = surfaceGravity;\n        }\n\n        public double getSurfaceGravity() {\n            return surfaceGravity;\n        }\n    }\n\n    public static double weightOn(Planet p, double weightOnEarthNewtons) {\n        return weightOnEarthNewtons / Planet.EARTH.getSurfaceGravity() * p.getSurfaceGravity();\n    }\n}\n",
   "explanation": "Enum constants can carry data: the argument list after each constant name (like MERCURY(3.7)) is passed to the enum's constructor, which runs once per constant and stores the value in a final field. The constructor is implicitly private -- only the constant list may create instances -- and the getter exposes the stored gravity. weightOn first divides by Earth's gravity to recover the mass-proportional part, then multiplies by the target planet's gravity, so EARTH maps a weight to itself.",
   "hints": [
-    "Declare private final double surfaceGravity; inside the enum and assign it in the constructor with this.surfaceGravity = surfaceGravity;.",
+    "Each constant has to remember its own gravity, so give the enum a private final double field and have the constructor store its parameter into it.",
     "Each constant's parenthesized value is simply a constructor argument -- MERCURY(3.7) calls Planet(3.7).",
     "In weightOn, use Planet.EARTH.getSurfaceGravity() as the divisor: weight / earthGravity * p.getSurfaceGravity()."
   ],

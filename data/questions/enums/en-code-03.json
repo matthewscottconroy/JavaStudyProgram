@@ -8,7 +8,7 @@
   "answer": "public class Calc {\n\n    public enum Op {\n        ADD {\n            public int apply(int a, int b) {\n                return a + b;\n            }\n        },\n        SUB {\n            public int apply(int a, int b) {\n                return a - b;\n            }\n        },\n        MUL {\n            public int apply(int a, int b) {\n                return a * b;\n            }\n        };\n\n        public abstract int apply(int a, int b);\n    }\n\n    public static int compute(Op op, int a, int b) {\n        return op.apply(a, b);\n    }\n}\n",
   "explanation": "An enum can declare an abstract method, which forces every constant to provide its own implementation in a constant-specific class body. This turns a switch-on-enum into polymorphism: calling op.apply(a, b) dispatches to the right constant's code automatically. The compute method therefore needs no branching at all.",
   "hints": [
-    "Each constant body acts like a small anonymous subclass: ADD { public int apply(int a, int b) { ... } } overrides the abstract method just for ADD.",
+    "Each constant can carry its own body in braces after its name, acting like a small anonymous subclass that overrides the abstract method for just that one constant.",
     "ADD returns a + b, SUB returns a - b, MUL returns a * b.",
     "compute needs no switch at all -- polymorphism does the work: return op.apply(a, b);"
   ],

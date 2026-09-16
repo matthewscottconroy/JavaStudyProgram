@@ -9,7 +9,7 @@
   "explanation": "A retry loop has three exits -- success, an argument that makes retrying meaningless, and exhaustion -- and each needs its own path. Keeping a reference to the most recent failure lets the give-up exception carry it as a cause, so the eventual stack trace still names the real problem instead of only saying that retries ran out. Reporting the wait through a DelayLog instead of calling Thread.sleep is what makes the method testable: the backoff schedule becomes an observable value, and the guard attempt < maxAttempts encodes the rule that nobody waits after the final try.",
   "hints": [
     "Validate maxAttempts before the loop, then count attempt from 1 to maxAttempts inclusive.",
-    "Inside the loop, `return call.attempt(attempt);` sits in the try -- returning is what ends the retries. The catch stores the failure in a variable declared outside the loop.",
+    "Inside the loop the attempt call sits in the try and returns its result directly -- returning is what ends the retries. The catch stores the failure in a variable declared outside the loop.",
     "Only report a delay while attempt < maxAttempts; baseMillis * (1L << (attempt - 1)) doubles it each time. After the loop, throw IllegalStateException with the stored failure as the second constructor argument."
   ],
   "relatedTopics": [

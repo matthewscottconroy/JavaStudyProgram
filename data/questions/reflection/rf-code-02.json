@@ -8,7 +8,7 @@
   "answer": "class Widget {\n    private final String name;\n\n    Widget() {\n        this.name = \"widget\";\n    }\n\n    String getName() {\n        return name;\n    }\n}\n\npublic class Instantiator {\n\n    public static Object create(String className) throws Exception {\n        Class<?> c = Class.forName(className);\n        return c.getDeclaredConstructor().newInstance();\n    }\n}\n",
   "explanation": "Class.forName looks a class up by its fully qualified name at runtime -- the basis of plugin systems and dependency-injection frameworks. getDeclaredConstructor() with no arguments fetches the no-arg constructor (even a non-public one declared in the same package), and newInstance() invokes it to build a fresh object. Every call produces a brand-new instance, which the tests confirm by checking two created Widgets are different objects.",
   "hints": [
-    "Start with Class<?> c = Class.forName(className);",
+    "Class.forName turns the name string into a Class object at runtime -- start there and hold the result in a Class<?> variable.",
     "c.getDeclaredConstructor() with no arguments selects the no-arg constructor.",
     "Chain .newInstance() on the constructor and return the result; the throws Exception clause absorbs the checked exceptions."
   ],

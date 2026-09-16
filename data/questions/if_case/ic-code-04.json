@@ -9,8 +9,10 @@
   "explanation": "A switch expression (Java 14+) returns a value directly, so the whole method body can be one return switch (...) { ... }. Arrow labels like case 12, 1, 2 -> group several constants on one line with no fall-through and no break statements. The default branch handles every month outside 1-12.",
   "hints": [
     "A switch expression can be returned directly: return switch (month) { ... };",
-    "Arrow cases take several labels at once: case 12, 1, 2 -> \"winter\";",
+    "An arrow case can carry several labels separated by commas, so all three months of one season fit on a single line.",
     "Use default -> \"invalid\"; to cover everything outside 1..12."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "STRINGS"
+  ]
 }

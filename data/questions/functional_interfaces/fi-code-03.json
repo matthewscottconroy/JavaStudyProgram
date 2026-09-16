@@ -9,7 +9,7 @@
   "explanation": "once is a higher-order function: it takes a Supplier and returns a new Supplier that wraps it with extra behavior (caching). The returned lambda captures the inner supplier plus two one-element arrays that act as mutable boxes, because a lambda may mutate a captured object's contents even though it cannot reassign the captured variable itself. Tracking a separate boolean flag (rather than testing the cached value against null) makes the memo correct even if inner legitimately returns null.",
   "hints": [
     "Return a lambda: () -> { ... } that decides whether to call inner.get() or reuse a stored value.",
-    "Captured locals are effectively final, so store the state in one-element arrays created before the return: boolean[] called = { false }; String[] cache = { null };.",
+    "Captured locals are effectively final, so the lambda cannot assign to them. Create two one-element arrays before the return -- one for the cached value, one for a have-I-run-yet flag -- and let the lambda write into their elements.",
     "Inside the lambda: if called[0] is false, set cache[0] = inner.get() and flip called[0] to true; always return cache[0]."
   ],
   "relatedTopics": [

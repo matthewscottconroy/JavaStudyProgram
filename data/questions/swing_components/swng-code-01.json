@@ -8,9 +8,9 @@
   "answer": "import javax.swing.JPanel;\nimport javax.swing.JTable;\nimport javax.swing.table.DefaultTableModel;\n\npublic class TableModelPanel extends JPanel {\n\n    private final DefaultTableModel model = new DefaultTableModel(new String[] {\"Name\", \"Score\"}, 0);\n    private final JTable table = new JTable(model);\n\n    public TableModelPanel() {\n        table.setName(\"table\");\n        add(table);\n    }\n\n    public void addRow(String name, int score) {\n        model.addRow(new Object[] { name, score });\n    }\n\n    public int rowCount() {\n        return model.getRowCount();\n    }\n\n    public int topScore() {\n        int best = 0;\n        for (int row = 0; row < model.getRowCount(); row++) {\n            int score = (Integer) model.getValueAt(row, 1);\n            if (score > best) {\n                best = score;\n            }\n        }\n        return best;\n    }\n}\n",
   "explanation": "JTable is only a view -- the data lives in its TableModel, so rows are added with model.addRow(...) and never on the table itself. DefaultTableModel stores each cell as an Object, which is why an int score comes back boxed and needs a cast to Integer before you can compare it. Reading through getRowCount()/getValueAt(row, column) is also how the tests inspect your work, and it is the same API a real renderer or sorter uses, which is why keeping the model as the single source of truth matters.",
   "hints": [
-    "addRow takes an Object array holding one entry per column: `model.addRow(new Object[] { name, score });`.",
+    "DefaultTableModel.addRow takes an Object array holding one entry per column, so wrap the name and the score into a two-element array.",
     "rowCount() is a one-liner -- the model already tracks it with getRowCount().",
-    "For topScore, loop rows from 0 to getRowCount() and cast each cell: `int score = (Integer) model.getValueAt(row, 1);`. Start the running maximum at 0 so an empty table returns 0."
+    "For topScore, loop rows from 0 up to getRowCount(); getValueAt hands back an Object, so cast each score cell (column 1) to Integer. Start the running maximum at 0 so an empty table returns 0."
   ],
   "relatedTopics": [
     "GUI_COMPONENTS",

@@ -10,7 +10,7 @@
   "hints": [
     "Give the nested exception a private final int field and assign it in the constructor right after the super(...) call.",
     "getBadAge() just returns that field -- this is how an exception carries structured information to its catcher.",
-    "In validate, use if (age < 0 || age > 130) { throw new InvalidAgeException(age); } -- valid ages need no code at all."
+    "validate only acts when the age is out of range: one if testing both bounds, throwing your custom exception with the offending value. A valid age needs no code at all."
   ],
   "relatedTopics": [
     "CLASSES",

@@ -8,7 +8,7 @@
   "answer": "record Sale(String region, double amount) {}\n\npublic class SalesRollup {\n\n    public static java.util.Map<String, Double> totalByRegion(java.util.List<Sale> sales) {\n        return sales.stream()\n                .collect(java.util.stream.Collectors.groupingBy(\n                        Sale::region,\n                        java.util.TreeMap::new,\n                        java.util.stream.Collectors.summingDouble(Sale::amount)));\n    }\n}\n",
   "explanation": "The three-argument groupingBy is the workhorse of stream aggregation: a classifier (Sale::region), a map factory (TreeMap::new) that controls which Map implementation collects the groups, and a downstream collector (summingDouble) that reduces each group's sales to a single number instead of keeping them in a list. Choosing TreeMap makes the key order deterministic and sorted. summingDouble extracts the amount from each Sale and accumulates the per-region sum.",
   "hints": [
-    "Start with sales.stream().collect(java.util.stream.Collectors.groupingBy(...)).",
+    "One stream and one collect is all it takes -- the whole rollup is a single groupingBy collector.",
     "Use the THREE-argument groupingBy: classifier, map factory, downstream collector.",
     "Classifier Sale::region, factory java.util.TreeMap::new, downstream Collectors.summingDouble(Sale::amount)."
   ],

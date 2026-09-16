@@ -12,5 +12,7 @@
     "totalMinutes % 60 gives the remainder after removing whole hours: 125 % 60 is 5.",
     "Build the result with new int[]{hours, minutes} and return it."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "ARRAYS"
+  ]
 }

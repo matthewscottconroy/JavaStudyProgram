@@ -12,5 +12,8 @@
     "word.charAt(0) is the first character; Character.toUpperCase(...) uppercases it.",
     "Every initial gets a '.' after it -- even the last one -- so just append letter then dot for each word."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "ARRAYS",
+    "LOOPS"
+  ]
 }

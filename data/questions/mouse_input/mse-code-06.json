@@ -8,7 +8,7 @@
   "answer": "import javax.swing.JLabel;\nimport javax.swing.JPanel;\n\npublic class WheelZoomPanel extends JPanel {\n\n    private final JLabel zoomLabel = new JLabel(\"100%\");\n    private int zoom = 100;\n\n    public WheelZoomPanel() {\n        zoomLabel.setName(\"zoom\");\n        add(zoomLabel);\n        addMouseWheelListener(e -> {\n            int next = zoom - 25 * e.getWheelRotation();\n            zoom = Math.max(50, Math.min(300, next));\n            zoomLabel.setText(zoom + \"%\");\n        });\n    }\n\n    public int zoom() {\n        return zoom;\n    }\n}\n",
   "explanation": "Wheel events are their own listener type, MouseWheelListener, and getWheelRotation() reports signed notches -- negative away from the user -- which is why zooming in means subtracting. Because one event can carry several notches, the arithmetic must handle any magnitude rather than assuming plus or minus one. Math.max(min, Math.min(max, value)) is the standard two-sided clamp, and clamping the stored value (not just the label) is what makes the limit hold without becoming sticky.",
   "hints": [
-    "MouseWheelListener has a single method, so a lambda works: addMouseWheelListener(e -> { ... }).",
+    "MouseWheelListener has a single method, so register a lambda taking the wheel event with addMouseWheelListener.",
     "Compute the unclamped value first: zoom - 25 * e.getWheelRotation().",
     "Clamp with Math.max(50, Math.min(300, next)) so the value can never leave the range in either direction."
   ],

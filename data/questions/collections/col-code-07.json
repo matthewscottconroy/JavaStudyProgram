@@ -12,5 +12,8 @@
     "floorKey(key) returns the greatest key <= key, or null if there is none.",
     "Store floorKey's result in an Integer variable and return null if it is null; otherwise return map.get(thatKey)."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "IF_CASE",
+    "COMPARABLE_COMPARATOR"
+  ]
 }

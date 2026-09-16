@@ -11,5 +11,10 @@
     "The listener method already runs on every click -- you only need to fill in its body.",
     "nameField.getText() returns whatever is currently typed in the field.",
     "Build the message with string concatenation and pass it to greeting.setText(...)."
+  ],
+  "relatedTopics": [
+    "GUI_EVENT_MODEL",
+    "GUI_COMPONENTS",
+    "STRINGS"
   ]
 }

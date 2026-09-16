@@ -12,5 +12,8 @@
     "For each index i, allocate copy[i] = new int[grid[i].length] so jagged rows keep their own lengths.",
     "Copy values with an inner loop (or java.util.Arrays.copyOf(grid[i], grid[i].length) per row)."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "ARRAYS",
+    "LOOPS"
+  ]
 }

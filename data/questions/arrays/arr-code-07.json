@@ -8,7 +8,7 @@
   "answer": "public class ScoreHistogram {\n\n    public static int[] histogram(int[] scores) {\n        int[] counts = new int[10];\n        for (int score : scores) {\n            counts[score]++;\n        }\n        return counts;\n    }\n}\n",
   "explanation": "A counting array turns the value being counted into an index: counts[score]++ files each score into its own bucket in a single pass. Because new int arrays start out filled with zeros, no separate initialization loop is needed. This counting pattern is the basis of counting sort and frequency tables.",
   "hints": [
-    "Allocate int[] counts = new int[10]; Java fills it with zeros automatically.",
+    "You need one counting slot per possible score -- what size array does that make? A new int array starts out full of zeros, which is exactly the right starting count.",
     "The score itself is the index: for each score s, do counts[s]++.",
     "An enhanced for loop (for (int s : scores)) is enough -- you never need the position in the input."
   ],

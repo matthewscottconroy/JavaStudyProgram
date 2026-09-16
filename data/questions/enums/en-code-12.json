@@ -9,7 +9,7 @@
   "explanation": "An enum may implement any interface, and the interface methods are written once in the enum body when every constant shares the same formula -- only the constructor argument differs. The arguments after each constant name are passed to the enum's constructor, which runs once per constant and stores the value in a final field. Routing every conversion through a single base unit (grams) means four constants give you sixteen conversions without a single switch.",
   "hints": [
     "Write the constants as GRAM(1.0), KILOGRAM(1000.0), ... and end the list with a semicolon.",
-    "Add `private final double gramsPerUnit;` and a constructor `MassUnit(double gramsPerUnit) { this.gramsPerUnit = gramsPerUnit; }` -- enum constructors are always private.",
+    "Store the grams-per-unit value in a private final double field assigned by a one-argument constructor -- enum constructors are always private, so no modifier is needed.",
     "toGrams multiplies by the field, fromGrams divides by it, and convert can simply call to.fromGrams(from.toGrams(amount))."
   ],
   "relatedTopics": [

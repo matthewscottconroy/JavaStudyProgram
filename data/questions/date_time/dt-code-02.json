@@ -8,7 +8,7 @@
   "answer": "import java.time.LocalDate;\nimport java.time.format.DateTimeFormatter;\nimport java.util.Locale;\n\npublic class DateFormatterUtil {\n\n    private static final DateTimeFormatter PRETTY =\n            DateTimeFormatter.ofPattern(\"MMM dd, yyyy\", Locale.US);\n\n    private static final DateTimeFormatter SLASH =\n            DateTimeFormatter.ofPattern(\"M/d/yyyy\");\n\n    public static String pretty(LocalDate d) {\n        return d.format(PRETTY);\n    }\n\n    public static LocalDate parseSlash(String s) {\n        return LocalDate.parse(s, SLASH);\n    }\n}\n",
   "explanation": "In the pattern, MMM is the short month NAME, which depends on the locale -- passing Locale.US to ofPattern pins it to English abbreviations like \"Mar\" no matter what machine runs the code, while dd zero-pads the day. For parsing, single-letter M and d accept one or two digits, so the same formatter reads both \"3/5/2026\" and \"12/31/1999\"; LocalDate.parse(text, formatter) applies it. DateTimeFormatter objects are immutable and thread-safe, so building them once as constants is idiomatic.",
   "hints": [
-    "Build the formatter with DateTimeFormatter.ofPattern(\"MMM dd, yyyy\", Locale.US); then d.format(formatter) produces the string.",
+    "Build the formatter once with DateTimeFormatter.ofPattern, passing Locale.US as a second argument, then let the date format itself with it.",
     "Without the Locale argument, MMM would use the computer's default language -- the tests demand English month names.",
     "For parsing, create a formatter from \"M/d/yyyy\" and call LocalDate.parse(s, formatter); one-letter M and d happily accept one- or two-digit numbers."
   ],

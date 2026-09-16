@@ -9,7 +9,7 @@
   "explanation": "Default methods give an interface reusable behavior, but a class is always free to override them just like any inherited method. shout() calls describe() on 'this', so once Robot overrides describe(), shout() automatically uses the overridden version -- dynamic dispatch applies to default methods too. Implementors that do not override describe() (like the lambda in the tests) keep the interface's default.",
   "hints": [
     "Implement kind() first: return \"robot\";",
-    "Override describe() in Robot with the public modifier and return \"unit of kind \" + kind();",
+    "Override describe() in Robot with the public modifier, and build its text by calling kind() instead of hard-coding the word.",
     "Do not override shout() -- it already calls describe(), and at runtime that resolves to your override."
   ],
   "relatedTopics": [

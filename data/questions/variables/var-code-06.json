@@ -12,5 +12,8 @@
     "c - 'a' gives the letter's position 0..25; add shift and use % 26 to wrap.",
     "'a' + position is an int, so return (char) ('a' + position)."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "HEX_BINARY_ENCODING",
+    "IF_CASE"
+  ]
 }

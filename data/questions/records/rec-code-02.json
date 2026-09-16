@@ -8,7 +8,7 @@
   "answer": "public record Money(String currency, long cents) {\n\n    public Money plus(Money other) {\n        if (!currency.equals(other.currency)) {\n            throw new IllegalArgumentException(\n                    \"Currency mismatch: \" + currency + \" vs \" + other.currency);\n        }\n        return new Money(currency, cents + other.cents);\n    }\n\n    public String pretty() {\n        return String.format(\"%s %d.%02d\", currency, cents / 100, cents % 100);\n    }\n}\n",
   "explanation": "plus validates its argument first and throws IllegalArgumentException so amounts in different currencies can never be silently mixed; because records are immutable, it returns a brand-new Money instead of modifying either operand. pretty splits the amount into whole units (cents / 100) and the remainder (cents % 100), and String.format's %02d pads the remainder to two digits so 5 cents prints as 0.05.",
   "hints": [
-    "In plus, compare the two currency fields with equals (not ==) and throw new IllegalArgumentException(...) when they differ.",
+    "In plus, compare the two currency fields with equals (not ==) and, when they differ, throw an IllegalArgumentException whose message names both currencies.",
     "A record cannot change its fields -- plus must build and return a new Money from the summed cents.",
     "For pretty, cents / 100 gives whole units and cents % 100 gives leftover cents; String.format with %02d pads a number to two digits."
   ],

@@ -12,5 +12,8 @@
     "Integer.parseInt throws NumberFormatException; dividing an int by zero throws ArithmeticException.",
     "Add one catch block per exception type, each returning the required message string."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "VARIABLES",
+    "STRINGS"
+  ]
 }

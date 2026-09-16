@@ -16,7 +16,7 @@
   "explanation": "Checking whether the queue is empty and removing the front task have to happen inside one synchronized method; if they were two separate calls, two workers could both pass the emptiness check and one would get a task that no longer exists. Each worker loops until take() returns null, which is how the pool knows the work is done without any sleeping. Joining every thread before reading the results is what makes the answer deterministic -- the totals are only complete once all the workers have stopped.",
   "hints": [
     "Mark every TaskQueue method synchronized, so the empty check and the removal cannot be split apart by another thread.",
-    "A worker's loop is: Integer task = queue.take(); while (task != null) { record(task); task = queue.take(); }",
+    "A worker keeps pulling from the queue until take() hands back null, recording each task it got. Take once before the loop and again at the end of every pass, so the null check happens before any recording.",
     "Start all the threads in one loop and join them in a second loop -- starting and joining in the same loop would run the workers one after another."
   ],
   "relatedTopics": [

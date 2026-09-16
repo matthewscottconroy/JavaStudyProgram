@@ -9,7 +9,7 @@
   "explanation": "Returning `this` from add is what makes the calls chain, and because UnaryOperator<String> is a functional interface each step can be a lambda or a method reference like String::trim. build turns the collected steps into one function by returning a lambda that loops over them, feeding each result into the next -- the loop runs at apply time, not at build time. Copying the list inside build is the detail that matters: without the snapshot the returned function would keep looking at the live list and silently change behaviour later.",
   "hints": [
     "add is two lines: steps.add(step); return this;",
-    "build should first do `List<UnaryOperator<String>> snapshot = new ArrayList<>(steps);` and capture the snapshot, not the field.",
+    "build must copy the current steps into a new list FIRST and let the returned lambda close over that copy -- capturing the field itself would let a later add() change an already-built pipeline.",
     "The returned lambda keeps a local `String current = text;` and reassigns it once per step before returning it."
   ],
   "relatedTopics": [

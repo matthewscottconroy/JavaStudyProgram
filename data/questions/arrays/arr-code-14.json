@@ -8,7 +8,7 @@
   "answer": "public class SelectionSorter {\n\n    public static int[] sortedCopy(int[] a) {\n        int[] copy = java.util.Arrays.copyOf(a, a.length);\n        for (int i = 0; i < copy.length - 1; i++) {\n            int minIndex = i;\n            for (int j = i + 1; j < copy.length; j++) {\n                if (copy[j] < copy[minIndex]) {\n                    minIndex = j;\n                }\n            }\n            int temp = copy[i];\n            copy[i] = copy[minIndex];\n            copy[minIndex] = temp;\n        }\n        return copy;\n    }\n}\n",
   "explanation": "Copying first (Arrays.copyOf) is what protects the caller's array -- assigning int[] copy = a would only copy the reference and the sort would mutate the original. Selection sort then walks each position i, scans the unsorted tail for the index of the smallest remaining value, and swaps it into position i. After pass i, the first i + 1 slots are final, so the algorithm always does exactly n - 1 swaps.",
   "hints": [
-    "Start with int[] copy = java.util.Arrays.copyOf(a, a.length); sorting a directly would change the caller's array.",
+    "Make your own copy of the input before you touch anything -- Arrays.copyOf hands you one. Sorting the parameter directly would change the caller's array.",
     "Outer loop over position i; inner loop from i + 1 onward finds the INDEX of the minimum, not just its value.",
     "After the inner loop, swap copy[i] with copy[minIndex] using a temp variable."
   ],

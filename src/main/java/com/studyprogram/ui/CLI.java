@@ -35,24 +35,34 @@ public class CLI {
     private int            lastCodingHints;   // hints used in the most recent codingFlow run
 
     public CLI(QuestionBank bank, ProfileStorage storage, LLMService llm) {
+        this(bank, storage, llm, System.in, new CodingExerciseRunner());
+    }
+
+    /**
+     * Full constructor. Taking the input stream and the exercise runner as parameters is what
+     * makes the interactive flow testable: a test can script keystrokes and point the workspace
+     * somewhere disposable, while output is captured from {@code System.out}.
+     */
+    public CLI(QuestionBank bank, ProfileStorage storage, LLMService llm,
+               java.io.InputStream input, CodingExerciseRunner codingRunner) {
         this.bank         = bank;
         this.storage      = storage;
         this.llm          = llm;
         this.grader       = new CompositeGrader(llm);
-        this.in           = new Scanner(System.in);
-        this.codingRunner = new CodingExerciseRunner();
+        this.in           = new Scanner(input);
+        this.codingRunner = codingRunner;
     }
 
     public void run() {
-        Display.header("Java Study Program");
-        System.out.printf("  Questions in bank: %d%n", bank.totalQuestions());
-        System.out.printf("  AI help:           %s%n",
+        Display.header(Messages.get("app.title"));
+        System.out.println("  " + Messages.get("banner.questions", bank.totalQuestions()));
+        System.out.printf("  %-18s %s%n", Messages.get("banner.ai"),
                           llm.isAvailable()
                                   ? Display.green() + com.studyprogram.llm.LLMServiceFactory
                                         .describe(com.studyprogram.llm.LLMConfig.load()) + Display.reset()
                                   : Display.dim() + com.studyprogram.llm.LLMServiceFactory
                                         .describe(com.studyprogram.llm.LLMConfig.load()) + Display.reset());
-        System.out.printf("  Exercise sandbox:  %s%n",
+        System.out.printf("  %-18s %s%n", Messages.get("banner.sandbox"),
                           Display.dim() + com.studyprogram.coding.Sandbox.describe() + Display.reset());
         System.out.printf("  Coding exercises:  %s%n",
                           CodingExerciseRunner.compilerAvailable()
@@ -68,15 +78,15 @@ public class CLI {
 
         while (true) {
             System.out.println();
-            System.out.println("  [1] Start Study Session");
-            System.out.println("  [2] View Performance");
-            System.out.println("  [3] Concept Map");
-            System.out.println("  [4] Boss Challenge");
-            System.out.println("  [5] Progress Report (HTML)");
-            System.out.println("  [6] Select Topics");
-            System.out.println("  [7] Switch Profile");
-            System.out.println("  [8] Exit");
-            System.out.print("\n  Choice: ");
+            System.out.println("  [1] " + Messages.get("menu.startSession"));
+            System.out.println("  [2] " + Messages.get("menu.viewPerformance"));
+            System.out.println("  [3] " + Messages.get("menu.conceptMap"));
+            System.out.println("  [4] " + Messages.get("menu.bossChallenge"));
+            System.out.println("  [5] " + Messages.get("menu.progressReport"));
+            System.out.println("  [6] " + Messages.get("menu.selectTopics"));
+            System.out.println("  [7] " + Messages.get("menu.switchProfile"));
+            System.out.println("  [8] " + Messages.get("menu.exit"));
+            System.out.print("\n  " + Messages.get("menu.choice") + " ");
             String choice = in.nextLine().trim();
 
             switch (choice) {
@@ -89,7 +99,7 @@ public class CLI {
                 case "6" -> selectTopics();
                 case "7" -> profileMenu();
                 case "8" -> { saveProfile(); return; }
-                default  -> System.out.println("  Invalid choice.");
+                default  -> System.out.println("  " + Messages.get("menu.invalidChoice"));
             }
         }
     }
@@ -97,16 +107,16 @@ public class CLI {
     // ── Profile ───────────────────────────────────────────────────────────────
 
     private void profileMenu() {
-        Display.header("Profile");
+        Display.header(Messages.get("profile.header"));
         try {
             List<String> profiles = storage.listProfileNames();
             if (!profiles.isEmpty()) {
-                System.out.println("  Existing profiles:");
+                System.out.println("  " + Messages.get("profile.existing"));
                 for (int i = 0; i < profiles.size(); i++) {
                     System.out.printf("    [%d] %s%n", i + 1, profiles.get(i));
                 }
-                System.out.println("    [N] New profile   [D] Delete a profile   [R] Rename a profile");
-                System.out.print("\n  Choose, or N/D/R: ");
+                System.out.println("    " + Messages.get("profile.options"));
+                System.out.print("\n  " + Messages.get("profile.choosePrompt") + " ");
                 String pick = in.nextLine().trim();
                 if (pick.equalsIgnoreCase("D")) { deleteProfile(profiles); profileMenu(); return; }
                 if (pick.equalsIgnoreCase("R")) { renameProfile(profiles); profileMenu(); return; }
@@ -120,7 +130,7 @@ public class CLI {
                                 currentProfile.applyDecay();
                                 attemptLog = AttemptLog.forProfile(storage.directory(),
                                                                    currentProfile.getName());
-                                System.out.printf("  Welcome back, %s!%n", currentProfile.getName());
+                                System.out.println("  " + Messages.get("profile.welcomeBack", currentProfile.getName()));
                                 return;
                             }
                         }
@@ -148,14 +158,14 @@ public class CLI {
         String name = profiles.get(idx);
         System.out.printf("  Delete '%s' and its whole attempt history? Type the name to confirm: ", name);
         if (!in.nextLine().trim().equals(name)) {
-            System.out.println("  Not deleted.");
+            System.out.println("  " + Messages.get("profile.notDeleted"));
             return;
         }
         try {
             storage.delete(name);
             java.nio.file.Files.deleteIfExists(
                     AttemptLog.forProfile(storage.directory(), name).getFile());
-            System.out.println("  Deleted " + name + ".");
+            System.out.println("  " + Messages.get("profile.deleted", name));
         } catch (IOException e) {
             System.out.println("  Could not delete: " + e.getMessage());
         }
@@ -186,7 +196,7 @@ public class CLI {
             java.nio.file.Path newLog = AttemptLog.forProfile(storage.directory(), newName).getFile();
             if (java.nio.file.Files.exists(oldLog)) java.nio.file.Files.move(oldLog, newLog);
             storage.delete(oldName);
-            System.out.println("  Renamed to " + newName + ".");
+            System.out.println("  " + Messages.get("profile.renamed", newName));
         } catch (IOException e) {
             System.out.println("  Could not rename: " + e.getMessage());
         }
@@ -194,7 +204,7 @@ public class CLI {
 
     /** Records a student's report that a question is wrong or unclear. */
     private void flagQuestion(Question q) {
-        System.out.print("  What is wrong with it? (Enter to skip): ");
+        System.out.print("  " + Messages.get("answer.flagPrompt") + " ");
         String note = in.nextLine().trim();
         try {
             java.nio.file.Path file = storage.directory().resolveSibling("flags.jsonl");
@@ -209,19 +219,19 @@ public class CLI {
                     java.nio.charset.StandardCharsets.UTF_8,
                     java.nio.file.StandardOpenOption.CREATE,
                     java.nio.file.StandardOpenOption.APPEND);
-            System.out.println("  Thanks — flagged for review. It stays in your session.");
+            System.out.println("  " + Messages.get("answer.flagThanks"));
         } catch (Exception e) {
             System.out.println("  Could not record the flag: " + e.getMessage());
         }
     }
 
     private void createProfile() {
-        System.out.print("  Enter your name: ");
+        System.out.print("  " + Messages.get("profile.enterName") + " ");
         String name = in.nextLine().trim();
         if (name.isBlank()) name = "Student";
         currentProfile = new StudentProfile(name);
         attemptLog = AttemptLog.forProfile(storage.directory(), name);
-        System.out.printf("  Profile created for %s.%n", name);
+        System.out.println("  " + Messages.get("profile.created", name));
         selectTopics();
     }
 
@@ -283,7 +293,7 @@ public class CLI {
      * Clearing one (80%+) is recorded on the profile and shown on the concept map.
      */
     private void bossChallenge() {
-        Display.header("Boss Challenges");
+        Display.header(Messages.get("boss.header"));
         String[] worldNames = {"", "Foundations", "Elementary", "Intermediate", "Advanced", "Expert"};
         for (int level = 1; level <= 5; level++) {
             String status;
@@ -552,9 +562,22 @@ public class CLI {
     // ── Study session ─────────────────────────────────────────────────────────
 
     private void studySession() {
-        System.out.print("\n  Feed: [a] auto — follows the concept map (recommended)  "
-                + "[m] my selected topics  [u] course unit review  [a]: ");
+        boolean canResume = currentProfile.hasResumableSession();
+        System.out.print("\n  " + Messages.get("session.feedPrompt")
+                + (canResume ? "  " + Messages.get("session.repeatOption",
+                        Display.topicSummary(currentProfile.getLastSessionTopics())) : "")
+                + "  [a]: ");
         String mode = in.nextLine().trim().toLowerCase();
+
+        // Picking up where you left off should not mean re-answering the setup questions
+        if (canResume && mode.equals("r")) {
+            List<Topic> previous = currentProfile.getLastSessionTopics();
+            System.out.println("  " + Display.cyan()
+                    + Messages.get("session.resuming", Display.topicSummary(previous))
+                    + Display.reset());
+            runSession(previous, currentProfile.getLastSessionLength(), false);
+            return;
+        }
 
         List<Topic> active;
         if (mode.equals("m")) {
@@ -596,6 +619,9 @@ public class CLI {
      * prompt so the concept map can start a session on one topic directly.
      */
     private void runSession(List<Topic> active, int sessionLen, boolean masteryMode) {
+        currentProfile.setLastSessionTopics(active);
+        currentProfile.setLastSessionLength(sessionLen);
+        saveProfile();
         // Calibrate question difficulty from every profile's attempt history on this
         // machine — real student data gradually corrects the authored difficulty labels.
         // The review scheduler is per-student: it spaces THIS student's repetitions.
@@ -627,7 +653,7 @@ public class CLI {
                     case SKIPPED -> {
                         session.skip(q);
                         logAttempt(q, AttemptRecord.OUTCOME_SKIPPED, qStart, lastCodingHints);
-                        System.out.println("  Skipped.");
+                        System.out.println("  " + Messages.get("session.skipped"));
                     }
                     case CORRECT -> {
                         GradingResult r = GradingResult.correct(q.getExplanation());
@@ -671,7 +697,7 @@ public class CLI {
                 if (input.equalsIgnoreCase("s")) {
                     session.skip(q);
                     logAttempt(q, AttemptRecord.OUTCOME_SKIPPED, qStart, hintsUsed);
-                    System.out.println("  Skipped.");
+                    System.out.println("  " + Messages.get("session.skipped"));
                     answer = null;
                     break;
                 }

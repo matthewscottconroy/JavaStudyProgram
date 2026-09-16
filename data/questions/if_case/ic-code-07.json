@@ -12,5 +12,7 @@
     "In an else if chain each later branch already knows the earlier tests failed, so else if (bmi < 25) alone means 18.5 <= bmi < 25.",
     "Boundary values go up: exactly 18.5 is \"normal\", exactly 25 is \"overweight\", exactly 30 is \"obese\"."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "VARIABLES"
+  ]
 }

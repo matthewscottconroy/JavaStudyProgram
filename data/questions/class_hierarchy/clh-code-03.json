@@ -9,7 +9,7 @@
   "explanation": "Pattern matching for instanceof (standard since Java 16) merges the type test and the cast: 'o instanceof String s' introduces s already typed as String inside the branch. null must be handled explicitly first, because instanceof is always false for null and would otherwise fall through to \"unknown\". Note that int[] is itself a reference type, so it works as an instanceof pattern, and a long[] does not match it.",
   "hints": [
     "Start with if (o == null) return \"null\"; -- instanceof never matches null.",
-    "Each branch looks like: if (o instanceof Integer i) { return \"int: \" + i; }",
+    "Each branch is an instanceof test with a variable name written after the type; inside that branch the variable is already the narrowed type, so no cast is needed.",
     "Arrays have a .length field (not a method); an int[] pattern only matches arrays of primitive int."
   ],
   "relatedTopics": [

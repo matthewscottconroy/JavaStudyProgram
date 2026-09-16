@@ -27,13 +27,15 @@ public class ParsonsGrader implements Grader {
                     "");
         }
 
-        StringBuilder reconstructed = new StringBuilder();
-        for (int i = 0; i < order.size(); i++) {
-            if (i > 0) reconstructed.append("\n");
-            reconstructed.append(shuffled.get(order.get(i) - 1));
-        }
+        // Compare line by line with indentation normalised. The Question builder trims the
+        // stored answer, which would otherwise strip the first line's indentation and make any
+        // puzzle drawn from an indented method body impossible to get right.
+        List<String> chosen = new ArrayList<>();
+        for (Integer index : order) chosen.add(shuffled.get(index - 1).strip());
+        List<String> expected = new ArrayList<>();
+        for (String line : question.getAnswer().split("\n")) expected.add(line.strip());
 
-        if (reconstructed.toString().equals(question.getAnswer())) {
+        if (chosen.equals(expected)) {
             return GradingResult.correct(question.getExplanation());
         }
         return GradingResult.incorrect(
@@ -65,8 +67,11 @@ public class ParsonsGrader implements Grader {
         List<String> shuffled = q.getShuffledLines();
         StringBuilder sb = new StringBuilder();
         for (String solutionLine : q.getAnswer().split("\n")) {
-            int idx = shuffled.indexOf(solutionLine) + 1;   // first matching shuffled line
-            sb.append("  ").append(idx).append(": ").append(solutionLine.trim()).append("\n");
+            int idx = 0;
+            for (int i = 0; i < shuffled.size(); i++) {
+                if (shuffled.get(i).strip().equals(solutionLine.strip())) { idx = i + 1; break; }
+            }
+            sb.append("  ").append(idx).append(": ").append(solutionLine.strip()).append("\n");
         }
         return sb.toString();
     }

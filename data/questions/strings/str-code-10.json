@@ -12,5 +12,8 @@
     "Loop the array backwards: for (int i = words.length - 1; i >= 0; i--).",
     "Append a space only when another word still follows (i > 0), so the result has no trailing space."
   ],
-  "relatedTopics": []
+  "relatedTopics": [
+    "ARRAYS",
+    "LOOPS"
+  ]
 }

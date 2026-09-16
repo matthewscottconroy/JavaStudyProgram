@@ -10,7 +10,7 @@
   "hints": [
     "mode.isSelected() tells you whether the toggle button is currently selected.",
     "The listener already runs on every state change -- you only need to set the label text inside it.",
-    "A conditional expression works well: text.setText(mode.isSelected() ? \"Yo!\" : \"Good day.\");"
+    "One setText call with a conditional expression is enough -- pick the casual greeting when the toggle is selected and the formal one otherwise."
   ],
   "relatedTopics": [
     "CLASSES",

@@ -10,7 +10,7 @@
   "hints": [
     "body.getBytes(StandardCharsets.UTF_8).length is the number you put in the header -- body.length() would be wrong for any non-ASCII character.",
     "Read the header with single in.read() calls, appending each byte as a char to a StringBuilder, and stop when the text endsWith(\"\\r\\n\\r\\n\").",
-    "Fill the body array with a loop: int read = in.read(body, filled, length - filled); add read to filled until filled == length, and treat a -1 as an early end of stream."
+    "Fill the body array in a loop: each read asks only for the bytes still missing and writes them at the offset already filled, and you keep going until the filled count reaches the length. A -1 means the stream ended early."
   ],
   "relatedTopics": [
     "FILE_PROCESSING",

@@ -10,7 +10,7 @@
   "hints": [
     "Standard equals skeleton: if (this == o) return true; if (o == null || getClass() != o.getClass()) return false; then cast and compare fields.",
     "Compare the String field with Objects.equals(code, other.code) so null codes cannot throw.",
-    "hashCode is one line -- return Objects.hash(code, percent); -- and toString is code + \" (\" + percent + \"%)\";"
+    "hashCode is one line: hand Objects.hash exactly the same two fields equals compares, so equal Coupons can never disagree. toString concatenates the code, a space, and the percent in parentheses with a percent sign."
   ],
   "relatedTopics": [
     "CLASSES",

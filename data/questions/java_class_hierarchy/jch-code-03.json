@@ -9,7 +9,7 @@
   "explanation": "Comparable defines the one natural ordering a type carries with it, while a Comparator is an ordering supplied from outside, so a type can support many. Sorted collections judge duplicates by the ordering in use, not by equals: because compareTo here looks only at the title, a TreeSet on the natural order treats \"Dune\" and \"dune\" as the same element and keeps whichever arrived first. Handing the TreeSet the year-based comparator instead changes what counts as a duplicate, and nothing is dropped.",
   "hints": [
     "String already knows how to do the case-insensitive comparison -- compareToIgnoreCase returns exactly the negative, zero or positive value compareTo needs.",
-    "Comparator.comparingInt(BookEntry::getYear) gives the first key; chain .thenComparing(...) for the tie-break.",
+    "Comparator.comparingInt with a method reference to the year getter gives the primary key; chain .thenComparing(...) onto it for the tie-break.",
     "String.CASE_INSENSITIVE_ORDER is a ready-made Comparator<String> you can pass to thenComparing as the second argument."
   ],
   "relatedTopics": [

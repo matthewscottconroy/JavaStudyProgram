@@ -11,5 +11,10 @@
     "The same actionPerformed runs for both buttons; the event object tells you who fired it.",
     "Compare e.getSource() == aButton (reference comparison is correct here).",
     "After updating the right counter, rebuild the whole label text: \"a=\" + aClicks + \" b=\" + bClicks."
+  ],
+  "relatedTopics": [
+    "IF_CASE",
+    "MEMORY_REFERENCE_STATIC",
+    "GUI_COMPONENTS"
   ]
 }

@@ -8,8 +8,8 @@
   "answer": "public class CoffeeOrder {\n\n    public enum Size {\n        SMALL(2.00), MEDIUM(2.75), LARGE(3.50);\n\n        private final double price;\n\n        Size(double price) {\n            this.price = price;\n        }\n\n        public double getPrice() {\n            return price;\n        }\n    }\n\n    public static double totalFor(Size[] order) {\n        double total = 0.0;\n        for (Size s : order) {\n            total += s.getPrice();\n        }\n        return total;\n    }\n}\n",
   "explanation": "Enum constants can carry data: writing SMALL(2.00) calls the enum's constructor, which stores the value in a private final field just like an ordinary class. Enum constructors are implicitly private -- they only run once per constant when the enum is loaded. Outside the enum, each constant is a normal object, so totalFor just iterates the array and accumulates getPrice().",
   "hints": [
-    "Change the constant list to SMALL(2.00), MEDIUM(2.75), LARGE(3.50); -- the parentheses are constructor calls.",
-    "Add: private final double price; and a constructor Size(double price) { this.price = price; } (no public keyword needed).",
+    "Put each size's price in parentheses right after the constant name -- those parentheses are constructor calls -- and end the constant list with a semicolon.",
+    "Give the enum a private final double field for the price plus a constructor that stores its parameter into it; an enum constructor needs no access modifier.",
     "totalFor: start with double total = 0.0 and use a for-each loop over the order array."
   ],
   "relatedTopics": [

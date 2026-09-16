@@ -53,6 +53,18 @@ class HtmlReportGeneratorTest {
         assertTrue(html.contains("<svg"), "charts are rendered as inline SVG");
         assertFalse(html.contains("http://"), "report must be self-contained");
         assertFalse(html.contains("https://"), "report must be self-contained");
+
+        // accessibility: the page must be navigable and understandable without sight or colour
+        assertTrue(html.contains("<html lang='en'"), "the document language must be declared");
+        assertTrue(html.contains("role='img'") && html.contains("aria-label='"),
+                "charts need text alternatives");
+        assertTrue(html.contains("Show these figures as a table"),
+                "the accuracy chart needs a real data table, not just a label claiming one");
+        assertTrue(html.contains("scope='row'") && html.contains("scope='col'"),
+                "tables need header semantics");
+        assertTrue(html.contains("mastered") || html.contains("in progress")
+                        || html.contains("needs work"),
+                "status must be stated in words, not only encoded in bar colour");
     }
 
     @Test
