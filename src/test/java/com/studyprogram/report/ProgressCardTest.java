@@ -47,10 +47,13 @@ class ProgressCardTest {
         String card = ProgressCard.render(p, List.of());
 
         assertTrue(card.contains("Goal: Final"), card);
-        assertTrue(card.contains("0/2 topics at target, 5 days left"), card);
+        assertTrue(card.contains("0/2 ready, 5 days left"), card);
+        for (String line : card.split("\n")) {
+            assertTrue(line.length() <= 54, "every card line must fit the border: " + line);
+        }
         assertTrue(ProgressCard.verify(card, p.getId()).startsWith("VALID"),
                 "the goal line is part of what is signed");
-        assertTrue(ProgressCard.verify(card.replace("0/2 topics", "2/2 topics"), p.getId())
+        assertTrue(ProgressCard.verify(card.replace("0/2 ready", "2/2 ready"), p.getId())
                         .startsWith("INVALID"),
                 "editing the goal line must break the code, like any other number on the card");
     }

@@ -69,9 +69,12 @@ public final class ProgressCard {
         if (profile.hasActiveGoal()) {
             var plan = com.studyprogram.core.GoalPlanner.plan(profile, LocalDate.now());
             int total = plan.behind().size() + plan.onTarget().size();
-            row(card, v, "Goal: " + profile.getGoal().getTitle(),
-                    plan.onTarget().size() + "/" + total + " topics at target, "
-                    + plan.daysLeft() + " day" + (plan.daysLeft() == 1 ? "" : "s") + " left");
+            // the value column is 23 characters wide; the title gets whatever the label allows
+            String title = profile.getGoal().getTitle();
+            if (title.length() > 20) title = title.substring(0, 19) + "…";
+            row(card, v, "Goal: " + title,
+                    plan.onTarget().size() + "/" + total + " ready, " + plan.daysLeft()
+                    + " day" + (plan.daysLeft() == 1 ? "" : "s") + " left");
         }
         card.append(ml).append(h.repeat(52)).append(mr).append("\n");
 
