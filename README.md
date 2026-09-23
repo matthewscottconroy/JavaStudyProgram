@@ -239,6 +239,28 @@ changes. English is the fallback for anything a translation has not covered, so 
 translation is useful immediately, and the build fails if the code asks for a key no bundle
 defines or if a translation leaves a `{0}` placeholder behind.
 
+## Help without an AI
+
+Optional AI means the program has to be useful without one, and for a long time it was not: `[e]`
+explain printed an advertisement for an API key, and `[h]` hint printed "No hints available" for
+the two thirds of questions nobody had written hints for. Both now answer from what the program
+already knows.
+
+- **Explain** assembles a study note from the topic's own description, the prerequisites it rests
+  on (with theirs), and what it leads to — so "I don't understand this" gets an answer about
+  *this*, and points at the foundation that is usually the real problem.
+- **Hint** gives authored hints first, in order, then falls back to a ladder derived from the
+  question: what it is about, what it rests on, how to attack that kind of question (trace a line
+  at a time; compare what the prompt promises with what the code does; find the line that must
+  come first), and which catalogued traps its choices contain.
+- Pressing hint twice now gives you the *second* hint. It used to repeat the first.
+
+Nothing here is generated and nothing is invented — every sentence is assembled from the topic
+graph, the question, and the misconception catalogue. It is not as good as a model that has read
+your code; it is a great deal better than a blank. A test asserts that no derived hint anywhere in
+the bank contains its own answer, and that every question in the bank has something to say to a
+stuck student.
+
 ## Optional AI, configured by file
 
 AI help is optional and off by default. Point it wherever you like with `data/llm.json`:

@@ -27,6 +27,17 @@ public interface LLMService {
     String generateHint(Question question);
 
     /**
+     * The next hint, given how many the student has already taken.
+     *
+     * <p>Without this a second press of "hint" returns the first hint again, which is how a
+     * student learns that asking twice is pointless. Implementations that have no notion of
+     * progression fall back to the single-hint form.
+     */
+    default String generateHint(Question question, int alreadyGiven) {
+        return generateHint(question);
+    }
+
+    /**
      * Asks the model to explain a concept in the context of a topic.
      * Useful for on-demand "teach me" mode.
      */

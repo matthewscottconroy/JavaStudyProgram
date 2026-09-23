@@ -72,13 +72,23 @@ class CodingExerciseRunnerTest {
 
     @Test
     void infiniteLoopTimesOut() {
-        String loop = """
-                public class Adder {
-                    public static int add(int a, int b) { while (true) {} }
-                }
-                """;
-        CodingResult result = runner.compileAndTest(loop, TEST);
-        assertEquals(CodingResult.Status.TIMEOUT, result.status());
+        // The limit is deliberately generous for students on loaded machines; a test does not
+        // need to sit through it to prove the kill works.
+        System.setProperty("javastudy.runTimeoutSeconds", "3");
+        try {
+            String loop = """
+                    public class Adder {
+                        public static int add(int a, int b) { while (true) {} }
+                    }
+                    """;
+            CodingResult result = runner.compileAndTest(loop, TEST);
+            assertEquals(CodingResult.Status.TIMEOUT, result.status());
+            assertTrue(result.output().contains("loop that never ends"),
+                    "the message should name the likely cause without asserting it: "
+                    + result.output());
+        } finally {
+            System.clearProperty("javastudy.runTimeoutSeconds");
+        }
     }
 
     @Test
@@ -96,8 +106,14 @@ class CodingExerciseRunnerTest {
      * ever reaching students. The gate is {@link com.studyprogram.questions.QuestionPackVerifier},
      * the same code an instructor runs as {@code --verify-questions} over their own pack — one
      * definition of "healthy", so a pack that verifies here also loads there.
+     *
+     * <p>Tagged {@code full-bank} because it compiles and runs 727 exercises, which is minutes of
+     * work on a slow runner. Question content is the same on every operating system, so CI sweeps
+     * the whole bank once on Linux and relies on the other tests in this class — which do exercise
+     * the compile-and-run pipeline — to prove that pipeline works on macOS and Windows.
      */
     @Test
+    @org.junit.jupiter.api.Tag("full-bank")
     void everyCodingExerciseStarterFailsAndSolutionPasses() {
         var report = com.studyprogram.questions.QuestionPackVerifier.verify(
                 QuestionBank.DEFAULT_EXTERNAL_DIR);

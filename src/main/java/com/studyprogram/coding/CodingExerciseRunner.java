@@ -44,6 +44,21 @@ public class CodingExerciseRunner {
      * machine and not enough on a busy one.
      */
     private static final int  RUN_TIMEOUT_SECONDS = 30;
+
+    /**
+     * The limit actually applied. Overridable through {@code javastudy.runTimeoutSeconds} so the
+     * test that proves an endless loop is caught does not have to sit through the full wait —
+     * the behaviour being tested is the kill, not the duration.
+     */
+    private static int runTimeoutSeconds() {
+        String override = System.getProperty("javastudy.runTimeoutSeconds");
+        if (override == null) return RUN_TIMEOUT_SECONDS;
+        try {
+            return Math.max(1, Integer.parseInt(override));
+        } catch (NumberFormatException e) {
+            return RUN_TIMEOUT_SECONDS;
+        }
+    }
     private static final int  MAX_OUTPUT_CHARS    = 10_000;
     private static final String MEMORY_CAP        = "-Xmx128m";
 
@@ -245,10 +260,11 @@ public class CodingExerciseRunner {
         reader.start();
 
         try {
-            if (!process.waitFor(RUN_TIMEOUT_SECONDS, TimeUnit.SECONDS)) {
+            int limit = runTimeoutSeconds();
+            if (!process.waitFor(limit, TimeUnit.SECONDS)) {
                 process.destroyForcibly();
                 return new CodingResult(CodingResult.Status.TIMEOUT,
-                        "Your program ran for more than " + RUN_TIMEOUT_SECONDS
+                        "Your program ran for more than " + limit
                         + " seconds and was stopped.\n"
                         + "Usually that means a loop that never ends — check that its condition "
                         + "can actually become false, and that whatever it tests really changes "

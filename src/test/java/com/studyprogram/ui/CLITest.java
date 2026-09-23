@@ -352,6 +352,41 @@ class CLITest {
         assertTrue(out.contains("Work on these before the real thing"), out);
     }
 
+    /**
+     * Regression: the exam's no-help flag and the coding screen briefly lived on different
+     * objects, so hints stayed available during an exam's coding questions. Multiple-choice
+     * questions take a different path and did not catch it.
+     */
+    @Test
+    void anExamRefusesHintsOnCodingQuestionsToo() throws Exception {
+        Question coding = Question.builder()
+                .id("exam-code").topic(Topic.VARIABLES).type(QuestionType.CODING).difficulty(2)
+                .prompt("Return 1.")
+                .starterCode("public class E { public static int f() { return 0; } }")
+                .testCode("""
+                        public class ETest {
+                            public static void main(String[] a) {
+                                if (E.f() != 1) { System.out.println("FAIL"); System.exit(1); }
+                                System.out.println("ALL TESTS PASSED");
+                            }
+                        }
+                        """)
+                .answer("public class E { public static int f() { return 1; } }")
+                .hint("This hint must not be reachable during an exam.")
+                .build();
+
+        String out = run(QuestionBank.of(List.of(coding)),
+                "Ada", "n", "done",
+                "5", "", "1", "1", "y",   // exam over unit 1, one question, start
+                "h",                       // ask for a hint mid-exam
+                "g",                       // give up
+                "9");
+
+        assertTrue(out.contains("No hints during an exam"), out);
+        assertFalse(out.contains("This hint must not be reachable"),
+                "the authored hint must not leak during an exam: " + out);
+    }
+
     @Test
     void examModeCanBeBackedOutOfWithoutRecordingAnything() throws Exception {
         run(tinyBank(), "Ada", "n", "done", "5", "", "1", "2", "n", "9");

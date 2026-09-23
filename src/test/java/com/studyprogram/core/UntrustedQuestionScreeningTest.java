@@ -17,6 +17,25 @@ class UntrustedQuestionScreeningTest {
     @TempDir
     Path external;
 
+    /**
+     * Whether a clean external question loads depends on whether the machine has containment, so
+     * every test here pins it. CI runs on three operating systems with two different answers.
+     */
+    private static void contained() {
+        com.studyprogram.coding.Sandbox.forceBackendForTesting(
+                com.studyprogram.coding.Sandbox.Backend.BWRAP);
+    }
+
+    private static void uncontained() {
+        com.studyprogram.coding.Sandbox.forceBackendForTesting(
+                com.studyprogram.coding.Sandbox.Backend.NONE);
+    }
+
+    @org.junit.jupiter.api.AfterEach
+    void restoreRealDetection() {
+        com.studyprogram.coding.Sandbox.forceBackendForTesting(null);
+    }
+
     private void writeQuestion(String id, String starterBody) throws Exception {
         Path dir = external.resolve("loops");
         Files.createDirectories(dir);
@@ -37,6 +56,7 @@ class UntrustedQuestionScreeningTest {
 
     @Test
     void externalQuestionUsingProcessExecutionIsRefused() throws Exception {
+        contained();
         writeQuestion("evil1", "try { new ProcessBuilder(\\\"sh\\\").start(); } catch (Exception e) {}");
         QuestionBank bank = new QuestionBank(external);
 
@@ -47,6 +67,7 @@ class UntrustedQuestionScreeningTest {
 
     @Test
     void harmlessExternalQuestionLoadsNormally() throws Exception {
+        contained();
         writeQuestion("fine1", "int x = 1 + 2;");
         QuestionBank bank = new QuestionBank(external);
 
@@ -62,6 +83,7 @@ class UntrustedQuestionScreeningTest {
      */
     @Test
     void anExternalExerciseWrittenTheDocumentedWayIsNotRefused() throws Exception {
+        contained();
         Path dir = external.resolve("loops");
         Files.createDirectories(dir);
         Files.writeString(dir.resolve("mine.json"), """
@@ -92,8 +114,7 @@ class UntrustedQuestionScreeningTest {
     void withNoSandboxACleanExternalExerciseIsStillRefusedUnlessTrusted() throws Exception {
         String previous = System.getProperty("JAVASTUDY_SANDBOX");
         try {
-            com.studyprogram.coding.Sandbox.forceBackendForTesting(
-                    com.studyprogram.coding.Sandbox.Backend.NONE);
+            uncontained();
             writeQuestion("plain1", "int x = 1 + 2;");
             QuestionBank bank = new QuestionBank(external);
 
@@ -104,16 +125,14 @@ class UntrustedQuestionScreeningTest {
                             .anyMatch(w -> w.contains("no exercise sandbox")),
                     "and the reason must be stated: " + bank.getWarnings());
         } finally {
-            com.studyprogram.coding.Sandbox.forceBackendForTesting(null);
-            if (previous != null) System.setProperty("JAVASTUDY_SANDBOX", previous);
+                if (previous != null) System.setProperty("JAVASTUDY_SANDBOX", previous);
         }
     }
 
     @Test
     void withNoSandboxAnExplicitlyTrustedPackStillLoads() throws Exception {
         try {
-            com.studyprogram.coding.Sandbox.forceBackendForTesting(
-                    com.studyprogram.coding.Sandbox.Backend.NONE);
+            uncontained();
             System.setProperty("javastudy.trustExternal", "true");
             writeQuestion("plain2", "int x = 1 + 2;");
             QuestionBank bank = new QuestionBank(external);
@@ -122,8 +141,7 @@ class UntrustedQuestionScreeningTest {
                     "an instructor who vouched for their own pack must be able to use it");
         } finally {
             System.clearProperty("javastudy.trustExternal");
-            com.studyprogram.coding.Sandbox.forceBackendForTesting(null);
-        }
+            }
     }
 
     @Test

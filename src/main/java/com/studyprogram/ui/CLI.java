@@ -34,13 +34,10 @@ public class CLI {
     private final Scanner        in;
     private final CodingExerciseRunner codingRunner;
 
+    private final StudyContext context;
+    private final CodingFlow codingFlow;
     private StudentProfile currentProfile;
     private AttemptLog     attemptLog;
-    private int            lastCodingHints;   // hints used in the most recent codingFlow run
-    /** Compile-error categories the student hit during the most recent codingFlow run. */
-    private final Set<String> lastCodingErrors = new LinkedHashSet<>();
-    /** True while an exam is in progress: hints and explanations are refused. */
-    private boolean noHelp;
     /** Whether a generated report is opened in the system browser. Off under test. */
     private final boolean openReportsInBrowser;
 
@@ -69,6 +66,9 @@ public class CLI {
         this.in           = new Scanner(input);
         this.codingRunner = codingRunner;
         this.openReportsInBrowser = openReportsInBrowser;
+        this.context      = new StudyContext(bank, storage, llm, this.in, codingRunner,
+                                             openReportsInBrowser);
+        this.codingFlow   = new CodingFlow(context);
     }
 
     public void run() {
@@ -186,10 +186,8 @@ public class CLI {
                                 loaded = offerRecovery(chosen);
                             }
                             if (loaded.isPresent()) {
-                                currentProfile = loaded.get();
+                                setProfile(loaded.get());
                                 currentProfile.applyDecay();
-                                attemptLog = AttemptLog.forProfile(storage.directory(),
-                                                                   currentProfile.getName());
                                 System.out.println("  " + Messages.get("profile.welcomeBack", currentProfile.getName()));
                                 return;
                             }
@@ -289,8 +287,7 @@ public class CLI {
         System.out.print("  " + Messages.get("profile.enterName") + " ");
         String name = in.nextLine().trim();
         if (name.isBlank()) name = "Student";
-        currentProfile = new StudentProfile(name);
-        attemptLog = AttemptLog.forProfile(storage.directory(), name);
+        setProfile(new StudentProfile(name));
         System.out.println("  " + Messages.get("profile.created", name));
 
         System.out.println();
@@ -361,9 +358,8 @@ public class CLI {
             profileMenu();
             return;
         }
-        currentProfile = chosen;
+        setProfile(chosen);
         currentProfile.applyDecay();
-        attemptLog = AttemptLog.forProfile(storage.directory(), currentProfile.getName());
         placementCheck();
     }
 
@@ -713,7 +709,7 @@ public class CLI {
         Set<String> attemptedIds = new LinkedHashSet<>();
         String lastSection = null;
         boolean ranOut = false;
-        noHelp = true;
+        context.noHelp = true;
 
         try {
             for (int i = 0; i < paper.size(); i++) {
@@ -733,14 +729,14 @@ public class CLI {
 
                 long qStart = System.nanoTime();
                 if (q.isCoding()) {
-                    CodingOutcome outcome = codingFlow(q, i + 1, paper.size());
-                    if (outcome == CodingOutcome.QUIT) break;
+                    CodingFlow.Outcome outcome = codingFlow.run(q, i + 1, paper.size());
+                    if (outcome == CodingFlow.Outcome.QUIT) break;
                     attemptedIds.add(q.getId());
-                    boolean ok = outcome == CodingOutcome.CORRECT;
+                    boolean ok = outcome == CodingFlow.Outcome.CORRECT;
                     if (ok) correctIds.add(q.getId());
                     currentProfile.recordAnswer(q, ok);
                     logAttempt(q, ok ? AttemptRecord.OUTCOME_CORRECT : AttemptRecord.OUTCOME_INCORRECT,
-                            qStart, 0, lastCodingErrors);
+                            qStart, 0, context.lastCodingErrors);
                     continue;
                 }
 
@@ -764,7 +760,7 @@ public class CLI {
                 System.out.println("  " + Display.dim() + "Recorded." + Display.reset());
             }
         } finally {
-            noHelp = false;
+            context.noHelp = false;
         }
 
         saveProfile();
@@ -911,13 +907,13 @@ public class CLI {
                 System.out.println("\n  " + Display.bold() + "FINAL BLOW — write the program."
                         + Display.reset());
                 long codeStart = System.nanoTime();
-                CodingOutcome outcome = codingFlow(q, asked, quiz.size());
-                if (outcome == CodingOutcome.QUIT) { asked--; break; }
-                boolean beat = outcome == CodingOutcome.CORRECT;
+                CodingFlow.Outcome outcome = codingFlow.run(q, asked, quiz.size());
+                if (outcome == CodingFlow.Outcome.QUIT) { asked--; break; }
+                boolean beat = outcome == CodingFlow.Outcome.CORRECT;
                 if (beat) correct++;
                 currentProfile.recordAnswer(q, beat);
                 logAttempt(q, beat ? AttemptRecord.OUTCOME_CORRECT : AttemptRecord.OUTCOME_INCORRECT,
-                        codeStart, lastCodingHints);
+                        codeStart, context.lastCodingHints);
                 continue;
             }
 
@@ -1073,6 +1069,20 @@ public class CLI {
         long secs = Math.max(0, (System.nanoTime() - startNano) / 1_000_000_000L);
         attemptLog.append(new AttemptRecord(LocalDateTime.now(), q, outcome, secs, hintsUsed,
                                             new ArrayList<>(compileErrors)));
+    }
+
+    /**
+     * Makes this the profile every flow is working with.
+     *
+     * <p>The profile and its attempt log always change together, and they are read by screens
+     * that no longer live in this class, so they are set in one place rather than at each call
+     * site — which is how two of them would eventually disagree.
+     */
+    private void setProfile(StudentProfile profile) {
+        this.currentProfile = profile;
+        this.attemptLog = AttemptLog.forProfile(storage.directory(), profile.getName());
+        context.setProfile(profile);
+        context.setAttemptLog(this.attemptLog);
     }
 
     private void saveProfile() {
@@ -1315,18 +1325,18 @@ public class CLI {
             // Coding exercises have their own compile-and-test flow
             if (q.isCoding()) {
                 long qStart = System.nanoTime();
-                CodingOutcome outcome = codingFlow(q, qNum, displayTotal);
+                CodingFlow.Outcome outcome = codingFlow.run(q, qNum, displayTotal);
                 switch (outcome) {
                     case QUIT -> quit = true;
                     case SKIPPED -> {
                         session.skip(q);
-                        logAttempt(q, AttemptRecord.OUTCOME_SKIPPED, qStart, lastCodingHints, lastCodingErrors);
+                        logAttempt(q, AttemptRecord.OUTCOME_SKIPPED, qStart, context.lastCodingHints, context.lastCodingErrors);
                         System.out.println("  " + Messages.get("session.skipped"));
                     }
                     case CORRECT -> {
                         GradingResult r = GradingResult.correct(q.getExplanation());
                         session.recordAnswer(q, r);
-                        logAttempt(q, AttemptRecord.OUTCOME_CORRECT, qStart, lastCodingHints, lastCodingErrors);
+                        logAttempt(q, AttemptRecord.OUTCOME_CORRECT, qStart, context.lastCodingHints, context.lastCodingErrors);
                         saveProfile();
                         Display.correct(r);
                     }
@@ -1335,12 +1345,12 @@ public class CLI {
                                 "Recorded as incorrect — study the reference solution and it "
                                 + "will come around again.", q.getExplanation());
                         session.recordAnswer(q, r);
-                        logAttempt(q, AttemptRecord.OUTCOME_INCORRECT, qStart, lastCodingHints, lastCodingErrors);
+                        logAttempt(q, AttemptRecord.OUTCOME_INCORRECT, qStart, context.lastCodingHints, context.lastCodingErrors);
                         saveProfile();
                     }
                 }
                 if (quit) break;
-                if (outcome == CodingOutcome.CORRECT || outcome == CodingOutcome.GAVE_UP) {
+                if (outcome == CodingFlow.Outcome.CORRECT || outcome == CodingFlow.Outcome.GAVE_UP) {
                     System.out.print("\n  [Enter] next  [q] quit: ");
                     if (in.nextLine().trim().equalsIgnoreCase("q")) break;
                 }
@@ -1375,8 +1385,11 @@ public class CLI {
                     continue;
                 }
                 if (input.equalsIgnoreCase("h")) {
+                    // Pass how many have already been taken, so pressing h again moves on
+                    // instead of repeating the first hint.
+                    String hint = llm.generateHint(q, hintsUsed);
                     hintsUsed++;
-                    System.out.println("  Hint: " + Display.yellow() + llm.generateHint(q) + Display.reset());
+                    System.out.println("  Hint: " + Display.yellow() + hint + Display.reset());
                     System.out.print("  Your answer: ");
                     continue;
                 }
@@ -1439,181 +1452,6 @@ public class CLI {
         }
     }
 
-    // ── Coding exercises ──────────────────────────────────────────────────────
-
-    private enum CodingOutcome { CORRECT, GAVE_UP, SKIPPED, QUIT }
-
-    /**
-     * Drives one coding exercise: writes the starter file to the workspace, then loops
-     * compile-and-test runs until the tests pass or the student gives up, skips, or quits.
-     */
-    private CodingOutcome codingFlow(Question q, int qNum, int total) {
-        Path file;
-        try {
-            file = codingRunner.prepareWorkspace(q);
-        } catch (IOException e) {
-            System.out.println("  Could not prepare the workspace: " + e.getMessage());
-            return CodingOutcome.SKIPPED;
-        }
-
-        Display.codingQuestion(q, qNum, total, file);
-        lastCodingHints = 0;
-        lastCodingErrors.clear();
-
-        while (true) {
-            String input = in.nextLine().trim().toLowerCase();
-            switch (input) {
-                case "q" -> { return CodingOutcome.QUIT; }
-                case "s" -> { return CodingOutcome.SKIPPED; }
-                case "g" -> {
-                    Display.referenceSolution(q);
-                    return CodingOutcome.GAVE_UP;
-                }
-                case "w" -> {
-                    watchAndRetest(q);
-                    Display.codingMenu();
-                }
-                case "r" -> {
-                    try {
-                        codingRunner.resetToStarter(q);
-                        System.out.println("  File reset to the original starter code.");
-                    } catch (IOException e) {
-                        System.out.println("  Could not reset the file: " + e.getMessage());
-                    }
-                    Display.codingMenu();
-                }
-                case "h" -> {
-                    if (noHelp) {
-                        System.out.println("  " + Display.yellow()
-                                + "No hints during an exam." + Display.reset());
-                        Display.codingMenu();
-                        break;
-                    }
-                    List<String> hints = q.getHints();
-                    String hint = lastCodingHints < hints.size()
-                            ? hints.get(lastCodingHints)
-                            : llm.generateHint(q);
-                    lastCodingHints++;
-                    System.out.println("  Hint: " + Display.yellow() + hint + Display.reset());
-                    Display.codingMenu();
-                }
-                case "e" -> {
-                    if (noHelp) {
-                        System.out.println("  " + Display.yellow()
-                                + "No explanations during an exam." + Display.reset());
-                    } else {
-                        System.out.println("  " + Display.dim()
-                                + llm.explainConcept(q.getTopic(), q.getPrompt()) + Display.reset());
-                    }
-                    Display.codingMenu();
-                }
-                default -> {   // Enter (or anything else) runs the tests
-                    System.out.println("  Compiling and running tests…");
-                    CodingResult result = codingRunner.run(q);
-                    lastCodingErrors.addAll(result.errorKinds());
-                    Display.codingResult(result);
-                    if (result.passed()) {
-                        showQualityReview(q);
-                        return CodingOutcome.CORRECT;
-                    }
-                    if (result.status() == CodingResult.Status.ENVIRONMENT_ERROR) {
-                        // not the student's fault — don't count it against them
-                        return CodingOutcome.SKIPPED;
-                    }
-                    Display.codingMenu();
-                }
-            }
-        }
-    }
-
-    /**
-     * After the tests go green, says what an instructor would circle in the margin.
-     *
-     * <p>Deliberately placed after the pass, never before it: correctness is what the exercise is
-     * marked on, and advice offered while a student is still fighting to compile would read as one
-     * more thing they had got wrong.
-     */
-    private void showQualityReview(Question q) {
-        String source = studentSource(q);
-        if (source == null) return;
-        String review = com.studyprogram.coding.CodeQualityReview.render(source);
-        if (review.isBlank()) return;
-
-        System.out.println();
-        System.out.println("  " + Display.cyan() + "It works. Worth tightening:" + Display.reset());
-        for (String line : review.split("\n")) {
-            System.out.println("  " + Display.dim() + line + Display.reset());
-        }
-    }
-
-    /** The student's own source, or null when it cannot be read. */
-    private String studentSource(Question q) {
-        try {
-            java.nio.file.Path file = codingRunner.studentFile(q);
-            if (!java.nio.file.Files.isRegularFile(file)) return null;
-            return java.nio.file.Files.readString(file);
-        } catch (IOException e) {
-            return null;
-        }
-    }
-
-    /**
-     * Watch mode: recompiles and retests whenever the student saves, so the loop is
-     * "save in your editor, glance at the terminal" instead of alt-tabbing to press Enter.
-     * Stops when the tests pass or the student presses Enter.
-     */
-    private void watchAndRetest(Question q) {
-        System.out.println("  Watching " + codingRunner.workspaceDir(q).toAbsolutePath()
-                + " — save to re-run. Press Enter to stop.");
-        long lastRun = 0;
-        try {
-            while (true) {
-                if (System.in.available() > 0) {
-                    in.nextLine();
-                    System.out.println("  Stopped watching.");
-                    return;
-                }
-                long newest = newestModification(codingRunner.workspaceDir(q));
-                if (newest > lastRun) {
-                    lastRun = newest;
-                    if (lastRun > 0) {
-                        System.out.println("  Change detected — compiling…");
-                        CodingResult result = codingRunner.run(q);
-                        lastCodingErrors.addAll(result.errorKinds());
-                        Display.codingResult(result);
-                        if (result.passed()) {
-                            showQualityReview(q);
-                            System.out.println("  " + Display.green()
-                                    + "Tests pass — press Enter to continue." + Display.reset());
-                            return;
-                        }
-                    }
-                }
-                Thread.sleep(300);
-            }
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        } catch (IOException e) {
-            System.out.println("  Watch mode unavailable: " + e.getMessage());
-        }
-    }
-
-    /** Most recent modification time across the exercise's .java files, or 0 when unreadable. */
-    private static long newestModification(java.nio.file.Path dir) {
-        try (var files = java.nio.file.Files.list(dir)) {
-            return files.filter(f -> f.toString().endsWith(".java"))
-                    .mapToLong(f -> {
-                        try {
-                            return java.nio.file.Files.getLastModifiedTime(f).toMillis();
-                        } catch (IOException e) {
-                            return 0L;
-                        }
-                    })
-                    .max().orElse(0L);
-        } catch (IOException e) {
-            return 0L;
-        }
-    }
 
     /** Brief review pass over questions the student got wrong this session. */
     private void reviewWrongAnswers(List<Question> wrong) {
@@ -1639,23 +1477,23 @@ public class CLI {
             long qStart = System.nanoTime();
 
             if (q.isCoding()) {
-                CodingOutcome outcome = codingFlow(q, i + 1, questions.size());
-                if (outcome == CodingOutcome.QUIT) break;
-                if (outcome == CodingOutcome.CORRECT) {
+                CodingFlow.Outcome outcome = codingFlow.run(q, i + 1, questions.size());
+                if (outcome == CodingFlow.Outcome.QUIT) break;
+                if (outcome == CodingFlow.Outcome.CORRECT) {
                     currentProfile.recordAnswer(q, true);
-                    logAttempt(q, AttemptRecord.OUTCOME_CORRECT, qStart, lastCodingHints,
-                               lastCodingErrors);
+                    logAttempt(q, AttemptRecord.OUTCOME_CORRECT, qStart, context.lastCodingHints,
+                               context.lastCodingErrors);
                     Display.correct(GradingResult.correct(q.getExplanation()));
                     correct++;
                     answered++;
-                } else if (outcome == CodingOutcome.GAVE_UP) {
+                } else if (outcome == CodingFlow.Outcome.GAVE_UP) {
                     currentProfile.recordAnswer(q, false);
-                    logAttempt(q, AttemptRecord.OUTCOME_INCORRECT, qStart, lastCodingHints,
-                               lastCodingErrors);
+                    logAttempt(q, AttemptRecord.OUTCOME_INCORRECT, qStart, context.lastCodingHints,
+                               context.lastCodingErrors);
                     answered++;
                 } else {
-                    logAttempt(q, AttemptRecord.OUTCOME_SKIPPED, qStart, lastCodingHints,
-                               lastCodingErrors);
+                    logAttempt(q, AttemptRecord.OUTCOME_SKIPPED, qStart, context.lastCodingHints,
+                               context.lastCodingErrors);
                 }
                 saveProfile();
                 continue;
@@ -1665,6 +1503,7 @@ public class CLI {
 
             String answer = null;
             boolean quit = false;
+            int hintsTaken = 0;
             while (answer == null) {
                 String input = in.nextLine().trim();
                 if (input.equalsIgnoreCase("q")) { quit = true; break; }
@@ -1673,7 +1512,8 @@ public class CLI {
                     break;
                 }
                 if (input.equalsIgnoreCase("h")) {
-                    System.out.println("  Hint: " + Display.yellow() + llm.generateHint(q) + Display.reset());
+                    String hint = llm.generateHint(q, hintsTaken++);
+                    System.out.println("  Hint: " + Display.yellow() + hint + Display.reset());
                     System.out.print("  Your answer: ");
                     continue;
                 }
