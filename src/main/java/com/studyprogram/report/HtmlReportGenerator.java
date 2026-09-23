@@ -213,7 +213,8 @@ public class HtmlReportGenerator {
                 int pct = (int) Math.round(p.getMasteryScore() * 100);
                 String color = pct >= 80 ? "#2e7d32" : pct >= 40 ? "#b26a00" : "#b02a1e";
                 // the status word carries the same meaning as the bar's colour
-                String status = pct >= 80 ? "mastered" : pct >= 40 ? "in progress" : "needs work";
+                String status = p.isPlacementSeeded() ? "opened by placement"
+                        : pct >= 80 ? "mastered" : pct >= 40 ? "in progress" : "needs work";
                 h.append("<tr><th scope='row'>").append(esc(t.displayName)).append("</th>")
                  .append("<td><span class='mbar'><span style='width:").append(pct)
                  .append("%;background:").append(color).append("'></span></span> ")
@@ -222,8 +223,9 @@ public class HtmlReportGenerator {
                  .append("<td class='dim'>").append(p.getCorrect()).append("/")
                  .append(p.getAttempts())
                  .append(p.getSkipped() > 0 ? ", " + p.getSkipped() + " skipped" : "")
-                 .append(" — ").append(esc(com.studyprogram.stats.Confidence.label(
-                         p.getCorrect(), p.getAttempts())))
+                 .append(" — ").append(esc(p.isPlacementSeeded()
+                         ? "estimated from your placement check, not yet practised"
+                         : com.studyprogram.stats.Confidence.label(p.getCorrect(), p.getAttempts())))
                  .append("</td></tr>");
             }
             h.append("</tbody></table>");

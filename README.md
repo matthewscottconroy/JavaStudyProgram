@@ -54,6 +54,19 @@ way to navigate the program, not just a picture of it. (It is itself a custom-pa
 `Graphics2D` component with Swing Timers driving its animations — once you reach the GUI world,
 you can read its source as course material.)
 
+**Placement.** A student halfway through Java II should not have to answer their way through
+variables and printing to reach the material they came for. So the first question the program
+asks is whether you have done any Java before, and a short adaptive check — up to 12 questions,
+harder while you are right, easier when you are not — opens the topics you already know. It uses
+the prerequisite graph rather than fighting it: a correct answer on an advanced topic is evidence
+about everything underneath it, so a dozen questions can speak to all 61. Two limits keep it
+honest. A wrong answer infers **nothing** downward, because a missed arrays question might mean
+weak arrays or weak loops and guessing would be worse than not guessing. And a passed topic is
+opened, not ticked off — seeded just over the unlock line and well under the mastery target,
+labelled "opened by placement" everywhere it appears, because answering one question is evidence
+that a topic should be open, never that it has been learned. Skip it and you start at the
+beginning; take it later from the profile menu with `[P]`.
+
 **Practice your mistakes.** The program records every question you get wrong and every compile
 error you hit; `[x]` at the session prompt turns that record into the next session. It serves the
 questions you missed and have not since got right — oldest first, because the longest-standing
@@ -87,6 +100,12 @@ divided by your expected gain is a number of questions). The auto feed heads for
 topics, routing through the prerequisites of any it cannot reach yet; the progress report and
 card show the same numbers. It says plainly when the pace needed is more than a session a day.
 Set it from Exam Mode, since a goal is literally the exam you will sit.
+
+**Worksheets.** Not all teaching happens at a keyboard. Exam Mode's `[w]` draws a balanced set
+from the bank the same way it draws a paper, and writes two self-contained HTML documents laid
+out for printing: a worksheet with a name line, blank space to write in and **no answers on it**,
+and a separate answer key that repeats each question with its answer and the reasoning, so it can
+be marked without the worksheet in hand. Questions never split across a page break.
 
 **Exam Mode** is the honest rehearsal. Everything else in the program is designed to help you
 succeed right now: the feed picks what you are ready for, hints are a keypress away, and a missed
@@ -254,7 +273,9 @@ hands-on end of the ladder whenever a topic has it.
 During a coding exercise: `Enter` compiles and tests, `h` gives progressive hints,
 `r` resets the file to the starter, `g` gives up and shows the reference solution,
 `s` skips, `q` quits. Student programs run in a subprocess with a memory cap and a
-10-second timeout, so an accidental infinite loop is caught, not fatal. When compilation fails you
+30-second timeout, so a loop that never ends is caught, not fatal (the limit is
+deliberately generous: telling a student their correct Swing code loops forever because AWT was
+slow to start on a busy laptop is a worse failure than waiting half a minute for a real hang). When compilation fails you
 get javac's message *and* a plain-English reading of it (see the compiler-error decoder above).
 
 ## Optional AI support

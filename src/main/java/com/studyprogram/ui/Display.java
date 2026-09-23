@@ -294,8 +294,9 @@ public class Display {
         for (Topic t : Topic.values()) {
             TopicPerformance p = performance.get(t);
             boolean hasAttempts = p != null && p.getAttempts() > 0;
+            boolean placed      = p != null && p.isPlacementSeeded();
             boolean selected    = selectedSet.contains(t);
-            if (!selected && !hasAttempts) continue;
+            if (!selected && !hasAttempts && !placed) continue;
 
             double mastery = (p == null) ? 0.0 : p.getMasteryScore();
             int pct = (int)(mastery * 100);
@@ -307,7 +308,9 @@ public class Display {
                     color,
                     bar(pct),
                     reset(),
-                    p == null ? "" : String.format("(%d/%d) %s",
+                    p == null ? ""
+                            : placed ? "opened by placement — not yet practised"
+                            : String.format("(%d/%d) %s",
                             p.getCorrect(), p.getAttempts(),
                             com.studyprogram.stats.Confidence.label(p.getCorrect(), p.getAttempts())));
             anyShown = true;

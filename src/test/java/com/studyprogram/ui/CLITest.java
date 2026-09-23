@@ -1,6 +1,7 @@
 package com.studyprogram.ui;
 
 import com.studyprogram.coding.CodingExerciseRunner;
+import com.studyprogram.core.PlacementCheck;
 import com.studyprogram.core.QuestionBank;
 import com.studyprogram.llm.NullLLMService;
 import com.studyprogram.model.Question;
@@ -102,6 +103,74 @@ class CLITest {
                 .build();
     }
 
+    /**
+     * A bank with one answerable probe per level, so the placement walk has somewhere to go.
+     * Every question answers "a", as elsewhere, so a script does not depend on which is served.
+     */
+    private static QuestionBank placementBank() {
+        List<Question> all = new java.util.ArrayList<>();
+        Topic[] perLevel = {Topic.VARIABLES, Topic.LOOPS, Topic.ARRAYS_ARRAYLISTS,
+                            Topic.INHERITANCE, Topic.STREAM_API};
+        for (Topic t : perLevel) {
+            for (int i = 1; i <= 3; i++) all.add(mc("p-" + t + "-" + i, t, "a"));
+        }
+        return QuestionBank.of(all);
+    }
+
+    @Test
+    void placementOpensWhatTheStudentAlreadyKnows() throws Exception {
+        String[] answers = new String[PlacementCheck.LENGTH];
+        java.util.Arrays.fill(answers, "a");          // right every time: climb the ladder
+        java.util.List<String> script = new java.util.ArrayList<>(
+                List.of("Ada", "y"));                  // name, take the check
+        script.addAll(List.of(answers));
+        script.addAll(List.of("done", "9"));
+
+        String out = run(placementBank(), script.toArray(new String[0]));
+
+        assertTrue(out.contains("Placement Check"), out);
+        assertTrue(out.contains("Placement result"), out);
+        assertTrue(out.contains("opened, not ticked off"),
+                "the summary must say what placement did and did not prove: " + out);
+
+        StudentProfile saved = storage.load("Ada").orElseThrow();
+        assertFalse(saved.getPerformance().isEmpty(), "placement must seed the profile");
+        assertTrue(Topic.LOOPS.isUnlocked(saved.getPerformance()),
+                "a student who answered correctly should not be locked out of loops");
+        for (var perf : saved.getPerformance().values()) {
+            assertTrue(perf.getMasteryScore() < 0.8,
+                    "placement opens topics, it does not mark them mastered");
+        }
+        assertFalse(AttemptLog.forProfile(storage.directory(), "Ada").readAll().isEmpty(),
+                "placement answers are real answers and belong in the log");
+    }
+
+    @Test
+    void decliningPlacementLeavesAnUntouchedProfile() throws Exception {
+        run(placementBank(), "Ada", "n", "done", "9");
+
+        StudentProfile saved = storage.load("Ada").orElseThrow();
+        assertTrue(saved.getPerformance().isEmpty(), "declining must seed nothing");
+    }
+
+    @Test
+    void placementRefusesHintsAndCanBeTakenLaterFromTheProfileMenu() throws Exception {
+        run(placementBank(), "Ada", "n", "done", "9");   // skip it at first
+
+        java.util.List<String> script = new java.util.ArrayList<>(
+                List.of("P", "1",        // profile menu: placement check on profile 1
+                        "h", "a"));      // ask for a hint, then answer
+        for (int i = 1; i < PlacementCheck.LENGTH; i++) script.add("a");
+        script.addAll(List.of("9"));
+
+        String out = run(placementBank(), script.toArray(new String[0]));
+
+        assertTrue(out.contains("[P] placement check"), "the menu must offer it: " + out);
+        assertTrue(out.contains("No hints during placement"), out);
+        assertFalse(storage.load("Ada").orElseThrow().getPerformance().isEmpty(),
+                "the later check must still seed the profile");
+    }
+
     @Test
     void passingTheTestsStillEarnsAdviceOnTheCodeItself() throws Exception {
         // The starter already passes: isYes("yes") is true because short literals are interned,
@@ -130,7 +199,7 @@ class CLITest {
                 .build();
 
         String out = run(QuestionBank.of(List.of(coding)),
-                "Ada", "done",
+                "Ada", "n", "done",
                 "1", "", "1",
                 "",             // Enter: compile and run the tests
                 "",             // Enter: next
@@ -147,7 +216,7 @@ class CLITest {
     @Test
     void aMissedQuestionIsOfferedBackAsAMistakeToPractise() throws Exception {
         // First run: get a question wrong.
-        run(tinyBank(), "Ada", "done", "1", "", "1", "delta", "", "9");
+        run(tinyBank(), "Ada", "n", "done", "1", "", "1", "delta", "", "9");
 
         // Second run: the feed should say so, and [x] should re-serve exactly that question.
         String out = run(tinyBank(), "1", "1", "x", "a", "", "9");
@@ -160,7 +229,7 @@ class CLITest {
 
     @Test
     void fixingAMistakeClearsItFromTheDeck() throws Exception {
-        run(tinyBank(), "Ada", "done", "1", "", "1", "delta", "", "9");
+        run(tinyBank(), "Ada", "n", "done", "1", "", "1", "delta", "", "9");
         run(tinyBank(), "1", "1", "x", "a", "", "9");
 
         String out = run(tinyBank(), "1", "1", "x", "9");
@@ -171,7 +240,7 @@ class CLITest {
     @Test
     void reviewingWrongAnswersReachesTheAttemptLog() throws Exception {
         run(tinyBank(),
-                "Ada", "done",
+                "Ada", "n", "done",
                 "1", "", "1",
                 "delta",      // wrong
                 "",           // next
@@ -189,7 +258,7 @@ class CLITest {
     @Test
     void aGoalShowsOnTheMenuAndSteersTheFeed() throws Exception {
         String out = run(tinyBank(),
-                "Ada", "done",
+                "Ada", "n", "done",
                 "5", "g",               // exam mode -> set a goal
                 "Midterm",              // title
                 "14",                   // in 14 days
@@ -212,7 +281,7 @@ class CLITest {
     @Test
     void aGoalCanBeClearedAndAPastDateIsRefused() throws Exception {
         String out = run(tinyBank(),
-                "Ada", "done",
+                "Ada", "n", "done",
                 "5", "g", "Quiz",
                 "2020-01-01",           // in the past
                 "3",                    // fine: three days from now
@@ -226,9 +295,32 @@ class CLITest {
     }
 
     @Test
+    void aWorksheetAndItsAnswerKeyAreWrittenSeparately() throws Exception {
+        String out = run(tinyBank(),
+                "Ada", "n", "done",
+                "5", "w",         // exam mode -> worksheet
+                "1",              // unit 1
+                "2",              // two questions
+                "Quiz One",       // title
+                "9");
+
+        assertTrue(out.contains("Worksheet:"), out);
+        assertTrue(out.contains("Answer key:"), out);
+        assertTrue(out.contains("no answers on it"), out);
+
+        Path sheet = home.resolve("worksheets").resolve("Quiz_One.html");
+        Path key   = home.resolve("worksheets").resolve("Quiz_One-answers.html");
+        assertTrue(Files.exists(sheet) && Files.exists(key),
+                "both documents must be written");
+        assertFalse(Files.readString(sheet).contains("Answer:"),
+                "the printable worksheet must not carry answers");
+        assertTrue(Files.readString(key).contains("Answer:"));
+    }
+
+    @Test
     void examModeScoresEachSyllabusUnitSeparately() throws Exception {
         String out = run(tinyBank(),
-                "Ada", "done",
+                "Ada", "n", "done",
                 "5",            // exam mode
                 "",             // sit a paper (not set a goal)
                 "1",            // units to examine
@@ -248,7 +340,7 @@ class CLITest {
     @Test
     void examModeRefusesHintsAndReportsTheWeakUnit() throws Exception {
         String out = run(tinyBank(),
-                "Ada", "done",
+                "Ada", "n", "done",
                 "5", "", "1", "2", "y",
                 "h",            // asking for help
                 "delta",        // …and then answering wrongly anyway
@@ -262,7 +354,7 @@ class CLITest {
 
     @Test
     void examModeCanBeBackedOutOfWithoutRecordingAnything() throws Exception {
-        run(tinyBank(), "Ada", "done", "5", "", "1", "2", "n", "9");
+        run(tinyBank(), "Ada", "n", "done", "5", "", "1", "2", "n", "9");
 
         StudentProfile saved = storage.load("Ada").orElseThrow();
         assertEquals(0, saved.getTotalQuestionsAnswered(),
@@ -275,7 +367,7 @@ class CLITest {
                 faded("f-1", Topic.VARIABLES, "int total = 0;", "total += n;")));
 
         String out = run(bank,
-                "Ada", "done",
+                "Ada", "n", "done",
                 "1", "", "1",
                 "int total = 0;",   // blank 1
                 "total += n;",      // blank 2
@@ -295,7 +387,7 @@ class CLITest {
                 faded("f-1", Topic.VARIABLES, "int total = 0;", "total += n;")));
 
         String out = run(bank,
-                "Ada", "done",
+                "Ada", "n", "done",
                 "1", "", "1",
                 "int total = 0;",
                 "total = n;",       // wrong second line
@@ -309,6 +401,7 @@ class CLITest {
     void createsAProfileAndSavesIt() throws Exception {
         String out = run(tinyBank(),
                 "Ada",        // name
+                "n",          // decline the placement check
                 "done",       // topic selection
                 "9");         // exit
 
@@ -319,7 +412,7 @@ class CLITest {
     @Test
     void answeringAQuestionRecordsProgressAndLogsTheAttempt() throws Exception {
         run(tinyBank(),
-                "Ada", "done",
+                "Ada", "n", "done",
                 "1", "", "1", // start a one-question session on the auto feed
                 "a",          // answer (correct for every fixture)
                 "",           // [Enter] next
@@ -337,7 +430,7 @@ class CLITest {
     @Test
     void aWrongAnswerIsMarkedWrongAndExplained() {
         String out = run(tinyBank(),
-                "Ada", "done", "1", "", "1",
+                "Ada", "n", "done", "1", "", "1",
                 "d",          // wrong: every fixture answers "a"
                 "",           // [Enter] next
                 "n",          // decline the wrong-answer review
@@ -350,7 +443,7 @@ class CLITest {
     @Test
     void hintsAreAvailableWithoutAnsweringAndDoNotEndTheQuestion() {
         String out = run(tinyBank(),
-                "Ada", "done", "1", "", "1",
+                "Ada", "n", "done", "1", "", "1",
                 "h",          // ask for a hint first
                 "a",          // then answer
                 "", "9");
@@ -363,7 +456,7 @@ class CLITest {
     @Test
     void flaggingAQuestionRecordsItForTheInstructor() throws Exception {
         run(tinyBank(),
-                "Ada", "done", "1", "", "1",
+                "Ada", "n", "done", "1", "", "1",
                 "f",                      // flag it
                 "the wording is unclear", // the note
                 "a", "", "9");
@@ -378,7 +471,7 @@ class CLITest {
     @Test
     void skippingIsRecordedAsAvoidanceRatherThanAWrongAnswer() throws Exception {
         // a skip is deliberately not progress, so the session asks again — quit out of it
-        run(tinyBank(), "Ada", "done", "1", "", "1", "s", "q", "9");
+        run(tinyBank(), "Ada", "n", "done", "1", "", "1", "s", "q", "9");
 
         StudentProfile saved = storage.load("Ada").orElseThrow();
         assertEquals(0, saved.getTotalQuestionsAnswered(), "a skip is not an answer");
@@ -390,7 +483,7 @@ class CLITest {
     @Test
     void theProgressReportIsWrittenAndCarriesACard() throws Exception {
         String out = run(tinyBank(),
-                "Ada", "done",
+                "Ada", "n", "done",
                 "1", "", "1", "a", "",   // do one question so there is something to report
                 "6",                      // progress report
                 "9");
@@ -404,14 +497,14 @@ class CLITest {
 
     @Test
     void aLockedBossCannotBeFought() {
-        String out = run(tinyBank(), "Ada", "done", "4", "1", "9");
+        String out = run(tinyBank(), "Ada", "n", "done", "4", "1", "9");
         assertTrue(out.contains("locked"), "an unearned boss must stay locked: " + out);
     }
 
     @Test
     void unitReviewOffersTheInstructorsCourseUnits() {
         // run from the repo, where data/courses/sample-java2.json ships
-        String out = run(tinyBank(), "Ada", "done", "1", "u", "1-2", "1", "a", "", "9");
+        String out = run(tinyBank(), "Ada", "n", "done", "1", "u", "1-2", "1", "a", "", "9");
         assertTrue(out.contains("Units to review"), "the unit picker must appear: " + out);
         assertTrue(out.contains("Tools & Java I Review") || out.contains("Sample Course"),
                 "the shipped course must be listed: " + out);
@@ -419,10 +512,10 @@ class CLITest {
 
     @Test
     void profilesCanBeRenamedCarryingTheirHistory() throws Exception {
-        run(tinyBank(), "Ada", "done", "1", "", "1", "a", "", "9");
+        run(tinyBank(), "Ada", "n", "done", "1", "", "1", "a", "", "9");
         assertEquals(1, AttemptLog.forProfile(storage.directory(), "Ada").readAll().size());
 
-        run(tinyBank(), "R", "1", "Grace", "1", "done", "9");
+        run(tinyBank(), "R", "1", "Grace", "1", "n", "done", "9");
 
         assertTrue(storage.load("Grace").isPresent(), "the renamed profile must exist");
         assertTrue(storage.load("Ada").isEmpty(), "the old name must be gone");
@@ -432,19 +525,19 @@ class CLITest {
 
     @Test
     void deletingAProfileRequiresTypingItsName() throws Exception {
-        run(tinyBank(), "Ada", "done", "9");
+        run(tinyBank(), "Ada", "n", "done", "9");
         assertTrue(storage.load("Ada").isPresent());
 
-        run(tinyBank(), "D", "1", "not the name", "1", "done", "9");
+        run(tinyBank(), "D", "1", "not the name", "1", "n", "done", "9");
         assertTrue(storage.load("Ada").isPresent(), "a mistyped confirmation must not delete");
 
-        run(tinyBank(), "D", "1", "Ada", "Fresh", "done", "9");
+        run(tinyBank(), "D", "1", "Ada", "Fresh", "n", "done", "9");
         assertTrue(storage.load("Ada").isEmpty(), "typing the name deletes the profile");
     }
 
     @Test
     void aFinishedSessionCanBeRepeatedWithoutReansweringTheSetup() throws Exception {
-        run(tinyBank(), "Ada", "done", "1", "", "1", "a", "", "9");
+        run(tinyBank(), "Ada", "n", "done", "1", "", "1", "a", "", "9");
         assertTrue(storage.load("Ada").orElseThrow().hasResumableSession(),
                 "the session just finished should be repeatable");
 
@@ -463,7 +556,7 @@ class CLITest {
 
     @Test
     void aFreshProfileIsNotOfferedAResume() {
-        String out = run(tinyBank(), "Ada", "done", "1", "", "1", "a", "", "9");
+        String out = run(tinyBank(), "Ada", "n", "done", "1", "", "1", "a", "", "9");
         int firstPrompt = out.indexOf("Feed:");
         assertTrue(firstPrompt >= 0);
         assertFalse(out.substring(firstPrompt, out.indexOf("\n", firstPrompt) + 1)
@@ -473,13 +566,13 @@ class CLITest {
 
     @Test
     void anInvalidMenuChoiceIsRejectedWithoutCrashing() {
-        String out = run(tinyBank(), "Ada", "done", "99", "9");
+        String out = run(tinyBank(), "Ada", "n", "done", "99", "9");
         assertTrue(out.contains("Invalid choice"), out);
     }
 
     @Test
     void theBannerReportsTheEnvironmentHonestly() {
-        String out = run(tinyBank(), "Ada", "done", "9");
+        String out = run(tinyBank(), "Ada", "n", "done", "9");
         assertTrue(out.contains("Questions in bank: 3"), out);
         assertTrue(out.contains("AI help:"), "the student must see whether AI is on");
         assertTrue(out.contains("Exercise sandbox:"), "and how exercises are contained");

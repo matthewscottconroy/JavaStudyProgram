@@ -27,13 +27,23 @@ import java.util.concurrent.TimeUnit;
  *  3. {@link #run} copies the student's file plus the (tamper-proof, held in question
  *     data) test harness into a fresh build directory, compiles both with the JDK
  *     compiler, and executes the test class in a subprocess with a memory cap and a
- *     timeout so infinite loops and runaway allocation can't take the app down.
+ *     timeout so endless loops and runaway allocation can't take the app down.
  */
 public class CodingExerciseRunner {
 
     public static final Path DEFAULT_WORKSPACE = Path.of("workspace");
 
-    private static final int  RUN_TIMEOUT_SECONDS = 10;
+    /**
+     * How long a student's program may run before it is killed.
+     *
+     * <p>Generous on purpose. The only cost of a long limit is that a genuine infinite loop takes
+     * this long to report, which happens once and teaches the lesson either way; the cost of a
+     * short one is telling a student their correct program has an infinite loop because a Swing
+     * exercise needed eight seconds to start AWT on a loaded laptop. That is a far worse failure:
+     * it sends them hunting for a bug that is not there. Ten seconds was enough on an idle
+     * machine and not enough on a busy one.
+     */
+    private static final int  RUN_TIMEOUT_SECONDS = 30;
     private static final int  MAX_OUTPUT_CHARS    = 10_000;
     private static final String MEMORY_CAP        = "-Xmx128m";
 
@@ -239,8 +249,14 @@ public class CodingExerciseRunner {
                 process.destroyForcibly();
                 return new CodingResult(CodingResult.Status.TIMEOUT,
                         "Your program ran for more than " + RUN_TIMEOUT_SECONDS
-                        + " seconds and was stopped. Check for an infinite loop.\n"
-                        + truncate(output.toString()));
+                        + " seconds and was stopped.\n"
+                        + "Usually that means a loop that never ends — check that its condition "
+                        + "can actually become false, and that whatever it tests really changes "
+                        + "inside the loop.\n"
+                        + (output.length() == 0
+                                ? "Nothing was printed before it was stopped, so it may have "
+                                  + "hung before reaching your code.\n"
+                                : "Output before it was stopped:\n" + truncate(output.toString())));
             }
             reader.join(2000);
         } catch (InterruptedException e) {

@@ -97,30 +97,44 @@ public final class ExamSession {
      */
     public static List<Item> build(QuestionBank bank, List<Section> sections,
                                    int questionCount, Random rng) {
+        return build(bank, sections, questionCount, rng, CODING_SHARE, q -> true);
+    }
+
+    /**
+     * As above, with control over the mix.
+     *
+     * @param codingShare how much of each section should be code to write ({@code 0} for none)
+     * @param allowed     which questions may be drawn at all — a worksheet meant for paper
+     *                    excludes the ones that need a compiler
+     */
+    public static List<Item> build(QuestionBank bank, List<Section> sections, int questionCount,
+                                   Random rng, double codingShare,
+                                   java.util.function.Predicate<Question> allowed) {
         List<Item> paper = new ArrayList<>();
         if (sections.isEmpty() || questionCount <= 0) return paper;
 
         int perSection = Math.max(1, questionCount / sections.size());
-        int codingTarget = (int) Math.round(perSection * CODING_SHARE);
+        int codingTarget = (int) Math.round(perSection * codingShare);
         Set<String> used = new LinkedHashSet<>();
 
         for (Section section : sections) {
-            paper.addAll(pick(bank, section, perSection, codingTarget, used, rng));
+            paper.addAll(pick(bank, section, perSection, codingTarget, used, rng, allowed));
         }
         // Remainder from integer division goes to the sections that still have unused questions,
         // so a 12-question exam over 5 units is 12 questions and not 10.
         for (Section section : sections) {
             if (paper.size() >= questionCount) break;
-            paper.addAll(pick(bank, section, questionCount - paper.size(), 0, used, rng));
+            paper.addAll(pick(bank, section, questionCount - paper.size(), 0, used, rng, allowed));
         }
         if (paper.size() > questionCount) paper = new ArrayList<>(paper.subList(0, questionCount));
         return paper;
     }
 
     private static List<Item> pick(QuestionBank bank, Section section, int want, int codingWant,
-                                   Set<String> used, Random rng) {
+                                   Set<String> used, Random rng,
+                                   java.util.function.Predicate<Question> allowed) {
         List<Question> pool = new ArrayList<>(bank.getQuestionsForTopics(section.topics()));
-        pool.removeIf(q -> used.contains(q.getId()));
+        pool.removeIf(q -> used.contains(q.getId()) || !allowed.test(q));
         Collections.shuffle(pool, rng);
         // Exams sit in the middle of the difficulty range: a paper of only easy questions cannot
         // distinguish students, and one of only hard questions cannot either.

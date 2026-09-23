@@ -20,6 +20,8 @@ public class TopicPerformance {
     private LocalDateTime lastAttempted;
     private LocalDateTime lastCorrect;
     private LocalDateTime masteryUpdatedAt; // last time masteryScore changed (incl. decay)
+    /** Mastery came from a placement check rather than practice, and nothing has been answered yet. */
+    private boolean placementSeeded;
     // NOTE: no @JsonIgnore here — the field must persist so the "recently seen"
     // spaced-repetition penalty survives across program runs. Jackson serializes it
     // through the List-typed accessor pair below.
@@ -55,6 +57,8 @@ public class TopicPerformance {
     }
 
     private void recordWeighted(String questionId, boolean wasCorrect, double delta) {
+        // The first real answer replaces the placement estimate as the source of this number.
+        placementSeeded = false;
         attempts++;
         lastAttempted = LocalDateTime.now();
         if (wasCorrect) {
@@ -135,6 +139,8 @@ public class TopicPerformance {
     public void setLastCorrect(LocalDateTime t)   { this.lastCorrect = t; }
     public LocalDateTime getMasteryUpdatedAt()    { return masteryUpdatedAt; }
     public void setMasteryUpdatedAt(LocalDateTime t) { this.masteryUpdatedAt = t; }
+    public boolean isPlacementSeeded()       { return placementSeeded; }
+    public void setPlacementSeeded(boolean b){ this.placementSeeded = b; }
 
     // Persist the spaced-repetition deque as a plain list for Jackson
     @JsonProperty("recentlyAnswered")

@@ -158,6 +158,18 @@ class ExamSessionTest {
     }
 
     @Test
+    void theMixCanBeConstrainedForPaper() {
+        List<ExamSession.Item> paper = ExamSession.build(bank(), SECTIONS, 9, new Random(2),
+                0.0, q -> q.getType() != QuestionType.CODING);
+
+        assertEquals(9, paper.size());
+        for (ExamSession.Item item : paper) {
+            assertNotSame(QuestionType.CODING, item.question().getType(),
+                    "an excluded type must not reach the paper by the backfill either");
+        }
+    }
+
+    @Test
     void anEmptyRangeYieldsNoPaperRatherThanAnEmptyOne() {
         assertTrue(ExamSession.build(bank(), List.of(), 10, new Random(1)).isEmpty());
         assertTrue(ExamSession.build(bank(), SECTIONS, 0, new Random(1)).isEmpty());

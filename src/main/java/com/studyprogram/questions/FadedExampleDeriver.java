@@ -46,6 +46,13 @@ public final class FadedExampleDeriver {
             "^\\s*(?!(if|for|while|switch|catch|try|else|do|synchronized|return)\\b)"
             + "[\\w<>\\[\\],.?\\s&]*\\w+\\s*\\([^;]*\\)\\s*(throws [\\w,.\\s]+)?\\{\\s*$");
 
+    /**
+     * Introduces the worked commentary inside a faded question's prompt. Public because the
+     * printed worksheet has to find and remove it: on screen the commentary is the point of the
+     * step, but on a quiz handed to a class it explains the very lines the blanks ask for.
+     */
+    public static final String COMMENTARY_HEADING = "How this solution works:";
+
     private FadedExampleDeriver() {}
 
     /**
@@ -122,7 +129,7 @@ public final class FadedExampleDeriver {
         }
 
         String commentary = coding.getExplanation() == null || coding.getExplanation().isBlank()
-                ? "" : "\n\nHow this solution works:\n" + coding.getExplanation();
+                ? "" : "\n\n" + COMMENTARY_HEADING + "\n" + coding.getExplanation();
 
         String prompt = (rung == 1
                 ? "A worked solution to this exercise, with one line faded out. Study the rest, "

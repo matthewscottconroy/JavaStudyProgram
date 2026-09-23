@@ -8,6 +8,7 @@ import com.studyprogram.grading.Grader;
 import com.studyprogram.llm.LLMService;
 import com.studyprogram.model.*;
 import com.studyprogram.report.HtmlReportGenerator;
+import com.studyprogram.report.Worksheet;
 import com.studyprogram.storage.AttemptLog;
 import com.studyprogram.storage.ProfileStorage;
 
@@ -24,6 +25,7 @@ public class CLI {
     private static final double  MASTERY_TARGET         = 0.80;
     private static final int     DEFAULT_EXAM_LENGTH    = 12;
     private static final int     MISTAKE_DECK_LIMIT     = 12;
+    private static final int     DEFAULT_WORKSHEET_LENGTH = 15;
 
     private final QuestionBank   bank;
     private final ProfileStorage storage;
@@ -139,6 +141,7 @@ public class CLI {
                 String pick = in.nextLine().trim();
                 if (pick.equalsIgnoreCase("D")) { deleteProfile(profiles); profileMenu(); return; }
                 if (pick.equalsIgnoreCase("R")) { renameProfile(profiles); profileMenu(); return; }
+                if (pick.equalsIgnoreCase("P")) { placeExistingProfile(profiles); return; }
                 if (!pick.equalsIgnoreCase("N")) {
                     try {
                         int idx = Integer.parseInt(pick) - 1;
@@ -251,7 +254,115 @@ public class CLI {
         currentProfile = new StudentProfile(name);
         attemptLog = AttemptLog.forProfile(storage.directory(), name);
         System.out.println("  " + Messages.get("profile.created", name));
+
+        System.out.println();
+        System.out.println("  " + Messages.get("placement.offer"));
+        System.out.print("  " + Messages.get("placement.prompt") + " ");
+        if (in.nextLine().trim().equalsIgnoreCase("y")) {
+            placementCheck();
+        } else {
+            System.out.println("  " + Display.dim() + Messages.get("placement.declined")
+                    + Display.reset());
+        }
         selectTopics();
+    }
+
+    /** Loads a profile and re-runs the placement check on it, for a student who skipped it. */
+    private void placeExistingProfile(List<String> profiles) throws IOException {
+        System.out.print("  Which profile? ");
+        StudentProfile chosen = null;
+        try {
+            int idx = Integer.parseInt(in.nextLine().trim()) - 1;
+            if (idx >= 0 && idx < profiles.size()) {
+                chosen = storage.load(profiles.get(idx)).orElse(null);
+            }
+        } catch (NumberFormatException ignored) {}
+        if (chosen == null) {
+            System.out.println("  No such profile.");
+            profileMenu();
+            return;
+        }
+        currentProfile = chosen;
+        currentProfile.applyDecay();
+        attemptLog = AttemptLog.forProfile(storage.directory(), currentProfile.getName());
+        placementCheck();
+    }
+
+    /**
+     * Runs the adaptive placement check and seeds the profile from it.
+     *
+     * <p>The walk climbs while the student clears each level and drops back when they do not, so
+     * the questions land near the edge of what they know. Answers are logged like any others:
+     * the student really did answer them, and pretending otherwise would corrupt the very history
+     * the reports and the scheduler are built on.
+     */
+    private void placementCheck() {
+        Display.header(Messages.get("placement.header"));
+        System.out.println("  " + Messages.get("placement.intro", PlacementCheck.LENGTH));
+        System.out.println("  " + Display.dim() + Messages.get("placement.noPenalty")
+                + Display.reset());
+
+        Random rng = new Random();
+        List<PlacementCheck.Result> results = new ArrayList<>();
+        Set<Integer> visited = new LinkedHashSet<>();
+        int level = PlacementCheck.START_LEVEL;
+        int asked = 0;
+        boolean quit = false;
+
+        while (level > 0 && asked < PlacementCheck.LENGTH && !quit) {
+            visited.add(level);
+            List<Question> probes = PlacementCheck.probesForLevel(bank, level, rng);
+            int correctHere = 0;
+            for (Question q : probes) {
+                if (asked >= PlacementCheck.LENGTH) break;
+                asked++;
+                Display.question(q, asked, PlacementCheck.LENGTH);
+                long qStart = System.nanoTime();
+                String answer = in.nextLine().trim();
+                if (answer.equalsIgnoreCase("q")) { quit = true; break; }
+                // No hints and no "skip to the answer": the point is to find out what is known.
+                if (answer.equalsIgnoreCase("h") || answer.equalsIgnoreCase("e")) {
+                    System.out.println("  " + Display.yellow()
+                            + Messages.get("placement.noHelp") + Display.reset());
+                    answer = in.nextLine().trim();
+                }
+                boolean correct = grader.grade(q, answer).correct();
+                if (correct) correctHere++;
+                results.add(new PlacementCheck.Result(q, correct));
+                logAttempt(q, correct ? AttemptRecord.OUTCOME_CORRECT
+                                      : AttemptRecord.OUTCOME_INCORRECT, qStart, 0);
+                System.out.println("  " + Display.dim() + Messages.get("placement.recorded")
+                        + Display.reset());
+            }
+            if (quit) break;
+            level = PlacementCheck.nextLevel(level, correctHere, visited);
+        }
+
+        PlacementCheck.Outcome outcome = PlacementCheck.apply(currentProfile, results);
+        saveProfile();
+
+        System.out.println();
+        System.out.println("  " + Display.bold() + Messages.get("placement.result")
+                + Display.reset());
+        for (String line : wrapToWidth(PlacementCheck.summary(outcome))) {
+            System.out.println("  " + line);
+        }
+    }
+
+    /** Wraps a sentence to the terminal width used elsewhere. */
+    private static List<String> wrapToWidth(String text) {
+        List<String> lines = new ArrayList<>();
+        StringBuilder line = new StringBuilder();
+        for (String word : text.split(" ")) {
+            if (line.length() > 0 && line.length() + word.length() > 70) {
+                lines.add(line.toString());
+                line.setLength(0);
+            }
+            if (line.length() > 0) line.append(' ');
+            line.append(word);
+        }
+        if (line.length() > 0) lines.add(line.toString());
+        return lines;
     }
 
     /**
@@ -306,15 +417,18 @@ public class CLI {
         System.out.println();
         if (currentProfile.hasActiveGoal()) {
             showGoalStatus();
-            System.out.print("  [Enter] sit a practice paper  [g] change the goal  [c] clear it: ");
+            System.out.print("  [Enter] sit a practice paper  [g] change the goal  [c] clear it"
+                    + "  [w] print a worksheet: ");
         } else {
             System.out.println("  " + Display.dim() + "No goal set. A goal is an exam date and "
                     + "the units it covers: the feed then heads for it, and the menu shows "
                     + "whether you are on pace." + Display.reset());
-            System.out.print("  [Enter] sit a practice paper  [g] set a goal: ");
+            System.out.print("  [Enter] sit a practice paper  [g] set a goal"
+                    + "  [w] print a worksheet: ");
         }
         String choice = in.nextLine().trim().toLowerCase();
         if (choice.equals("g")) { setGoal(); return; }
+        if (choice.equals("w")) { printWorksheet(); return; }
         if (choice.equals("c")) {
             currentProfile.setGoal(null);
             saveProfile();
@@ -440,6 +554,61 @@ public class CLI {
             return null;
         }
         return sections;
+    }
+
+    /**
+     * Writes a worksheet and its answer key to disk, for working on paper.
+     *
+     * <p>The same builder that draws an exam draws the worksheet, so it is balanced across the
+     * units the same way — but it produces two files, and the worksheet half carries no answers,
+     * so it can be handed to a class.
+     */
+    private void printWorksheet() {
+        List<ExamSession.Section> sections = chooseSections("cover");
+        if (sections == null) return;
+
+        System.out.print("  How many questions [" + DEFAULT_WORKSHEET_LENGTH + "]: ");
+        int count = DEFAULT_WORKSHEET_LENGTH;
+        String lenInput = in.nextLine().trim();
+        if (!lenInput.isBlank()) {
+            try { count = Math.max(1, Integer.parseInt(lenInput)); }
+            catch (NumberFormatException ignored) {}
+        }
+
+        System.out.print("  Title [Java Practice]: ");
+        String title = in.nextLine().trim();
+        if (title.isBlank()) title = "Java Practice";
+
+        List<ExamSession.Item> paper = ExamSession.build(
+                bank, sections, count, new Random(), 0.0, Worksheet.SUITS_PAPER);
+        if (paper.isEmpty()) {
+            System.out.println("  No questions available for those units.");
+            return;
+        }
+
+        try {
+            Worksheet.Pair pair = Worksheet.render(title, paper);
+            String safe = title.replaceAll("[^A-Za-z0-9._-]", "_");
+            Path dir = storage.directory().resolveSibling("worksheets");
+            java.nio.file.Files.createDirectories(dir);
+            Path sheet = dir.resolve(safe + ".html");
+            Path key   = dir.resolve(safe + "-answers.html");
+            java.nio.file.Files.writeString(sheet, pair.worksheet());
+            java.nio.file.Files.writeString(key, pair.answerKey());
+
+            System.out.println();
+            System.out.println("  " + paper.size() + " questions across " + sections.size()
+                    + " section(s).");
+            System.out.println("  Worksheet:  " + Display.cyan() + sheet.toAbsolutePath()
+                    + Display.reset());
+            System.out.println("  Answer key: " + Display.cyan() + key.toAbsolutePath()
+                    + Display.reset());
+            System.out.println("  " + Display.dim()
+                    + "Open either in a browser and print. The worksheet has no answers on it."
+                    + Display.reset());
+        } catch (IOException e) {
+            System.out.println("  Could not write the worksheet: " + e.getMessage());
+        }
     }
 
     /** Runs the paper against the clock and reports the result. */

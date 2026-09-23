@@ -18,7 +18,7 @@ public record CodingResult(Status status, String output, List<String> errorKinds
         TEST_FAILURE,
         /** The student's code (or the test harness against it) did not compile. */
         COMPILE_ERROR,
-        /** The program ran too long and was killed (likely an infinite loop). */
+        /** The program ran past the time limit and was killed (usually an endless loop). */
         TIMEOUT,
         /** The environment cannot run exercises (e.g. no JDK compiler available). */
         ENVIRONMENT_ERROR
