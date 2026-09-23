@@ -392,6 +392,11 @@ workspace/        created at runtime; your coding-exercise files live here
 
 ## Development
 
+**If `mvn test` reports "TestEngine with ID 'junit-jupiter' failed to discover tests"**, run
+`mvn clean test`. Maven's incremental compilation can leave test classes in `target/test-classes`
+that no longer match the main classes after a refactor, and the failure it produces names nothing
+useful. A clean build fixes it every time.
+
 ```bash
 mvn test      # full suite, including compile-and-run verification of every coding exercise
 mvn package   # executable fat jar in target/
