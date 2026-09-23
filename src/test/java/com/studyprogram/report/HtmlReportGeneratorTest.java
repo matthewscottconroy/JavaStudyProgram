@@ -45,6 +45,11 @@ class HtmlReportGeneratorTest {
                 question(Topic.LOOPS, 3, QuestionType.CODING),
                 AttemptRecord.OUTCOME_CORRECT, 400, 0,
                 List.of("missing semicolon", "cannot find symbol")));
+        AttemptRecord wrongIdea = new AttemptRecord(LocalDateTime.now(),
+                question(Topic.STRINGS, 2, QuestionType.MULTIPLE_CHOICE),
+                AttemptRecord.OUTCOME_INCORRECT, 25, 0);
+        wrongIdea.setMisconception(Misconception.STRING_IDENTITY.name());
+        attempts.add(wrongIdea);
 
         Path out = new HtmlReportGenerator()
                 .generate(profile, attempts, dir.resolve("report.html"));
@@ -71,6 +76,10 @@ class HtmlReportGeneratorTest {
         assertTrue(html.contains("Goal: Midterm"), "the goal must be reported");
         assertTrue(html.contains("9 days left"), html);
         assertTrue(html.contains("points to go"), "each goal topic shows its distance from target");
+
+        assertTrue(html.contains("Ideas to clear up"), "misconceptions must be reported");
+        assertTrue(html.contains(Misconception.STRING_IDENTITY.summary), html.length() + "");
+        assertTrue(html.contains("chosen 1 time"), "with how often it was chosen");
 
         assertTrue(html.contains("Compile errors you hit most"),
                 "recurring compile errors are the most actionable thing a student can see");

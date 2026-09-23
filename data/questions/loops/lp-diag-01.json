@@ -1,0 +1,26 @@
+{
+  "id": "lp-diag-01",
+  "type": "MULTIPLE_CHOICE",
+  "difficulty": 2,
+  "prompt": "This loop is meant to print every element. What does it actually do?",
+  "choices": [
+    "Prints 10, 20, 30 correctly",
+    "Prints 10, 20, 30 and then throws ArrayIndexOutOfBoundsException",
+    "Prints 20, 30 - it starts one element too late",
+    "Prints nothing - the condition is false immediately"
+  ],
+  "answer": "b",
+  "distractors": {
+    "a": "OFF_BY_ONE",
+    "c": "OFF_BY_ONE"
+  },
+  "explanation": "Indices run from 0 to length - 1, so the last valid index here is 2. Using <= length lets i reach 3, and values[3] does not exist. The loop prints all three elements first and then throws, which is why this bug often looks like it works until the very end.",
+  "hints": [
+    "What is the largest index a three-element array has?",
+    "Work out the last value i takes, and ask whether that index exists."
+  ],
+  "code": "int[] values = {10, 20, 30};\nfor (int i = 0; i <= values.length; i++) {\n    System.out.println(values[i]);\n}",
+  "relatedTopics": [
+    "ARRAYS"
+  ]
+}

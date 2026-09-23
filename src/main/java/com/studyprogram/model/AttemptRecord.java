@@ -29,6 +29,8 @@ public class AttemptRecord {
     private int hintsUsed;
     /** Compile-error categories hit while working this question (coding exercises only). */
     private List<String> compileErrors = new ArrayList<>();
+    /** The misconception a wrong multiple-choice answer revealed, when the question named one. */
+    private String misconception;
 
     public AttemptRecord() {}
 
@@ -71,6 +73,8 @@ public class AttemptRecord {
     public void setSeconds(long s)           { this.seconds = s; }
     public int getHintsUsed()                { return hintsUsed; }
     public void setHintsUsed(int h)          { this.hintsUsed = h; }
+    public String getMisconception()         { return misconception; }
+    public void setMisconception(String m)   { this.misconception = m; }
     public List<String> getCompileErrors()   { return compileErrors; }
     public void setCompileErrors(List<String> e) {
         this.compileErrors = e == null ? new ArrayList<>() : new ArrayList<>(e);

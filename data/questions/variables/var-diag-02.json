@@ -1,0 +1,23 @@
+{
+  "id": "var-diag-02",
+  "type": "MULTIPLE_CHOICE",
+  "difficulty": 2,
+  "prompt": "What does this print?",
+  "choices": [
+    "A1",
+    "B",
+    "66",
+    "It does not compile - a char cannot be added to an int"
+  ],
+  "answer": "c",
+  "distractors": {
+    "a": "CHAR_VS_STRING",
+    "b": "CHAR_VS_STRING"
+  },
+  "explanation": "A char is a number underneath - 'A' is 65 - so grade + 1 is int arithmetic giving 66, and println prints the number. Joining text would need a String on one side (\"\" + grade + 1), and getting 'B' would need a cast back to char: (char) (grade + 1).",
+  "hints": [
+    "What is a char actually stored as?",
+    "Adding an int to a char gives an int. What does println do with an int?"
+  ],
+  "code": "char grade = 'A';\nSystem.out.println(grade + 1);"
+}

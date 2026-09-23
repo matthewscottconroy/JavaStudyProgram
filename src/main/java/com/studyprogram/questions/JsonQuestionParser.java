@@ -60,6 +60,14 @@ public final class JsonQuestionParser {
             // strict: an unknown name throws, so a typo'd tag surfaces as a load warning
             dto.relatedTopics.forEach(name -> b.relatedTopic(Topic.valueOf(name)));
         }
+        if (dto.distractors != null) {
+            dto.distractors.forEach((letter, id) -> b.distractor(letter,
+                    // strict, like relatedTopics: a misspelled misconception must not be
+                    // silently dropped, or a question would quietly lose its diagnosis
+                    com.studyprogram.model.Misconception.byId(id).orElseThrow(() ->
+                            new IllegalArgumentException("unknown misconception '" + id
+                                    + "' (known: " + com.studyprogram.model.Misconception.ids() + ")"))));
+        }
         if (dto.starterFiles != null && !dto.starterFiles.isEmpty()) b.starterFiles(dto.starterFiles);
         if (dto.solutionFiles != null && !dto.solutionFiles.isEmpty()) b.solutionFiles(dto.solutionFiles);
 

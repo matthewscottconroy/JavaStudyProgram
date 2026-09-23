@@ -1,0 +1,23 @@
+{
+  "id": "tc-diag-02",
+  "type": "MULTIPLE_CHOICE",
+  "difficulty": 2,
+  "prompt": "What does this print?",
+  "choices": [
+    "empty",
+    "has text",
+    "It throws NullPointerException",
+    "It does not compile - null cannot be assigned to a String"
+  ],
+  "answer": "c",
+  "distractors": {
+    "a": "NULL_VS_EMPTY",
+    "b": "NULL_VS_EMPTY"
+  },
+  "explanation": "null is not an empty string - it is the absence of any string at all, so there is no object to call isEmpty() on and the call throws. An empty string \"\" is a real object that happily answers isEmpty() with true. Check for null first, or use a form that tolerates it.",
+  "hints": [
+    "Is there an object here for isEmpty() to run on?",
+    "\"\" and null are different things. Which one is this?"
+  ],
+  "code": "String value = null;\nif (value.isEmpty()) {\n    System.out.println(\"empty\");\n} else {\n    System.out.println(\"has text\");\n}"
+}

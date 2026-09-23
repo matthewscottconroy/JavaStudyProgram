@@ -1,0 +1,25 @@
+{
+  "id": "arr-diag-02",
+  "type": "MULTIPLE_CHOICE",
+  "difficulty": 3,
+  "prompt": "What does this print?",
+  "choices": [
+    "1",
+    "99",
+    "0",
+    "It does not compile - arrays cannot be assigned to each other"
+  ],
+  "answer": "b",
+  "distractors": {
+    "a": "REFERENCE_SEMANTICS"
+  },
+  "explanation": "The assignment copies the reference, not the array. first and second are two names for one array, so a change through either is visible through the other. Copying the contents takes something explicit, such as Arrays.copyOf(first, first.length).",
+  "hints": [
+    "How many arrays were actually created here?",
+    "Does assigning an array variable duplicate the elements?"
+  ],
+  "code": "int[] first = {1, 2, 3};\nint[] second = first;\nsecond[0] = 99;\nSystem.out.println(first[0]);",
+  "relatedTopics": [
+    "MEMORY_REFERENCE_STATIC"
+  ]
+}

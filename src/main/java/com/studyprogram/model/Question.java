@@ -28,6 +28,8 @@ public final class Question {
     private final Map<String, String> starterFiles;  // CODING multi-file: filename -> content
     private final Map<String, String> solutionFiles; // CODING multi-file: reference solution set
     private final boolean trusted;      // false for questions loaded from an external overlay
+    /** MC only: choice letter -> the misconception picking it reveals. */
+    private final Map<String, Misconception> distractors;
 
     private Question(Builder b) {
         this.id                 = b.id;
@@ -48,9 +50,19 @@ public final class Question {
         this.starterFiles       = Collections.unmodifiableMap(new LinkedHashMap<>(b.starterFiles));
         this.solutionFiles      = Collections.unmodifiableMap(new LinkedHashMap<>(b.solutionFiles));
         this.trusted            = b.trusted;
+        this.distractors        = Collections.unmodifiableMap(new LinkedHashMap<>(b.distractors));
     }
 
     // ── Accessors ────────────────────────────────────────────────────────────
+
+    /** The misconception behind a wrong choice, when the question names one. */
+    public java.util.Optional<Misconception> misconceptionFor(String choiceLetter) {
+        if (choiceLetter == null) return java.util.Optional.empty();
+        return java.util.Optional.ofNullable(
+                distractors.get(choiceLetter.trim().toUpperCase().replaceAll("\\.$", "")));
+    }
+
+    public Map<String, Misconception> getDistractors() { return distractors; }
 
     public String getId()                     { return id; }
     public Topic getTopic()                   { return topic; }
@@ -111,6 +123,7 @@ public final class Question {
         private final List<Topic> relatedTopics  = new ArrayList<>();
         private final Map<String, String> starterFiles  = new LinkedHashMap<>();
         private final Map<String, String> solutionFiles = new LinkedHashMap<>();
+        private final Map<String, Misconception> distractors = new LinkedHashMap<>();
         private boolean trusted = true;
 
         public Builder id(String id)                  { this.id = id; return this; }
@@ -140,6 +153,11 @@ public final class Question {
         public Builder solutionFiles(Map<String, String> f) { this.solutionFiles.clear();
                                                               this.solutionFiles.putAll(f); return this; }
         public Builder trusted(boolean t)             { this.trusted = t; return this; }
+        /** Records what choosing a particular wrong letter reveals. */
+        public Builder distractor(String letter, Misconception m) {
+            if (letter != null && m != null) this.distractors.put(letter.trim().toUpperCase(), m);
+            return this;
+        }
 
         public Question build() {
             if (topic == null)  throw new IllegalStateException("topic required");

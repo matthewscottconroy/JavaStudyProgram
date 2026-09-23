@@ -83,6 +83,49 @@ class UntrustedQuestionScreeningTest {
                 + bank.getWarnings());
     }
 
+    /**
+     * With no OS containment — every Windows machine, and any Linux box without bubblewrap —
+     * the lexical screen is the only defence left, so a clean scan is no longer enough on its
+     * own to run a stranger's code.
+     */
+    @Test
+    void withNoSandboxACleanExternalExerciseIsStillRefusedUnlessTrusted() throws Exception {
+        String previous = System.getProperty("JAVASTUDY_SANDBOX");
+        try {
+            com.studyprogram.coding.Sandbox.forceBackendForTesting(
+                    com.studyprogram.coding.Sandbox.Backend.NONE);
+            writeQuestion("plain1", "int x = 1 + 2;");
+            QuestionBank bank = new QuestionBank(external);
+
+            assertTrue(bank.findById("plain1").isEmpty(),
+                    "third-party code must not run with neither containment nor a clean bill "
+                    + "of health from anything else");
+            assertTrue(bank.getWarnings().stream()
+                            .anyMatch(w -> w.contains("no exercise sandbox")),
+                    "and the reason must be stated: " + bank.getWarnings());
+        } finally {
+            com.studyprogram.coding.Sandbox.forceBackendForTesting(null);
+            if (previous != null) System.setProperty("JAVASTUDY_SANDBOX", previous);
+        }
+    }
+
+    @Test
+    void withNoSandboxAnExplicitlyTrustedPackStillLoads() throws Exception {
+        try {
+            com.studyprogram.coding.Sandbox.forceBackendForTesting(
+                    com.studyprogram.coding.Sandbox.Backend.NONE);
+            System.setProperty("javastudy.trustExternal", "true");
+            writeQuestion("plain2", "int x = 1 + 2;");
+            QuestionBank bank = new QuestionBank(external);
+
+            assertTrue(bank.findById("plain2").isPresent(),
+                    "an instructor who vouched for their own pack must be able to use it");
+        } finally {
+            System.clearProperty("javastudy.trustExternal");
+            com.studyprogram.coding.Sandbox.forceBackendForTesting(null);
+        }
+    }
+
     @Test
     void bundledFirstPartyContentIsNeverRefused() {
         QuestionBank bank = new QuestionBank();   // repo's own data/questions overlay

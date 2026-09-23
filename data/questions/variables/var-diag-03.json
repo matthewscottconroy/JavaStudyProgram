@@ -1,0 +1,23 @@
+{
+  "id": "var-diag-03",
+  "type": "MULTIPLE_CHOICE",
+  "difficulty": 2,
+  "prompt": "Why does this not compile?",
+  "choices": [
+    "= assigns rather than compares, so the condition is an int and not a boolean",
+    "count cannot be reassigned after it is initialised",
+    "The condition needs extra parentheses",
+    "10 must be written as 10.0"
+  ],
+  "answer": "a",
+  "distractors": {
+    "b": "ASSIGNMENT_VS_COMPARISON",
+    "c": "ASSIGNMENT_VS_COMPARISON"
+  },
+  "explanation": "A single = stores a value and the expression evaluates to that value - here the int 10, which is not a condition. Java rejects it, which is a kindness: in languages that accept it this typo silently assigns and then treats the result as true. Comparing takes ==. Note the trap if the variable is boolean, where = does compile and does the wrong thing.",
+  "hints": [
+    "Read the condition as an expression. What type is its value?",
+    "How many equals signs does a comparison need?"
+  ],
+  "code": "int count = 5;\nif (count = 10) {\n    System.out.println(\"ten\");\n}"
+}

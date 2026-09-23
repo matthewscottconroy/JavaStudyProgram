@@ -1,0 +1,23 @@
+{
+  "id": "str-diag-02",
+  "type": "MULTIPLE_CHOICE",
+  "difficulty": 2,
+  "prompt": "What does this print?",
+  "choices": [
+    "[Ada]",
+    "[  Ada  ]",
+    "[Ada  ]",
+    "It does not compile - trim() needs an argument"
+  ],
+  "answer": "b",
+  "distractors": {
+    "a": "STRING_IMMUTABILITY",
+    "c": "STRING_IMMUTABILITY"
+  },
+  "explanation": "Strings cannot be changed once made, so trim() cannot modify name - it returns a NEW string with the spaces removed and leaves the original alone. Calling it and ignoring the result does nothing at all. The fix is name = name.trim().",
+  "hints": [
+    "Look at what trim() gives back, and at what the code does with it.",
+    "Does any String method ever change the string it was called on?"
+  ],
+  "code": "String name = \"  Ada  \";\nname.trim();\nSystem.out.println(\"[\" + name + \"]\");"
+}

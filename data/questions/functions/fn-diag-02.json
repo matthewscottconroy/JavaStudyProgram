@@ -1,0 +1,23 @@
+{
+  "id": "fn-diag-02",
+  "type": "MULTIPLE_CHOICE",
+  "difficulty": 3,
+  "prompt": "What does this method return for the array {4, 7, 2}?",
+  "choices": [
+    "4",
+    "-1",
+    "4 and then 2",
+    "2"
+  ],
+  "answer": "a",
+  "distractors": {
+    "b": "RETURN_ENDS_METHOD",
+    "c": "RETURN_ENDS_METHOD"
+  },
+  "explanation": "return leaves the method the instant it runs, so the first even value ends everything - the loop does not continue and the final return -1 is never reached. A method returns once. If you wanted only to leave the loop and carry on afterwards, that is break.",
+  "hints": [
+    "What does return do to the loop it is inside?",
+    "How many times can one call of a method return?"
+  ],
+  "code": "static int firstEven(int[] values) {\n    for (int v : values) {\n        if (v % 2 == 0) {\n            return v;\n        }\n    }\n    return -1;\n}"
+}

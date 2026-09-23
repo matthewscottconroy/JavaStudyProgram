@@ -96,6 +96,27 @@ public class ReviewScheduler {
     }
 
     /** True when the question's review interval has elapsed. */
+    /**
+     * How many previously-answered questions are due for review right now.
+     *
+     * <p>This is the number that gets a student to open the program. Spaced repetition has been
+     * scheduling every question individually for a while, and until now it only ever showed up
+     * as a quiet nudge inside the feed's ranking — nothing ever said "twelve things you learned
+     * are ready to be revisited today".
+     */
+    public int dueCount(LocalDateTime now) {
+        int due = 0;
+        for (String id : scheduledIds()) {
+            if (isDue(id, now)) due++;
+        }
+        return due;
+    }
+
+    /** The questions this scheduler knows about, in no particular order. */
+    public java.util.Set<String> scheduledIds() {
+        return java.util.Collections.unmodifiableSet(byQuestion.keySet());
+    }
+
     public boolean isDue(String questionId, LocalDateTime now) {
         State s = byQuestion.get(questionId);
         if (s == null) return false;

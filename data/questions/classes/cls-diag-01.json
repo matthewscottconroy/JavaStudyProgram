@@ -1,0 +1,26 @@
+{
+  "id": "cls-diag-01",
+  "type": "MULTIPLE_CHOICE",
+  "difficulty": 3,
+  "prompt": "Why does this not compile?",
+  "choices": [
+    "count must be public to be printed",
+    "A static method cannot read an instance field, because there is no object to read it from",
+    "println cannot print a private field",
+    "report() must return int rather than void"
+  ],
+  "answer": "b",
+  "distractors": {
+    "a": "STATIC_VS_INSTANCE",
+    "c": "STATIC_VS_INSTANCE"
+  },
+  "explanation": "count belongs to an object and there may be many objects or none; report() belongs to the class and runs without one, so there is no particular count for it to read. Either make the field static so there is exactly one, or make report() an instance method called on an object. Visibility is a red herring - private is fine inside the same class.",
+  "hints": [
+    "Ask which object's count the static method would be printing.",
+    "How many Counter objects exist when a static method runs?"
+  ],
+  "code": "public class Counter {\n    private int count = 0;\n\n    public static void report() {\n        System.out.println(count);\n    }\n}",
+  "relatedTopics": [
+    "MEMORY_REFERENCE_STATIC"
+  ]
+}

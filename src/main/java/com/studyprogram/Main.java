@@ -29,7 +29,8 @@ import java.util.List;
  * <ul>
  *   <li>{@code ANTHROPIC_API_KEY} — optional AI hints and explanations</li>
  *   <li>{@code PROFILE_DIR} — where profiles live (default ./data/profiles in a checkout,
- *       else ~/.javastudy/profiles)</li>
+ *       else ~/.javastudy/profiles); the {@code javastudy.profileDir} system property wins
+ *       over it</li>
  *   <li>{@code STUDY_SIGNING_KEY} — HMAC key for progress cards (instructor machines)</li>
  *   <li>{@code JAVASTUDY_SANDBOX=off} — disable OS sandboxing of exercise runs</li>
  *   <li>{@code JAVASTUDY_TRUST_EXTERNAL=1} — load external questions that fail safety screening</li>
@@ -39,11 +40,25 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
+        int status = run(args);
+        if (status != 0) System.exit(status);
+    }
+
+    /**
+     * Dispatches one command and returns the process exit code.
+     *
+     * <p>Separate from {@link #main} so the command-line surface can be tested: every flag here
+     * is something an instructor runs in front of a class, and a test that cannot call it without
+     * killing the JVM is a test nobody writes. Exit codes are returned rather than thrown at
+     * {@code System.exit}, and only {@code main} turns one into a process exit.
+     */
+    static int run(String... args) {
         List<String> argv = new java.util.ArrayList<>(List.of(args));
 
         // Presentation flags apply to every mode
         if (argv.remove("--no-color")) Display.disableColor();
         if (argv.remove("--ascii")) Display.useAsciiGlyphs();
+        applyLanguage(argv);
 
         String command = argv.isEmpty() ? "" : argv.get(0);
         String value = argv.size() > 1 ? argv.get(1) : null;
@@ -55,18 +70,37 @@ public class Main {
                 case "--export-profile" -> exportProfile(value, argv.size() > 2 ? argv.get(2) : null);
                 case "--import-profile" -> importProfile(value);
                 case "--verify-card" -> verifyCard(value);
-                case "--verify-questions" -> verifyQuestions(value);
+                case "--verify-questions" -> { return verifyQuestions(value); }
                 case "" -> interactive();
                 default -> {
                     System.out.println("Unknown option: " + command);
                     System.out.println();
                     System.out.println(usage());
+                    return 2;
                 }
             }
         } catch (IOException e) {
             // A command-line tool should explain what went wrong, not print a stack trace
             System.err.println("Error: " + e.getMessage());
-            System.exit(1);
+            return 1;
+        }
+        return 0;
+    }
+
+    /**
+     * Honours {@code --lang <code>}, removing it from the arguments.
+     *
+     * <p>Without a flag the JVM's own locale decides, which is right by default — a student whose
+     * machine is in Spanish gets Spanish. The flag exists because that is not always true of the
+     * machine a class is taught on.
+     */
+    private static void applyLanguage(List<String> argv) {
+        int at = argv.indexOf("--lang");
+        if (at < 0) return;
+        argv.remove(at);
+        if (at < argv.size()) {
+            com.studyprogram.ui.Messages.setLocale(
+                    java.util.Locale.forLanguageTag(argv.remove(at)));
         }
     }
 
@@ -160,6 +194,8 @@ public class Main {
                  --help                         show this message
 
                Display:
+                 --lang <code>                  interface language, e.g. --lang es
+                                                (default: your system language)
                  --no-color                     disable ANSI colour (also honours NO_COLOR)
                  --ascii                        plain-ASCII glyphs for limited terminals
                """;
@@ -170,12 +206,12 @@ public class Main {
      * writing their own exercises finds a broken one here rather than a student finding it in
      * class. Exits non-zero on problems so it can guard a course repository's CI.
      */
-    private static void verifyQuestions(String dir) {
+    private static int verifyQuestions(String dir) {
         Path root = dir == null ? QuestionBank.DEFAULT_EXTERNAL_DIR : Path.of(dir);
         System.out.println("Verifying " + root + " …");
         var report = com.studyprogram.questions.QuestionPackVerifier.verify(root);
         System.out.println(com.studyprogram.questions.QuestionPackVerifier.render(root, report));
-        if (!report.ok()) System.exit(1);
+        return report.ok() ? 0 : 1;
     }
 
     /**
@@ -183,6 +219,10 @@ public class Main {
      * (a repo checkout), and downloaded-jar users get a stable home-directory location.
      */
     private static Path resolveProfileDir() {
+        // A system property beats the environment: it is settable per JVM, which is what lets
+        // the command-line surface be tested without writing into a real student's profiles.
+        String property = System.getProperty("javastudy.profileDir");
+        if (property != null && !property.isBlank()) return Path.of(property);
         String env = System.getenv("PROFILE_DIR");
         if (env != null && !env.isBlank()) return Path.of(env);
         Path repoDir = Path.of("data", "profiles");

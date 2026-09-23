@@ -9,7 +9,7 @@ An adaptive engine tracks your per-topic mastery, matches question difficulty to
 repeating what you just answered, and prefers hands-on coding exercises whenever a topic has them.
 A prerequisite graph of 61 topics gates advanced material until its foundations are in place.
 
-The bank holds **4,072 questions, of which 727 are coding exercises**, plus **604 Parsons puzzles**
+The bank holds **4,092 questions, of which 727 are coding exercises**, plus **604 Parsons puzzles**
 and **900 faded worked examples** derived from them — every coding exercise machine-verified by
 the content gate (its starter must compile but fail its tests; its reference solution must pass),
 and every derived question verified answerable through the real grader. **All 61 topics have
@@ -39,6 +39,14 @@ topics yourself. Progress is saved automatically — to `data/profiles/` when
 running from a checkout, or `~/.javastudy/profiles/` when running a downloaded
 jar (`PROFILE_DIR` overrides both).
 
+**Your work survives a crash.** Profiles are written to a temporary file and moved into place in
+one step, so a closed laptop mid-save leaves either the whole new profile or the whole old one,
+never half of each. A profile that is already damaged is quarantined rather than throwing — one
+bad file cannot make your other profiles unreachable — and the program offers to **rebuild it from
+your attempt log**, replaying every recorded attempt through the same scoring the live program
+uses. Mastery, accuracy and history come back; bosses, map discoveries and goals were choices
+rather than answers, were never in the log, and the summary says so instead of inventing them.
+
 Every attempt is also appended to a per-profile log (`<name>.attempts.jsonl`),
 which powers the **Progress Report** menu option: a self-contained HTML page
 with an activity calendar, accuracy-over-time chart, per-topic mastery bars,
@@ -66,6 +74,24 @@ opened, not ticked off — seeded just over the unlock line and well under the m
 labelled "opened by placement" everywhere it appears, because answering one question is evidence
 that a topic should be open, never that it has been learned. Skip it and you start at the
 beginning; take it later from the profile menu with `[P]`.
+
+**Wrong answers that say what you were thinking.** "Incorrect, the answer is B" corrects the
+symptom and leaves the belief that produced it untouched, which is why the same student picks the
+same kind of wrong answer next week. A well-built multiple-choice question already encodes the
+diagnosis — each distractor is there because it is what someone with a particular wrong model
+would choose — so distractors can be tagged with the misconception they represent, from a
+catalogue of 20 (`==` compares references not text; dividing two ints throws away the remainder;
+`length` vs `length()` vs `size()`; `return` leaves the whole method; a case without `break` falls
+through). Pick a tagged wrong answer and the program names the idea and explains it. Those picks
+are recorded, so your report grows an **Ideas to clear up** section and the class report ranks
+**ideas the class is getting wrong** by how many students hold each one — the difference between a
+conversation with one student and five minutes at the whiteboard.
+
+Twenty questions ship purpose-built as diagnostics, one per misconception. The existing bank is
+mostly untagged: its distractors are plausible-but-unrelated wrong reasons rather than encoded
+misconceptions, and guessing tags for them would put a confident wrong diagnosis in front of a
+student, which is worse than none. Any question file can add a `"distractors"` map, and a
+misspelled misconception name is refused at load rather than silently dropped.
 
 **Practice your mistakes.** The program records every question you get wrong and every compile
 error you hit; `[x]` at the session prompt turns that record into the next session. It serves the
@@ -183,6 +209,7 @@ java -jar java-study-program.jar --help               # all options
 --import-profile <file|dir>    import one bundle, or a whole folder of them
 --verify-card <card.txt>       check a progress card against its local profile
 --verify-questions [dir]       content-gate a question pack; exits 1 on problems
+--lang <code>                  interface language, e.g. --lang es (default: system language)
 --no-color / --ascii          accessibility fallbacks (NO_COLOR is honoured too)
 ```
 
@@ -204,10 +231,13 @@ progress", "needs work") rather than only in bar colour.
 
 ## Translation
 
-All primary screens read their text from `src/main/resources/messages.properties`. To add a
-language, copy it to `messages_<language>.properties`, translate the values, and run with that
-locale — no code changes. English is the fallback for anything a translation has not covered, and
-the build fails if the code asks for a key no bundle defines.
+All primary screens read their text from `src/main/resources/messages.properties`. **Spanish
+ships as well** (`messages_es.properties`, all 81 keys) — run `--lang es`, or just run it on a
+machine whose locale is already Spanish. To add another language, copy the English file to
+`messages_<language>.properties`, translate the values, and run with that locale — no code
+changes. English is the fallback for anything a translation has not covered, so a partial
+translation is useful immediately, and the build fails if the code asks for a key no bundle
+defines or if a translation leaves a `{0}` placeholder behind.
 
 ## Optional AI, configured by file
 

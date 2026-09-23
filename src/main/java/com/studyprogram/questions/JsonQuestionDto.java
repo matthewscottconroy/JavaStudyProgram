@@ -23,4 +23,6 @@ public class JsonQuestionDto {
     public List<String> relatedTopics = Collections.emptyList(); // prerequisite Topic names
     public java.util.Map<String, String> starterFiles  = Collections.emptyMap(); // multi-file CODING
     public java.util.Map<String, String> solutionFiles = Collections.emptyMap(); // multi-file CODING
+    /** MC only: choice letter -> Misconception name, e.g. {"c": "INTEGER_DIVISION"}. */
+    public java.util.Map<String, String> distractors = Collections.emptyMap();
 }

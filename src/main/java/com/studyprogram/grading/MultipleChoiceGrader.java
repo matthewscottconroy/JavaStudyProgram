@@ -49,9 +49,16 @@ public class MultipleChoiceGrader implements Grader {
         int correctIdx = letterToIndex(correctLetter);
         String correctChoiceText = (correctIdx >= 0 && correctIdx < question.getChoices().size())
                 ? question.getChoices().get(correctIdx) : "";
-        String feedback = String.format("Incorrect. The correct answer is %s) %s",
-                                        correctLetter, correctChoiceText);
-        return GradingResult.incorrect(feedback, question.getExplanation());
+        StringBuilder feedback = new StringBuilder(String.format(
+                "Incorrect. The correct answer is %s) %s", correctLetter, correctChoiceText));
+
+        // If the question knows what this particular wrong choice means, say so. Correcting the
+        // answer without touching the belief that produced it is how the same mistake comes back.
+        question.misconceptionFor(givenLetter).ifPresent(m ->
+                feedback.append("\n\nWhat picking ").append(givenLetter).append(" suggests — ")
+                        .append(m.summary).append('\n').append(m.explanation));
+
+        return GradingResult.incorrect(feedback.toString(), question.getExplanation());
     }
 
     private int letterToIndex(String letter) {

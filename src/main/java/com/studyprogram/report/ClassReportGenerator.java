@@ -52,6 +52,7 @@ public class ClassReportGenerator {
 
         studentTable(h, profiles, storage);
         weakestTopics(h, profiles);
+        cohortMisconceptions(h, attemptsByProfile);
         cohortCompileErrors(h, attemptsByProfile);
         flaggedByStudents(h, storage.directory().resolveSibling("flags.jsonl"));
         calibrationSection(h, attemptsByProfile, bank);
@@ -116,6 +117,48 @@ public class ClassReportGenerator {
             h.append("<tr><th scope='row'>").append(esc(a.topic().displayName))
              .append("</th><td>").append(Math.round(a.mastery() * 100)).append("%")
              .append("</td><td>").append(a.students()).append("</td></tr>");
+        }
+        h.append("</table>");
+    }
+
+    /**
+     * Which wrong ideas are shared across the class.
+     *
+     * <p>Ranked by how many students hold each one, because that is the difference between a
+     * conversation with one student and five minutes at the whiteboard for everybody.
+     */
+    private void cohortMisconceptions(StringBuilder h,
+                                      java.util.Map<String, List<AttemptRecord>> attemptsByProfile) {
+        Map<String, Set<String>> studentsByIdea = new LinkedHashMap<>();
+        Map<String, Integer> occurrences = new LinkedHashMap<>();
+        for (var entry : attemptsByProfile.entrySet()) {
+            for (AttemptRecord a : entry.getValue()) {
+                if (a.getMisconception() == null) continue;
+                studentsByIdea.computeIfAbsent(a.getMisconception(), k -> new HashSet<>())
+                              .add(entry.getKey());
+                occurrences.merge(a.getMisconception(), 1, Integer::sum);
+            }
+        }
+        if (studentsByIdea.isEmpty()) return;
+
+        List<String> ranked = new ArrayList<>(studentsByIdea.keySet());
+        ranked.sort((x, y) -> {
+            int byStudents = studentsByIdea.get(y).size() - studentsByIdea.get(x).size();
+            return byStudents != 0 ? byStudents : occurrences.get(y) - occurrences.get(x);
+        });
+
+        h.append("<h2>Ideas the class is getting wrong</h2><p class='dim'>")
+         .append("From the specific wrong answers students chose, ranked by how many students ")
+         .append("chose them.</p><table><tr><th scope='col'>Idea</th>")
+         .append("<th scope='col'>Students</th><th scope='col'>Times</th>")
+         .append("<th scope='col'>What to say</th></tr>");
+        for (String id : ranked.subList(0, Math.min(8, ranked.size()))) {
+            var m = com.studyprogram.model.Misconception.byId(id);
+            if (m.isEmpty()) continue;
+            h.append("<tr><th scope='row'>").append(esc(m.get().summary)).append("</th><td>")
+             .append(studentsByIdea.get(id).size()).append("</td><td>")
+             .append(occurrences.get(id)).append("</td><td class='dim'>")
+             .append(esc(m.get().explanation)).append("</td></tr>");
         }
         h.append("</table>");
     }

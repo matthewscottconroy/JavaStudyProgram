@@ -77,12 +77,29 @@ public class QuestionBank {
     private void screenUntrusted() {
         boolean optedIn = "1".equals(System.getenv("JAVASTUDY_TRUST_EXTERNAL"))
                 || Boolean.getBoolean("javastudy.trustExternal");
+        // With no OS containment there is only one layer of defence left, so the lexical screen
+        // has to be the whole answer rather than a first pass. On Windows in particular there is
+        // no backend at all, and running a stranger's code there with neither containment nor a
+        // clean scan is the one combination worth refusing outright.
+        boolean contained = com.studyprogram.coding.Sandbox.backend()
+                != com.studyprogram.coding.Sandbox.Backend.NONE;
+
         List<String> refused = new ArrayList<>();
         for (Question q : byId.values()) {
             if (q.isTrusted() || !q.isCoding()) continue;   // only coding exercises execute
             if (q.allCode().equals(bundledCode.get(q.getId()))) continue;   // unmodified first-party copy
             var findings = CodeSafetyScanner.scan(q.allCode());
-            if (findings.isEmpty()) continue;
+
+            if (findings.isEmpty()) {
+                if (!contained && !optedIn) {
+                    refused.add(q.getId());
+                    warnings.add("REFUSED external question '" + q.getId()
+                            + "': this machine has no exercise sandbox, so third-party code is "
+                            + "not run. Set JAVASTUDY_TRUST_EXTERNAL=1 only for packs you wrote "
+                            + "or reviewed yourself.");
+                }
+                continue;
+            }
             String detail = findings.stream().map(Object::toString)
                     .collect(Collectors.joining(", "));
             if (optedIn) {

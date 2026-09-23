@@ -1,0 +1,23 @@
+{
+  "id": "lp-diag-02",
+  "type": "MULTIPLE_CHOICE",
+  "difficulty": 2,
+  "prompt": "What does this print?",
+  "choices": [
+    "6 6",
+    "5 6",
+    "5 5",
+    "6 5"
+  ],
+  "answer": "b",
+  "distractors": {
+    "a": "POST_VS_PRE_INCREMENT",
+    "d": "POST_VS_PRE_INCREMENT"
+  },
+  "explanation": "i++ increments i but evaluates to the value i had BEFORE the increment, so result gets 5 while i becomes 6. ++i would evaluate to the new value and print 6 6. Both forms leave i at 6 - the difference is only what the expression itself hands back.",
+  "hints": [
+    "Both forms change i the same way. The question is what the expression gives back.",
+    "The ++ is after the variable. Does the expression use the old value or the new one?"
+  ],
+  "code": "int i = 5;\nint result = i++;\nSystem.out.println(result + \" \" + i);"
+}

@@ -36,6 +36,15 @@ public final class Sandbox {
 
     private Sandbox() {}
 
+    /**
+     * Overrides detection, for tests that need to exercise what happens on a machine with no
+     * containment (every Windows box, for one) without being on such a machine. Pass null to go
+     * back to real detection.
+     */
+    public static synchronized void forceBackendForTesting(Backend backend) {
+        detected = backend;
+    }
+
     public static synchronized Backend backend() {
         if (detected == null) {
             detected = selfCheck(detect());

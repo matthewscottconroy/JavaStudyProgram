@@ -1,0 +1,23 @@
+{
+  "id": "ic-diag-02",
+  "type": "MULTIPLE_CHOICE",
+  "difficulty": 3,
+  "prompt": "What does this print when day is 2?",
+  "choices": [
+    "Tue",
+    "Tue, then Wed, then Other",
+    "Tue and Other",
+    "Nothing - there is no break"
+  ],
+  "answer": "b",
+  "distractors": {
+    "a": "SWITCH_FALLTHROUGH",
+    "d": "SWITCH_FALLTHROUGH"
+  },
+  "explanation": "In the classic switch form a case is an entry point, not a box. Execution starts at case 2 and keeps going into every case below it until it meets a break or the end, so all three lines print. Adding break to each case - or using the arrow form, which does not fall through - fixes it.",
+  "hints": [
+    "A case label says where to start, not where to stop.",
+    "What ends a case other than reaching the closing brace?"
+  ],
+  "code": "switch (day) {\n    case 1: System.out.println(\"Mon\");\n    case 2: System.out.println(\"Tue\");\n    case 3: System.out.println(\"Wed\");\n    default: System.out.println(\"Other\");\n}"
+}

@@ -1,0 +1,22 @@
+{
+  "id": "ic-diag-01",
+  "type": "MULTIPLE_CHOICE",
+  "difficulty": 3,
+  "prompt": "What happens when this runs with name set to null?",
+  "choices": [
+    "It throws NullPointerException on name.length()",
+    "It prints \"no name\"",
+    "It prints \"got a name\"",
+    "It does not compile - null cannot be compared with !="
+  ],
+  "answer": "b",
+  "distractors": {
+    "a": "SHORT_CIRCUIT"
+  },
+  "explanation": "&& stops as soon as the answer is settled. name != null is false, so the whole condition is already false and name.length() is never evaluated - which is exactly what makes this null-check idiom safe. Writing & instead would evaluate both sides and throw.",
+  "hints": [
+    "Does && always evaluate its right-hand side?",
+    "If the left side of && is false, can the answer still change?"
+  ],
+  "code": "String name = null;\nif (name != null && name.length() > 0) {\n    System.out.println(\"got a name\");\n} else {\n    System.out.println(\"no name\");\n}"
+}

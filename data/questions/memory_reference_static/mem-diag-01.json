@@ -1,0 +1,25 @@
+{
+  "id": "mem-diag-01",
+  "type": "MULTIPLE_CHOICE",
+  "difficulty": 3,
+  "prompt": "What does this print?",
+  "choices": [
+    "true",
+    "false",
+    "It does not compile",
+    "0.3"
+  ],
+  "answer": "b",
+  "distractors": {
+    "a": "FLOATING_POINT_EQUALITY"
+  },
+  "explanation": "0.1 and 0.2 have no exact binary representation, so their sum is very slightly off 0.3 and == is false. This is not a Java quirk - it is how binary floating point works everywhere. Compare the difference against a small tolerance instead: Math.abs(a - 0.3) < 1e-9.",
+  "hints": [
+    "Can 0.1 be written exactly in binary?",
+    "Try printing a itself before comparing it."
+  ],
+  "code": "double a = 0.1 + 0.2;\nSystem.out.println(a == 0.3);",
+  "relatedTopics": [
+    "VARIABLES"
+  ]
+}

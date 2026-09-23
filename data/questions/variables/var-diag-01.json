@@ -1,0 +1,23 @@
+{
+  "id": "var-diag-01",
+  "type": "MULTIPLE_CHOICE",
+  "difficulty": 1,
+  "prompt": "What does this print?",
+  "choices": [
+    "3.5",
+    "3.0",
+    "3",
+    "4.0"
+  ],
+  "answer": "b",
+  "distractors": {
+    "a": "INTEGER_DIVISION",
+    "d": "INTEGER_DIVISION"
+  },
+  "explanation": "Both operands are int, so Java does integer division and throws the remainder away before anything is assigned: 7 / 2 is 3. Only then is that 3 widened to the double 3.0. Declaring the result as double does not change how the division itself is done - making one operand a double does, as in (double) total / parts.",
+  "hints": [
+    "Java chooses the operation from the operand types, not from what you assign it to.",
+    "What is 7 / 2 when both sides are int? The assignment happens after that."
+  ],
+  "code": "int total = 7;\nint parts = 2;\ndouble each = total / parts;\nSystem.out.println(each);"
+}

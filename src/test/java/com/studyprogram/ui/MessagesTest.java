@@ -91,4 +91,61 @@ class MessagesTest {
             }
         }
     }
+
+    @Test
+    void translationsKeepEveryPlaceholderTheEnglishHas() throws IOException {
+        Path resources = Path.of("src/main/resources");
+        var english = load(resources.resolve("messages.properties"));
+
+        try (Stream<Path> files = Files.list(resources)) {
+            for (Path translation : files
+                    .filter(f -> f.getFileName().toString().matches("messages_.+\\.properties"))
+                    .toList()) {
+                var translated = load(translation);
+                List<String> broken = new ArrayList<>();
+                for (String key : english.stringPropertyNames()) {
+                    String from = english.getProperty(key);
+                    String to = translated.getProperty(key, "");
+                    for (int i = 0; i < 3; i++) {
+                        String slot = "{" + i + "}";
+                        // A translator who drops {0} does not get a compile error; they get a
+                        // sentence that silently loses the number it was about.
+                        if (from.contains(slot) && !to.contains(slot)) {
+                            broken.add(key + " lost " + slot);
+                        }
+                    }
+                }
+                assertTrue(broken.isEmpty(), translation.getFileName() + ": " + broken);
+            }
+        }
+    }
+
+    @Test
+    void spanishLoadsWithItsAccentsIntact() {
+        Messages.setLocale(Locale.forLanguageTag("es"));
+
+        assertEquals("Programa de Estudio de Java", Messages.get("app.title"));
+        assertTrue(Messages.get("answer.correct").contains("¡"),
+                "a mangled encoding shows up here first: " + Messages.get("answer.correct"));
+        assertTrue(Messages.get("menu.examMode").contains("cronometrado"));
+        assertTrue(Messages.get("profile.created", "Ada").contains("Ada"),
+                "placeholders must still work in translation");
+    }
+
+    @Test
+    void aTranslationIsUsedOnlyForTheLocaleThatAsksForIt() {
+        Messages.setLocale(Locale.ENGLISH);
+        assertEquals("Java Study Program", Messages.get("app.title"));
+        Messages.setLocale(Locale.forLanguageTag("es"));
+        assertNotEquals("Java Study Program", Messages.get("app.title"));
+    }
+
+    /** Properties files are UTF-8 here, so they must be read as UTF-8 rather than ISO-8859-1. */
+    private static java.util.Properties load(Path file) throws IOException {
+        var props = new java.util.Properties();
+        try (var reader = Files.newBufferedReader(file, java.nio.charset.StandardCharsets.UTF_8)) {
+            props.load(reader);
+        }
+        return props;
+    }
 }

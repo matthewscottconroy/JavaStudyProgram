@@ -49,6 +49,14 @@ class ClassReportGeneratorTest {
                         AttemptRecord.OUTCOME_INCORRECT, 300, 0,
                         java.util.List.of("cannot find symbol")));
 
+        // Both students hold the same wrong idea — the thing worth five minutes of class time.
+        for (String student : java.util.List.of("Alice", "Bob")) {
+            AttemptRecord r = new AttemptRecord(LocalDateTime.now(), q,
+                    AttemptRecord.OUTCOME_INCORRECT, 20, 0);
+            r.setMisconception(Misconception.INTEGER_DIVISION.name());
+            AttemptLog.forProfile(storage.directory(), student).append(r);
+        }
+
         Path out = new ClassReportGenerator()
                 .generate(storage, new QuestionBank(), dir.resolve("class-report.html"));
         String html = Files.readString(out);
@@ -58,6 +66,9 @@ class ClassReportGeneratorTest {
         assertTrue(html.contains("2 profile(s)"));
         assertTrue(html.contains("Class-wide weak spots"));
         assertTrue(html.contains("Arrays"), "Bob's weak topic should surface");
+
+        assertTrue(html.contains("Ideas the class is getting wrong"), "shared wrong ideas matter");
+        assertTrue(html.contains(Misconception.INTEGER_DIVISION.summary));
 
         assertTrue(html.contains("Where the class gets stuck"));
         int shared = html.indexOf("cannot find symbol");

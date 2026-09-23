@@ -1,0 +1,25 @@
+{
+  "id": "fn-diag-01",
+  "type": "MULTIPLE_CHOICE",
+  "difficulty": 3,
+  "prompt": "What does this print?",
+  "choices": [
+    "100",
+    "5",
+    "0",
+    "It does not compile - n is not returned"
+  ],
+  "answer": "b",
+  "distractors": {
+    "a": "PASS_BY_VALUE"
+  },
+  "explanation": "Java copies the argument into the parameter, so n starts as 5 and assigning to it changes only the method's own copy. The caller's variable is untouched. Passing an object is the same rule applied to a reference: reassigning the parameter does nothing to the caller, but changing the object the reference points at does.",
+  "hints": [
+    "What exactly gets copied when a method is called?",
+    "Is n the same variable as value, or a copy of its value?"
+  ],
+  "code": "static void tryToChange(int n) {\n    n = 100;\n}\n\npublic static void main(String[] args) {\n    int value = 5;\n    tryToChange(value);\n    System.out.println(value);\n}",
+  "relatedTopics": [
+    "ARGUMENTS"
+  ]
+}

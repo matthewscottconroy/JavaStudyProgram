@@ -36,6 +36,13 @@ failure, so screening it would refuse every exercise written the documented way.
 A flagged external question is **refused**, not run. Override with
 `JAVASTUDY_TRUST_EXTERNAL=1` only for packs you wrote or reviewed yourself.
 
+**With no containment backend — every Windows machine, and any Linux box without bubblewrap —
+external coding exercises are refused even when they scan clean.** Screening is a lexical check,
+not a proof, and it was only ever meant to be the first of two layers. Where the second layer
+does not exist, running a stranger's code on the strength of a regex is not a trade worth making;
+the same `JAVASTUDY_TRUST_EXTERNAL=1` opt-in covers instructors running their own packs. Bundled
+first-party questions are unaffected.
+
 Questions bundled inside the jar are first-party: they pass the content gate in CI, so they are
 trusted. An external file byte-identical to its bundled counterpart (an ordinary repo checkout)
 stays trusted too — editing it makes it untrusted again, which is the correct behaviour.

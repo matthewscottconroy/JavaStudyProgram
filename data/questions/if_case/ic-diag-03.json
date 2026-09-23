@@ -1,0 +1,23 @@
+{
+  "id": "ic-diag-03",
+  "type": "MULTIPLE_CHOICE",
+  "difficulty": 3,
+  "prompt": "What does this print?",
+  "choices": [
+    "20",
+    "14",
+    "24",
+    "9"
+  ],
+  "answer": "b",
+  "distractors": {
+    "a": "OPERATOR_PRECEDENCE",
+    "c": "OPERATOR_PRECEDENCE"
+  },
+  "explanation": "Multiplication happens before addition regardless of reading order, so this is 2 + (3 * 4) = 14, not (2 + 3) * 4 = 20. When an expression surprises you, put in the parentheses you meant and see whether the answer changes - if it does, they were doing something.",
+  "hints": [
+    "Java does not simply work left to right.",
+    "Which of * and + binds more tightly?"
+  ],
+  "code": "int a = 2, b = 3, c = 4;\nSystem.out.println(a + b * c);"
+}

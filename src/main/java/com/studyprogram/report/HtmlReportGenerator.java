@@ -44,6 +44,7 @@ public class HtmlReportGenerator {
         accuracyOverTime(h, attempts);
         masteryByTopic(h, profile);
         accuracyBreakdowns(h, attempts);
+        misconceptions(h, attempts);
         compileErrors(h, attempts);
         workOnNext(h, profile);
 
@@ -303,6 +304,37 @@ public class HtmlReportGenerator {
     }
 
     /**
+     * Ideas this student keeps getting wrong, as opposed to topics they score badly on.
+     *
+     * <p>A topic percentage says where to look; this says what to fix. "62% on strings" and "you
+     * are using == to compare text" are the same fact at very different distances from being
+     * actionable, and only one of them can be read in the ten seconds a student spends on a
+     * report.
+     */
+    private void misconceptions(StringBuilder h, List<AttemptRecord> attempts) {
+        Map<String, Integer> counts = new LinkedHashMap<>();
+        for (AttemptRecord a : attempts) {
+            if (a.getMisconception() != null) counts.merge(a.getMisconception(), 1, Integer::sum);
+        }
+        if (counts.isEmpty()) return;
+
+        List<Map.Entry<String, Integer>> ranked = new ArrayList<>(counts.entrySet());
+        ranked.sort((x, y) -> y.getValue() - x.getValue());
+
+        h.append("<h2>Ideas to clear up</h2><p class='dim'>")
+         .append("Drawn from the particular wrong answers you chose, not from your score. ")
+         .append("Each one is a single idea — worth ten minutes now and then.</p>");
+        for (Map.Entry<String, Integer> e : ranked.subList(0, Math.min(5, ranked.size()))) {
+            var m = com.studyprogram.model.Misconception.byId(e.getKey());
+            if (m.isEmpty()) continue;
+            h.append("<div class='misc'><p><b>").append(esc(m.get().summary)).append("</b> ")
+             .append("<span class='dim'>(chosen ").append(e.getValue()).append(" time")
+             .append(e.getValue() == 1 ? "" : "s").append(")</span></p><p class='dim'>")
+             .append(esc(m.get().explanation)).append("</p></div>");
+        }
+    }
+
+    /**
      * The compile errors this student keeps hitting. A recurring error is a concrete, fixable
      * habit — far more actionable than a topic-level accuracy number — and it is the thing a
      * student can look up before their next session.
@@ -407,6 +439,8 @@ public class HtmlReportGenerator {
             .tile { background: #fff; border-radius: 10px; padding: 14px 18px;
                     box-shadow: 0 1px 3px rgba(0,0,0,.12); min-width: 110px; }
             .big { font-size: 28px; font-weight: 700; }
+            .misc { margin: 10px 0; padding-left: 10px; border-left: 3px solid #b26a00; }
+            .misc p { margin: 2px 0; }
             .dim { color: #55555f; font-size: 13px; }
             .mrow { display: flex; align-items: center; gap: 10px; margin: 4px 0; }
             table.mastery { border-collapse: collapse; width: 100%; background: #fff;

@@ -74,19 +74,22 @@ public class CLI {
     public void run() {
         Display.header(Messages.get("app.title"));
         System.out.println("  " + Messages.get("banner.questions", bank.totalQuestions()));
-        System.out.printf("  %-18s %s%n", Messages.get("banner.ai"),
-                          llm.isAvailable()
-                                  ? Display.green() + com.studyprogram.llm.LLMServiceFactory
-                                        .describe(com.studyprogram.llm.LLMConfig.load()) + Display.reset()
-                                  : Display.dim() + com.studyprogram.llm.LLMServiceFactory
-                                        .describe(com.studyprogram.llm.LLMConfig.load()) + Display.reset());
-        System.out.printf("  %-18s %s%n", Messages.get("banner.sandbox"),
-                          Display.dim() + com.studyprogram.coding.Sandbox.describe() + Display.reset());
-        System.out.printf("  Coding exercises:  %s%n",
+        // The label column is sized from the labels themselves so a translation with longer
+        // words still lines up instead of running into its own values.
+        List<String> labels = List.of(Messages.get("banner.ai"), Messages.get("banner.sandbox"),
+                                      Messages.get("banner.coding"));
+        int width = labels.stream().mapToInt(String::length).max().orElse(18) + 2;
+        String row = "  %-" + width + "s %s%n";
+
+        System.out.printf(row, Messages.get("banner.ai"),
+                          (llm.isAvailable() ? Display.green() : Display.dim())
+                                  + describeAi() + Display.reset());
+        System.out.printf(row, Messages.get("banner.sandbox"),
+                          Display.dim() + describeSandbox() + Display.reset());
+        System.out.printf(row, Messages.get("banner.coding"),
                           CodingExerciseRunner.compilerAvailable()
-                                  ? Display.green() + "enabled" + Display.reset()
-                                  : Display.yellow() + "disabled — run with a full JDK (not a JRE) to "
-                                    + "compile and test real programs" + Display.reset());
+                                  ? Display.green() + Messages.get("banner.codingOn") + Display.reset()
+                                  : Display.yellow() + Messages.get("banner.codingOff") + Display.reset());
 
         for (String warning : bank.getWarnings()) {
             System.out.println("  " + Display.yellow() + "⚠ " + warning + Display.reset());
@@ -97,6 +100,7 @@ public class CLI {
         while (true) {
             System.out.println();
             showGoalStatus();
+            showReviewsDue();
             System.out.println("  [1] " + Messages.get("menu.startSession"));
             System.out.println("  [2] " + Messages.get("menu.viewPerformance"));
             System.out.println("  [3] " + Messages.get("menu.conceptMap"));
@@ -125,12 +129,39 @@ public class CLI {
         }
     }
 
-    // ── Profile ───────────────────────────────────────────────────────────────
+    /**
+     * The AI and sandbox status lines, worded here rather than in those layers.
+     *
+     * <p>They are the first thing a student reads, so they have to translate — and the classes
+     * that know the facts have no business knowing about the interface's language. The UI asks
+     * what the state is and says it in the student's own words.
+     */
+    private static String describeAi() {
+        var config = com.studyprogram.llm.LLMConfig.load();
+        if (config.apiKey() == null && !config.isLocalEndpoint()) {
+            return Messages.get("banner.aiOff", config.apiKeyEnv());
+        }
+        return Messages.get("banner.aiOn", config.model(), config.baseUrl(),
+                            config.maxCallsPerSession());
+    }
+
+    private static String describeSandbox() {
+        return switch (com.studyprogram.coding.Sandbox.backend()) {
+            case BWRAP -> Messages.get("banner.sandboxBwrap");
+            case SANDBOX_EXEC -> Messages.get("banner.sandboxMac");
+            case NONE -> System.getProperty("os.name", "").toLowerCase().contains("win")
+                    ? Messages.get("banner.sandboxNoneWin")
+                    : Messages.get("banner.sandboxNone");
+        };
+    }
+
+    // ── Profile ───────────────────────────────────────────────────────────────    // ── Profile ───────────────────────────────────────────────────────────────
 
     private void profileMenu() {
         Display.header(Messages.get("profile.header"));
         try {
             List<String> profiles = storage.listProfileNames();
+            reportStorageWarnings();
             if (!profiles.isEmpty()) {
                 System.out.println("  " + Messages.get("profile.existing"));
                 for (int i = 0; i < profiles.size(); i++) {
@@ -146,7 +177,14 @@ public class CLI {
                     try {
                         int idx = Integer.parseInt(pick) - 1;
                         if (idx >= 0 && idx < profiles.size()) {
-                            Optional<StudentProfile> loaded = storage.load(profiles.get(idx));
+                            String chosen = profiles.get(idx);
+                            Optional<StudentProfile> loaded = storage.load(chosen);
+                            reportStorageWarnings();
+                            if (loaded.isEmpty()) {
+                                // The file was unreadable and has been quarantined. Everything
+                                // that profile ever answered is still in its attempt log.
+                                loaded = offerRecovery(chosen);
+                            }
                             if (loaded.isPresent()) {
                                 currentProfile = loaded.get();
                                 currentProfile.applyDecay();
@@ -267,7 +305,48 @@ public class CLI {
         selectTopics();
     }
 
-    /** Loads a profile and re-runs the placement check on it, for a student who skipped it. */
+    /** Surfaces anything the storage layer had to quarantine. */
+    private void reportStorageWarnings() {
+        if (!(storage instanceof com.studyprogram.storage.JsonProfileStorage json)) return;
+        for (String warning : json.getWarnings()) {
+            System.out.println("  " + Display.yellow() + Display.warnSign() + " " + warning
+                    + Display.reset());
+        }
+    }
+
+    /**
+     * Offers to rebuild a profile whose file could not be read, by replaying its attempt log.
+     *
+     * <p>The log is append-only and written a line at a time, so it survives the kind of damage
+     * that destroys a profile. Mastery is a function of that history, which means most of what
+     * was lost can simply be recomputed.
+     */
+    private Optional<StudentProfile> offerRecovery(String name) {
+        if (!com.studyprogram.storage.ProfileRecovery.canRecover(storage.directory(), name)) {
+            System.out.println("  " + Display.dim()
+                    + "There is no attempt log for that profile, so there is nothing to rebuild "
+                    + "from." + Display.reset());
+            return Optional.empty();
+        }
+        System.out.print("  Rebuild it from your attempt log? [Y/n]: ");
+        if (in.nextLine().trim().equalsIgnoreCase("n")) return Optional.empty();
+
+        var rebuilt = com.studyprogram.storage.ProfileRecovery.rebuild(storage.directory(), name);
+        for (String line : wrapToWidth(
+                com.studyprogram.storage.ProfileRecovery.summary(rebuilt))) {
+            System.out.println("  " + line);
+        }
+        if (rebuilt.isEmpty()) return Optional.empty();
+
+        try {
+            storage.save(rebuilt.profile());
+        } catch (IOException e) {
+            System.out.println("  Could not save the rebuilt profile: " + e.getMessage());
+        }
+        return Optional.of(rebuilt.profile());
+    }
+
+    /** Loads a profile and re-runs the placement check on it, for a student who skipped it. */    /** Loads a profile and re-runs the placement check on it, for a student who skipped it. */
     private void placeExistingProfile(List<String> profiles) throws IOException {
         System.out.print("  Which profile? ");
         StudentProfile chosen = null;
@@ -469,7 +548,23 @@ public class CLI {
         sitExam(paper, minutes);
     }
 
-    /** One line about the goal, when there is one. */
+    /**
+     * "N reviews due today" on the menu.
+     *
+     * <p>Spaced repetition has been scheduling every question since the first session, but it
+     * only ever showed up as a weighting inside the feed. Saying the number out loud is what
+     * turns it into a reason to sit down.
+     */
+    private void showReviewsDue() {
+        if (attemptLog == null) return;
+        int due = ReviewScheduler.fromRecords(attemptLog.readAll())
+                .dueCount(LocalDateTime.now());
+        if (due == 0) return;
+        System.out.println("  " + Display.cyan() + Messages.get("menu.reviewsDue", due)
+                + Display.reset());
+    }
+
+    /** One line about the goal, when there is one. */    /** One line about the goal, when there is one. */
     private void showGoalStatus() {
         if (!currentProfile.hasActiveGoal()) return;
         GoalPlanner.Plan plan = GoalPlanner.plan(currentProfile, LocalDateTime.now().toLocalDate());
@@ -954,6 +1049,23 @@ public class CLI {
         logAttempt(q, outcome, startNano, hintsUsed, List.of());
     }
 
+    /**
+     * As above, also recording which misconception a wrong choice revealed.
+     *
+     * <p>Kept in the log for the same reason compile errors are: one wrong answer is noise, but
+     * the same wrong idea showing up across a dozen questions is a thing worth telling a student.
+     */
+    private void logAttempt(Question q, String outcome, long startNano, int hintsUsed,
+                            String studentAnswer) {
+        if (attemptLog == null) return;
+        long secs = Math.max(0, (System.nanoTime() - startNano) / 1_000_000_000L);
+        AttemptRecord record = new AttemptRecord(LocalDateTime.now(), q, outcome, secs, hintsUsed);
+        if (AttemptRecord.OUTCOME_INCORRECT.equals(outcome)) {
+            q.misconceptionFor(studentAnswer).ifPresent(m -> record.setMisconception(m.name()));
+        }
+        attemptLog.append(record);
+    }
+
     /** As above, also recording which compile errors the student hit on the way. */
     private void logAttempt(Question q, String outcome, long startNano, int hintsUsed,
                             Collection<String> compileErrors) {
@@ -1287,7 +1399,8 @@ public class CLI {
             GradingResult result = grader.grade(q, answer);
             session.recordAnswer(q, result);
             logAttempt(q, result.correct() ? AttemptRecord.OUTCOME_CORRECT
-                                           : AttemptRecord.OUTCOME_INCORRECT, qStart, hintsUsed);
+                                           : AttemptRecord.OUTCOME_INCORRECT, qStart, hintsUsed,
+                       answer);
             saveProfile();   // auto-save after every answered question
 
             if (result.correct()) Display.correct(result);
@@ -1573,7 +1686,7 @@ public class CLI {
             GradingResult result = grader.grade(q, answer);
             currentProfile.recordAnswer(q, result.correct());
             logAttempt(q, result.correct() ? AttemptRecord.OUTCOME_CORRECT
-                                           : AttemptRecord.OUTCOME_INCORRECT, qStart, 0);
+                                           : AttemptRecord.OUTCOME_INCORRECT, qStart, 0, answer);
             answered++;
             if (result.correct()) { Display.correct(result); correct++; }
             else                  Display.incorrect(result);

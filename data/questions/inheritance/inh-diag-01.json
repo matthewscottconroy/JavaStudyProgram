@@ -1,0 +1,26 @@
+{
+  "id": "inh-diag-01",
+  "type": "MULTIPLE_CHOICE",
+  "difficulty": 4,
+  "prompt": "Animal declares speak(String tone). Dog writes the method below. What does dog.speak(\"loud\") print, given Animal.speak prints \"generic noise\"?",
+  "choices": [
+    "woof - Dog overrides speak",
+    "generic noise - Dog's method is an overload, not an override",
+    "It does not compile - the signatures differ",
+    "Both lines, parent first"
+  ],
+  "answer": "b",
+  "distractors": {
+    "a": "OVERRIDE_VS_OVERLOAD",
+    "d": "OVERRIDE_VS_OVERLOAD"
+  },
+  "explanation": "An override must match the parent's signature exactly. Dog.speak() takes no parameters, so it is a second, unrelated method that happens to share a name, and the call with a String argument still finds the parent's. This is precisely what @Override is for: it asks the compiler to check, and would have rejected this method with an error.",
+  "hints": [
+    "Compare the parameters of the two methods carefully.",
+    "What would @Override have said about Dog.speak()?"
+  ],
+  "code": "class Dog extends Animal {\n    public void speak() {\n        System.out.println(\"woof\");\n    }\n}",
+  "relatedTopics": [
+    "INHERITANCE_POLYMORPHISM_ENCAPSULATION"
+  ]
+}

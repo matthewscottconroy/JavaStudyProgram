@@ -1,0 +1,23 @@
+{
+  "id": "tc-diag-01",
+  "type": "MULTIPLE_CHOICE",
+  "difficulty": 3,
+  "prompt": "Why does this not compile?",
+  "choices": [
+    "Files.readString does not exist",
+    "readString throws IOException, which must be caught or declared with throws",
+    "The method must be marked static to use Files",
+    "Path.of returns the wrong type"
+  ],
+  "answer": "b",
+  "distractors": {
+    "a": "CHECKED_EXCEPTIONS",
+    "c": "CHECKED_EXCEPTIONS"
+  },
+  "explanation": "IOException is a checked exception, so Java insists the code says what happens to it: either wrap the call in try/catch or add throws IOException to the method and let the caller decide. Catching Exception just to quiet the compiler also swallows the bugs you wanted to hear about.",
+  "hints": [
+    "What kind of exception does file reading declare?",
+    "What are the two ways Java lets you deal with a checked exception?"
+  ],
+  "code": "static String read(String path) {\n    return Files.readString(Path.of(path));\n}"
+}

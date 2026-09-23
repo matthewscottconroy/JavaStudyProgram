@@ -1,0 +1,26 @@
+{
+  "id": "str-diag-01",
+  "type": "MULTIPLE_CHOICE",
+  "difficulty": 2,
+  "prompt": "What does this print?",
+  "choices": [
+    "true, because both hold the text \"hi\"",
+    "false, because they are two separate objects",
+    "true, because Java shares all equal strings",
+    "It does not compile - == cannot be used on Strings"
+  ],
+  "answer": "b",
+  "distractors": {
+    "a": "STRING_IDENTITY",
+    "c": "STRING_IDENTITY"
+  },
+  "explanation": "new String(...) deliberately makes a fresh object each time, so a and b name two different objects that happen to hold the same characters. == asks whether the two names point at the same object, which they do not. a.equals(b) asks about the characters and is true. Literals are a special case: the compiler shares them, which is why \"hi\" == \"hi\" is often true and why this mistake survives so much testing.",
+  "hints": [
+    "== on objects compares identity. Which two objects exist here?",
+    "new String(...) is a promise to create a new object rather than reuse one."
+  ],
+  "code": "String a = new String(\"hi\");\nString b = new String(\"hi\");\nSystem.out.println(a == b);",
+  "relatedTopics": [
+    "MEMORY_REFERENCE_STATIC"
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "id": "arr-diag-01",
+  "type": "MULTIPLE_CHOICE",
+  "difficulty": 2,
+  "prompt": "Which line correctly gets the number of elements in each of these?",
+  "choices": [
+    "numbers.length, word.length(), items.size()",
+    "numbers.length(), word.length(), items.length()",
+    "numbers.size(), word.size(), items.size()",
+    "numbers.length, word.length, items.length"
+  ],
+  "answer": "a",
+  "distractors": {
+    "b": "ARRAY_LENGTH_VS_SIZE",
+    "c": "ARRAY_LENGTH_VS_SIZE",
+    "d": "ARRAY_LENGTH_VS_SIZE"
+  },
+  "explanation": "Three different types, three different spellings: an array has a length FIELD (no parentheses), a String has a length() METHOD, and a collection has size(). There is no reason behind the inconsistency beyond history, so it has to be remembered - and getting it wrong is a compile error rather than a wrong answer, which at least tells you straight away.",
+  "hints": [
+    "One of these is a field and two are methods.",
+    "Arrays are not objects with methods in the way Strings and Lists are."
+  ],
+  "code": "int[] numbers = {1, 2, 3};\nString word = \"abc\";\nList<String> items = new ArrayList<>();",
+  "relatedTopics": [
+    "STRINGS",
+    "COLLECTIONS"
+  ]
+}

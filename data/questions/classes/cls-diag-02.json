@@ -1,0 +1,23 @@
+{
+  "id": "cls-diag-02",
+  "type": "MULTIPLE_CHOICE",
+  "difficulty": 2,
+  "prompt": "Why does this not compile?",
+  "choices": [
+    "total is declared inside the loop, so it no longer exists at the println",
+    "total must be initialised to 0 before the loop",
+    "i cannot be used to set total",
+    "println cannot print an int variable"
+  ],
+  "answer": "a",
+  "distractors": {
+    "b": "SCOPE",
+    "c": "SCOPE"
+  },
+  "explanation": "A variable exists only inside the block that declares it. total is created and destroyed on every pass of the loop, so by the time the println runs there is no such name. If it has to outlive the loop, declare it before the loop - which is also the only way it could accumulate anything across iterations.",
+  "hints": [
+    "Where does total's block start and end?",
+    "Which brace is total inside?"
+  ],
+  "code": "public static void main(String[] args) {\n    for (int i = 0; i < 3; i++) {\n        int total = i;\n    }\n    System.out.println(total);\n}"
+}
