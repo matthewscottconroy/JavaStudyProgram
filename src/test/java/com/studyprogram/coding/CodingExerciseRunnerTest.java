@@ -101,6 +101,66 @@ class CodingExerciseRunnerTest {
     }
 
     /**
+     * An exercise must run from its own workspace on every platform.
+     *
+     * <p>Regression, found by CI on a runner where bubblewrap was installed but unusable.
+     * bubblewrap passes --chdir, so with containment the working directory was the build
+     * directory; without it the exercise inherited the app's. Any exercise touching a relative
+     * path therefore worked or failed depending on whether the student had bubblewrap installed,
+     * which is to say it was broken for every Windows and macOS student.
+     */
+    @Test
+    void anExerciseRunsFromItsWorkspaceWithOrWithoutASandbox() {
+        String source = """
+                public class Here {
+                    public static String ownSource() throws Exception {
+                        return java.nio.file.Files.readString(
+                                java.nio.file.Path.of("Here.java"));
+                    }
+                }
+                """;
+        String harness = """
+                public class HereTest {
+                    public static void main(String[] args) throws Exception {
+                        if (!Here.ownSource().contains("class Here")) {
+                            System.out.println("FAIL  could not read its own source");
+                            System.exit(1);
+                        }
+                        System.out.println("ALL TESTS PASSED");
+                    }
+                }
+                """;
+        for (Sandbox.Backend backend : new Sandbox.Backend[] {Sandbox.Backend.NONE, null}) {
+            Sandbox.forceBackendForTesting(backend);
+            try {
+                CodingResult result = runner.compileAndTest(source, harness);
+                assertEquals(CodingResult.Status.PASS, result.status(),
+                        "with backend " + (backend == null ? "as detected" : backend)
+                        + " the exercise could not find a file in its own workspace: "
+                        + result.output());
+            } finally {
+                Sandbox.forceBackendForTesting(null);
+            }
+        }
+    }
+
+    /**
+     * The exercise that exposed the bug above: it reads its own .java file by relative path, and
+     * its reference solution failed for anyone without containment.
+     */
+    @Test
+    void theSelfReadingJavadocExercisePassesWithoutASandbox() {
+        Question q = new QuestionBank().findById("jdoc-code-06").orElseThrow();
+        Sandbox.forceBackendForTesting(Sandbox.Backend.NONE);
+        try {
+            assertTrue(runner.verifyExercise(q).isEmpty(),
+                    "uncontained run: " + runner.verifyExercise(q).orElse(""));
+        } finally {
+            Sandbox.forceBackendForTesting(null);
+        }
+    }
+
+    /**
      * Content gate for every shipped CODING exercise: the starter must compile cleanly but fail
      * its tests, and the reference solution must pass them. This keeps broken exercises from
      * ever reaching students. The gate is {@link com.studyprogram.questions.QuestionPackVerifier},

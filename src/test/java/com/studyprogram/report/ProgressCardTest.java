@@ -48,7 +48,9 @@ class ProgressCardTest {
 
         assertTrue(card.contains("Goal: Final"), card);
         assertTrue(card.contains("0/2 ready, 5 days left"), card);
-        for (String line : card.split("\n")) {
+        // Split on any line break: the card is formatted with %n, which is \r\n on Windows,
+        // and splitting on \n alone left a trailing \r that made every line one char too long.
+        for (String line : card.split("\\R")) {
             assertTrue(line.length() <= 54, "every card line must fit the border: " + line);
         }
         assertTrue(ProgressCard.verify(card, p.getId()).startsWith("VALID"),

@@ -243,7 +243,17 @@ public class CodingExerciseRunner {
         List<String> command = Sandbox.wrap(List.of(
                 javaExecutable().toString(), MEMORY_CAP, "-Djava.awt.headless=true",
                 "-cp", buildDir.toString(), testClass), buildDir);
+        // Always run from the build directory, whatever the sandbox does.
+        //
+        // bubblewrap passes --chdir and so set this implicitly; without a sandbox the exercise
+        // inherited the app's own working directory instead. That made any exercise touching a
+        // relative path behave differently depending on whether the student happened to have
+        // bubblewrap — and jdoc-code-06, which reads its own source file as
+        // Path.of("OwnSourceDocReader.java"), failed for every student on Windows or macOS with a
+        // perfectly correct solution. Setting it here makes the working directory part of the
+        // contract rather than a side effect of containment.
         Process process = new ProcessBuilder(command)
+                .directory(buildDir.toFile())
                 .redirectErrorStream(true)
                 .start();
 
